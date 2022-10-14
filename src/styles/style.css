@@ -366,6 +366,7 @@ html {
   letter-spacing: -0.05em;
   color: #1A1A1A;
   font-family: "Inter", sans-serif;
+  background-color: #EAEAEA;
 }
 
 a,
@@ -492,4 +493,49 @@ a:active {
     font-size: 1.2rem;
     margin: 1rem 0 0 0;
   }
+}
+.login {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: calc(100vh - 10rem - 20rem);
+}
+.login__container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.login__app-icon {
+  width: 20rem;
+}
+.login__inputs-block {
+  width: 50rem;
+  margin: 2rem 11.5rem 3rem 0;
+  display: grid;
+  grid-template-columns: 1fr 4fr;
+  align-items: center;
+  row-gap: 3rem;
+}
+.login__label {
+  font-size: 2.8rem;
+  margin: 0 2rem 0 0;
+  text-align: right;
+  font-weight: bold;
+}
+.login__input {
+  height: 2.8rem;
+  font-size: 2rem;
+  border: 0.2rem solid #1A1A1A;
+  background-color: #EAEAEA;
+  border-radius: 0.2rem;
+}
+.login__button {
+  height: 8rem;
+  width: 24rem;
+  font-size: 2.8rem;
+  font-weight: bold;
+  background-color: #C15943;
+  color: #EAEAEA;
+  border: none;
+  border-radius: 0.3rem;
 }

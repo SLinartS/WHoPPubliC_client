@@ -1,0 +1,55 @@
+@use '../global/colors.scss' as *;
+
+.login {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: calc(100vh - 10rem - 20rem); // 100vh - header-height
+
+  &__container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+  }
+
+  &__app-icon {
+    width: 20rem;
+  }
+
+  &__inputs-block {
+    width: 50rem;
+    margin: 2rem 11.5rem 3rem 0;
+    display: grid;
+    grid-template-columns: 1fr 4fr;
+    align-items: center;
+    row-gap: 3rem;
+  }
+
+  &__label {
+    font-size: 2.8rem;
+    margin: 0 2rem 0 0;
+    text-align: right;
+    font-weight: bold;
+  }
+
+  &__input {
+    height: 2.8rem;
+    font-size: 2rem;
+    border: 0.2rem solid $fontColor--black;
+    background-color: $fontColor--white;
+    border-radius: 0.2rem;
+  }
+
+  &__button {
+    height: 8rem;
+    width: 24rem;
+    font-size: 2.8rem;
+    font-weight: bold;
+    background-color: $secondColor;
+    color: $fontColor--white;
+    border: none;
+    border-radius: 0.3rem;
+  }
+
+}
