@@ -13,7 +13,7 @@ Client part of the finished products warehouse of the publishing center
 
 ## Standart font sizes
 
-16 20 24 28 32 36
+12 16 20 24 28 32 36
 
 ## Standart font sizes
 

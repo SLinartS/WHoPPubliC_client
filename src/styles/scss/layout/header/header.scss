@@ -56,6 +56,16 @@
 			text-align: center;
 		}
 	}
+
+  &--no-auth {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  &__app-name {
+    font-size: 3.6rem;
+  }
 }
 
 @media (max-width: 1050px) {

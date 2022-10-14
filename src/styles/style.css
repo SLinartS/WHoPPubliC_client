@@ -420,6 +420,14 @@ a:active {
   word-wrap: break-word;
   text-align: center;
 }
+.header--no-auth {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.header__app-name {
+  font-size: 3.6rem;
+}
 
 @media (max-width: 1050px) {
   .header__nav-link {
