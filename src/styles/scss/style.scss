@@ -1,0 +1,13 @@
+// FONTS
+@use './global/fonts.scss';
+
+// NORMALIZE
+@use './global/normalize.scss';
+@use './global/settings.scss';
+
+// LAYOUT
+@use './layout/errorPage/errorPage.scss';
+@use './layout/header/header.scss';
+
+// PAGES
+@use './pages/main.scss';
