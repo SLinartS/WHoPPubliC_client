@@ -1,49 +1,71 @@
-import React, { FC, useState } from 'react';
-import Table from './Table';
-import { IMapTable } from '../../../types/map';
+import React, { FC } from 'react';
+import { IMap } from '../../../types/map';
+import Zone from './Zone';
 
-const testInitialData: Array<IMapTable> = [
-	{
-		columnsNumber: 4,
-		zoneLetter: 'A',
-		rows: [
-			{ isHeadRow: true, number: 0 },
-			{ isHeadRow: false, number: 1 },
-			{ isHeadRow: false, number: 2 },
-			{ isHeadRow: false, number: 3 },
-			{ isHeadRow: false, number: 4 },
-			{ isHeadRow: false, number: 5 },
-			{ isHeadRow: false, number: 6 },
-			{ isHeadRow: false, number: 7 },
-			{ isHeadRow: false, number: 8 },
-			{ isHeadRow: false, number: 9 },
-		],
-	},
-	{
-		columnsNumber: 5,
-		zoneLetter: 'B',
-		rows: [
-			{ isHeadRow: true, number: 0 },
-			{ isHeadRow: false, number: 1 },
-			{ isHeadRow: false, number: 2 },
-			{ isHeadRow: false, number: 3 },
-		],
-	},
-];
+const testInitialData: IMap = {
+	zones: [
+		{
+			id: 0,
+			zoneLetter: 'A',
+			sections: [
+				{
+					id: 0,
+					columnsNumber: 15,
+					rows: [
+						{ id: 0, isHeadRow: true, number: 0 },
+						{ id: 1, isHeadRow: false, number: 1 },
+						{ id: 2, isHeadRow: false, number: 2 },
+						{ id: 3, isHeadRow: false, number: 3 },
+						{ id: 4, isHeadRow: false, number: 4 },
+						{ id: 5, isHeadRow: false, number: 5 },
+						{ id: 6, isHeadRow: false, number: 6 },
+						{ id: 7, isHeadRow: false, number: 7 },
+					],
+				},
+			],
+		},
+		{
+			id: 1,
+			zoneLetter: 'C',
+			sections: [
+				{
+					id: 0,
+					columnsNumber: 4,
+					rows: [
+						{ id: 0, isHeadRow: true, number: 0 },
+						{ id: 1, isHeadRow: false, number: 1 },
+						{ id: 2, isHeadRow: false, number: 2 },
+						{ id: 3, isHeadRow: false, number: 3 },
+					],
+				},
+				{
+					id: 1,
+					columnsNumber: 10,
+					rows: [
+						{ id: 0, isHeadRow: true, number: 0 },
+						{ id: 1, isHeadRow: false, number: 1 },
+						{ id: 2, isHeadRow: false, number: 2 },
+						{ id: 3, isHeadRow: false, number: 3 },
+						{ id: 4, isHeadRow: false, number: 4 },
+						{ id: 5, isHeadRow: false, number: 5 },
+					],
+				},
+			],
+		},
+	],
+};
 
 const Map: FC = () => {
-	const [tableData, setTableData] = useState<Array<IMapTable>>(testInitialData);
-
 	return (
 		<main className='map'>
 			<div className='map__container'>
-				{tableData.map((table) => {
+				{testInitialData.zones.map((zone) => {
 					return (
-						<Table
-							key={table.zoneLetter}
-							columnsNumber={table.columnsNumber}
-							zoneLetter={table.zoneLetter}
-							rows={table.rows}
+						<Zone
+							key={zone.id}
+							id={zone.id}
+							zoneLetter={zone.zoneLetter}
+							sections={zone.sections}
 						/>
 					);
 				})}

@@ -564,17 +564,25 @@ a:active {
   display: flex;
   align-items: center;
   justify-content: center;
-  height: calc(100vh - 10rem);
+  height: calc(100vh - 10rem + 10rem);
 }
 .map__container {
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
 }
-.map__table {
-  display: grid;
+.map__zone {
+  display: flex;
+  align-items: center;
   position: relative;
-  margin: 5rem;
+}
+.map__section {
+  display: flex;
+  flex-direction: column;
+  width: fit-content;
+  position: relative;
+  margin: 4rem;
 }
 .map__row {
   display: grid;

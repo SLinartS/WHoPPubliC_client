@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
-import { IMapHeadRow } from '../../../../types/map';
+import { ISectionHeadFloor } from '../../../../types/map';
 
-const HeadRow: FC<IMapHeadRow> = ({ number }) => {
+const HeadRow: FC<ISectionHeadFloor> = ({ number }) => {
 	if (number === 0) {
 		return <div className='map__title' style={{ opacity: 0 }}></div>;
 	}

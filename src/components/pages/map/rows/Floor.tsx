@@ -1,9 +1,9 @@
 import React, { FC, ReactNode } from 'react';
-import { IMapRowComponent } from '../../../../types/map';
+import { ISectionFloorComponent } from '../../../../types/map';
 import BlockRow from './BlockRow';
-import HeadRow from './HeadRow';
+import HeadRow from './HeadFloor';
 
-const Row: FC<IMapRowComponent> = ({ number, isHeadRow, columnsNumber}) => {
+const Row: FC<ISectionFloorComponent> = ({ number, isHeadRow, columnsNumber}) => {
 
 	function rowType(columnsNumber: number) {
 		let rows: Array<ReactNode> = [];
@@ -16,7 +16,7 @@ const Row: FC<IMapRowComponent> = ({ number, isHeadRow, columnsNumber}) => {
 				if (i === 0) {
 					rows.push(<HeadRow key={number} number={number} />);
 				} else {
-					rows.push(<BlockRow />);
+					rows.push(<BlockRow key={Math.random()}/>);
 				}
 			}
 		}
