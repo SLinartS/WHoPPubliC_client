@@ -3,6 +3,7 @@ import Main from './components/pages/Main';
 import ErrorPage from './components/layout/errorPage/ErrorPage';
 import Layout from './components/layout/Layout';
 import Login from './components/pages/Login';
+import Map from './components/pages/map/Map';
 
 const router = createBrowserRouter([
 	{
@@ -17,6 +18,10 @@ const router = createBrowserRouter([
 			{
 				path: 'login',
 				element: <Login />,
+			},
+			{
+				path: 'map',
+				element: <Map />,
 			},
 		],
 	},

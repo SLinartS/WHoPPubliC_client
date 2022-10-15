@@ -1,0 +1,55 @@
+@use '../global/colors.scss' as *;
+
+.map {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	height: calc(100vh - 10rem ); // 100vh - header-height
+
+	&__container {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+	}
+
+	&__table {
+		display: grid;
+		position: relative;
+		margin: 5rem;
+	}
+
+	&__row {
+		display: grid;
+		grid-template-columns: repeat(9, 5rem);
+		align-items: center;
+		justify-items: center;
+	}
+
+	&__title {
+		display: inline-block;
+		font-size: 2rem;
+		color: $tableColorOpacityMid;
+		opacity: 0.5;
+		padding: 0.5rem;
+	}
+
+	&__block {
+		display: inline-block;
+		border: 0.1rem solid $tableColor;
+		width: 5rem;
+		height: 5rem;
+		
+	}
+
+	&__zone-title {
+		color: $tableColorOpacityLow;
+		display: inline;
+		font-size: 30rem;
+		font-weight: bold;
+		margin: 0;
+    text-align: center;
+    line-height: 1em;
+		z-index: -1;
+		position: absolute;
+	}
+}

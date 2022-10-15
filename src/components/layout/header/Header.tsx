@@ -7,7 +7,9 @@ const Header = () => {
 		<>
 			{/* if (userIsAuth) */}
 			<header className='header'>
-				<img className='header__app-icon' src={appIcon} alt='app icon' />
+				<Link to={'/'}>
+					<img className='header__app-icon' src={appIcon} alt='app icon' />
+				</Link>
 				<div className='header__user-info'>
 					<p className='header__user-name'>Евгений Иванович Петров</p>
 					<p className='header__user-role'>Администратор</p>
