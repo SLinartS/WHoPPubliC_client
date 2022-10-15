@@ -1,10 +1,11 @@
 import React, { FC, ReactNode } from 'react';
-import {IMapRowData } from '../../../../types/map';
+import { IMapRowComponent } from '../../../../types/map';
 import BlockRow from './BlockRow';
 import HeadRow from './HeadRow';
 
-const Row: FC<IMapRowData> = ({ number, columnsNumber, isHeadRow }) => {
-	function rowType() {
+const Row: FC<IMapRowComponent> = ({ number, isHeadRow, columnsNumber}) => {
+
+	function rowType(columnsNumber: number) {
 		let rows: Array<ReactNode> = [];
 		if (isHeadRow) {
 			for (let i = 0; i <= columnsNumber; i++) {
@@ -22,7 +23,14 @@ const Row: FC<IMapRowData> = ({ number, columnsNumber, isHeadRow }) => {
 		return rows;
 	}
 
-	return <div className='map__row' style={{gridTemplateColumns: `repeat(${columnsNumber+1}, 5rem`}}>{rowType()}</div>;
+	return (
+		<div
+			className='map__row'
+			style={{ gridTemplateColumns: `repeat(${columnsNumber + 1}, 5rem` }}
+		>
+			{rowType(columnsNumber)}
+		</div>
+	);
 };
 
 export default Row;

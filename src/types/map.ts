@@ -1,20 +1,29 @@
 export interface IMapZoneLetter {
-  fontSize: number;
+	fontSize: number;
 	topOffset: number;
 	leftOffset: number;
 }
 
-export interface IMapTableData {
-	zoneLetter: string;
-	rows: Array<IMapRowData>;
+export interface IMapSectionLetter {
+	topOffset: number;
+	rightOffset: number;
 }
 
-export interface IMapRowData {
+export interface IMapTable {
+	columnsNumber: number;
+	zoneLetter: string;
+	rows: Array<IMapRow>;
+}
+
+export interface IMapRow {
 	number: number;
 	isHeadRow: boolean;
+}
+
+export interface IMapRowComponent extends IMapRow {
 	columnsNumber: number;
 }
 
-export interface IMapHeadRowData {
+export interface IMapHeadRow {
 	number: number;
 }

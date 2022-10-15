@@ -1,5 +1,5 @@
 import React, { FC, useEffect, useState } from 'react';
-import { IMapTableData, IMapZoneLetter } from '../../../types/map';
+import { IMapSectionLetter, IMapTable, IMapZoneLetter } from '../../../types/map';
 import Row from './rows/Row';
 
 const initialMapZoneLetter: IMapZoneLetter = {
@@ -8,17 +8,30 @@ const initialMapZoneLetter: IMapZoneLetter = {
 	leftOffset: 100,
 };
 
-const Table: FC<IMapTableData> = ({ rows, zoneLetter }) => {
+const initialMapSectionLetter: IMapSectionLetter = {
+	topOffset: 100,
+	rightOffset: 100,
+};
+
+const Table: FC<IMapTable> = ({ columnsNumber, zoneLetter, rows }) => {
 	const [mapZoneLetter, setMapZoneLetter] = useState<IMapZoneLetter>(initialMapZoneLetter);
 
+	const [mapSectionLetter, setMapSectionLetter] = useState<IMapSectionLetter>(initialMapSectionLetter);
+
 	const tableNode = React.useRef<HTMLTableElement>(null);
-	const letterNode = React.useRef<HTMLTableElement>(null);
+	const letterZoneNode = React.useRef<HTMLTableElement>(null);
+	const letterSectionNode = React.useRef<HTMLTableElement>(null);
 
 	useEffect(() => {
 		let newZoneLetter = {
 			fontSize: mapZoneLetter.fontSize,
 			topOffset: mapZoneLetter.topOffset,
 			leftOffset: mapZoneLetter.leftOffset,
+		};
+
+		let newSectionLetter = {
+			topOffset: mapSectionLetter.topOffset,
+			rightOffset: mapSectionLetter.rightOffset,
 		};
 
 		let tableHeigth = tableNode.current?.offsetHeight;
@@ -32,13 +45,24 @@ const Table: FC<IMapTableData> = ({ rows, zoneLetter }) => {
 			}
 			setMapZoneLetter({ ...newZoneLetter });
 
-			let letterHeigth = letterNode.current?.offsetHeight;
-			let letterWidth = letterNode.current?.offsetWidth;
+			let letterZoneHeigth = letterZoneNode.current?.offsetHeight;
+			let letterZoneWidth = letterZoneNode.current?.offsetWidth;
 
-			if (letterHeigth && letterWidth) {
-				newZoneLetter.topOffset = tableHeigth! / 20 - letterHeigth / 20 + 2;
-				newZoneLetter.leftOffset = tableWidth! / 20 - letterWidth / 20 + 2.5;
+			let letterSectionHeigth = letterSectionNode.current?.offsetHeight;
+			let letterSectionWidth = letterSectionNode.current?.offsetWidth;
+
+			let valueExists =
+				letterZoneHeigth && letterZoneWidth && letterSectionHeigth && letterSectionWidth;
+
+			if (valueExists) {
+				newZoneLetter.topOffset = tableHeigth / 20 - letterZoneHeigth! / 20 + 2;
+				newZoneLetter.leftOffset = tableWidth / 20 - letterZoneWidth! / 20 + 2.5;
+
+				newSectionLetter.topOffset = tableHeigth / 20 - letterSectionHeigth! / 20 + 2;
+				newSectionLetter.rightOffset = letterSectionWidth! / 8;
+
 				setMapZoneLetter({ ...newZoneLetter });
+        setMapSectionLetter({...newSectionLetter})
 			}
 		}
 	}, [
@@ -54,15 +78,15 @@ const Table: FC<IMapTableData> = ({ rows, zoneLetter }) => {
 				return (
 					<Row
 						key={row.number}
-						isHeadRow={row.isHeadRow}
-						columnsNumber={row.columnsNumber}
 						number={row.number}
+						isHeadRow={row.isHeadRow}
+						columnsNumber={columnsNumber}
 					/>
 				);
 			})}
 
 			<p
-				ref={letterNode}
+				ref={letterZoneNode}
 				className='map__zone-title'
 				style={{
 					fontSize: mapZoneLetter.fontSize + 'rem',
@@ -71,6 +95,16 @@ const Table: FC<IMapTableData> = ({ rows, zoneLetter }) => {
 				}}
 			>
 				{zoneLetter}
+			</p>
+			<p
+				ref={letterSectionNode}
+				className='map__section-title'
+				style={{
+					top: mapSectionLetter.topOffset + 'rem',
+					right: -mapSectionLetter.rightOffset + 'rem',
+				}}
+			>
+				{1}
 			</p>
 		</div>
 	);

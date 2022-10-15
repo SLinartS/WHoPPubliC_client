@@ -1,36 +1,38 @@
 import React, { FC, useState } from 'react';
 import Table from './Table';
-import { IMapTableData } from '../../../types/map';
+import { IMapTable } from '../../../types/map';
 
-const testInitialData: Array<IMapTableData> = [
+const testInitialData: Array<IMapTable> = [
 	{
+		columnsNumber: 4,
 		zoneLetter: 'A',
 		rows: [
-			{ isHeadRow: true, number: 0, columnsNumber: 4 },
-			{ isHeadRow: false, number: 1, columnsNumber: 4 },
-			{ isHeadRow: false, number: 2, columnsNumber: 4 },
-			{ isHeadRow: false, number: 3, columnsNumber: 4 },
-			{ isHeadRow: false, number: 4, columnsNumber: 4 },
-			{ isHeadRow: false, number: 5, columnsNumber: 4 },
-			{ isHeadRow: false, number: 6, columnsNumber: 4 },
-			{ isHeadRow: false, number: 7, columnsNumber: 4 },
-			{ isHeadRow: false, number: 8, columnsNumber: 4 },
-			{ isHeadRow: false, number: 9, columnsNumber: 4 },
+			{ isHeadRow: true, number: 0 },
+			{ isHeadRow: false, number: 1 },
+			{ isHeadRow: false, number: 2 },
+			{ isHeadRow: false, number: 3 },
+			{ isHeadRow: false, number: 4 },
+			{ isHeadRow: false, number: 5 },
+			{ isHeadRow: false, number: 6 },
+			{ isHeadRow: false, number: 7 },
+			{ isHeadRow: false, number: 8 },
+			{ isHeadRow: false, number: 9 },
 		],
 	},
 	{
+		columnsNumber: 5,
 		zoneLetter: 'B',
 		rows: [
-			{ isHeadRow: true, number: 0, columnsNumber: 5 },
-			{ isHeadRow: false, number: 1, columnsNumber: 5 },
-			{ isHeadRow: false, number: 2, columnsNumber: 5 },
-			{ isHeadRow: false, number: 3, columnsNumber: 5 },
+			{ isHeadRow: true, number: 0 },
+			{ isHeadRow: false, number: 1 },
+			{ isHeadRow: false, number: 2 },
+			{ isHeadRow: false, number: 3 },
 		],
 	},
 ];
 
 const Map: FC = () => {
-	const [tableData, setTableData] = useState<Array<IMapTableData>>(testInitialData);
+	const [tableData, setTableData] = useState<Array<IMapTable>>(testInitialData);
 
 	return (
 		<main className='map'>
@@ -39,8 +41,9 @@ const Map: FC = () => {
 					return (
 						<Table
 							key={table.zoneLetter}
-							rows={table.rows}
+							columnsNumber={table.columnsNumber}
 							zoneLetter={table.zoneLetter}
+							rows={table.rows}
 						/>
 					);
 				})}
