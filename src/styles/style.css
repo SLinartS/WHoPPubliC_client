@@ -500,6 +500,11 @@ a:active {
   align-items: center;
   height: calc(100vh - 10rem - 20rem);
 }
+.login__container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
 .login__app-icon {
   width: 20rem;
 }
