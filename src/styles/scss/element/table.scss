@@ -1,0 +1,46 @@
+@use '../global/colors.scss' as *;
+
+.table {
+	display: grid;
+	height: fit-content;
+	grid-template-columns: repeat(6, auto);
+	grid-auto-rows: min-content;
+	column-gap: 0.1rem;
+	row-gap: 0.5rem;
+	font-size: 1.6rem;
+
+	&--map {
+		margin: 2rem;
+	}
+
+	&__text {
+		margin: 0;
+		text-align: center;
+		padding: 0 1rem;
+
+		&--id {
+			color: $linkColor;
+		}
+	}
+
+	&__block {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		width: 100%;
+		max-width: 25rem;
+		min-width: 3rem;
+		border: 0.1rem solid $fontColor--black;
+
+		&--header {
+			font-weight: bold;
+			height: 5rem;
+		}
+
+		&--row {
+			min-height: 3rem;
+			// overflow-wrap: break-word;
+			// word-break: break-all;
+		}
+	}
+}

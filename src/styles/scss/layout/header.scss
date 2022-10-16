@@ -1,7 +1,8 @@
-@use '../../global/colors.scss' as *;
+@use '../global/colors.scss' as *;
+@use '../global/variables.scss' as v;
 
 .header {
-	height: 10rem;
+	height: v.$headerHeightStandart;
 	display: grid;
 	grid-template-columns: 10rem 31rem 1fr;
 	background-color: $mainColor;
@@ -102,7 +103,7 @@
 		font-size: 2rem;
 	}
 	.header {
-    height: 8rem;
+    height: v.$headerHeightMid;
 		grid-template-columns: 8rem 25rem 1fr;
 
     &__app-icon {
@@ -128,7 +129,7 @@
 		font-size: 1.6rem;
 	}
 	.header {
-    height: 7rem;
+    height: v.$headerHeightLow;
 		grid-template-columns: 6rem 20rem 1fr;
 
     &__app-icon {

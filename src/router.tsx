@@ -4,6 +4,7 @@ import ErrorPage from './components/layout/errorPage/ErrorPage';
 import Layout from './components/layout/Layout';
 import Login from './components/pages/Login';
 import Map from './components/pages/map/Map';
+import Tasks from './components/pages/tasks/Tasks';
 
 const router = createBrowserRouter([
 	{
@@ -22,6 +23,10 @@ const router = createBrowserRouter([
 			{
 				path: 'map',
 				element: <Map />,
+			},
+			{
+				path: 'tasks',
+				element: <Tasks />,
 			},
 		],
 	},

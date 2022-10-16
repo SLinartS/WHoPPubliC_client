@@ -1,19 +1,26 @@
 @use '../global/colors.scss' as *;
+@use '../global/variables.scss' as v;
 
 .map {
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	height: calc(100vh - 10rem + 40rem); // 100vh - header-height
-
+	height: calc(100vh - v.$headerHeightStandart);
+	
 	&__container {
+		padding: 2rem 0 0 0;
+		height: 100%;
+		width: 100%;
 		display: flex;
 		flex-direction: column;
 		align-items: center;
-		justify-content: center;
+		overflow-y:scroll;
+		box-sizing: border-box;
 	}
 
 	&__zone {
+		height: 100%;
+		margin: 2rem;
 		display: flex;
 		align-items: center;
 		position: relative;
@@ -23,7 +30,7 @@
 		display: flex;
 		width: fit-content;
 		position: relative;
-		margin: 4rem;
+		margin: 2rem;
 	}
 
 	&__block {
@@ -31,9 +38,10 @@
 		grid-template-columns: 5rem;
 		grid-template-rows: repeat(5, 5rem);
 		gap: 0.1rem;
-		margin-bottom: -0.1rem;
+		margin: 0 0.1rem 0 0;
 		align-items: center;
 		justify-items: center;
+		box-sizing: border-box;
 	}
 
 	&__floor {

@@ -10,7 +10,7 @@ const initialSectionNumber: ISectionNumber = {
 	rightOffset: 100,
 };
 
-const Table: FC<ISection> = ({ id, floorsNumber, blocks }) => {
+const Section: FC<ISection> = ({ id, floorsNumber, blocks }) => {
 	const [sectionNumber, setSectionNumber] = useState<ISectionNumber>(initialSectionNumber);
 
 	const letterSectionNode = React.useRef<HTMLParagraphElement>(null);
@@ -61,4 +61,4 @@ const Table: FC<ISection> = ({ id, floorsNumber, blocks }) => {
 	);
 };
 
-export default Table;
+export default Section;

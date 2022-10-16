@@ -6,10 +6,14 @@
 @use './global/settings.scss';
 
 // LAYOUT
-@use './layout/errorPage/errorPage.scss';
-@use './layout/header/header.scss';
+@use './layout/errorPage.scss';
+@use './layout/header.scss';
 
 // PAGES
 @use './pages/main.scss';
 @use './pages/login.scss';
 @use './pages/map.scss';
+@use './pages/tasks.scss';
+
+// ELEMENTS
+@use './element/table.scss';
