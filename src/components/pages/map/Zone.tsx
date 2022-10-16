@@ -23,8 +23,8 @@ const Map: FC<IZone> = ({ id, zoneLetter, sections }) => {
 			leftOffset: zoneLetterObject.leftOffset,
 		};
 
-		let tableHeigth = zoneNode.current?.offsetHeight;
-		let tableWidth = zoneNode.current?.offsetWidth;
+		let tableHeigth: number | undefined = zoneNode.current?.offsetHeight;
+		let tableWidth: number | undefined = zoneNode.current?.offsetWidth;
 
 		if (tableHeigth && tableWidth) {
 			if (tableHeigth > tableWidth) {
@@ -34,19 +34,24 @@ const Map: FC<IZone> = ({ id, zoneLetter, sections }) => {
 			}
 			setZoneLetterObject({ ...newZoneLetterObject });
 
-			let letterZoneHeigth = letterZoneNode.current?.offsetHeight;
-			let letterZoneWidth = letterZoneNode.current?.offsetWidth;
+			let letterZoneHeigth: number | undefined = letterZoneNode.current?.offsetHeight;
+			let letterZoneWidth: number | undefined = letterZoneNode.current?.offsetWidth;
 
 			let valueExists = letterZoneHeigth && letterZoneWidth;
 
 			if (valueExists) {
-				newZoneLetterObject.topOffset = tableHeigth / 20 - letterZoneHeigth! / 20 + 2;
+				newZoneLetterObject.topOffset = tableHeigth / 20 - letterZoneHeigth! / 20 - 2.5;
 				newZoneLetterObject.leftOffset = tableWidth / 20 - letterZoneWidth! / 20 + 2.5;
 
 				setZoneLetterObject({ ...newZoneLetterObject });
 			}
 		}
-	}, [zoneNode.current?.offsetHeight]);
+	}, [
+		zoneNode.current?.offsetHeight,
+		zoneLetterObject.fontSize,
+		zoneLetterObject.leftOffset,
+		zoneLetterObject.topOffset,
+	]);
 
 	return (
 		<div className='map__zone' ref={zoneNode}>
@@ -55,8 +60,8 @@ const Map: FC<IZone> = ({ id, zoneLetter, sections }) => {
 					<Section
 						key={section.id}
 						id={section.id}
-						columnsNumber={section.columnsNumber}
-						rows={section.rows}
+						floorsNumber={section.floorsNumber}
+						blocks={section.blocks}
 					/>
 				);
 			})}

@@ -11,21 +11,23 @@ export interface IZone {
 
 export interface ISection {
 	id: number;
-	columnsNumber: number;
-	rows: Array<ISectionFloor>;
+	floorsNumber: number;
+	blocks: Array<IBlock>;
 }
 
-export interface ISectionFloor {
+export interface IBlock {
 	id: number;
-	number: number;
-	isHeadRow: boolean;
 }
 
-export interface ISectionFloorComponent extends ISectionFloor {
-	columnsNumber: number;
+export interface IBlockComponent extends IBlock {
+	floorsNumber: number;
 }
 
-export interface ISectionHeadFloor {
+export interface IHeaderBlock {
+	floorsNumber: number;
+}
+
+export interface IHeaderFloor {
 	number: number;
 }
 

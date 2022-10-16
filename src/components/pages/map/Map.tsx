@@ -10,16 +10,15 @@ const testInitialData: IMap = {
 			sections: [
 				{
 					id: 0,
-					columnsNumber: 15,
-					rows: [
-						{ id: 0, isHeadRow: true, number: 0 },
-						{ id: 1, isHeadRow: false, number: 1 },
-						{ id: 2, isHeadRow: false, number: 2 },
-						{ id: 3, isHeadRow: false, number: 3 },
-						{ id: 4, isHeadRow: false, number: 4 },
-						{ id: 5, isHeadRow: false, number: 5 },
-						{ id: 6, isHeadRow: false, number: 6 },
-						{ id: 7, isHeadRow: false, number: 7 },
+					floorsNumber: 7,
+					blocks: [
+						{ id: 1 },
+						{ id: 2 },
+						{ id: 3 },
+						{ id: 4 },
+						{ id: 5 },
+						{ id: 6 },
+						{ id: 7 },
 					],
 				},
 			],
@@ -30,24 +29,26 @@ const testInitialData: IMap = {
 			sections: [
 				{
 					id: 0,
-					columnsNumber: 4,
-					rows: [
-						{ id: 0, isHeadRow: true, number: 0 },
-						{ id: 1, isHeadRow: false, number: 1 },
-						{ id: 2, isHeadRow: false, number: 2 },
-						{ id: 3, isHeadRow: false, number: 3 },
+					floorsNumber: 5,
+					blocks: [
+						{ id: 1 },
+						{ id: 2 },
+						{ id: 3 },
+						{ id: 4 },
 					],
 				},
 				{
 					id: 1,
-					columnsNumber: 10,
-					rows: [
-						{ id: 0, isHeadRow: true, number: 0 },
-						{ id: 1, isHeadRow: false, number: 1 },
-						{ id: 2, isHeadRow: false, number: 2 },
-						{ id: 3, isHeadRow: false, number: 3 },
-						{ id: 4, isHeadRow: false, number: 4 },
-						{ id: 5, isHeadRow: false, number: 5 },
+					floorsNumber: 5,
+					blocks: [
+						{ id: 1 },
+						{ id: 2 },
+						{ id: 3 },
+						{ id: 4 },
+						{ id: 5 },
+						{ id: 6 },
+						{ id: 7 },
+						{ id: 8 },
 					],
 				},
 			],
