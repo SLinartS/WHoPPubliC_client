@@ -6,11 +6,14 @@ import { RouterProvider } from 'react-router-dom';
 import router from './router';
 
 import './styles/style.scss';
+import { RootStoreProvider } from './utils/RootStoreProvider/RootStoreProvider';
 
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement);
 root.render(
 	<React.StrictMode>
-		<RouterProvider router={router} />
+		<RootStoreProvider>
+			<RouterProvider router={router} />
+		</RootStoreProvider>
 	</React.StrictMode>,
 );
 

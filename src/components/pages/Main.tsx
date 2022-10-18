@@ -1,7 +1,8 @@
-import React from 'react';
+import { observer } from 'mobx-react-lite';
+import { FC } from 'react';
 
-function Main() {
-	return <div>Main Page Content</div>;
-}
+const Main: FC = observer(() => {
+	return <div>This is a Main Page</div>;
+});
 
 export default Main;

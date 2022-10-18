@@ -1,12 +1,13 @@
-import React, { FC, ReactNode } from 'react';
+import { observer } from 'mobx-react-lite';
+import { FC, ReactNode } from 'react';
 import { ITasks } from '../../../../types/tasks';
 import TableHeader from './TableHeader';
 import TableRow from './TableRow';
 
-const Table: FC<ITasks> = ({ tasks }) => {
+const Table: FC<ITasks> = observer(({ tasks }) => {
 	function generateRows() {
 		let rows: Array<ReactNode> = [];
-    
+
 		for (let i: number = 0; i < tasks.length; i++) {
 			let task = tasks[i];
 			rows.push(
@@ -30,6 +31,6 @@ const Table: FC<ITasks> = ({ tasks }) => {
 			{generateRows()}
 		</div>
 	);
-};
+});
 
 export default Table;

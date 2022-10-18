@@ -1,7 +1,8 @@
-import React from 'react';
+import { observer } from 'mobx-react-lite';
+import { FC } from 'react';
 import appIcon from '../../assets/images/app-icon.png';
 
-const Login = () => {
+const Login: FC = observer(() => {
 	return (
 		<main className='login'>
 			<div className='login__container'>
@@ -16,6 +17,6 @@ const Login = () => {
 			</div>
 		</main>
 	);
-};
+});
 
 export default Login;

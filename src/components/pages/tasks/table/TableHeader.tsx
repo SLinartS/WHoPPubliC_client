@@ -1,6 +1,7 @@
-import React from 'react';
+import { observer } from 'mobx-react-lite';
+import { FC } from 'react';
 
-const TableHeader = () => {
+const TableHeader: FC = observer(() => {
 	return (
 		<>
 			<div className='table__block table__block--header'>
@@ -23,6 +24,6 @@ const TableHeader = () => {
 			</div>
 		</>
 	);
-};
+});
 
 export default TableHeader;

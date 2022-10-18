@@ -1,4 +1,5 @@
-import React, { FC, useEffect, useState } from 'react';
+import { observer } from 'mobx-react-lite';
+import { FC, useEffect, useRef, useState } from 'react';
 import { ISectionNumber, ISection } from '../../../types/map';
 import NumberSection from './info/NumberSection';
 import Block from './rows/Block';
@@ -10,12 +11,12 @@ const initialSectionNumber: ISectionNumber = {
 	rightOffset: 100,
 };
 
-const Section: FC<ISection> = ({ id, floorsNumber, blocks }) => {
+const Section: FC<ISection> = observer(({ id, floorsNumber, blocks }) => {
 	const [sectionNumber, setSectionNumber] = useState<ISectionNumber>(initialSectionNumber);
 
-	const letterSectionNode = React.useRef<HTMLParagraphElement>(null);
+	const letterSectionNode = useRef<HTMLParagraphElement>(null);
 
-	const sectionNode = React.useRef<HTMLDivElement>(null);
+	const sectionNode = useRef<HTMLDivElement>(null);
 
 	useEffect(() => {
 		let newSectionNumber: ISectionNumber = {
@@ -59,6 +60,6 @@ const Section: FC<ISection> = ({ id, floorsNumber, blocks }) => {
 			/>
 		</div>
 	);
-};
+});
 
 export default Section;

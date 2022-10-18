@@ -1,7 +1,7 @@
-export interface ITasksList {
-	acceptance: Array<ITask>;
-	shipments: Array<ITask>;
-}
+export type IAcceptanceTasksList = Array<ITask>;
+
+// in the future, the realization of acceptance and shipments may need to be different
+export type IShipmentTasksList = Array<ITask>;
 
 export interface ITasks {
 	tasks: Array<ITask>;
@@ -15,6 +15,7 @@ export interface ITask {
 	operatorLogin: string;
 }
 
-export interface ITaskComponent extends ITask {
+export interface ITaskProps extends ITask {
 	number: number;
+
 }
