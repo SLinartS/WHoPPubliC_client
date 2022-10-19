@@ -1,26 +1,27 @@
-import { IMap } from '../types/map';
-import { IAcceptanceTasksList, IShipmentTasksList } from '../types/tasks';
+import { TMap } from '../types/map';
+import { TAcceptanceTasks, TShipmentTasks } from '../types/tasks';
 import { fakeMap } from './data/fakeMap';
-import { TL } from './data/fakeTaskList';
+import { fTL } from './data/fakeTaskList';
 
 const loadingSpeed: number = 1000;
 
+// <---------- TASKS ---------->
 export async function getFakeAcceptanceTasks() {
-	return new Promise<IAcceptanceTasksList>((resolve) => {
-		setTimeout(() => resolve(TL.fakeAcceptanceTasks), loadingSpeed);
+	return new Promise<TAcceptanceTasks>((resolve) => {
+		setTimeout(() => resolve(fTL.fakeAcceptanceTasks), loadingSpeed);
 	});
 }
 
 export async function getFakeShipmentTasks() {
-	return new Promise<IShipmentTasksList>((resolve) => {
-		setTimeout(() => resolve(TL.fakeShipmentTasks), loadingSpeed);
+	return new Promise<TShipmentTasks>((resolve) => {
+		setTimeout(() => resolve(fTL.fakeShipmentTasks), loadingSpeed);
 	});
 }
 
 export async function deleteFakeAcceptanceTask(id: string) {
 	return new Promise<Object>((resolve) => {
 		setTimeout(() => {
-			TL.fakeAcceptanceTasks = TL.fakeAcceptanceTasks.filter(
+			fTL.fakeAcceptanceTasks = fTL.fakeAcceptanceTasks.filter(
 				(value) => value.id !== id,
 			);
 			resolve({ response: "It's OK" });
@@ -28,8 +29,9 @@ export async function deleteFakeAcceptanceTask(id: string) {
 	});
 }
 
+// <---------- MAP ---------->
 export async function getFakeMap() {
-	return new Promise<IMap>((resolve) => {
+	return new Promise<TMap>((resolve) => {
 		setTimeout(() => resolve(fakeMap), loadingSpeed);
 	});
 }

@@ -1,6 +1,6 @@
-import { IAcceptanceTasksList, IShipmentTasksList } from '../../types/tasks';
+import { TAcceptanceTasks, TShipmentTasks } from '../../types/tasks';
 
-let fakeAcceptanceTasks: IAcceptanceTasksList = [
+let fakeAcceptanceTasks: TAcceptanceTasks = [
 	{
 		id: 'A4264',
 		deadlines: '6 дней',
@@ -45,7 +45,7 @@ let fakeAcceptanceTasks: IAcceptanceTasksList = [
 	},
 ];
 
-let fakeShipmentTasks: IShipmentTasksList = [
+let fakeShipmentTasks: TShipmentTasks = [
 	{
 		id: 'O8372',
 		deadlines: '3 дней',
@@ -62,7 +62,7 @@ let fakeShipmentTasks: IShipmentTasksList = [
 	},
 ];
 
-export const TL = {
+export const fTL = {
 	fakeAcceptanceTasks: fakeAcceptanceTasks,
 	fakeShipmentTasks: fakeShipmentTasks,
 };

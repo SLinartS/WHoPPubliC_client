@@ -1,7 +1,6 @@
 // Components Data
-export interface IMap {
-	zones: Array<IZone>;
-}
+export type TMap = Array<IZone>;
+
 
 export interface IZone {
 	id: number;

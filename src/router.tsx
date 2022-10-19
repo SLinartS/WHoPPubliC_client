@@ -5,6 +5,7 @@ import Layout from './components/layout/Layout';
 import Login from './components/pages/Login';
 import Map from './components/pages/map/Map';
 import Tasks from './components/pages/tasks/Tasks';
+import Products from './components/pages/products/Products';
 
 const router = createBrowserRouter([
 	{
@@ -27,6 +28,10 @@ const router = createBrowserRouter([
 			{
 				path: 'tasks',
 				element: <Tasks />,
+			},
+			{
+				path: 'products',
+				element: <Products />,
 			},
 		],
 	},

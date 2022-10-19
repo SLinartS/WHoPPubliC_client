@@ -13,8 +13,7 @@ const Tasks: FC = observer(() => {
 			tasksStore.getAcceptanceTasks();
 			tasksStore.getShipmentTasks();
 		}
-	}, [tasksStore.status]);
-
+	}, [tasksStore.status, tasksStore]);
 	return (
 		<main className='tasks'>
 			<div className='tasks__title'>
@@ -23,7 +22,7 @@ const Tasks: FC = observer(() => {
 			<div className='tasks__block'>
 				<button className='tasks__add-task'>Добавить</button>
 				{tasksStore.status === 'done' ? (
-					<Table key={Math.random()} tasks={tasksStore.tasksAccepranceList} />
+					<Table key={Math.random()} dataList={tasksStore.tasksAccepranceList} />
 				) : (
 					''
 				)}
@@ -33,8 +32,9 @@ const Tasks: FC = observer(() => {
 			</div>
 			<div className='tasks__block'>
 				<button className='tasks__add-task'>Добавить</button>
+
 				{tasksStore.status === 'done' ? (
-					<Table key={Math.random()} tasks={tasksStore.tasksShipmentList} />
+					<Table key={Math.random()} dataList={tasksStore.tasksShipmentList} />
 				) : (
 					''
 				)}

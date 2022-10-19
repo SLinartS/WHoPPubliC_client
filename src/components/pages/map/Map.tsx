@@ -12,12 +12,12 @@ const Map: FC = observer(() => {
 		if (mapStore.status === 'pending') {
 			mapStore.getMap();
 		}
-	}, [mapStore.status]);
+	}, [mapStore.status, mapStore]);
 
 	return (
 		<main className='map'>
 			<div className='map__container'>
-				{mapStore.map.zones.map((zone) => {
+				{mapStore.mapData.map((zone) => {
 					return (
 						<Zone
 							key={zone.id}
