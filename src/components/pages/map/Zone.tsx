@@ -17,7 +17,7 @@ const Map: FC<IZone> = observer(({ id, zoneLetter, sections }) => {
 
 	const zoneNode = useRef<HTMLDivElement>(null);
 
-	useEffect(() => {
+	function findPositionSectionNumber() {
 		let newZoneLetterObject: IZoneLetter = {
 			fontSize: zoneLetterObject.fontSize,
 			topOffset: zoneLetterObject.topOffset,
@@ -47,12 +47,12 @@ const Map: FC<IZone> = observer(({ id, zoneLetter, sections }) => {
 				setZoneLetterObject({ ...newZoneLetterObject });
 			}
 		}
-	}, [
-		zoneNode.current?.offsetHeight,
-		zoneLetterObject.fontSize,
-		zoneLetterObject.leftOffset,
-		zoneLetterObject.topOffset,
-	]);
+	}
+
+	useEffect(() => {
+		findPositionSectionNumber();
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [zoneNode.current?.offsetHeight, zoneNode.current?.offsetWidth]);
 
 	return (
 		<div className='map__zone' ref={zoneNode}>

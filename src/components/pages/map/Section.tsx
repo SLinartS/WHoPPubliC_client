@@ -18,7 +18,7 @@ const Section: FC<ISection> = observer(({ id, floorsNumber, blocks }) => {
 
 	const sectionNode = useRef<HTMLDivElement>(null);
 
-	useEffect(() => {
+	function findPositionSectionNumber() {
 		let newSectionNumber: ISectionNumber = {
 			fontSize: sectionNumber.topOffset,
 			topOffset: sectionNumber.topOffset,
@@ -43,7 +43,12 @@ const Section: FC<ISection> = observer(({ id, floorsNumber, blocks }) => {
 				setSectionNumber({ ...newSectionNumber });
 			}
 		}
-	}, [sectionNode.current?.offsetHeight, sectionNumber.rightOffset, sectionNumber.topOffset]);
+	}
+
+	useEffect(() => {
+		findPositionSectionNumber();
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [sectionNode.current?.offsetHeight, sectionNode.current?.offsetWidth]);
 
 	return (
 		<div className='map__section' ref={sectionNode}>
