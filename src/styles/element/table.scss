@@ -3,6 +3,7 @@
 .table {
 	display: grid;
 	height: fit-content;
+	max-width: 160rem;
 	grid-template-columns: repeat(6, auto);
 	grid-auto-rows: min-content;
 	column-gap: 0.1rem;
@@ -28,8 +29,7 @@
 		align-items: center;
 		justify-content: center;
 		width: 100%;
-		max-width: 25rem;
-		min-width: 3rem;
+		min-width: 2rem;
 		border: 0.1rem solid $fontColor--black;
 
 		&--header {
@@ -41,6 +41,35 @@
 			min-height: 3rem;
 			// overflow-wrap: break-word;
 			// word-break: break-all;
+		}
+	}
+}
+
+@media (max-width: 900px) {
+	.table {
+		font-size: 1.4rem;
+		&__block {
+			&--row {
+				overflow-wrap: break-word;
+				word-break: break-all;
+			}
+		}
+	}
+}
+
+@media (max-width: 750px) {
+	.table {
+		font-size: 1.2rem;
+		&__block {
+			&--row {
+				overflow-wrap: break-word;
+				word-break: break-all;
+			}
+		}
+		&__text {
+			padding: 0 0.2rem;
+			// text-overflow: ellipsis;
+			overflow: scroll;
 		}
 	}
 }

@@ -1,8 +1,9 @@
 import { IProduct, TProducts } from '../products';
-import { TAcceptanceTasks, TShipmentTasks, ITask } from '../tasks';
+import { TAcceptanceTasks, TShipmentTasks, ITask, TTasks } from '../tasks';
 
 export interface ITableProps {
-	dataList: TAcceptanceTasks | TShipmentTasks | TProducts;
+	data: TTasks | TProducts;
+	tableHeader: Array<string>;
 }
 
 export interface IRowProps {

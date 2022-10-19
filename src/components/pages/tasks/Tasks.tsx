@@ -13,7 +13,8 @@ const Tasks: FC = observer(() => {
 			tasksStore.getAcceptanceTasks();
 			tasksStore.getShipmentTasks();
 		}
-	}, [tasksStore.status, tasksStore]);
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [tasksStore.status]);
 	return (
 		<main className='tasks'>
 			<div className='tasks__title'>
@@ -22,7 +23,11 @@ const Tasks: FC = observer(() => {
 			<div className='tasks__block'>
 				<button className='tasks__add-task'>Добавить</button>
 				{tasksStore.status === 'done' ? (
-					<Table key={Math.random()} dataList={tasksStore.tasksAccepranceList} />
+					<Table
+						key={Math.random()}
+						data={tasksStore.tasksAccepranceList.data}
+						tableHeader={tasksStore.tasksAccepranceList.tableHeader}
+					/>
 				) : (
 					''
 				)}
@@ -34,7 +39,11 @@ const Tasks: FC = observer(() => {
 				<button className='tasks__add-task'>Добавить</button>
 
 				{tasksStore.status === 'done' ? (
-					<Table key={Math.random()} dataList={tasksStore.tasksShipmentList} />
+					<Table
+						key={Math.random()}
+						data={tasksStore.tasksShipmentList.data}
+						tableHeader={tasksStore.tasksShipmentList.tableHeader}
+					/>
 				) : (
 					''
 				)}

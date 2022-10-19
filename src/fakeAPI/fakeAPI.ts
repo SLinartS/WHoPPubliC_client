@@ -1,29 +1,30 @@
 import { TMap } from '../types/map';
+import { TProductsData } from '../types/products';
 import { TAcceptanceTasks, TShipmentTasks } from '../types/tasks';
-import { fakeMap } from './data/fakeMap';
-import { fTL } from './data/fakeTaskList';
+import { fM } from './data/fakeMap';
+import { fP } from './data/fakeProducts';
+import { fATL } from './data/fakeTaskList';
+import { fSTL } from './data/fakeTaskList';
 
 const loadingSpeed: number = 1000;
 
 // <---------- TASKS ---------->
 export async function getFakeAcceptanceTasks() {
 	return new Promise<TAcceptanceTasks>((resolve) => {
-		setTimeout(() => resolve(fTL.fakeAcceptanceTasks), loadingSpeed);
+		setTimeout(() => resolve(fATL), loadingSpeed);
 	});
 }
 
 export async function getFakeShipmentTasks() {
 	return new Promise<TShipmentTasks>((resolve) => {
-		setTimeout(() => resolve(fTL.fakeShipmentTasks), loadingSpeed);
+		setTimeout(() => resolve(fSTL), loadingSpeed);
 	});
 }
 
 export async function deleteFakeAcceptanceTask(id: string) {
 	return new Promise<Object>((resolve) => {
 		setTimeout(() => {
-			fTL.fakeAcceptanceTasks = fTL.fakeAcceptanceTasks.filter(
-				(value) => value.id !== id,
-			);
+			fATL.data = fATL.data.filter((value) => value.id !== id);
 			resolve({ response: "It's OK" });
 		}, loadingSpeed);
 	});
@@ -32,6 +33,13 @@ export async function deleteFakeAcceptanceTask(id: string) {
 // <---------- MAP ---------->
 export async function getFakeMap() {
 	return new Promise<TMap>((resolve) => {
-		setTimeout(() => resolve(fakeMap), loadingSpeed);
+		setTimeout(() => resolve(fM.zones), loadingSpeed);
+	});
+}
+
+// <---------- PRODUCTS ---------->
+export async function getFakeProducts() {
+	return new Promise<TProductsData>((resolve) => {
+		setTimeout(() => resolve(fP), loadingSpeed);
 	});
 }

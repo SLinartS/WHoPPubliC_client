@@ -1,22 +1,15 @@
-export type TProducts = Array<IProduct>;
-
-export interface IProduct {
-	id: string;
-	article: string;
-	title: string;
-	yearOfPublication: number;
-	shelfLife: string;
-	category: string;
-	number: number;
-	printDate: string;
+export interface TProductsData {
+	data: TProducts;
+	tableHeader: Array<string>;
 }
 
+export type TProducts = Array<IProduct>
+
 export interface IProduct {
 	id: string;
-	article: string;
 	title: string;
+	author: string;
 	yearOfPublication: number;
-	shelfLife: string;
 	category: string;
 	number: number;
 	printDate: string;

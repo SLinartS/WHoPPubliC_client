@@ -19,8 +19,8 @@ export class TasksStore {
 	}
 
 	public status: TypeStatus = 'pending';
-	public tasksAccepranceList: TAcceptanceTasks = [];
-	public tasksShipmentList: TShipmentTasks = [];
+	public tasksAccepranceList: TAcceptanceTasks = { data: [], tableHeader: [] };
+	public tasksShipmentList: TShipmentTasks = { data: [], tableHeader: [] };
 
 	public *getAcceptanceTasks() {
 		try {
@@ -39,7 +39,6 @@ export class TasksStore {
 			const data: TAcceptanceTasks = yield getFakeShipmentTasks();
 			this.tasksShipmentList = data;
 			this.status = 'done';
-			
 		} catch (error) {
 			this.status = 'error';
 		}

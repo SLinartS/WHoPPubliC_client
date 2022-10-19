@@ -2,80 +2,84 @@
 @use '../global/variables.scss' as v;
 
 .login {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: calc(100vh - v.$headerHeightStandart - 20rem);
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	height: calc(100vh - v.$headerHeightStandart - 20rem);
 
-  &__container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
+	&__container {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+	}
 
-  &__app-icon {
-    width: 20rem;
-  }
+	&__app-icon {
+		width: 20rem;
+	}
 
-  &__inputs-block {
-    width: 50rem;
-    margin: 2rem 11.5rem 3rem 0;
-    display: grid;
-    grid-template-columns: 1fr 4fr;
-    align-items: center;
-    row-gap: 3rem;
-  }
+	&__inputs-block {
+		width: 50rem;
+		margin: 2rem 11.5rem 3rem 0;
+		display: grid;
+		grid-template-columns: 1fr 4fr;
+		align-items: center;
+		row-gap: 3rem;
+	}
 
-  &__label {
-    font-size: 2.8rem;
-    margin: 0 2rem 0 0;
-    text-align: right;
-    font-weight: bold;
-  }
+	&__label {
+		font-size: 2.8rem;
+		margin: 0 2rem 0 0;
+		text-align: right;
+		font-weight: bold;
+	}
 
-  &__input {
-    height: 2.8rem;
-    font-size: 2rem;
-    border: 0.2rem solid $fontColor--black;
-    background-color: $fontColor--white;
-    border-radius: 0.2rem;
-  }
+	&__input {
+		height: 2.8rem;
+		font-size: 2rem;
+		border: 0.1rem solid $fontColor--black;
+		background-color: $fontColor--white;
+		border-radius: 0.2rem;
 
-  &__button {
-    height: 8rem;
-    width: 24rem;
-    font-size: 2.8rem;
-    font-weight: bold;
-    background-color: $secondColor;
-    color: $fontColor--white;
-    border: none;
-    border-radius: 0.3rem;
-  }
+		&:focus {
+			outline: none;
+			border: 0.2rem solid $fontColor--black;
+		}
+	}
+
+	&__button {
+		height: 8rem;
+		width: 24rem;
+		font-size: 2.8rem;
+		font-weight: bold;
+		background-color: $secondColor;
+		color: $fontColor--white;
+		border: none;
+		border-radius: 0.3rem;
+	}
 }
-
 
 @media (max-width: 700px) {
 	.login {
-    &__inputs-block {
-      margin: 1rem 10rem 2rem 0;
-      width: 40rem;
-      row-gap: 2rem;
-    }
+		&__inputs-block {
+			margin: 1rem 10rem 2rem 0;
+			width: 40rem;
+			row-gap: 2rem;
+		}
 
-    &__label {
-      font-size: 2.4rem;
-      margin: 0 1.5rem 0 0;
-    }
+		&__label {
+			font-size: 2.4rem;
+			margin: 0 1.5rem 0 0;
+		}
 
-    &__input {
-      height: 2.4rem;
-      font-size: 1.6rem;
-    }
+		&__input {
+			height: 2.4rem;
+			font-size: 1.6rem;
+		}
 
-    &__button {
-      height: 6rem;
-      width: 20rem;
-      font-size: 2.8rem;
-    }
+		&__button {
+			height: 6rem;
+			width: 20rem;
+			font-size: 2.8rem;
+		}
 	}
 }
