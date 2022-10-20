@@ -1,9 +1,9 @@
 import { FC, useEffect } from 'react';
 import { observer } from 'mobx-react-lite';
 
-import Table from './table/Table';
-
 import { useRootStore } from '../../../utils/RootStoreProvider/useRootStore';
+import Table from '../../blocks/table/Table';
+import Button from '../../blocks/Button';
 
 const Tasks: FC = observer(() => {
 	const { tasksStore } = useRootStore();
@@ -21,7 +21,7 @@ const Tasks: FC = observer(() => {
 				<h3 className='tasks__title-text'>Приёмка</h3>
 			</div>
 			<div className='tasks__block'>
-				<button className='add-button add-button--tasks'>Добавить</button>
+				<Button classes='button--tasks' text='Добавить' />
 				{tasksStore.status === 'done' ? (
 					<Table
 						key={Math.random()}
@@ -36,7 +36,7 @@ const Tasks: FC = observer(() => {
 				<h3 className='tasks__title-text tasks__title-text'>Отгрузка</h3>
 			</div>
 			<div className='tasks__block'>
-				<button className='add-button add-button--tasks'>Добавить</button>
+				<Button classes='button--tasks' text='Добавить' />
 
 				{tasksStore.status === 'done' ? (
 					<Table

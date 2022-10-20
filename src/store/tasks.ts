@@ -1,7 +1,7 @@
 import { makeAutoObservable } from 'mobx';
 
 import RootStore from './root';
-import { TypeStatus } from '../types/store';
+import { TStatus } from '../types/store';
 import { TAcceptanceTasks, TShipmentTasks } from '../types/tasks';
 
 import {
@@ -18,7 +18,7 @@ export class TasksStore {
 		this.rootStore = rootStore;
 	}
 
-	public status: TypeStatus = 'pending';
+	public status: TStatus = 'pending';
 	public tasksAccepranceList: TAcceptanceTasks = { data: [], tableHeader: [] };
 	public tasksShipmentList: TShipmentTasks = { data: [], tableHeader: [] };
 

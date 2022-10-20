@@ -1,6 +1,6 @@
 import { observer } from 'mobx-react-lite';
 import { FC, ReactNode } from 'react';
-import { ITableProps } from '../../../../types/elements/table';
+import { ITableProps } from '../../../types/blocks/table';
 import TableHeaderColumn from './TableHeaderColumn';
 import TableRow from './TableRow';
 

@@ -1,28 +1,24 @@
 @use '../global/colors.scss' as *;
 
-.add-button {
+.button {
 	background-color: $secondColor;
 	border: none;
-	border-radius: 0.1em;
+	border-radius: 0.3rem;
 	font-size: 2.4rem;
 	font-weight: bold;
 	padding: 1rem 4rem;
 	color: $fontColor--white;
 }
 
-.add-button--tasks {
-	margin: 2rem 0 0 0;
-}
-
 @media (max-width: 950px) {
-	.add-button {
+	.button {
 		font-size: 2rem;
 		padding: 1rem 2rem;
 	}
 }
 
 @media (max-width: 700px) {
-	.add-button {
+	.button {
 		font-size: 1.6rem;
 		padding: 0.5rem 2rem;
 	}

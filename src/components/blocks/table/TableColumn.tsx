@@ -1,5 +1,5 @@
 import { FC } from 'react';
-import { TableColumnProps } from '../../../../types/elements/table';
+import { TableColumnProps } from '../../../types/blocks/table';
 
 const TableColumn: FC<TableColumnProps> = ({ stroke }) => {
 	return (

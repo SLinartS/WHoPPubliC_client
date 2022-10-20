@@ -16,6 +16,9 @@
 @use './pages/tasks.scss';
 @use './pages/products.scss';
 
-// ELEMENTS
-@use './element/table.scss';
-@use './element/addButton.scss';
+// BLOCKS
+@use './blocks/table.scss';
+@use './blocks/button.scss';
+
+// POP-UP
+@use './popup/addProducts.scss'

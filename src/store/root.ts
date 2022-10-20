@@ -2,6 +2,7 @@ import { configure } from 'mobx';
 import { TasksStore } from './tasks';
 import { MapStore } from './map';
 import { ProductsStore } from './products';
+import { PopUpControlStore } from './popUpControl';
 
 configure({
 	enforceActions: 'always',
@@ -13,11 +14,13 @@ class RootStore {
 	public tasksStore: TasksStore;
 	public mapStore: MapStore;
 	public productsStore: ProductsStore;
+	public popUpControlStore: PopUpControlStore;
 
 	private constructor() {
 		this.tasksStore = new TasksStore(this);
 		this.mapStore = new MapStore(this);
 		this.productsStore = new ProductsStore(this);
+		this.popUpControlStore = new PopUpControlStore(this);
 	}
 
 	public static getInstance(): RootStore {

@@ -1,7 +1,7 @@
 import { makeAutoObservable } from 'mobx';
 
 import RootStore from './root';
-import { TypeStatus } from '../types/store';
+import { TStatus } from '../types/store';
 import { TMap } from '../types/map';
 
 import { getFakeMap } from '../fakeAPI/fakeAPI';
@@ -14,7 +14,7 @@ export class MapStore {
 		this.rootStore = rootStore;
 	}
 
-	public status: TypeStatus = 'pending';
+	public status: TStatus = 'pending';
 	public mapData: TMap = [];
 
 	public *getMap() {

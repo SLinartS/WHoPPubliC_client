@@ -43,6 +43,12 @@
 	}
 }
 
+.button {
+	&--tasks {
+		margin: 2rem 0 0 0;
+	}
+}
+
 @media (max-width: 1100px) {
 	.tasks {
 		grid-template-columns: repeat(1, 1fr);

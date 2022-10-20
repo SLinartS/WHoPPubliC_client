@@ -1,7 +1,7 @@
 import { makeAutoObservable } from 'mobx';
 
 import RootStore from './root';
-import { TypeStatus } from '../types/store';
+import { TStatus } from '../types/store';
 
 import { getFakeProducts } from '../fakeAPI/fakeAPI';
 import { TProductsData } from '../types/products';
@@ -14,7 +14,7 @@ export class ProductsStore {
 		this.rootStore = rootStore;
 	}
 
-	public status: TypeStatus = 'pending';
+	public status: TStatus = 'pending';
 	public products: TProductsData = {
 		data: [],
 		tableHeader: [],
