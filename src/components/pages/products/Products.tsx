@@ -18,11 +18,12 @@ const Products: FC = observer(() => {
 			<div className='products__title'>
 				<h3 className='products__title-text'>Список товаров</h3>
 			</div>
-			<div className='products__search'>
+			<div className='products__action'>
 				<p className='products__search-text'>Поиск: </p>
 				<input type='text' className='products__search-input' />
+				<button className='add-button'>Добавить</button>
 			</div>
-
+			
 			{productsStore.status === 'done' ? (
 				<Table
 					key={Math.random()}
@@ -32,6 +33,7 @@ const Products: FC = observer(() => {
 			) : (
 				''
 			)}
+			
 		</main>
 	);
 });

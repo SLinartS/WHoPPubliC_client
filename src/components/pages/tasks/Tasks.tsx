@@ -21,7 +21,7 @@ const Tasks: FC = observer(() => {
 				<h3 className='tasks__title-text'>Приёмка</h3>
 			</div>
 			<div className='tasks__block'>
-				<button className='tasks__add-task'>Добавить</button>
+				<button className='add-button add-button--tasks'>Добавить</button>
 				{tasksStore.status === 'done' ? (
 					<Table
 						key={Math.random()}
@@ -36,7 +36,7 @@ const Tasks: FC = observer(() => {
 				<h3 className='tasks__title-text tasks__title-text'>Отгрузка</h3>
 			</div>
 			<div className='tasks__block'>
-				<button className='tasks__add-task'>Добавить</button>
+				<button className='add-button add-button--tasks'>Добавить</button>
 
 				{tasksStore.status === 'done' ? (
 					<Table

@@ -34,25 +34,13 @@
 
 	&__block {
 		display: flex;
-    flex-direction: column;
+		flex-direction: column;
 		align-items: center;
 		width: 100%;
 		height: 100%;
 		background-color: $fontColor--white;
 		overflow-y: scroll;
 	}
-
-  &__add-task {
-    background-color: $secondColor;
-    border: none;
-    border-radius: 0.1em;
-    font-size: 2.4rem;
-    font-weight: bold;
-    padding: 1rem 4rem;
-    color: $fontColor--white;
-    margin: 2rem 0 0 0;
-  }
-
 }
 
 @media (max-width: 1100px) {
@@ -88,16 +76,15 @@
 			height: calc((100vh - v.$headerHeightLow - (5.219rem * 2) - (0.2rem * 3)) / 2);
 		}
 
-    &__title {
-  
-      &-text {
-        font-size: 2.8rem;
-        margin: 1rem 0;
-      }
-    }
+		&__title {
+			&-text {
+				font-size: 2.8rem;
+				margin: 1rem 0;
+			}
+		}
 
-    &__add-task {
-      font-size: 2rem;
-    }
+		&__add-task {
+			font-size: 2rem;
+		}
 	}
 }
