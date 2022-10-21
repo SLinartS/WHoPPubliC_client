@@ -1,0 +1,27 @@
+@use '../global/colors.scss' as *;
+@use '../global/variables.scss' as v;
+
+.window-header {
+	display: grid;
+	align-items: center;
+	grid-template-columns: repeat(5, 1fr);
+	column-gap: 3rem;
+	background-color: $mainColor;
+	height: v.$headerHeightStandart;
+	border-radius: 0.5rem 0.5rem 0 0;
+	padding: 0 3rem;
+
+	&__title {
+		font-size: 3.2rem;
+		grid-column: 1/4;
+	}
+}
+
+.button {
+	&--window-header {
+		height: fit-content;
+		width: fit-content;
+		font-size: 2.8rem;
+		padding: 1rem 3rem;
+	}
+}

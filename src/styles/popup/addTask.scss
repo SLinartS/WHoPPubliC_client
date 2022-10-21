@@ -1,0 +1,47 @@
+@use '../global/colors.scss' as *;
+@use '../global/variables.scss' as v;
+
+.add-task {
+	display: grid;
+	grid-template-rows: fit-content(100%) 1fr;
+	width: 102.4rem;
+	height: 76.8rem;
+	position: absolute;
+	background-color: $fontColor--white;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	box-shadow: 0 0 1rem 0;
+	border-radius: 0.5rem;
+
+	&__content-block {
+		display: grid;
+		grid-template-columns: 1fr 2fr;
+		grid-template-rows: repeat(2, auto) 1fr;
+		background-color: $fontColor--black;
+		gap: 0.2rem;
+		font-size: 2.4rem;
+		overflow-y: hidden;
+	}
+
+	&__table-block {
+		height: 100%;
+		overflow-y: scroll;
+		background-color: $fontColor--white;
+		grid-column: 1/3;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+	}
+
+}
+
+.button--add-task {
+	width: fit-content;
+	margin: 2rem 0;
+}
+
+.table--add-task {
+	margin: 0 2rem;
+	
+}

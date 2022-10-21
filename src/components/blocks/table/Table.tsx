@@ -4,7 +4,7 @@ import { ITableProps } from '../../../types/blocks/table';
 import TableHeaderColumn from './TableHeaderColumn';
 import TableRow from './TableRow';
 
-const Table: FC<ITableProps> = observer(({ data, tableHeader }) => {
+const Table: FC<ITableProps> = observer(({ data, tableHeader, classes }) => {
 	function generateRows(): Array<ReactNode> {
 		let rows: Array<ReactNode> = [];
 		for (let i: number = 0; i < data.length; i++) {
@@ -16,11 +16,11 @@ const Table: FC<ITableProps> = observer(({ data, tableHeader }) => {
 
 	return (
 		<div
-			className='table table--map'
+			className={'table ' + classes}
 			style={{ gridTemplateColumns: `repeat(${tableHeader.length}, auto)` }}
 		>
-			{tableHeader.map((stroke) => (
-				<TableHeaderColumn stroke={stroke} />
+			{tableHeader.map((text) => (
+				<TableHeaderColumn text={text} />
 			))}
 			{generateRows()}
 		</div>

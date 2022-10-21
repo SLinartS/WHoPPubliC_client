@@ -4,6 +4,7 @@ import { TAcceptanceTasks, TShipmentTasks, ITask, TTasks } from '../tasks';
 export interface ITableProps {
 	data: TTasks | TProducts;
 	tableHeader: Array<string>;
+	classes?: string;
 }
 
 export interface IRowProps {
@@ -12,5 +13,5 @@ export interface IRowProps {
 }
 
 export interface TableColumnProps {
-	stroke: number | string;
+	text: number | string;
 }

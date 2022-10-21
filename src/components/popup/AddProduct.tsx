@@ -1,10 +1,12 @@
 import { observer } from 'mobx-react-lite';
 import { FC } from 'react';
-import Button from '../../blocks/Button';
-import PropertiesBlock from '../../blocks/PropertiesBlock';
-import imagePlaceholder from '../../../assets/images/placeholder.jpg';
-import { IProperties } from '../../../types/blocks/propertiesBlock';
-import { useRootStore } from '../../../utils/RootStoreProvider/useRootStore';
+
+import imagePlaceholder from '../../assets/images/placeholder.jpg';
+import { IProperties } from '../../types/blocks/propertiesBlock';
+import { useRootStore } from '../../utils/RootStoreProvider/useRootStore';
+import Button from '../blocks/Button';
+import PropertiesBlock from '../blocks/PropertiesBlock';
+import WindowHeader from '../blocks/WindowHeader';
 
 const AddProduct: FC = observer(() => {
 	const { popUpControlStore } = useRootStore();
@@ -37,19 +39,14 @@ const AddProduct: FC = observer(() => {
 
 	return (
 		<div className='add-product'>
-			<div className='add-product__header'>
-				<h3 className='add-product__title'>Добавить партию товара</h3>
-				<Button classes='button--add-product button--add-product-two' text='Добавить' />
-				<Button
-					classes='button--add-product button--add-product-one'
-					text='Отмена'
-					onClick={hideAddProductWindowHandler}
-				/>
-			</div>
+			<WindowHeader
+				text='Добавить партию товара'
+				closeWindowEvent={hideAddProductWindowHandler}
+			/>
 			<div className='add-product__content-block'>
 				<div className='properties-block properties-block--article-info'>
 					<div className='properties-block__block'>
-						<p className='properties-block__title'>Артикул</p>
+						<p className='properties-block__title properties-block__title--big'>Артикул</p>
 						<input className='properties-block__input' />
 						<Button classes='button--add-product' text='Сгенерировать' />
 					</div>

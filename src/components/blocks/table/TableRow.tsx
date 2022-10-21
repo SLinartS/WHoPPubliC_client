@@ -7,8 +7,8 @@ const TableRow: FC<IRowProps> = observer(({ columns, number }) => {
 	function generateColumns() {
 		let columnsNode: Array<ReactNode> = [];
 
-		for (let stroke of Object.values(columns)) {
-			columnsNode.push(<TableColumn stroke={stroke} />);
+		for (let text of Object.values(columns)) {
+			columnsNode.push(<TableColumn text={text} />);
 		}
 
 		return columnsNode;
@@ -16,7 +16,7 @@ const TableRow: FC<IRowProps> = observer(({ columns, number }) => {
 
 	return (
 		<>
-			<TableColumn stroke={number} />
+			<TableColumn text={number} />
 			{generateColumns()}
 		</>
 	);

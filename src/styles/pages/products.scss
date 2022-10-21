@@ -43,6 +43,10 @@
 	}
 }
 
+.table--products {
+	margin: 2rem;
+}
+
 @media (max-width: 900px) {
 	.products {
 		&__search {

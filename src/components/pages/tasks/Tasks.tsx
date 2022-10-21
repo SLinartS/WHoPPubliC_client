@@ -4,9 +4,14 @@ import { observer } from 'mobx-react-lite';
 import { useRootStore } from '../../../utils/RootStoreProvider/useRootStore';
 import Table from '../../blocks/table/Table';
 import Button from '../../blocks/Button';
+import { TTypesAddTaskWindow } from '../../../types/store';
 
 const Tasks: FC = observer(() => {
-	const { tasksStore } = useRootStore();
+	const { tasksStore, popUpControlStore } = useRootStore();
+
+	function showAddTaskWindowHandler(type: TTypesAddTaskWindow) {
+		popUpControlStore.showAddTaskWindow(type);
+	}
 
 	useEffect(() => {
 		if (tasksStore.status === 'pending') {
@@ -21,12 +26,17 @@ const Tasks: FC = observer(() => {
 				<h3 className='tasks__title-text'>Приёмка</h3>
 			</div>
 			<div className='tasks__block'>
-				<Button classes='button--tasks' text='Добавить' />
+				<Button
+					classes='button--tasks'
+					text='Добавить'
+					onClick={() => showAddTaskWindowHandler('acceptance')}
+				/>
 				{tasksStore.status === 'done' ? (
 					<Table
 						key={Math.random()}
 						data={tasksStore.tasksAccepranceList.data}
 						tableHeader={tasksStore.tasksAccepranceList.tableHeader}
+						classes={'table--tasks'}
 					/>
 				) : (
 					''
@@ -43,6 +53,7 @@ const Tasks: FC = observer(() => {
 						key={Math.random()}
 						data={tasksStore.tasksShipmentList.data}
 						tableHeader={tasksStore.tasksShipmentList.tableHeader}
+						classes={'table--tasks'}
 					/>
 				) : (
 					''

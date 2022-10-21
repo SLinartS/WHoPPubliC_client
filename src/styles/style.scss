@@ -19,6 +19,9 @@
 // BLOCKS
 @use './blocks/table.scss';
 @use './blocks/button.scss';
+@use './blocks/propertiesBlock.scss';
+@use './blocks/windowHeader.scss';
 
 // POP-UP
-@use './popup/addProducts.scss'
+@use './popup/addProduct.scss';
+@use './popup/addTask.scss';
