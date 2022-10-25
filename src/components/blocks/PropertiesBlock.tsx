@@ -9,10 +9,13 @@ const PropertiesBlock: FC<IPropertiesBlockProps> = ({ classes, properties }) => 
 				return (
 					<div className='properties-block__block'>
 						<p className='properties-block__title'>{property.text}</p>
-						{property.inputOptions ? (
-							<SelectInput options={property.inputOptions} />
+						{property.selectOptions ? (
+							<SelectInput options={property.selectOptions} changeEvent={property.changeEvent}/>
 						) : (
-							<input className='properties-block__input' />
+							<input
+								className='properties-block__input'
+								onChange={property.changeEvent}
+							/>
 						)}
 					</div>
 				);

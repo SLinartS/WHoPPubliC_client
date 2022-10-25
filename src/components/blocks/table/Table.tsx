@@ -9,7 +9,7 @@ const Table: FC<ITableProps> = observer(({ data, tableHeader, classes }) => {
 		let rows: Array<ReactNode> = [];
 		for (let i: number = 0; i < data.length; i++) {
 			let columns = data[i];
-			rows.push(<TableRow key={columns.id} number={i + 1} columns={columns} />);
+			rows.push(<TableRow key={columns.id} columns={columns} />);
 		}
 		return rows;
 	}
@@ -20,7 +20,7 @@ const Table: FC<ITableProps> = observer(({ data, tableHeader, classes }) => {
 			style={{ gridTemplateColumns: `repeat(${tableHeader.length}, auto)` }}
 		>
 			{tableHeader.map((text) => (
-				<TableHeaderColumn text={text} />
+				<TableHeaderColumn key={text} text={text} />
 			))}
 			{generateRows()}
 		</div>

@@ -1,22 +1,56 @@
+@use '../global/colors.scss' as *;
+
 .properties-block {
+	background-color: $fontColor--white;
+	padding: 1rem 2rem;
+	display: flex;
+	align-items: center;
+	flex-direction: column;
 
-	&__title {
-		font-size: 2.4rem;
-
-    &--big {
-      font-size: 3.6rem;
-    }
+	&__block {
+		width: 100%;
+		display: flex;
+		align-items: center;
 	}
 
-	&__input {
-		box-sizing: border-box;
+	&__title {
+		width: fit-content;
+		white-space: nowrap;
+		margin: 0.5rem 2rem 0.5rem 0;
+
+		&--big {
+			font-size: 3.6rem;
+		}
+	}
+
+	&__input,
+	&__select,
+	&__option {
+		background-color: $fontColor--white;
+		font-size: 2rem;
+		height: 2.4rem;
 		width: 100%;
-		height: 4rem;
-		margin: 0 2rem 0 0;
+		border: 0.1rem solid $fontColor--black;
+		border-radius: 0.2rem;
+
+		&--big {
+			font-size: 2.8rem;
+			margin: 0 2rem 0 0;
+			height: 4rem;
+		}
+
+		&:focus {
+			outline: none;
+			border: 0.2rem solid $fontColor--black;
+		}
+	}
+
+	&__select {
+		height: 2.8rem;
 	}
 
 	&__add-point {
-    height: 3rem;
-    width: 5rem;
+		height: 3rem;
+		width: 5rem;
 	}
 }

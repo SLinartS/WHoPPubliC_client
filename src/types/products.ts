@@ -3,10 +3,17 @@ export interface TProductsData {
 	tableHeader: Array<string>;
 }
 
+export interface TProductsOfTaskData {
+	taskId: number;
+	data: TProducts;
+	tableHeader: Array<string>;
+}
+
 export type TProducts = Array<IProduct>
 
 export interface IProduct {
-	id: string;
+	id: number;
+	article: string;
 	title: string;
 	author: string;
 	yearOfPublication: number;

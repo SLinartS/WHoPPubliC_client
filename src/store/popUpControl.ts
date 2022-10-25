@@ -1,5 +1,4 @@
 import { makeAutoObservable } from 'mobx';
-import { IAddTaskWindow, TTypesAddTaskWindow } from '../types/store';
 
 import RootStore from './root';
 
@@ -11,13 +10,22 @@ export class PopUpControlStore {
 		this.rootStore = rootStore;
 	}
 
-	public addProduct: boolean = false;
-	public addTask: IAddTaskWindow = {
-		status: true,
-		type: 'acceptance',
-	};
-	// public addShipmentTask: boolean = false;
+	private addProduct: boolean = false;
+	private addAcceptanceTask: boolean = false;
+	private addShipmentTask: boolean = false;
 
+	// Getters
+	public get addProductStatus() {
+		return this.addProduct;
+	}
+	public get addAcceptanceTaskStatus() {
+		return this.addAcceptanceTask;
+	}
+	public get addShipmentTaskStatus() {
+		return this.addShipmentTask;
+	}
+
+	// addProduct
 	showAddProductWindow() {
 		this.addProduct = true;
 	}
@@ -25,19 +33,19 @@ export class PopUpControlStore {
 		this.addProduct = false;
 	}
 
-	showAddTaskWindow(type: TTypesAddTaskWindow) {
-		this.addTask.type = type;
-		this.addTask.status = true;
+	// AddAcceptanceTask
+	showAddAcceptanceTaskWindow() {
+		this.addAcceptanceTask = true;
 	}
-	hideAddTaskWindow() {
-		this.addTask.status = false;
-		this.addTask.type = 'unset';
+	hideAddAcceptanceTaskWindow() {
+		this.addAcceptanceTask = false;
 	}
 
-	// showAddShipmentTaskWindow() {
-	// 	this.addShipmentTask = true;
-	// }
-	// hideAddShipmentTaskWindow() {
-	// 	this.addShipmentTask = false;
-	// }
+	// AddShipmentTask
+	showAddShipmentTaskWindow() {
+		this.addShipmentTask = true;
+	}
+	hideAddShipmentTaskWindow() {
+		this.addShipmentTask = false;
+	}
 }

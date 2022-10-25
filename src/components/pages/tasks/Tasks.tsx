@@ -4,13 +4,12 @@ import { observer } from 'mobx-react-lite';
 import { useRootStore } from '../../../utils/RootStoreProvider/useRootStore';
 import Table from '../../blocks/table/Table';
 import Button from '../../blocks/Button';
-import { TTypesAddTaskWindow } from '../../../types/store';
 
 const Tasks: FC = observer(() => {
 	const { tasksStore, popUpControlStore } = useRootStore();
 
-	function showAddTaskWindowHandler(type: TTypesAddTaskWindow) {
-		popUpControlStore.showAddTaskWindow(type);
+	function showAddTaskWindowHandler() {
+		popUpControlStore.showAddAcceptanceTaskWindow();
 	}
 
 	useEffect(() => {
@@ -18,8 +17,12 @@ const Tasks: FC = observer(() => {
 			tasksStore.getAcceptanceTasks();
 			tasksStore.getShipmentTasks();
 		}
+		if (tasksStore.status === 'done') {
+			console.log(tasksStore.tasksAccepranceList);
+		}
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [tasksStore.status]);
+
 	return (
 		<main className='tasks'>
 			<div className='tasks__title'>
@@ -29,7 +32,7 @@ const Tasks: FC = observer(() => {
 				<Button
 					classes='button--tasks'
 					text='Добавить'
-					onClick={() => showAddTaskWindowHandler('acceptance')}
+					onClick={showAddTaskWindowHandler}
 				/>
 				{tasksStore.status === 'done' ? (
 					<Table

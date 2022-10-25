@@ -1,5 +1,5 @@
 import { IProduct, TProducts } from '../products';
-import { TAcceptanceTasks, TShipmentTasks, ITask, TTasks } from '../tasks';
+import { ITask, TTasks } from '../tasks';
 
 export interface ITableProps {
 	data: TTasks | TProducts;
@@ -9,7 +9,6 @@ export interface ITableProps {
 
 export interface IRowProps {
 	columns: ITask | IProduct;
-	number: number;
 }
 
 export interface TableColumnProps {

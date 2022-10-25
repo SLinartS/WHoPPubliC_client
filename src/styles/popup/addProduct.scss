@@ -65,44 +65,6 @@
 }
 
 .properties-block {
-	background-color: $fontColor--white;
-	padding: 1rem 2rem;
-	display: flex;
-	align-items: center;
-	flex-direction: column;
-
-	&__block {
-		width: 100%;
-		display: flex;
-		align-items: center;
-	}
-
-	&__title {
-		width: fit-content;
-		white-space: nowrap;
-		margin: 0.5rem 2rem 0.5rem 0;
-	}
-
-	&__input,
-	&__select,
-	&__option {
-		background-color: $fontColor--white;
-		font-size: 2rem;
-		height: 2.4rem;
-		width: 100%;
-		border: 0.1rem solid $fontColor--black;
-		border-radius: 0.2rem;
-
-		&:focus {
-			outline: none;
-			border: 0.2rem solid $fontColor--black;
-		}
-	}
-
-	&__select {
-		height: 2.8rem;
-	}
-
 	&--article-info {
 		grid-row: 1/2;
 		grid-column: 1/3;

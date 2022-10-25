@@ -3,38 +3,55 @@ import { FC } from 'react';
 
 import imagePlaceholder from '../../assets/images/placeholder.jpg';
 import { IProperties } from '../../types/blocks/propertiesBlock';
+import { addProductFormData } from '../../types/store';
 import { useRootStore } from '../../utils/RootStoreProvider/useRootStore';
-import Button from '../blocks/Button';
 import PropertiesBlock from '../blocks/PropertiesBlock';
+import PropertyHeadBlock from '../blocks/PropertyHeadBlock';
 import WindowHeader from '../blocks/WindowHeader';
 
-const AddProduct: FC = observer(() => {
-	const { popUpControlStore } = useRootStore();
+type ChangeFieldEvent = React.ChangeEvent<HTMLInputElement | HTMLSelectElement>;
 
-	const TITLE_BLOCK_PROPERTIES: Array<IProperties> = [{ text: 'Название' }];
+const AddProduct: FC = observer(() => {
+	const { popUpControlStore, addProductFormStore } = useRootStore();
+
+	function changeBlockHandler(e: ChangeFieldEvent, fieldName: keyof addProductFormData) {
+		addProductFormStore[fieldName] = e.target.value;
+	}
+
+	const TITLE_BLOCK_PROPERTIES: Array<IProperties> = [
+		{ text: 'Название', changeEvent: (e) => changeBlockHandler(e, 'title') },
+	];
 	const MAIN_BLOCK_PROPERTIES: Array<IProperties> = [
-		{ text: 'Автор' },
+		{ text: 'Автор', changeEvent: (e) => changeBlockHandler(e, 'author') },
 		{
 			text: 'Категория',
-			inputOptions: [
-				'Учебная литература (ВУЗ)',
-				'Учебная литература (CУЗ)',
-				'Художественная литература',
+			changeEvent: (e) => changeBlockHandler(e, 'category'),
+			selectOptions: [
+				{ id: 1, option: 'Учебная литература (ВУЗ)' },
+				{ id: 2, option: 'Учебная литература (CУЗ)' },
+				{ id: 3, option: 'Художественная литература' },
 			],
 		},
 	];
 	const SECOND_BLOCK_PROPERTIES: Array<IProperties> = [
-		{ text: 'Год издания' },
-		{ text: 'Количество товаров' },
+		{
+			text: 'Год издания',
+			changeEvent: (e) => changeBlockHandler(e, 'yearOfPublication'),
+		},
+		{ text: 'Количество товаров', changeEvent: (e) => changeBlockHandler(e, 'number') },
 	];
 	const OTHER_BLOCK_PROPERTIES: Array<IProperties> = [
-		{ text: 'Дата печати' },
-		{ text: 'Типография' },
-		{ text: 'Издательство' },
+		{ text: 'Дата печати', changeEvent: (e) => changeBlockHandler(e, 'printDate') },
+		{ text: 'Типография', changeEvent: (e) => changeBlockHandler(e, 'printingHouse') },
+		{
+			text: 'Издательство',
+			changeEvent: (e) => changeBlockHandler(e, 'publishingHouse'),
+		},
 	];
 
 	function hideAddProductWindowHandler() {
 		popUpControlStore.hideAddProductWindow();
+		popUpControlStore.showAddAcceptanceTaskWindow();
 	}
 
 	return (
@@ -44,13 +61,13 @@ const AddProduct: FC = observer(() => {
 				closeWindowEvent={hideAddProductWindowHandler}
 			/>
 			<div className='add-product__content-block'>
-				<div className='properties-block properties-block--article-info'>
-					<div className='properties-block__block'>
-						<p className='properties-block__title properties-block__title--big'>Артикул</p>
-						<input className='properties-block__input' />
-						<Button classes='button--add-product' text='Сгенерировать' />
-					</div>
-				</div>
+				<PropertyHeadBlock
+					property={{
+						text: 'Артикул',
+						changeEvent: (e) => changeBlockHandler(e, 'article'),
+					}}
+				/>
+
 				<PropertiesBlock
 					classes='properties-block--title-info'
 					properties={TITLE_BLOCK_PROPERTIES}

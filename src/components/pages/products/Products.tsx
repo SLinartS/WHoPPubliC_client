@@ -1,22 +1,17 @@
 import { observer } from 'mobx-react-lite';
 import { FC, useEffect } from 'react';
 import { useRootStore } from '../../../utils/RootStoreProvider/useRootStore';
-import Button from '../../blocks/Button';
 import Table from '../../blocks/table/Table';
 
 const Products: FC = observer(() => {
-	const { productsStore, popUpControlStore } = useRootStore();
+	const { productsStore } = useRootStore();
 
 	useEffect(() => {
-		if (productsStore.status === 'pending') {
+		if (productsStore.productsStatus === 'pending') {
 			productsStore.getProducts();
 		}
 		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [productsStore.status]);
-
-	function showAddProductWindowHandler() {
-		popUpControlStore.showAddProductWindow();
-	}
+	}, [productsStore.productsStatus]);
 
 	return (
 		<main className='products'>
@@ -26,10 +21,9 @@ const Products: FC = observer(() => {
 			<div className='products__action'>
 				<p className='products__search-text'>Поиск: </p>
 				<input type='text' className='products__search-input' />
-				<Button text='Добавить' onClick={showAddProductWindowHandler} />
 			</div>
 
-			{productsStore.status === 'done' ? (
+			{productsStore.productsStatus === 'done' ? (
 				<Table
 					key={Math.random()}
 					data={productsStore.products.data}

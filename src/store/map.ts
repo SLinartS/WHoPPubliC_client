@@ -4,7 +4,8 @@ import RootStore from './root';
 import { TStatus } from '../types/store';
 import { TMap } from '../types/map';
 
-import { getFakeMap } from '../fakeAPI/fakeAPI';
+import extendAxios from '../utils/extendAxios';
+import { AxiosResponse } from 'axios';
 
 export class MapStore {
 	private rootStore: RootStore;
@@ -20,10 +21,11 @@ export class MapStore {
 	public *getMap() {
 		try {
 			console.log('request to the server...', '| Map');
-			const data: TMap = yield getFakeMap();
-			this.mapData = data;
+			const response: AxiosResponse<TMap> = yield extendAxios.get<TMap>('map');
+			this.mapData = response.data;
 			this.status = 'done';
 		} catch (error) {
+			console.log(error);
 			this.status = 'error';
 		}
 	}

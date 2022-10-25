@@ -2,13 +2,10 @@ import { makeAutoObservable } from 'mobx';
 
 import RootStore from './root';
 import { TStatus } from '../types/store';
-import { TAcceptanceTasks, TShipmentTasks } from '../types/tasks';
+import { ITasksList } from '../types/tasks';
 
-import {
-	deleteFakeAcceptanceTask,
-	getFakeAcceptanceTasks,
-	getFakeShipmentTasks,
-} from '../fakeAPI/fakeAPI';
+import { AxiosResponse } from 'axios';
+import extendAxios from '../utils/extendAxios';
 
 export class TasksStore {
 	private rootStore: RootStore;
@@ -19,14 +16,16 @@ export class TasksStore {
 	}
 
 	public status: TStatus = 'pending';
-	public tasksAccepranceList: TAcceptanceTasks = { data: [], tableHeader: [] };
-	public tasksShipmentList: TShipmentTasks = { data: [], tableHeader: [] };
+	public tasksAccepranceList: ITasksList = { data: [], tableHeader: [] };
+	public tasksShipmentList: ITasksList = { data: [], tableHeader: [] };
 
 	public *getAcceptanceTasks() {
 		try {
 			console.log('request to the server...', '| TasksAcceptance');
-			const data: TAcceptanceTasks = yield getFakeAcceptanceTasks();
-			this.tasksAccepranceList = data;
+			const response: AxiosResponse<ITasksList> = yield extendAxios.get<ITasksList>(
+				'tasks/acceptance',
+			);
+			this.tasksAccepranceList = response.data;
 			this.status = 'done';
 		} catch (error) {
 			this.status = 'error';
@@ -36,22 +35,24 @@ export class TasksStore {
 	public *getShipmentTasks() {
 		try {
 			console.log('request to the server...', '| TasksShipment');
-			const data: TAcceptanceTasks = yield getFakeShipmentTasks();
-			this.tasksShipmentList = data;
+			const response: AxiosResponse<ITasksList> = yield extendAxios.get<ITasksList>(
+				'tasks/shipment',
+			);
+			this.tasksShipmentList = response.data;
 			this.status = 'done';
 		} catch (error) {
 			this.status = 'error';
 		}
 	}
 
-	public *deleteAcceptanceTask(id: string) {
-		try {
-			console.log('request to the server...', '| DELETE Task Acceptance');
-			yield deleteFakeAcceptanceTask(id);
-			this.status = 'pending';
-			this.getAcceptanceTasks();
-		} catch (error) {
-			this.status = 'error';
-		}
-	}
+	// public *deleteAcceptanceTask(id: number) {
+	// 	try {
+	// 		console.log('request to the server...', '| DELETE Task Acceptance');
+	// 		yield deleteFakeAcceptanceTask(id);
+	// 		this.status = 'pending';
+	// 		this.getAcceptanceTasks();
+	// 	} catch (error) {
+	// 		this.status = 'error';
+	// 	}
+	// }
 }
