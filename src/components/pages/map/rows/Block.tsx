@@ -1,5 +1,5 @@
 import React, { FC, ReactNode } from 'react';
-import { IBlockComponent } from '../../../../types/map';
+import { IBlockComponent } from '../types';
 import Floor from './Floor';
 import HeaderFloor from './HeaderFloor';
 

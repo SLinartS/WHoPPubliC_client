@@ -1,8 +1,9 @@
 import { FC, useState, useEffect, useRef } from 'react';
-import Section from './Section';
-import { IZone, IZoneLetter } from '../../../types/map';
-import LetterZone from './info/LetterZone';
+
 import { observer } from 'mobx-react-lite';
+import { IZone, IZoneLetter } from '../types';
+import Section from '../section/Section';
+import LetterZone from '../info/LetterZone';
 
 const initialZoneLetter: IZoneLetter = {
 	fontSize: 30,
@@ -10,7 +11,7 @@ const initialZoneLetter: IZoneLetter = {
 	leftOffset: 100,
 };
 
-const Map: FC<IZone> = observer(({ id, zoneLetter, sections }) => {
+const Zone: FC<IZone> = observer(({ id, zoneLetter, sections }) => {
 	const [zoneLetterObject, setZoneLetterObject] = useState<IZoneLetter>(initialZoneLetter);
 
 	const letterZoneNode = useRef<HTMLParagraphElement>(null);
@@ -78,4 +79,4 @@ const Map: FC<IZone> = observer(({ id, zoneLetter, sections }) => {
 	);
 });
 
-export default Map;
+export default Zone;

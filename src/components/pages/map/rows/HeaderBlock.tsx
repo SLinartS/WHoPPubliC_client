@@ -1,5 +1,5 @@
 import React, { FC, ReactNode } from 'react';
-import { IHeaderBlock } from '../../../../types/map';
+import { IHeaderBlock } from '../types';
 import HeaderFloor from './HeaderFloor';
 
 const HeaderBlock: FC<IHeaderBlock> = ({ floorsNumber }) => {

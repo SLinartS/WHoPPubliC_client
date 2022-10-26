@@ -1,19 +1,19 @@
 import { observer } from 'mobx-react-lite';
 import { FC, useEffect } from 'react';
-import { IProperties } from '../../types/blocks/propertiesBlock/propertiesBlock';
 
 import { ChangeFieldEvent } from '../../types/popup/popupWindows';
 import { addAcceptanceTaskFormDataFields } from '../../types/store/addAcceptanceTaskForm';
 import { useRootStore } from '../../utils/RootStoreProvider/useRootStore';
-import Button from '../blocks/Button';
-import PropertiesBlock from '../blocks/propertiesBlock/PropertiesBlock';
-import PropertiesPointBlock from '../blocks/propertiesBlock/PropertiesPointBlock';
-import PropertyHeadBlock from '../blocks/propertiesBlock/PropertyHeadBlock';
+import Button from '../blocks/button/Button';
+
+import FormBlock from '../blocks/form/block/Block';
+import FormFieldInput from '../blocks/form/field/input/Input';
+import FormLayout from '../blocks/form/layout/Layout';
 
 import Table from '../blocks/table/Table';
 import WindowHeader from '../blocks/WindowHeader';
 
-const AddAcceptanceTask: FC = observer(() => {
+const AddTask: FC = observer(() => {
 	const { popUpControlStore, productsStore, addAcceptanceTaskFormStore, tasksStore } =
 		useRootStore();
 
@@ -58,19 +58,6 @@ const AddAcceptanceTask: FC = observer(() => {
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [tasksStore.statusAddTask, productsStore.statusGetProductsOfTask]);
 
-	const MAIN_BLOCK_PROPERTIES: Array<IProperties> = [
-		{
-			text: 'Дата начала',
-			changeEvent: (e) => changeFieldHandler(e, 'dateStart'),
-			value: addAcceptanceTaskFormStore.dateStart,
-		},
-		{
-			text: 'Дата окончания',
-			changeEvent: (e) => changeFieldHandler(e, 'dateEnd'),
-			value: addAcceptanceTaskFormStore.dateEnd,
-		},
-	];
-
 	return (
 		<div className='add-task'>
 			<WindowHeader
@@ -78,23 +65,42 @@ const AddAcceptanceTask: FC = observer(() => {
 				closeWindowEvent={hideAddAcceptanceTaskWindowHandler}
 			/>
 			<div className='add-task__content-block'>
-				<PropertyHeadBlock
-					property={{
-						text: 'Название',
-						changeEvent: (e) => changeFieldHandler(e, 'title'),
-						value: addAcceptanceTaskFormStore.title,
-					}}
-				/>
-				<PropertiesBlock
-					classes='properties-block--title-info'
-					properties={MAIN_BLOCK_PROPERTIES}
-				/>
-				<PropertiesPointBlock
+				<FormLayout additionalСlasses='properties-block--article-info'>
+					<FormBlock
+						titleText='Название'
+						additionalTitleBlockClasses='properties-block__title--big'
+					>
+						<FormFieldInput
+							value={addAcceptanceTaskFormStore.title}
+							changeEvent={(e) => changeFieldHandler(e, 'title')}
+							additionalСlasses='properties-block__input--big'
+						/>
+						<Button additionalСlasses='button--window-header' text='Сгенерировать' />
+					</FormBlock>
+				</FormLayout>
+
+				<FormLayout additionalСlasses='properties-block--title-info'>
+					<FormBlock titleText='Дата начала'>
+						<FormFieldInput
+							value={addAcceptanceTaskFormStore.dateStart}
+							changeEvent={(e) => changeFieldHandler(e, 'dateStart')}
+						/>
+					</FormBlock>
+					<FormBlock titleText='Дата окончания'>
+						<FormFieldInput
+							value={addAcceptanceTaskFormStore.dateEnd}
+							changeEvent={(e) => changeFieldHandler(e, 'dateEnd')}
+						/>
+					</FormBlock>
+				</FormLayout>
+
+				{/* <PropertiesPointBlock
 					properties={[{ text: 'Точки приёмки' }, { text: 'Точки раскладки' }]}
-				/>
+				/> */}
+
 				<div className='add-task__table-block'>
 					<Button
-						classes='button--add-task'
+						additionalСlasses='button--add-task'
 						text='Добавить'
 						onClick={showAddProductWindowHandler}
 					/>
@@ -114,4 +120,4 @@ const AddAcceptanceTask: FC = observer(() => {
 	);
 });
 
-export default AddAcceptanceTask;
+export default AddTask;

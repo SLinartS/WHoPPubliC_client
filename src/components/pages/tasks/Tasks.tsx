@@ -3,7 +3,7 @@ import { observer } from 'mobx-react-lite';
 
 import { useRootStore } from '../../../utils/RootStoreProvider/useRootStore';
 import Table from '../../blocks/table/Table';
-import Button from '../../blocks/Button';
+import Button from '../../blocks/button/Button';
 
 const Tasks: FC = observer(() => {
 	const { tasksStore, popUpControlStore } = useRootStore();
@@ -30,7 +30,7 @@ const Tasks: FC = observer(() => {
 			</div>
 			<div className='tasks__block'>
 				<Button
-					classes='button--tasks'
+					additionalСlasses='button--tasks'
 					text='Добавить'
 					onClick={showAddTaskWindowHandler}
 				/>
@@ -49,7 +49,7 @@ const Tasks: FC = observer(() => {
 				<h3 className='tasks__title-text tasks__title-text'>Отгрузка</h3>
 			</div>
 			<div className='tasks__block'>
-				<Button classes='button--tasks' text='Добавить' />
+				<Button additionalСlasses='button--tasks' text='Добавить' />
 
 				{tasksStore.statusGetShipmentTasks === 'done' ? (
 					<Table

@@ -1,10 +1,9 @@
 import { observer } from 'mobx-react-lite';
-import { FC } from 'react';
-import { ISelectInputProps } from '../../../types/blocks/propertiesBlock/selectInput';
+import React, { FC } from 'react';
+import { ISelectFiledInputProps } from './types';
 
 
-
-const SelectInput: FC<ISelectInputProps> = observer(({ options, changeEvent, value }) => {
+const FormFieldSelect: FC<ISelectFiledInputProps> = observer(({ options, changeEvent, value }) => {
 	return (
 		<select className='properties-block__select' value={value} onChange={changeEvent}>
 			{options.map((option) => (
@@ -16,4 +15,4 @@ const SelectInput: FC<ISelectInputProps> = observer(({ options, changeEvent, val
 	);
 });
 
-export default SelectInput;
+export default FormFieldSelect;

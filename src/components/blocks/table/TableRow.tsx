@@ -1,7 +1,8 @@
 import { observer } from 'mobx-react-lite';
 import { FC } from 'react';
-import { IRowProps } from '../../../types/blocks/table';
+
 import TableColumn from './TableColumn';
+import { IRowProps } from './types';
 
 const TableRow: FC<IRowProps> = observer(({ columns }) => {
 	return (

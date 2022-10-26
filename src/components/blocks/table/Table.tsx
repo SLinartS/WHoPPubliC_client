@@ -1,8 +1,9 @@
 import { observer } from 'mobx-react-lite';
 import { FC, ReactNode } from 'react';
-import { ITableProps } from '../../../types/blocks/table';
+
 import TableHeaderColumn from './TableHeaderColumn';
 import TableRow from './TableRow';
+import { ITableProps } from './types';
 
 const Table: FC<ITableProps> = observer(({ data, tableHeader, classes }) => {
 	function generateRows(): Array<ReactNode> {

@@ -1,11 +1,12 @@
 import { makeAutoObservable } from 'mobx';
 
 import RootStore from './root';
-import { TMap } from '../types/map';
+
 
 import extendAxios from '../utils/extendAxios';
 import { AxiosResponse } from 'axios';
 import { TStatus } from '../types/store/store';
+import { TMap } from '../components/pages/map/types';
 
 export class MapStore {
 	private _rootStore!: RootStore;
@@ -24,7 +25,6 @@ export class MapStore {
 
 	public *getMap() {
 		try {
-			console.log('request to the server...', '| Map');
 			const response: AxiosResponse<TMap> = yield extendAxios.get<TMap>('map');
 			this.mapData = response.data;
 			this.status = 'done';

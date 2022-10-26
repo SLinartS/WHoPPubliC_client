@@ -1,5 +1,6 @@
-import { IProduct, TProducts } from '../products';
-import { ITask, TTasks } from '../tasks';
+import { IProduct, TProducts } from "../../../types/products";
+import { ITask, TTasks } from "../../pages/tasks/types";
+
 
 export interface ITableProps {
 	data: TTasks | TProducts;

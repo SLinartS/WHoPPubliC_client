@@ -1,7 +1,7 @@
 import { observer } from 'mobx-react-lite';
 import { FC } from 'react';
 import appIcon from '../../assets/images/app-icon.png';
-import Button from '../blocks/Button';
+import Button from '../blocks/button/Button';
 
 const Login: FC = observer(() => {
 	return (
@@ -14,7 +14,7 @@ const Login: FC = observer(() => {
 					<p className='login__label'>Пароль</p>
 					<input type='text' className='login__input' />
 				</div>
-				<Button classes='button--login' text='Войти'/>
+				<Button additionalСlasses='button--login' text='Войти'/>
 			</div>
 		</main>
 	);

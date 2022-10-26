@@ -1,6 +1,6 @@
 import { observer } from 'mobx-react-lite';
 import { forwardRef } from 'react';
-import { ISectionNumber } from '../../../../types/map';
+import { ISectionNumber } from '../types';
 
 const NumberSection = observer(
 	forwardRef<HTMLParagraphElement, ISectionNumber>(

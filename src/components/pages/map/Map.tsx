@@ -1,9 +1,9 @@
 import { FC, useEffect } from 'react';
 import { observer } from 'mobx-react-lite';
 
-import Zone from './Zone';
 
 import { useRootStore } from '../../../utils/RootStoreProvider/useRootStore';
+import Zone from './zone/Zone';
 
 const Map: FC = observer(() => {
 	const { mapStore } = useRootStore();

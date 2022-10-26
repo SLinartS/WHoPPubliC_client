@@ -1,5 +1,3 @@
-import { IProperties } from "./propertiesBlock";
-
 export interface IPropertiesOfPointBlockProps {
 	classes?: string;
 	properties: Array<IPropertiesOfPoint>;

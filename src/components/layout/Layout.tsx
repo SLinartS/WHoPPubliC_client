@@ -5,7 +5,7 @@ import { observer } from 'mobx-react-lite';
 import { Outlet } from 'react-router-dom';
 
 import AddProduct from '../popup/AddProduct';
-import AddAcceptanceTask from '../popup/AddAcceptanceTask';
+import AddTask from '../popup/AddTask';
 
 const Layout = observer(() => {
 	const { popUpControlStore } = useRootStore();
@@ -15,7 +15,7 @@ const Layout = observer(() => {
 			<Header />
 			<Outlet />
 			{popUpControlStore.addProductStatus ? <AddProduct /> : ''}
-			{popUpControlStore.addAcceptanceTaskStatus ? <AddAcceptanceTask /> : ''}
+			{popUpControlStore.addAcceptanceTaskStatus ? <AddTask /> : ''}
 		</>
 	);
 });
