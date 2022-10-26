@@ -1,7 +1,13 @@
 import { ChangeEventHandler } from "react";
-import { ISelectOptions } from "./propertiesBlock";
+
 
 export interface ISelectInputProps {
 	options: Array<ISelectOptions>;
+	value?: string;
 	changeEvent?: ChangeEventHandler<HTMLInputElement | HTMLSelectElement>;
+}
+
+export interface ISelectOptions {
+	id: number;
+	option: string;
 }

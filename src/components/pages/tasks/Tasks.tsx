@@ -13,15 +13,15 @@ const Tasks: FC = observer(() => {
 	}
 
 	useEffect(() => {
-		if (tasksStore.status === 'pending') {
+		if (tasksStore.statusGetAcceptanceTasks === 'pending') {
 			tasksStore.getAcceptanceTasks();
+		}
+
+		if (tasksStore.statusGetShipmentTasks === 'pending') {
 			tasksStore.getShipmentTasks();
 		}
-		if (tasksStore.status === 'done') {
-			console.log(tasksStore.tasksAccepranceList);
-		}
 		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [tasksStore.status]);
+	}, [tasksStore.statusGetAcceptanceTasks, tasksStore.statusGetShipmentTasks]);
 
 	return (
 		<main className='tasks'>
@@ -34,7 +34,7 @@ const Tasks: FC = observer(() => {
 					text='Добавить'
 					onClick={showAddTaskWindowHandler}
 				/>
-				{tasksStore.status === 'done' ? (
+				{tasksStore.statusGetAcceptanceTasks === 'done' ? (
 					<Table
 						key={Math.random()}
 						data={tasksStore.tasksAccepranceList.data}
@@ -51,7 +51,7 @@ const Tasks: FC = observer(() => {
 			<div className='tasks__block'>
 				<Button classes='button--tasks' text='Добавить' />
 
-				{tasksStore.status === 'done' ? (
+				{tasksStore.statusGetShipmentTasks === 'done' ? (
 					<Table
 						key={Math.random()}
 						data={tasksStore.tasksShipmentList.data}

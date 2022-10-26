@@ -1,0 +1,1 @@
+export type ChangeFieldEvent = React.ChangeEvent<HTMLInputElement | HTMLSelectElement>;

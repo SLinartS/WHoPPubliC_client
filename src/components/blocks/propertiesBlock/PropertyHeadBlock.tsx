@@ -1,7 +1,9 @@
 import { observer } from 'mobx-react-lite';
 import { FC } from 'react';
-import { IPropertyHeadBlockProps } from '../../types/blocks/propertiesBlock';
-import Button from './Button';
+import { IPropertyHeadBlockProps } from '../../../types/blocks/propertiesBlock/propertiesBlock';
+
+import Button from '../Button';
+
 
 const PropertyHeadBlock: FC<IPropertyHeadBlockProps> = observer(({ classes, property,  }) => {
 	return (
@@ -10,7 +12,7 @@ const PropertyHeadBlock: FC<IPropertyHeadBlockProps> = observer(({ classes, prop
 				<p className='properties-block__title properties-block__title--big'>
 					{property.text}
 				</p>
-				<input className='properties-block__input properties-block__input--big' onChange={property.changeEvent}/>
+				<input className='properties-block__input properties-block__input--big' value={property.value} onChange={property.changeEvent}/>
 				<Button classes='button--window-header' text='Сгенерировать' />
 			</div>
 		</div>

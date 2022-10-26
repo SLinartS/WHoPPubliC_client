@@ -1,12 +1,8 @@
 import { ChangeEventHandler } from 'react';
+import { ISelectOptions } from './selectInput';
 
 export interface IPropertiesBlockProps {
 	classes: string;
-	properties: Array<IProperties>;
-}
-
-export interface IPropertiesPointBlockProps {
-	classes?: string;
 	properties: Array<IProperties>;
 }
 
@@ -17,11 +13,7 @@ export interface IPropertyHeadBlockProps {
 
 export interface IProperties {
 	text: string;
-	changeEvent?: ChangeEventHandler<HTMLInputElement | HTMLSelectElement>;
+	changeEvent: ChangeEventHandler<HTMLInputElement | HTMLSelectElement>;
+	value: string;
 	selectOptions?: Array<ISelectOptions>;
-}
-
-export interface ISelectOptions {
-	id: number;
-	option: string;
 }

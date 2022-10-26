@@ -3,7 +3,11 @@ import { makeAutoObservable } from 'mobx';
 import RootStore from './root';
 
 export class PopUpControlStore {
-	private rootStore: RootStore;
+	private _rootStore!: RootStore;
+
+	private set rootStore(rootStore: RootStore) {
+		this._rootStore = rootStore;
+	}
 
 	constructor(rootStore: RootStore) {
 		makeAutoObservable(this, {});

@@ -1,14 +1,18 @@
 import { makeAutoObservable } from 'mobx';
 
 import RootStore from './root';
-import { TStatus } from '../types/store';
 import { TMap } from '../types/map';
 
 import extendAxios from '../utils/extendAxios';
 import { AxiosResponse } from 'axios';
+import { TStatus } from '../types/store/store';
 
 export class MapStore {
-	private rootStore: RootStore;
+	private _rootStore!: RootStore;
+
+	private set rootStore(rootStore: RootStore) {
+		this._rootStore = rootStore;
+	}
 
 	constructor(rootStore: RootStore) {
 		makeAutoObservable(this, {});

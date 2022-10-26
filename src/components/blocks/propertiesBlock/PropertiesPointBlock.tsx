@@ -1,13 +1,16 @@
 import { observer } from 'mobx-react-lite';
 import { FC } from 'react';
-import { IPropertiesPointBlockProps } from '../../types/blocks/propertiesBlock';
+import { IPropertiesOfPointBlockProps } from '../../../types/blocks/propertiesBlock/propertiesOfPointBlock';
 
-const PropertiesPointBlock: FC<IPropertiesPointBlockProps> = observer(({ classes, properties }) => {
+
+
+
+const PropertiesPointBlock: FC<IPropertiesOfPointBlockProps> = observer(({ classes, properties }) => {
 	return (
 		<div className={'properties-block ' + classes}>
 			{properties.map((property) => {
 				return (
-					<div className='properties-block__block'>
+					<div key={property.text} className='properties-block__block'>
 						<p className='properties-block__title'>{property.text}</p>
 						<button className='properties-block__add-point'>+</button>
 					</div>

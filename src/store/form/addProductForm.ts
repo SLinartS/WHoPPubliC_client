@@ -1,17 +1,21 @@
 import { makeAutoObservable } from 'mobx';
-import { addProductFormData } from '../../types/store';
+import { addProductFormData } from '../../types/store/addProductForm';
+
 import RootStore from '../root';
 
 export class AddProductFormStore {
-	private rootStore: RootStore;
+	private _rootStore!: RootStore;
+
+	private set rootStore(rootStore: RootStore) {
+		this._rootStore = rootStore;
+	}
 
 	constructor(rootStore: RootStore) {
 		makeAutoObservable(this, {});
 		this.rootStore = rootStore;
 	}
-	
 
-	public formData: addProductFormData = {
+	public _formData: addProductFormData = {
 		article: '',
 		title: '',
 		author: '',
@@ -21,80 +25,88 @@ export class AddProductFormStore {
 		printDate: '',
 		printingHouse: '',
 		publishingHouse: '',
-		operatorLogin: '',
+		userId: '',
+		stored: '',
+		taskTitle: '',
 	};
 
-	// public getField(fieldName: keyof addProductFormData) {
-	// 	return this.formData[fieldName];
-	// }
-
-	// public setField(fieldName: keyof addProductFormData, fieldValue: number | string) {
-	// 		this.formData[fieldName] = fieldValue;
-		
-	// }
-	
-
+	// Getters
+	public get formData() {
+		return this._formData;
+	}
 
 	public get article() {
-		return this.formData.article;
+		return this._formData.article;
 	}
 	public get title() {
-		return this.formData.title;
+		return this._formData.title;
 	}
 	public get author() {
-		return this.formData.author;
+		return this._formData.author;
 	}
 	public get category() {
-		return this.formData.category;
+		return this._formData.category;
 	}
 	public get yearOfPublication() {
-		return this.formData.yearOfPublication;
+		return this._formData.yearOfPublication;
 	}
 	public get number() {
-		return this.formData.number;
+		return this._formData.number;
 	}
 	public get printDate() {
-		return this.formData.printDate;
+		return this._formData.printDate;
 	}
 	public get printingHouse() {
-		return this.formData.printingHouse;
+		return this._formData.printingHouse;
 	}
 	public get publishingHouse() {
-		return this.formData.publishingHouse;
+		return this._formData.publishingHouse;
 	}
-	public get operatorLogin() {
-		return this.formData.operatorLogin;
+	public get userId() {
+		return this._formData.userId;
+	}
+	public get stored() {
+		return this._formData.stored;
+	}
+	public get taskTitle() {
+		return this._formData.taskTitle;
 	}
 
 	// Setters
 	public set article(article: string) {
-		this.formData.article = article;
+		this._formData.article = article;
 	}
 	public set title(title: string) {
-		this.formData.title = title;
+		this._formData.title = title;
 	}
 	public set author(author: string) {
-		this.formData.author = author;
+		this._formData.author = author;
 	}
 	public set category(category: string) {
-		this.formData.category = category;
+		this._formData.category = category;
 	}
 	public set yearOfPublication(yearOfPublication: string) {
-		this.formData.yearOfPublication = yearOfPublication;
+		this._formData.yearOfPublication = yearOfPublication;
 	}
 	public set number(number: string) {
-		this.formData.number = number;
+		this._formData.number = number;
 	}
 	public set printDate(printDate: string) {
-		this.formData.printDate = printDate;
+		this._formData.printDate = printDate;
 	}
 	public set printingHouse(printingHouse: string) {
-		this.formData.printingHouse = printingHouse;
+		this._formData.printingHouse = printingHouse;
 	}
 	public set publishingHouse(publishingHouse: string) {
-		this.formData.publishingHouse = publishingHouse;
+		this._formData.publishingHouse = publishingHouse;
 	}
-	public set operatorLogin(operatorLogin: string) {
-		this.formData.operatorLogin = operatorLogin;
+	public set userId(userId: string) {
+		this._formData.userId = userId;
+	}
+	public set taskTitle(taskTitle: string) {
+		this._formData.taskTitle = taskTitle;
+	}
+	public set stored(stored: string) {
+		this._formData.stored = stored;
 	}
 }

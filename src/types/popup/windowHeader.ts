@@ -4,4 +4,5 @@ export interface IWindowHeaderProps {
 	classes?: string;
 	text: string;
 	closeWindowEvent: MouseEventHandler<HTMLButtonElement>;
+	actionEvent?: MouseEventHandler<HTMLButtonElement>;
 }

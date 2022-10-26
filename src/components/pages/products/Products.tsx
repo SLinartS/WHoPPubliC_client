@@ -7,11 +7,11 @@ const Products: FC = observer(() => {
 	const { productsStore } = useRootStore();
 
 	useEffect(() => {
-		if (productsStore.productsStatus === 'pending') {
+		if (productsStore.statusGetProducts === 'pending') {
 			productsStore.getProducts();
 		}
 		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [productsStore.productsStatus]);
+	}, [productsStore.statusGetProducts]);
 
 	return (
 		<main className='products'>
@@ -23,7 +23,7 @@ const Products: FC = observer(() => {
 				<input type='text' className='products__search-input' />
 			</div>
 
-			{productsStore.productsStatus === 'done' ? (
+			{productsStore.statusGetProducts === 'done' ? (
 				<Table
 					key={Math.random()}
 					data={productsStore.products.data}

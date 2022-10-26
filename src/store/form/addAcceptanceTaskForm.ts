@@ -1,85 +1,108 @@
 import { makeAutoObservable } from 'mobx';
-import { addAcceptanceTaskFormData } from '../../types/store';
+import {
+	addAcceptanceTaskFormDataArrays,
+	addAcceptanceTaskFormDataFields,
+} from '../../types/store/addAcceptanceTaskForm';
+
 import RootStore from '../root';
 
 export class AddAcceptanceTaskFormStore {
-	private rootStore: RootStore;
+	private _rootStore!: RootStore;
+
+	private set rootStore(rootStore: RootStore) {
+		this._rootStore = rootStore;
+	}
 
 	constructor(rootStore: RootStore) {
 		makeAutoObservable(this, {});
 		this.rootStore = rootStore;
 	}
 
-	public formData: addAcceptanceTaskFormData = {
+	private _formDataField: addAcceptanceTaskFormDataFields = {
 		title: '',
 		dateStart: '',
 		dateEnd: '',
-		operatorLogin: '',
-		productIds: [],
-		startPointIds: [],
-		endPointIds: [],
+		userId: '',
 	};
 
-	// Getters
+	private _formDataArrays: addAcceptanceTaskFormDataArrays = {
+		products: [],
+		startPoints: [],
+		endPoints: [],
+	};
+
+	// Getters ALL FORM DATA
+	public get formDataField() {
+		return this._formDataField;
+	}
+	public get formDataArrays() {
+		return this._formDataArrays;
+	}
+
+	// Getters FIELDS
 	public get title() {
-		return this.formData.title;
+		return this._formDataField.title;
 	}
 	public get dateStart() {
-		return this.formData.dateStart;
+		return this._formDataField.dateStart;
 	}
 	public get dateEnd() {
-		return this.formData.dateEnd;
+		return this._formDataField.dateEnd;
 	}
-	public get operatorLogin() {
-		return this.formData.operatorLogin;
-	}
-	public get productIds() {
-		return this.formData.productIds;
-	}
-	public get startPointIds() {
-		return this.formData.startPointIds;
-	}
-	public get endPointIds() {
-		return this.formData.endPointIds;
+	public get userId() {
+		return this._formDataField.userId;
 	}
 
-	// Setters
+	// Getters ARRAYS
+	public get products() {
+		return this._formDataArrays.products;
+	}
+	public get startPoints() {
+		return this._formDataArrays.startPoints;
+	}
+	public get endPoints() {
+		return this._formDataArrays.endPoints;
+	}
+
+	// Setters FIELDS
 	public set title(title: string) {
-		this.formData.title = title;
+		this._formDataField.title = title;
 	}
 	public set dateStart(dateStart: string) {
-		this.formData.dateStart = dateStart;
+		this._formDataField.dateStart = dateStart;
 	}
 	public set dateEnd(dateEnd: string) {
-		this.formData.dateEnd = dateEnd;
+		this._formDataField.dateEnd = dateEnd;
 	}
-	public set operatorLogin(operatorLogin: string) {
-		this.formData.operatorLogin = operatorLogin;
+	public set userId(userId: string) {
+		this._formDataField.userId = userId;
 	}
 
-	// Adding and removing values from arrays
+	// Adding and removing values from ARRAYS
 	// Add values
-	public addProductId(productId: number) {
-		this.formData.productIds.push(productId);
+	public addProductId(productId: string) {
+		this._formDataArrays.products.push(productId);
 	}
-	public addStartPointId(startPointId: number) {
-		this.formData.startPointIds.push(startPointId);
+	public addStartPointId(startPointId: string) {
+		this._formDataArrays.startPoints.push(startPointId);
 	}
 	public addEndPointId(endPointTitle: string) {
-		this.formData.endPointIds.push(endPointTitle);
+		this._formDataArrays.endPoints.push(endPointTitle);
 	}
 
 	// Remove values
-	public removeProductId(productId: number) {
-		this.formData.productIds = this.formData.productIds.filter((id) => id !== productId);
+	public removeProductId(productId: string) {
+		this._formDataArrays.products = this._formDataArrays.products.filter(
+			(id) => id !== productId,
+		);
 	}
-	public removeStartPoint(startPointid: number) {
-		this.formData.startPointIds = this.formData.startPointIds.filter(
+	public removeStartPoint(startPointid: string) {
+		this._formDataArrays.startPoints = this._formDataArrays.startPoints.filter(
 			(id) => id !== startPointid,
 		);
 	}
 	public removeEndPoint(endPointTitle: string) {
-		this.formData.endPointIds = this.formData.endPointIds.filter(
+		this._formDataArrays.endPoints = this._formDataArrays.endPoints.filter(
 			(title) => title !== endPointTitle,
 		);
 	}
