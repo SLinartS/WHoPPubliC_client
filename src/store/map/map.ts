@@ -1,12 +1,11 @@
-import { makeAutoObservable } from 'mobx';
-
-import RootStore from './root';
-
-
-import extendAxios from '../utils/extendAxios';
 import { AxiosResponse } from 'axios';
-import { TMap } from '../components/pages/map/types';
-import { TStatus } from './types';
+import { makeAutoObservable } from 'mobx';
+import extendAxios from '../../utils/extendAxios';
+import RootStore from '../root';
+import { TStatus } from '../types';
+import { TMap } from './types';
+
+
 
 export class MapStore {
 	private _rootStore!: RootStore;

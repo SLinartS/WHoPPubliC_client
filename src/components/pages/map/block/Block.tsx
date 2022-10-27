@@ -1,7 +1,8 @@
-import { FC, ReactNode } from 'react';
-import { IBlockProps } from '../types';
-import Floor from './Floor';
-import HeaderFloor from './HeaderFloor';
+import { FC } from 'react';
+import Floor from '../floor/Floor';
+import HeaderFloor from '../floor/HeaderFloor';
+import { IBlockProps } from './types';
+
 
 const Block: FC<IBlockProps> = ({ id, index, floors }) => {
 	return (

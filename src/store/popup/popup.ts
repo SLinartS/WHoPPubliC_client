@@ -1,8 +1,8 @@
 import { makeAutoObservable } from 'mobx';
+import RootStore from '../root';
 
-import RootStore from './root';
 
-export class PopUpControlStore {
+export class PopupStore {
 	private _rootStore!: RootStore;
 
 	private set rootStore(rootStore: RootStore) {

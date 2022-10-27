@@ -1,9 +1,9 @@
 import { observer } from 'mobx-react-lite';
 import { forwardRef } from 'react';
-import { IInfoElementProps } from '../types';
+import { ISectionNumberProps } from '../types';
 
 const NumberSection = observer(
-	forwardRef<HTMLParagraphElement, IInfoElementProps>(({ fontSize }, ref) => {
+	forwardRef<HTMLParagraphElement, ISectionNumberProps>(({ fontSize, index }, ref) => {
 		return (
 			<p
 				ref={ref}
@@ -12,7 +12,7 @@ const NumberSection = observer(
 					fontSize: fontSize + 'rem',
 				}}
 			>
-				{1}
+				{index}
 			</p>
 		);
 	}),

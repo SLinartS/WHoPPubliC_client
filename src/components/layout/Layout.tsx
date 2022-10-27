@@ -8,14 +8,14 @@ import AddProduct from '../popup/AddProduct';
 import AddTask from '../popup/AddTask';
 
 const Layout = observer(() => {
-	const { popUpControlStore } = useRootStore();
+	const { popupStore } = useRootStore();
 
 	return (
 		<>
 			<Header />
 			<Outlet />
-			{popUpControlStore.addProductStatus ? <AddProduct /> : ''}
-			{popUpControlStore.addAcceptanceTaskStatus ? <AddTask /> : ''}
+			{popupStore.addProductStatus ? <AddProduct /> : ''}
+			{popupStore.addAcceptanceTaskStatus ? <AddTask /> : ''}
 		</>
 	);
 });

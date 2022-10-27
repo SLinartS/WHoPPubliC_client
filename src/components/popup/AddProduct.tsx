@@ -1,5 +1,5 @@
 import { observer } from 'mobx-react-lite';
-import { FC, useEffect } from 'react';
+import { FC, useCallback, useEffect } from 'react';
 import imagePlaceholder from '../../assets/images/placeholder.jpg';
 import { useRootStore } from '../../utils/RootStoreProvider/useRootStore';
 import { ISelectOptions } from '../blocks/form/field/select/types';
@@ -8,12 +8,12 @@ import FormBlock from '../blocks/form/block/Block';
 import FormFieldInput from '../blocks/form/field/input/Input';
 import FormFieldSelect from '../blocks/form/field/select/Select';
 import Button from '../blocks/button/Button';
-import { addProductFormData, ChangeFieldEvent } from './types';
+
 import WindowHeader from '../blocks/windowHeader/WindowHeader';
+import { addProductFormData, ChangeFieldEvent } from '../../store/form/types';
 
 const AddProduct: FC = observer(() => {
-	const { popUpControlStore, addProductFormStore, productsStore, addTaskFormStore } =
-		useRootStore();
+	const { popupStore, addProductFormStore, productsStore, addTaskFormStore } = useRootStore();
 
 	function changeFieldHandler(e: ChangeFieldEvent, fieldName: keyof addProductFormData) {
 		addProductFormStore[fieldName] = e.target.value;
@@ -25,17 +25,13 @@ const AddProduct: FC = observer(() => {
 		{ id: 3, option: 'Художественная литература' },
 	];
 
-	function hideAddProductWindowHandler() {
-		popUpControlStore.hideAddProductWindow();
-		popUpControlStore.showAddAcceptanceTaskWindow();
-	}
+	const hideAddProductWindowHandler = useCallback(() => {
+		popupStore.hideAddProductWindow();
+		popupStore.showAddAcceptanceTaskWindow();
+	}, [popupStore]);
 
 	function addProductHandler() {
-		productsStore.addProduct(
-			addProductFormStore.formData,
-			addTaskFormStore.title,
-			'1',
-		);
+		productsStore.addProduct(addProductFormStore.formData, addTaskFormStore.title, '1');
 	}
 
 	useEffect(() => {
@@ -44,8 +40,7 @@ const AddProduct: FC = observer(() => {
 			productsStore.statusAddProduct = 'pending';
 			productsStore.statusGetProductsOfTask = 'pending';
 		}
-		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [productsStore.statusAddProduct]);
+	}, [productsStore, hideAddProductWindowHandler]);
 
 	return (
 		<div className='add-product'>

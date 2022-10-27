@@ -2,7 +2,6 @@ import { ChangeEvent } from 'react';
 
 export type ChangeFieldEvent = ChangeEvent<HTMLInputElement | HTMLSelectElement>;
 
-
 export interface addTaskFormDataArrays {
 	products: Array<string>;
 	startPoints: Array<string>;
@@ -28,5 +27,5 @@ export interface addProductFormData {
 	publishingHouse: string;
 	userId: string;
 	stored: string;
-  taskTitle: string;
+	taskTitle: string;
 }

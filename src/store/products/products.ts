@@ -1,13 +1,10 @@
-import { makeAutoObservable } from 'mobx';
-
-import RootStore from './root';
-
-
-import extendAxios from '../utils/extendAxios';
 import { AxiosResponse } from 'axios';
-import { TProductsData } from '../components/pages/products/types';
-import { addProductFormData } from '../components/popup/types';
-import { TStatus } from './types';
+import { makeAutoObservable } from 'mobx';
+import extendAxios from '../../utils/extendAxios';
+import { addProductFormData } from '../form/types';
+import { TProductsData } from '../popup/types';
+import RootStore from '../root';
+import { TStatus } from '../types';
 
 export class ProductsStore {
 	private _rootStore!: RootStore;

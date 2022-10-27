@@ -1,5 +1,6 @@
 import { observer } from 'mobx-react-lite';
 import { FC, useEffect } from 'react';
+import { addTaskFormDataFields, ChangeFieldEvent } from '../../store/form/types';
 
 import { useRootStore } from '../../utils/RootStoreProvider/useRootStore';
 import Button from '../blocks/button/Button';
@@ -11,22 +12,16 @@ import FormLayout from '../blocks/form/layout/Layout';
 
 import Table from '../blocks/table/Table';
 import WindowHeader from '../blocks/windowHeader/WindowHeader';
-import { addTaskFormDataFields, ChangeFieldEvent } from './types';
-
 
 const AddTask: FC = observer(() => {
-	const { popUpControlStore, productsStore, addTaskFormStore, tasksStore } =
-		useRootStore();
+	const { popupStore, productsStore, addTaskFormStore, tasksStore } = useRootStore();
 
-	function changeFieldHandler(
-		e: ChangeFieldEvent,
-		fieldName: keyof addTaskFormDataFields,
-	) {
+	function changeFieldHandler(e: ChangeFieldEvent, fieldName: keyof addTaskFormDataFields) {
 		addTaskFormStore[fieldName] = e.target.value;
 	}
 
 	function hideAddAcceptanceTaskWindowHandler() {
-		popUpControlStore.hideAddAcceptanceTaskWindow();
+		popupStore.hideAddAcceptanceTaskWindow();
 	}
 
 	function showAddProductWindowHandler() {
@@ -37,27 +32,23 @@ const AddTask: FC = observer(() => {
 				alert('Заполните название задачи!');
 			}
 		} else {
-			popUpControlStore.showAddProductWindow();
-			popUpControlStore.hideAddAcceptanceTaskWindow();
+			popupStore.showAddProductWindow();
+			popupStore.hideAddAcceptanceTaskWindow();
 		}
 	}
 
 	useEffect(() => {
-		if (
-			productsStore.statusGetProductsOfTask === 'pending' &&
-			addTaskFormStore.title
-		) {
+		if (productsStore.statusGetProductsOfTask === 'pending' && addTaskFormStore.title) {
 			productsStore.getProductsOfAcceptanceTask(addTaskFormStore.title);
 		}
 
 		if (tasksStore.statusAddTask === 'done' && !tasksStore.statusTaskHasBeenAdded) {
 			tasksStore.statusTaskHasBeenAdded = true;
 			tasksStore.statusGetAcceptanceTasks = 'pending';
-			popUpControlStore.showAddProductWindow();
-			popUpControlStore.hideAddAcceptanceTaskWindow();
+			popupStore.showAddProductWindow();
+			popupStore.hideAddAcceptanceTaskWindow();
 		}
-		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [tasksStore.statusAddTask, productsStore.statusGetProductsOfTask]);
+	}, [addTaskFormStore.title, popupStore, productsStore, tasksStore]);
 
 	return (
 		<div className='add-task'>
@@ -97,10 +88,10 @@ const AddTask: FC = observer(() => {
 
 				<FormLayout>
 					<FormBlock titleText='Точки приёмки'>
-						<FormFieldPoint/>
+						<FormFieldPoint />
 					</FormBlock>
 					<FormBlock titleText='Точки раскладки'>
-						<FormFieldPoint/>
+						<FormFieldPoint />
 					</FormBlock>
 				</FormLayout>
 

@@ -1,7 +1,7 @@
 import { makeAutoObservable } from 'mobx';
-import { addTaskFormDataArrays, addTaskFormDataFields } from '../../components/popup/types';
 
 import RootStore from '../root';
+import { addTaskFormDataArrays, addTaskFormDataFields } from './types';
 
 export class AddTaskFormStore {
 	private _rootStore!: RootStore;

@@ -1,7 +1,7 @@
-import { FC, ReactNode } from 'react';
-import { IHeaderBlockProps } from '../types';
-import Floor from './Floor';
-import HeaderFloor from './HeaderFloor';
+import { FC } from 'react';
+import HeaderFloor from '../floor/HeaderFloor';
+import { IHeaderBlockProps } from './types';
+
 
 const HeaderBlock: FC<IHeaderBlockProps> = ({ floors }) => {
 	return (
@@ -10,7 +10,7 @@ const HeaderBlock: FC<IHeaderBlockProps> = ({ floors }) => {
 				className='map__block'
 				style={{ gridTemplateRows: `repeat(${floors.length + 1}, 5rem` }}
 			>
-				<HeaderFloor key={Math.random()} index={0} />
+				<HeaderFloor index={0} />
 				{floors.map((_, index) => (
 					<HeaderFloor key={index} index={index + 1} />
 				))}

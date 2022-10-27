@@ -6,22 +6,20 @@ import Table from '../../blocks/table/Table';
 import Button from '../../blocks/button/Button';
 
 const Tasks: FC = observer(() => {
-	const { tasksStore, popUpControlStore } = useRootStore();
+	const { tasksStore, popupStore } = useRootStore();
 
 	function showAddTaskWindowHandler() {
-		popUpControlStore.showAddAcceptanceTaskWindow();
+		popupStore.showAddAcceptanceTaskWindow();
 	}
 
 	useEffect(() => {
 		if (tasksStore.statusGetAcceptanceTasks === 'pending') {
 			tasksStore.getAcceptanceTasks();
 		}
-
 		if (tasksStore.statusGetShipmentTasks === 'pending') {
 			tasksStore.getShipmentTasks();
 		}
-		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [tasksStore.statusGetAcceptanceTasks, tasksStore.statusGetShipmentTasks]);
+	}, [tasksStore]);
 
 	return (
 		<main className='tasks'>

@@ -10,8 +10,7 @@ const Products: FC = observer(() => {
 		if (productsStore.statusGetProducts === 'pending') {
 			productsStore.getProducts();
 		}
-		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [productsStore.statusGetProducts]);
+	}, [productsStore]);
 
 	return (
 		<main className='products'>

@@ -1,10 +1,10 @@
 import { configure } from 'mobx';
-import { TasksStore } from './tasks';
-import { MapStore } from './map';
-import { ProductsStore } from './products';
-import { PopUpControlStore } from './popUpControl';
 import { AddTaskFormStore } from './form/addTaskForm';
 import { AddProductFormStore } from './form/addProductForm';
+import { PopupStore } from './popup/popup';
+import { TasksStore } from './tasks/tasks';
+import { MapStore } from './map/map';
+import { ProductsStore } from './products/products';
 
 configure({
 	enforceActions: 'always',
@@ -16,7 +16,7 @@ class RootStore {
 	public tasksStore: TasksStore;
 	public mapStore: MapStore;
 	public productsStore: ProductsStore;
-	public popUpControlStore: PopUpControlStore;
+	public popupStore: PopupStore;
 
 	public addTaskFormStore: AddTaskFormStore;
 	public addProductFormStore: AddProductFormStore;
@@ -25,7 +25,7 @@ class RootStore {
 		this.tasksStore = new TasksStore(this);
 		this.mapStore = new MapStore(this);
 		this.productsStore = new ProductsStore(this);
-		this.popUpControlStore = new PopUpControlStore(this);
+		this.popupStore = new PopupStore(this);
 
 		this.addTaskFormStore = new AddTaskFormStore(this);
 		this.addProductFormStore = new AddProductFormStore(this);
