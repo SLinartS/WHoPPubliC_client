@@ -39,7 +39,7 @@ const Tasks: FC = observer(() => {
 						key={Math.random()}
 						data={tasksStore.tasksAccepranceList.data}
 						tableHeader={tasksStore.tasksAccepranceList.tableHeader}
-						classes={'table--tasks'}
+						additionalСlasses={'table--tasks'}
 					/>
 				) : (
 					''
@@ -56,7 +56,7 @@ const Tasks: FC = observer(() => {
 						key={Math.random()}
 						data={tasksStore.tasksShipmentList.data}
 						tableHeader={tasksStore.tasksShipmentList.tableHeader}
-						classes={'table--tasks'}
+						additionalСlasses={'table--tasks'}
 					/>
 				) : (
 					''

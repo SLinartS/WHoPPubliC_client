@@ -8,7 +8,7 @@ const TableRow: FC<IRowProps> = observer(({ columns }) => {
 	return (
 		<>
 			{Object.entries(columns).map(([key, value]) => (
-				<TableColumn key={key + value} text={value} />
+				<TableColumn key={key + value} text={value} additionalСlasses='table__block--row' />
 			))}
 		</>
 	);

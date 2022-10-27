@@ -1,11 +1,11 @@
-import { IProduct, TProducts } from "../../../types/products";
+import { IProduct, TProducts } from "../../pages/products/types";
 import { ITask, TTasks } from "../../pages/tasks/types";
 
 
 export interface ITableProps {
 	data: TTasks | TProducts;
 	tableHeader: Array<string>;
-	classes?: string;
+	additionalСlasses?: string;
 }
 
 export interface IRowProps {
@@ -13,5 +13,6 @@ export interface IRowProps {
 }
 
 export interface TableColumnProps {
+	additionalСlasses?: string;
 	text: number | string;
 }

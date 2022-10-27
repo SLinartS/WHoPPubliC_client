@@ -1,4 +1,4 @@
-import React, { FC, ReactNode } from 'react';
+import { FC, ReactNode } from 'react';
 import { IHeaderBlock } from '../types';
 import HeaderFloor from './HeaderFloor';
 

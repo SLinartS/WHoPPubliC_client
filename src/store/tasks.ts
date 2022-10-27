@@ -4,8 +4,9 @@ import RootStore from './root';
 
 import { AxiosResponse } from 'axios';
 import extendAxios from '../utils/extendAxios';
-import { TStatus } from '../types/store/store';
+
 import { ITasksList } from '../components/pages/tasks/types';
+import { TStatus } from './types';
 
 export class TasksStore {
 	private _rootStore!: RootStore;

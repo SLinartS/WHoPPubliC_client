@@ -5,8 +5,8 @@ import RootStore from './root';
 
 import extendAxios from '../utils/extendAxios';
 import { AxiosResponse } from 'axios';
-import { TStatus } from '../types/store/store';
 import { TMap } from '../components/pages/map/types';
+import { TStatus } from './types';
 
 export class MapStore {
 	private _rootStore!: RootStore;

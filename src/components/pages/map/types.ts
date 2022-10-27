@@ -18,7 +18,7 @@ export interface IBlock {
 	id: number;
 }
 
-export interface IBlockComponent extends IBlock {
+export interface IBlockProps extends IBlock {
 	floorsNumber: number;
 }
 
@@ -38,7 +38,7 @@ export interface IZoneLetter {
 	leftOffset: number;
 }
 
-export interface IZoneLetterComponent extends IZoneLetter {
+export interface IZoneLetterProps extends IZoneLetter {
 	zoneLetter: string;
 }
 

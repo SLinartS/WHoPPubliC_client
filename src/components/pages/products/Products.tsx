@@ -28,7 +28,7 @@ const Products: FC = observer(() => {
 					key={Math.random()}
 					data={productsStore.products.data}
 					tableHeader={productsStore.products.tableHeader}
-					classes={'table--products'}
+					additionalСlasses={'table--products'}
 				/>
 			) : (
 				''

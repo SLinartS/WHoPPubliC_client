@@ -1,7 +1,7 @@
 import { observer } from 'mobx-react-lite';
 import { FC } from 'react';
-import { IWindowHeaderProps } from '../../types/popup/windowHeader';
-import Button from './button/Button';
+import Button from '../button/Button';
+import { IWindowHeaderProps } from './types';
 
 const WindowHeader: FC<IWindowHeaderProps> = observer(
 	({ classes, text, closeWindowEvent, actionEvent }) => {

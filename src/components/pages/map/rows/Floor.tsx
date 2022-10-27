@@ -1,7 +1,8 @@
-import React, { FC } from 'react';
+import { observer } from 'mobx-react-lite';
+import { FC } from 'react';
 
-const BlockRow: FC = () => {
+const Floor: FC = observer(() => {
 	return <div className='map__floor'></div>;
-};
+});
 
-export default BlockRow;
+export default Floor;

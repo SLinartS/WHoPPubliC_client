@@ -1,27 +1,28 @@
 import { observer } from 'mobx-react-lite';
 import { FC, useEffect } from 'react';
 
-import { ChangeFieldEvent } from '../../types/popup/popupWindows';
-import { addAcceptanceTaskFormDataFields } from '../../types/store/addAcceptanceTaskForm';
 import { useRootStore } from '../../utils/RootStoreProvider/useRootStore';
 import Button from '../blocks/button/Button';
 
 import FormBlock from '../blocks/form/block/Block';
 import FormFieldInput from '../blocks/form/field/input/Input';
+import FormFieldPoint from '../blocks/form/field/point/point';
 import FormLayout from '../blocks/form/layout/Layout';
 
 import Table from '../blocks/table/Table';
-import WindowHeader from '../blocks/WindowHeader';
+import WindowHeader from '../blocks/windowHeader/WindowHeader';
+import { addTaskFormDataFields, ChangeFieldEvent } from './types';
+
 
 const AddTask: FC = observer(() => {
-	const { popUpControlStore, productsStore, addAcceptanceTaskFormStore, tasksStore } =
+	const { popUpControlStore, productsStore, addTaskFormStore, tasksStore } =
 		useRootStore();
 
 	function changeFieldHandler(
 		e: ChangeFieldEvent,
-		fieldName: keyof addAcceptanceTaskFormDataFields,
+		fieldName: keyof addTaskFormDataFields,
 	) {
-		addAcceptanceTaskFormStore[fieldName] = e.target.value;
+		addTaskFormStore[fieldName] = e.target.value;
 	}
 
 	function hideAddAcceptanceTaskWindowHandler() {
@@ -30,8 +31,8 @@ const AddTask: FC = observer(() => {
 
 	function showAddProductWindowHandler() {
 		if (!tasksStore.statusTaskHasBeenAdded) {
-			if (addAcceptanceTaskFormStore.title) {
-				tasksStore.addTask('1', addAcceptanceTaskFormStore.title, '1');
+			if (addTaskFormStore.title) {
+				tasksStore.addTask('1', addTaskFormStore.title, '1');
 			} else {
 				alert('Заполните название задачи!');
 			}
@@ -44,9 +45,9 @@ const AddTask: FC = observer(() => {
 	useEffect(() => {
 		if (
 			productsStore.statusGetProductsOfTask === 'pending' &&
-			addAcceptanceTaskFormStore.title
+			addTaskFormStore.title
 		) {
-			productsStore.getProductsOfAcceptanceTask(addAcceptanceTaskFormStore.title);
+			productsStore.getProductsOfAcceptanceTask(addTaskFormStore.title);
 		}
 
 		if (tasksStore.statusAddTask === 'done' && !tasksStore.statusTaskHasBeenAdded) {
@@ -71,7 +72,7 @@ const AddTask: FC = observer(() => {
 						additionalTitleBlockClasses='properties-block__title--big'
 					>
 						<FormFieldInput
-							value={addAcceptanceTaskFormStore.title}
+							value={addTaskFormStore.title}
 							changeEvent={(e) => changeFieldHandler(e, 'title')}
 							additionalСlasses='properties-block__input--big'
 						/>
@@ -82,21 +83,26 @@ const AddTask: FC = observer(() => {
 				<FormLayout additionalСlasses='properties-block--title-info'>
 					<FormBlock titleText='Дата начала'>
 						<FormFieldInput
-							value={addAcceptanceTaskFormStore.dateStart}
+							value={addTaskFormStore.dateStart}
 							changeEvent={(e) => changeFieldHandler(e, 'dateStart')}
 						/>
 					</FormBlock>
 					<FormBlock titleText='Дата окончания'>
 						<FormFieldInput
-							value={addAcceptanceTaskFormStore.dateEnd}
+							value={addTaskFormStore.dateEnd}
 							changeEvent={(e) => changeFieldHandler(e, 'dateEnd')}
 						/>
 					</FormBlock>
 				</FormLayout>
 
-				{/* <PropertiesPointBlock
-					properties={[{ text: 'Точки приёмки' }, { text: 'Точки раскладки' }]}
-				/> */}
+				<FormLayout>
+					<FormBlock titleText='Точки приёмки'>
+						<FormFieldPoint/>
+					</FormBlock>
+					<FormBlock titleText='Точки раскладки'>
+						<FormFieldPoint/>
+					</FormBlock>
+				</FormLayout>
 
 				<div className='add-task__table-block'>
 					<Button
@@ -109,7 +115,7 @@ const AddTask: FC = observer(() => {
 						<Table
 							data={productsStore.productsOfTask.data}
 							tableHeader={productsStore.productsOfTask.tableHeader}
-							classes={'table--add-task'}
+							additionalСlasses={'table--add-task'}
 						/>
 					) : (
 						''

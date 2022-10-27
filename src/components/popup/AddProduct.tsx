@@ -1,23 +1,18 @@
 import { observer } from 'mobx-react-lite';
 import { FC, useEffect } from 'react';
-
 import imagePlaceholder from '../../assets/images/placeholder.jpg';
-
-import { ChangeFieldEvent } from '../../types/popup/popupWindows';
-import { addProductFormData } from '../../types/store/addProductForm';
-
 import { useRootStore } from '../../utils/RootStoreProvider/useRootStore';
-
-import WindowHeader from '../blocks/WindowHeader';
 import { ISelectOptions } from '../blocks/form/field/select/types';
 import FormLayout from '../blocks/form/layout/Layout';
 import FormBlock from '../blocks/form/block/Block';
 import FormFieldInput from '../blocks/form/field/input/Input';
 import FormFieldSelect from '../blocks/form/field/select/Select';
 import Button from '../blocks/button/Button';
+import { addProductFormData, ChangeFieldEvent } from './types';
+import WindowHeader from '../blocks/windowHeader/WindowHeader';
 
 const AddProduct: FC = observer(() => {
-	const { popUpControlStore, addProductFormStore, productsStore, addAcceptanceTaskFormStore } =
+	const { popUpControlStore, addProductFormStore, productsStore, addTaskFormStore } =
 		useRootStore();
 
 	function changeFieldHandler(e: ChangeFieldEvent, fieldName: keyof addProductFormData) {
@@ -38,7 +33,7 @@ const AddProduct: FC = observer(() => {
 	function addProductHandler() {
 		productsStore.addProduct(
 			addProductFormStore.formData,
-			addAcceptanceTaskFormStore.title,
+			addTaskFormStore.title,
 			'1',
 		);
 	}

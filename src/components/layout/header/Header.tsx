@@ -1,8 +1,9 @@
-import React from 'react';
+import { observer } from 'mobx-react-lite';
+import { FC } from 'react';
 import { Link } from 'react-router-dom';
 import appIcon from '../../../assets/images/app-icon.png';
 
-const Header = () => {
+const Header: FC = observer(() => {
 	return (
 		<>
 			{/* if (userIsAuth) */}
@@ -37,6 +38,6 @@ const Header = () => {
        */}
 		</>
 	);
-};
+});
 
 export default Header;

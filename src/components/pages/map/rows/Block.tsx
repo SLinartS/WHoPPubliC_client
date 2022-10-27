@@ -1,9 +1,9 @@
-import React, { FC, ReactNode } from 'react';
-import { IBlockComponent } from '../types';
+import { FC, ReactNode } from 'react';
+import { IBlockProps } from '../types';
 import Floor from './Floor';
 import HeaderFloor from './HeaderFloor';
 
-const Row: FC<IBlockComponent> = ({ id, floorsNumber }) => {
+const Block: FC<IBlockProps> = ({ id, floorsNumber }) => {
 	function floorsGenerate(id: number, fNumber: number) {
 		let floors: Array<ReactNode> = [];
 
@@ -28,4 +28,4 @@ const Row: FC<IBlockComponent> = ({ id, floorsNumber }) => {
 	);
 };
 
-export default Row;
+export default Block;

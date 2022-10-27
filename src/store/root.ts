@@ -3,7 +3,7 @@ import { TasksStore } from './tasks';
 import { MapStore } from './map';
 import { ProductsStore } from './products';
 import { PopUpControlStore } from './popUpControl';
-import { AddAcceptanceTaskFormStore } from './form/addAcceptanceTaskForm';
+import { AddTaskFormStore } from './form/addTaskForm';
 import { AddProductFormStore } from './form/addProductForm';
 
 configure({
@@ -18,7 +18,7 @@ class RootStore {
 	public productsStore: ProductsStore;
 	public popUpControlStore: PopUpControlStore;
 
-	public addAcceptanceTaskFormStore: AddAcceptanceTaskFormStore;
+	public addTaskFormStore: AddTaskFormStore;
 	public addProductFormStore: AddProductFormStore;
 
 	private constructor() {
@@ -27,7 +27,7 @@ class RootStore {
 		this.productsStore = new ProductsStore(this);
 		this.popUpControlStore = new PopUpControlStore(this);
 
-		this.addAcceptanceTaskFormStore = new AddAcceptanceTaskFormStore(this);
+		this.addTaskFormStore = new AddTaskFormStore(this);
 		this.addProductFormStore = new AddProductFormStore(this);
 	}
 

@@ -1,7 +1,7 @@
 import { observer } from 'mobx-react-lite';
 import { FC, useEffect, useRef, useState } from 'react';
 import NumberSection from '../info/NumberSection';
-import Row from '../rows/Block';
+import Block from '../rows/Block';
 import HeaderBlock from '../rows/HeaderBlock';
 import { ISection, ISectionNumber } from '../types';
 
@@ -55,7 +55,7 @@ const Section: FC<ISection> = observer(({ id, floorsNumber, blocks }) => {
 		<div className='map__section' ref={sectionNode}>
 			<HeaderBlock floorsNumber={floorsNumber} />
 			{blocks.map((block) => {
-				return <Row key={block.id} id={block.id} floorsNumber={floorsNumber} />;
+				return <Block key={block.id} id={block.id} floorsNumber={floorsNumber} />;
 			})}
 			<NumberSection
 				key={sectionNumber.topOffset}

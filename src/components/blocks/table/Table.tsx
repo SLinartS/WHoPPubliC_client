@@ -1,29 +1,22 @@
 import { observer } from 'mobx-react-lite';
-import { FC, ReactNode } from 'react';
+import { FC } from 'react';
+import TableColumn from './TableColumn';
 
-import TableHeaderColumn from './TableHeaderColumn';
 import TableRow from './TableRow';
 import { ITableProps } from './types';
 
-const Table: FC<ITableProps> = observer(({ data, tableHeader, classes }) => {
-	function generateRows(): Array<ReactNode> {
-		let rows: Array<ReactNode> = [];
-		for (let i: number = 0; i < data.length; i++) {
-			let columns = data[i];
-			rows.push(<TableRow key={columns.id} columns={columns} />);
-		}
-		return rows;
-	}
-
+const Table: FC<ITableProps> = observer(({ data, tableHeader, additionalСlasses }) => {
 	return (
 		<div
-			className={'table ' + classes}
+			className={'table ' + additionalСlasses}
 			style={{ gridTemplateColumns: `repeat(${tableHeader.length}, auto)` }}
 		>
 			{tableHeader.map((text) => (
-				<TableHeaderColumn key={text} text={text} />
+				<TableColumn key={text} text={text} additionalСlasses='table__block--header' />
 			))}
-			{generateRows()}
+			{data.map((columns) => (
+				<TableRow key={columns.id} columns={columns} />
+			))}
 		</div>
 	);
 });

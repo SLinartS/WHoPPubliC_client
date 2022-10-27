@@ -1,12 +1,9 @@
 import { makeAutoObservable } from 'mobx';
-import {
-	addAcceptanceTaskFormDataArrays,
-	addAcceptanceTaskFormDataFields,
-} from '../../types/store/addAcceptanceTaskForm';
+import { addTaskFormDataArrays, addTaskFormDataFields } from '../../components/popup/types';
 
 import RootStore from '../root';
 
-export class AddAcceptanceTaskFormStore {
+export class AddTaskFormStore {
 	private _rootStore!: RootStore;
 
 	private set rootStore(rootStore: RootStore) {
@@ -18,14 +15,14 @@ export class AddAcceptanceTaskFormStore {
 		this.rootStore = rootStore;
 	}
 
-	private _formDataField: addAcceptanceTaskFormDataFields = {
+	private _formDataField: addTaskFormDataFields = {
 		title: '',
 		dateStart: '',
 		dateEnd: '',
 		userId: '',
 	};
 
-	private _formDataArrays: addAcceptanceTaskFormDataArrays = {
+	private _formDataArrays: addTaskFormDataArrays = {
 		products: [],
 		startPoints: [],
 		endPoints: [],
