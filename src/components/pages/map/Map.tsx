@@ -12,7 +12,6 @@ const Map: FC = observer(() => {
 		if (mapStore.status === 'pending') {
 			mapStore.getMap();
 		}
-		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [mapStore.status]);
 
 	return (

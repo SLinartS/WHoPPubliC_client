@@ -49,14 +49,17 @@
 		border: 0.1rem solid $tableColor;
 		width: 5rem;
 		height: 5rem;
-	}
 
-	&__title {
-		display: inline-block;
-		font-size: 2rem;
-		color: $tableColorOpacityMid;
-		opacity: 0.5;
-		padding: 0.5rem;
+		&--title {
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			border: none;
+			font-size: 2rem;
+			color: $tableColorOpacityMid;
+			opacity: 0.5;
+		}
+
 	}
 
 	&__zone-title {
@@ -67,6 +70,8 @@
 		text-align: center;
 		line-height: 1em;
 		z-index: -1;
+		top: 50%; right: 50%;
+		transform: translate(55%,-50%);
 		position: absolute;
 	}
 
@@ -78,6 +83,8 @@
 		text-align: center;
 		line-height: 1em;
 		z-index: -1;
+		top: 50%; right: 0%;
+		transform: translate(110%,-20%);
 		position: absolute;
 	}
 }

@@ -3,67 +3,42 @@ import { FC, useEffect, useRef, useState } from 'react';
 import NumberSection from '../info/NumberSection';
 import Block from '../rows/Block';
 import HeaderBlock from '../rows/HeaderBlock';
-import { ISection, ISectionNumber } from '../types';
+import { ISection } from '../types';
 
-
-const initialSectionNumber: ISectionNumber = {
-	fontSize: 10,
-	topOffset: 100,
-	rightOffset: 100,
-};
-
-const Section: FC<ISection> = observer(({ id, floorsNumber, blocks }) => {
-	const [sectionNumber, setSectionNumber] = useState<ISectionNumber>(initialSectionNumber);
+const Section: FC<ISection> = observer(({ id, blocks }) => {
+	const [sectionNumberFontSize, setSectionNumberFontSize] = useState<number>(10);
 
 	const letterSectionNode = useRef<HTMLParagraphElement>(null);
 
 	const sectionNode = useRef<HTMLDivElement>(null);
 
-	function findPositionSectionNumber() {
-		let newSectionNumber: ISectionNumber = {
-			fontSize: sectionNumber.topOffset,
-			topOffset: sectionNumber.topOffset,
-			rightOffset: sectionNumber.rightOffset,
-		};
+	function findFontSizeSectionNumber() {
+		let newSectionNumberFontSize: number = sectionNumberFontSize;
 
 		let tableHeigth: number | undefined = sectionNode.current?.offsetHeight;
-		let tableWidth: number | undefined = sectionNode.current?.offsetWidth;
 
-		if (tableHeigth && tableWidth) {
-			newSectionNumber.fontSize = tableHeigth / 40;
+		if (tableHeigth) {
+			newSectionNumberFontSize = tableHeigth / 40;
 
-			let letterSectionHeigth: number | undefined = letterSectionNode.current?.offsetHeight;
-			let letterSectionWidth: number | undefined = letterSectionNode.current?.offsetWidth;
-
-			let valueExists = letterSectionHeigth && letterSectionWidth;
-
-			if (valueExists) {
-				newSectionNumber.topOffset = tableHeigth / 20 - letterSectionHeigth! / 20 - 2.5;
-				newSectionNumber.rightOffset = letterSectionWidth! / 8;
-
-				setSectionNumber({ ...newSectionNumber });
-			}
+			setSectionNumberFontSize(newSectionNumberFontSize);
 		}
 	}
 
 	useEffect(() => {
-		findPositionSectionNumber();
+		findFontSizeSectionNumber();
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [sectionNode.current?.offsetHeight, sectionNode.current?.offsetWidth]);
 
 	return (
 		<div className='map__section' ref={sectionNode}>
-			<HeaderBlock floorsNumber={floorsNumber} />
-			{blocks.map((block) => {
-				return <Block key={block.id} id={block.id} floorsNumber={floorsNumber} />;
+			<HeaderBlock floors={blocks[0].floors} />
+
+			{blocks.map((block, index) => {
+				return (
+					<Block key={block.id} id={block.id} index={index + 1} floors={block.floors} />
+				);
 			})}
-			<NumberSection
-				key={sectionNumber.topOffset}
-				ref={letterSectionNode}
-				fontSize={sectionNumber.fontSize}
-				topOffset={sectionNumber.topOffset}
-				rightOffset={sectionNumber.rightOffset}
-			/>
+			<NumberSection ref={letterSectionNode} fontSize={sectionNumberFontSize} />
 		</div>
 	);
 });

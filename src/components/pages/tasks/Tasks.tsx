@@ -36,7 +36,6 @@ const Tasks: FC = observer(() => {
 				/>
 				{tasksStore.statusGetAcceptanceTasks === 'done' ? (
 					<Table
-						key={Math.random()}
 						data={tasksStore.tasksAccepranceList.data}
 						tableHeader={tasksStore.tasksAccepranceList.tableHeader}
 						additionalСlasses={'table--tasks'}
@@ -53,7 +52,6 @@ const Tasks: FC = observer(() => {
 
 				{tasksStore.statusGetShipmentTasks === 'done' ? (
 					<Table
-						key={Math.random()}
 						data={tasksStore.tasksShipmentList.data}
 						tableHeader={tasksStore.tasksShipmentList.tableHeader}
 						additionalСlasses={'table--tasks'}

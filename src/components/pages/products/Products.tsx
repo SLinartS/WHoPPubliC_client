@@ -25,7 +25,6 @@ const Products: FC = observer(() => {
 
 			{productsStore.statusGetProducts === 'done' ? (
 				<Table
-					key={Math.random()}
 					data={productsStore.products.data}
 					tableHeader={productsStore.products.tableHeader}
 					additionalСlasses={'table--products'}

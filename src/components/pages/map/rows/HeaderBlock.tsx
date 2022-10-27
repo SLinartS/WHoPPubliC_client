@@ -1,30 +1,23 @@
 import { FC, ReactNode } from 'react';
-import { IHeaderBlock } from '../types';
+import { IHeaderBlockProps } from '../types';
+import Floor from './Floor';
 import HeaderFloor from './HeaderFloor';
 
-const HeaderBlock: FC<IHeaderBlock> = ({ floorsNumber }) => {
-	function floorsGenerate(fNumber: number) {
-		let floors: Array<ReactNode> = [];
-
-		for (let i: number = fNumber; i > 0; i--) {
-			if (i !== 0) {
-				floors.push(<HeaderFloor key={Math.random()} number={i}/>);
-			}
-		}
-
-		return floors;
-	}
-
+const HeaderBlock: FC<IHeaderBlockProps> = ({ floors }) => {
 	return (
 		<>
 			<div
 				className='map__block'
-				style={{ gridTemplateRows: `repeat(${floorsNumber + 1}, 5rem` }}
+				style={{ gridTemplateRows: `repeat(${floors.length + 1}, 5rem` }}
 			>
-				{floorsGenerate(floorsNumber)}
+				<HeaderFloor key={Math.random()} index={0} />
+				{floors.map((_, index) => (
+					<HeaderFloor key={index} index={index + 1} />
+				))}
 			</div>
 		</>
 	);
 };
 
 export default HeaderBlock;
+export {};

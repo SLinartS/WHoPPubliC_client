@@ -1,9 +1,9 @@
 import { FC } from 'react';
-import { IHeaderFloor } from '../types';
+import { IHeaderFloorProps } from '../types';
 
-
-const HeaderFloor: FC<IHeaderFloor> = ({ number }) => {
-	return <div className='map__title'>{number}</div>;
+const HeaderFloor: FC<IHeaderFloorProps> = ({ index }) => {
+	return <div className='map__floor map__floor--title'>{index !== 0 && index}</div>;
 };
 
 export default HeaderFloor;
+export {};

@@ -3,27 +3,18 @@ import { IBlockProps } from '../types';
 import Floor from './Floor';
 import HeaderFloor from './HeaderFloor';
 
-const Block: FC<IBlockProps> = ({ id, floorsNumber }) => {
-	function floorsGenerate(id: number, fNumber: number) {
-		let floors: Array<ReactNode> = [];
-
-		for (let i: number = fNumber; i >= 0; i--) {
-			if (i === 0) {
-				floors.push(<HeaderFloor key={i} number={id}/>);
-			} else {
-				floors.push(<Floor key={Math.random() + id} />);
-			}
-		}
-
-		return floors;
-	}
-
+const Block: FC<IBlockProps> = ({ id, index, floors }) => {
 	return (
 		<div
 			className='map__block'
-			style={{ gridTemplateRows: `repeat(${floorsNumber + 1}, 5rem` }}
+			style={{ gridTemplateRows: `repeat(${floors.length + 1}, 5rem` }}
+			data-block-id={id}
 		>
-			{floorsGenerate(id, floorsNumber)}
+			<HeaderFloor index={index} />
+
+			{floors.map((floor, index) => (
+				<Floor key={floor.id} id={floor.id} index={index} />
+			))}
 		</div>
 	);
 };

@@ -1,7 +1,6 @@
 // Components Data
 export type TMap = Array<IZone>;
 
-
 export interface IZone {
 	id: number;
 	zoneLetter: string;
@@ -10,40 +9,42 @@ export interface IZone {
 
 export interface ISection {
 	id: number;
-	floorsNumber: number;
 	blocks: Array<IBlock>;
 }
 
 export interface IBlock {
 	id: number;
+	floors: Array<IFloor>;
 }
 
-export interface IBlockProps extends IBlock {
-	floorsNumber: number;
+export interface IFloor {
+	id: number;
 }
 
-export interface IHeaderBlock {
-	floorsNumber: number;
+// Headers
+export interface IBlockProps extends IBlock{
+	index: number;
 }
 
-export interface IHeaderFloor {
-	number: number;
+export interface IHeaderBlockProps {
+	floors: Array<IFloor>;
+}
+
+export interface IFloorProps extends Omit<IFloor, 'id'> {
+	id?: number;
+	index: number;
+}
+
+export interface IHeaderFloorProps {
+	index: number;
 }
 
 // Info Blocks Data
 
-export interface IZoneLetter {
+export interface IInfoElementProps {
 	fontSize: number;
-	topOffset: number;
-	leftOffset: number;
 }
-
-export interface IZoneLetterProps extends IZoneLetter {
+export interface IZoneLetterProps extends IInfoElementProps {
 	zoneLetter: string;
 }
 
-export interface ISectionNumber {
-  fontSize: number;
-	topOffset: number;
-	rightOffset: number;
-}
