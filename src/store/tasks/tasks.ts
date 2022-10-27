@@ -1,8 +1,8 @@
 import { makeAutoObservable } from 'mobx';
 import { AxiosResponse } from 'axios';
 import RootStore from '../root';
-import { TStatus } from '../types';
-import { ITasksList } from './types';
+import { TStatus } from '../type';
+import { ITasksList } from './type';
 import extendAxios from '../../utils/extendAxios';
 
 export class TasksStore {

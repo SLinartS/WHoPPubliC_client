@@ -3,7 +3,8 @@ import { FC } from 'react';
 import TableColumn from './TableColumn';
 
 import TableRow from './TableRow';
-import { ITableProps } from './types';
+import { ITableProps } from './type';
+import './style.scss';
 
 const Table: FC<ITableProps> = observer(({ data, tableHeader, additionalСlasses }) => {
 	return (

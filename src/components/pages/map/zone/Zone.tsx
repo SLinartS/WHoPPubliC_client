@@ -3,7 +3,7 @@ import { FC, useState, useEffect, useRef } from 'react';
 import { observer } from 'mobx-react-lite';
 import Section from '../section/Section';
 import LetterZone from '../info/letterZone/LetterZone';
-import { IZone } from '../../../../store/map/types';
+import { IZone } from '../../../../store/map/type';
 
 const Zone: FC<IZone> = observer(({ id, zoneLetter, sections }) => {
 	const [zoneLetterFontSize, setZoneLetterFontSize] = useState<number>(30);

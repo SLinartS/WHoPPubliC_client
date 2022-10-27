@@ -1,6 +1,6 @@
 import { observer } from 'mobx-react-lite';
 import { FC } from 'react';
-import { IFormFieldInputProps } from './types';
+import { IFormFieldInputProps } from './type';
 
 const FormFieldInput: FC<IFormFieldInputProps> = observer(
 	({ additionalСlasses, value, changeEvent }) => {

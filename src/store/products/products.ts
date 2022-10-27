@@ -1,10 +1,10 @@
 import { AxiosResponse } from 'axios';
 import { makeAutoObservable } from 'mobx';
 import extendAxios from '../../utils/extendAxios';
-import { addProductFormData } from '../form/types';
-import { TProductsData } from '../popup/types';
+import { addProductFormData } from '../form/type';
+import { TProductsData } from '../popup/type';
 import RootStore from '../root';
-import { TStatus } from '../types';
+import { TStatus } from '../type';
 
 export class ProductsStore {
 	private _rootStore!: RootStore;

@@ -1,4 +1,4 @@
-import { IFloor } from "../../../../store/map/types";
+import { IFloor } from "../../../../store/map/type";
 
 export interface IFloorProps extends Omit<IFloor, 'id'> {
 	id?: number;

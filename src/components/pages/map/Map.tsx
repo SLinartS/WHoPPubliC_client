@@ -1,6 +1,6 @@
 import { FC, useEffect } from 'react';
 import { observer } from 'mobx-react-lite';
-
+import './style.scss';
 
 import { useRootStore } from '../../../utils/RootStoreProvider/useRootStore';
 import Zone from './zone/Zone';

@@ -1,9 +1,12 @@
-import React from "react"
+import React from 'react';
+import './style.scss';
 
 const ErrorPage = () => {
-  return (
-    <div>ErrorPage 404</div>
-  )
-}
+	return (
+		<main className='error-page'>
+			<p className='error-page__text'>Not Found 404</p>{' '}
+		</main>
+	);
+};
 
 export default ErrorPage;

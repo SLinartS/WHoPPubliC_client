@@ -1,6 +1,6 @@
 import { observer } from 'mobx-react-lite';
 import { FC } from 'react';
-import { ISelectFiledInputProps } from './types';
+import { ISelectFiledInputProps } from './type';
 
 
 const FormFieldSelect: FC<ISelectFiledInputProps> = observer(({ options, changeEvent, value }) => {

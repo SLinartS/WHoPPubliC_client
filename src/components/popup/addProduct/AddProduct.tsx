@@ -1,16 +1,16 @@
 import { observer } from 'mobx-react-lite';
 import { FC, useCallback, useEffect } from 'react';
-import imagePlaceholder from '../../assets/images/placeholder.jpg';
-import { useRootStore } from '../../utils/RootStoreProvider/useRootStore';
-import { ISelectOptions } from '../blocks/form/field/select/types';
-import FormLayout from '../blocks/form/layout/Layout';
-import FormBlock from '../blocks/form/block/Block';
-import FormFieldInput from '../blocks/form/field/input/Input';
-import FormFieldSelect from '../blocks/form/field/select/Select';
-import Button from '../blocks/button/Button';
-
-import WindowHeader from '../blocks/windowHeader/WindowHeader';
-import { addProductFormData, ChangeFieldEvent } from '../../store/form/types';
+import { addProductFormData, ChangeFieldEvent } from '../../../store/form/type';
+import { useRootStore } from '../../../utils/RootStoreProvider/useRootStore';
+import imagePlaceholder from '../../../assets/images/placeholder.jpg';
+import Button from '../../blocks/button/Button';
+import FormBlock from '../../blocks/form/block/Block';
+import FormFieldInput from '../../blocks/form/field/input/Input';
+import FormFieldSelect from '../../blocks/form/field/select/Select';
+import { ISelectOptions } from '../../blocks/form/field/select/type';
+import FormLayout from '../../blocks/form/layout/Layout';
+import WindowHeader from '../../blocks/windowHeader/WindowHeader';
+import './style.scss';
 
 const AddProduct: FC = observer(() => {
 	const { popupStore, addProductFormStore, productsStore, addTaskFormStore } = useRootStore();
@@ -40,7 +40,7 @@ const AddProduct: FC = observer(() => {
 			productsStore.statusAddProduct = 'pending';
 			productsStore.statusGetProductsOfTask = 'pending';
 		}
-	}, [productsStore, hideAddProductWindowHandler]);
+	}, [productsStore, hideAddProductWindowHandler, productsStore.statusAddProduct]);
 
 	return (
 		<div className='add-product'>

@@ -1,6 +1,6 @@
 import { observer } from 'mobx-react-lite';
 import { forwardRef } from 'react';
-import { IZoneLetterProps } from '../types';
+import { IZoneLetterProps } from '../type';
 
 const LetterZone = observer(
 	forwardRef<HTMLParagraphElement, IZoneLetterProps>(({ fontSize, zoneLetter }, ref) => {

@@ -1,6 +1,6 @@
 import { observer } from 'mobx-react-lite';
 import { FC } from 'react';
-import { IFloorProps } from './types';
+import { IFloorProps } from './type';
 
 
 const Floor: FC<IFloorProps> = observer(({ id }) => {

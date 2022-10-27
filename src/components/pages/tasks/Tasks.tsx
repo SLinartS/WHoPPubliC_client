@@ -4,6 +4,7 @@ import { observer } from 'mobx-react-lite';
 import { useRootStore } from '../../../utils/RootStoreProvider/useRootStore';
 import Table from '../../blocks/table/Table';
 import Button from '../../blocks/button/Button';
+import './style.scss';
 
 const Tasks: FC = observer(() => {
 	const { tasksStore, popupStore } = useRootStore();
@@ -19,7 +20,7 @@ const Tasks: FC = observer(() => {
 		if (tasksStore.statusGetShipmentTasks === 'pending') {
 			tasksStore.getShipmentTasks();
 		}
-	}, [tasksStore]);
+	}, [tasksStore, tasksStore.statusGetAcceptanceTasks, tasksStore.statusGetShipmentTasks]);
 
 	return (
 		<main className='tasks'>

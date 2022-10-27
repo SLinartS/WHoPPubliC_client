@@ -2,8 +2,8 @@ import { AxiosResponse } from 'axios';
 import { makeAutoObservable } from 'mobx';
 import extendAxios from '../../utils/extendAxios';
 import RootStore from '../root';
-import { TStatus } from '../types';
-import { TMap } from './types';
+import { TStatus } from '../type';
+import { TMap } from './type';
 
 
 

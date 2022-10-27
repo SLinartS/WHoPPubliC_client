@@ -1,17 +1,15 @@
 import { observer } from 'mobx-react-lite';
 import { FC, useEffect } from 'react';
-import { addTaskFormDataFields, ChangeFieldEvent } from '../../store/form/types';
-
-import { useRootStore } from '../../utils/RootStoreProvider/useRootStore';
-import Button from '../blocks/button/Button';
-
-import FormBlock from '../blocks/form/block/Block';
-import FormFieldInput from '../blocks/form/field/input/Input';
-import FormFieldPoint from '../blocks/form/field/point/point';
-import FormLayout from '../blocks/form/layout/Layout';
-
-import Table from '../blocks/table/Table';
-import WindowHeader from '../blocks/windowHeader/WindowHeader';
+import { addTaskFormDataFields, ChangeFieldEvent } from '../../../store/form/type';
+import { useRootStore } from '../../../utils/RootStoreProvider/useRootStore';
+import Button from '../../blocks/button/Button';
+import FormBlock from '../../blocks/form/block/Block';
+import FormFieldInput from '../../blocks/form/field/input/Input';
+import FormFieldPoint from '../../blocks/form/field/point/point';
+import FormLayout from '../../blocks/form/layout/Layout';
+import Table from '../../blocks/table/Table';
+import WindowHeader from '../../blocks/windowHeader/WindowHeader';
+import './style.scss';
 
 const AddTask: FC = observer(() => {
 	const { popupStore, productsStore, addTaskFormStore, tasksStore } = useRootStore();
@@ -48,7 +46,7 @@ const AddTask: FC = observer(() => {
 			popupStore.showAddProductWindow();
 			popupStore.hideAddAcceptanceTaskWindow();
 		}
-	}, [addTaskFormStore.title, popupStore, productsStore, tasksStore]);
+	}, [addTaskFormStore.title, tasksStore.statusAddTask, popupStore, productsStore, tasksStore]);
 
 	return (
 		<div className='add-task'>

@@ -3,7 +3,7 @@ import { FC, useEffect, useRef, useState } from 'react';
 import Block from '../block/Block';
 import HeaderBlock from '../block/HeaderBlock';
 import NumberSection from '../info/numberSection/NumberSection';
-import { ISectionProps } from './types';
+import { ISectionProps } from './type';
 
 const Section: FC<ISectionProps> = observer(({ id, blocks, index }) => {
 	const [sectionNumberFontSize, setSectionNumberFontSize] = useState<number>(10);
@@ -16,7 +16,7 @@ const Section: FC<ISectionProps> = observer(({ id, blocks, index }) => {
 		let newSectionNumberFontSize: number;
 
 		let tableHeigth: number | undefined = sectionNode.current?.offsetHeight;
-		
+
 		if (tableHeigth) {
 			newSectionNumberFontSize = tableHeigth / 40;
 			setSectionNumberFontSize(newSectionNumberFontSize);

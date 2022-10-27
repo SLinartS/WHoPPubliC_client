@@ -1,5 +1,5 @@
-@use '../global/colors.scss' as *;
-@use '../global/variables.scss' as v;
+@use '../../../styles/global/colors.scss' as *;
+@use '../../../styles/global/variables.scss' as v;
 
 .header {
 	height: v.$headerHeightStandart;

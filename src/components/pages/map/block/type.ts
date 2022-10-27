@@ -1,4 +1,4 @@
-import { IBlock, IFloor } from "../../../../store/map/types";
+import { IBlock, IFloor } from "../../../../store/map/type";
 
 export interface IBlockProps extends IBlock {
 	index: number;

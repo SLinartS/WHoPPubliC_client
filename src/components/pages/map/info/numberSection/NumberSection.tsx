@@ -1,6 +1,6 @@
 import { observer } from 'mobx-react-lite';
 import { forwardRef } from 'react';
-import { ISectionNumberProps } from '../types';
+import { ISectionNumberProps } from '../type';
 
 const NumberSection = observer(
 	forwardRef<HTMLParagraphElement, ISectionNumberProps>(({ fontSize, index }, ref) => {

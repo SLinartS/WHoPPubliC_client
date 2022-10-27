@@ -1,7 +1,7 @@
 import { FC } from 'react';
 import Floor from '../floor/Floor';
 import HeaderFloor from '../floor/HeaderFloor';
-import { IBlockProps } from './types';
+import { IBlockProps } from './type';
 
 
 const Block: FC<IBlockProps> = ({ id, index, floors }) => {

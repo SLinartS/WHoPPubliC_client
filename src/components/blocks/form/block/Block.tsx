@@ -1,7 +1,7 @@
 import { observer } from 'mobx-react-lite';
 import { FC } from 'react';
 import FormTitle from '../title/Title';
-import { IFormBlockProps } from './types';
+import { IFormBlockProps } from './type';
 
 const FormBlock: FC<IFormBlockProps> = observer(
 	({ additionalTitleBlockClasses, titleText, children }) => {

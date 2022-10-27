@@ -2,6 +2,7 @@ import { observer } from 'mobx-react-lite';
 import { FC, useEffect } from 'react';
 import { useRootStore } from '../../../utils/RootStoreProvider/useRootStore';
 import Table from '../../blocks/table/Table';
+import './style.scss';
 
 const Products: FC = observer(() => {
 	const { productsStore } = useRootStore();
@@ -10,7 +11,7 @@ const Products: FC = observer(() => {
 		if (productsStore.statusGetProducts === 'pending') {
 			productsStore.getProducts();
 		}
-	}, [productsStore]);
+	}, [productsStore, productsStore.statusGetProducts]);
 
 	return (
 		<main className='products'>

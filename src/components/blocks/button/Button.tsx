@@ -1,5 +1,6 @@
 import { FC } from 'react';
-import { IButtonProps } from './types';
+import { IButtonProps } from './type';
+import './style.scss';
 
 const Button: FC<IButtonProps> = ({ additionalСlasses, text, onClick }) => {
 	return (

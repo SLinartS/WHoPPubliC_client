@@ -1,5 +1,5 @@
 import { FC } from 'react';
-import { TableColumnProps } from './types';
+import { TableColumnProps } from './type';
 
 
 const TableColumn: FC<TableColumnProps> = ({ additionalСlasses, text }) => {

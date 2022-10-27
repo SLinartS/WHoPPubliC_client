@@ -1,6 +1,6 @@
 import { observer } from 'mobx-react-lite';
 import { FC } from 'react';
-import { IPropertiesBlockTitleProps } from './types';
+import { IPropertiesBlockTitleProps } from './type';
 
 
 const FormTitle: FC<IPropertiesBlockTitleProps> = observer(({ additionalСlasses, text }) => {

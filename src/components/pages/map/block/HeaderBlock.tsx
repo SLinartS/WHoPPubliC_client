@@ -1,6 +1,6 @@
 import { FC } from 'react';
 import HeaderFloor from '../floor/HeaderFloor';
-import { IHeaderBlockProps } from './types';
+import { IHeaderBlockProps } from './type';
 
 
 const HeaderBlock: FC<IHeaderBlockProps> = ({ floors }) => {

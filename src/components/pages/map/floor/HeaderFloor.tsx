@@ -1,5 +1,5 @@
 import { FC } from 'react';
-import { IHeaderFloorProps } from './types';
+import { IHeaderFloorProps } from './type';
 
 const HeaderFloor: FC<IHeaderFloorProps> = ({ index }) => {
 	return <div className='map__floor map__floor--title'>{index !== 0 && index}</div>;

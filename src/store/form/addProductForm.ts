@@ -1,7 +1,7 @@
 import { makeAutoObservable } from 'mobx';
 
 import RootStore from '../root';
-import { addProductFormData } from './types';
+import { addProductFormData } from './type';
 
 export class AddProductFormStore {
 	private _rootStore!: RootStore;

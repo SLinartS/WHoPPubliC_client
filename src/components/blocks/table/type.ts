@@ -1,5 +1,5 @@
-import { IProduct, TProducts } from '../../../store/popup/types';
-import { ITask, TTasks } from '../../../store/tasks/types';
+import { IProduct, TProducts } from '../../../store/popup/type';
+import { ITask, TTasks } from '../../../store/tasks/type';
 
 export interface ITableProps {
 	data: TTasks | TProducts;
