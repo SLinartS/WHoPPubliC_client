@@ -1,8 +1,7 @@
-import { MouseEventHandler } from 'react';
+import { MouseEventHandler, ReactNode } from 'react';
 
 export interface IWindowHeaderProps {
 	classes?: string;
 	text: string;
-	closeWindowEvent: MouseEventHandler<HTMLButtonElement>;
-	actionEvent?: MouseEventHandler<HTMLButtonElement>;
+	children?: ReactNode;
 }

@@ -1,7 +1,6 @@
 import { makeAutoObservable } from 'mobx';
 import RootStore from '../root';
 
-
 export class PopupStore {
 	private _rootStore!: RootStore;
 
@@ -14,42 +13,51 @@ export class PopupStore {
 		this.rootStore = rootStore;
 	}
 
-	private addProduct: boolean = false;
-	private addAcceptanceTask: boolean = false;
-	private addShipmentTask: boolean = false;
+	/* 
+	* AddProduct 
+	*/
+	private _addProductStatus: boolean = false;
 
-	// Getters
 	public get addProductStatus() {
-		return this.addProduct;
-	}
-	public get addAcceptanceTaskStatus() {
-		return this.addAcceptanceTask;
-	}
-	public get addShipmentTaskStatus() {
-		return this.addShipmentTask;
+		return this._addProductStatus;
 	}
 
-	// addProduct
 	showAddProductWindow() {
-		this.addProduct = true;
+		this._addProductStatus = true;
 	}
 	hideAddProductWindow() {
-		this.addProduct = false;
+		this._addProductStatus = false;
 	}
 
-	// AddAcceptanceTask
-	showAddAcceptanceTaskWindow() {
-		this.addAcceptanceTask = true;
-	}
-	hideAddAcceptanceTaskWindow() {
-		this.addAcceptanceTask = false;
+	/* 
+	* AddTask
+	*/
+	private _addTaskStatus: boolean = false;
+
+	public get addTaskStatus() {
+		return this._addTaskStatus;
 	}
 
-	// AddShipmentTask
-	showAddShipmentTaskWindow() {
-		this.addShipmentTask = true;
+	showAddTaskWindow() {
+		this._addTaskStatus = true;
 	}
-	hideAddShipmentTaskWindow() {
-		this.addShipmentTask = false;
+	hideAddTaskWindow() {
+		this._addTaskStatus = false;
+	}
+
+	/* 
+	* SelectMap
+	*/
+	private _selectMapStatus: boolean = false;
+
+	public get selectMapStatus() {
+		return this._selectMapStatus;
+	}
+
+	showSelectMap() {
+		this._selectMapStatus = true;
+	}
+	hideSelectMap() {
+		this._selectMapStatus = false;
 	}
 }

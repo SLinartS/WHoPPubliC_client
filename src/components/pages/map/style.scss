@@ -3,10 +3,11 @@
 
 .map {
 	display: flex;
+	width: 100%;
 	align-items: center;
 	justify-content: center;
 	height: calc(100vh - v.$headerHeightStandart);
-	
+
 	&__container {
 		padding: 2rem 0 0 0;
 		height: 100%;
@@ -87,6 +88,11 @@
 		transform: translate(50%,-50%);
 		position: absolute;
 	}
+
+	&--select-map {
+		height: calc(100% - 9.2rem);
+	}
+
 }
 
 .table--map {

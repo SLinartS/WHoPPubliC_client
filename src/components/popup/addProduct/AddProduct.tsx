@@ -27,7 +27,7 @@ const AddProduct: FC = observer(() => {
 
 	const hideAddProductWindowHandler = useCallback(() => {
 		popupStore.hideAddProductWindow();
-		popupStore.showAddAcceptanceTaskWindow();
+		popupStore.showAddTaskWindow();
 	}, [popupStore]);
 
 	function addProductHandler() {
@@ -44,11 +44,18 @@ const AddProduct: FC = observer(() => {
 
 	return (
 		<div className='add-product'>
-			<WindowHeader
-				text='Добавить партию товара'
-				closeWindowEvent={hideAddProductWindowHandler}
-				actionEvent={addProductHandler}
-			/>
+			<WindowHeader text='Добавить партию товара'>
+				<Button
+					additionalСlasses='button--window-header'
+					text='Сохранить'
+					onClick={addProductHandler}
+				/>
+				<Button
+					additionalСlasses='button--window-header'
+					text='Отмена'
+					onClick={hideAddProductWindowHandler}
+				/>
+			</WindowHeader>
 			<div className='add-product__content-block'>
 				<FormLayout additionalСlasses='properties-block--article-info'>
 					<FormBlock

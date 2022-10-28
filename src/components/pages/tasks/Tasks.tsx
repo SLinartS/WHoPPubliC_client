@@ -10,7 +10,7 @@ const Tasks: FC = observer(() => {
 	const { tasksStore, popupStore } = useRootStore();
 
 	function showAddTaskWindowHandler() {
-		popupStore.showAddAcceptanceTaskWindow();
+		popupStore.showAddTaskWindow();
 	}
 
 	useEffect(() => {

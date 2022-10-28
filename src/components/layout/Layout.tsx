@@ -6,6 +6,7 @@ import { Outlet } from 'react-router-dom';
 
 import AddProduct from '../popup/addProduct/AddProduct';
 import AddTask from '../popup/addTask/AddTask';
+import SelectMap from '../popup/selectMap/SelectMap';
 
 const Layout = observer(() => {
 	const { popupStore } = useRootStore();
@@ -15,7 +16,8 @@ const Layout = observer(() => {
 			<Header />
 			<Outlet />
 			{popupStore.addProductStatus ? <AddProduct /> : ''}
-			{popupStore.addAcceptanceTaskStatus ? <AddTask /> : ''}
+			{popupStore.addTaskStatus ? <AddTask /> : ''}
+			{popupStore.selectMapStatus ? <SelectMap /> : ''}
 		</>
 	);
 });

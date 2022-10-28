@@ -1,7 +1,7 @@
 import { makeAutoObservable } from 'mobx';
 
 import RootStore from '../root';
-import { addTaskFormDataArrays, addTaskFormDataFields } from './type';
+import { addTaskFormDataArrays, addTaskFormDataFields, IPoint, IWarehousePoint } from './type';
 
 export class AddTaskFormStore {
 	private _rootStore!: RootStore;
@@ -24,8 +24,8 @@ export class AddTaskFormStore {
 
 	private _formDataArrays: addTaskFormDataArrays = {
 		products: [],
-		startPoints: [],
-		endPoints: [],
+		points: [],
+		warehousePoints: [],
 	};
 
 	// Getters ALL FORM DATA
@@ -54,11 +54,11 @@ export class AddTaskFormStore {
 	public get products() {
 		return this._formDataArrays.products;
 	}
-	public get startPoints() {
-		return this._formDataArrays.startPoints;
+	public get points() {
+		return this._formDataArrays.points;
 	}
-	public get endPoints() {
-		return this._formDataArrays.endPoints;
+	public get warehousePoints() {
+		return this._formDataArrays.warehousePoints;
 	}
 
 	// Setters FIELDS
@@ -75,16 +75,16 @@ export class AddTaskFormStore {
 		this._formDataField.userId = userId;
 	}
 
-	// Adding and removing values from ARRAYS
+	// ARRAYS
 	// Add values
 	public addProductId(productId: string) {
 		this._formDataArrays.products.push(productId);
 	}
-	public addStartPointId(startPointId: string) {
-		this._formDataArrays.startPoints.push(startPointId);
+	public addPoint(point: IPoint) {
+		this._formDataArrays.points.push(point);
 	}
-	public addEndPointId(endPointTitle: string) {
-		this._formDataArrays.endPoints.push(endPointTitle);
+	public addWarehousePoint(warehousePoint: IWarehousePoint) {
+		this._formDataArrays.warehousePoints.push(warehousePoint);
 	}
 
 	// Remove values
@@ -93,14 +93,14 @@ export class AddTaskFormStore {
 			(id) => id !== productId,
 		);
 	}
-	public removeStartPoint(startPointid: string) {
-		this._formDataArrays.startPoints = this._formDataArrays.startPoints.filter(
-			(id) => id !== startPointid,
+	public removePoint(pointId: string) {
+		this._formDataArrays.points = this._formDataArrays.points.filter(
+			(point) => point.pointId !== pointId,
 		);
 	}
-	public removeEndPoint(endPointTitle: string) {
-		this._formDataArrays.endPoints = this._formDataArrays.endPoints.filter(
-			(title) => title !== endPointTitle,
+	public removeWarehousePoint(floorId: string) {
+		this._formDataArrays.warehousePoints = this._formDataArrays.warehousePoints.filter(
+			(warehousePoint) => warehousePoint.floorId !== floorId,
 		);
 	}
 }

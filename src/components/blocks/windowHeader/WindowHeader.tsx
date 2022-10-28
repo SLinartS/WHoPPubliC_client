@@ -4,24 +4,13 @@ import Button from '../button/Button';
 import { IWindowHeaderProps } from './type';
 import './style.scss';
 
-const WindowHeader: FC<IWindowHeaderProps> = observer(
-	({ classes, text, closeWindowEvent, actionEvent }) => {
-		return (
-			<div className={'window-header ' + classes}>
-				<h3 className='window-header__title'>{text}</h3>
-				<Button
-					additionalСlasses='button--window-header'
-					text='Сохранить'
-					onClick={actionEvent}
-				/>
-				<Button
-					additionalСlasses='button--window-header'
-					text='Отмена'
-					onClick={closeWindowEvent}
-				/>
-			</div>
-		);
-	},
-);
+const WindowHeader: FC<IWindowHeaderProps> = observer(({ classes, text, children }) => {
+	return (
+		<div className={'window-header ' + classes}>
+			<h3 className='window-header__title'>{text}</h3>
+			{children}
+		</div>
+	);
+});
 
 export default WindowHeader;

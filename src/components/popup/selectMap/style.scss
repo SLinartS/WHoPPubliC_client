@@ -1,0 +1,17 @@
+@use '../../../styles/global/colors.scss' as *;
+
+.select-map {
+  background-color: $fontColor--white;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+	width: 102.4rem;
+	height: 76.8rem;
+  transform: translate(-50%, -50%);
+  border-radius: 0.5rem;
+  box-shadow: 0 0 1rem 0;
+}

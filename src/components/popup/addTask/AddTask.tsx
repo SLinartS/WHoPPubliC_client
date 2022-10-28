@@ -18,8 +18,12 @@ const AddTask: FC = observer(() => {
 		addTaskFormStore[fieldName] = e.target.value;
 	}
 
+	function addWarehousePointHandler() {
+		popupStore.showSelectMap();
+	}
+
 	function hideAddAcceptanceTaskWindowHandler() {
-		popupStore.hideAddAcceptanceTaskWindow();
+		popupStore.hideAddTaskWindow();
 	}
 
 	function showAddProductWindowHandler() {
@@ -31,7 +35,7 @@ const AddTask: FC = observer(() => {
 			}
 		} else {
 			popupStore.showAddProductWindow();
-			popupStore.hideAddAcceptanceTaskWindow();
+			popupStore.hideAddTaskWindow();
 		}
 	}
 
@@ -44,16 +48,25 @@ const AddTask: FC = observer(() => {
 			tasksStore.statusTaskHasBeenAdded = true;
 			tasksStore.statusGetAcceptanceTasks = 'pending';
 			popupStore.showAddProductWindow();
-			popupStore.hideAddAcceptanceTaskWindow();
+			popupStore.hideAddTaskWindow();
 		}
 	}, [addTaskFormStore.title, tasksStore.statusAddTask, popupStore, productsStore, tasksStore]);
 
 	return (
 		<div className='add-task'>
-			<WindowHeader
-				text={'Добавить задачу приёмки'}
-				closeWindowEvent={hideAddAcceptanceTaskWindowHandler}
-			/>
+			<WindowHeader text={'Добавить задачу приёмки'}>
+				<Button
+					additionalСlasses='button--window-header'
+					text='Сохранить'
+					onClick={hideAddAcceptanceTaskWindowHandler}
+				/>
+				<Button
+					additionalСlasses='button--window-header'
+					text='Отмена'
+					onClick={hideAddAcceptanceTaskWindowHandler}
+				/>
+			</WindowHeader>
+
 			<div className='add-task__content-block'>
 				<FormLayout additionalСlasses='properties-block--article-info'>
 					<FormBlock
@@ -85,11 +98,11 @@ const AddTask: FC = observer(() => {
 				</FormLayout>
 
 				<FormLayout>
-					<FormBlock titleText='Точки приёмки'>
+					{/* <FormBlock titleText='Точки приёмки'>
 						<FormFieldPoint />
-					</FormBlock>
+					</FormBlock> */}
 					<FormBlock titleText='Точки раскладки'>
-						<FormFieldPoint />
+						<FormFieldPoint clickEvent={addWarehousePointHandler} />
 					</FormBlock>
 				</FormLayout>
 

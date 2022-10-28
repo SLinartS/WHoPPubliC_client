@@ -15,7 +15,7 @@ export class AddProductFormStore {
 		this.rootStore = rootStore;
 	}
 
-	public _formData: addProductFormData = {
+	private _formData: addProductFormData = {
 		article: '',
 		title: '',
 		author: '',

@@ -4,8 +4,9 @@ import './style.scss';
 
 import { useRootStore } from '../../../utils/RootStoreProvider/useRootStore';
 import Zone from './zone/Zone';
+import { IMapProps } from './type';
 
-const Map: FC = observer(() => {
+const Map: FC<IMapProps> = observer(({additionalClasses}) => {
 	const { mapStore } = useRootStore();
 
 	useEffect(() => {
@@ -15,7 +16,7 @@ const Map: FC = observer(() => {
 	}, [mapStore.status]);
 
 	return (
-		<main className='map'>
+		<main className={'map ' + additionalClasses }>
 			<div className='map__container'>
 				{mapStore.mapData.map((zone) => {
 					return (

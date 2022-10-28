@@ -4,8 +4,8 @@ export type ChangeFieldEvent = ChangeEvent<HTMLInputElement | HTMLSelectElement>
 
 export interface addTaskFormDataArrays {
 	products: Array<string>;
-	startPoints: Array<string>;
-	endPoints: Array<string>;
+	points: Array<IPoint>;
+	warehousePoints: Array<IWarehousePoint>
 }
 
 export interface addTaskFormDataFields {
@@ -29,3 +29,17 @@ export interface addProductFormData {
 	stored: string;
 	taskTitle: string;
 }
+
+export interface IWarehousePoint {
+	zoneId: string;
+	sectionId: string;
+	blockId: string;
+	floorId: string;
+}
+
+export interface IPoint {
+	pointId: string;
+	type: TTypePoint;
+}
+
+export type TTypePoint = 'acceptance' | 'shipment';
