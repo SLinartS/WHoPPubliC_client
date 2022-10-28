@@ -3,7 +3,7 @@ import { forwardRef } from 'react';
 import { ISectionNumberProps } from '../type';
 
 const NumberSection = observer(
-	forwardRef<HTMLParagraphElement, ISectionNumberProps>(({ fontSize, index }, ref) => {
+	forwardRef<HTMLParagraphElement, ISectionNumberProps>(({ fontSize, number }, ref) => {
 		return (
 			<p
 				ref={ref}
@@ -12,7 +12,7 @@ const NumberSection = observer(
 					fontSize: fontSize + 'rem',
 				}}
 			>
-				{index}
+				{number}
 			</p>
 		);
 	}),

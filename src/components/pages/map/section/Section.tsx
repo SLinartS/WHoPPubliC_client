@@ -1,11 +1,11 @@
 import { observer } from 'mobx-react-lite';
 import { FC, useEffect, useRef, useState } from 'react';
+import { ISection } from '../../../../store/map/type';
 import Block from '../block/Block';
 import HeaderBlock from '../block/HeaderBlock';
 import NumberSection from '../info/numberSection/NumberSection';
-import { ISectionProps } from './type';
 
-const Section: FC<ISectionProps> = observer(({ id, blocks, index }) => {
+const Section: FC<ISection> = observer(({ id, number, blocks, }) => {
 	const [sectionNumberFontSize, setSectionNumberFontSize] = useState<number>(10);
 
 	const letterSectionNode = useRef<HTMLParagraphElement>(null);
@@ -24,15 +24,15 @@ const Section: FC<ISectionProps> = observer(({ id, blocks, index }) => {
 	}, [sectionNode.current?.offsetHeight]);
 
 	return (
-		<div className='map__section' ref={sectionNode}>
+		<div className='map__section' ref={sectionNode} data-section-id={id}>
 			<HeaderBlock floors={blocks[0].floors} />
 
-			{blocks.map((block, index) => {
+			{blocks.map((block) => {
 				return (
-					<Block key={block.id} id={block.id} index={index + 1} floors={block.floors} />
+					<Block key={block.id} id={block.id} number={block.number} floors={block.floors} />
 				);
 			})}
-			<NumberSection ref={letterSectionNode} fontSize={sectionNumberFontSize} index={index} />
+			<NumberSection ref={letterSectionNode} fontSize={sectionNumberFontSize} number={number} />
 		</div>
 	);
 });

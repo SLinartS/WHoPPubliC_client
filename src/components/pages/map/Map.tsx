@@ -22,6 +22,7 @@ const Map: FC = observer(() => {
 						<Zone
 							key={zone.id}
 							id={zone.id}
+							number={zone.number}
 							zoneLetter={zone.zoneLetter}
 							sections={zone.sections}
 						/>

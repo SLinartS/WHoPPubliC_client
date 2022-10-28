@@ -1,8 +1,4 @@
-import { IBlock, IFloor } from "../../../../store/map/type";
-
-export interface IBlockProps extends IBlock {
-	index: number;
-}
+import { IFloor } from "../../../../store/map/type";
 
 export interface IHeaderBlockProps {
 	floors: Array<IFloor>;

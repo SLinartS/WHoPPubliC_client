@@ -5,7 +5,7 @@ import Section from '../section/Section';
 import LetterZone from '../info/letterZone/LetterZone';
 import { IZone } from '../../../../store/map/type';
 
-const Zone: FC<IZone> = observer(({ id, zoneLetter, sections }) => {
+const Zone: FC<IZone> = observer(({ id, number, zoneLetter, sections }) => {
 	const [zoneLetterFontSize, setZoneLetterFontSize] = useState<number>(30);
 
 	const letterZoneNode = useRef<HTMLParagraphElement>(null);
@@ -20,23 +20,23 @@ const Zone: FC<IZone> = observer(({ id, zoneLetter, sections }) => {
 
 		if (tableHeigth && tableWidth) {
 			if (tableHeigth > tableWidth) {
-				newZoneLetterFontSize = tableWidth / 11;
+				newZoneLetterFontSize = tableWidth / 13;
 			} else {
-				newZoneLetterFontSize = tableHeigth / 11;
+				newZoneLetterFontSize = tableHeigth / 13;
 			}
 			setZoneLetterFontSize(newZoneLetterFontSize);
 		}
 	}, [zoneNode.current?.offsetHeight, zoneNode.current?.offsetWidth]);
 
 	return (
-		<div className='map__zone' ref={zoneNode}>
-			{sections.map((section, index) => {
+		<div className='map__zone' ref={zoneNode} data-zone-id={id}>
+			{sections.map((section) => {
 				return (
 					<Section
 						key={section.id}
 						id={section.id}
+						number={section.number}
 						blocks={section.blocks}
-						index={index + 1}
 					/>
 				);
 			})}

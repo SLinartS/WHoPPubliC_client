@@ -3,7 +3,7 @@ export interface IInfoElementProps {
 }
 
 export interface ISectionNumberProps extends IInfoElementProps {
-	index: number;
+	number: number;
 }
 export interface IZoneLetterProps extends IInfoElementProps {
 	zoneLetter: string;
