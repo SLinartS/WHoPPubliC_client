@@ -4,14 +4,15 @@ import FormTitle from '../title/Title';
 import { IFormBlockProps } from './type';
 
 const FormBlock: FC<IFormBlockProps> = observer(
-	({ additionalTitleBlockClasses, titleText, children }) => {
-		return (
-			<div className='properties-block__block'>
-				<FormTitle text={titleText} additionalСlasses={additionalTitleBlockClasses} />
-				{children}
-			</div>
-		);
-	},
+  ({ additionalTitleBlockClasses, titleText, children }) => (
+    <div className='properties-block__block'>
+      <FormTitle
+        text={titleText}
+        additionalСlasses={additionalTitleBlockClasses}
+      />
+      {children}
+    </div>
+  ),
 );
 
 export default FormBlock;

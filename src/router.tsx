@@ -8,33 +8,33 @@ import Tasks from './components/pages/tasks/Tasks';
 import Products from './components/pages/products/Products';
 
 const router = createBrowserRouter([
-	{
-		path: '/',
-		element: <Layout />,
-		errorElement: <ErrorPage />,
-		children: [
-			{
-				index: true,
-				element: <Main />,
-			},
-			{
-				path: 'login',
-				element: <Login />,
-			},
-			{
-				path: 'map',
-				element: <Map />,
-			},
-			{
-				path: 'tasks',
-				element: <Tasks />,
-			},
-			{
-				path: 'products',
-				element: <Products />,
-			},
-		],
-	},
+  {
+    path: '/',
+    element: <Layout />,
+    errorElement: <ErrorPage />,
+    children: [
+      {
+        index: true,
+        element: <Main />,
+      },
+      {
+        path: 'login',
+        element: <Login />,
+      },
+      {
+        path: 'map',
+        element: <Map />,
+      },
+      {
+        path: 'tasks',
+        element: <Tasks />,
+      },
+      {
+        path: 'products',
+        element: <Products />,
+      },
+    ],
+  },
 ]);
 
 export default router;

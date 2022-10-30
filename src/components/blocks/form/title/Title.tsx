@@ -2,9 +2,10 @@ import { observer } from 'mobx-react-lite';
 import { FC } from 'react';
 import { IPropertiesBlockTitleProps } from './type';
 
-
-const FormTitle: FC<IPropertiesBlockTitleProps> = observer(({ additionalСlasses, text }) => {
-	return <p className={'properties-block__title ' + additionalСlasses}>{text}</p>;
-});
+const FormTitle: FC<IPropertiesBlockTitleProps> = observer(
+  ({ additionalСlasses, text }) => (
+    <p className={`properties-block__title ${additionalСlasses}`}>{text}</p>
+  ),
+);
 
 export default FormTitle;

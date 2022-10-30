@@ -3,19 +3,19 @@ import { forwardRef } from 'react';
 import { IZoneLetterProps } from '../type';
 
 const LetterZone = observer(
-	forwardRef<HTMLParagraphElement, IZoneLetterProps>(({ fontSize, zoneLetter }, ref) => {
-		return (
-			<p
-				ref={ref}
-				className='map__zone-title'
-				style={{
-					fontSize: fontSize + 'rem',
-				}}
-			>
-				{zoneLetter}
-			</p>
-		);
-	}),
+  forwardRef<HTMLParagraphElement, IZoneLetterProps>(
+    ({ fontSize, zoneLetter }, ref) => (
+      <p
+        ref={ref}
+        className='map__zone-title'
+        style={{
+          fontSize: `${fontSize}rem`,
+        }}
+      >
+        {zoneLetter}
+      </p>
+    ),
+  ),
 );
 
 export default LetterZone;

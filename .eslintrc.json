@@ -1,0 +1,55 @@
+{
+  "env": {
+    "browser": true,
+    "es2021": true,
+    "jest": true
+  },
+  "extends": [
+    "react-app",
+    "react-app/jest",
+    "airbnb",
+    "airbnb-typescript",
+    "plugin:import/typescript"
+  ],
+  "overrides": [],
+  "parserOptions": {
+    "ecmaFeatures": {
+      "jsx": true
+    },
+    "ecmaVersion": "latest",
+    "sourceType": "module",
+    "project": "tsconfig.json",
+    "nomen": true
+  },
+  "plugins": ["react", "@typescript-eslint"],
+  "rules": {
+    "react/jsx-filename-extension": ["warn", { "extensions": [".tsx"] }],
+    "react/react-in-jsx-scope": "off",
+    "react/jsx-no-bind": [
+      "off",
+      { "allowFunctions": true, "allowArrowFunctions": true }
+    ],
+    "react/function-component-definition": [
+      "warn",
+      { "namedComponents": "arrow-function" }
+    ],
+    "jsx-a11y/click-events-have-key-events": "off",
+    "jsx-a11y/no-static-element-interactions": "off",
+    "jsx-quotes": ["error", "prefer-single"],
+    "no-underscore-dangle": "off",
+    "import/prefer-default-export": "off",
+    "arrow-body-style": "off",
+    "import/no-cycle": "off",
+    "grouped-accessor-pairs": "off",
+    "generator-star-spacing": ["error", { "before": true, "after": false }],
+    "no-tabs": "off",
+    "indent": ["warn", 2],
+    "@typescript-eslint/indent": "off",
+    "operator-linebreak": "off",
+    "object-curly-newline": "off",
+    "no-restricted-syntax": "off",
+    // for develop
+    "no-console": "off",
+    "no-alert": "off"
+  }
+}

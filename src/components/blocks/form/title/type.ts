@@ -1,4 +1,4 @@
 export interface IPropertiesBlockTitleProps {
-	additionalСlasses?: string;
-	text: string;
+  additionalСlasses?: string;
+  text: string;
 }

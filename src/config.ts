@@ -1,1 +1,1 @@
-export const API_URL: string = 'http://whoppublicserver' + '/api/';
+export const API_URL: string = 'http://whoppublicserver/api/';

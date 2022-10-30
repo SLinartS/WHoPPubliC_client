@@ -7,60 +7,67 @@ import Button from '../../blocks/button/Button';
 import './style.scss';
 
 const Tasks: FC = observer(() => {
-	const { tasksStore, popupStore } = useRootStore();
+  const { tasksStore, popupStore } = useRootStore();
 
-	function showAddTaskWindowHandler() {
-		popupStore.showAddTaskWindow();
-	}
+  function showAddTaskWindowHandler() {
+    popupStore.showAddTaskWindow();
+  }
 
-	useEffect(() => {
-		if (tasksStore.statusGetAcceptanceTasks === 'pending') {
-			tasksStore.getAcceptanceTasks();
-		}
-		if (tasksStore.statusGetShipmentTasks === 'pending') {
-			tasksStore.getShipmentTasks();
-		}
-	}, [tasksStore, tasksStore.statusGetAcceptanceTasks, tasksStore.statusGetShipmentTasks]);
+  useEffect(() => {
+    if (tasksStore.statusGetAcceptanceTasks === 'pending') {
+      tasksStore.getAcceptanceTasks();
+    }
+    if (tasksStore.statusGetShipmentTasks === 'pending') {
+      tasksStore.getShipmentTasks();
+    }
+  }, [
+    tasksStore,
+    tasksStore.statusGetAcceptanceTasks,
+    tasksStore.statusGetShipmentTasks,
+  ]);
 
-	return (
-		<main className='tasks'>
-			<div className='tasks__title'>
-				<h3 className='tasks__title-text'>Приёмка</h3>
-			</div>
-			<div className='tasks__block'>
-				<Button
-					additionalСlasses='button--tasks'
-					text='Добавить'
-					onClick={showAddTaskWindowHandler}
-				/>
-				{tasksStore.statusGetAcceptanceTasks === 'done' ? (
-					<Table
-						data={tasksStore.tasksAccepranceList.data}
-						tableHeader={tasksStore.tasksAccepranceList.tableHeader}
-						additionalСlasses={'table--tasks'}
-					/>
-				) : (
-					''
-				)}
-			</div>
-			<div className='tasks__title tasks__title--shipment'>
-				<h3 className='tasks__title-text tasks__title-text'>Отгрузка</h3>
-			</div>
-			<div className='tasks__block'>
-				<Button additionalСlasses='button--tasks' text='Добавить' />
+  return (
+    <main className='tasks'>
+      <div className='tasks__title'>
+        <h3 className='tasks__title-text'>Приёмка</h3>
+      </div>
+      <div className='tasks__block'>
+        <Button
+          additionalСlasses='button--tasks'
+          text='Добавить'
+          onClick={showAddTaskWindowHandler}
+        />
+        {tasksStore.statusGetAcceptanceTasks === 'done' ? (
+          <Table
+            data={tasksStore.tasksAccepranceList.data}
+            tableHeader={tasksStore.tasksAccepranceList.tableHeader}
+            additionalСlasses='table--tasks'
+          />
+        ) : (
+          ''
+        )}
+      </div>
+      <div className='tasks__title tasks__title--shipment'>
+        <h3 className='tasks__title-text tasks__title-text'>Отгрузка</h3>
+      </div>
+      <div className='tasks__block'>
+        <Button
+          additionalСlasses='button--tasks'
+          text='Добавить'
+        />
 
-				{tasksStore.statusGetShipmentTasks === 'done' ? (
-					<Table
-						data={tasksStore.tasksShipmentList.data}
-						tableHeader={tasksStore.tasksShipmentList.tableHeader}
-						additionalСlasses={'table--tasks'}
-					/>
-				) : (
-					''
-				)}
-			</div>
-		</main>
-	);
+        {tasksStore.statusGetShipmentTasks === 'done' ? (
+          <Table
+            data={tasksStore.tasksShipmentList.data}
+            tableHeader={tasksStore.tasksShipmentList.tableHeader}
+            additionalСlasses='table--tasks'
+          />
+        ) : (
+          ''
+        )}
+      </div>
+    </main>
+  );
 });
 
 export default Tasks;

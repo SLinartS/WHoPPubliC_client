@@ -1,3 +1,3 @@
 export interface IHeaderFloorProps {
-	index: number;
+  index: number;
 }

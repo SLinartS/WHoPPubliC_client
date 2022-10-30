@@ -2,61 +2,61 @@
 @use '../../../styles/global/variables.scss' as v;
 
 .header {
-	height: v.$headerHeightStandart;
-	display: grid;
-	grid-template-columns: 10rem 31rem 1fr;
-	background-color: $mainColor;
-	align-items: center;
-	justify-items: center;
+  height: v.$headerHeightStandart;
+  display: grid;
+  grid-template-columns: 10rem 31rem 1fr;
+  background-color: $mainColor;
+  align-items: center;
+  justify-items: center;
 
-	&__app-icon {
-		width: 8rem;
-		grid-column: 1/2;
-		grid-row: 1/2;
-	}
+  &__app-icon {
+    width: 8rem;
+    grid-column: 1/2;
+    grid-row: 1/2;
+  }
 
-	&__user {
-		&-info {
-			grid-column: 2/3;
-			grid-row: 1/2;
+  &__user {
+    &-info {
+      grid-column: 2/3;
+      grid-row: 1/2;
 
-			width: fit-content;
-			display: flex;
-			flex-direction: column;
-			align-items: center;
-		}
+      width: fit-content;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
 
-		&-name {
-			font-size: 2.4rem;
-			margin: 0;
-		}
-		&-role {
-			font-size: 2rem;
-			margin: 1rem 0 0 0;
-		}
-	}
+    &-name {
+      font-size: 2.4rem;
+      margin: 0;
+    }
+    &-role {
+      font-size: 2rem;
+      margin: 1rem 0 0 0;
+    }
+  }
 
-	&__nav {
-		grid-column: 3/4;
-		grid-row: 1/2;
-		justify-self: flex-end;
+  &__nav {
+    grid-column: 3/4;
+    grid-row: 1/2;
+    justify-self: flex-end;
 
-		display: flex;
-		align-items: center;
+    display: flex;
+    align-items: center;
 
-		&-link {
-			display: inline-block;
-			padding: 0 3rem;
+    &-link {
+      display: inline-block;
+      padding: 0 3rem;
 
-			color: $fontColor--black;
-			font-weight: bold;
-			font-size: 2.4rem;
+      color: $fontColor--black;
+      font-weight: bold;
+      font-size: 2.4rem;
 
-			word-wrap: break-word;
+      word-wrap: break-word;
 
-			text-align: center;
-		}
-	}
+      text-align: center;
+    }
+  }
 
   &--no-auth {
     display: flex;
@@ -70,81 +70,80 @@
 }
 
 @media (max-width: 1050px) {
-	.header__nav-link {
-		padding: 0 2rem;
-	}
+  .header__nav-link {
+    padding: 0 2rem;
+  }
 }
 
 @media (max-width: 950px) {
-	.header__nav-link {
-		padding: 0 1rem;
-		font-size: 2.4rem;
-	}
-	.header {
-		grid-template-columns: 10rem 30rem 1fr;
+  .header__nav-link {
+    padding: 0 1rem;
+    font-size: 2.4rem;
+  }
+  .header {
+    grid-template-columns: 10rem 30rem 1fr;
 
-		&__user {
-			&-name {
-				font-size: 2.4rem;
-				margin: 0;
-			}
-			&-role {
-				font-size: 2rem;
-				margin: 1rem 0 0 0;
-			}
-		}
-
-	}
+    &__user {
+      &-name {
+        font-size: 2.4rem;
+        margin: 0;
+      }
+      &-role {
+        font-size: 2rem;
+        margin: 1rem 0 0 0;
+      }
+    }
+  }
 }
 
 @media (max-width: 900px) {
-	.header__nav-link {
-		padding: 0 1rem;
-		font-size: 2rem;
-	}
-	.header {
+  .header__nav-link {
+    padding: 0 1rem;
+    font-size: 2rem;
+  }
+  .header {
     height: v.$headerHeightMid;
-		grid-template-columns: 8rem 25rem 1fr;
+    grid-template-columns: 8rem 25rem 1fr;
 
     &__app-icon {
       width: 7rem;
     }
 
-		&__user {
-			&-name {
-				font-size: 2rem;
-				margin: 0;
-			}
-			&-role {
-				font-size: 1.6rem;
-				margin: 1rem 0 0 0;
-			}
-		}
-	}
+    &__user {
+      &-name {
+        font-size: 2rem;
+        margin: 0;
+      }
+      &-role {
+        font-size: 1.6rem;
+        margin: 1rem 0 0 0;
+      }
+    }
+  }
 }
 
 @media (max-width: 750px) {
-	.header__nav-link {
-		padding: 0 1rem;
-		font-size: 1.6rem;
-	}
-	.header {
+  .header__nav-link {
+    padding: 0 1rem;
+    font-size: 1.6rem;
+  }
+  .header {
     height: v.$headerHeightLow;
-		grid-template-columns: 6rem 20rem 1fr;
+    grid-template-columns: 6rem 20rem 1fr;
 
     &__app-icon {
       width: 5rem;
     }
 
-		&__user {
-			&-name {
-				font-size: 1.6rem;
-				margin: 0;
-			}
-			&-role {
-				font-size: 1.2rem;
-				margin: 1rem 0 0 0;
-			}
-		}
-	}
+    &__user {
+      &-name {
+        font-size: 1.6rem;
+        margin: 0;
+      }
+      &-role {
+        font-size: 1.2rem;
+        margin: 1rem 0 0 0;
+      }
+    }
+  }
 }

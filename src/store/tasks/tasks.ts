@@ -6,93 +6,94 @@ import { ITasksList } from './type';
 import extendAxios from '../../utils/extendAxios';
 
 export class TasksStore {
-	private _rootStore!: RootStore;
+  private _rootStore!: RootStore;
 
-	private set rootStore(rootStore: RootStore) {
-		this._rootStore = rootStore;
-	}
+  private set rootStore(rootStore: RootStore) {
+    this._rootStore = rootStore;
+  }
 
-	constructor(rootStore: RootStore) {
-		makeAutoObservable(this, {});
-		this.rootStore = rootStore;
-	}
+  constructor(rootStore: RootStore) {
+    makeAutoObservable(this, {});
+    this.rootStore = rootStore;
+  }
 
-	// STATUS
-	private _statusGetAcceptanceTasks: TStatus = 'pending';
-	private _statusGetShipmentTasks: TStatus = 'pending';
-	private _statusAddTask: TStatus = 'pending';
-	private _statusTaskHasBeenAdded: boolean = false;
+  // STATUS
+  private _statusGetAcceptanceTasks: TStatus = 'pending';
 
-	// Getters
-	public get statusGetAcceptanceTasks() {
-		return this._statusGetAcceptanceTasks;
-	}
+  private _statusGetShipmentTasks: TStatus = 'pending';
 
-	public get statusGetShipmentTasks() {
-		return this._statusGetShipmentTasks;
-	}
+  private _statusAddTask: TStatus = 'pending';
 
-	public get statusAddTask() {
-		return this._statusAddTask;
-	}
+  private _statusTaskHasBeenAdded: boolean = false;
 
-	public get statusTaskHasBeenAdded() {
-		return this._statusTaskHasBeenAdded;
-	}
+  // Getters
+  public get statusGetAcceptanceTasks() {
+    return this._statusGetAcceptanceTasks;
+  }
 
-	// Setters
-	public set statusGetAcceptanceTasks(newStatus: TStatus) {
-		this._statusGetAcceptanceTasks = newStatus;
-	}
+  public get statusGetShipmentTasks() {
+    return this._statusGetShipmentTasks;
+  }
 
-	public set statusGetShipmentTasks(newStatus: TStatus) {
-		this._statusGetShipmentTasks = newStatus;
-	}
+  public get statusAddTask() {
+    return this._statusAddTask;
+  }
 
-	public set statusAddTask(newStatus: TStatus) {
-		this._statusAddTask = newStatus;
-	}
+  public get statusTaskHasBeenAdded() {
+    return this._statusTaskHasBeenAdded;
+  }
 
-	public set statusTaskHasBeenAdded(newStatus: boolean) {
-		this._statusTaskHasBeenAdded = newStatus;
-	}
+  // Setters
+  public set statusGetAcceptanceTasks(newStatus: TStatus) {
+    this._statusGetAcceptanceTasks = newStatus;
+  }
 
-	// DATA
-	public tasksAccepranceList: ITasksList = { data: [], tableHeader: [] };
-	public tasksShipmentList: ITasksList = { data: [], tableHeader: [] };
+  public set statusGetShipmentTasks(newStatus: TStatus) {
+    this._statusGetShipmentTasks = newStatus;
+  }
 
-	public *getAcceptanceTasks() {
-		try {
-			const response: AxiosResponse<ITasksList> = yield extendAxios.get<ITasksList>(
-				'tasks/acceptance',
-			);
-			this.tasksAccepranceList = response.data;
-			this._statusGetAcceptanceTasks = 'done';
-		} catch (error) {
-			this._statusGetAcceptanceTasks = 'error';
-		}
-	}
+  public set statusAddTask(newStatus: TStatus) {
+    this._statusAddTask = newStatus;
+  }
 
-	public *getShipmentTasks() {
-		try {
-			const response: AxiosResponse<ITasksList> = yield extendAxios.get<ITasksList>(
-				'tasks/shipment',
-			);
-			this.tasksShipmentList = response.data;
-			this.statusGetShipmentTasks = 'done';
-		} catch (error) {
-			this.statusGetShipmentTasks = 'error';
-		}
-	}
+  public set statusTaskHasBeenAdded(newStatus: boolean) {
+    this._statusTaskHasBeenAdded = newStatus;
+  }
 
-	public *addTask(typeId: string, taskTitle: string, userId: string) {
-		try {
-			const data = { title: taskTitle, typeId: typeId, userId: userId };
-			const response: AxiosResponse = yield extendAxios.post('tasks', data);
-			console.log(response);
-			this.statusAddTask = 'done';
-		} catch (error) {
-			this.statusAddTask = 'error';
-		}
-	}
+  // DATA
+  public tasksAccepranceList: ITasksList = { data: [], tableHeader: [] };
+
+  public tasksShipmentList: ITasksList = { data: [], tableHeader: [] };
+
+  public *getAcceptanceTasks() {
+    try {
+      const response: AxiosResponse<ITasksList> =
+        yield extendAxios.get<ITasksList>('tasks/acceptance');
+      this.tasksAccepranceList = response.data;
+      this._statusGetAcceptanceTasks = 'done';
+    } catch (error) {
+      this._statusGetAcceptanceTasks = 'error';
+    }
+  }
+
+  public *getShipmentTasks() {
+    try {
+      const response: AxiosResponse<ITasksList> =
+        yield extendAxios.get<ITasksList>('tasks/shipment');
+      this.tasksShipmentList = response.data;
+      this.statusGetShipmentTasks = 'done';
+    } catch (error) {
+      this.statusGetShipmentTasks = 'error';
+    }
+  }
+
+  public *addTask(typeId: string, taskTitle: string, userId: string) {
+    try {
+      const data = { title: taskTitle, typeId, userId };
+      yield extendAxios.post('tasks', data);
+      this.statusAddTask = 'done';
+    } catch (error) {
+      this.statusAddTask = 'error';
+    }
+  }
 }

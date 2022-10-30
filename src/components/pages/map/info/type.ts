@@ -1,10 +1,10 @@
 export interface IInfoElementProps {
-	fontSize: number;
+  fontSize: number;
 }
 
 export interface ISectionNumberProps extends IInfoElementProps {
-	number: number;
+  number: number;
 }
 export interface IZoneLetterProps extends IInfoElementProps {
-	zoneLetter: string;
+  zoneLetter: string;
 }

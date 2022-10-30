@@ -6,32 +6,30 @@ import { useRootStore } from '../../../utils/RootStoreProvider/useRootStore';
 import Zone from './zone/Zone';
 import { IMapProps } from './type';
 
-const Map: FC<IMapProps> = observer(({additionalClasses}) => {
-	const { mapStore } = useRootStore();
+const Map: FC<IMapProps> = observer(({ additionalClasses }) => {
+  const { mapStore } = useRootStore();
 
-	useEffect(() => {
-		if (mapStore.status === 'pending') {
-			mapStore.getMap();
-		}
-	}, [mapStore.status]);
+  useEffect(() => {
+    if (mapStore.status === 'pending') {
+      mapStore.getMap();
+    }
+  }, [mapStore, mapStore.status]);
 
-	return (
-		<main className={'map ' + additionalClasses }>
-			<div className='map__container'>
-				{mapStore.mapData.map((zone) => {
-					return (
-						<Zone
-							key={zone.id}
-							id={zone.id}
-							number={zone.number}
-							zoneLetter={zone.zoneLetter}
-							sections={zone.sections}
-						/>
-					);
-				})}
-			</div>
-		</main>
-	);
+  return (
+    <main className={`map ${additionalClasses}`}>
+      <div className='map__container'>
+        {mapStore.mapData.map((zone) => (
+          <Zone
+            key={zone.id}
+            id={zone.id}
+            number={zone.number}
+            zoneLetter={zone.zoneLetter}
+            sections={zone.sections}
+          />
+        ))}
+      </div>
+    </main>
+  );
 });
 
 export default Map;

@@ -1,15 +1,15 @@
 @use '../global/colors.scss' as *;
 
 #id {
-	position: relative;
+  position: relative;
 }
 
 html {
-	font-size: 10px;
-	letter-spacing: -0.05em;
-	color: $fontColor--black;
-	font-family: 'Inter', sans-serif;
-	background-color: $fontColor--white;
+  font-size: 10px;
+  letter-spacing: -0.05em;
+  color: $fontColor--black;
+  font-family: 'Inter', sans-serif;
+  background-color: $fontColor--white;
 }
 
 h1,
@@ -19,12 +19,12 @@ h4,
 h5,
 h6,
 p {
-	margin: 0;
+  margin: 0;
 }
 
 a,
 a:visited,
 a:hover,
 a:active {
-	text-decoration: none;
+  text-decoration: none;
 }

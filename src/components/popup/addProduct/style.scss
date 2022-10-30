@@ -2,64 +2,64 @@
 @use '../../../styles/global/variables.scss' as v;
 
 .add-product {
-	display: grid;
-	grid-template-rows: fit-content(100%) 1fr;
-	width: 102.4rem;
-	height: 76.8rem;
-	position: absolute;
-	background-color: $fontColor--white;
-	top: 50%;
-	left: 50%;
-	transform: translate(-50%, -50%);
-	box-shadow: 0 0 1rem 0;
-	border-radius: 0.5rem;
+  display: grid;
+  grid-template-rows: fit-content(100%) 1fr;
+  width: 102.4rem;
+  height: 76.8rem;
+  position: absolute;
+  background-color: $fontColor--white;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  box-shadow: 0 0 1rem 0;
+  border-radius: 0.5rem;
 
-	&__header {
-		display: grid;
-		align-items: center;
-		grid-template-columns: repeat(5, 1fr);
-		column-gap: 3rem;
-		background-color: $mainColor;
-		height: v.$headerHeightStandart;
-		border-radius: 0.5rem 0.5rem 0 0;
-		padding: 0 3rem;
-	}
+  &__header {
+    display: grid;
+    align-items: center;
+    grid-template-columns: repeat(5, 1fr);
+    column-gap: 3rem;
+    background-color: $mainColor;
+    height: v.$headerHeightStandart;
+    border-radius: 0.5rem 0.5rem 0 0;
+    padding: 0 3rem;
+  }
 
-	&__title {
-		font-size: 3.2rem;
-		grid-column: 1/4;
-	}
+  &__title {
+    font-size: 3.2rem;
+    grid-column: 1/4;
+  }
 
-	&__content-block {
-		display: grid;
-		grid-template-columns: 2fr 1fr;
-		grid-template-rows: repeat(5, auto) 1fr;
-		background-color: $fontColor--black;
-		gap: 0.2rem;
-		font-size: 2.4rem;
-	}
+  &__content-block {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    grid-template-rows: repeat(5, auto) 1fr;
+    background-color: $fontColor--black;
+    gap: 0.2rem;
+    font-size: 2.4rem;
+  }
 
-	&__photo-block {
-		display: flex;
-		flex-direction: column;
-		align-items: center;
-		justify-content: center;
-		background-color: $fontColor--white;
-		grid-column: 2/3;
-		grid-row: 2/6;
-	}
+  &__photo-block {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: $fontColor--white;
+    grid-column: 2/3;
+    grid-row: 2/6;
+  }
 
-	&__photo {
-		width: 70%;
-		height: 60%;
+  &__photo {
+    width: 70%;
+    height: 60%;
 
-		&-text {
-			margin: 2rem 0 0 0;
-		}
-	}
+    &-text {
+      margin: 2rem 0 0 0;
+    }
+  }
 
-	&__empty-block {
-		background-color: $fontColor--white;
-		grid-column: 1/3;
-	}
+  &__empty-block {
+    background-color: $fontColor--white;
+    grid-column: 1/3;
+  }
 }

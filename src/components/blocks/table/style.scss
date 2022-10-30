@@ -1,75 +1,75 @@
 @use '../../../styles/global/colors.scss' as *;
 
 .table {
-	display: grid;
-	height: fit-content;
-	max-width: 160rem;
-	grid-template-columns: repeat(6, auto);
-	grid-auto-rows: min-content;
-	column-gap: 0.1rem;
-	row-gap: 0.5rem;
-	font-size: 1.6rem;
+  display: grid;
+  height: fit-content;
+  max-width: 160rem;
+  grid-template-columns: repeat(6, auto);
+  grid-auto-rows: min-content;
+  column-gap: 0.1rem;
+  row-gap: 0.5rem;
+  font-size: 1.6rem;
 
-	&--map {
-		margin: 2rem;
-	}
+  &--map {
+    margin: 2rem;
+  }
 
-	&__text {
-		margin: 0;
-		text-align: center;
-		padding: 0 1rem;
+  &__text {
+    margin: 0;
+    text-align: center;
+    padding: 0 1rem;
 
-		&--id {
-			color: $linkColor;
-		}
-	}
+    &--id {
+      color: $linkColor;
+    }
+  }
 
-	&__block {
-		display: flex;
-		align-items: center;
-		justify-content: center;
-		width: 100%;
-		min-width: 2rem;
-		border: 0.1rem solid $fontColor--black;
+  &__block {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    min-width: 2rem;
+    border: 0.1rem solid $fontColor--black;
 
-		&--header {
-			font-weight: bold;
-			height: 5rem;
-		}
+    &--header {
+      font-weight: bold;
+      height: 5rem;
+    }
 
-		&--row {
-			min-height: 3rem;
-			// overflow-wrap: break-word;
-			// word-break: break-all;
-		}
-	}
+    &--row {
+      min-height: 3rem;
+      // overflow-wrap: break-word;
+      // word-break: break-all;
+    }
+  }
 }
 
 @media (max-width: 900px) {
-	.table {
-		font-size: 1.4rem;
-		&__block {
-			&--row {
-				overflow-wrap: break-word;
-				word-break: break-all;
-			}
-		}
-	}
+  .table {
+    font-size: 1.4rem;
+    &__block {
+      &--row {
+        overflow-wrap: break-word;
+        word-break: break-all;
+      }
+    }
+  }
 }
 
 @media (max-width: 750px) {
-	.table {
-		font-size: 1.2rem;
-		&__block {
-			&--row {
-				overflow-wrap: break-word;
-				word-break: break-all;
-			}
-		}
-		&__text {
-			padding: 0 0.2rem;
-			// text-overflow: ellipsis;
-			overflow: scroll;
-		}
-	}
+  .table {
+    font-size: 1.2rem;
+    &__block {
+      &--row {
+        overflow-wrap: break-word;
+        word-break: break-all;
+      }
+    }
+    &__text {
+      padding: 0 0.2rem;
+      // text-overflow: ellipsis;
+      overflow: scroll;
+    }
+  }
 }

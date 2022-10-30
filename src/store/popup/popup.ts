@@ -2,62 +2,65 @@ import { makeAutoObservable } from 'mobx';
 import RootStore from '../root';
 
 export class PopupStore {
-	private _rootStore!: RootStore;
+  private _rootStore!: RootStore;
 
-	private set rootStore(rootStore: RootStore) {
-		this._rootStore = rootStore;
-	}
+  private set rootStore(rootStore: RootStore) {
+    this._rootStore = rootStore;
+  }
 
-	constructor(rootStore: RootStore) {
-		makeAutoObservable(this, {});
-		this.rootStore = rootStore;
-	}
+  constructor(rootStore: RootStore) {
+    makeAutoObservable(this, {});
+    this.rootStore = rootStore;
+  }
 
-	/* 
-	* AddProduct 
-	*/
-	private _addProductStatus: boolean = false;
+  /*
+   * AddProduct
+   */
+  private _addProductStatus: boolean = false;
 
-	public get addProductStatus() {
-		return this._addProductStatus;
-	}
+  public get addProductStatus() {
+    return this._addProductStatus;
+  }
 
-	showAddProductWindow() {
-		this._addProductStatus = true;
-	}
-	hideAddProductWindow() {
-		this._addProductStatus = false;
-	}
+  showAddProductWindow() {
+    this._addProductStatus = true;
+  }
 
-	/* 
-	* AddTask
-	*/
-	private _addTaskStatus: boolean = false;
+  hideAddProductWindow() {
+    this._addProductStatus = false;
+  }
 
-	public get addTaskStatus() {
-		return this._addTaskStatus;
-	}
+  /*
+   * AddTask
+   */
+  private _addTaskStatus: boolean = false;
 
-	showAddTaskWindow() {
-		this._addTaskStatus = true;
-	}
-	hideAddTaskWindow() {
-		this._addTaskStatus = false;
-	}
+  public get addTaskStatus() {
+    return this._addTaskStatus;
+  }
 
-	/* 
-	* SelectMap
-	*/
-	private _selectMapStatus: boolean = false;
+  showAddTaskWindow() {
+    this._addTaskStatus = true;
+  }
 
-	public get selectMapStatus() {
-		return this._selectMapStatus;
-	}
+  hideAddTaskWindow() {
+    this._addTaskStatus = false;
+  }
 
-	showSelectMap() {
-		this._selectMapStatus = true;
-	}
-	hideSelectMap() {
-		this._selectMapStatus = false;
-	}
+  /*
+   * SelectMap
+   */
+  private _selectMapStatus: boolean = false;
+
+  public get selectMapStatus() {
+    return this._selectMapStatus;
+  }
+
+  showSelectMap() {
+    this._selectMapStatus = true;
+  }
+
+  hideSelectMap() {
+    this._selectMapStatus = false;
+  }
 }

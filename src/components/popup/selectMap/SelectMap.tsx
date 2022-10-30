@@ -6,29 +6,29 @@ import Map from '../../pages/map/Map';
 import './style.scss';
 
 const SelectMap: FC = () => {
-	const { popupStore } = useRootStore();
+  const { popupStore } = useRootStore();
 
-	function hideSelectMapHandler() {
-		popupStore.hideSelectMap();
-	}
+  function hideSelectMapHandler() {
+    popupStore.hideSelectMap();
+  }
 
-	return (
-		<div className='select-map'>
-			<WindowHeader text={'Добавить задачу приёмки'}>
-				<Button
-					additionalСlasses='button--window-header'
-					text='Сохранить'
-					onClick={hideSelectMapHandler}
-				/>
-				<Button
-					additionalСlasses='button--window-header'
-					text='Отмена'
-					onClick={hideSelectMapHandler}
-				/>
-			</WindowHeader>
-			<Map additionalClasses='map--select-map'/>
-		</div>
-	);
+  return (
+    <div className='select-map'>
+      <WindowHeader text='Добавить задачу приёмки'>
+        <Button
+          additionalСlasses='button--window-header'
+          text='Сохранить'
+          onClick={hideSelectMapHandler}
+        />
+        <Button
+          additionalСlasses='button--window-header'
+          text='Отмена'
+          onClick={hideSelectMapHandler}
+        />
+      </WindowHeader>
+      <Map additionalClasses='map--select-map' />
+    </div>
+  );
 };
 
 export default SelectMap;

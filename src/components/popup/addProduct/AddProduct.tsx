@@ -1,6 +1,9 @@
 import { observer } from 'mobx-react-lite';
 import { FC, useCallback, useEffect } from 'react';
-import { addProductFormData, ChangeFieldEvent } from '../../../store/form/type';
+import {
+  IAddProductFormData,
+  TChangeFieldEvent,
+} from '../../../store/form/type';
 import { useRootStore } from '../../../utils/RootStoreProvider/useRootStore';
 import imagePlaceholder from '../../../assets/images/placeholder.jpg';
 import Button from '../../blocks/button/Button';
@@ -13,133 +16,152 @@ import WindowHeader from '../../blocks/windowHeader/WindowHeader';
 import './style.scss';
 
 const AddProduct: FC = observer(() => {
-	const { popupStore, addProductFormStore, productsStore, addTaskFormStore } = useRootStore();
+  const { popupStore, addProductFormStore, productsStore, addTaskFormStore } =
+    useRootStore();
 
-	function changeFieldHandler(e: ChangeFieldEvent, fieldName: keyof addProductFormData) {
-		addProductFormStore[fieldName] = e.target.value;
-	}
+  function changeFieldHandler(
+    e: TChangeFieldEvent,
+    fieldName: keyof IAddProductFormData,
+  ) {
+    addProductFormStore[fieldName] = e.target.value;
+  }
 
-	const SELECT_OPTIONS: Array<ISelectOptions> = [
-		{ id: 1, option: 'Учебная литература (ВУЗ)' },
-		{ id: 2, option: 'Учебная литература (CУЗ)' },
-		{ id: 3, option: 'Художественная литература' },
-	];
+  const SELECT_OPTIONS: Array<ISelectOptions> = [
+    { id: 1, option: 'Учебная литература (ВУЗ)' },
+    { id: 2, option: 'Учебная литература (CУЗ)' },
+    { id: 3, option: 'Художественная литература' },
+  ];
 
-	const hideAddProductWindowHandler = useCallback(() => {
-		popupStore.hideAddProductWindow();
-		popupStore.showAddTaskWindow();
-	}, [popupStore]);
+  const hideAddProductWindowHandler = useCallback(() => {
+    popupStore.hideAddProductWindow();
+    popupStore.showAddTaskWindow();
+  }, [popupStore]);
 
-	function addProductHandler() {
-		productsStore.addProduct(addProductFormStore.formData, addTaskFormStore.title, '1');
-	}
+  function addProductHandler() {
+    productsStore.addProduct(
+      addProductFormStore.formData,
+      addTaskFormStore.title,
+      '1',
+    );
+  }
 
-	useEffect(() => {
-		if (productsStore.statusAddProduct === 'done') {
-			hideAddProductWindowHandler();
-			productsStore.statusAddProduct = 'pending';
-			productsStore.statusGetProductsOfTask = 'pending';
-		}
-	}, [productsStore, hideAddProductWindowHandler, productsStore.statusAddProduct]);
+  useEffect(() => {
+    if (productsStore.statusAddProduct === 'done') {
+      hideAddProductWindowHandler();
+      productsStore.statusAddProduct = 'pending';
+      productsStore.statusGetProductsOfTask = 'pending';
+    }
+  }, [
+    productsStore,
+    hideAddProductWindowHandler,
+    productsStore.statusAddProduct,
+  ]);
 
-	return (
-		<div className='add-product'>
-			<WindowHeader text='Добавить партию товара'>
-				<Button
-					additionalСlasses='button--window-header'
-					text='Сохранить'
-					onClick={addProductHandler}
-				/>
-				<Button
-					additionalСlasses='button--window-header'
-					text='Отмена'
-					onClick={hideAddProductWindowHandler}
-				/>
-			</WindowHeader>
-			<div className='add-product__content-block'>
-				<FormLayout additionalСlasses='properties-block--article-info'>
-					<FormBlock
-						titleText='Артикул'
-						additionalTitleBlockClasses='properties-block__title--big'
-					>
-						<FormFieldInput
-							value={addProductFormStore.article}
-							changeEvent={(e) => changeFieldHandler(e, 'article')}
-							additionalСlasses='properties-block__input--big'
-						/>
-						<Button additionalСlasses='button--window-header' text='Сгенерировать' />
-					</FormBlock>
-				</FormLayout>
+  return (
+    <div className='add-product'>
+      <WindowHeader text='Добавить партию товара'>
+        <Button
+          additionalСlasses='button--window-header'
+          text='Сохранить'
+          onClick={addProductHandler}
+        />
+        <Button
+          additionalСlasses='button--window-header'
+          text='Отмена'
+          onClick={hideAddProductWindowHandler}
+        />
+      </WindowHeader>
+      <div className='add-product__content-block'>
+        <FormLayout additionalСlasses='properties-block--article-info'>
+          <FormBlock
+            titleText='Артикул'
+            additionalTitleBlockClasses='properties-block__title--big'
+          >
+            <FormFieldInput
+              value={addProductFormStore.article}
+              changeEvent={(e) => changeFieldHandler(e, 'article')}
+              additionalСlasses='properties-block__input--big'
+            />
+            <Button
+              additionalСlasses='button--window-header'
+              text='Сгенерировать'
+            />
+          </FormBlock>
+        </FormLayout>
 
-				<FormLayout additionalСlasses='properties-block--title-info'>
-					<FormBlock titleText='Название'>
-						<FormFieldInput
-							value={addProductFormStore.title}
-							changeEvent={(e) => changeFieldHandler(e, 'title')}
-						/>
-					</FormBlock>
-				</FormLayout>
+        <FormLayout additionalСlasses='properties-block--title-info'>
+          <FormBlock titleText='Название'>
+            <FormFieldInput
+              value={addProductFormStore.title}
+              changeEvent={(e) => changeFieldHandler(e, 'title')}
+            />
+          </FormBlock>
+        </FormLayout>
 
-				<FormLayout additionalСlasses='properties-block--main-info'>
-					<FormBlock titleText='Автор'>
-						<FormFieldInput
-							value={addProductFormStore.author}
-							changeEvent={(e) => changeFieldHandler(e, 'author')}
-						/>
-					</FormBlock>
-					<FormBlock titleText='Категория'>
-						<FormFieldSelect
-							value={addProductFormStore.category}
-							changeEvent={(e) => changeFieldHandler(e, 'category')}
-							options={SELECT_OPTIONS}
-						/>
-					</FormBlock>
-				</FormLayout>
+        <FormLayout additionalСlasses='properties-block--main-info'>
+          <FormBlock titleText='Автор'>
+            <FormFieldInput
+              value={addProductFormStore.author}
+              changeEvent={(e) => changeFieldHandler(e, 'author')}
+            />
+          </FormBlock>
+          <FormBlock titleText='Категория'>
+            <FormFieldSelect
+              value={addProductFormStore.category}
+              changeEvent={(e) => changeFieldHandler(e, 'category')}
+              options={SELECT_OPTIONS}
+            />
+          </FormBlock>
+        </FormLayout>
 
-				<FormLayout additionalСlasses='properties-block--second-info'>
-					<FormBlock titleText='Год издания'>
-						<FormFieldInput
-							value={addProductFormStore.yearOfPublication}
-							changeEvent={(e) => changeFieldHandler(e, 'yearOfPublication')}
-						/>
-					</FormBlock>
-					<FormBlock titleText='Количество товаров'>
-						<FormFieldInput
-							value={addProductFormStore.number}
-							changeEvent={(e) => changeFieldHandler(e, 'number')}
-						/>
-					</FormBlock>
-				</FormLayout>
+        <FormLayout additionalСlasses='properties-block--second-info'>
+          <FormBlock titleText='Год издания'>
+            <FormFieldInput
+              value={addProductFormStore.yearOfPublication}
+              changeEvent={(e) => changeFieldHandler(e, 'yearOfPublication')}
+            />
+          </FormBlock>
+          <FormBlock titleText='Количество товаров'>
+            <FormFieldInput
+              value={addProductFormStore.number}
+              changeEvent={(e) => changeFieldHandler(e, 'number')}
+            />
+          </FormBlock>
+        </FormLayout>
 
-				<FormLayout additionalСlasses='properties-block--other-info'>
-					<FormBlock titleText='Дата печати'>
-						<FormFieldInput
-							value={addProductFormStore.printDate}
-							changeEvent={(e) => changeFieldHandler(e, 'printDate')}
-						/>
-					</FormBlock>
-					<FormBlock titleText='Типография'>
-						<FormFieldInput
-							value={addProductFormStore.printingHouse}
-							changeEvent={(e) => changeFieldHandler(e, 'printingHouse')}
-						/>
-					</FormBlock>
-					<FormBlock titleText='Издательство'>
-						<FormFieldInput
-							value={addProductFormStore.publishingHouse}
-							changeEvent={(e) => changeFieldHandler(e, 'publishingHouse')}
-						/>
-					</FormBlock>
-				</FormLayout>
+        <FormLayout additionalСlasses='properties-block--other-info'>
+          <FormBlock titleText='Дата печати'>
+            <FormFieldInput
+              value={addProductFormStore.printDate}
+              changeEvent={(e) => changeFieldHandler(e, 'printDate')}
+            />
+          </FormBlock>
+          <FormBlock titleText='Типография'>
+            <FormFieldInput
+              value={addProductFormStore.printingHouse}
+              changeEvent={(e) => changeFieldHandler(e, 'printingHouse')}
+            />
+          </FormBlock>
+          <FormBlock titleText='Издательство'>
+            <FormFieldInput
+              value={addProductFormStore.publishingHouse}
+              changeEvent={(e) => changeFieldHandler(e, 'publishingHouse')}
+            />
+          </FormBlock>
+        </FormLayout>
 
-				<div className='add-product__photo-block'>
-					<img src={imagePlaceholder} alt='' className='add-product__photo' />
-					<p className='add-product__photo-text'>Фотография товара</p>
-				</div>
-				<div className='add-product__empty-block'></div>
-			</div>
-		</div>
-	);
+        <div className='add-product__photo-block'>
+          <img
+            src={imagePlaceholder}
+            alt=''
+            className='add-product__photo'
+          />
+          <p className='add-product__photo-text'>Фотография товара</p>
+        </div>
+        <div className='add-product__empty-block' />
+      </div>
+    </div>
+  );
 });
 
 export default AddProduct;

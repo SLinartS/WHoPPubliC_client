@@ -2,99 +2,105 @@
 @use '../../../styles/global/variables.scss' as v;
 
 .tasks {
-	display: grid;
-	height: calc(100vh - v.$headerHeightStandart);
-	grid-template-columns: repeat(2, 1fr);
-	grid-template-rows: 8rem 1fr;
-	justify-items: center;
-	align-items: center;
-	align-content: center;
-	gap: 0.2rem;
-	background-color: $fontColor--black;
+  display: grid;
+  height: calc(100vh - v.$headerHeightStandart);
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: 8rem 1fr;
+  justify-items: center;
+  align-items: center;
+  align-content: center;
+  gap: 0.2rem;
+  background-color: $fontColor--black;
 
-	&__title {
-		display: flex;
-		align-items: center;
-		justify-content: center;
-		width: 100%;
-		height: 100%;
-		text-align: center;
-		background-color: $fontColor--white;
+  &__title {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    background-color: $fontColor--white;
 
-		&--shipment {
-			grid-row: 1/2;
-			grid-column: 2/3;
-		}
+    &--shipment {
+      grid-row: 1/2;
+      grid-column: 2/3;
+    }
 
-		&-text {
-			font-size: 3.2rem;
-			margin: 2rem 0;
-		}
-	}
+    &-text {
+      font-size: 3.2rem;
+      margin: 2rem 0;
+    }
+  }
 
-	&__block {
-		display: flex;
-		flex-direction: column;
-		align-items: center;
-		width: 100%;
-		height: 100%;
-		background-color: $fontColor--white;
-		overflow-y: scroll;
-	}
+  &__block {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    background-color: $fontColor--white;
+    overflow-y: scroll;
+  }
 }
 
 .button {
-	&--tasks {
-		margin: 2rem 0 0 0;
-	}
+  &--tasks {
+    margin: 2rem 0 0 0;
+  }
 }
 
 .table--tasks {
-	margin: 2rem;
+  margin: 2rem;
 }
 
 @media (max-width: 1100px) {
-	.tasks {
-		grid-template-columns: repeat(1, 1fr);
-		grid-template-rows: repeat(3, auto) 1fr;
-		align-content: flex-start;
+  .tasks {
+    grid-template-columns: repeat(1, 1fr);
+    grid-template-rows: repeat(3, auto) 1fr;
+    align-content: flex-start;
 
-		&__title {
-			&--shipment {
-				grid-row: initial;
-				grid-column: initial;
-			}
-		}
+    &__title {
+      &--shipment {
+        grid-row: initial;
+        grid-column: initial;
+      }
+    }
 
-		&__block {
-			height: calc((100vh - v.$headerHeightStandart - (7.68rem * 2) - (0.2rem * 3)) / 2);
-		}
-	}
+    &__block {
+      height: calc(
+        (100vh - v.$headerHeightStandart - (7.68rem * 2) - (0.2rem * 3)) / 2
+      );
+    }
+  }
 }
 
 @media (max-width: 900px) {
-	.tasks {
-		&__block {
-			height: calc((100vh - v.$headerHeightMid - (7.68rem * 2) - (0.2rem * 3)) / 2);
-		}
-	}
+  .tasks {
+    &__block {
+      height: calc(
+        (100vh - v.$headerHeightMid - (7.68rem * 2) - (0.2rem * 3)) / 2
+      );
+    }
+  }
 }
 
 @media (max-width: 750px) {
-	.tasks {
-		&__block {
-			height: calc((100vh - v.$headerHeightLow - (5.219rem * 2) - (0.2rem * 3)) / 2);
-		}
+  .tasks {
+    &__block {
+      height: calc(
+        (100vh - v.$headerHeightLow - (5.219rem * 2) - (0.2rem * 3)) / 2
+      );
+    }
 
-		&__title {
-			&-text {
-				font-size: 2.8rem;
-				margin: 1rem 0;
-			}
-		}
+    &__title {
+      &-text {
+        font-size: 2.8rem;
+        margin: 1rem 0;
+      }
+    }
 
-		&__add-task {
-			font-size: 2rem;
-		}
-	}
+    &__add-task {
+      font-size: 2rem;
+    }
+  }
 }
