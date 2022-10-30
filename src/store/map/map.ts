@@ -17,9 +17,37 @@ export class MapStore {
     this.rootStore = rootStore;
   }
 
-  public status: TStatus = 'pending';
+  public _status: TStatus = 'pending';
 
-  public mapData: TMap = [];
+  public get status() {
+    return this._status;
+  }
+
+  public set status(newStatus: TStatus) {
+    this._status = newStatus;
+  }
+
+  public _mapData: TMap = [];
+
+  public get mapData() {
+    return this._mapData;
+  }
+
+  public set mapData(newMapData: TMap) {
+    this._mapData = newMapData;
+  }
+
+  public setFloorActive(
+    zoneIndex: number,
+    sectionIndex: number,
+    blockIndex: number,
+    floorIndex: number,
+    newStatus: boolean,
+  ) {
+    this._mapData[zoneIndex].sections[sectionIndex].blocks[blockIndex].floors[
+      floorIndex
+    ].active = newStatus;
+  }
 
   public *getMap() {
     try {

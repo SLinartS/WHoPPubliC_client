@@ -33,10 +33,10 @@ export interface IAddProductFormData {
 }
 
 export interface IWarehousePoint {
-  zoneId: string;
-  sectionId: string;
-  blockId: string;
-  floorId: string;
+  zoneId: number;
+  sectionId: number;
+  blockId: number;
+  floorId: number;
 }
 
 export interface IPoint {

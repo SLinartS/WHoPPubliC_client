@@ -116,7 +116,7 @@ export class AddTaskFormStore {
     );
   }
 
-  public removeWarehousePoint(floorId: string) {
+  public removeWarehousePoint(floorId: number) {
     this._formDataArrays.warehousePoints =
       this._formDataArrays.warehousePoints.filter(
         (warehousePoint) => warehousePoint.floorId !== floorId,

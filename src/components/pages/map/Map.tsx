@@ -18,13 +18,14 @@ const Map: FC<IMapProps> = observer(({ additionalClasses }) => {
   return (
     <main className={`map ${additionalClasses}`}>
       <div className='map__container'>
-        {mapStore.mapData.map((zone) => (
+        {mapStore.mapData.map((zone, zoneIndex) => (
           <Zone
             key={zone.id}
             id={zone.id}
             number={zone.number}
             zoneLetter={zone.zoneLetter}
             sections={zone.sections}
+            index={zoneIndex}
           />
         ))}
       </div>

@@ -11,11 +11,10 @@ const HeaderBlock: FC<IHeaderBlockProps> = ({ floors }) => (
     {floors.map((floor, index) => (
       <HeaderFloor
         key={floor.id}
-        index={index + 1}
+        index={floors.length - index}
       />
     ))}
   </div>
 );
 
 export default HeaderBlock;
-export {};

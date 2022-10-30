@@ -3,9 +3,9 @@ import { FC, useState, useEffect, useRef } from 'react';
 import { observer } from 'mobx-react-lite';
 import Section from '../section/Section';
 import LetterZone from '../info/letterZone/LetterZone';
-import { IZone } from '../../../../store/map/type';
+import { IZoneProps } from './type';
 
-const Zone: FC<IZone> = observer(({ id, zoneLetter, sections }) => {
+const Zone: FC<IZoneProps> = observer(({ id, zoneLetter, sections, index }) => {
   const [zoneLetterFontSize, setZoneLetterFontSize] = useState<number>(30);
 
   const letterZoneNode = useRef<HTMLParagraphElement>(null);
@@ -33,13 +33,15 @@ const Zone: FC<IZone> = observer(({ id, zoneLetter, sections }) => {
       className='map__zone'
       ref={zoneNode}
       data-zone-id={id}
+      data-zone-index={index}
     >
-      {sections.map((section) => (
+      {sections.map((section, sectionIndex) => (
         <Section
           key={section.id}
           id={section.id}
           number={section.number}
           blocks={section.blocks}
+          index={sectionIndex}
         />
       ))}
       <LetterZone

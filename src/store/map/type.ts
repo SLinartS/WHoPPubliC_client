@@ -21,5 +21,6 @@ export interface IBlock {
 
 export interface IFloor {
   id: number;
+  active: boolean;
   number: number;
 }

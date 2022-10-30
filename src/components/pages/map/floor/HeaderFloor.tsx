@@ -6,4 +6,3 @@ const HeaderFloor: FC<IHeaderFloorProps> = ({ index }) => (
 );
 
 export default HeaderFloor;
-export {};

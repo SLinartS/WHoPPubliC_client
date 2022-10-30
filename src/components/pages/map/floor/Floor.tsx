@@ -1,93 +1,62 @@
 import { observer } from 'mobx-react-lite';
-import { FC, MouseEvent, useCallback, useEffect, useState } from 'react';
-import { IWarehousePoint } from '../../../../store/form/type';
-import { IFloor } from '../../../../store/map/type';
+import { FC, useRef } from 'react';
+import useCheckIsAdded from '../../../../hooks/map/useCheckIsAdded/useCheckIsAdded';
+import useGetFloorCoordinates from '../../../../hooks/map/useGetFloorCoordinates/useGetFloorCoordinates';
 import { useRootStore } from '../../../../utils/RootStoreProvider/useRootStore';
+import { IFloorProps } from './type';
 
-const initialFloorPosition: IWarehousePoint = {
-  zoneId: '0',
-  sectionId: '0',
-  blockId: '0',
-  floorId: '0',
-};
+const Floor: FC<IFloorProps> = observer(({ id, active, number, index }) => {
+  const { addTaskFormStore, mapStore } = useRootStore();
+  const floorNode = useRef<HTMLDivElement>(null);
+  const getFloorCoordinates = useGetFloorCoordinates();
+  const checkIsAdded = useCheckIsAdded();
 
-const Floor: FC<IFloor> = observer(({ id, number }) => {
-  const [floorAdded, setFloorAdded] = useState<boolean>(false);
-  const [floorPosition, setFloorPosition] =
-    useState<IWarehousePoint>(initialFloorPosition);
+  function chooseFloor() {
+    if (floorNode.current) {
+      const { zone, section, block, floor } = getFloorCoordinates(
+        floorNode.current,
+      );
 
-  const { addTaskFormStore } = useRootStore();
-
-  const checkFloorAdded = useCallback(() => {
-    for (const warehousePoint of addTaskFormStore.warehousePoints) {
-      console.log(warehousePoint.floorId);
-      console.log(addTaskFormStore.warehousePoints);
-      if (warehousePoint.floorId === floorPosition.floorId) {
-        console.log(warehousePoint.floorId, '=', floorPosition.floorId);
-        return true;
-      }
-    }
-    return false;
-  }, [addTaskFormStore.warehousePoints, floorPosition.floorId]);
-
-  function sayFloorPosition(e: MouseEvent<HTMLDivElement>) {
-    const { floorId } = (e.target as HTMLDivElement).dataset;
-
-    const blockParent: HTMLDivElement = (e.target as HTMLDivElement)
-      .parentNode as HTMLDivElement;
-    const { blockId } = blockParent.dataset;
-
-    const sectionParent: HTMLDivElement =
-      blockParent.parentNode as HTMLDivElement;
-    const { sectionId } = sectionParent.dataset;
-
-    const zoneParent: HTMLDivElement =
-      sectionParent.parentNode as HTMLDivElement;
-    const { zoneId } = zoneParent.dataset;
-
-    console.log(
-      `zoneId: ${zoneId} | sectionId: ${sectionId} | blockId: ${blockId} | floorId: ${floorId}`,
-    );
-
-    if (zoneId && sectionId && blockId && floorId) {
-      if (checkFloorAdded()) {
-        addTaskFormStore.removeWarehousePoint(floorId);
-        console.log('Check True');
-      } else {
-        console.log('Check False');
-        setFloorPosition({
-          zoneId,
-          sectionId,
-          blockId,
-          floorId,
-        });
-        addTaskFormStore.addWarehousePoint({
-          zoneId,
-          sectionId,
-          blockId,
-          floorId,
-        });
+      if (zone && section && block && floor) {
+        if (checkIsAdded(floor.id)) {
+          mapStore.setFloorActive(
+            zone.index,
+            section.index,
+            block.index,
+            floor.index,
+            false,
+          );
+          addTaskFormStore.removeWarehousePoint(floor.id);
+        } else {
+          mapStore.setFloorActive(
+            zone.index,
+            section.index,
+            block.index,
+            floor.index,
+            true,
+          );
+          addTaskFormStore.addWarehousePoint({
+            zoneId: zone.id,
+            sectionId: section.id,
+            blockId: block.id,
+            floorId: floor.id,
+          });
+        }
       }
     }
   }
 
-  useEffect(() => {
-    if (checkFloorAdded()) {
-      setFloorAdded(true);
-    } else {
-      setFloorAdded(false);
-    }
-  }, [checkFloorAdded]);
-
   return (
     <div
+      ref={floorNode}
       className='map__floor'
       data-floor-id={id}
+      data-floor-index={index}
       style={{
         gridRow: `${-number}/${-number - 1}`,
-        backgroundColor: floorAdded ? 'red' : '',
+        backgroundColor: active ? '#c15943' : '',
       }}
-      onClick={(e) => sayFloorPosition(e)}
+      onClick={chooseFloor}
     />
   );
 });

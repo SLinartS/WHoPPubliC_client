@@ -1,11 +1,11 @@
 import { observer } from 'mobx-react-lite';
 import { FC, useEffect, useRef, useState } from 'react';
-import { ISection } from '../../../../store/map/type';
 import Block from '../block/Block';
 import HeaderBlock from '../block/HeaderBlock';
 import NumberSection from '../info/numberSection/NumberSection';
+import { ISectionProps } from './type';
 
-const Section: FC<ISection> = observer(({ id, number, blocks }) => {
+const Section: FC<ISectionProps> = observer(({ id, number, blocks, index }) => {
   const [sectionNumberFontSize, setSectionNumberFontSize] =
     useState<number>(10);
 
@@ -29,15 +29,17 @@ const Section: FC<ISection> = observer(({ id, number, blocks }) => {
       className='map__section'
       ref={sectionNode}
       data-section-id={id}
+      data-section-index={index}
     >
       <HeaderBlock floors={blocks[0].floors} />
 
-      {blocks.map((block) => (
+      {blocks.map((block, blockIndex) => (
         <Block
           key={block.id}
           id={block.id}
           number={block.number}
           floors={block.floors}
+          index={blockIndex}
         />
       ))}
       <NumberSection
