@@ -1,0 +1,92 @@
+@use '../../../styles/global/colors.scss' as *;
+@use '../../../styles/global/variables.scss' as v;
+
+.map-block {
+  padding: 2rem 0 0 0;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  overflow-y: scroll;
+  box-sizing: border-box;
+
+  &__zone {
+    height: 100%;
+    margin: 2rem;
+    display: flex;
+    align-items: center;
+    position: relative;
+  }
+
+  &__section {
+    display: flex;
+    width: fit-content;
+    position: relative;
+    margin: 2rem;
+  }
+
+  &__block {
+    display: grid;
+    grid-template-columns: 5rem;
+    grid-template-rows: repeat(5, 5rem);
+    gap: 0.1rem;
+    margin: 0 0.1rem 0 0;
+    align-items: center;
+    justify-items: center;
+    box-sizing: border-box;
+  }
+
+  &__floor {
+    display: inline-block;
+    border: 0.1rem solid $tableColor;
+    width: 5rem;
+    height: 5rem;
+
+    &--title {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: none;
+      font-size: 2rem;
+      color: $tableColorOpacityMid;
+      opacity: 0.5;
+    }
+  }
+
+  &__zone-title {
+    color: $tableColorOpacityLow;
+    font-size: 30rem;
+    font-weight: bold;
+    margin: 0;
+    text-align: center;
+    line-height: 1em;
+    z-index: -1;
+    top: calc(50% + 2.5rem);
+    right: calc(50% - 2.5rem);
+    transform: translate(50%, -50%);
+    position: absolute;
+  }
+
+  &__section-title {
+    color: $tableColorOpacityMid;
+    font-size: 10rem;
+    font-weight: bold;
+    margin: 0;
+    text-align: center;
+    line-height: 1em;
+    z-index: -1;
+    top: calc(50% + 2.5rem);
+    right: calc(0% - 2.5rem);
+    transform: translate(50%, -50%);
+    position: absolute;
+  }
+
+  &--select-map {
+    height: calc(100% - 9.2rem);
+  }
+}
+
+.table--map {
+  margin: 2rem;
+}

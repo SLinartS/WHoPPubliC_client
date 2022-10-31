@@ -5,11 +5,13 @@ import { useRootStore } from '../../../utils/RootStoreProvider/useRootStore';
 import Table from '../../blocks/table/Table';
 import Button from '../../blocks/button/Button';
 import './style.scss';
+import { TTaskType } from '../../../store/form/type';
 
 const Tasks: FC = observer(() => {
-  const { tasksStore, popupStore } = useRootStore();
+  const { tasksStore, popupStore, addTaskFormStore } = useRootStore();
 
-  function showAddTaskWindowHandler() {
+  function showAddTaskWindowHandler(taskType: TTaskType) {
+    addTaskFormStore.currentTaskType = taskType;
     popupStore.showAddTaskWindow();
   }
 
@@ -35,7 +37,7 @@ const Tasks: FC = observer(() => {
         <Button
           additionalСlasses='button--tasks'
           text='Добавить'
-          onClick={showAddTaskWindowHandler}
+          onClick={() => showAddTaskWindowHandler('acceptance')}
         />
         {tasksStore.statusGetAcceptanceTasks === 'done' ? (
           <Table
@@ -54,6 +56,7 @@ const Tasks: FC = observer(() => {
         <Button
           additionalСlasses='button--tasks'
           text='Добавить'
+          onClick={() => showAddTaskWindowHandler('shipment')}
         />
 
         {tasksStore.statusGetShipmentTasks === 'done' ? (

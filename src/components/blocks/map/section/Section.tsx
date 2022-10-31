@@ -26,7 +26,7 @@ const Section: FC<ISectionProps> = observer(({ id, number, blocks, index }) => {
 
   return (
     <div
-      className='map__section'
+      className='map-block__section'
       ref={sectionNode}
       data-section-id={id}
       data-section-index={index}

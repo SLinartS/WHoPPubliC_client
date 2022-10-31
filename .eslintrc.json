@@ -43,7 +43,7 @@
     "grouped-accessor-pairs": "off",
     "generator-star-spacing": ["error", { "before": true, "after": false }],
     "no-tabs": "off",
-    "indent": ["warn", 2],
+    "indent": ["warn", 2, { "SwitchCase": 1 }],
     "@typescript-eslint/indent": "off",
     "operator-linebreak": "off",
     "object-curly-newline": "off",

@@ -6,6 +6,10 @@ import { IAddProductFormData } from './type';
 export class AddProductFormStore {
   private _rootStore!: RootStore;
 
+  private get rootStore() {
+    return this._rootStore;
+  }
+
   private set rootStore(rootStore: RootStore) {
     this._rootStore = rootStore;
   }

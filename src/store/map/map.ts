@@ -8,6 +8,10 @@ import { TMap } from './type';
 export class MapStore {
   private _rootStore!: RootStore;
 
+  private get rootStore() {
+    return this._rootStore;
+  }
+
   private set rootStore(rootStore: RootStore) {
     this._rootStore = rootStore;
   }
@@ -17,7 +21,9 @@ export class MapStore {
     this.rootStore = rootStore;
   }
 
-  public _status: TStatus = 'pending';
+  /*  Status of receiving 
+      data from the server  */
+  private _status: TStatus = 'pending';
 
   public get status() {
     return this._status;
@@ -27,6 +33,20 @@ export class MapStore {
     this._status = newStatus;
   }
 
+  /*  Is the current open 
+      map a pop-up window  */
+  private _isSelectedMap: boolean = false;
+
+  public get isSelectedMap() {
+    return this._isSelectedMap;
+  }
+
+  public set isSelectedMap(newStatus: boolean) {
+    this._isSelectedMap = newStatus;
+  }
+
+  /*  Array of data 
+      from the server */
   public _mapData: TMap = [];
 
   public get mapData() {
@@ -37,6 +57,9 @@ export class MapStore {
     this._mapData = newMapData;
   }
 
+  /*  Set the 'active' switch 
+      at the floor to the true, 
+      which will color it */
   public setFloorActive(
     zoneIndex: number,
     sectionIndex: number,

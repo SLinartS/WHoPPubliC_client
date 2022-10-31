@@ -4,6 +4,10 @@ import RootStore from '../root';
 export class PopupStore {
   private _rootStore!: RootStore;
 
+  private get rootStore() {
+    return this._rootStore;
+  }
+
   private set rootStore(rootStore: RootStore) {
     this._rootStore = rootStore;
   }
@@ -14,7 +18,7 @@ export class PopupStore {
   }
 
   /*
-   * AddProduct
+    AddProduct
    */
   private _addProductStatus: boolean = false;
 
@@ -31,7 +35,7 @@ export class PopupStore {
   }
 
   /*
-   * AddTask
+    AddTask
    */
   private _addTaskStatus: boolean = false;
 
@@ -48,7 +52,7 @@ export class PopupStore {
   }
 
   /*
-   * SelectMap
+    SelectMap
    */
   private _selectMapStatus: boolean = false;
 
@@ -62,5 +66,23 @@ export class PopupStore {
 
   hideSelectMap() {
     this._selectMapStatus = false;
+  }
+
+  /*
+    SelectPoints
+   */
+
+  private _selectPointsStatus: boolean = false;
+
+  public get selectPointsStatus() {
+    return this._selectPointsStatus;
+  }
+
+  showSelectPoints() {
+    this._selectPointsStatus = true;
+  }
+
+  hideSelectPoints() {
+    this._selectPointsStatus = false;
   }
 }

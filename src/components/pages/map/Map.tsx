@@ -1,36 +1,21 @@
 import { FC, useEffect } from 'react';
 import { observer } from 'mobx-react-lite';
 import './style.scss';
-
+import Map from '../../blocks/map/Map';
 import { useRootStore } from '../../../utils/RootStoreProvider/useRootStore';
-import Zone from './zone/Zone';
-import { IMapProps } from './type';
 
-const Map: FC<IMapProps> = observer(({ additionalClasses }) => {
+const MapPage: FC = observer(() => {
   const { mapStore } = useRootStore();
 
   useEffect(() => {
-    if (mapStore.status === 'pending') {
-      mapStore.getMap();
-    }
-  }, [mapStore, mapStore.status]);
+    mapStore.isSelectedMap = false;
+  }, [mapStore]);
 
   return (
-    <main className={`map ${additionalClasses}`}>
-      <div className='map__container'>
-        {mapStore.mapData.map((zone, zoneIndex) => (
-          <Zone
-            key={zone.id}
-            id={zone.id}
-            number={zone.number}
-            zoneLetter={zone.zoneLetter}
-            sections={zone.sections}
-            index={zoneIndex}
-          />
-        ))}
-      </div>
+    <main className='map'>
+      <Map />
     </main>
   );
 });
 
-export default Map;
+export default MapPage;

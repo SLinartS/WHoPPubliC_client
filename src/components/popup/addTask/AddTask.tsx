@@ -1,5 +1,5 @@
 import { observer } from 'mobx-react-lite';
-import { FC, useEffect } from 'react';
+import { FC, useEffect, useState } from 'react';
 import {
   IAddTaskFormDataFields,
   TChangeFieldEvent,
@@ -15,6 +15,7 @@ import WindowHeader from '../../blocks/windowHeader/WindowHeader';
 import './style.scss';
 
 const AddTask: FC = observer(() => {
+  const [isAcceptance, setIsAcceptance] = useState<boolean>(true);
   const { popupStore, productsStore, addTaskFormStore, tasksStore } =
     useRootStore();
 
@@ -23,6 +24,10 @@ const AddTask: FC = observer(() => {
     fieldName: keyof IAddTaskFormDataFields,
   ) {
     addTaskFormStore[fieldName] = e.target.value;
+  }
+
+  function addPointHandler() {
+    popupStore.showSelectPoints();
   }
 
   function addWarehousePointHandler() {
@@ -61,17 +66,30 @@ const AddTask: FC = observer(() => {
       popupStore.showAddProductWindow();
       popupStore.hideAddTaskWindow();
     }
+
+    switch (addTaskFormStore.currentTaskType) {
+      case 'acceptance':
+        setIsAcceptance(true);
+        break;
+      case 'shipment':
+        setIsAcceptance(false);
+        break;
+      default:
+    }
   }, [
     popupStore,
     productsStore,
     tasksStore,
     addTaskFormStore.title,
     tasksStore.statusAddTask,
+    addTaskFormStore.currentTaskType,
   ]);
 
   return (
     <div className='add-task'>
-      <WindowHeader text='Добавить задачу приёмки'>
+      <WindowHeader
+        text={`Добавить задачу ${isAcceptance ? 'приёмки' : 'отгрузки'}`}
+      >
         <Button
           additionalСlasses='button--window-header'
           text='Сохранить'
@@ -118,10 +136,12 @@ const AddTask: FC = observer(() => {
         </FormLayout>
 
         <FormLayout>
-          {/* <FormBlock titleText='Точки приёмки'>
-						<FormFieldPoint />
-					</FormBlock> */}
-          <FormBlock titleText='Точки раскладки'>
+          <FormBlock
+            titleText={`Точки ${isAcceptance ? 'приёмки' : 'отгрузки'}`}
+          >
+            <FormFieldPoint clickEvent={addPointHandler} />
+          </FormBlock>
+          <FormBlock titleText='Точки склада'>
             <FormFieldPoint clickEvent={addWarehousePointHandler} />
           </FormBlock>
         </FormLayout>

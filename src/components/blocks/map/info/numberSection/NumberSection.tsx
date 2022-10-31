@@ -7,7 +7,7 @@ const NumberSection = observer(
     ({ fontSize, number }, ref) => (
       <p
         ref={ref}
-        className='map__section-title'
+        className='map-block__section-title'
         style={{
           fontSize: `${fontSize}rem`,
         }}

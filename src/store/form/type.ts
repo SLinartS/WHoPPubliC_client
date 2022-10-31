@@ -1,4 +1,5 @@
 import { ChangeEvent } from 'react';
+import { IPoint } from '../point/type';
 
 export type TChangeFieldEvent = ChangeEvent<
   HTMLInputElement | HTMLSelectElement
@@ -39,9 +40,5 @@ export interface IWarehousePoint {
   floorId: number;
 }
 
-export interface IPoint {
-  pointId: string;
-  type: TTypePoint;
-}
+export type TTaskType = 'acceptance' | 'shipment';
 
-export type TTypePoint = 'acceptance' | 'shipment';

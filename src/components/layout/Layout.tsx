@@ -7,6 +7,7 @@ import { useRootStore } from '../../utils/RootStoreProvider/useRootStore';
 import AddProduct from '../popup/addProduct/AddProduct';
 import AddTask from '../popup/addTask/AddTask';
 import SelectMap from '../popup/selectMap/SelectMap';
+import SelectPoints from '../popup/selectPoints/SelectPoints';
 
 const Layout = observer(() => {
   const { popupStore } = useRootStore();
@@ -18,6 +19,7 @@ const Layout = observer(() => {
       {popupStore.addProductStatus ? <AddProduct /> : ''}
       {popupStore.addTaskStatus ? <AddTask /> : ''}
       {popupStore.selectMapStatus ? <SelectMap /> : ''}
+      {popupStore.selectPointsStatus ? <SelectPoints /> : ''}
     </>
   );
 });

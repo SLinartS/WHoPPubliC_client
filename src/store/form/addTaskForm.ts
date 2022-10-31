@@ -1,15 +1,20 @@
 import { makeAutoObservable } from 'mobx';
+import { IPoint } from '../point/type';
 
 import RootStore from '../root';
 import {
   IAddTaskFormDataArrays,
   IAddTaskFormDataFields,
-  IPoint,
   IWarehousePoint,
+  TTaskType,
 } from './type';
 
 export class AddTaskFormStore {
   private _rootStore!: RootStore;
+
+  private get rootStore() {
+    return this._rootStore;
+  }
 
   private set rootStore(rootStore: RootStore) {
     this._rootStore = rootStore;
@@ -20,6 +25,20 @@ export class AddTaskFormStore {
     this.rootStore = rootStore;
   }
 
+  /*  The type of task
+      being processed  */
+  private _currentTaskType: TTaskType = 'acceptance';
+
+  public get currentTaskType() {
+    return this._currentTaskType;
+  }
+
+  public set currentTaskType(newType: TTaskType) {
+    this._currentTaskType = newType;
+  }
+
+  /*  Array of data 
+      from the server */
   private _formDataField: IAddTaskFormDataFields = {
     title: '',
     dateStart: '',
@@ -110,9 +129,9 @@ export class AddTaskFormStore {
     );
   }
 
-  public removePoint(pointId: string) {
+  public removePoint(pointId: number) {
     this._formDataArrays.points = this._formDataArrays.points.filter(
-      (point) => point.pointId !== pointId,
+      (point) => point.id !== pointId,
     );
   }
 

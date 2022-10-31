@@ -5,6 +5,7 @@ import { PopupStore } from './popup/popup';
 import { TasksStore } from './tasks/tasks';
 import { MapStore } from './map/map';
 import { ProductsStore } from './products/products';
+import { PointStore } from './point/point';
 
 configure({
   enforceActions: 'always',
@@ -17,6 +18,8 @@ class RootStore {
 
   public mapStore: MapStore;
 
+  public pointStore: PointStore;
+
   public productsStore: ProductsStore;
 
   public popupStore: PopupStore;
@@ -27,7 +30,10 @@ class RootStore {
 
   private constructor() {
     this.tasksStore = new TasksStore(this);
+
     this.mapStore = new MapStore(this);
+    this.pointStore = new PointStore(this);
+
     this.productsStore = new ProductsStore(this);
     this.popupStore = new PopupStore(this);
 

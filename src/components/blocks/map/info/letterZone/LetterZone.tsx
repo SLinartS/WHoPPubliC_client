@@ -7,7 +7,7 @@ const LetterZone = observer(
     ({ fontSize, zoneLetter }, ref) => (
       <p
         ref={ref}
-        className='map__zone-title'
+        className='map-block__zone-title'
         style={{
           fontSize: `${fontSize}rem`,
         }}

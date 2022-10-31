@@ -4,7 +4,7 @@ import { IHeaderBlockProps } from './type';
 
 const HeaderBlock: FC<IHeaderBlockProps> = ({ floors }) => (
   <div
-    className='map__block'
+    className='map-block__block'
     style={{ gridTemplateRows: `repeat(${floors.length + 1}, 5rem` }}
   >
     <HeaderFloor index={0} />

@@ -4,7 +4,7 @@ import appIcon from '../../../assets/images/app-icon.png';
 import Button from '../../blocks/button/Button';
 import './style.scss';
 
-const Login: FC = observer(() => (
+const LoginPage: FC = observer(() => (
   <main className='login'>
     <div className='login__container'>
       <img
@@ -32,4 +32,4 @@ const Login: FC = observer(() => (
   </main>
 ));
 
-export default Login;
+export default LoginPage;

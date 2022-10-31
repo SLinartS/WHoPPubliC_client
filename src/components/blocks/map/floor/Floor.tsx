@@ -1,18 +1,21 @@
 import { observer } from 'mobx-react-lite';
-import { FC, useRef } from 'react';
+import { FC, useEffect, useRef, useState } from 'react';
 import useCheckIsAdded from '../../../../hooks/map/useCheckIsAdded/useCheckIsAdded';
 import useGetFloorCoordinates from '../../../../hooks/map/useGetFloorCoordinates/useGetFloorCoordinates';
 import { useRootStore } from '../../../../utils/RootStoreProvider/useRootStore';
 import { IFloorProps } from './type';
 
 const Floor: FC<IFloorProps> = observer(({ id, active, number, index }) => {
+  const [isSelectedMapStatus, setIsSelectedMap] = useState<boolean>(false);
+
   const { addTaskFormStore, mapStore } = useRootStore();
   const floorNode = useRef<HTMLDivElement>(null);
   const getFloorCoordinates = useGetFloorCoordinates();
   const checkIsAdded = useCheckIsAdded();
 
   function chooseFloor() {
-    if (floorNode.current) {
+    console.log(floorNode.current, isSelectedMapStatus);
+    if (floorNode.current && isSelectedMapStatus) {
       const { zone, section, block, floor } = getFloorCoordinates(
         floorNode.current,
       );
@@ -46,15 +49,24 @@ const Floor: FC<IFloorProps> = observer(({ id, active, number, index }) => {
     }
   }
 
+  useEffect(() => {
+    console.log('SDFAS', mapStore.isSelectedMap);
+    if (mapStore.isSelectedMap) {
+      setIsSelectedMap(true);
+    } else {
+      setIsSelectedMap(false);
+    }
+  }, [mapStore.isSelectedMap]);
+
   return (
     <div
       ref={floorNode}
-      className='map__floor'
+      className='map-block__floor'
       data-floor-id={id}
       data-floor-index={index}
       style={{
         gridRow: `${-number}/${-number - 1}`,
-        backgroundColor: active ? '#c15943' : '',
+        backgroundColor: active && isSelectedMapStatus ? '#c15943' : '',
       }}
       onClick={chooseFloor}
     />

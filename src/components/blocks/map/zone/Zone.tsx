@@ -30,7 +30,7 @@ const Zone: FC<IZoneProps> = observer(({ id, zoneLetter, sections, index }) => {
 
   return (
     <div
-      className='map__zone'
+      className='map-block__zone'
       ref={zoneNode}
       data-zone-id={id}
       data-zone-index={index}

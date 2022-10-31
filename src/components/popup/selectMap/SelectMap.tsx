@@ -1,20 +1,24 @@
-import { FC } from 'react';
+import { FC, useEffect } from 'react';
 import { useRootStore } from '../../../utils/RootStoreProvider/useRootStore';
 import Button from '../../blocks/button/Button';
+import Map from '../../blocks/map/Map';
 import WindowHeader from '../../blocks/windowHeader/WindowHeader';
-import Map from '../../pages/map/Map';
 import './style.scss';
 
 const SelectMap: FC = () => {
-  const { popupStore } = useRootStore();
+  const { popupStore, mapStore } = useRootStore();
 
   function hideSelectMapHandler() {
     popupStore.hideSelectMap();
   }
 
+  useEffect(() => {
+    mapStore.isSelectedMap = true;
+  }, [mapStore]);
+
   return (
     <div className='select-map'>
-      <WindowHeader text='Добавить задачу приёмки'>
+      <WindowHeader text='Выбрать раскладки на складе'>
         <Button
           additionalСlasses='button--window-header'
           text='Сохранить'

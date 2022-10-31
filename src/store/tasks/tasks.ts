@@ -8,6 +8,10 @@ import extendAxios from '../../utils/extendAxios';
 export class TasksStore {
   private _rootStore!: RootStore;
 
+  private get rootStore() {
+    return this._rootStore;
+  }
+
   private set rootStore(rootStore: RootStore) {
     this._rootStore = rootStore;
   }

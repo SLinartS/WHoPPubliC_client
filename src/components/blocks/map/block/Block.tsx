@@ -6,7 +6,7 @@ import { IBlockProps } from './type';
 
 const Block: FC<IBlockProps> = observer(({ id, number, floors, index }) => (
   <div
-    className='map__block'
+    className='map-block__block'
     style={{ gridTemplateRows: `repeat(${floors.length + 1}, 5rem` }}
     data-block-id={id}
     data-block-index={index}
