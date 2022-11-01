@@ -5,7 +5,7 @@ import { useRootStore } from '../../../utils/RootStoreProvider/useRootStore';
 import Table from '../../blocks/table/Table';
 import Button from '../../blocks/button/Button';
 import './style.scss';
-import { TTaskType } from '../../../store/form/type';
+import { TTaskType } from '../../../store/form/addTaskForm/type';
 
 const Tasks: FC = observer(() => {
   const { tasksStore, popupStore, addTaskFormStore } = useRootStore();
@@ -41,8 +41,8 @@ const Tasks: FC = observer(() => {
         />
         {tasksStore.statusGetAcceptanceTasks === 'done' ? (
           <Table
-            data={tasksStore.tasksAccepranceList.data}
-            tableHeader={tasksStore.tasksAccepranceList.tableHeader}
+            data={tasksStore.tasksAcceptanceList.data}
+            tableHeader={tasksStore.tasksAcceptanceList.tableHeader}
             additionalСlasses='table--tasks'
           />
         ) : (

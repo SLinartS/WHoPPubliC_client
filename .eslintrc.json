@@ -49,8 +49,8 @@
     "object-curly-newline": "off",
     "no-restricted-syntax": "off",
     // for develop
-    // "no-console": "off",
-    // "no-alert": "off",
+    "no-console": "off",
+    "no-alert": "off",
     "@typescript-eslint/no-unused-vars": "warn",
     "no-trailing-spaces": "off",
     "@typescript-eslint/semi": "off",

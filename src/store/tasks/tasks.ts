@@ -6,19 +6,8 @@ import { ITasksList } from './type';
 import extendAxios from '../../utils/extendAxios';
 
 export class TasksStore {
-  private _rootStore!: RootStore;
-
-  private get rootStore() {
-    return this._rootStore;
-  }
-
-  private set rootStore(rootStore: RootStore) {
-    this._rootStore = rootStore;
-  }
-
-  constructor(rootStore: RootStore) {
+  constructor(private readonly rootStore: RootStore) {
     makeAutoObservable(this, {});
-    this.rootStore = rootStore;
   }
 
   // STATUS
@@ -27,8 +16,6 @@ export class TasksStore {
   private _statusGetShipmentTasks: TStatus = 'pending';
 
   private _statusAddTask: TStatus = 'pending';
-
-  private _statusTaskHasBeenAdded: boolean = false;
 
   // Getters
   public get statusGetAcceptanceTasks() {
@@ -41,10 +28,6 @@ export class TasksStore {
 
   public get statusAddTask() {
     return this._statusAddTask;
-  }
-
-  public get statusTaskHasBeenAdded() {
-    return this._statusTaskHasBeenAdded;
   }
 
   // Setters
@@ -60,12 +43,8 @@ export class TasksStore {
     this._statusAddTask = newStatus;
   }
 
-  public set statusTaskHasBeenAdded(newStatus: boolean) {
-    this._statusTaskHasBeenAdded = newStatus;
-  }
-
   // DATA
-  public tasksAccepranceList: ITasksList = { data: [], tableHeader: [] };
+  public tasksAcceptanceList: ITasksList = { data: [], tableHeader: [] };
 
   public tasksShipmentList: ITasksList = { data: [], tableHeader: [] };
 
@@ -73,7 +52,7 @@ export class TasksStore {
     try {
       const response: AxiosResponse<ITasksList> =
         yield extendAxios.get<ITasksList>('tasks/acceptance');
-      this.tasksAccepranceList = response.data;
+      this.tasksAcceptanceList = response.data;
       this._statusGetAcceptanceTasks = 'done';
     } catch (error) {
       this._statusGetAcceptanceTasks = 'error';

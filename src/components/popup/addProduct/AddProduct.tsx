@@ -1,9 +1,6 @@
 import { observer } from 'mobx-react-lite';
 import { FC, useCallback, useEffect } from 'react';
-import {
-  IAddProductFormData,
-  TChangeFieldEvent,
-} from '../../../store/form/type';
+
 import { useRootStore } from '../../../utils/RootStoreProvider/useRootStore';
 import imagePlaceholder from '../../../assets/images/placeholder.jpg';
 import Button from '../../blocks/button/Button';
@@ -14,10 +11,11 @@ import { ISelectOptions } from '../../blocks/form/field/select/type';
 import FormLayout from '../../blocks/form/layout/Layout';
 import WindowHeader from '../../blocks/windowHeader/WindowHeader';
 import './style.scss';
+import { TChangeFieldEvent } from '../../../store/form/addTaskForm/type';
+import { IAddProductFormData } from '../../../store/form/addProductForm/type';
 
 const AddProduct: FC = observer(() => {
-  const { popupStore, addProductFormStore, productsStore, addTaskFormStore } =
-    useRootStore();
+  const { popupStore, addProductFormStore, productsStore } = useRootStore();
 
   function changeFieldHandler(
     e: TChangeFieldEvent,
@@ -38,24 +36,9 @@ const AddProduct: FC = observer(() => {
   }, [popupStore]);
 
   function addProductHandler() {
-    productsStore.addProduct(
-      addProductFormStore.formData,
-      addTaskFormStore.title,
-      '1',
-    );
+    addProductFormStore.addProductToList();
+    hideAddProductWindowHandler();
   }
-
-  useEffect(() => {
-    if (productsStore.statusAddProduct === 'done') {
-      hideAddProductWindowHandler();
-      productsStore.statusAddProduct = 'pending';
-      productsStore.statusGetProductsOfTask = 'pending';
-    }
-  }, [
-    productsStore,
-    hideAddProductWindowHandler,
-    productsStore.statusAddProduct,
-  ]);
 
   return (
     <div className='add-product'>

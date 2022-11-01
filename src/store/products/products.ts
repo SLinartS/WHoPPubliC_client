@@ -1,25 +1,13 @@
 import { AxiosResponse } from 'axios';
 import { makeAutoObservable } from 'mobx';
 import extendAxios from '../../utils/extendAxios';
-import { IAddProductFormData } from '../form/type';
-import { TProductsData } from '../popup/type';
 import RootStore from '../root';
 import { TStatus } from '../type';
+import { TProductsData } from './type';
 
 export class ProductsStore {
-  private _rootStore!: RootStore;
-
-  private get rootStore() {
-    return this._rootStore;
-  }
-
-  private set rootStore(rootStore: RootStore) {
-    this._rootStore = rootStore;
-  }
-
-  constructor(rootStore: RootStore) {
+  constructor(private readonly rootStore: RootStore) {
     makeAutoObservable(this, {});
-    this.rootStore = rootStore;
   }
 
   // STATUS
@@ -87,16 +75,13 @@ export class ProductsStore {
     }
   }
 
-  public *addProduct(
-    productData: IAddProductFormData,
-    taskTitle: string,
-    userId: string,
-  ) {
+  public *addProduct() {
     try {
-      const newProductData = productData;
-      newProductData.taskTitle = taskTitle;
-      newProductData.userId = userId;
-      newProductData.stored = '0';
+      const newProductData = {
+        ...this.rootStore.addProductFormStore.formData,
+        taskTitle: this.rootStore.addTaskFormStore.currentTaskArticle,
+        userId: '0',
+      };
       yield extendAxios.post('products', newProductData);
       this.statusAddProduct = 'done';
     } catch (error) {

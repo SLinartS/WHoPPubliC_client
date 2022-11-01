@@ -7,7 +7,7 @@ export type TTasks = Array<ITask>;
 
 export interface ITask {
   id: number;
-  title: string;
+  article: string;
   deadlines: string;
   dateStart: string;
   dateEnd: string;

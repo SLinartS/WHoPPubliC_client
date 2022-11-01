@@ -3,7 +3,8 @@ import { FC, useEffect, useState } from 'react';
 import {
   IAddTaskFormDataFields,
   TChangeFieldEvent,
-} from '../../../store/form/type';
+} from '../../../store/form/addTaskForm/type';
+
 import { useRootStore } from '../../../utils/RootStoreProvider/useRootStore';
 import Button from '../../blocks/button/Button';
 import FormBlock from '../../blocks/form/block/Block';
@@ -16,8 +17,13 @@ import './style.scss';
 
 const AddTask: FC = observer(() => {
   const [isAcceptance, setIsAcceptance] = useState<boolean>(true);
-  const { popupStore, productsStore, addTaskFormStore, tasksStore } =
-    useRootStore();
+  const {
+    popupStore,
+    productsStore,
+    addTaskFormStore,
+    tasksStore,
+    addProductFormStore,
+  } = useRootStore();
 
   function changeFieldHandler(
     e: TChangeFieldEvent,
@@ -28,10 +34,12 @@ const AddTask: FC = observer(() => {
 
   function addPointHandler() {
     popupStore.showSelectPoints();
+    popupStore.hideAddTaskWindow();
   }
 
   function addWarehousePointHandler() {
     popupStore.showSelectMap();
+    popupStore.hideAddTaskWindow();
   }
 
   function hideAddAcceptanceTaskWindowHandler() {
@@ -39,42 +47,15 @@ const AddTask: FC = observer(() => {
   }
 
   function showAddProductWindowHandler() {
-    if (!tasksStore.statusTaskHasBeenAdded) {
-      if (addTaskFormStore.title) {
-        tasksStore.addTask('1', addTaskFormStore.title, '1');
-      }
-    } else {
-      popupStore.showAddProductWindow();
-      popupStore.hideAddTaskWindow();
-    }
+    popupStore.showAddProductWindow();
+    popupStore.hideAddTaskWindow();
   }
 
   useEffect(() => {
-    if (
-      productsStore.statusGetProductsOfTask === 'pending' &&
-      addTaskFormStore.title
-    ) {
-      productsStore.getProductsOfAcceptanceTask(addTaskFormStore.title);
-    }
-
-    if (
-      tasksStore.statusAddTask === 'done' &&
-      !tasksStore.statusTaskHasBeenAdded
-    ) {
-      tasksStore.statusTaskHasBeenAdded = true;
-      tasksStore.statusGetAcceptanceTasks = 'pending';
-      popupStore.showAddProductWindow();
-      popupStore.hideAddTaskWindow();
-    }
-
-    switch (addTaskFormStore.currentTaskType) {
-      case 'acceptance':
-        setIsAcceptance(true);
-        break;
-      case 'shipment':
-        setIsAcceptance(false);
-        break;
-      default:
+    if (addTaskFormStore.currentTaskType === 'acceptance') {
+      setIsAcceptance(true);
+    } else {
+      setIsAcceptance(false);
     }
   }, [
     popupStore,
@@ -84,6 +65,16 @@ const AddTask: FC = observer(() => {
     tasksStore.statusAddTask,
     addTaskFormStore.currentTaskType,
   ]);
+
+  const PRODUCT_TABLE_HEADER = [
+    'Артикул',
+    'Название',
+    'Автор',
+    'Категория',
+    'Количество',
+    'Типография',
+    'Издательство',
+  ];
 
   return (
     <div className='add-task'>
@@ -141,9 +132,13 @@ const AddTask: FC = observer(() => {
           >
             <FormFieldPoint clickEvent={addPointHandler} />
           </FormBlock>
-          <FormBlock titleText='Точки склада'>
-            <FormFieldPoint clickEvent={addWarehousePointHandler} />
-          </FormBlock>
+          {isAcceptance ? (
+            <FormBlock titleText='Точки склада'>
+              <FormFieldPoint clickEvent={addWarehousePointHandler} />
+            </FormBlock>
+          ) : (
+            ''
+          )}
         </FormLayout>
 
         <div className='add-task__table-block'>
@@ -153,10 +148,10 @@ const AddTask: FC = observer(() => {
             onClick={showAddProductWindowHandler}
           />
 
-          {productsStore.statusGetProductsOfTask === 'done' ? (
+          {addProductFormStore.addedProductList.length > 0 ? (
             <Table
-              data={productsStore.productsOfTask.data}
-              tableHeader={productsStore.productsOfTask.tableHeader}
+              data={addProductFormStore.getAddedProductListForTable()}
+              tableHeader={PRODUCT_TABLE_HEADER}
               additionalСlasses='table--add-task'
             />
           ) : (

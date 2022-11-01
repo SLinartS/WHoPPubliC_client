@@ -1,4 +1,7 @@
-export type TPoints = Array<IPoint>;
+export interface TPoints {
+  acceptance: Array<IPoint>;
+  shipment: Array<IPoint>;
+}
 
 export interface IPoint {
   id: number;

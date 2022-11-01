@@ -1,25 +1,54 @@
 import { makeAutoObservable } from 'mobx';
 
-import RootStore from '../root';
-import { IAddProductFormData } from './type';
+import RootStore from '../../root';
+import { IAddProductFormData, TAddedPoductListForTable, TAddedProductList } from './type';
 
 export class AddProductFormStore {
-  private _rootStore!: RootStore;
-
-  private get rootStore() {
-    return this._rootStore;
-  }
-
-  private set rootStore(rootStore: RootStore) {
-    this._rootStore = rootStore;
-  }
-
-  constructor(rootStore: RootStore) {
+  constructor(private readonly rootStore: RootStore) {
     makeAutoObservable(this, {});
-    this.rootStore = rootStore;
   }
 
-  private _formData: IAddProductFormData = {
+  /*  List of products 
+    added by the user */
+  private _addedProductList: TAddedProductList = [];
+
+  public get addedProductList() {
+    return this._addedProductList;
+  }
+
+  public getAddedProductListForTable() {
+    const productListForTable: TAddedPoductListForTable = [];
+    for (const product of this.addedProductList) {
+      productListForTable.push({
+        article: product.article,
+        title: product.title,
+        author: product.author,
+        category: product.category,
+        number: product.number,
+        printingHouse: product.printingHouse,
+        publishingHouse: product.publishingHouse,
+      });
+    }
+    return productListForTable;
+  }
+
+  public addProductToList() {
+    this._addedProductList.push(this._formData);
+  }
+
+  public removeProductFromList(producArticle: string) {
+    this._addedProductList = this._addedProductList.filter(
+      (product) => product.article !== producArticle,
+    );
+  }
+
+  public clearProductList() {
+    this._addedProductList = [];
+  }
+
+  /*  Fields of the product
+      addition form */
+  private readonly initialFormData = {
     article: '',
     title: '',
     author: '',
@@ -30,9 +59,13 @@ export class AddProductFormStore {
     printingHouse: '',
     publishingHouse: '',
     userId: '',
-    stored: '',
-    taskTitle: '',
   };
+
+  private _formData: IAddProductFormData = this.initialFormData;
+
+  public clearFormData() {
+    this._formData = this.initialFormData;
+  }
 
   // Getters
   public get formData() {
@@ -79,14 +112,6 @@ export class AddProductFormStore {
     return this._formData.userId;
   }
 
-  public get stored() {
-    return this._formData.stored;
-  }
-
-  public get taskTitle() {
-    return this._formData.taskTitle;
-  }
-
   // Setters
   public set article(article: string) {
     this._formData.article = article;
@@ -126,13 +151,5 @@ export class AddProductFormStore {
 
   public set userId(userId: string) {
     this._formData.userId = userId;
-  }
-
-  public set taskTitle(taskTitle: string) {
-    this._formData.taskTitle = taskTitle;
-  }
-
-  public set stored(stored: string) {
-    this._formData.stored = stored;
   }
 }

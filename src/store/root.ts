@@ -1,11 +1,12 @@
 import { configure } from 'mobx';
-import { AddTaskFormStore } from './form/addTaskForm';
-import { AddProductFormStore } from './form/addProductForm';
+
 import { PopupStore } from './popup/popup';
 import { TasksStore } from './tasks/tasks';
 import { MapStore } from './map/map';
 import { ProductsStore } from './products/products';
 import { PointStore } from './point/point';
+import { AddTaskFormStore } from './form/addTaskForm/addTaskForm';
+import { AddProductFormStore } from './form/addProductForm/addProductForm';
 
 configure({
   enforceActions: 'always',

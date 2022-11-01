@@ -21,7 +21,7 @@ const Table: FC<ITableProps> = observer(
       ))}
       {data.map((columns) => (
         <TableRow
-          key={columns.id}
+          key={columns.article}
           columns={columns}
         />
       ))}

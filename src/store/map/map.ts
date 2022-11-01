@@ -6,19 +6,8 @@ import { TStatus } from '../type';
 import { TMap } from './type';
 
 export class MapStore {
-  private _rootStore!: RootStore;
-
-  private get rootStore() {
-    return this._rootStore;
-  }
-
-  private set rootStore(rootStore: RootStore) {
-    this._rootStore = rootStore;
-  }
-
-  constructor(rootStore: RootStore) {
+  constructor(private readonly rootStore: RootStore) {
     makeAutoObservable(this, {});
-    this.rootStore = rootStore;
   }
 
   /*  Status of receiving 

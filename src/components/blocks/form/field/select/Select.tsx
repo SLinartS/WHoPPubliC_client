@@ -9,6 +9,12 @@ const FormFieldSelect: FC<ISelectFiledInputProps> = observer(
       value={value}
       onChange={changeEvent}
     >
+      <option
+        className='properties-block__option'
+        value='unset'
+      >
+        --- Выберите категорию ---
+      </option>
       {options.map((option) => (
         <option
           key={option.id}

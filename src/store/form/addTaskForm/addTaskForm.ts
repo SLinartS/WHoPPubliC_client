@@ -1,7 +1,7 @@
 import { makeAutoObservable } from 'mobx';
-import { IPoint } from '../point/type';
+import { IPoint } from '../../point/type';
 
-import RootStore from '../root';
+import RootStore from '../../root';
 import {
   IAddTaskFormDataArrays,
   IAddTaskFormDataFields,
@@ -10,19 +10,8 @@ import {
 } from './type';
 
 export class AddTaskFormStore {
-  private _rootStore!: RootStore;
-
-  private get rootStore() {
-    return this._rootStore;
-  }
-
-  private set rootStore(rootStore: RootStore) {
-    this._rootStore = rootStore;
-  }
-
-  constructor(rootStore: RootStore) {
+  constructor(private readonly rootStore: RootStore) {
     makeAutoObservable(this, {});
-    this.rootStore = rootStore;
   }
 
   /*  The type of task
@@ -35,6 +24,18 @@ export class AddTaskFormStore {
 
   public set currentTaskType(newType: TTaskType) {
     this._currentTaskType = newType;
+  }
+
+  /*  The title of task
+      being processed  */
+  private _currentTaskArticle: string = '';
+
+  public get currentTaskArticle() {
+    return this._currentTaskArticle;
+  }
+
+  public set currentTaskArticle(newTitle: string) {
+    this._currentTaskArticle = newTitle;
   }
 
   /*  Array of data 
@@ -110,7 +111,7 @@ export class AddTaskFormStore {
 
   // ARRAYS
   // Add values
-  public addProductId(productId: string) {
+  public addProduct(productId: string) {
     this._formDataArrays.products.push(productId);
   }
 
@@ -123,7 +124,7 @@ export class AddTaskFormStore {
   }
 
   // Remove values
-  public removeProductId(productId: string) {
+  public removeProduct(productId: string) {
     this._formDataArrays.products = this._formDataArrays.products.filter(
       (id) => id !== productId,
     );
@@ -140,5 +141,18 @@ export class AddTaskFormStore {
       this._formDataArrays.warehousePoints.filter(
         (warehousePoint) => warehousePoint.floorId !== floorId,
       );
+  }
+
+  // Clear values
+  public clearProducts() {
+    this._formDataArrays.products = [];
+  }
+
+  public clearPoints() {
+    this._formDataArrays.points = [];
+  }
+
+  public clearWarehousePoints() {
+    this._formDataArrays.warehousePoints = [];
   }
 }

@@ -10,23 +10,15 @@ const SelectPoints: FC = observer(() => {
   const { popupStore, pointStore, addTaskFormStore } = useRootStore();
 
   function hideSelectMapHandler() {
+    popupStore.showAddTaskWindow();
     popupStore.hideSelectPoints();
   }
 
   useEffect(() => {
-    if (
-      pointStore.acceptanceStatus === 'pending' &&
-      addTaskFormStore.currentTaskType === 'acceptance'
-    ) {
+    if (pointStore.status === 'pending') {
       pointStore.getPoints();
     }
-    if (
-      pointStore.shipmentStatus === 'pending' &&
-      addTaskFormStore.currentTaskType === 'shipment'
-    ) {
-      pointStore.getPoints();
-    }
-  }, [pointStore, addTaskFormStore.currentTaskType]);
+  }, [pointStore]);
 
   return (
     <div className='select-points'>
@@ -49,16 +41,29 @@ const SelectPoints: FC = observer(() => {
         />
       </WindowHeader>
       <div className='points-map'>
-        <div className='points-map__container'>
-          {pointStore.acceptancePoints.map((point, index) => (
-            <PointsBlock
-              key={point.id}
-              id={point.id}
-              text={point.title}
-              index={index}
-            />
-          ))}
-        </div>
+        {addTaskFormStore.currentTaskType === 'acceptance' ? (
+          <div className='points-map__container'>
+            {pointStore.points.acceptance.map((point, index) => (
+              <PointsBlock
+                key={point.id}
+                id={point.id}
+                text={point.title}
+                index={index}
+              />
+            ))}
+          </div>
+        ) : (
+          <div className='points-map__container'>
+            {pointStore.points.shipment.map((point, index) => (
+              <PointsBlock
+                key={point.id}
+                id={point.id}
+                text={point.title}
+                index={index}
+              />
+            ))}
+          </div>
+        )}
       </div>
     </div>
   );

@@ -9,6 +9,7 @@ const SelectMap: FC = () => {
   const { popupStore, mapStore } = useRootStore();
 
   function hideSelectMapHandler() {
+    popupStore.showAddTaskWindow();
     popupStore.hideSelectMap();
   }
 
