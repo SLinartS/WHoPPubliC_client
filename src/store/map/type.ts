@@ -1,5 +1,3 @@
-export type TMap = Array<IZone>;
-
 export interface IZone {
   id: number;
   zoneLetter: string;

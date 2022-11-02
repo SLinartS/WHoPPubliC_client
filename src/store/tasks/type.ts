@@ -1,9 +1,7 @@
-export interface ITasksList {
-  data: TTasks;
+export interface ITasks {
+  data: Array<ITask>;
   tableHeader: Array<string>;
 }
-
-export type TTasks = Array<ITask>;
 
 export interface ITask {
   id: number;

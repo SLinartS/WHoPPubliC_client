@@ -1,8 +1,10 @@
+import './style.scss';
+
 import { observer } from 'mobx-react-lite';
 import { FC } from 'react';
 import { Link } from 'react-router-dom';
+
 import appIcon from '../../../assets/images/app-icon.png';
-import './style.scss';
 
 const Header: FC = observer(() => (
   <>

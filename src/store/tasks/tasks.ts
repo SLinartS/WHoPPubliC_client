@@ -1,72 +1,76 @@
-import { makeAutoObservable } from 'mobx';
 import { AxiosResponse } from 'axios';
+import { makeAutoObservable } from 'mobx';
+
+import extendAxios from '../../utils/extendAxios';
 import RootStore from '../root';
 import { TStatus } from '../type';
-import { ITasksList } from './type';
-import extendAxios from '../../utils/extendAxios';
+import { ITasks } from './type';
 
-export class TasksStore {
+export class StoreTasks {
   constructor(private readonly rootStore: RootStore) {
     makeAutoObservable(this, {});
   }
 
-  // STATUS
-  private _statusGetAcceptanceTasks: TStatus = 'pending';
+  // STATUS FETCH ACCEPTANCE TASKS
+  private _statusFetchAcceptanceTasks: TStatus = 'pending';
 
-  private _statusGetShipmentTasks: TStatus = 'pending';
+  public get statusFetchAcceptanceTasks() {
+    return this._statusFetchAcceptanceTasks;
+  }
 
+  public set statusFetchAcceptanceTasks(newStatus: TStatus) {
+    this._statusFetchAcceptanceTasks = newStatus;
+  }
+
+  // STATUS FETCH SHIPMENT TASKS
+  private _statusFetchShipmentTasks: TStatus = 'pending';
+
+  public get statusFetchShipmentTasks() {
+    return this._statusFetchShipmentTasks;
+  }
+
+  public set statusFetchShipmentTasks(newStatus: TStatus) {
+    this._statusFetchShipmentTasks = newStatus;
+  }
+
+  // STATUS ADD TASK
   private _statusAddTask: TStatus = 'pending';
-
-  // Getters
-  public get statusGetAcceptanceTasks() {
-    return this._statusGetAcceptanceTasks;
-  }
-
-  public get statusGetShipmentTasks() {
-    return this._statusGetShipmentTasks;
-  }
 
   public get statusAddTask() {
     return this._statusAddTask;
-  }
-
-  // Setters
-  public set statusGetAcceptanceTasks(newStatus: TStatus) {
-    this._statusGetAcceptanceTasks = newStatus;
-  }
-
-  public set statusGetShipmentTasks(newStatus: TStatus) {
-    this._statusGetShipmentTasks = newStatus;
   }
 
   public set statusAddTask(newStatus: TStatus) {
     this._statusAddTask = newStatus;
   }
 
-  // DATA
-  public tasksAcceptanceList: ITasksList = { data: [], tableHeader: [] };
+  /*  Arrays of data 
+      from the server */
+  public tasksAcceptanceList: ITasks = { data: [], tableHeader: [] };
 
-  public tasksShipmentList: ITasksList = { data: [], tableHeader: [] };
+  public tasksShipmentList: ITasks = { data: [], tableHeader: [] };
 
-  public *getAcceptanceTasks() {
+  public *fetchAcceptanceTasks() {
     try {
-      const response: AxiosResponse<ITasksList> =
-        yield extendAxios.get<ITasksList>('tasks/acceptance');
+      const response: AxiosResponse<ITasks> = yield extendAxios.get<ITasks>(
+        'tasks/acceptance',
+      );
       this.tasksAcceptanceList = response.data;
-      this._statusGetAcceptanceTasks = 'done';
+      this._statusFetchAcceptanceTasks = 'done';
     } catch (error) {
-      this._statusGetAcceptanceTasks = 'error';
+      this._statusFetchAcceptanceTasks = 'error';
     }
   }
 
-  public *getShipmentTasks() {
+  public *fetchShipmentTasks() {
     try {
-      const response: AxiosResponse<ITasksList> =
-        yield extendAxios.get<ITasksList>('tasks/shipment');
+      const response: AxiosResponse<ITasks> = yield extendAxios.get<ITasks>(
+        'tasks/shipment',
+      );
       this.tasksShipmentList = response.data;
-      this.statusGetShipmentTasks = 'done';
+      this.statusFetchShipmentTasks = 'done';
     } catch (error) {
-      this.statusGetShipmentTasks = 'error';
+      this.statusFetchShipmentTasks = 'error';
     }
   }
 
@@ -74,11 +78,11 @@ export class TasksStore {
     try {
       const newTaskData = {
         fields: {
-          ...this.rootStore.addTaskFormStore.formDataField,
+          ...this.rootStore.storeTaskForm.formDataField,
           userId: '1',
           typeId: '1',
         },
-        arrays: this.rootStore.addTaskFormStore.formDataArrays,
+        arrays: this.rootStore.storeTaskForm.formDataArrays,
       };
 
       yield extendAxios.post('tasks', newTaskData);

@@ -2,7 +2,7 @@
 @use '../../../styles/global/variables.scss' as v;
 
 .map-block {
-  padding: 2rem 0 0 0;
+  padding: 2rem 0 0;
   height: 100%;
   width: 100%;
   display: flex;
@@ -39,7 +39,7 @@
 
   &__floor {
     display: inline-block;
-    border: 0.1rem solid $tableColor;
+    border: 0.1rem solid $table-color;
     width: 5rem;
     height: 5rem;
 
@@ -49,13 +49,13 @@
       justify-content: center;
       border: none;
       font-size: 2rem;
-      color: $tableColorOpacityMid;
+      color: $table-color--opacity-mid;
       opacity: 0.5;
     }
   }
 
   &__zone-title {
-    color: $tableColorOpacityLow;
+    color: $table-color--opacity-low;
     font-size: 30rem;
     font-weight: bold;
     margin: 0;
@@ -69,7 +69,7 @@
   }
 
   &__section-title {
-    color: $tableColorOpacityMid;
+    color: $table-color--opacity-mid;
     font-size: 10rem;
     font-weight: bold;
     margin: 0;

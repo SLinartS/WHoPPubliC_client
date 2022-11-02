@@ -1,11 +1,12 @@
 import { AxiosResponse } from 'axios';
 import { makeAutoObservable } from 'mobx';
+
 import extendAxios from '../../utils/extendAxios';
 import RootStore from '../root';
 import { TStatus } from '../type';
-import { TPoints } from './type';
+import { IPoints } from './type';
 
-export class PointStore {
+export class StorePoint {
   constructor(private readonly rootStore: RootStore) {
     makeAutoObservable(this, {});
   }
@@ -14,7 +15,7 @@ export class PointStore {
       at the point to the true, 
       which will color it */
   public setPointActive(
-    pointType: keyof TPoints,
+    pointType: keyof IPoints,
     pointIndex: number,
     newStatus: boolean,
   ) {
@@ -36,20 +37,20 @@ export class PointStore {
   /*  Status of receiving 
       data from the server  
       ACCEPTANCE POINTS   */
-  private _status: TStatus = 'pending';
+  private _statusFetchPoints: TStatus = 'pending';
 
-  public get status() {
-    return this._status;
+  public get statusFetchPoints() {
+    return this._statusFetchPoints;
   }
 
-  public set status(newStatus: TStatus) {
-    this._status = newStatus;
+  public set statusFetchPoints(newStatus: TStatus) {
+    this._statusFetchPoints = newStatus;
   }
 
   /*  Array of data 
       from the server 
       ACCEPTANCE POINTS */
-  private _points: TPoints = {
+  private _points: IPoints = {
     acceptance: [],
     shipment: [],
   };
@@ -58,19 +59,19 @@ export class PointStore {
     return this._points;
   }
 
-  public set points(newPoints: TPoints) {
+  public set points(newPoints: IPoints) {
     this._points = newPoints;
   }
 
-  public *getPoints() {
+  public *fetchPoints() {
     try {
-      const response: AxiosResponse<TPoints> = yield extendAxios.get<TPoints>(
+      const response: AxiosResponse<IPoints> = yield extendAxios.get<IPoints>(
         'points',
       );
       this.points = response.data;
-      this.status = 'done';
+      this.statusFetchPoints = 'done';
     } catch (error) {
-      this.status = 'error';
+      this.statusFetchPoints = 'error';
     }
   }
 }

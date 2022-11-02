@@ -1,4 +1,4 @@
-export interface TPoints {
+export interface IPoints {
   acceptance: Array<IPoint>;
   shipment: Array<IPoint>;
 }

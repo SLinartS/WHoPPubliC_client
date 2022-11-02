@@ -1,11 +1,17 @@
-import { FC } from 'react';
-import { IButtonProps } from './type';
 import './style.scss';
 
-const Button: FC<IButtonProps> = ({ additionalСlasses, text, onClick }) => (
+import { FC, MouseEventHandler } from 'react';
+
+interface IButtonProps {
+  additionalСlasses?: string;
+  text: string;
+  clickEvent?: MouseEventHandler<HTMLButtonElement>;
+}
+
+const Button: FC<IButtonProps> = ({ additionalСlasses, text, clickEvent }) => (
   <button
     type='button'
-    onClick={onClick}
+    onClick={clickEvent}
     className={`button ${additionalСlasses}`}
   >
     {text}

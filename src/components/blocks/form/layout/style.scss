@@ -1,7 +1,7 @@
 @use '../../../../styles/global/colors.scss' as *;
 
-.properties-block {
-  background-color: $fontColor--white;
+.form-block {
+  background-color: $font-color--white;
   padding: 1rem 2rem;
   display: flex;
   align-items: center;
@@ -26,11 +26,11 @@
   &__input,
   &__select,
   &__option {
-    background-color: $fontColor--white;
+    background-color: $font-color--white;
     font-size: 2rem;
     height: 2.4rem;
     width: 100%;
-    border: 0.1rem solid $fontColor--black;
+    border: 0.1rem solid $font-color--black;
     border-radius: 0.2rem;
 
     &--big {
@@ -38,24 +38,22 @@
       margin: 0 2rem 0 0;
       height: 4rem;
     }
-
-    &:focus {
-      outline: none;
-      border: 0.2rem solid $fontColor--black;
-    }
   }
 
   &__select {
     height: 2.8rem;
+
+    &:focus {
+      outline: none;
+      border: 0.2rem solid $font-color--black;
+    }
   }
 
   &__add-point {
     height: 3rem;
     width: 5rem;
   }
-}
 
-.properties-block {
   &--article-info {
     grid-row: 1/2;
     grid-column: 1/3;

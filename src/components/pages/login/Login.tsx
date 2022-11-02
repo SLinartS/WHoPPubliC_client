@@ -1,8 +1,10 @@
+import './style.scss';
+
 import { observer } from 'mobx-react-lite';
 import { FC } from 'react';
+
 import appIcon from '../../../assets/images/app-icon.png';
 import Button from '../../blocks/button/Button';
-import './style.scss';
 
 const LoginPage: FC = observer(() => (
   <main className='login'>

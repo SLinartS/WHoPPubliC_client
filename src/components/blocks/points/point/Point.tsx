@@ -1,16 +1,20 @@
 import { observer } from 'mobx-react-lite';
 import React, { FC } from 'react';
-import { useRootStore } from '../../../../utils/RootStoreProvider/useRootStore';
-import { IPointShellProps } from './type';
 
-const Point: FC<IPointShellProps> = observer(({ active }) => {
-  const { pointStore } = useRootStore();
+import { useRootStore } from '../../../../utils/RootStoreProvider/useRootStore';
+
+interface IPointProps {
+  active: boolean;
+}
+
+const Point: FC<IPointProps> = observer(({ active }) => {
+  const { storePoint } = useRootStore();
 
   return (
     <div
       className='points-map__point'
       style={{
-        backgroundColor: active && pointStore.isSelectedPoint ? '#c15943' : '',
+        backgroundColor: active && storePoint.isSelectedPoint ? '#c15943' : '',
       }}
     />
   );

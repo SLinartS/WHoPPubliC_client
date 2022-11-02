@@ -1,31 +1,34 @@
-import { FC, useEffect } from 'react';
-import { observer } from 'mobx-react-lite';
-
-import { useRootStore } from '../../../utils/RootStoreProvider/useRootStore';
-import Table from '../../blocks/table/Table';
-import Button from '../../blocks/button/Button';
 import './style.scss';
-import { TTaskType } from '../../../store/form/addTaskForm/type';
+
+import { observer } from 'mobx-react-lite';
+import { FC, useEffect } from 'react';
+
+import { TTaskType } from '../../../store/type';
+import { useRootStore } from '../../../utils/RootStoreProvider/useRootStore';
+import Button from '../../blocks/button/Button';
+import Table from '../../blocks/table/Table';
 
 const Tasks: FC = observer(() => {
-  const { tasksStore, popupStore, addTaskFormStore } = useRootStore();
+  const { storeTasks, storePopup, storeTaskForm, storeProduct } =
+    useRootStore();
 
   function showAddTaskWindowHandler(taskType: TTaskType) {
-    addTaskFormStore.currentTaskType = taskType;
-    popupStore.showAddTaskWindow();
+    storeTaskForm.currentTaskType = taskType;
+    storeProduct.statusAddProducts = 'pending';
+    storePopup.showTaskForm();
   }
 
   useEffect(() => {
-    if (tasksStore.statusGetAcceptanceTasks === 'pending') {
-      tasksStore.getAcceptanceTasks();
+    if (storeTasks.statusFetchAcceptanceTasks === 'pending') {
+      storeTasks.fetchAcceptanceTasks();
     }
-    if (tasksStore.statusGetShipmentTasks === 'pending') {
-      tasksStore.getShipmentTasks();
+    if (storeTasks.statusFetchShipmentTasks === 'pending') {
+      storeTasks.fetchShipmentTasks();
     }
   }, [
-    tasksStore,
-    tasksStore.statusGetAcceptanceTasks,
-    tasksStore.statusGetShipmentTasks,
+    storeTasks,
+    storeTasks.statusFetchAcceptanceTasks,
+    storeTasks.statusFetchShipmentTasks,
   ]);
 
   return (
@@ -37,12 +40,12 @@ const Tasks: FC = observer(() => {
         <Button
           additionalСlasses='button--tasks'
           text='Добавить'
-          onClick={() => showAddTaskWindowHandler('acceptance')}
+          clickEvent={() => showAddTaskWindowHandler('acceptance')}
         />
-        {tasksStore.statusGetAcceptanceTasks === 'done' ? (
+        {storeTasks.statusFetchAcceptanceTasks === 'done' ? (
           <Table
-            data={tasksStore.tasksAcceptanceList.data}
-            tableHeader={tasksStore.tasksAcceptanceList.tableHeader}
+            data={storeTasks.tasksAcceptanceList.data}
+            tableHeader={storeTasks.tasksAcceptanceList.tableHeader}
             additionalСlasses='table--tasks'
           />
         ) : (
@@ -56,13 +59,13 @@ const Tasks: FC = observer(() => {
         <Button
           additionalСlasses='button--tasks'
           text='Добавить'
-          onClick={() => showAddTaskWindowHandler('shipment')}
+          clickEvent={() => showAddTaskWindowHandler('shipment')}
         />
 
-        {tasksStore.statusGetShipmentTasks === 'done' ? (
+        {storeTasks.statusFetchShipmentTasks === 'done' ? (
           <Table
-            data={tasksStore.tasksShipmentList.data}
-            tableHeader={tasksStore.tasksShipmentList.tableHeader}
+            data={storeTasks.tasksShipmentList.data}
+            tableHeader={storeTasks.tasksShipmentList.tableHeader}
             additionalСlasses='table--tasks'
           />
         ) : (

@@ -10,7 +10,8 @@
     justify-content: center;
     align-items: center;
     font-size: 2.8rem;
-    margin: 2rem 0 0 0;
+    margin: 2rem 0 0;
+
     &-text {
       margin: 0;
     }
@@ -19,7 +20,7 @@
   &__action {
     display: flex;
     align-items: center;
-    margin: 3rem 0 0 0;
+    margin: 3rem 0 0;
   }
 
   &__search {
@@ -27,17 +28,18 @@
       font-size: 2rem;
       margin: 0 1rem 0 0;
     }
+
     &-input {
       width: 60rem;
       height: 2rem;
       font-size: 2rem;
-      border: 0.1rem solid $fontColor--black;
+      border: 0.1rem solid $font-color--black;
       border-radius: 0;
       margin: 0 2rem 0 0;
 
       &:focus {
         outline: none;
-        border: 0.2rem solid $fontColor--black;
+        border: 0.2rem solid $font-color--black;
       }
     }
   }
@@ -61,11 +63,11 @@
   .products {
     &__title {
       font-size: 2.4rem;
-      margin: 1rem 0 0 0;
+      margin: 1rem 0 0;
     }
 
     &__action {
-      margin: 1rem 0 0 0;
+      margin: 1rem 0 0;
     }
 
     &__search {

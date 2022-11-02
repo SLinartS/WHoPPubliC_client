@@ -1,37 +1,44 @@
 import { observer } from 'mobx-react-lite';
 import { FC, useRef } from 'react';
-import useCheckIsAdded from '../../../../hooks/map/useCheckIsAdded/useCheckIsAdded';
-import useGetPointCoordinates from '../../../../hooks/map/useGetPointCoordinates/useGetPointCoordinates';
+
+import useCheckIsAdded from '../../../../hooks/mapAndPoint/useCheckIsAdded';
+import useGetPointCoordinates from '../../../../hooks/mapAndPoint/useGetPointCoordinates';
 import { useRootStore } from '../../../../utils/RootStoreProvider/useRootStore';
 import Point from '../point/Point';
-import { IPointsBlockProps } from './type';
+
+interface IPointsBlockProps {
+  id: number;
+  text: string;
+  index: number;
+  active: boolean;
+}
 
 const PointsBlock: FC<IPointsBlockProps> = observer(
   ({ id, text, index, active }) => {
-    const { addTaskFormStore, pointStore } = useRootStore();
+    const { storeTaskForm, storePoint } = useRootStore();
     const pointBlockNode = useRef<HTMLDivElement>(null);
     const getPointCoordinates = useGetPointCoordinates();
     const checkIsAdded = useCheckIsAdded();
 
     function choosePointBlock() {
-      if (pointBlockNode.current && pointStore.isSelectedPoint) {
+      if (pointBlockNode.current && storePoint.isSelectedPoint) {
         const { point } = getPointCoordinates(pointBlockNode.current);
 
         if (point) {
-          if (checkIsAdded(addTaskFormStore.points, point.id)) {
-            pointStore.setPointActive(
-              addTaskFormStore.currentTaskType,
+          if (checkIsAdded(storeTaskForm.points, point.id)) {
+            storePoint.setPointActive(
+              storeTaskForm.currentTaskType,
               point.index,
               false,
             );
-            addTaskFormStore.removePoint(point.id);
+            storeTaskForm.removePoint(point.id);
           } else {
-            pointStore.setPointActive(
-              addTaskFormStore.currentTaskType,
+            storePoint.setPointActive(
+              storeTaskForm.currentTaskType,
               point.index,
               true,
             );
-            addTaskFormStore.addPoint(point.id);
+            storeTaskForm.addPoint(point.id);
           }
         }
       }

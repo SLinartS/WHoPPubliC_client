@@ -1,48 +1,52 @@
 import { AxiosResponse } from 'axios';
 import { makeAutoObservable } from 'mobx';
+
 import extendAxios from '../../utils/extendAxios';
 import RootStore from '../root';
 import { TStatus } from '../type';
-import { IAddProductResponse, TProductsData } from './type';
+import { IProductResponse, TProductsData } from './type';
 
-export class ProductsStore {
+export class StoreProducts {
   constructor(private readonly rootStore: RootStore) {
     makeAutoObservable(this, {});
   }
 
-  // STATUS
-  private _statusGetProducts: TStatus = 'pending';
+  // STATUS FETCH PRODUCTS
+  private _statusFetchProducts: TStatus = 'pending';
 
-  private _statusGetProductsOfTask: TStatus = 'done';
-
-  private _statusAddProducts: TStatus = 'pending';
-
-  // Getters
-  public get statusGetProducts() {
-    return this._statusGetProducts;
+  public get statusFetchProducts() {
+    return this._statusFetchProducts;
   }
+
+  public set statusFetchProducts(newStatus: TStatus) {
+    this._statusFetchProducts = newStatus;
+  }
+
+  // STATUS GET PRODUCTS OF TASKS
+  private _statusGetProductsOfTask: TStatus = 'done';
 
   public get statusGetProductsOfTask() {
     return this._statusGetProductsOfTask;
-  }
-
-  public get statusAddProducts() {
-    return this._statusAddProducts;
-  }
-
-  // Setters
-  public set statusGetProducts(newStatus: TStatus) {
-    this._statusGetProducts = newStatus;
   }
 
   public set statusGetProductsOfTask(newStatus: TStatus) {
     this._statusGetProductsOfTask = newStatus;
   }
 
+  private _statusAddProducts: TStatus = 'pending';
+
+  // STATUS ADD PRODUCTS
+
+  public get statusAddProducts() {
+    return this._statusAddProducts;
+  }
+
   public set statusAddProducts(newStatus: TStatus) {
     this._statusAddProducts = newStatus;
   }
 
+  /*  Arrays of data 
+      from the server */
   public products: TProductsData = {
     data: [],
     tableHeader: [],
@@ -53,18 +57,18 @@ export class ProductsStore {
     tableHeader: [],
   };
 
-  public *getProducts() {
+  public *fetchProducts() {
     try {
       const response: AxiosResponse<TProductsData> =
         yield extendAxios.get<TProductsData>('products');
       this.products = response.data;
-      this.statusGetProducts = 'done';
+      this.statusFetchProducts = 'done';
     } catch (error) {
-      this.statusGetProducts = 'error';
+      this.statusFetchProducts = 'error';
     }
   }
 
-  public *getProductsOfAcceptanceTask(taskTitle: string) {
+  public *fetchProductsOfAcceptanceTask(taskTitle: string) {
     try {
       const response: AxiosResponse<TProductsData> =
         yield extendAxios.get<TProductsData>(`products/${taskTitle}`);
@@ -78,15 +82,15 @@ export class ProductsStore {
   public *addProducts() {
     try {
       const newProductData = {
-        products: this.rootStore.addProductFormStore.addedProductList,
-        warehousePoints: this.rootStore.addTaskFormStore.addWarehousePoint,
+        products: this.rootStore.storeProductForm.addedProductList,
+        warehousePoints: this.rootStore.storeTaskForm.addWarehousePoint,
         userId: '1',
         categoryId: '1',
       };
-      const response: AxiosResponse<IAddProductResponse> =
-        yield extendAxios.post<IAddProductResponse>('products', newProductData);
+      const response: AxiosResponse<IProductResponse> =
+        yield extendAxios.post<IProductResponse>('products', newProductData);
       for (const productId of response.data.productIds) {
-        this.rootStore.addTaskFormStore.addProduct(productId);
+        this.rootStore.storeTaskForm.addProduct(productId);
       }
 
       this.statusAddProducts = 'done';

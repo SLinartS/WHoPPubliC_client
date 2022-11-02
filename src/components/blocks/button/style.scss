@@ -1,19 +1,41 @@
 @use '../../../styles/global/colors.scss' as *;
 
 .button {
-  background-color: $secondColor;
+  background-color: $second-color;
   border: none;
   border-radius: 0.3rem;
   font-size: 2.4rem;
   font-weight: bold;
   padding: 1rem 4rem;
-  color: $fontColor--white;
+  color: $font-color--white;
+
+  &--add-task {
+    width: fit-content;
+    margin: 2rem 0;
+  }
+
+  &--window-header {
+    height: fit-content;
+    width: fit-content;
+    font-size: 2.8rem;
+    padding: 1rem 3rem;
+  }
+
+  &--login {
+    font-size: 2.8rem;
+    padding: 2rem 5rem;
+  }
 }
 
 @media (max-width: 950px) {
   .button {
     font-size: 2rem;
     padding: 1rem 2rem;
+
+    &--login {
+      font-size: 2.4rem;
+      padding: 1.4rem 4rem;
+    }
   }
 }
 
@@ -21,5 +43,10 @@
   .button {
     font-size: 1.6rem;
     padding: 0.5rem 2rem;
+
+    &--login {
+      font-size: 2rem;
+      padding: 1rem 3rem;
+    }
   }
 }

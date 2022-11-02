@@ -1,10 +1,19 @@
+import './style.scss';
+
 import { observer } from 'mobx-react-lite';
 import { FC } from 'react';
-import TableColumn from './TableColumn';
 
-import TableRow from './TableRow';
-import { ITableProps } from './type';
-import './style.scss';
+import { IProductForTable } from '../../../store/form/product/type';
+import { IProduct } from '../../../store/products/type';
+import { ITask } from '../../../store/tasks/type';
+import TableColumn from './column/Column';
+import TableRow from './row/Row';
+
+interface ITableProps {
+  data: Array<ITask> | Array<IProduct> | Array<IProductForTable>;
+  tableHeader: Array<string>;
+  additionalСlasses?: string;
+}
 
 const Table: FC<ITableProps> = observer(
   ({ data, tableHeader, additionalСlasses }) => (

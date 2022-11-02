@@ -1,25 +1,24 @@
 import { observer } from 'mobx-react-lite';
 import { Outlet } from 'react-router-dom';
-import Header from './header/Header';
 
 import { useRootStore } from '../../utils/RootStoreProvider/useRootStore';
-
-import AddProduct from '../popup/addProduct/AddProduct';
-import AddTask from '../popup/addTask/AddTask';
-import SelectMap from '../popup/selectMap/SelectMap';
-import SelectPoints from '../popup/selectPoints/SelectPoints';
+import PopupFormProduct from '../popup/form/product/Product';
+import PopupFormTask from '../popup/form/task/Task';
+import PopupSelectMap from '../popup/select/map/Map';
+import PopupSelectPoints from '../popup/select/points/Points';
+import Header from './header/Header';
 
 const Layout = observer(() => {
-  const { popupStore } = useRootStore();
+  const { storePopup } = useRootStore();
 
   return (
     <>
       <Header />
       <Outlet />
-      {popupStore.addProductStatus ? <AddProduct /> : ''}
-      {popupStore.addTaskStatus ? <AddTask /> : ''}
-      {popupStore.selectMapStatus ? <SelectMap /> : ''}
-      {popupStore.selectPointsStatus ? <SelectPoints /> : ''}
+      {storePopup.productForm ? <PopupFormProduct /> : ''}
+      {storePopup.taskForm ? <PopupFormTask /> : ''}
+      {storePopup.selectMap ? <PopupSelectMap /> : ''}
+      {storePopup.selectPoints ? <PopupSelectPoints /> : ''}
     </>
   );
 });

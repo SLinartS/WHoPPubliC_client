@@ -1,15 +1,17 @@
-import { FC, useEffect } from 'react';
-import { observer } from 'mobx-react-lite';
 import './style.scss';
-import Map from '../../blocks/map/Map';
+
+import { observer } from 'mobx-react-lite';
+import { FC, useEffect } from 'react';
+
 import { useRootStore } from '../../../utils/RootStoreProvider/useRootStore';
+import Map from '../../blocks/map/Map';
 
 const MapPage: FC = observer(() => {
-  const { mapStore } = useRootStore();
+  const { storeMap } = useRootStore();
 
   useEffect(() => {
-    mapStore.isSelectedMap = false;
-  }, [mapStore]);
+    storeMap.isSelectedMap = false;
+  }, [storeMap]);
 
   return (
     <main className='map'>

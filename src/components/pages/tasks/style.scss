@@ -3,14 +3,14 @@
 
 .tasks {
   display: grid;
-  height: calc(100vh - v.$headerHeightStandart);
+  height: calc(100vh - v.$header-height--standart);
   grid-template-columns: repeat(2, 1fr);
   grid-template-rows: 8rem 1fr;
   justify-items: center;
   align-items: center;
   align-content: center;
   gap: 0.2rem;
-  background-color: $fontColor--black;
+  background-color: $font-color--black;
 
   &__title {
     display: flex;
@@ -19,7 +19,7 @@
     width: 100%;
     height: 100%;
     text-align: center;
-    background-color: $fontColor--white;
+    background-color: $font-color--white;
 
     &--shipment {
       grid-row: 1/2;
@@ -38,14 +38,14 @@
     align-items: center;
     width: 100%;
     height: 100%;
-    background-color: $fontColor--white;
+    background-color: $font-color--white;
     overflow-y: scroll;
   }
 }
 
 .button {
   &--tasks {
-    margin: 2rem 0 0 0;
+    margin: 2rem 0 0;
   }
 }
 
@@ -68,7 +68,7 @@
 
     &__block {
       height: calc(
-        (100vh - v.$headerHeightStandart - (7.68rem * 2) - (0.2rem * 3)) / 2
+        (100vh - v.$header-height--standart - (7.68rem * 2) - (0.2rem * 3)) / 2
       );
     }
   }
@@ -78,7 +78,7 @@
   .tasks {
     &__block {
       height: calc(
-        (100vh - v.$headerHeightMid - (7.68rem * 2) - (0.2rem * 3)) / 2
+        (100vh - v.$header-height--mid - (7.68rem * 2) - (0.2rem * 3)) / 2
       );
     }
   }
@@ -88,7 +88,7 @@
   .tasks {
     &__block {
       height: calc(
-        (100vh - v.$headerHeightLow - (5.219rem * 2) - (0.2rem * 3)) / 2
+        (100vh - v.$header-height--low - (5.219rem * 2) - (0.2rem * 3)) / 2
       );
     }
 

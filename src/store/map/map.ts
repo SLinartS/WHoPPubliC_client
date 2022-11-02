@@ -1,25 +1,26 @@
 import { AxiosResponse } from 'axios';
 import { makeAutoObservable } from 'mobx';
+
 import extendAxios from '../../utils/extendAxios';
 import RootStore from '../root';
 import { TStatus } from '../type';
-import { TMap } from './type';
+import { IZone } from './type';
 
-export class MapStore {
+export class StoreMap {
   constructor(private readonly rootStore: RootStore) {
     makeAutoObservable(this, {});
   }
 
   /*  Status of receiving 
       data from the server  */
-  private _status: TStatus = 'pending';
+  private _statusFetchMap: TStatus = 'pending';
 
-  public get status() {
-    return this._status;
+  public get statusFetchMap() {
+    return this._statusFetchMap;
   }
 
-  public set status(newStatus: TStatus) {
-    this._status = newStatus;
+  public set statusFetchMap(newStatus: TStatus) {
+    this._statusFetchMap = newStatus;
   }
 
   /*  Is the current open 
@@ -36,13 +37,13 @@ export class MapStore {
 
   /*  Array of data 
       from the server */
-  public _mapData: TMap = [];
+  public _mapData: Array<IZone> = [];
 
   public get mapData() {
     return this._mapData;
   }
 
-  public set mapData(newMapData: TMap) {
+  public set mapData(newMapData: Array<IZone>) {
     this._mapData = newMapData;
   }
 
@@ -61,13 +62,15 @@ export class MapStore {
     ].active = newStatus;
   }
 
-  public *getMap() {
+  public *fetchMap() {
     try {
-      const response: AxiosResponse<TMap> = yield extendAxios.get<TMap>('map');
+      const response: AxiosResponse<Array<IZone>> = yield extendAxios.get<
+        Array<IZone>
+      >('map');
       this.mapData = response.data;
-      this.status = 'done';
+      this.statusFetchMap = 'done';
     } catch (error) {
-      this.status = 'error';
+      this.statusFetchMap = 'error';
     }
   }
 }

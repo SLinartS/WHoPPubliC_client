@@ -21,8 +21,9 @@
     "project": "tsconfig.json",
     "nomen": true
   },
-  "plugins": ["react", "@typescript-eslint"],
+  "plugins": ["react", "@typescript-eslint", "simple-import-sort"],
   "rules": {
+    // react
     "react/jsx-filename-extension": ["warn", { "extensions": [".tsx"] }],
     "react/react-in-jsx-scope": "off",
     "react/jsx-no-bind": [
@@ -33,9 +34,13 @@
       "warn",
       { "namedComponents": "arrow-function" }
     ],
+    "react/require-default-props": "off",
+    // a11y
     "jsx-a11y/click-events-have-key-events": "off",
     "jsx-a11y/no-static-element-interactions": "off",
+    // jsx
     "jsx-quotes": ["error", "prefer-single"],
+    // other
     "no-underscore-dangle": "off",
     "import/prefer-default-export": "off",
     "arrow-body-style": "off",
@@ -48,6 +53,12 @@
     "operator-linebreak": "off",
     "object-curly-newline": "off",
     "no-restricted-syntax": "off",
+    // automatic sorting of imports
+    "import/first": "error",
+    "import/newline-after-import": "error",
+    "import/no-duplicates": "error",
+    "simple-import-sort/imports": "error",
+    "simple-import-sort/exports": "error",
     // for develop
     "no-console": "off",
     "no-alert": "off",

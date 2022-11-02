@@ -1,11 +1,16 @@
-import { observer } from 'mobx-react-lite';
-import { FC } from 'react';
-import { PropertiesBlockLayoutProps } from './type';
 import './style.scss';
+
+import { observer } from 'mobx-react-lite';
+import { FC, ReactNode } from 'react';
+
+interface PropertiesBlockLayoutProps {
+  additionalСlasses?: string;
+  children: ReactNode;
+}
 
 const FormLayout: FC<PropertiesBlockLayoutProps> = observer(
   ({ additionalСlasses, children }) => (
-    <div className={`properties-block ${additionalСlasses}`}>{children}</div>
+    <div className={`form-block ${additionalСlasses}`}>{children}</div>
   ),
 );
 

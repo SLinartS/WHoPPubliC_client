@@ -1,16 +1,23 @@
 import { observer } from 'mobx-react-lite';
-import { FC } from 'react';
-import { ISelectFiledInputProps } from './type';
+import { ChangeEventHandler, FC } from 'react';
 
-const FormFieldSelect: FC<ISelectFiledInputProps> = observer(
+import { ISelectOption } from './type';
+
+interface ISelectFieldInputProps {
+  options: Array<ISelectOption>;
+  value?: string;
+  changeEvent?: ChangeEventHandler<HTMLInputElement | HTMLSelectElement>;
+}
+
+const FormFieldSelect: FC<ISelectFieldInputProps> = observer(
   ({ options, changeEvent, value }) => (
     <select
-      className='properties-block__select'
+      className='form-block__select'
       value={value}
       onChange={changeEvent}
     >
       <option
-        className='properties-block__option'
+        className='form-block__option'
         value='unset'
       >
         --- Выберите категорию ---
@@ -18,7 +25,7 @@ const FormFieldSelect: FC<ISelectFiledInputProps> = observer(
       {options.map((option) => (
         <option
           key={option.id}
-          className='properties-block__option'
+          className='form-block__option'
           value={option.id}
         >
           {option.option}

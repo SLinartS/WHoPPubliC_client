@@ -1,56 +1,59 @@
-import { FC, useState, useEffect, useRef } from 'react';
-
 import { observer } from 'mobx-react-lite';
-import Section from '../section/Section';
-import LetterZone from '../info/letterZone/LetterZone';
-import { IZoneProps } from './type';
+import { FC, useEffect, useRef, useState } from 'react';
 
-const Zone: FC<IZoneProps> = observer(({ id, zoneLetter, sections, index }) => {
-  const [zoneLetterFontSize, setZoneLetterFontSize] = useState<number>(30);
+import { IZone } from '../../../../store/map/type';
+import MapInfoZoneLetter from '../info/zoneLetter/ZoneLetter';
+import MapSection from '../section/Section';
 
-  const letterZoneNode = useRef<HTMLParagraphElement>(null);
+interface IMapZoneProps extends IZone {
+  index: number;
+}
 
-  const zoneNode = useRef<HTMLDivElement>(null);
+const MapZone: FC<IMapZoneProps> = observer(
+  ({ id, zoneLetter, sections, index }) => {
+    const [zoneLetterFontSize, setZoneLetterFontSize] = useState<number>(30);
 
-  useEffect(() => {
-    let newZoneLetterFontSize: number;
+    const zoneNode = useRef<HTMLDivElement>(null);
 
-    const tableHeigth: number | undefined = zoneNode.current?.offsetHeight;
-    const tableWidth: number | undefined = zoneNode.current?.offsetWidth;
+    useEffect(() => {
+      let newZoneLetterFontSize: number;
 
-    if (tableHeigth && tableWidth) {
-      if (tableHeigth > tableWidth) {
-        newZoneLetterFontSize = tableWidth / 13;
-      } else {
-        newZoneLetterFontSize = tableHeigth / 13;
+      const tableHeigth: number | undefined = zoneNode.current?.offsetHeight;
+      const tableWidth: number | undefined = zoneNode.current?.offsetWidth;
+
+      if (tableHeigth && tableWidth) {
+        if (tableHeigth > tableWidth) {
+          newZoneLetterFontSize = tableWidth / 13;
+        } else {
+          newZoneLetterFontSize = tableHeigth / 13;
+        }
+        setZoneLetterFontSize(newZoneLetterFontSize);
       }
-      setZoneLetterFontSize(newZoneLetterFontSize);
-    }
-  }, [zoneNode.current?.offsetHeight, zoneNode.current?.offsetWidth]);
+    }, [zoneNode.current?.offsetHeight, zoneNode.current?.offsetWidth]);
 
-  return (
-    <div
-      className='map-block__zone'
-      ref={zoneNode}
-      data-zone-id={id}
-      data-zone-index={index}
-    >
-      {sections.map((section, sectionIndex) => (
-        <Section
-          key={section.id}
-          id={section.id}
-          number={section.number}
-          blocks={section.blocks}
-          index={sectionIndex}
+    return (
+      <div
+        className='map-block__zone'
+        ref={zoneNode}
+        data-zone-id={id}
+        data-zone-index={index}
+      >
+        {sections.map((section, sectionIndex) => (
+          <MapSection
+            key={section.id}
+            id={section.id}
+            number={section.number}
+            blocks={section.blocks}
+            index={sectionIndex}
+          />
+        ))}
+        <MapInfoZoneLetter
+          fontSize={zoneLetterFontSize}
+          zoneLetter={zoneLetter}
         />
-      ))}
-      <LetterZone
-        ref={letterZoneNode}
-        fontSize={zoneLetterFontSize}
-        zoneLetter={zoneLetter}
-      />
-    </div>
-  );
-});
+      </div>
+    );
+  },
+);
 
-export default Zone;
+export default MapZone;

@@ -1,12 +1,12 @@
 import { configure } from 'mobx';
 
-import { PopupStore } from './popup/popup';
-import { TasksStore } from './tasks/tasks';
-import { MapStore } from './map/map';
-import { ProductsStore } from './products/products';
-import { PointStore } from './point/point';
-import { AddTaskFormStore } from './form/addTaskForm/addTaskForm';
-import { AddProductFormStore } from './form/addProductForm/addProductForm';
+import { StoreProductForm } from './form/product/product';
+import { StoreTaskForm } from './form/task/task';
+import { StoreMap } from './map/map';
+import { StorePoint } from './point/point';
+import { StorePopup } from './popup/popup';
+import { StoreProducts } from './products/products';
+import { StoreTasks } from './tasks/tasks';
 
 configure({
   enforceActions: 'always',
@@ -15,31 +15,31 @@ configure({
 class RootStore {
   private static instance: RootStore;
 
-  public tasksStore: TasksStore;
+  public storeTasks: StoreTasks;
 
-  public mapStore: MapStore;
+  public storeMap: StoreMap;
 
-  public pointStore: PointStore;
+  public storePoint: StorePoint;
 
-  public productsStore: ProductsStore;
+  public storeProduct: StoreProducts;
 
-  public popupStore: PopupStore;
+  public storePopup: StorePopup;
 
-  public addTaskFormStore: AddTaskFormStore;
+  public storeTaskForm: StoreTaskForm;
 
-  public addProductFormStore: AddProductFormStore;
+  public storeProductForm: StoreProductForm;
 
   private constructor() {
-    this.tasksStore = new TasksStore(this);
+    this.storeTasks = new StoreTasks(this);
 
-    this.mapStore = new MapStore(this);
-    this.pointStore = new PointStore(this);
+    this.storeMap = new StoreMap(this);
+    this.storePoint = new StorePoint(this);
 
-    this.productsStore = new ProductsStore(this);
-    this.popupStore = new PopupStore(this);
+    this.storeProduct = new StoreProducts(this);
+    this.storePopup = new StorePopup(this);
 
-    this.addTaskFormStore = new AddTaskFormStore(this);
-    this.addProductFormStore = new AddProductFormStore(this);
+    this.storeTaskForm = new StoreTaskForm(this);
+    this.storeProductForm = new StoreProductForm(this);
   }
 
   public static getInstance(): RootStore {

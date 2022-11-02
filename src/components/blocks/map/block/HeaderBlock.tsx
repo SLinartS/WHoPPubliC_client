@@ -1,15 +1,20 @@
 import { FC } from 'react';
-import HeaderFloor from '../floor/HeaderFloor';
-import { IHeaderBlockProps } from './type';
 
-const HeaderBlock: FC<IHeaderBlockProps> = ({ floors }) => (
+import { IFloor } from '../../../../store/map/type';
+import MapHeaderFloor from '../floor/HeaderFloor';
+
+interface IMapHeaderBlockProps {
+  floors: Array<IFloor>;
+}
+
+const MapHeaderBlock: FC<IMapHeaderBlockProps> = ({ floors }) => (
   <div
     className='map-block__block'
     style={{ gridTemplateRows: `repeat(${floors.length + 1}, 5rem` }}
   >
-    <HeaderFloor index={0} />
+    <MapHeaderFloor index={0} />
     {floors.map((floor, index) => (
-      <HeaderFloor
+      <MapHeaderFloor
         key={floor.id}
         index={floors.length - index}
       />
@@ -17,4 +22,4 @@ const HeaderBlock: FC<IHeaderBlockProps> = ({ floors }) => (
   </div>
 );
 
-export default HeaderBlock;
+export default MapHeaderBlock;

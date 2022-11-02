@@ -5,7 +5,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  height: calc(100vh - v.$headerHeightStandart - 20rem);
+  height: calc(100vh - v.$header-height--standart - 20rem);
 
   &__container {
     display: flex;
@@ -36,29 +36,13 @@
   &__input {
     height: 2.8rem;
     font-size: 2rem;
-    border: 0.1rem solid $fontColor--black;
-    background-color: $fontColor--white;
+    border: 0.1rem solid $font-color--black;
+    background-color: $font-color--white;
     border-radius: 0.2rem;
 
     &:focus {
       outline: none;
-      border: 0.2rem solid $fontColor--black;
-    }
-  }
-}
-
-.button {
-  &--login {
-    font-size: 2.8rem;
-    padding: 2rem 5rem;
-  }
-}
-
-@media (max-width: 950px) {
-  .button {
-    &--login {
-      font-size: 2.4rem;
-      padding: 1.4rem 4rem;
+      border: 0.2rem solid $font-color--black;
     }
   }
 }
@@ -79,13 +63,6 @@
     &__input {
       height: 2.4rem;
       font-size: 1.6rem;
-    }
-  }
-
-  .button {
-    &--login {
-      font-size: 2rem;
-      padding: 1rem 3rem;
     }
   }
 }

@@ -1,23 +1,27 @@
-import { FC, useEffect } from 'react';
-import { observer } from 'mobx-react-lite';
 import './style.scss';
+
+import { observer } from 'mobx-react-lite';
+import { FC, useEffect } from 'react';
 
 import { useRootStore } from '../../../utils/RootStoreProvider/useRootStore';
 import Zone from './zone/Zone';
-import { IMapProps } from './type';
+
+interface IMapProps {
+  additionalClasses?: string;
+}
 
 const Map: FC<IMapProps> = observer(({ additionalClasses }) => {
-  const { mapStore } = useRootStore();
+  const { storeMap } = useRootStore();
 
   useEffect(() => {
-    if (mapStore.status === 'pending') {
-      mapStore.getMap();
+    if (storeMap.statusFetchMap === 'pending') {
+      storeMap.fetchMap();
     }
-  }, [mapStore, mapStore.status]);
+  }, [storeMap, storeMap.statusFetchMap]);
 
   return (
     <div className={`map-block ${additionalClasses}}`}>
-      {mapStore.mapData.map((zone, zoneIndex) => (
+      {storeMap.mapData.map((zone, zoneIndex) => (
         <Zone
           key={zone.id}
           id={zone.id}

@@ -1,15 +1,7 @@
 export interface TProductsData {
-  data: TProducts;
+  data: Array<IProduct>;
   tableHeader: Array<string>;
 }
-
-export interface TProductsOfTaskData {
-  taskId: number;
-  data: TProducts;
-  tableHeader: Array<string>;
-}
-
-export type TProducts = Array<IProduct>;
 
 export interface IProduct {
   id: number;
@@ -22,7 +14,7 @@ export interface IProduct {
   printDate: string;
 }
 
-export interface IAddProductResponse {
+export interface IProductResponse {
   message: string;
   productIds: Array<number>;
 }

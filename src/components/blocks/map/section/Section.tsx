@@ -1,54 +1,58 @@
 import { observer } from 'mobx-react-lite';
 import { FC, useEffect, useRef, useState } from 'react';
-import Block from '../block/Block';
-import HeaderBlock from '../block/HeaderBlock';
-import NumberSection from '../info/numberSection/NumberSection';
-import { ISectionProps } from './type';
 
-const Section: FC<ISectionProps> = observer(({ id, number, blocks, index }) => {
-  const [sectionNumberFontSize, setSectionNumberFontSize] =
-    useState<number>(10);
+import { ISection } from '../../../../store/map/type';
+import MapBlock from '../block/Block';
+import MapHeaderBlock from '../block/HeaderBlock';
+import MapInfoSectionNumber from '../info/sectionNumber/sectionNumber';
 
-  const letterSectionNode = useRef<HTMLParagraphElement>(null);
+interface IMapSectionProps extends ISection {
+  index: number;
+}
 
-  const sectionNode = useRef<HTMLDivElement>(null);
+const MapSection: FC<IMapSectionProps> = observer(
+  ({ id, number, blocks, index }) => {
+    const [sectionNumberFontSize, setSectionNumberFontSize] =
+      useState<number>(10);
 
-  useEffect(() => {
-    let newSectionNumberFontSize: number;
+    const sectionNode = useRef<HTMLDivElement>(null);
 
-    const tableHeigth: number | undefined = sectionNode.current?.offsetHeight;
+    useEffect(() => {
+      let newSectionNumberFontSize: number;
 
-    if (tableHeigth) {
-      newSectionNumberFontSize = tableHeigth / 40;
-      setSectionNumberFontSize(newSectionNumberFontSize);
-    }
-  }, [sectionNode.current?.offsetHeight]);
+      const tableHeigth: number | undefined = sectionNode.current?.offsetHeight;
 
-  return (
-    <div
-      className='map-block__section'
-      ref={sectionNode}
-      data-section-id={id}
-      data-section-index={index}
-    >
-      <HeaderBlock floors={blocks[0].floors} />
+      if (tableHeigth) {
+        newSectionNumberFontSize = tableHeigth / 40;
+        setSectionNumberFontSize(newSectionNumberFontSize);
+      }
+    }, [sectionNode.current?.offsetHeight]);
 
-      {blocks.map((block, blockIndex) => (
-        <Block
-          key={block.id}
-          id={block.id}
-          number={block.number}
-          floors={block.floors}
-          index={blockIndex}
+    return (
+      <div
+        className='map-block__section'
+        ref={sectionNode}
+        data-section-id={id}
+        data-section-index={index}
+      >
+        <MapHeaderBlock floors={blocks[0].floors} />
+
+        {blocks.map((block, blockIndex) => (
+          <MapBlock
+            key={block.id}
+            id={block.id}
+            number={block.number}
+            floors={block.floors}
+            index={blockIndex}
+          />
+        ))}
+        <MapInfoSectionNumber
+          fontSize={sectionNumberFontSize}
+          number={number}
         />
-      ))}
-      <NumberSection
-        ref={letterSectionNode}
-        fontSize={sectionNumberFontSize}
-        number={number}
-      />
-    </div>
-  );
-});
+      </div>
+    );
+  },
+);
 
-export default Section;
+export default MapSection;

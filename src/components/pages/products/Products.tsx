@@ -1,17 +1,19 @@
-import { observer } from 'mobx-react-lite';
-import { FC, useEffect } from 'react';
-import { useRootStore } from '../../../utils/RootStoreProvider/useRootStore';
-import Table from '../../blocks/table/Table';
 import './style.scss';
 
+import { observer } from 'mobx-react-lite';
+import { FC, useEffect } from 'react';
+
+import { useRootStore } from '../../../utils/RootStoreProvider/useRootStore';
+import Table from '../../blocks/table/Table';
+
 const Products: FC = observer(() => {
-  const { productsStore } = useRootStore();
+  const { storeProduct } = useRootStore();
 
   useEffect(() => {
-    if (productsStore.statusGetProducts === 'pending') {
-      productsStore.getProducts();
+    if (storeProduct.statusFetchProducts === 'pending') {
+      storeProduct.fetchProducts();
     }
-  }, [productsStore, productsStore.statusGetProducts]);
+  }, [storeProduct, storeProduct.statusFetchProducts]);
 
   return (
     <main className='products'>
@@ -26,10 +28,10 @@ const Products: FC = observer(() => {
         />
       </div>
 
-      {productsStore.statusGetProducts === 'done' ? (
+      {storeProduct.statusFetchProducts === 'done' ? (
         <Table
-          data={productsStore.products.data}
-          tableHeader={productsStore.products.tableHeader}
+          data={storeProduct.products.data}
+          tableHeader={storeProduct.products.tableHeader}
           additionalСlasses='table--products'
         />
       ) : (

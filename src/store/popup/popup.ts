@@ -1,77 +1,78 @@
 import { makeAutoObservable } from 'mobx';
+
 import RootStore from '../root';
 
-export class PopupStore {
+export class StorePopup {
   constructor(private readonly rootStore: RootStore) {
     makeAutoObservable(this, {});
   }
 
   /*
-    AddProduct
+    ProductForm
    */
-  private _addProductStatus: boolean = false;
+  private _productForm: boolean = false;
 
-  public get addProductStatus() {
-    return this._addProductStatus;
+  public get productForm() {
+    return this._productForm;
   }
 
-  showAddProductWindow() {
-    this._addProductStatus = true;
+  public showProductForm() {
+    this._productForm = true;
   }
 
-  hideAddProductWindow() {
-    this._addProductStatus = false;
+  public hideProductForm() {
+    this._productForm = false;
   }
 
   /*
-    AddTask
+    TaskForm
    */
-  private _addTaskStatus: boolean = false;
+  private _taskForm: boolean = false;
 
-  public get addTaskStatus() {
-    return this._addTaskStatus;
+  public get taskForm() {
+    return this._taskForm;
   }
 
-  showAddTaskWindow() {
-    this._addTaskStatus = true;
+  public showTaskForm() {
+    this._taskForm = true;
   }
 
-  hideAddTaskWindow() {
-    this._addTaskStatus = false;
+  public hideTaskForm() {
+    this._taskForm = false;
   }
 
   /*
     SelectMap
    */
-  private _selectMapStatus: boolean = false;
+  private _selectMap: boolean = false;
 
-  public get selectMapStatus() {
-    return this._selectMapStatus;
+  public get selectMap() {
+    return this._selectMap;
   }
 
-  showSelectMap() {
-    this._selectMapStatus = true;
+  public showSelectMap() {
+    this._selectMap = true;
   }
 
-  hideSelectMap() {
-    this._selectMapStatus = false;
+  public hideSelectMap() {
+    this._selectMap = false;
   }
 
   /*
     SelectPoints
    */
 
-  private _selectPointsStatus: boolean = false;
+  private _selectPoints: boolean = false;
 
-  public get selectPointsStatus() {
-    return this._selectPointsStatus;
+  public get selectPoints() {
+    return this._selectPoints;
   }
 
-  showSelectPoints() {
-    this._selectPointsStatus = true;
+  public showSelectPoints() {
+    this._selectPoints = true;
   }
 
-  hideSelectPoints() {
-    this._selectPointsStatus = false;
+  public hideSelectPoints() {
+    this._selectPoints = false;
   }
 }

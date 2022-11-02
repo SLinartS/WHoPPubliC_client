@@ -2,10 +2,10 @@
 @use '../../../styles/global/variables.scss' as v;
 
 .header {
-  height: v.$headerHeightStandart;
+  height: v.$header-height--standart;
   display: grid;
   grid-template-columns: 10rem 31rem 1fr;
-  background-color: $mainColor;
+  background-color: $main-color;
   align-items: center;
   justify-items: center;
 
@@ -19,7 +19,6 @@
     &-info {
       grid-column: 2/3;
       grid-row: 1/2;
-
       width: fit-content;
       display: flex;
       flex-direction: column;
@@ -30,9 +29,10 @@
       font-size: 2.4rem;
       margin: 0;
     }
+
     &-role {
       font-size: 2rem;
-      margin: 1rem 0 0 0;
+      margin: 1rem 0 0;
     }
   }
 
@@ -40,20 +40,16 @@
     grid-column: 3/4;
     grid-row: 1/2;
     justify-self: flex-end;
-
     display: flex;
     align-items: center;
 
     &-link {
       display: inline-block;
       padding: 0 3rem;
-
-      color: $fontColor--black;
+      color: $font-color--black;
       font-weight: bold;
       font-size: 2.4rem;
-
       word-wrap: break-word;
-
       text-align: center;
     }
   }
@@ -80,6 +76,7 @@
     padding: 0 1rem;
     font-size: 2.4rem;
   }
+
   .header {
     grid-template-columns: 10rem 30rem 1fr;
 
@@ -88,9 +85,10 @@
         font-size: 2.4rem;
         margin: 0;
       }
+
       &-role {
         font-size: 2rem;
-        margin: 1rem 0 0 0;
+        margin: 1rem 0 0;
       }
     }
   }
@@ -101,8 +99,9 @@
     padding: 0 1rem;
     font-size: 2rem;
   }
+
   .header {
-    height: v.$headerHeightMid;
+    height: v.$header-height--mid;
     grid-template-columns: 8rem 25rem 1fr;
 
     &__app-icon {
@@ -114,9 +113,10 @@
         font-size: 2rem;
         margin: 0;
       }
+
       &-role {
         font-size: 1.6rem;
-        margin: 1rem 0 0 0;
+        margin: 1rem 0 0;
       }
     }
   }
@@ -127,8 +127,9 @@
     padding: 0 1rem;
     font-size: 1.6rem;
   }
+
   .header {
-    height: v.$headerHeightLow;
+    height: v.$header-height--low;
     grid-template-columns: 6rem 20rem 1fr;
 
     &__app-icon {
@@ -140,9 +141,10 @@
         font-size: 1.6rem;
         margin: 0;
       }
+
       &-role {
         font-size: 1.2rem;
-        margin: 1rem 0 0 0;
+        margin: 1rem 0 0;
       }
     }
   }

@@ -1,15 +1,12 @@
-$mainColor: #7fa89c;
-$mainColor--hover: #7fa89c;
-$mainColor--active: #7fa89c;
-
-$secondColor: #c15943;
-$secondColor--hover: #c15943;
-$secondColor--active: #c15943;
-
-$tableColor: rgba(26, 26, 26, 1);
-$tableColorOpacityMid: rgba(26, 26, 26, 0.4);
-$tableColorOpacityLow: rgba(26, 26, 26, 0.07);
-
-$fontColor--white: #eaeaea;
-$fontColor--black: #1a1a1a;
-$linkColor: #4566c1;
+$main-color: #7fa89c;
+$main-color--hover: #7fa89c;
+$main-color--active: #7fa89c;
+$second-color: #c15943;
+$second-color--hover: #c15943;
+$second-color--active: #c15943;
+$table-color: rgb(26 26 26 / 100%);
+$table-color--opacity-mid: rgb(26 26 26 / 40%);
+$table-color--opacity-low: rgb(26 26 26 / 7%);
+$font-color--white: #eaeaea;
+$font-color--black: #1a1a1a;
+$link-color: #4566c1;

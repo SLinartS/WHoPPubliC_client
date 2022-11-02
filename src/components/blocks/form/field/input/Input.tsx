@@ -1,12 +1,17 @@
 import { observer } from 'mobx-react-lite';
-import { FC } from 'react';
-import { IFormFieldInputProps } from './type';
+import { ChangeEventHandler, FC } from 'react';
+
+interface IFormFieldInputProps {
+  additionalСlasses?: string;
+  value: string;
+  changeEvent: ChangeEventHandler<HTMLInputElement | HTMLSelectElement>;
+}
 
 const FormFieldInput: FC<IFormFieldInputProps> = observer(
   ({ additionalСlasses, value, changeEvent }) => (
     <input
       value={value}
-      className={`properties-block__input ${additionalСlasses}`}
+      className={`form-block__input ${additionalСlasses}`}
       onChange={changeEvent}
     />
   ),
