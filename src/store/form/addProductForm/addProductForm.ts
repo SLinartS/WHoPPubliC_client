@@ -1,7 +1,11 @@
 import { makeAutoObservable } from 'mobx';
 
 import RootStore from '../../root';
-import { IAddProductFormData, TAddedPoductListForTable, TAddedProductList } from './type';
+import {
+  IAddedProductListForTableData,
+  IAddProductFormData,
+  TAddedProductList,
+} from './type';
 
 export class AddProductFormStore {
   constructor(private readonly rootStore: RootStore) {
@@ -17,23 +21,36 @@ export class AddProductFormStore {
   }
 
   public getAddedProductListForTable() {
-    const productListForTable: TAddedPoductListForTable = [];
+    const productListForTable: IAddedProductListForTableData = {
+      data: [],
+      tableHeader: [
+        'Артикул',
+        'Название',
+        'Автор',
+        'Категория',
+        'Количество',
+        'Типография',
+        'Издательство',
+      ],
+    };
+
     for (const product of this.addedProductList) {
-      productListForTable.push({
+      productListForTable.data.push({
         article: product.article,
         title: product.title,
         author: product.author,
-        category: product.category,
+        categoryId: product.categoryId,
         number: product.number,
         printingHouse: product.printingHouse,
         publishingHouse: product.publishingHouse,
       });
     }
+
     return productListForTable;
   }
 
   public addProductToList() {
-    this._addedProductList.push(this._formData);
+    this._addedProductList.push({ ...this._formData });
   }
 
   public removeProductFromList(producArticle: string) {
@@ -48,17 +65,16 @@ export class AddProductFormStore {
 
   /*  Fields of the product
       addition form */
-  private readonly initialFormData = {
+  private readonly initialFormData: IAddProductFormData = {
     article: '',
     title: '',
     author: '',
-    category: '',
     yearOfPublication: '',
     number: '',
     printDate: '',
     printingHouse: '',
     publishingHouse: '',
-    userId: '',
+    categoryId: '',
   };
 
   private _formData: IAddProductFormData = this.initialFormData;
@@ -84,8 +100,8 @@ export class AddProductFormStore {
     return this._formData.author;
   }
 
-  public get category() {
-    return this._formData.category;
+  public get categoryId() {
+    return this._formData.categoryId;
   }
 
   public get yearOfPublication() {
@@ -108,10 +124,6 @@ export class AddProductFormStore {
     return this._formData.publishingHouse;
   }
 
-  public get userId() {
-    return this._formData.userId;
-  }
-
   // Setters
   public set article(article: string) {
     this._formData.article = article;
@@ -125,8 +137,8 @@ export class AddProductFormStore {
     this._formData.author = author;
   }
 
-  public set category(category: string) {
-    this._formData.category = category;
+  public set categoryId(categoryId: string) {
+    this._formData.categoryId = categoryId;
   }
 
   public set yearOfPublication(yearOfPublication: string) {
@@ -147,9 +159,5 @@ export class AddProductFormStore {
 
   public set publishingHouse(publishingHouse: string) {
     this._formData.publishingHouse = publishingHouse;
-  }
-
-  public set userId(userId: string) {
-    this._formData.userId = userId;
   }
 }

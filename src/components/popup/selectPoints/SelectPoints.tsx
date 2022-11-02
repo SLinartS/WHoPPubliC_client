@@ -15,6 +15,7 @@ const SelectPoints: FC = observer(() => {
   }
 
   useEffect(() => {
+    pointStore.isSelectedPoint = true;
     if (pointStore.status === 'pending') {
       pointStore.getPoints();
     }
@@ -49,6 +50,7 @@ const SelectPoints: FC = observer(() => {
                 id={point.id}
                 text={point.title}
                 index={index}
+                active={point.active}
               />
             ))}
           </div>
@@ -60,6 +62,7 @@ const SelectPoints: FC = observer(() => {
                 id={point.id}
                 text={point.title}
                 index={index}
+                active={point.active}
               />
             ))}
           </div>

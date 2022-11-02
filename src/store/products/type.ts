@@ -21,3 +21,8 @@ export interface IProduct {
   number: number;
   printDate: string;
 }
+
+export interface IAddProductResponse {
+  message: string;
+  productIds: Array<number>;
+}

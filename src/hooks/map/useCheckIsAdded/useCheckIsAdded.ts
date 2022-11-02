@@ -1,19 +1,24 @@
 import { useCallback } from 'react';
-import { useRootStore } from '../../../utils/RootStoreProvider/useRootStore';
 
 const useCheckIsAdded = () => {
-  const { addTaskFormStore } = useRootStore();
-
   const internalCallback = useCallback(
-    (floorId: number): boolean => {
-      for (const point of addTaskFormStore.warehousePoints) {
-        if (point.floorId === floorId) {
+    <T>(
+      array: Array<T>,
+      value: T[keyof T] | T,
+      searchParameter?: keyof T,
+    ): boolean => {
+      for (const item of array) {
+        if (searchParameter) {
+          if (item[searchParameter] === value) {
+            return true;
+          }
+        } else if (item === value) {
           return true;
         }
       }
       return false;
     },
-    [addTaskFormStore.warehousePoints],
+    [],
   );
 
   return internalCallback;

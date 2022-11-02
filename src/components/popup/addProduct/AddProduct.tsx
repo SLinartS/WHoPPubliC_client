@@ -1,5 +1,5 @@
 import { observer } from 'mobx-react-lite';
-import { FC, useCallback, useEffect } from 'react';
+import { FC, useCallback } from 'react';
 
 import { useRootStore } from '../../../utils/RootStoreProvider/useRootStore';
 import imagePlaceholder from '../../../assets/images/placeholder.jpg';
@@ -15,7 +15,7 @@ import { TChangeFieldEvent } from '../../../store/form/addTaskForm/type';
 import { IAddProductFormData } from '../../../store/form/addProductForm/type';
 
 const AddProduct: FC = observer(() => {
-  const { popupStore, addProductFormStore, productsStore } = useRootStore();
+  const { popupStore, addProductFormStore } = useRootStore();
 
   function changeFieldHandler(
     e: TChangeFieldEvent,
@@ -90,8 +90,8 @@ const AddProduct: FC = observer(() => {
           </FormBlock>
           <FormBlock titleText='Категория'>
             <FormFieldSelect
-              value={addProductFormStore.category}
-              changeEvent={(e) => changeFieldHandler(e, 'category')}
+              value={addProductFormStore.categoryId}
+              changeEvent={(e) => changeFieldHandler(e, 'categoryId')}
               options={SELECT_OPTIONS}
             />
           </FormBlock>

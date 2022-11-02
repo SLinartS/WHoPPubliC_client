@@ -10,6 +10,29 @@ export class PointStore {
     makeAutoObservable(this, {});
   }
 
+  /*  Set the 'active' switch 
+      at the point to the true, 
+      which will color it */
+  public setPointActive(
+    pointType: keyof TPoints,
+    pointIndex: number,
+    newStatus: boolean,
+  ) {
+    this._points[pointType][pointIndex].active = newStatus;
+  }
+
+  /*  Is the current open 
+      point a pop-up window  */
+  private _isSelectedPoint: boolean = false;
+
+  public get isSelectedPoint() {
+    return this._isSelectedPoint;
+  }
+
+  public set isSelectedPoint(newStatus: boolean) {
+    this._isSelectedPoint = newStatus;
+  }
+
   /*  Status of receiving 
       data from the server  
       ACCEPTANCE POINTS   */

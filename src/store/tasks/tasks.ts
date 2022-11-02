@@ -70,10 +70,18 @@ export class TasksStore {
     }
   }
 
-  public *addTask(typeId: string, taskTitle: string, userId: string) {
+  public *addTask() {
     try {
-      const data = { title: taskTitle, typeId, userId };
-      yield extendAxios.post('tasks', data);
+      const newTaskData = {
+        fields: {
+          ...this.rootStore.addTaskFormStore.formDataField,
+          userId: '1',
+          typeId: '1',
+        },
+        arrays: this.rootStore.addTaskFormStore.formDataArrays,
+      };
+
+      yield extendAxios.post('tasks', newTaskData);
       this.statusAddTask = 'done';
     } catch (error) {
       this.statusAddTask = 'error';

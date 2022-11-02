@@ -46,6 +46,10 @@ const AddTask: FC = observer(() => {
     popupStore.hideAddTaskWindow();
   }
 
+  function saveAddAcceptanceTaskWindowHandler() {
+    productsStore.addProducts();
+  }
+
   function showAddProductWindowHandler() {
     popupStore.showAddProductWindow();
     popupStore.hideAddTaskWindow();
@@ -57,24 +61,20 @@ const AddTask: FC = observer(() => {
     } else {
       setIsAcceptance(false);
     }
-  }, [
-    popupStore,
-    productsStore,
-    tasksStore,
-    addTaskFormStore.title,
-    tasksStore.statusAddTask,
-    addTaskFormStore.currentTaskType,
-  ]);
 
-  const PRODUCT_TABLE_HEADER = [
-    'Артикул',
-    'Название',
-    'Автор',
-    'Категория',
-    'Количество',
-    'Типография',
-    'Издательство',
-  ];
+    if (productsStore.statusAddProducts === 'done') {
+      tasksStore.addTask();
+    }
+
+    if (tasksStore.statusAddTask === 'done') {
+      popupStore.hideAddTaskWindow();
+    }
+  }, [
+    addTaskFormStore.currentTaskType,
+    productsStore.statusAddProducts,
+    popupStore,
+    tasksStore,
+  ]);
 
   return (
     <div className='add-task'>
@@ -84,7 +84,7 @@ const AddTask: FC = observer(() => {
         <Button
           additionalСlasses='button--window-header'
           text='Сохранить'
-          onClick={hideAddAcceptanceTaskWindowHandler}
+          onClick={saveAddAcceptanceTaskWindowHandler}
         />
         <Button
           additionalСlasses='button--window-header'
@@ -100,8 +100,8 @@ const AddTask: FC = observer(() => {
             additionalTitleBlockClasses='properties-block__title--big'
           >
             <FormFieldInput
-              value={addTaskFormStore.title}
-              changeEvent={(e) => changeFieldHandler(e, 'title')}
+              value={addTaskFormStore.article}
+              changeEvent={(e) => changeFieldHandler(e, 'article')}
               additionalСlasses='properties-block__input--big'
             />
             <Button
@@ -150,8 +150,10 @@ const AddTask: FC = observer(() => {
 
           {addProductFormStore.addedProductList.length > 0 ? (
             <Table
-              data={addProductFormStore.getAddedProductListForTable()}
-              tableHeader={PRODUCT_TABLE_HEADER}
+              data={addProductFormStore.getAddedProductListForTable().data}
+              tableHeader={
+                addProductFormStore.getAddedProductListForTable().tableHeader
+              }
               additionalСlasses='table--add-task'
             />
           ) : (

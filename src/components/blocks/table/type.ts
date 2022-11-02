@@ -1,12 +1,12 @@
 import {
   IAddProductForTable,
-  TAddedPoductListForTable,
+  TAddedProductListForTable,
 } from '../../../store/form/addProductForm/type';
 import { IProduct, TProducts } from '../../../store/products/type';
 import { ITask, TTasks } from '../../../store/tasks/type';
 
 export interface ITableProps {
-  data: TTasks | TProducts | TAddedPoductListForTable;
+  data: TTasks | TProducts | TAddedProductListForTable;
   tableHeader: Array<string>;
   additionalСlasses?: string;
 }

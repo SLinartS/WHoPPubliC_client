@@ -1,21 +1,19 @@
 import { ChangeEvent } from 'react';
-import { IPoint } from '../../point/type';
 
 export type TChangeFieldEvent = ChangeEvent<
   HTMLInputElement | HTMLSelectElement
 >;
 
 export interface IAddTaskFormDataArrays {
-  products: Array<string>;
-  points: Array<IPoint>;
+  products: Array<number>;
+  points: Array<number>;
   warehousePoints: Array<IWarehousePoint>;
 }
 
 export interface IAddTaskFormDataFields {
-  title: string;
+  article: string;
   dateStart: string;
   dateEnd: string;
-  userId: string;
 }
 
 export interface IWarehousePoint {

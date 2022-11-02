@@ -3,7 +3,7 @@ import { makeAutoObservable } from 'mobx';
 import extendAxios from '../../utils/extendAxios';
 import RootStore from '../root';
 import { TStatus } from '../type';
-import { TProductsData } from './type';
+import { IAddProductResponse, TProductsData } from './type';
 
 export class ProductsStore {
   constructor(private readonly rootStore: RootStore) {
@@ -15,7 +15,7 @@ export class ProductsStore {
 
   private _statusGetProductsOfTask: TStatus = 'done';
 
-  private _statusAddProduct: TStatus = 'pending';
+  private _statusAddProducts: TStatus = 'pending';
 
   // Getters
   public get statusGetProducts() {
@@ -26,8 +26,8 @@ export class ProductsStore {
     return this._statusGetProductsOfTask;
   }
 
-  public get statusAddProduct() {
-    return this._statusAddProduct;
+  public get statusAddProducts() {
+    return this._statusAddProducts;
   }
 
   // Setters
@@ -39,8 +39,8 @@ export class ProductsStore {
     this._statusGetProductsOfTask = newStatus;
   }
 
-  public set statusAddProduct(newStatus: TStatus) {
-    this._statusAddProduct = newStatus;
+  public set statusAddProducts(newStatus: TStatus) {
+    this._statusAddProducts = newStatus;
   }
 
   public products: TProductsData = {
@@ -75,17 +75,23 @@ export class ProductsStore {
     }
   }
 
-  public *addProduct() {
+  public *addProducts() {
     try {
       const newProductData = {
-        ...this.rootStore.addProductFormStore.formData,
-        taskTitle: this.rootStore.addTaskFormStore.currentTaskArticle,
-        userId: '0',
+        products: this.rootStore.addProductFormStore.addedProductList,
+        warehousePoints: this.rootStore.addTaskFormStore.addWarehousePoint,
+        userId: '1',
+        categoryId: '1',
       };
-      yield extendAxios.post('products', newProductData);
-      this.statusAddProduct = 'done';
+      const response: AxiosResponse<IAddProductResponse> =
+        yield extendAxios.post<IAddProductResponse>('products', newProductData);
+      for (const productId of response.data.productIds) {
+        this.rootStore.addTaskFormStore.addProduct(productId);
+      }
+
+      this.statusAddProducts = 'done';
     } catch (error) {
-      this.statusAddProduct = 'error';
+      this.statusAddProducts = 'error';
     }
   }
 }
