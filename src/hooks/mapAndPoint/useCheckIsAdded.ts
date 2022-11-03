@@ -1,11 +1,7 @@
 import { useCallback } from 'react';
 
 export interface TCallbackType {
-  <T>(
-    array: Array<T>,
-    value: T[keyof T] | T,
-    searchParameter?: keyof T,
-  ): boolean;
+  <T>(array: T[], value: T[keyof T] | T, searchParameter?: keyof T): boolean;
 }
 
 const useCheckIsAdded = () => {

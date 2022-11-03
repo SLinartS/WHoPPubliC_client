@@ -6,7 +6,9 @@ interface IRowProps<T> {
   columns: T;
 }
 
-export default observer(function TableRow<T extends object>({ columns }: IRowProps<T>) {
+export default observer(function TableRow<T extends object>({
+  columns,
+}: IRowProps<T>) {
   return (
     <>
       {Object.entries(columns).map(([key, value]) => (

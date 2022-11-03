@@ -52,21 +52,21 @@ export class StoreMap {
 
   /*  Array of data 
       from the server */
-  public _mapData: Array<IZone> = [];
+  public _mapData: IZone[] = [];
 
   public get mapData() {
     return this._mapData;
   }
 
-  public set mapData(newMapData: Array<IZone>) {
+  public set mapData(newMapData: IZone[]) {
     this._mapData = newMapData;
   }
 
   public *fetchMap() {
     try {
-      const response: AxiosResponse<Array<IZone>> = yield extendAxios.get<
-        Array<IZone>
-      >('map');
+      const response: AxiosResponse<IZone[]> = yield extendAxios.get<IZone[]>(
+        'map',
+      );
       this.mapData = response.data;
       this.statusFetchMap = 'done';
     } catch (error) {

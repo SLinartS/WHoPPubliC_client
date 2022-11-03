@@ -1,6 +1,6 @@
 export interface ITasks {
-  data: Array<ITask>;
-  tableHeader: Array<string>;
+  data: ITask[];
+  tableHeader: string[];
 }
 
 export interface ITask {

@@ -1,6 +1,6 @@
 export interface TProductsData {
-  data: Array<IProduct>;
-  tableHeader: Array<string>;
+  data: IProduct[];
+  tableHeader: string[];
 }
 
 export interface IProduct {
@@ -16,5 +16,5 @@ export interface IProduct {
 
 export interface IProductResponse {
   message: string;
-  productIds: Array<number>;
+  productIds: number[];
 }

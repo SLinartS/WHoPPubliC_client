@@ -9,4 +9,3 @@ export interface IProductFormData {
   publishingHouse: string;
   categoryId: string;
 }
-

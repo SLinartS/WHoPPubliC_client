@@ -4,7 +4,7 @@ import { ChangeEventHandler, FC } from 'react';
 import { ICategory } from '../../../../../store/category/type';
 
 interface ISelectFieldInputProps {
-  options: Array<ICategory>;
+  options: ICategory[];
   value?: string;
   changeEvent?: ChangeEventHandler<HTMLInputElement | HTMLSelectElement>;
 }

@@ -2,19 +2,19 @@ export interface IZone {
   id: number;
   zoneLetter: string;
   number: number;
-  sections: Array<ISection>;
+  sections: ISection[];
 }
 
 export interface ISection {
   id: number;
   number: number;
-  blocks: Array<IBlock>;
+  blocks: IBlock[];
 }
 
 export interface IBlock {
   id: number;
   number: number;
-  floors: Array<IFloor>;
+  floors: IFloor[];
 }
 
 export interface IFloor {

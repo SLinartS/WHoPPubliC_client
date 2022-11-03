@@ -25,20 +25,20 @@ export class StoreCategory {
 
   /*  Array of data 
       from the server */
-  private _categories: Array<ICategory> = [];
+  private _categories: ICategory[] = [];
 
   public get categories() {
     return this._categories;
   }
 
-  private set categories(newCategories: Array<ICategory>) {
+  private set categories(newCategories: ICategory[]) {
     this._categories = newCategories;
   }
 
   public *fetchCategories() {
     try {
-      const response: AxiosResponse<Array<ICategory>> = yield extendAxios.get<
-        Array<ICategory>
+      const response: AxiosResponse<ICategory[]> = yield extendAxios.get<
+        ICategory[]
       >('categories');
 
       this.categories = response.data;

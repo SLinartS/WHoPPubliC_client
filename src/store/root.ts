@@ -32,14 +32,13 @@ class RootStore {
 
   public storeCategory: StoreCategory;
 
-
   private constructor() {
     this.storeTasks = new StoreTasks(this);
     this.storeProduct = new StoreProducts(this);
 
     this.storeMap = new StoreMap(this);
     this.storePoint = new StorePoint(this);
-   
+
     this.storePopup = new StorePopup(this);
 
     this.storeFormTask = new StoreFormTask(this);

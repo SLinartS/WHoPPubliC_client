@@ -7,8 +7,8 @@ interface IProductForTable
   extends Omit<IProductFormData, 'yearOfPublication' | 'printDate'> {}
 
 interface IProductListForTableData {
-  data: Array<IProductForTable>;
-  tableHeader: Array<string>;
+  data: IProductForTable[];
+  tableHeader: string[];
 }
 
 const useGetProductListForTable = () => {

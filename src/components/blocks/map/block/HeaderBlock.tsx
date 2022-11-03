@@ -4,7 +4,7 @@ import { IFloor } from '../../../../store/map/type';
 import MapHeaderFloor from '../floor/HeaderFloor';
 
 interface IMapHeaderBlockProps {
-  floors: Array<IFloor>;
+  floors: IFloor[];
 }
 
 const MapHeaderBlock: FC<IMapHeaderBlockProps> = ({ floors }) => (

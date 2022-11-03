@@ -1,6 +1,6 @@
 export interface IPoints {
-  acceptance: Array<IPoint>;
-  shipment: Array<IPoint>;
+  acceptance: IPoint[];
+  shipment: IPoint[];
 }
 
 export interface IPoint {

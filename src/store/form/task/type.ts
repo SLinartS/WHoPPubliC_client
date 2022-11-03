@@ -1,7 +1,7 @@
 export interface ITaskFormDataArrays {
-  products: Array<number>;
-  points: Array<number>;
-  warehousePoints: Array<IWarehousePoint>;
+  products: number[];
+  points: number[];
+  warehousePoints: IWarehousePoint[];
 }
 
 export interface IWarehousePoint {

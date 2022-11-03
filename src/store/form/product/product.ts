@@ -10,7 +10,7 @@ export class StoreFormProduct {
 
   /*  List of products 
       added by the user */
-  private _productList: Array<IProductFormData> = [];
+  private _productList: IProductFormData[] = [];
 
   public get productList() {
     return this._productList;

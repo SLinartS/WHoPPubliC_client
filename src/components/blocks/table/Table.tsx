@@ -9,7 +9,7 @@ import TableRow from './row/Row';
 interface ITableProps<T> {
   data: T[];
   keyWord: keyof T;
-  tableHeader: Array<string>;
+  tableHeader: string[];
   additionalСlasses?: string;
 }
 

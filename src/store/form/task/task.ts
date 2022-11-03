@@ -47,7 +47,7 @@ export class StoreFormTask {
   public get formDataArrays() {
     return this._formDataArrays;
   }
-  
+
   // Getters ARRAYS
   public get products() {
     return this._formDataArrays.products;
