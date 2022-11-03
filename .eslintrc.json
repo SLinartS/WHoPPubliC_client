@@ -9,7 +9,9 @@
     "react-app/jest",
     "airbnb",
     "airbnb-typescript",
-    "plugin:import/typescript"
+    "plugin:import/typescript",
+    "plugin:testing-library/react",
+    "plugin:jest-dom/recommended"
   ],
   "overrides": [],
   "parserOptions": {
@@ -21,7 +23,13 @@
     "project": "tsconfig.json",
     "nomen": true
   },
-  "plugins": ["react", "@typescript-eslint", "simple-import-sort"],
+  "plugins": [
+    "react",
+    "@typescript-eslint",
+    "simple-import-sort",
+    "testing-library",
+    "jest-dom"
+  ],
   "rules": {
     // react
     "react/jsx-filename-extension": ["warn", { "extensions": [".tsx"] }],
@@ -60,6 +68,16 @@
     "import/no-duplicates": "warn",
     "simple-import-sort/imports": "warn",
     "simple-import-sort/exports": "warn",
+    // testing-library
+    "testing-library/await-async-query": "error",
+		"testing-library/no-await-sync-query": "error",
+		"testing-library/no-debugging-utils": "warn",
+		"testing-library/no-dom-import": "off",
+    // jest-dom
+    "jest-dom/prefer-checked": "error",
+    "jest-dom/prefer-enabled-disabled": "error",
+    "jest-dom/prefer-required": "error",
+    "jest-dom/prefer-to-have-attribute": "error",
     // for develop
     "no-console": "off",
     "no-alert": "off",

@@ -45,7 +45,7 @@ export class StoreProducts {
     this._statusAddProducts = newStatus;
   }
 
-  /*  Arrays of data 
+  /*  Arrays of data
       from the server */
   public products: TProductsData = {
     data: [],
@@ -81,8 +81,12 @@ export class StoreProducts {
 
   public *addProducts() {
     try {
+      const { productList } = this.rootStore.storeFormProduct;
+      if (productList) {
+        throw new Error('the list of products is empty');
+      }
       const newProductData = {
-        products: this.rootStore.storeFormProduct.productList,
+        products: productList,
         warehousePoints: this.rootStore.storeFormTask.addWarehousePoint,
         userId: '1',
       };
@@ -91,7 +95,6 @@ export class StoreProducts {
       for (const productId of response.data.productIds) {
         this.rootStore.storeFormTask.addProduct(productId);
       }
-
       this.statusAddProducts = 'done';
     } catch (error) {
       this.statusAddProducts = 'error';

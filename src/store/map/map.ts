@@ -11,7 +11,7 @@ export class StoreMap {
     makeAutoObservable(this, {});
   }
 
-  /*  Status of receiving 
+  /*  Status of receiving
       data from the server  */
   private _statusFetchMap: TStatus = 'pending';
 
@@ -23,7 +23,7 @@ export class StoreMap {
     this._statusFetchMap = newStatus;
   }
 
-  /*  Is the current open 
+  /*  Is the current open
       map a pop-up window  */
   private _isSelectedMap: boolean = false;
 
@@ -35,8 +35,8 @@ export class StoreMap {
     this._isSelectedMap = newStatus;
   }
 
-  /*  Set the 'active' switch 
-      at the floor to the true, 
+  /*  Set the 'active' switch
+      at the floor to the true,
       which will color it */
   public setFloorActive(
     zoneIndex: number,
@@ -50,7 +50,7 @@ export class StoreMap {
     ].active = newStatus;
   }
 
-  /*  Array of data 
+  /*  Array of data
       from the server */
   public _mapData: IZone[] = [];
 

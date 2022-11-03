@@ -44,7 +44,7 @@ export class StoreTasks {
     this._statusAddTask = newStatus;
   }
 
-  /*  Arrays of data 
+  /*  Arrays of data
       from the server */
   public tasksAcceptanceList: ITasks = { data: [], tableHeader: [] };
 

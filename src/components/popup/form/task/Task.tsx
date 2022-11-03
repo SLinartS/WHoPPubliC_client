@@ -104,7 +104,7 @@ const PopupFormTask: FC = observer(() => {
         <FormLayout additionalСlasses='form-block--article-info'>
           <FormBlock
             titleText='Название'
-            additionalTitleBlockClasses='form-block__title--big'
+            additionalTitleClasses='form-block__title--big'
           >
             <FormFieldInput
               value={storeFormTask.article}

@@ -52,7 +52,7 @@ const PopupFormProduct: FC = observer(() => {
         <FormLayout additionalСlasses='form-block--article-info'>
           <FormBlock
             titleText='Артикул'
-            additionalTitleBlockClasses='form-block__title--big'
+            additionalTitleClasses='form-block__title--big'
           >
             <FormFieldInput
               value={storeFormProduct.article}

@@ -11,7 +11,7 @@ export class StoreCategory {
     makeAutoObservable(this, {});
   }
 
-  /*  Status of receiving 
+  /*  Status of receiving
       data from the server  */
   private _statusFetchCategories: TStatus = 'pending';
 
@@ -23,7 +23,7 @@ export class StoreCategory {
     this._statusFetchCategories = newStatus;
   }
 
-  /*  Array of data 
+  /*  Array of data
       from the server */
   private _categories: ICategory[] = [];
 

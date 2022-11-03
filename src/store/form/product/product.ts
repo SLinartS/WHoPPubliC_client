@@ -8,7 +8,7 @@ export class StoreFormProduct {
     makeAutoObservable(this, {});
   }
 
-  /*  List of products 
+  /*  List of products
       added by the user */
   private _productList: IProductFormData[] = [];
 

@@ -4,17 +4,17 @@ import { FC, ReactNode } from 'react';
 import FormTitle from '../title/Title';
 
 interface IFormBlockProps {
-  additionalTitleBlockClasses?: string;
+  additionalTitleClasses?: string;
   titleText: string;
   children: ReactNode;
 }
 
 const FormBlock: FC<IFormBlockProps> = observer(
-  ({ additionalTitleBlockClasses, titleText, children }) => (
-    <div className='form-block__block'>
+  ({ additionalTitleClasses, titleText, children }) => (
+    <div className='form-block__block' data-testid='form-block-div'>
       <FormTitle
         text={titleText}
-        additionalСlasses={additionalTitleBlockClasses}
+        additionalСlasses={additionalTitleClasses}
       />
       {children}
     </div>

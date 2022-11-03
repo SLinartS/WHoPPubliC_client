@@ -10,7 +10,12 @@ interface PropertiesBlockLayoutProps {
 
 const FormLayout: FC<PropertiesBlockLayoutProps> = observer(
   ({ additionalСlasses, children }) => (
-    <div className={`form-block ${additionalСlasses}`}>{children}</div>
+    <div
+      className={`form-block ${additionalСlasses}`}
+      data-testid='form-layout-div'
+    >
+      {children}
+    </div>
   ),
 );
 

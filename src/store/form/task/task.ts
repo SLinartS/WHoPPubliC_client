@@ -25,7 +25,7 @@ export class StoreFormTask {
     this._currentTaskType = newType;
   }
 
-  /*  Array of data 
+  /*  Array of data
       from the server */
   private _formDataField: ITaskFormDataFields = {
     article: '',
