@@ -1,0 +1,18 @@
+@use '../../styles/global/colors.scss' as *;
+
+.popup {
+  display: grid;
+  grid-template-rows: fit-content(100%) 1fr;
+  max-width: 102.4rem;
+  width: 95%;
+  height: 76.8rem;
+  position: absolute;
+  background-color: $font-color--white;
+  top: 50%;
+  left: calc(50% - 2rem);
+  transform: translate(-50%, -50%);
+  box-shadow: 0 0 1rem 0;
+  border-radius: 0.5rem;
+  margin: 0rem 2rem;
+  font-size: 2.4rem;
+}

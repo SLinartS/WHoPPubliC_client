@@ -1,8 +1,10 @@
 import './style.scss';
+import '../../style.scss';
 
 import { observer } from 'mobx-react-lite';
 import { FC, useEffect, useState } from 'react';
 
+import useGetProductListForTable from '../../../../hooks/mapAndPoint/useGetProductListForTable/useGetProductListForTable';
 import { ITaskFormDataFields } from '../../../../store/form/task/type';
 import { TChangeFieldEvent } from '../../../../types/form/type';
 import { useRootStore } from '../../../../utils/RootStoreProvider/useRootStore';
@@ -19,24 +21,36 @@ const PopupFormTask: FC = observer(() => {
   const {
     storePopup,
     storeProduct,
-    storeTaskForm,
+    storeFormTask,
     storeTasks,
-    storeProductForm,
+    storePoint,
+    storeFormProduct,
+    storeCategory,
   } = useRootStore();
+
+  const getProductListForTable = useGetProductListForTable();
 
   function changeFieldHandler(
     e: TChangeFieldEvent,
     fieldName: keyof ITaskFormDataFields,
   ) {
-    storeTaskForm[fieldName] = e.target.value;
+    storeFormTask[fieldName] = e.target.value;
   }
 
-  function closeWindowHandler() {
+  function closeHandler() {
     storePopup.hideTaskForm();
+    storeFormTask.clearPoints();
+    storeFormTask.clearWarehousePoints();
+    storeFormTask.clearProducts();
+    storePoint.statusFetchPoints = 'pending';
+    storeProduct.statusFetchProducts = 'pending';
+    storeCategory.statusFetchCategories = 'pending';
+    storeFormProduct.clearProductList();
   }
 
-  function addTaskHandler() {
+  function saveHandler() {
     storeProduct.addProducts();
+    closeHandler();
   }
 
   function openSelectPointsHandler() {
@@ -55,7 +69,7 @@ const PopupFormTask: FC = observer(() => {
   }
 
   useEffect(() => {
-    if (storeTaskForm.currentTaskType === 'acceptance') {
+    if (storeFormTask.currentTaskType === 'acceptance') {
       setIsAcceptance(true);
     } else {
       setIsAcceptance(false);
@@ -67,21 +81,23 @@ const PopupFormTask: FC = observer(() => {
 
     if (storeTasks.statusAddTask === 'done') {
       storePopup.hideTaskForm();
+      storeFormProduct.clearProductList();
     }
   }, [
-    storeTaskForm.currentTaskType,
+    storeFormTask.currentTaskType,
     storeProduct.statusAddProducts,
     storeTasks.statusAddTask,
+    storeFormProduct,
     storePopup,
     storeTasks,
   ]);
 
   return (
-    <div className='add-task'>
+    <div className='popup add-task'>
       <WindowHeader
         text={`Добавить задачу ${isAcceptance ? 'приёмки' : 'отгрузки'}`}
-        saveEvent={addTaskHandler}
-        closeEvent={closeWindowHandler}
+        saveEvent={saveHandler}
+        closeEvent={closeHandler}
       />
 
       <div className='add-task__content-block'>
@@ -91,7 +107,7 @@ const PopupFormTask: FC = observer(() => {
             additionalTitleBlockClasses='form-block__title--big'
           >
             <FormFieldInput
-              value={storeTaskForm.article}
+              value={storeFormTask.article}
               changeEvent={(e) => changeFieldHandler(e, 'article')}
               additionalСlasses='form-block__input--big'
             />
@@ -105,13 +121,13 @@ const PopupFormTask: FC = observer(() => {
         <FormLayout additionalСlasses='form-block--title-info'>
           <FormBlock titleText='Дата начала'>
             <FormFieldInput
-              value={storeTaskForm.dateStart}
+              value={storeFormTask.dateStart}
               changeEvent={(e) => changeFieldHandler(e, 'dateStart')}
             />
           </FormBlock>
           <FormBlock titleText='Дата окончания'>
             <FormFieldInput
-              value={storeTaskForm.dateEnd}
+              value={storeFormTask.dateEnd}
               changeEvent={(e) => changeFieldHandler(e, 'dateEnd')}
             />
           </FormBlock>
@@ -139,12 +155,10 @@ const PopupFormTask: FC = observer(() => {
             clickEvent={openProductFormHandler}
           />
 
-          {storeProductForm.addedProductList.length > 0 ? (
+          {storeFormProduct.productList.length > 0 ? (
             <Table
-              data={storeProductForm.getAddedProductListForTable().data}
-              tableHeader={
-                storeProductForm.getAddedProductListForTable().tableHeader
-              }
+              data={getProductListForTable().data}
+              tableHeader={getProductListForTable().tableHeader}
               additionalСlasses='table--add-task'
             />
           ) : (

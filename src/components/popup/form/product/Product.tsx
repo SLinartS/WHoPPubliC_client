@@ -1,7 +1,7 @@
 import './style.scss';
 
 import { observer } from 'mobx-react-lite';
-import { FC } from 'react';
+import { FC, useEffect } from 'react';
 
 import imagePlaceholder from '../../../../assets/images/placeholder.jpg';
 import { IProductFormData } from '../../../../store/form/product/type';
@@ -11,42 +11,42 @@ import Button from '../../../blocks/button/Button';
 import FormBlock from '../../../blocks/form/block/Block';
 import FormFieldInput from '../../../blocks/form/field/input/Input';
 import FormFieldSelect from '../../../blocks/form/field/select/Select';
-import { ISelectOption } from '../../../blocks/form/field/select/type';
 import FormLayout from '../../../blocks/form/layout/Layout';
 import WindowHeader from '../../../blocks/windowHeader/WindowHeader';
 
 const PopupFormProduct: FC = observer(() => {
-  const { storePopup, storeProductForm } = useRootStore();
+  const { storePopup, storeFormProduct, storeCategory } = useRootStore();
 
   function changeFieldHandler(
     e: TChangeFieldEvent,
     fieldName: keyof IProductFormData,
   ) {
-    storeProductForm[fieldName] = e.target.value;
+    storeFormProduct[fieldName] = e.target.value;
   }
 
-  const SELECT_OPTIONS: Array<ISelectOption> = [
-    { id: 1, option: 'Учебная литература (ВУЗ)' },
-    { id: 2, option: 'Учебная литература (CУЗ)' },
-    { id: 3, option: 'Художественная литература' },
-  ];
-
-  function closeWindowHandler() {
+  function closeHandler() {
+    storeFormProduct.clearFormData();
     storePopup.hideProductForm();
     storePopup.showTaskForm();
   }
 
-  function addProductHandler() {
-    storeProductForm.addProductToList();
-    closeWindowHandler();
+  function saveHandler() {
+    storeFormProduct.addProductToList();
+    closeHandler();
   }
 
+  useEffect(() => {
+    if (storeCategory.statusFetchCategories === 'pending') {
+      storeCategory.fetchCategories();
+    }
+  });
+
   return (
-    <div className='add-product'>
+    <div className='popup add-product'>
       <WindowHeader
         text='Добавить партию товара'
-        saveEvent={addProductHandler}
-        closeEvent={closeWindowHandler}
+        saveEvent={saveHandler}
+        closeEvent={closeHandler}
       />
       <div className='add-product__content-block'>
         <FormLayout additionalСlasses='form-block--article-info'>
@@ -55,7 +55,7 @@ const PopupFormProduct: FC = observer(() => {
             additionalTitleBlockClasses='form-block__title--big'
           >
             <FormFieldInput
-              value={storeProductForm.article}
+              value={storeFormProduct.article}
               changeEvent={(e) => changeFieldHandler(e, 'article')}
               additionalСlasses='form-block__input--big'
             />
@@ -69,7 +69,7 @@ const PopupFormProduct: FC = observer(() => {
         <FormLayout additionalСlasses='form-block--title-info'>
           <FormBlock titleText='Название'>
             <FormFieldInput
-              value={storeProductForm.title}
+              value={storeFormProduct.title}
               changeEvent={(e) => changeFieldHandler(e, 'title')}
             />
           </FormBlock>
@@ -78,15 +78,15 @@ const PopupFormProduct: FC = observer(() => {
         <FormLayout additionalСlasses='form-block--main-info'>
           <FormBlock titleText='Автор'>
             <FormFieldInput
-              value={storeProductForm.author}
+              value={storeFormProduct.author}
               changeEvent={(e) => changeFieldHandler(e, 'author')}
             />
           </FormBlock>
           <FormBlock titleText='Категория'>
             <FormFieldSelect
-              value={storeProductForm.categoryId}
+              value={storeFormProduct.categoryId}
               changeEvent={(e) => changeFieldHandler(e, 'categoryId')}
-              options={SELECT_OPTIONS}
+              options={storeCategory.categories}
             />
           </FormBlock>
         </FormLayout>
@@ -94,13 +94,13 @@ const PopupFormProduct: FC = observer(() => {
         <FormLayout additionalСlasses='form-block--second-info'>
           <FormBlock titleText='Год издания'>
             <FormFieldInput
-              value={storeProductForm.yearOfPublication}
+              value={storeFormProduct.yearOfPublication}
               changeEvent={(e) => changeFieldHandler(e, 'yearOfPublication')}
             />
           </FormBlock>
           <FormBlock titleText='Количество товаров'>
             <FormFieldInput
-              value={storeProductForm.number}
+              value={storeFormProduct.number}
               changeEvent={(e) => changeFieldHandler(e, 'number')}
             />
           </FormBlock>
@@ -109,19 +109,19 @@ const PopupFormProduct: FC = observer(() => {
         <FormLayout additionalСlasses='form-block--other-info'>
           <FormBlock titleText='Дата печати'>
             <FormFieldInput
-              value={storeProductForm.printDate}
+              value={storeFormProduct.printDate}
               changeEvent={(e) => changeFieldHandler(e, 'printDate')}
             />
           </FormBlock>
           <FormBlock titleText='Типография'>
             <FormFieldInput
-              value={storeProductForm.printingHouse}
+              value={storeFormProduct.printingHouse}
               changeEvent={(e) => changeFieldHandler(e, 'printingHouse')}
             />
           </FormBlock>
           <FormBlock titleText='Издательство'>
             <FormFieldInput
-              value={storeProductForm.publishingHouse}
+              value={storeFormProduct.publishingHouse}
               changeEvent={(e) => changeFieldHandler(e, 'publishingHouse')}
             />
           </FormBlock>

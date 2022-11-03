@@ -15,7 +15,7 @@ interface IPointsBlockProps {
 
 const PointsBlock: FC<IPointsBlockProps> = observer(
   ({ id, text, index, active }) => {
-    const { storeTaskForm, storePoint } = useRootStore();
+    const { storeFormTask, storePoint } = useRootStore();
     const pointBlockNode = useRef<HTMLDivElement>(null);
     const getPointCoordinates = useGetPointCoordinates();
     const checkIsAdded = useCheckIsAdded();
@@ -25,20 +25,20 @@ const PointsBlock: FC<IPointsBlockProps> = observer(
         const { point } = getPointCoordinates(pointBlockNode.current);
 
         if (point) {
-          if (checkIsAdded(storeTaskForm.points, point.id)) {
+          if (checkIsAdded(storeFormTask.points, point.id)) {
             storePoint.setPointActive(
-              storeTaskForm.currentTaskType,
+              storeFormTask.currentTaskType,
               point.index,
               false,
             );
-            storeTaskForm.removePoint(point.id);
+            storeFormTask.removePoint(point.id);
           } else {
             storePoint.setPointActive(
-              storeTaskForm.currentTaskType,
+              storeFormTask.currentTaskType,
               point.index,
               true,
             );
-            storeTaskForm.addPoint(point.id);
+            storeFormTask.addPoint(point.id);
           }
         }
       }

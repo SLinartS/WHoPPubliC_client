@@ -1,7 +1,8 @@
 import { configure } from 'mobx';
 
-import { StoreProductForm } from './form/product/product';
-import { StoreTaskForm } from './form/task/task';
+import { StoreCategory } from './category/category';
+import { StoreFormProduct } from './form/product/product';
+import { StoreFormTask } from './form/task/task';
 import { StoreMap } from './map/map';
 import { StorePoint } from './point/point';
 import { StorePopup } from './popup/popup';
@@ -17,29 +18,34 @@ class RootStore {
 
   public storeTasks: StoreTasks;
 
+  public storeProduct: StoreProducts;
+
   public storeMap: StoreMap;
 
   public storePoint: StorePoint;
 
-  public storeProduct: StoreProducts;
-
   public storePopup: StorePopup;
 
-  public storeTaskForm: StoreTaskForm;
+  public storeFormTask: StoreFormTask;
 
-  public storeProductForm: StoreProductForm;
+  public storeFormProduct: StoreFormProduct;
+
+  public storeCategory: StoreCategory;
+
 
   private constructor() {
     this.storeTasks = new StoreTasks(this);
+    this.storeProduct = new StoreProducts(this);
 
     this.storeMap = new StoreMap(this);
     this.storePoint = new StorePoint(this);
-
-    this.storeProduct = new StoreProducts(this);
+   
     this.storePopup = new StorePopup(this);
 
-    this.storeTaskForm = new StoreTaskForm(this);
-    this.storeProductForm = new StoreProductForm(this);
+    this.storeFormTask = new StoreFormTask(this);
+    this.storeFormProduct = new StoreFormProduct(this);
+
+    this.storeCategory = new StoreCategory(this);
   }
 
   public static getInstance(): RootStore {

@@ -54,11 +54,11 @@
     "object-curly-newline": "off",
     "no-restricted-syntax": "off",
     // automatic sorting of imports
-    "import/first": "error",
-    "import/newline-after-import": "error",
-    "import/no-duplicates": "error",
-    "simple-import-sort/imports": "error",
-    "simple-import-sort/exports": "error",
+    "import/first": "warn",
+    "import/newline-after-import": "warn",
+    "import/no-duplicates": "warn",
+    "simple-import-sort/imports": "warn",
+    "simple-import-sort/exports": "warn",
     // for develop
     "no-console": "off",
     "no-alert": "off",

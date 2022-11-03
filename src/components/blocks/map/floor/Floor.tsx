@@ -12,7 +12,7 @@ interface IMapFloorProps extends IFloor {
 
 const MapFloor: FC<IMapFloorProps> = observer(
   ({ id, active, number, index }) => {
-    const { storeTaskForm, storeMap } = useRootStore();
+    const { storeFormTask, storeMap } = useRootStore();
     const floorNode = useRef<HTMLDivElement>(null);
     const getFloorCoordinates = useGetFloorCoordinates();
     const checkIsAdded = useCheckIsAdded();
@@ -25,7 +25,7 @@ const MapFloor: FC<IMapFloorProps> = observer(
 
         if (zone && section && block && floor) {
           if (
-            checkIsAdded(storeTaskForm.warehousePoints, floor.id, 'floorId')
+            checkIsAdded(storeFormTask.warehousePoints, floor.id, 'floorId')
           ) {
             storeMap.setFloorActive(
               zone.index,
@@ -34,7 +34,7 @@ const MapFloor: FC<IMapFloorProps> = observer(
               floor.index,
               false,
             );
-            storeTaskForm.removeWarehousePoint(floor.id);
+            storeFormTask.removeWarehousePoint(floor.id);
           } else {
             storeMap.setFloorActive(
               zone.index,
@@ -43,7 +43,7 @@ const MapFloor: FC<IMapFloorProps> = observer(
               floor.index,
               true,
             );
-            storeTaskForm.addWarehousePoint({
+            storeFormTask.addWarehousePoint({
               zoneId: zone.id,
               sectionId: section.id,
               blockId: block.id,

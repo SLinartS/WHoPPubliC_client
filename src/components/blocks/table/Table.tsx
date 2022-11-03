@@ -3,7 +3,7 @@ import './style.scss';
 import { observer } from 'mobx-react-lite';
 import { FC } from 'react';
 
-import { IProductForTable } from '../../../store/form/product/type';
+import { IProductForTable } from '../../../hooks/mapAndPoint/useGetProductListForTable/type';
 import { IProduct } from '../../../store/products/type';
 import { ITask } from '../../../store/tasks/type';
 import TableColumn from './column/Column';

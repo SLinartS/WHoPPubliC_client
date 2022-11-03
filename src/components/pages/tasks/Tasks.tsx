@@ -9,11 +9,11 @@ import Button from '../../blocks/button/Button';
 import Table from '../../blocks/table/Table';
 
 const Tasks: FC = observer(() => {
-  const { storeTasks, storePopup, storeTaskForm, storeProduct } =
+  const { storeTasks, storePopup, storeFormTask, storeProduct } =
     useRootStore();
 
   function showAddTaskWindowHandler(taskType: TTaskType) {
-    storeTaskForm.currentTaskType = taskType;
+    storeFormTask.currentTaskType = taskType;
     storeProduct.statusAddProducts = 'pending';
     storePopup.showTaskForm();
   }

@@ -1,62 +1,33 @@
 import { makeAutoObservable } from 'mobx';
 
 import RootStore from '../../root';
-import { IAddedProductListForTableData, IProductFormData } from './type';
+import { IProductFormData } from './type';
 
-export class StoreProductForm {
+export class StoreFormProduct {
   constructor(private readonly rootStore: RootStore) {
     makeAutoObservable(this, {});
   }
 
   /*  List of products 
-    added by the user */
-  private _addedProductList: Array<IProductFormData> = [];
+      added by the user */
+  private _productList: Array<IProductFormData> = [];
 
-  public get addedProductList() {
-    return this._addedProductList;
-  }
-
-  public getAddedProductListForTable() {
-    const productListForTable: IAddedProductListForTableData = {
-      data: [],
-      tableHeader: [
-        'Артикул',
-        'Название',
-        'Автор',
-        'Категория',
-        'Количество',
-        'Типография',
-        'Издательство',
-      ],
-    };
-
-    for (const product of this.addedProductList) {
-      productListForTable.data.push({
-        article: product.article,
-        title: product.title,
-        author: product.author,
-        categoryId: product.categoryId,
-        number: product.number,
-        printingHouse: product.printingHouse,
-        publishingHouse: product.publishingHouse,
-      });
-    }
-
-    return productListForTable;
+  public get productList() {
+    return this._productList;
   }
 
   public addProductToList() {
-    this._addedProductList.push({ ...this._formData });
+    this._productList.push({ ...this._formData });
   }
 
   public removeProductFromList(producArticle: string) {
-    this._addedProductList = this._addedProductList.filter(
+    this._productList = this._productList.filter(
       (product) => product.article !== producArticle,
     );
   }
 
   public clearProductList() {
-    this._addedProductList = [];
+    this._productList = [];
   }
 
   /*  Fields of the product
@@ -77,47 +48,6 @@ export class StoreProductForm {
 
   public clearFormData() {
     this._formData = this.initialFormData;
-  }
-
-  // Getters
-  public get formData() {
-    return this._formData;
-  }
-
-  public get article() {
-    return this._formData.article;
-  }
-
-  public get title() {
-    return this._formData.title;
-  }
-
-  public get author() {
-    return this._formData.author;
-  }
-
-  public get categoryId() {
-    return this._formData.categoryId;
-  }
-
-  public get yearOfPublication() {
-    return this._formData.yearOfPublication;
-  }
-
-  public get number() {
-    return this._formData.number;
-  }
-
-  public get printDate() {
-    return this._formData.printDate;
-  }
-
-  public get printingHouse() {
-    return this._formData.printingHouse;
-  }
-
-  public get publishingHouse() {
-    return this._formData.publishingHouse;
   }
 
   // Setters

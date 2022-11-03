@@ -10,10 +10,3 @@ export interface IProductFormData {
   categoryId: string;
 }
 
-export interface IAddedProductListForTableData {
-  data: Array<IProductForTable>;
-  tableHeader: Array<string>;
-}
-
-export interface IProductForTable
-  extends Omit<IProductFormData, 'yearOfPublication' | 'printDate'> {}

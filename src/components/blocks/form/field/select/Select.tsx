@@ -1,10 +1,10 @@
 import { observer } from 'mobx-react-lite';
 import { ChangeEventHandler, FC } from 'react';
 
-import { ISelectOption } from './type';
+import { ICategory } from '../../../../../store/category/type';
 
 interface ISelectFieldInputProps {
-  options: Array<ISelectOption>;
+  options: Array<ICategory>;
   value?: string;
   changeEvent?: ChangeEventHandler<HTMLInputElement | HTMLSelectElement>;
 }
@@ -28,7 +28,7 @@ const FormFieldSelect: FC<ISelectFieldInputProps> = observer(
           className='form-block__option'
           value={option.id}
         >
-          {option.option}
+          {option.title}
         </option>
       ))}
     </select>

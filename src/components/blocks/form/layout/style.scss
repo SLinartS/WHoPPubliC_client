@@ -38,15 +38,15 @@
       margin: 0 2rem 0 0;
       height: 4rem;
     }
-  }
-
-  &__select {
-    height: 2.8rem;
-
+    
     &:focus {
       outline: none;
       border: 0.2rem solid $font-color--black;
     }
+  }
+
+  &__select {
+    height: 2.8rem;
   }
 
   &__add-point {
@@ -64,5 +64,39 @@
   &--second-info,
   &--other-info {
     grid-column: 1/2;
+  }
+}
+
+@media (max-width: 700px) {
+  .form-block {
+    padding: 1rem 1rem;
+
+    &__title {
+      width: fit-content;
+      white-space: nowrap;
+      margin: 0.5rem 1rem 0.5rem 0;
+      font-size: 1.6rem;
+
+      &--big {
+        font-size: 2.4rem;
+      }
+    }
+
+    &__input,
+    &__select,
+    &__option {
+      font-size: 1.2rem;
+      height: 2rem;
+
+      &--big {
+        font-size: 2.4rem;
+        margin: 0 1rem 0 0;
+        height: 3rem;
+      }
+    }
+
+    &__add-point {
+      height: 2ю4rem;
+    }
   }
 }

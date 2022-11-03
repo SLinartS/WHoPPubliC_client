@@ -8,11 +8,18 @@ import PointsBlock from '../../../blocks/points/block/Block';
 import WindowHeader from '../../../blocks/windowHeader/WindowHeader';
 
 const PopupSelectPoints: FC = observer(() => {
-  const { storePopup, storePoint, storeTaskForm } = useRootStore();
+  const { storePopup, storePoint, storeFormTask } = useRootStore();
 
-  function closeWindowHandler() {
+  function saveHandler() {
     storePopup.showTaskForm();
     storePopup.hideSelectPoints();
+  }
+
+  function closeHandler() {
+    storePopup.showTaskForm();
+    storePopup.hideSelectPoints();
+    storeFormTask.clearPoints();
+    storePoint.fetchPoints();
   }
 
   useEffect(() => {
@@ -23,19 +30,19 @@ const PopupSelectPoints: FC = observer(() => {
   }, [storePoint]);
 
   return (
-    <div className='select-points'>
+    <div className='popup select-points'>
       <WindowHeader
         text={`Выбрать точки ${
-          storeTaskForm.currentTaskType === 'acceptance'
+          storeFormTask.currentTaskType === 'acceptance'
             ? 'приёмки'
             : 'отгрузки'
         }`}
-        saveEvent={closeWindowHandler}
-        closeEvent={closeWindowHandler}
+        saveEvent={saveHandler}
+        closeEvent={closeHandler}
       />
 
       <div className='points-map'>
-        {storeTaskForm.currentTaskType === 'acceptance' ? (
+        {storeFormTask.currentTaskType === 'acceptance' ? (
           <div className='points-map__container'>
             {storePoint.points.acceptance.map((point, index) => (
               <PointsBlock

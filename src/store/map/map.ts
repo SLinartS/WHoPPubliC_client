@@ -35,18 +35,6 @@ export class StoreMap {
     this._isSelectedMap = newStatus;
   }
 
-  /*  Array of data 
-      from the server */
-  public _mapData: Array<IZone> = [];
-
-  public get mapData() {
-    return this._mapData;
-  }
-
-  public set mapData(newMapData: Array<IZone>) {
-    this._mapData = newMapData;
-  }
-
   /*  Set the 'active' switch 
       at the floor to the true, 
       which will color it */
@@ -60,6 +48,18 @@ export class StoreMap {
     this._mapData[zoneIndex].sections[sectionIndex].blocks[blockIndex].floors[
       floorIndex
     ].active = newStatus;
+  }
+
+  /*  Array of data 
+      from the server */
+  public _mapData: Array<IZone> = [];
+
+  public get mapData() {
+    return this._mapData;
+  }
+
+  public set mapData(newMapData: Array<IZone>) {
+    this._mapData = newMapData;
   }
 
   public *fetchMap() {

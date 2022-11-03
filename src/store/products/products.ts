@@ -82,15 +82,14 @@ export class StoreProducts {
   public *addProducts() {
     try {
       const newProductData = {
-        products: this.rootStore.storeProductForm.addedProductList,
-        warehousePoints: this.rootStore.storeTaskForm.addWarehousePoint,
+        products: this.rootStore.storeFormProduct.productList,
+        warehousePoints: this.rootStore.storeFormTask.addWarehousePoint,
         userId: '1',
-        categoryId: '1',
       };
       const response: AxiosResponse<IProductResponse> =
         yield extendAxios.post<IProductResponse>('products', newProductData);
       for (const productId of response.data.productIds) {
-        this.rootStore.storeTaskForm.addProduct(productId);
+        this.rootStore.storeFormTask.addProduct(productId);
       }
 
       this.statusAddProducts = 'done';

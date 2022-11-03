@@ -8,7 +8,7 @@ import {
   IWarehousePoint,
 } from './type';
 
-export class StoreTaskForm {
+export class StoreFormTask {
   constructor(private readonly rootStore: RootStore) {
     makeAutoObservable(this, {});
   }
@@ -47,20 +47,7 @@ export class StoreTaskForm {
   public get formDataArrays() {
     return this._formDataArrays;
   }
-
-  // Getters FIELDS
-  public get article() {
-    return this._formDataField.article;
-  }
-
-  public get dateStart() {
-    return this._formDataField.dateStart;
-  }
-
-  public get dateEnd() {
-    return this._formDataField.dateEnd;
-  }
-
+  
   // Getters ARRAYS
   public get products() {
     return this._formDataArrays.products;

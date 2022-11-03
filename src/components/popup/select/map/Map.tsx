@@ -7,11 +7,18 @@ import Map from '../../../blocks/map/Map';
 import WindowHeader from '../../../blocks/windowHeader/WindowHeader';
 
 const PopupSelectMap: FC = () => {
-  const { storePopup, storeMap } = useRootStore();
+  const { storePopup, storeMap, storeFormTask } = useRootStore();
 
-  function closeWindowHandler() {
+  function saveHandler() {
     storePopup.showTaskForm();
     storePopup.hideSelectMap();
+  }
+
+  function closeHandler() {
+    storePopup.showTaskForm();
+    storePopup.hideSelectMap();
+    storeFormTask.clearWarehousePoints();
+    storeMap.fetchMap();
   }
 
   useEffect(() => {
@@ -19,11 +26,11 @@ const PopupSelectMap: FC = () => {
   }, [storeMap]);
 
   return (
-    <div className='select-map'>
+    <div className='popup select-map'>
       <WindowHeader
         text='Выбрать раскладки на складе'
-        saveEvent={closeWindowHandler}
-        closeEvent={closeWindowHandler}
+        saveEvent={saveHandler}
+        closeEvent={closeHandler}
       />
       <Map additionalClasses='map--select-map' />
     </div>
