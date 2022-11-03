@@ -45,6 +45,7 @@ const Tasks: FC = observer(() => {
         {storeTasks.statusFetchAcceptanceTasks === 'done' ? (
           <Table
             data={storeTasks.tasksAcceptanceList.data}
+            keyWord='article'
             tableHeader={storeTasks.tasksAcceptanceList.tableHeader}
             additionalСlasses='table--tasks'
           />
@@ -65,6 +66,7 @@ const Tasks: FC = observer(() => {
         {storeTasks.statusFetchShipmentTasks === 'done' ? (
           <Table
             data={storeTasks.tasksShipmentList.data}
+            keyWord='article'
             tableHeader={storeTasks.tasksShipmentList.tableHeader}
             additionalСlasses='table--tasks'
           />

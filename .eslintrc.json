@@ -41,6 +41,7 @@
     // jsx
     "jsx-quotes": ["error", "prefer-single"],
     // other
+    "prefer-arrow-callback": "off",
     "no-underscore-dangle": "off",
     "import/prefer-default-export": "off",
     "arrow-body-style": "off",

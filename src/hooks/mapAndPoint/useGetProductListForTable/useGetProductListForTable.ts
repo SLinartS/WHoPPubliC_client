@@ -1,7 +1,15 @@
 import { useCallback } from 'react';
 
+import { IProductFormData } from '../../../store/form/product/type';
 import { useRootStore } from '../../../utils/RootStoreProvider/useRootStore';
-import { IProductListForTableData } from './type';
+
+interface IProductForTable
+  extends Omit<IProductFormData, 'yearOfPublication' | 'printDate'> {}
+
+interface IProductListForTableData {
+  data: Array<IProductForTable>;
+  tableHeader: Array<string>;
+}
 
 const useGetProductListForTable = () => {
   const { storeFormProduct } = useRootStore();

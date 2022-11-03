@@ -1,16 +1,12 @@
 import { observer } from 'mobx-react-lite';
-import { FC } from 'react';
 
-import { IProductForTable } from '../../../../hooks/mapAndPoint/useGetProductListForTable/type';
-import { IProduct } from '../../../../store/products/type';
-import { ITask } from '../../../../store/tasks/type';
 import TableColumn from '../column/Column';
 
-interface IRowProps {
-  columns: ITask | IProduct | IProductForTable;
+interface IRowProps<T> {
+  columns: T;
 }
 
-const TableRow: FC<IRowProps> = observer(({ columns }) => {
+export default observer(function TableRow<T extends object>({ columns }: IRowProps<T>) {
   return (
     <>
       {Object.entries(columns).map(([key, value]) => (
@@ -23,5 +19,3 @@ const TableRow: FC<IRowProps> = observer(({ columns }) => {
     </>
   );
 });
-
-export default TableRow;

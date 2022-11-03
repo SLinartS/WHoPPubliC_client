@@ -1,22 +1,25 @@
 import './style.scss';
 
 import { observer } from 'mobx-react-lite';
-import { FC } from 'react';
+import { Key } from 'react';
 
-import { IProductForTable } from '../../../hooks/mapAndPoint/useGetProductListForTable/type';
-import { IProduct } from '../../../store/products/type';
-import { ITask } from '../../../store/tasks/type';
 import TableColumn from './column/Column';
 import TableRow from './row/Row';
 
-interface ITableProps {
-  data: Array<ITask> | Array<IProduct> | Array<IProductForTable>;
+interface ITableProps<T> {
+  data: T[];
+  keyWord: keyof T;
   tableHeader: Array<string>;
   additionalСlasses?: string;
 }
 
-const Table: FC<ITableProps> = observer(
-  ({ data, tableHeader, additionalСlasses }) => (
+export default observer(function Table<T extends object>({
+  data,
+  keyWord,
+  tableHeader,
+  additionalСlasses,
+}: ITableProps<T>) {
+  return (
     <div
       className={`table ${additionalСlasses}`}
       style={{ gridTemplateColumns: `repeat(${tableHeader.length}, auto)` }}
@@ -30,12 +33,10 @@ const Table: FC<ITableProps> = observer(
       ))}
       {data.map((columns) => (
         <TableRow
-          key={columns.article}
+          key={columns[keyWord] as Key}
           columns={columns}
         />
       ))}
     </div>
-  ),
-);
-
-export default Table;
+  );
+});

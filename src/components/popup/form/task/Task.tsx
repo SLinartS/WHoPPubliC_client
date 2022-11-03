@@ -158,6 +158,7 @@ const PopupFormTask: FC = observer(() => {
           {storeFormProduct.productList.length > 0 ? (
             <Table
               data={getProductListForTable().data}
+              keyWord='article'
               tableHeader={getProductListForTable().tableHeader}
               additionalСlasses='table--add-task'
             />

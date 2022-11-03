@@ -31,6 +31,7 @@ const Products: FC = observer(() => {
       {storeProduct.statusFetchProducts === 'done' ? (
         <Table
           data={storeProduct.products.data}
+          keyWord='article'
           tableHeader={storeProduct.products.tableHeader}
           additionalСlasses='table--products'
         />
