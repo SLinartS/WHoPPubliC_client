@@ -3,7 +3,7 @@ import { render, screen } from '@testing-library/react';
 import FormTitle from './Title';
 
 describe('FormTitle Component Render', () => {
-  test('Сorrect values', () => {
+  test('Title are rendered', () => {
     render(
       <FormTitle
         additionalСlasses='test-form-title-modifier'
@@ -12,6 +12,16 @@ describe('FormTitle Component Render', () => {
     );
     const paragraph = screen.getByText(/testTitleText/);
     expect(paragraph).toBeInTheDocument();
+  });
+
+  test('An additional class is added', () => {
+    render(
+      <FormTitle
+        additionalСlasses='test-form-title-modifier'
+        text='testTitleText'
+      />,
+    );
+    const paragraph = screen.getByText(/testTitleText/);
     expect(paragraph).toHaveClass('test-form-title-modifier');
   });
 });

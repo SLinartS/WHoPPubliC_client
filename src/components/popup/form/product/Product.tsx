@@ -56,7 +56,7 @@ const PopupFormProduct: FC = observer(() => {
           >
             <FormFieldInput
               value={storeFormProduct.article}
-              changeEvent={(e) => changeFieldHandler(e, 'article')}
+              changeHandler={(e) => changeFieldHandler(e, 'article')}
               additionalСlasses='form-block__input--big'
             />
             <Button
@@ -70,7 +70,7 @@ const PopupFormProduct: FC = observer(() => {
           <FormBlock titleText='Название'>
             <FormFieldInput
               value={storeFormProduct.title}
-              changeEvent={(e) => changeFieldHandler(e, 'title')}
+              changeHandler={(e) => changeFieldHandler(e, 'title')}
             />
           </FormBlock>
         </FormLayout>
@@ -79,13 +79,13 @@ const PopupFormProduct: FC = observer(() => {
           <FormBlock titleText='Автор'>
             <FormFieldInput
               value={storeFormProduct.author}
-              changeEvent={(e) => changeFieldHandler(e, 'author')}
+              changeHandler={(e) => changeFieldHandler(e, 'author')}
             />
           </FormBlock>
           <FormBlock titleText='Категория'>
             <FormFieldSelect
               value={storeFormProduct.categoryId}
-              changeEvent={(e) => changeFieldHandler(e, 'categoryId')}
+              changeHandler={(e) => changeFieldHandler(e, 'categoryId')}
               options={storeCategory.categories}
             />
           </FormBlock>
@@ -95,13 +95,13 @@ const PopupFormProduct: FC = observer(() => {
           <FormBlock titleText='Год издания'>
             <FormFieldInput
               value={storeFormProduct.yearOfPublication}
-              changeEvent={(e) => changeFieldHandler(e, 'yearOfPublication')}
+              changeHandler={(e) => changeFieldHandler(e, 'yearOfPublication')}
             />
           </FormBlock>
           <FormBlock titleText='Количество товаров'>
             <FormFieldInput
               value={storeFormProduct.number}
-              changeEvent={(e) => changeFieldHandler(e, 'number')}
+              changeHandler={(e) => changeFieldHandler(e, 'number')}
             />
           </FormBlock>
         </FormLayout>
@@ -110,19 +110,19 @@ const PopupFormProduct: FC = observer(() => {
           <FormBlock titleText='Дата печати'>
             <FormFieldInput
               value={storeFormProduct.printDate}
-              changeEvent={(e) => changeFieldHandler(e, 'printDate')}
+              changeHandler={(e) => changeFieldHandler(e, 'printDate')}
             />
           </FormBlock>
           <FormBlock titleText='Типография'>
             <FormFieldInput
               value={storeFormProduct.printingHouse}
-              changeEvent={(e) => changeFieldHandler(e, 'printingHouse')}
+              changeHandler={(e) => changeFieldHandler(e, 'printingHouse')}
             />
           </FormBlock>
           <FormBlock titleText='Издательство'>
             <FormFieldInput
               value={storeFormProduct.publishingHouse}
-              changeEvent={(e) => changeFieldHandler(e, 'publishingHouse')}
+              changeHandler={(e) => changeFieldHandler(e, 'publishingHouse')}
             />
           </FormBlock>
         </FormLayout>

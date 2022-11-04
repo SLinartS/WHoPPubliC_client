@@ -1,24 +1,50 @@
-import { render, screen } from '@testing-library/react';
-import userEvent from '@testing-library/user-event';
+import { screen } from '@testing-library/react';
 
+import setupUserEvent from '../../../tests/helpers/setupUserEvent';
 import Button from './Button';
 
 describe('Button Component Render', () => {
-  test('Сorrect values', () => {
+  test('Button are rendered', async () => {
     const clickHandler = jest.fn();
 
-    render(
+    setupUserEvent(
       <Button
         text='TestButtonText'
         additionalСlasses='test-button-class'
         clickEvent={clickHandler}
       />,
     );
-    const button = screen.getByRole('button');
-    expect(button).toBeInTheDocument();
-    expect(button).toHaveClass('test-button-class');
+
+    expect(screen.getByRole('button')).toBeInTheDocument();
+  });
+
+  test('An additional class is added', async () => {
+    const clickHandler = jest.fn();
+
+    setupUserEvent(
+      <Button
+        text='TestButtonText'
+        additionalСlasses='test-button-class'
+        clickEvent={clickHandler}
+      />,
+    );
+
+    expect(screen.getByRole('button')).toHaveClass('test-button-class');
+  });
+
+  test('Сlick on the button', async () => {
+    const clickHandler = jest.fn();
+
+    const { user } = setupUserEvent(
+      <Button
+        text='TestButtonText'
+        additionalСlasses='test-button-class'
+        clickEvent={clickHandler}
+      />,
+    );
+
     expect(clickHandler).toBeCalledTimes(0);
-    userEvent.click(button);
+    await user.click(await screen.findByRole('button'));
     expect(clickHandler).toBeCalledTimes(1);
   });
 });

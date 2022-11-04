@@ -1,11 +1,13 @@
 import './style.scss';
 
-import { FC, MouseEventHandler } from 'react';
+import { FC } from 'react';
+
+import { TMouseButtonEvent } from '../../../types/form/type';
 
 interface IButtonProps {
   additionalСlasses?: string;
   text: string;
-  clickEvent?: MouseEventHandler<HTMLButtonElement>;
+  clickEvent?: TMouseButtonEvent;
 }
 
 const Button: FC<IButtonProps> = ({ additionalСlasses, text, clickEvent }) => (

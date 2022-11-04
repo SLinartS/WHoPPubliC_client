@@ -1,12 +1,14 @@
 import { render, screen } from '@testing-library/react';
-import userEvent from '@testing-library/user-event';
-import { ChangeEventHandler } from 'react';
 
-import { TChangeFieldEvent } from '../../../../../types/form/type';
+import setupUserEvent from '../../../../../tests/helpers/setupUserEvent';
+import {
+  TChangeFieldEvent,
+  TChangeFieldHandler,
+} from '../../../../../types/form/type';
 import FormFieldSelect from './Select';
 
 describe('FormFieldSelect Component Render', () => {
-  let clickHandler: ChangeEventHandler<HTMLInputElement | HTMLSelectElement>;
+  let changeHandler: TChangeFieldHandler;
   const options = [
     {
       id: 1,
@@ -28,33 +30,16 @@ describe('FormFieldSelect Component Render', () => {
       <FormFieldSelect
         options={options}
         value={value}
-        changeEvent={clickHandler}
+        changeHandler={changeHandler}
       />,
     );
 
     expect(
       screen.getByRole('combobox') as HTMLSelectElement,
     ).toBeInTheDocument();
-    expect(
-      screen.getByRole('option', {
-        name: /--- Выберите категорию ---/,
-      }) as HTMLOptionElement,
-    ).toBeInTheDocument();
-    expect(
-      screen.getByRole('option', {
-        name: /optionTitle1/,
-      }) as HTMLOptionElement,
-    ).toBeInTheDocument();
-    expect(
-      screen.getByRole('option', {
-        name: /optionTitle2/,
-      }) as HTMLOptionElement,
-    ).toBeInTheDocument();
-    expect(
-      screen.getByRole('option', {
-        name: /optionTitle3/,
-      }) as HTMLOptionElement,
-    ).toBeInTheDocument();
+    expect(screen.getAllByRole('option') as HTMLOptionElement[]).toHaveLength(
+      4,
+    );
   });
 
   test('Selected option by default', () => {
@@ -63,11 +48,11 @@ describe('FormFieldSelect Component Render', () => {
       <FormFieldSelect
         options={options}
         value={value}
-        changeEvent={clickHandler}
+        changeHandler={changeHandler}
       />,
     );
 
-    expect((screen.getByRole('combobox') as HTMLSelectElement).value).toBe(
+    expect(screen.getByRole('combobox') as HTMLSelectElement).toHaveValue(
       'unset',
     );
   });
@@ -78,54 +63,38 @@ describe('FormFieldSelect Component Render', () => {
       <FormFieldSelect
         options={options}
         value={value}
-        changeEvent={clickHandler}
+        changeHandler={changeHandler}
       />,
     );
-    expect((screen.getByRole('combobox') as HTMLSelectElement).value).toBe('1');
+    expect(screen.getByRole('combobox') as HTMLSelectElement).toHaveValue('1');
   });
 
-  test('Selection of options', () => {
+  test('Selection of options', async () => {
     let value = '';
-
-    clickHandler = jest.fn((event: TChangeFieldEvent) => {
+    changeHandler = jest.fn((event: TChangeFieldEvent) => {
       value = event.target.value;
     });
-
-    const { rerender } = render(
+    const { user, rerender } = setupUserEvent(
       <FormFieldSelect
         options={options}
         value={value}
-        changeEvent={clickHandler}
+        changeHandler={changeHandler}
       />,
     );
 
-    expect(clickHandler).toBeCalledTimes(0);
-    userEvent.selectOptions(
+    expect(changeHandler).toBeCalledTimes(0);
+    await user.selectOptions(
       screen.getByRole('combobox') as HTMLSelectElement,
       '2',
     );
-    expect(clickHandler).toBeCalledTimes(1);
+    expect(changeHandler).toBeCalledTimes(1);
     rerender(
       <FormFieldSelect
         options={options}
         value={value}
-        changeEvent={clickHandler}
+        changeHandler={changeHandler}
       />,
     );
-    expect((screen.getByRole('combobox') as HTMLSelectElement).value).toBe('2');
-
-    userEvent.selectOptions(
-      screen.getByRole('combobox') as HTMLSelectElement,
-      '1',
-    );
-    expect(clickHandler).toBeCalledTimes(2);
-    rerender(
-      <FormFieldSelect
-        options={options}
-        value={value}
-        changeEvent={clickHandler}
-      />,
-    );
-    expect((screen.getByRole('combobox') as HTMLSelectElement).value).toBe('1');
+    expect(screen.getByRole('combobox') as HTMLSelectElement).toHaveValue('2');
   });
 });

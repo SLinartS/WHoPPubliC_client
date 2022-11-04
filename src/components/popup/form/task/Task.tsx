@@ -11,7 +11,7 @@ import { useRootStore } from '../../../../utils/RootStoreProvider/useRootStore';
 import Button from '../../../blocks/button/Button';
 import FormBlock from '../../../blocks/form/block/Block';
 import FormFieldInput from '../../../blocks/form/field/input/Input';
-import FormFieldPoint from '../../../blocks/form/field/point/point';
+import FormFieldPoint from '../../../blocks/form/field/point/Point';
 import FormLayout from '../../../blocks/form/layout/Layout';
 import Table from '../../../blocks/table/Table';
 import WindowHeader from '../../../blocks/windowHeader/WindowHeader';
@@ -108,7 +108,7 @@ const PopupFormTask: FC = observer(() => {
           >
             <FormFieldInput
               value={storeFormTask.article}
-              changeEvent={(e) => changeFieldHandler(e, 'article')}
+              changeHandler={(e) => changeFieldHandler(e, 'article')}
               additionalСlasses='form-block__input--big'
             />
             <Button
@@ -122,13 +122,13 @@ const PopupFormTask: FC = observer(() => {
           <FormBlock titleText='Дата начала'>
             <FormFieldInput
               value={storeFormTask.dateStart}
-              changeEvent={(e) => changeFieldHandler(e, 'dateStart')}
+              changeHandler={(e) => changeFieldHandler(e, 'dateStart')}
             />
           </FormBlock>
           <FormBlock titleText='Дата окончания'>
             <FormFieldInput
               value={storeFormTask.dateEnd}
-              changeEvent={(e) => changeFieldHandler(e, 'dateEnd')}
+              changeHandler={(e) => changeFieldHandler(e, 'dateEnd')}
             />
           </FormBlock>
         </FormLayout>
@@ -137,11 +137,11 @@ const PopupFormTask: FC = observer(() => {
           <FormBlock
             titleText={`Точки ${isAcceptance ? 'приёмки' : 'отгрузки'}`}
           >
-            <FormFieldPoint clickEvent={openSelectPointsHandler} />
+            <FormFieldPoint clickHandler={openSelectPointsHandler} />
           </FormBlock>
           {isAcceptance ? (
             <FormBlock titleText='Точки склада'>
-              <FormFieldPoint clickEvent={openSelectMapHandler} />
+              <FormFieldPoint clickHandler={openSelectMapHandler} />
             </FormBlock>
           ) : (
             ''

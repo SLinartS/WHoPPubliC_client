@@ -1,15 +1,17 @@
 import { observer } from 'mobx-react-lite';
-import { FC, MouseEventHandler } from 'react';
+import { FC } from 'react';
+
+import { TMouseButtonEvent } from '../../../../../types/form/type';
 
 interface IFormFieldPointProps {
-  clickEvent: MouseEventHandler<HTMLButtonElement>;
+  clickHandler: TMouseButtonEvent;
 }
 
-const FormFieldPoint: FC<IFormFieldPointProps> = observer(({ clickEvent }) => (
+const FormFieldPoint: FC<IFormFieldPointProps> = observer(({ clickHandler }) => (
   <button
     type='button'
     className='form-block__add-point'
-    onClick={clickEvent}
+    onClick={clickHandler}
   >
     +
   </button>
