@@ -11,9 +11,6 @@ export class StorePoint {
     makeAutoObservable(this, {});
   }
 
-  /*  Set the 'active' switch
-      at the point to the true,
-      which will color it */
   public setPointActive(
     pointType: keyof IPoints,
     pointIndex: number,
@@ -22,21 +19,6 @@ export class StorePoint {
     this._points[pointType][pointIndex].active = newStatus;
   }
 
-  /*  Is the current open
-      point a pop-up window  */
-  private _isSelectedPoint: boolean = false;
-
-  public get isSelectedPoint() {
-    return this._isSelectedPoint;
-  }
-
-  public set isSelectedPoint(newStatus: boolean) {
-    this._isSelectedPoint = newStatus;
-  }
-
-  /*  Status of receiving
-      data from the server
-      ACCEPTANCE POINTS   */
   private _statusFetchPoints: TStatus = 'pending';
 
   public get statusFetchPoints() {
@@ -47,9 +29,6 @@ export class StorePoint {
     this._statusFetchPoints = newStatus;
   }
 
-  /*  Array of data
-      from the server
-      ACCEPTANCE POINTS */
   private _points: IPoints = {
     acceptance: [],
     shipment: [],

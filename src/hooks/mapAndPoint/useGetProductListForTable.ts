@@ -1,10 +1,10 @@
 import { useCallback } from 'react';
 
-import { IProductFormData } from '../../../store/form/product/type';
-import { useRootStore } from '../../../utils/RootStoreProvider/useRootStore';
+import { IProductFormDataFields } from '../../store/form/product/field/type';
+import { useRootStore } from '../../utils/RootStoreProvider/useRootStore';
 
 interface IProductForTable
-  extends Omit<IProductFormData, 'yearOfPublication' | 'printDate'> {}
+  extends Omit<IProductFormDataFields, 'yearOfPublication' | 'printDate'> {}
 
 interface IProductListForTableData {
   data: IProductForTable[];
@@ -12,7 +12,7 @@ interface IProductListForTableData {
 }
 
 const useGetProductListForTable = () => {
-  const { storeFormProduct } = useRootStore();
+  const { storeFormProductList } = useRootStore();
 
   const internalCallback = useCallback((): IProductListForTableData => {
     const productListForTable: IProductListForTableData = {
@@ -28,7 +28,7 @@ const useGetProductListForTable = () => {
       ],
     };
 
-    for (const product of storeFormProduct.productList) {
+    for (const product of storeFormProductList.list) {
       productListForTable.data.push({
         article: product.article,
         title: product.title,
@@ -41,7 +41,7 @@ const useGetProductListForTable = () => {
     }
 
     return productListForTable;
-  }, [storeFormProduct.productList]);
+  }, [storeFormProductList.list]);
 
   return internalCallback;
 };

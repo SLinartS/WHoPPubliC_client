@@ -76,13 +76,16 @@ export class StoreTasks {
 
   public *addTask() {
     try {
+      if (this.rootStore.storeFormState.checkTaskErrors()) {
+        throw new Error();
+      }
       const newTaskData = {
         fields: {
-          ...this.rootStore.storeFormTask.formDataField,
+          ...this.rootStore.storeFormTaskField.formData,
           userId: '1',
           typeId: '1',
         },
-        arrays: this.rootStore.storeFormTask.formDataArrays,
+        arrays: this.rootStore.storeFormTaskArray.formData,
       };
 
       yield extendAxios.post('tasks', newTaskData);

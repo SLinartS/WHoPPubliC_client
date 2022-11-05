@@ -4,12 +4,13 @@ import '../../style.scss';
 import { observer } from 'mobx-react-lite';
 import { FC, useEffect, useState } from 'react';
 
-import useGetProductListForTable from '../../../../hooks/mapAndPoint/useGetProductListForTable/useGetProductListForTable';
-import { ITaskFormDataFields } from '../../../../store/form/task/type';
+import useGetProductListForTable from '../../../../hooks/mapAndPoint/useGetProductListForTable';
+import { ITaskFormFields } from '../../../../store/form/task/field/type';
 import { TChangeFieldEvent } from '../../../../types/form/type';
 import { useRootStore } from '../../../../utils/RootStoreProvider/useRootStore';
 import Button from '../../../blocks/button/Button';
 import FormBlock from '../../../blocks/form/block/Block';
+import FormField from '../../../blocks/form/field/Field';
 import FormFieldInput from '../../../blocks/form/field/input/Input';
 import FormFieldPoint from '../../../blocks/form/field/point/Point';
 import FormLayout from '../../../blocks/form/layout/Layout';
@@ -21,10 +22,12 @@ const PopupFormTask: FC = observer(() => {
   const {
     storePopup,
     storeProduct,
-    storeFormTask,
+    storeFormState,
+    storeFormProductList,
+    storeFormTaskArray,
+    storeFormTaskField,
     storeTasks,
     storePoint,
-    storeFormProduct,
     storeCategory,
   } = useRootStore();
 
@@ -32,20 +35,18 @@ const PopupFormTask: FC = observer(() => {
 
   function changeFieldHandler(
     e: TChangeFieldEvent,
-    fieldName: keyof ITaskFormDataFields,
+    fieldName: keyof ITaskFormFields,
   ) {
-    storeFormTask[fieldName] = e.target.value;
+    storeFormTaskField.setFormField(fieldName, e.target.value);
   }
 
   function closeHandler() {
     storePopup.hideTaskForm();
-    storeFormTask.clearPoints();
-    storeFormTask.clearWarehousePoints();
-    storeFormTask.clearProducts();
+    storeFormTaskArray.clearArrays();
     storePoint.statusFetchPoints = 'pending';
     storeProduct.statusFetchProducts = 'pending';
     storeCategory.statusFetchCategories = 'pending';
-    storeFormProduct.clearProductList();
+    storeFormProductList.clearProductList();
   }
 
   function saveHandler() {
@@ -69,7 +70,7 @@ const PopupFormTask: FC = observer(() => {
   }
 
   useEffect(() => {
-    if (storeFormTask.currentTaskType === 'acceptance') {
+    if (storeFormState.currentTaskType === 'acceptance') {
       setIsAcceptance(true);
     } else {
       setIsAcceptance(false);
@@ -81,13 +82,12 @@ const PopupFormTask: FC = observer(() => {
 
     if (storeTasks.statusAddTask === 'done') {
       storePopup.hideTaskForm();
-      storeFormProduct.clearProductList();
+      storeFormProductList.clearProductList();
     }
   }, [
-    storeFormTask.currentTaskType,
+    storeFormState.currentTaskType,
     storeProduct.statusAddProducts,
-    storeTasks.statusAddTask,
-    storeFormProduct,
+    storeFormProductList,
     storePopup,
     storeTasks,
   ]);
@@ -106,11 +106,13 @@ const PopupFormTask: FC = observer(() => {
             titleText='Название'
             additionalTitleClasses='form-block__title--big'
           >
-            <FormFieldInput
-              value={storeFormTask.article}
-              changeHandler={(e) => changeFieldHandler(e, 'article')}
-              additionalСlasses='form-block__input--big'
-            />
+            <FormField errors={storeFormTaskField.getFormErrors('article')}>
+              <FormFieldInput
+                value={storeFormTaskField.getFormField('article')}
+                changeHandler={(e) => changeFieldHandler(e, 'article')}
+                additionalСlasses='form-block__input--big'
+              />
+            </FormField>
             <Button
               additionalСlasses='button--window-header'
               text='Сгенерировать'
@@ -120,16 +122,20 @@ const PopupFormTask: FC = observer(() => {
 
         <FormLayout additionalСlasses='form-block--title-info'>
           <FormBlock titleText='Дата начала'>
-            <FormFieldInput
-              value={storeFormTask.dateStart}
-              changeHandler={(e) => changeFieldHandler(e, 'dateStart')}
-            />
+            <FormField errors={storeFormTaskField.getFormErrors('dateStart')}>
+              <FormFieldInput
+                value={storeFormTaskField.getFormField('dateStart')}
+                changeHandler={(e) => changeFieldHandler(e, 'dateStart')}
+              />
+            </FormField>
           </FormBlock>
           <FormBlock titleText='Дата окончания'>
-            <FormFieldInput
-              value={storeFormTask.dateEnd}
-              changeHandler={(e) => changeFieldHandler(e, 'dateEnd')}
-            />
+            <FormField errors={storeFormTaskField.getFormErrors('dateEnd')}>
+              <FormFieldInput
+                value={storeFormTaskField.getFormField('dateEnd')}
+                changeHandler={(e) => changeFieldHandler(e, 'dateEnd')}
+              />
+            </FormField>
           </FormBlock>
         </FormLayout>
 
@@ -155,7 +161,7 @@ const PopupFormTask: FC = observer(() => {
             clickEvent={openProductFormHandler}
           />
 
-          {storeFormProduct.productList.length > 0 ? (
+          {storeFormProductList.list.length > 0 ? (
             <Table
               data={getProductListForTable().data}
               keyWord='article'

@@ -81,19 +81,19 @@ export class StoreProducts {
 
   public *addProducts() {
     try {
-      const { productList } = this.rootStore.storeFormProduct;
-      if (productList) {
+      const { list } = this.rootStore.storeFormProductList;
+      if (list) {
         throw new Error('the list of products is empty');
       }
       const newProductData = {
-        products: productList,
-        warehousePoints: this.rootStore.storeFormTask.addWarehousePoint,
+        products: list,
+        warehousePoints: this.rootStore.storeFormTaskArray.addWarehousePoint,
         userId: '1',
       };
       const response: AxiosResponse<IProductResponse> =
         yield extendAxios.post<IProductResponse>('products', newProductData);
       for (const productId of response.data.productIds) {
-        this.rootStore.storeFormTask.addProduct(productId);
+        this.rootStore.storeFormTaskArray.addProduct(productId);
       }
       this.statusAddProducts = 'done';
     } catch (error) {

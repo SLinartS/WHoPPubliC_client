@@ -7,7 +7,8 @@ import Map from '../../../blocks/map/Map';
 import WindowHeader from '../../../blocks/windowHeader/WindowHeader';
 
 const PopupSelectMap: FC = () => {
-  const { storePopup, storeMap, storeFormTask } = useRootStore();
+  const { storePopup, storeMap, storeFormState, storeFormTaskArray } =
+    useRootStore();
 
   function saveHandler() {
     storePopup.showTaskForm();
@@ -17,13 +18,13 @@ const PopupSelectMap: FC = () => {
   function closeHandler() {
     storePopup.showTaskForm();
     storePopup.hideSelectMap();
-    storeFormTask.clearWarehousePoints();
+    storeFormTaskArray.clearArrays('warehousePoints');
     storeMap.fetchMap();
   }
 
   useEffect(() => {
-    storeMap.isSelectedMap = true;
-  }, [storeMap]);
+    storeFormState.isSelectedMap = true;
+  }, [storeFormState]);
 
   return (
     <div className='popup select-map'>

@@ -11,7 +11,10 @@ interface IFormBlockProps {
 
 const FormBlock: FC<IFormBlockProps> = observer(
   ({ additionalTitleClasses, titleText, children }) => (
-    <div className='form-block__block' data-testid='form-block-div'>
+    <div
+      className='form-block__block'
+      data-testid='form-block-div'
+    >
       <FormTitle
         text={titleText}
         additionalСlasses={additionalTitleClasses}

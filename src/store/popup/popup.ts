@@ -61,7 +61,6 @@ export class StorePopup {
   /*
     SelectPoints
    */
-
   private _selectPoints: boolean = false;
 
   public get selectPoints() {

@@ -1,12 +1,10 @@
-import React from 'react'
-import { useRootStore } from '../../utils/RootStoreProvider/useRootStore'
+import React from 'react';
+import { useRootStore } from '../../utils/RootStoreProvider/useRootStore';
 
 const testStoreProvider = () => {
-  const rootStore = useRootStore()
+  const rootStore = useRootStore();
 
-  return (
-    <div>testStoreProvider</div>
-  )
-}
+  return <div>testStoreProvider</div>;
+};
 
-export default testStoreProvider
+export default testStoreProvider;

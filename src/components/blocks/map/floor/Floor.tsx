@@ -12,20 +12,24 @@ interface IMapFloorProps extends IFloor {
 
 const MapFloor: FC<IMapFloorProps> = observer(
   ({ id, active, number, index }) => {
-    const { storeFormTask, storeMap } = useRootStore();
+    const { storeFormTaskArray, storeMap, storeFormState } = useRootStore();
     const floorNode = useRef<HTMLDivElement>(null);
     const getFloorCoordinates = useGetFloorCoordinates();
     const checkIsAdded = useCheckIsAdded();
 
     function chooseFloor() {
-      if (floorNode.current && storeMap.isSelectedMap) {
+      if (floorNode.current && storeFormState.isSelectedMap) {
         const { zone, section, block, floor } = getFloorCoordinates(
           floorNode.current,
         );
 
         if (zone && section && block && floor) {
           if (
-            checkIsAdded(storeFormTask.warehousePoints, floor.id, 'floorId')
+            checkIsAdded(
+              storeFormTaskArray.warehousePoints,
+              floor.id,
+              'floorId',
+            )
           ) {
             storeMap.setFloorActive(
               zone.index,
@@ -34,7 +38,7 @@ const MapFloor: FC<IMapFloorProps> = observer(
               floor.index,
               false,
             );
-            storeFormTask.removeWarehousePoint(floor.id);
+            storeFormTaskArray.removeWarehousePoint(floor.id);
           } else {
             storeMap.setFloorActive(
               zone.index,
@@ -43,7 +47,7 @@ const MapFloor: FC<IMapFloorProps> = observer(
               floor.index,
               true,
             );
-            storeFormTask.addWarehousePoint({
+            storeFormTaskArray.addWarehousePoint({
               zoneId: zone.id,
               sectionId: section.id,
               blockId: block.id,
@@ -62,7 +66,8 @@ const MapFloor: FC<IMapFloorProps> = observer(
         data-floor-index={index}
         style={{
           gridRow: `${-number}/${-number - 1}`,
-          backgroundColor: active && storeMap.isSelectedMap ? '#c15943' : '',
+          backgroundColor:
+            active && storeFormState.isSelectedMap ? '#c15943' : '',
         }}
         onClick={chooseFloor}
       />

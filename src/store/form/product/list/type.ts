@@ -1,4 +1,4 @@
-export interface IProductFormData {
+export interface IProductFormFields {
   article: string;
   title: string;
   author: string;

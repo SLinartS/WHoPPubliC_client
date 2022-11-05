@@ -1,9 +1,7 @@
 import { render, screen } from '@testing-library/react';
 
 import setupUserEvent from '../../../../../tests/helpers/setupUserEvent';
-import {
-  TChangeFieldHandler,
-} from '../../../../../types/form/type';
+import { TChangeFieldHandler } from '../../../../../types/form/type';
 import FormFieldInput from './Input';
 
 describe('FormFieldInput Component Render', () => {
@@ -49,7 +47,9 @@ describe('FormFieldInput Component Render', () => {
       />,
     );
 
-    expect(screen.getByRole('textbox') as HTMLInputElement).toHaveValue('testValue');
+    expect(screen.getByRole('textbox') as HTMLInputElement).toHaveValue(
+      'testValue',
+    );
 
     expect(changeHandler).toBeCalledTimes(0);
     await user.type(
@@ -58,6 +58,5 @@ describe('FormFieldInput Component Render', () => {
     );
 
     expect(changeHandler).toBeCalledTimes(13);
-
   });
 });

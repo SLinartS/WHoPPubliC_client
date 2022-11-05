@@ -15,30 +15,30 @@ interface IPointsBlockProps {
 
 const PointsBlock: FC<IPointsBlockProps> = observer(
   ({ id, text, index, active }) => {
-    const { storeFormTask, storePoint } = useRootStore();
+    const { storeFormTaskArray, storeFormState, storePoint } = useRootStore();
     const pointBlockNode = useRef<HTMLDivElement>(null);
     const getPointCoordinates = useGetPointCoordinates();
     const checkIsAdded = useCheckIsAdded();
 
     function choosePointBlock() {
-      if (pointBlockNode.current && storePoint.isSelectedPoint) {
+      if (pointBlockNode.current && storeFormState.isSelectedPoint) {
         const { point } = getPointCoordinates(pointBlockNode.current);
 
         if (point) {
-          if (checkIsAdded(storeFormTask.points, point.id)) {
+          if (checkIsAdded(storeFormTaskArray.points, point.id)) {
             storePoint.setPointActive(
-              storeFormTask.currentTaskType,
+              storeFormState.currentTaskType,
               point.index,
               false,
             );
-            storeFormTask.removePoint(point.id);
+            storeFormTaskArray.removePoint(point.id);
           } else {
             storePoint.setPointActive(
-              storeFormTask.currentTaskType,
+              storeFormState.currentTaskType,
               point.index,
               true,
             );
-            storeFormTask.addPoint(point.id);
+            storeFormTaskArray.addPoint(point.id);
           }
         }
       }

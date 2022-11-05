@@ -1,4 +1,4 @@
-import './style.scss';
+import '../style.scss';
 
 import { observer } from 'mobx-react-lite';
 import { FC, ReactNode } from 'react';

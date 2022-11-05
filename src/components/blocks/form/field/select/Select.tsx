@@ -12,7 +12,6 @@ interface ISelectFieldInputProps {
 
 const FormFieldSelect: FC<ISelectFieldInputProps> = observer(
   ({ options, changeHandler, value }) => {
-    
     /*  to remove the error from the absence of onChange. 
         See:
         https://github.com/facebook/react/issues/1118

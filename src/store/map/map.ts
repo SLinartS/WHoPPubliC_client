@@ -23,18 +23,6 @@ export class StoreMap {
     this._statusFetchMap = newStatus;
   }
 
-  /*  Is the current open
-      map a pop-up window  */
-  private _isSelectedMap: boolean = false;
-
-  public get isSelectedMap() {
-    return this._isSelectedMap;
-  }
-
-  public set isSelectedMap(newStatus: boolean) {
-    this._isSelectedMap = newStatus;
-  }
-
   /*  Set the 'active' switch
       at the floor to the true,
       which will color it */

@@ -11,7 +11,6 @@ interface IFormFieldInputProps {
 
 const FormFieldInput: FC<IFormFieldInputProps> = observer(
   ({ additionalСlasses, value, changeHandler }) => {
-
     /*  to remove the error from the absence of onChange. 
         See:
         https://github.com/facebook/react/issues/1118

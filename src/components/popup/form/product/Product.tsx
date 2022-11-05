@@ -4,34 +4,40 @@ import { observer } from 'mobx-react-lite';
 import { FC, useEffect } from 'react';
 
 import imagePlaceholder from '../../../../assets/images/placeholder.jpg';
-import { IProductFormData } from '../../../../store/form/product/type';
+import { IProductFormFields } from '../../../../store/form/product/list/type';
 import { TChangeFieldEvent } from '../../../../types/form/type';
 import { useRootStore } from '../../../../utils/RootStoreProvider/useRootStore';
 import Button from '../../../blocks/button/Button';
 import FormBlock from '../../../blocks/form/block/Block';
+import FormField from '../../../blocks/form/field/Field';
 import FormFieldInput from '../../../blocks/form/field/input/Input';
 import FormFieldSelect from '../../../blocks/form/field/select/Select';
 import FormLayout from '../../../blocks/form/layout/Layout';
 import WindowHeader from '../../../blocks/windowHeader/WindowHeader';
 
 const PopupFormProduct: FC = observer(() => {
-  const { storePopup, storeFormProduct, storeCategory } = useRootStore();
+  const {
+    storePopup,
+    storeFormProductField,
+    storeFormProductList,
+    storeCategory,
+  } = useRootStore();
 
   function changeFieldHandler(
     e: TChangeFieldEvent,
-    fieldName: keyof IProductFormData,
+    fieldName: keyof IProductFormFields,
   ) {
-    storeFormProduct[fieldName] = e.target.value;
+    storeFormProductField.setFormField(fieldName, e.target.value);
   }
 
   function closeHandler() {
-    storeFormProduct.clearFormData();
+    storeFormProductField.clearFormData();
     storePopup.hideProductForm();
     storePopup.showTaskForm();
   }
 
   function saveHandler() {
-    storeFormProduct.addProductToList();
+    storeFormProductList.addProductToList();
     closeHandler();
   }
 
@@ -54,11 +60,13 @@ const PopupFormProduct: FC = observer(() => {
             titleText='Артикул'
             additionalTitleClasses='form-block__title--big'
           >
-            <FormFieldInput
-              value={storeFormProduct.article}
-              changeHandler={(e) => changeFieldHandler(e, 'article')}
-              additionalСlasses='form-block__input--big'
-            />
+            <FormField errors={storeFormProductField.getFormErrors('article')}>
+              <FormFieldInput
+                value={storeFormProductField.getFormField('article')}
+                changeHandler={(e) => changeFieldHandler(e, 'article')}
+                additionalСlasses='form-block__input--big'
+              />
+            </FormField>
             <Button
               additionalСlasses='button--window-header'
               text='Сгенерировать'
@@ -68,62 +76,90 @@ const PopupFormProduct: FC = observer(() => {
 
         <FormLayout additionalСlasses='form-block--title-info'>
           <FormBlock titleText='Название'>
-            <FormFieldInput
-              value={storeFormProduct.title}
-              changeHandler={(e) => changeFieldHandler(e, 'title')}
-            />
+            <FormField errors={storeFormProductField.getFormErrors('title')}>
+              <FormFieldInput
+                value={storeFormProductField.getFormField('title')}
+                changeHandler={(e) => changeFieldHandler(e, 'title')}
+              />
+            </FormField>
           </FormBlock>
         </FormLayout>
 
         <FormLayout additionalСlasses='form-block--main-info'>
           <FormBlock titleText='Автор'>
-            <FormFieldInput
-              value={storeFormProduct.author}
-              changeHandler={(e) => changeFieldHandler(e, 'author')}
-            />
+            <FormField errors={storeFormProductField.getFormErrors('author')}>
+              <FormFieldInput
+                value={storeFormProductField.getFormField('author')}
+                changeHandler={(e) => changeFieldHandler(e, 'author')}
+              />
+            </FormField>
           </FormBlock>
           <FormBlock titleText='Категория'>
-            <FormFieldSelect
-              value={storeFormProduct.categoryId}
-              changeHandler={(e) => changeFieldHandler(e, 'categoryId')}
-              options={storeCategory.categories}
-            />
+            <FormField
+              errors={storeFormProductField.getFormErrors('categoryId')}
+            >
+              <FormFieldSelect
+                value={storeFormProductField.getFormField('categoryId')}
+                changeHandler={(e) => changeFieldHandler(e, 'categoryId')}
+                options={storeCategory.categories}
+              />
+            </FormField>
           </FormBlock>
         </FormLayout>
 
         <FormLayout additionalСlasses='form-block--second-info'>
           <FormBlock titleText='Год издания'>
-            <FormFieldInput
-              value={storeFormProduct.yearOfPublication}
-              changeHandler={(e) => changeFieldHandler(e, 'yearOfPublication')}
-            />
+            <FormField
+              errors={storeFormProductField.getFormErrors('yearOfPublication')}
+            >
+              <FormFieldInput
+                value={storeFormProductField.getFormField('yearOfPublication')}
+                changeHandler={(e) =>
+                  changeFieldHandler(e, 'yearOfPublication')
+                }
+              />
+            </FormField>
           </FormBlock>
           <FormBlock titleText='Количество товаров'>
-            <FormFieldInput
-              value={storeFormProduct.number}
-              changeHandler={(e) => changeFieldHandler(e, 'number')}
-            />
+            <FormField errors={storeFormProductField.getFormErrors('number')}>
+              <FormFieldInput
+                value={storeFormProductField.getFormField('number')}
+                changeHandler={(e) => changeFieldHandler(e, 'number')}
+              />
+            </FormField>
           </FormBlock>
         </FormLayout>
 
         <FormLayout additionalСlasses='form-block--other-info'>
           <FormBlock titleText='Дата печати'>
-            <FormFieldInput
-              value={storeFormProduct.printDate}
-              changeHandler={(e) => changeFieldHandler(e, 'printDate')}
-            />
+            <FormField
+              errors={storeFormProductField.getFormErrors('printDate')}
+            >
+              <FormFieldInput
+                value={storeFormProductField.getFormField('printDate')}
+                changeHandler={(e) => changeFieldHandler(e, 'printDate')}
+              />
+            </FormField>
           </FormBlock>
           <FormBlock titleText='Типография'>
-            <FormFieldInput
-              value={storeFormProduct.printingHouse}
-              changeHandler={(e) => changeFieldHandler(e, 'printingHouse')}
-            />
+            <FormField
+              errors={storeFormProductField.getFormErrors('printingHouse')}
+            >
+              <FormFieldInput
+                value={storeFormProductField.getFormField('printingHouse')}
+                changeHandler={(e) => changeFieldHandler(e, 'printingHouse')}
+              />
+            </FormField>
           </FormBlock>
           <FormBlock titleText='Издательство'>
-            <FormFieldInput
-              value={storeFormProduct.publishingHouse}
-              changeHandler={(e) => changeFieldHandler(e, 'publishingHouse')}
-            />
+            <FormField
+              errors={storeFormProductField.getFormErrors('publishingHouse')}
+            >
+              <FormFieldInput
+                value={storeFormProductField.getFormField('publishingHouse')}
+                changeHandler={(e) => changeFieldHandler(e, 'publishingHouse')}
+              />
+            </FormField>
           </FormBlock>
         </FormLayout>
 

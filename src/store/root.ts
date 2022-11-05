@@ -1,8 +1,11 @@
 import { configure } from 'mobx';
 
 import { StoreCategory } from './category/category';
-import { StoreFormProduct } from './form/product/product';
-import { StoreFormTask } from './form/task/task';
+import { StoreFormProductField } from './form/product/field/field';
+import { StoreFormProductList } from './form/product/list/list';
+import { StoreFormState } from './form/state/state';
+import { StoreFormTaskArray } from './form/task/array/array';
+import { StoreFormTaskField } from './form/task/field/field';
 import { StoreMap } from './map/map';
 import { StorePoint } from './point/point';
 import { StorePopup } from './popup/popup';
@@ -26,9 +29,15 @@ class RootStore {
 
   public storePopup: StorePopup;
 
-  public storeFormTask: StoreFormTask;
+  public storeFormState: StoreFormState;
 
-  public storeFormProduct: StoreFormProduct;
+  public storeFormTaskField: StoreFormTaskField;
+
+  public storeFormTaskArray: StoreFormTaskArray;
+
+  public storeFormProductField: StoreFormProductField;
+
+  public storeFormProductList: StoreFormProductList;
 
   public storeCategory: StoreCategory;
 
@@ -41,8 +50,12 @@ class RootStore {
 
     this.storePopup = new StorePopup(this);
 
-    this.storeFormTask = new StoreFormTask(this);
-    this.storeFormProduct = new StoreFormProduct(this);
+    this.storeFormState = new StoreFormState(this);
+    this.storeFormTaskField = new StoreFormTaskField(this);
+    this.storeFormTaskArray = new StoreFormTaskArray(this);
+
+    this.storeFormProductField = new StoreFormProductField(this);
+    this.storeFormProductList = new StoreFormProductList(this);
 
     this.storeCategory = new StoreCategory(this);
   }

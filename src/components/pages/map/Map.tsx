@@ -7,11 +7,12 @@ import { useRootStore } from '../../../utils/RootStoreProvider/useRootStore';
 import Map from '../../blocks/map/Map';
 
 const MapPage: FC = observer(() => {
-  const { storeMap } = useRootStore();
+  const { storeFormState } = useRootStore();
 
   useEffect(() => {
-    storeMap.isSelectedMap = false;
-  }, [storeMap]);
+    storeFormState.isSelectedMap = false;
+    storeFormState.checkTaskErrors();
+  }, [storeFormState]);
 
   return (
     <main className='map'>
