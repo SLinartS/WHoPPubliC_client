@@ -48,13 +48,16 @@ const PopupFormTask: FC = observer(() => {
     storeProduct.statusFetchProducts = 'pending';
     storeCategory.statusFetchCategories = 'pending';
     storeFormProductList.clearProductList();
+    storeFormState.isDisplayDefaultErrors = false;
   }
 
   function saveHandler() {
     if (!storeFormUtils.checkTaskErrors()) {
       storeProduct.addProducts();
       closeHandler();
+      storeFormState.isDisplayDefaultErrors = false;
     } else {
+      storeFormState.isDisplayDefaultErrors = true;
       alert('Тут должно быть окно с предупреждением');
     }
   }

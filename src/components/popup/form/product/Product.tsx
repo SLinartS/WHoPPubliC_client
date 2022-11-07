@@ -19,6 +19,7 @@ const PopupFormProduct: FC = observer(() => {
   const {
     storePopup,
     storeFormUtils,
+    storeFormState,
     storeFormProductField,
     storeFormProductList,
     storeCategory,
@@ -35,13 +36,16 @@ const PopupFormProduct: FC = observer(() => {
     storeFormProductField.clearFormData();
     storePopup.hideProductForm();
     storePopup.showTaskForm();
+    storeFormState.isDisplayDefaultErrors = false;
   }
 
   function saveHandler() {
     if (!storeFormUtils.checkProductErrors()) {
       storeFormProductList.addProductToList();
+      storeFormState.isDisplayDefaultErrors = false;
       closeHandler();
     } else {
+      storeFormState.isDisplayDefaultErrors = true;
       alert('Тут должно быть окно с предупреждением');
     }
   }
