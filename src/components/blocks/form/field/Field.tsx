@@ -1,5 +1,6 @@
 import { observer } from 'mobx-react-lite';
 import React, { FC, ReactNode } from 'react';
+import { useRootStore } from '../../../../utils/RootStoreProvider/useRootStore';
 
 interface IFormFieldProps {
   children: ReactNode;
@@ -7,10 +8,15 @@ interface IFormFieldProps {
 }
 
 const FormField: FC<IFormFieldProps> = observer(({ children, errors }) => {
+  const { storeFormState } = useRootStore();
+
   return (
-    <div className='form-block__field'>
+    <div
+      className='form-block__field'
+      data-testid='form-field'
+    >
       <p className='form-block__error'>
-        {errors[0] !== 'defaultError' ? errors[0] : ''}
+        {storeFormState.isDisplayDefaultErrors && errors[0]}
       </p>
       {children}
     </div>

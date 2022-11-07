@@ -8,7 +8,7 @@ export default class FormArrayValidator {
     return false;
   }
 
-  constructor(private _array: Array<any>, private _arrayName: string) {
+  constructor(private _array: Array<any>) {
     this._errors = [];
   }
 
@@ -16,7 +16,7 @@ export default class FormArrayValidator {
     if (this._array.length) {
       return this;
     }
-    this._errors.push(`${this._arrayName} не добавлены`);
+    this._errors.push(`Данные не добавлены`);
     return this;
   }
 
@@ -25,14 +25,6 @@ export default class FormArrayValidator {
       return this;
     }
     this._errors.push(`Строка должна содержать менее ${length} символов`);
-    return this;
-  }
-
-  public minLength(length: number) {
-    if (this._array.length > length) {
-      return this;
-    }
-    this._errors.push(`Строка должна содержать более ${length} символов`);
     return this;
   }
 }

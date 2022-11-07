@@ -76,9 +76,6 @@ export class StoreTasks {
 
   public *addTask() {
     try {
-      if (this.rootStore.storeFormState.checkTaskErrors()) {
-        throw new Error();
-      }
       const newTaskData = {
         fields: {
           ...this.rootStore.storeFormTaskField.formData,
@@ -91,6 +88,7 @@ export class StoreTasks {
       yield extendAxios.post('tasks', newTaskData);
       this.statusAddTask = 'done';
     } catch (error) {
+      console.log(error);
       this.statusAddTask = 'error';
     }
   }

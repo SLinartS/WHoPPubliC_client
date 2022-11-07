@@ -1,2 +1,4 @@
 **/tests/
 scripts
+/*.ts
+/*.js

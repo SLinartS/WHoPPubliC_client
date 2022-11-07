@@ -11,7 +11,6 @@ const MapPage: FC = observer(() => {
 
   useEffect(() => {
     storeFormState.isSelectedMap = false;
-    storeFormState.checkTaskErrors();
   }, [storeFormState]);
 
   return (

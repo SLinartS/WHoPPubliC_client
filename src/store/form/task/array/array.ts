@@ -1,6 +1,8 @@
-import { makeAutoObservable } from 'mobx';
+import { makeAutoObservable, toJS } from 'mobx';
 
+import FormArrayValidator from '../../../../utils/formValidator/formArrayValidator';
 import RootStore from '../../../root';
+import { INITIAL_ARRAY_VALUE } from '../../utils/config';
 import { ITaskFormDataArrays, IWarehousePoint } from './type';
 
 export class StoreFormTaskArray {
@@ -8,75 +10,80 @@ export class StoreFormTaskArray {
     makeAutoObservable(this, {});
   }
 
-  private INITIAL_VALUE = {
-    value: [],
-    errors: ['defaultError'],
-  };
-
   private _formData: ITaskFormDataArrays = {
-    products: this.INITIAL_VALUE,
-    points: this.INITIAL_VALUE,
-    warehousePoints: this.INITIAL_VALUE,
+    products: INITIAL_ARRAY_VALUE,
+    points: INITIAL_ARRAY_VALUE,
+    warehousePoints: INITIAL_ARRAY_VALUE,
   };
 
   public get formData() {
     return this._formData;
   }
 
-  public get products() {
-    return this._formData.products.value;
-  }
-
-  public get points() {
-    return this._formData.points.value;
-  }
-
-  public get warehousePoints() {
-    return this._formData.warehousePoints.value;
+  public getFormArrays(field: keyof ITaskFormDataArrays) {
+    return this._formData[field].value;
   }
 
   public getFormErrors(field: keyof ITaskFormDataArrays) {
-    return this._formData[field].errors;
+    return toJS(this._formData[field].errors);
   }
 
-  public addProduct(productId: number) {
-    this._formData.products.value.push(productId);
+  public addFormArrays(
+    field: keyof ITaskFormDataArrays,
+    value: number | IWarehousePoint,
+  ) {
+    switch (field) {
+      case 'products':
+      case 'points':
+        this._formData[field].value.push(value as number);
+        break;
+      case 'warehousePoints':
+        this._formData[field].value.push(value as IWarehousePoint);
+        break;
+      default:
+    }
   }
 
-  public addPoint(pointId: number) {
-    this._formData.points.value.push(pointId);
-  }
-
-  public addWarehousePoint(warehousePoint: IWarehousePoint) {
-    this._formData.warehousePoints.value.push(warehousePoint);
-  }
-
-  public removeProduct(productId: number) {
-    this._formData.products.value = this._formData.products.value.filter(
-      (id) => id !== productId,
-    );
-  }
-
-  public removePoint(pointId: number) {
-    this._formData.points.value = this._formData.points.value.filter(
-      (point) => point !== pointId,
-    );
-  }
-
-  public removeWarehousePoint(floorId: number) {
-    this._formData.warehousePoints.value =
-      this._formData.warehousePoints.value.filter(
-        (warehousePoint) => warehousePoint.floorId !== floorId,
-      );
+  public removeFormArrays(field: keyof ITaskFormDataArrays, itemId: number) {
+    switch (field) {
+      case 'products':
+      case 'points':
+        this._formData[field].value = this._formData[field].value.filter(
+          (id) => id !== itemId,
+        );
+        break;
+      case 'warehousePoints':
+        this._formData[field].value = this._formData[field].value.filter(
+          (warehousePoint) => warehousePoint.floorId !== itemId,
+        );
+        break;
+      default:
+    }
+    const validator = new FormArrayValidator(
+      this._formData[field].value,
+    ).notEmpty();
+    this.checkErrorsExist(validator.errors, field);
   }
 
   public clearArrays(arrayName?: keyof ITaskFormDataArrays) {
     if (arrayName) {
-      this._formData[arrayName] = this.INITIAL_VALUE;
+      this._formData[arrayName] = INITIAL_ARRAY_VALUE;
     } else {
-      this._formData.products = this.INITIAL_VALUE;
-      this._formData.points = this.INITIAL_VALUE;
-      this._formData.warehousePoints = this.INITIAL_VALUE;
+      this._formData.products = INITIAL_ARRAY_VALUE;
+      this._formData.points = INITIAL_ARRAY_VALUE;
+      this._formData.warehousePoints = INITIAL_ARRAY_VALUE;
     }
+  }
+
+  private checkErrorsExist(
+    errors: string[] | false,
+    field: keyof ITaskFormDataArrays,
+  ) {
+    if (errors) {
+      this._formData[field].errors = errors;
+    } else {
+      this._formData[field].errors = [];
+    }
+    console.log(this._formData[field]);
   }
 }

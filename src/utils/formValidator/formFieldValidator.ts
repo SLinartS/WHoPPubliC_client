@@ -1,5 +1,7 @@
 import { DateTime } from 'luxon';
 
+import { emptyErrorText } from './config';
+
 export default class FormFieldValidator {
   private _errors: string[];
 
@@ -18,23 +20,31 @@ export default class FormFieldValidator {
     if (this._value) {
       return this;
     }
-    this._errors.push('Строка значения пуста');
+    this._errors.push(emptyErrorText);
     return this;
   }
 
   public maxLength(length: number) {
-    if (this._value.length < length) {
+    if (this._value.length <= length) {
       return this;
     }
-    this._errors.push(`Строка должна содержать менее ${length} символов`);
+    this._errors.push(`Строка должна содержать не более ${length} символов`);
     return this;
   }
 
   public minLength(length: number) {
-    if (this._value.length > length) {
+    if (this._value.length >= length) {
       return this;
     }
-    this._errors.push(`Строка должна содержать более ${length} символов`);
+    this._errors.push(`Строка должна содержать не менее ${length} символов`);
+    return this;
+  }
+
+  public hasOnlyDigits() {
+    if (/^\d+$/.test(this._value)) {
+      return this;
+    }
+    this._errors.push(`Поле должно содержать только цифры`);
     return this;
   }
 

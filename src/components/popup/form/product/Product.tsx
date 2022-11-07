@@ -18,6 +18,7 @@ import WindowHeader from '../../../blocks/windowHeader/WindowHeader';
 const PopupFormProduct: FC = observer(() => {
   const {
     storePopup,
+    storeFormUtils,
     storeFormProductField,
     storeFormProductList,
     storeCategory,
@@ -37,8 +38,12 @@ const PopupFormProduct: FC = observer(() => {
   }
 
   function saveHandler() {
-    storeFormProductList.addProductToList();
-    closeHandler();
+    if (!storeFormUtils.checkProductErrors()) {
+      storeFormProductList.addProductToList();
+      closeHandler();
+    } else {
+      alert('Тут должно быть окно с предупреждением');
+    }
   }
 
   useEffect(() => {

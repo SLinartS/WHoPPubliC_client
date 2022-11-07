@@ -65,8 +65,18 @@
   }
 
   &__add-point {
-    height: 3rem;
-    width: 5rem;
+    display: flex;
+    align-items: center;
+    height: 4rem;
+    width: 4rem;
+    border: none;
+    background-color: transparent;
+    padding: 0;
+  }
+
+  &__plus-icon {
+    width: 4rem;
+    height: 4rem;
   }
 
   &--article-info {

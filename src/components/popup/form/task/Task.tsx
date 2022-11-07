@@ -22,6 +22,7 @@ const PopupFormTask: FC = observer(() => {
   const {
     storePopup,
     storeProduct,
+    storeFormUtils,
     storeFormState,
     storeFormProductList,
     storeFormTaskArray,
@@ -50,8 +51,12 @@ const PopupFormTask: FC = observer(() => {
   }
 
   function saveHandler() {
-    storeProduct.addProducts();
-    closeHandler();
+    if (!storeFormUtils.checkTaskErrors()) {
+      storeProduct.addProducts();
+      closeHandler();
+    } else {
+      alert('Тут должно быть окно с предупреждением');
+    }
   }
 
   function openSelectPointsHandler() {
@@ -143,11 +148,17 @@ const PopupFormTask: FC = observer(() => {
           <FormBlock
             titleText={`Точки ${isAcceptance ? 'приёмки' : 'отгрузки'}`}
           >
-            <FormFieldPoint clickHandler={openSelectPointsHandler} />
+            <FormField errors={storeFormTaskArray.getFormErrors('points')}>
+              <FormFieldPoint clickHandler={openSelectPointsHandler} />
+            </FormField>
           </FormBlock>
           {isAcceptance ? (
             <FormBlock titleText='Точки склада'>
-              <FormFieldPoint clickHandler={openSelectMapHandler} />
+              <FormField
+                errors={storeFormTaskArray.getFormErrors('warehousePoints')}
+              >
+                <FormFieldPoint clickHandler={openSelectMapHandler} />
+              </FormField>
             </FormBlock>
           ) : (
             ''

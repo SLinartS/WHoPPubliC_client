@@ -1,31 +1,21 @@
 import { makeAutoObservable } from 'mobx';
 
 import RootStore from '../../root';
-import { TTaskType, TValueOrErrorType } from '../../type';
-import { IWarehousePoint } from '../task/array/type';
+import { TTaskType } from '../../type';
 
 export class StoreFormState {
   constructor(private readonly rootStore: RootStore) {
     makeAutoObservable(this, {});
   }
 
-  public checkTaskErrors() {
-    const fields = this.rootStore.storeFormTaskField.formData;
-    for (const value of Object.values(fields)) {
-      const typedValue: TValueOrErrorType = value;
-      if (typedValue.errors.length) {
-        return true;
-      }
-    }
+  private _isDisplayDefaultErrors: boolean = false;
 
-    const arrays = this.rootStore.storeFormTaskArray.formData;
-    for (const value of Object.values(arrays)) {
-      const typedValue: Array<any | IWarehousePoint> = value;
-      if (!typedValue.length) {
-        return true;
-      }
-    }
-    return false;
+  public get isDisplayDefaultErrors() {
+    return this._isDisplayDefaultErrors;
+  }
+
+  public set isDisplayDefaultErrors(newStatus: boolean) {
+    this._isDisplayDefaultErrors = newStatus;
   }
 
   private _currentTaskType: TTaskType = 'acceptance';

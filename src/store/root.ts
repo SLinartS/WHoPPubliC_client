@@ -6,6 +6,7 @@ import { StoreFormProductList } from './form/product/list/list';
 import { StoreFormState } from './form/state/state';
 import { StoreFormTaskArray } from './form/task/array/array';
 import { StoreFormTaskField } from './form/task/field/field';
+import { StoreFormUtils } from './form/utils/utils';
 import { StoreMap } from './map/map';
 import { StorePoint } from './point/point';
 import { StorePopup } from './popup/popup';
@@ -41,6 +42,8 @@ class RootStore {
 
   public storeCategory: StoreCategory;
 
+  public storeFormUtils: StoreFormUtils;
+
   private constructor() {
     this.storeTasks = new StoreTasks(this);
     this.storeProduct = new StoreProducts(this);
@@ -58,6 +61,7 @@ class RootStore {
     this.storeFormProductList = new StoreFormProductList(this);
 
     this.storeCategory = new StoreCategory(this);
+    this.storeFormUtils = new StoreFormUtils(this);
   }
 
   public static getInstance(): RootStore {

@@ -1,7 +1,8 @@
-import { makeAutoObservable } from 'mobx';
+import { makeAutoObservable, toJS } from 'mobx';
 
 import FormFieldValidator from '../../../../utils/formValidator/formFieldValidator';
 import RootStore from '../../../root';
+import { INITIAL_VALUE } from '../../utils/config';
 import { ITaskFormDataFields } from './type';
 
 export class StoreFormTaskField {
@@ -9,23 +10,20 @@ export class StoreFormTaskField {
     makeAutoObservable(this, {});
   }
 
-  private _formData: ITaskFormDataFields = {
-    article: {
-      value: '',
-      errors: [],
-    },
-    dateStart: {
-      value: '',
-      errors: [],
-    },
-    dateEnd: {
-      value: '',
-      errors: [],
-    },
+  private readonly initialFormData: ITaskFormDataFields = {
+    article: INITIAL_VALUE,
+    dateStart: INITIAL_VALUE,
+    dateEnd: INITIAL_VALUE,
   };
+
+  private _formData: ITaskFormDataFields = this.initialFormData;
 
   public get formData() {
     return this._formData;
+  }
+
+  public clearFormData() {
+    this._formData = this.initialFormData;
   }
 
   public getFormField(field: keyof ITaskFormDataFields) {
@@ -33,7 +31,7 @@ export class StoreFormTaskField {
   }
 
   public getFormErrors(field: keyof ITaskFormDataFields) {
-    return this._formData[field].errors;
+    return toJS(this._formData[field].errors);
   }
 
   public setFormField(field: keyof ITaskFormDataFields, value: string) {

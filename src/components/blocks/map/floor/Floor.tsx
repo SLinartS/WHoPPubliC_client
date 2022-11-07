@@ -3,6 +3,7 @@ import { FC, useRef } from 'react';
 
 import useCheckIsAdded from '../../../../hooks/mapAndPoint/useCheckIsAdded';
 import useGetFloorCoordinates from '../../../../hooks/mapAndPoint/useGetFloorCoordinates';
+import { IWarehousePoint } from '../../../../store/form/task/array/type';
 import { IFloor } from '../../../../store/map/type';
 import { useRootStore } from '../../../../utils/RootStoreProvider/useRootStore';
 
@@ -26,7 +27,9 @@ const MapFloor: FC<IMapFloorProps> = observer(
         if (zone && section && block && floor) {
           if (
             checkIsAdded(
-              storeFormTaskArray.warehousePoints,
+              storeFormTaskArray.getFormArrays(
+                'warehousePoints',
+              ) as IWarehousePoint[],
               floor.id,
               'floorId',
             )
@@ -38,7 +41,7 @@ const MapFloor: FC<IMapFloorProps> = observer(
               floor.index,
               false,
             );
-            storeFormTaskArray.removeWarehousePoint(floor.id);
+            storeFormTaskArray.removeFormArrays('warehousePoints', floor.id);
           } else {
             storeMap.setFloorActive(
               zone.index,
@@ -47,7 +50,7 @@ const MapFloor: FC<IMapFloorProps> = observer(
               floor.index,
               true,
             );
-            storeFormTaskArray.addWarehousePoint({
+            storeFormTaskArray.addFormArrays('warehousePoints', {
               zoneId: zone.id,
               sectionId: section.id,
               blockId: block.id,

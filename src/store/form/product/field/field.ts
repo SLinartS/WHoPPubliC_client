@@ -1,7 +1,8 @@
-import { makeAutoObservable } from 'mobx';
+import { makeAutoObservable, toJS } from 'mobx';
 
 import FormFieldValidator from '../../../../utils/formValidator/formFieldValidator';
 import RootStore from '../../../root';
+import { INITIAL_VALUE } from '../../utils/config';
 import { IProductFormDataFields } from './type';
 
 export class StoreFormProductField {
@@ -10,42 +11,15 @@ export class StoreFormProductField {
   }
 
   private readonly initialFormData: IProductFormDataFields = {
-    article: {
-      value: '',
-      errors: ['defaultError'],
-    },
-    title: {
-      value: '',
-      errors: ['defaultError'],
-    },
-    author: {
-      value: '',
-      errors: ['defaultError'],
-    },
-    yearOfPublication: {
-      value: '',
-      errors: ['defaultError'],
-    },
-    number: {
-      value: '',
-      errors: ['defaultError'],
-    },
-    printDate: {
-      value: '',
-      errors: ['defaultError'],
-    },
-    printingHouse: {
-      value: '',
-      errors: ['defaultError'],
-    },
-    publishingHouse: {
-      value: '',
-      errors: ['defaultError'],
-    },
-    categoryId: {
-      value: '',
-      errors: ['defaultError'],
-    },
+    article: INITIAL_VALUE,
+    title: INITIAL_VALUE,
+    author: INITIAL_VALUE,
+    yearOfPublication: INITIAL_VALUE,
+    number: INITIAL_VALUE,
+    printDate: INITIAL_VALUE,
+    printingHouse: INITIAL_VALUE,
+    publishingHouse: INITIAL_VALUE,
+    categoryId: INITIAL_VALUE,
   };
 
   private _formData: IProductFormDataFields = this.initialFormData;
@@ -63,7 +37,7 @@ export class StoreFormProductField {
   }
 
   public getFormErrors(field: keyof IProductFormDataFields) {
-    return this._formData[field].errors;
+    return toJS(this._formData[field].errors);
   }
 
   public setFormField(field: keyof IProductFormDataFields, value: string) {
@@ -82,11 +56,11 @@ export class StoreFormProductField {
         break;
 
       case 'yearOfPublication':
-        validator.notEmpty().minLength(4).maxLength(4);
+        validator.notEmpty().hasOnlyDigits().minLength(4).maxLength(4);
         break;
 
       case 'number':
-        validator.notEmpty().outOfRange(1, 100000);
+        validator.notEmpty().hasOnlyDigits().outOfRange(1, 100000);
         break;
 
       case 'printDate':
