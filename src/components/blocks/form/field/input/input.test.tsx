@@ -1,3 +1,5 @@
+import '@testing-library/jest-dom';
+
 import { render, screen } from '@testing-library/react';
 
 import setupUserEvent from '../../../../../tests/helpers/setupUserEvent';

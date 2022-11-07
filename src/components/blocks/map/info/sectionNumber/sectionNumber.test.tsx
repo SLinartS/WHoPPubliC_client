@@ -1,3 +1,5 @@
+import '@testing-library/jest-dom/extend-expect';
+
 import { render, screen } from '@testing-library/react';
 
 import MapInfoSectionNumber from './sectionNumber';
