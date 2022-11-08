@@ -16,7 +16,7 @@ export default class FormArrayValidator {
     if (this._array.length) {
       return this;
     }
-    this._errors.push(`Данные не добавлены`);
+    this._errors.push('Точки не выбраны');
     return this;
   }
 

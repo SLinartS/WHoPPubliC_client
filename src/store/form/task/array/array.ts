@@ -42,6 +42,12 @@ export class StoreFormTaskArray {
         break;
       default:
     }
+    console.warn(this._formData.products.value);
+    const validator = new FormArrayValidator(
+      this._formData[field].value,
+    ).notEmpty();
+    console.warn(validator);
+    this.checkErrorsExist(validator.errors, field);
   }
 
   public removeFormArrays(field: keyof ITaskFormDataArrays, itemId: number) {
@@ -84,6 +90,5 @@ export class StoreFormTaskArray {
     } else {
       this._formData[field].errors = [];
     }
-    console.log(this._formData[field]);
   }
 }

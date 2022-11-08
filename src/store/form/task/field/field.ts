@@ -1,5 +1,6 @@
 import { makeAutoObservable, toJS } from 'mobx';
 
+import deepCopy from '../../../../utils/deepCopy/deepCopy';
 import FormFieldValidator from '../../../../utils/formValidator/formFieldValidator';
 import RootStore from '../../../root';
 import { INITIAL_VALUE } from '../../utils/config';
@@ -16,14 +17,14 @@ export class StoreFormTaskField {
     dateEnd: INITIAL_VALUE,
   };
 
-  private _formData: ITaskFormDataFields = this.initialFormData;
+  private _formData: ITaskFormDataFields = deepCopy(this.initialFormData);
 
   public get formData() {
     return this._formData;
   }
 
   public clearFormData() {
-    this._formData = this.initialFormData;
+    this._formData = deepCopy(this.initialFormData);
   }
 
   public getFormField(field: keyof ITaskFormDataFields) {

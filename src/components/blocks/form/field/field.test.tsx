@@ -4,6 +4,7 @@ import { screen } from '@testing-library/react';
 
 import RootStore from '../../../../store/root';
 import setupStoreProvider from '../../../../tests/helpers/setupStoreProvider';
+import { emptyFieldErrorText } from '../../../../utils/formValidator/config';
 import FormField from './Field';
 
 describe('FormField Component Render', () => {
@@ -40,12 +41,12 @@ describe('FormField Component Render', () => {
   test('The error is invisible', () => {
     root.storeFormState.isDisplayDefaultErrors = false;
     setupStoreProvider(
-      <FormField errors={['defaultError']}>
+      <FormField errors={[emptyFieldErrorText]}>
         <p>testChildren1</p>
       </FormField>,
     );
     expect(
-      screen.queryByText(/defaultError/) as HTMLParagraphElement,
+      screen.queryByText(emptyFieldErrorText) as HTMLParagraphElement,
     ).toBeNull();
   });
 });

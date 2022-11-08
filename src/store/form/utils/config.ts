@@ -1,11 +1,14 @@
-import { emptyErrorText } from '../../../utils/formValidator/config';
+import {
+  emptyArrayErrorText,
+  emptyFieldErrorText,
+} from '../../../utils/formValidator/config';
 
 export const INITIAL_VALUE = {
   value: '',
-  errors: [emptyErrorText],
+  errors: [emptyFieldErrorText],
 };
 
 export const INITIAL_ARRAY_VALUE = {
   value: [],
-  errors: [emptyErrorText],
+  errors: [emptyArrayErrorText],
 };

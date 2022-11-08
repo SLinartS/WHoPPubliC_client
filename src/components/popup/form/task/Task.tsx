@@ -2,7 +2,7 @@ import './style.scss';
 import '../../style.scss';
 
 import { observer } from 'mobx-react-lite';
-import { FC, useEffect, useState } from 'react';
+import { FC, useCallback, useEffect, useState } from 'react';
 
 import useGetProductListForTable from '../../../../hooks/mapAndPoint/useGetProductListForTable';
 import { ITaskFormFields } from '../../../../store/form/task/field/type';
@@ -24,6 +24,7 @@ const PopupFormTask: FC = observer(() => {
     storeProduct,
     storeFormUtils,
     storeFormState,
+    storeFormProductField,
     storeFormProductList,
     storeFormTaskArray,
     storeFormTaskField,
@@ -41,24 +42,34 @@ const PopupFormTask: FC = observer(() => {
     storeFormTaskField.setFormField(fieldName, e.target.value);
   }
 
-  function closeHandler() {
+  const closeHandler = useCallback(() => {
     storePopup.hideTaskForm();
     storeFormTaskArray.clearArrays();
+    storeProduct.statusAddProducts = 'pending';
     storePoint.statusFetchPoints = 'pending';
     storeProduct.statusFetchProducts = 'pending';
     storeCategory.statusFetchCategories = 'pending';
+    storeTasks.statusAddTask = 'pending';
     storeFormProductList.clearProductList();
+    storeFormTaskField.clearFormData();
     storeFormState.isDisplayDefaultErrors = false;
-  }
+  }, [
+    storeCategory,
+    storeFormProductList,
+    storeFormState,
+    storeFormTaskArray,
+    storeFormTaskField,
+    storePoint,
+    storePopup,
+    storeProduct,
+    storeTasks,
+  ]);
 
   function saveHandler() {
     if (!storeFormUtils.checkTaskErrors()) {
       storeProduct.addProducts();
-      closeHandler();
-      storeFormState.isDisplayDefaultErrors = false;
     } else {
       storeFormState.isDisplayDefaultErrors = true;
-      alert('Тут должно быть окно с предупреждением');
     }
   }
 
@@ -73,6 +84,8 @@ const PopupFormTask: FC = observer(() => {
   }
 
   function openProductFormHandler() {
+    storeFormState.isDisplayDefaultErrors = false;
+    storeFormProductField.clearFormData();
     storePopup.showProductForm();
     storePopup.hideTaskForm();
   }
@@ -85,19 +98,25 @@ const PopupFormTask: FC = observer(() => {
     }
 
     if (storeProduct.statusAddProducts === 'done') {
+      storeProduct.statusAddProducts = 'pending';
       storeTasks.addTask();
     }
 
     if (storeTasks.statusAddTask === 'done') {
-      storePopup.hideTaskForm();
-      storeFormProductList.clearProductList();
+      storeFormTaskField.clearFormData();
+      closeHandler();
     }
   }, [
+    storeFormState,
+    storeFormTaskField,
     storeFormState.currentTaskType,
     storeProduct.statusAddProducts,
+    storeTasks.statusAddTask,
     storeFormProductList,
     storePopup,
+    storeProduct,
     storeTasks,
+    closeHandler,
   ]);
 
   return (

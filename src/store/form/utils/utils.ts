@@ -21,7 +21,7 @@ export class StoreFormUtils {
   }
 
   public checkTaskErrors(): boolean {
-    if (this.checkTaskArrayErrors() && this.checkTaskFieldErrors()) {
+    if (this.checkTaskArrayErrors() || this.checkTaskFieldErrors()) {
       return true;
     }
     return false;
@@ -39,13 +39,20 @@ export class StoreFormUtils {
   }
 
   private checkTaskArrayErrors(): boolean {
-    const arrays = this.rootStore.storeFormTaskArray.formData;
-    for (const value of Object.values(arrays)) {
-      const typedValue: Array<number | IWarehousePoint> = value;
-      if (!typedValue.length) {
-        return true;
-      }
+    const { list } = this.rootStore.storeFormProductList;
+    const { points } = this.rootStore.storeFormTaskArray.formData;
+    const { warehousePoints } = this.rootStore.storeFormTaskArray.formData;
+
+    if (points.errors.length) {
+      return true;
     }
+    if (warehousePoints.errors.length) {
+      return true;
+    }
+    if (!list.length) {
+      return true;
+    }
+
     return false;
   }
 }

@@ -1,1 +1,2 @@
-export const emptyErrorText = 'Строка значения пуста';
+export const emptyFieldErrorText = 'Строка значения пуста';
+export const emptyArrayErrorText = 'Точки не выбраны';

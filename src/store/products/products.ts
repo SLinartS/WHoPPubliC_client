@@ -82,9 +82,6 @@ export class StoreProducts {
   public *addProducts() {
     try {
       const { list } = this.rootStore.storeFormProductList;
-      if (list) {
-        throw new Error('the list of products is empty');
-      }
       const newProductData = {
         products: list,
         warehousePoints:

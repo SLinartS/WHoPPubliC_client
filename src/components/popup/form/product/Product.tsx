@@ -42,11 +42,11 @@ const PopupFormProduct: FC = observer(() => {
   function saveHandler() {
     if (!storeFormUtils.checkProductErrors()) {
       storeFormProductList.addProductToList();
+      storeFormProductField.clearFormData();
       storeFormState.isDisplayDefaultErrors = false;
       closeHandler();
     } else {
       storeFormState.isDisplayDefaultErrors = true;
-      alert('Тут должно быть окно с предупреждением');
     }
   }
 

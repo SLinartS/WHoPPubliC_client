@@ -1,6 +1,6 @@
 import { DateTime } from 'luxon';
 
-import { emptyErrorText } from './config';
+import { emptyFieldErrorText } from './config';
 
 export default class FormFieldValidator {
   private _errors: string[];
@@ -20,7 +20,7 @@ export default class FormFieldValidator {
     if (this._value) {
       return this;
     }
-    this._errors.push(emptyErrorText);
+    this._errors.push(emptyFieldErrorText);
     return this;
   }
 

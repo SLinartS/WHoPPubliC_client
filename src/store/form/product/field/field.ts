@@ -1,5 +1,6 @@
 import { makeAutoObservable, toJS } from 'mobx';
 
+import deepCopy from '../../../../utils/deepCopy/deepCopy';
 import FormFieldValidator from '../../../../utils/formValidator/formFieldValidator';
 import RootStore from '../../../root';
 import { INITIAL_VALUE } from '../../utils/config';
@@ -22,10 +23,10 @@ export class StoreFormProductField {
     categoryId: INITIAL_VALUE,
   };
 
-  private _formData: IProductFormDataFields = this.initialFormData;
+  private _formData: IProductFormDataFields = deepCopy(this.initialFormData);
 
   public clearFormData() {
-    this._formData = this.initialFormData;
+    this._formData = deepCopy(this.initialFormData);
   }
 
   public get formData() {

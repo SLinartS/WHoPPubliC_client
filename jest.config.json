@@ -8,7 +8,7 @@
   "transform": {
     "^.+\\.[t|j]sx?$": "ts-jest"
   },
-  "testMatch": ["**/*.test.tsx"],
+  "testMatch": ["**/*.test.tsx", "**/*.test.ts"],
   "testEnvironment": "jsdom",
   "moduleFileExtensions": ["js", "ts", "tsx"],
   "moduleNameMapper": {

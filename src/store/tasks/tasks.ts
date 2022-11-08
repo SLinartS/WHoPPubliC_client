@@ -79,8 +79,14 @@ export class StoreTasks {
       const newTaskData = {
         fields: {
           ...this.rootStore.storeFormTaskField.formData,
-          userId: '1',
-          typeId: '1',
+          userId: {
+            value: '1',
+            errors: [],
+          },
+          typeId: {
+            value: '1',
+            errors: [],
+          },
         },
         arrays: this.rootStore.storeFormTaskArray.formData,
       };
@@ -88,7 +94,7 @@ export class StoreTasks {
       yield extendAxios.post('tasks', newTaskData);
       this.statusAddTask = 'done';
     } catch (error) {
-      console.log(error);
+      console.log(error, this.statusAddTask);
       this.statusAddTask = 'error';
     }
   }
