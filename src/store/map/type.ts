@@ -21,4 +21,6 @@ export interface IFloor {
   id: number;
   active: boolean;
   number: number;
+  capacity: number;
+  freeSpace: number;
 }

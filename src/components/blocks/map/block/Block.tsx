@@ -25,6 +25,8 @@ const MapBlock: FC<IMapBlockProps> = observer(
           id={floor.id}
           active={floor.active}
           number={floor.number}
+          capacity={floor.capacity}
+          freeSpace={floor.freeSpace}
           index={floorIndex}
         />
       ))}

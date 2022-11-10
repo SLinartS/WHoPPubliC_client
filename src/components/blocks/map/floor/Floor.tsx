@@ -1,5 +1,5 @@
 import { observer } from 'mobx-react-lite';
-import { FC, useRef } from 'react';
+import { FC, useEffect, useRef, useState } from 'react';
 
 import useCheckIsAdded from '../../../../hooks/mapAndPoint/useCheckIsAdded';
 import useGetFloorCoordinates from '../../../../hooks/mapAndPoint/useGetFloorCoordinates';
@@ -11,9 +11,14 @@ interface IMapFloorProps extends IFloor {
   index: number;
 }
 
+interface IMapFloorStyles {
+  [key: string]: string;
+}
+
 const MapFloor: FC<IMapFloorProps> = observer(
-  ({ id, active, number, index }) => {
+  ({ id, active, number, capacity, freeSpace, index }) => {
     const { storeFormTaskArray, storeMap, storeFormState } = useRootStore();
+    const [styles, setStyles] = useState<IMapFloorStyles>();
     const floorNode = useRef<HTMLDivElement>(null);
     const getFloorCoordinates = useGetFloorCoordinates();
     const checkIsAdded = useCheckIsAdded();
@@ -61,17 +66,31 @@ const MapFloor: FC<IMapFloorProps> = observer(
       }
     }
 
+    useEffect(() => {
+      const newStyle = {
+        gridRow: `${-number}/${-number - 1}`,
+        background: 'unset',
+      };
+
+      if (active) {
+        newStyle.background =
+          active && storeFormState.isSelectedMap ? '#c15943' : '';
+      } else {
+        newStyle.background = `linear-gradient(180deg, 
+          transparent ${(freeSpace / capacity) * 100}%, 
+          #7fa89c ${(freeSpace / capacity) * 100}%)`;
+      }
+
+      setStyles(newStyle);
+    }, [active, number, freeSpace, capacity, storeFormState.isSelectedMap]);
+
     return (
       <div
         ref={floorNode}
         className='map-block__floor'
         data-floor-id={id}
         data-floor-index={index}
-        style={{
-          gridRow: `${-number}/${-number - 1}`,
-          backgroundColor:
-            active && storeFormState.isSelectedMap ? '#c15943' : '',
-        }}
+        style={styles}
         onClick={chooseFloor}
       />
     );
