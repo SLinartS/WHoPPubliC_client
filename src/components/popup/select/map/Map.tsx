@@ -1,12 +1,14 @@
 import './style.scss';
 
+import { observer } from 'mobx-react-lite';
 import { FC, useEffect } from 'react';
 
 import { useRootStore } from '../../../../utils/RootStoreProvider/useRootStore';
+import Loader from '../../../blocks/loader/Loader';
 import Map from '../../../blocks/map/Map';
 import WindowHeader from '../../../blocks/windowHeader/WindowHeader';
 
-const PopupSelectMap: FC = () => {
+const PopupSelectMap: FC = observer(() => {
   const { storePopup, storeMap, storeFormState, storeFormTaskArray } =
     useRootStore();
 
@@ -24,7 +26,13 @@ const PopupSelectMap: FC = () => {
 
   useEffect(() => {
     storeFormState.isSelectedMap = true;
-  }, [storeFormState]);
+  }, []);
+
+  useEffect(() => {
+    if (storeMap.statusFetchMap === 'pending') {
+      storeMap.fetchMap();
+    }
+  }, [storeMap.statusFetchMap]);
 
   return (
     <div className='popup select-map'>
@@ -33,9 +41,13 @@ const PopupSelectMap: FC = () => {
         saveEvent={saveHandler}
         closeEvent={closeHandler}
       />
-      <Map additionalClasses='map--select-map' />
+      {storeMap.statusFetchMap === 'done' ? (
+        <Map additionalClasses='map--select-map' />
+      ) : (
+        <Loader />
+      )}
     </div>
   );
-};
+});
 
 export default PopupSelectMap;

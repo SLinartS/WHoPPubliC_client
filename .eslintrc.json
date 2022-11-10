@@ -26,6 +26,7 @@
   },
   "plugins": [
     "react",
+    "react-hooks",
     "@typescript-eslint",
     "simple-import-sort",
     "testing-library",
@@ -49,6 +50,8 @@
       { "namedComponents": "arrow-function" }
     ],
     "react/require-default-props": "off",
+    // useEffect dependencies
+    "react-hooks/exhaustive-deps": "off",
     // a11y
     "jsx-a11y/click-events-have-key-events": "off",
     "jsx-a11y/no-static-element-interactions": "off",

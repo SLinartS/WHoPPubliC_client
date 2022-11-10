@@ -4,6 +4,7 @@ import { observer } from 'mobx-react-lite';
 import { FC, useEffect } from 'react';
 
 import { useRootStore } from '../../../utils/RootStoreProvider/useRootStore';
+import Loader from '../../blocks/loader/Loader';
 import Table from '../../blocks/table/Table';
 
 const Products: FC = observer(() => {
@@ -13,7 +14,7 @@ const Products: FC = observer(() => {
     if (storeProduct.statusFetchProducts === 'pending') {
       storeProduct.fetchProducts();
     }
-  }, [storeProduct, storeProduct.statusFetchProducts]);
+  }, [storeProduct.statusFetchProducts]);
 
   return (
     <main className='products'>
@@ -36,7 +37,7 @@ const Products: FC = observer(() => {
           additionalСlasses='table--products'
         />
       ) : (
-        ''
+        <Loader />
       )}
     </main>
   );

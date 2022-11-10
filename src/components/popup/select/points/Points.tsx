@@ -1,9 +1,10 @@
 import './style.scss';
 
 import { observer } from 'mobx-react-lite';
-import { FC, useEffect } from 'react';
+import { FC, ReactNode, useEffect } from 'react';
 
 import { useRootStore } from '../../../../utils/RootStoreProvider/useRootStore';
+import Loader from '../../../blocks/loader/Loader';
 import PointsBlock from '../../../blocks/points/block/Block';
 import WindowHeader from '../../../blocks/windowHeader/WindowHeader';
 
@@ -23,12 +24,35 @@ const PopupSelectPoints: FC = observer(() => {
     storePoint.fetchPoints();
   }
 
+  function displayPointsByTaskType(): ReactNode {
+    const PointNodes: ReactNode[] = [];
+
+    let pointsArray = storePoint.points.acceptance;
+    if (storeFormState.currentTaskType === 'shipment') {
+      pointsArray = storePoint.points.shipment;
+    }
+
+    pointsArray.forEach((point, index) => {
+      PointNodes.push(
+        <PointsBlock
+          key={point.id}
+          id={point.id}
+          text={point.title}
+          index={index}
+          active={point.active}
+        />,
+      );
+    });
+
+    return PointNodes;
+  }
+
   useEffect(() => {
     storeFormState.isSelectedPoint = true;
     if (storePoint.statusFetchPoints === 'pending') {
       storePoint.fetchPoints();
     }
-  }, [storePoint, storeFormState]);
+  }, [storePoint.statusFetchPoints]);
 
   return (
     <div className='popup select-points'>
@@ -43,30 +67,12 @@ const PopupSelectPoints: FC = observer(() => {
       />
 
       <div className='points-map'>
-        {storeFormState.currentTaskType === 'acceptance' ? (
+        {storePoint.statusFetchPoints === 'done' ? (
           <div className='points-map__container'>
-            {storePoint.points.acceptance.map((point, index) => (
-              <PointsBlock
-                key={point.id}
-                id={point.id}
-                text={point.title}
-                index={index}
-                active={point.active}
-              />
-            ))}
+            {displayPointsByTaskType()}
           </div>
         ) : (
-          <div className='points-map__container'>
-            {storePoint.points.shipment.map((point, index) => (
-              <PointsBlock
-                key={point.id}
-                id={point.id}
-                text={point.title}
-                index={index}
-                active={point.active}
-              />
-            ))}
-          </div>
+          <Loader />
         )}
       </div>
     </div>

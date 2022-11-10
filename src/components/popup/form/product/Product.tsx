@@ -18,6 +18,7 @@ import WindowHeader from '../../../blocks/windowHeader/WindowHeader';
 const PopupFormProduct: FC = observer(() => {
   const {
     storePopup,
+    storeProduct,
     storeFormUtils,
     storeFormState,
     storeFormProductField,
@@ -33,17 +34,15 @@ const PopupFormProduct: FC = observer(() => {
   }
 
   function closeHandler() {
-    storeFormProductField.clearFormData();
     storePopup.hideProductForm();
-    storePopup.showTaskForm();
     storeFormState.isDisplayDefaultErrors = false;
+    storePopup.showTaskForm();
   }
 
   function saveHandler() {
     if (!storeFormUtils.checkProductErrors()) {
       storeFormProductList.addProductToList();
       storeFormProductField.clearFormData();
-      storeFormState.isDisplayDefaultErrors = false;
       closeHandler();
     } else {
       storeFormState.isDisplayDefaultErrors = true;
@@ -51,10 +50,11 @@ const PopupFormProduct: FC = observer(() => {
   }
 
   useEffect(() => {
-    if (storeCategory.statusFetchCategories === 'pending') {
-      storeCategory.fetchCategories();
-    }
-  });
+    storeFormState.isDisplayDefaultErrors = false;
+    storeProduct.statusAddProducts = 'pending';
+    storeCategory.fetchCategories();
+    storeFormProductField.clearFormData();
+  }, []);
 
   return (
     <div className='popup add-product'>

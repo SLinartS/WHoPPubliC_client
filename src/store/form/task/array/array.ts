@@ -42,11 +42,9 @@ export class StoreFormTaskArray {
         break;
       default:
     }
-    console.warn(this._formData.products.value);
     const validator = new FormArrayValidator(
       this._formData[field].value,
     ).notEmpty();
-    console.warn(validator);
     this.checkErrorsExist(validator.errors, field);
   }
 

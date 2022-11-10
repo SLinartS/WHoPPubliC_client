@@ -1,9 +1,11 @@
 @use '../../../styles/global/colors.scss' as *;
+@use '../../../styles/global/variables.scss' as v;
 
 .products {
   display: flex;
   align-items: center;
   flex-direction: column;
+  height: calc(100vh - v.$header-height--standart);
 
   &__title {
     display: flex;

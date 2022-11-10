@@ -4,7 +4,7 @@ import { makeAutoObservable } from 'mobx';
 import extendAxios from '../../utils/extendAxios';
 import RootStore from '../root';
 import { TStatus } from '../type';
-import { ITasks } from './type';
+import { INewTaskData, ITasks } from './type';
 
 export class StoreTasks {
   constructor(private readonly rootStore: RootStore) {
@@ -74,9 +74,10 @@ export class StoreTasks {
     }
   }
 
-  public *addTask() {
+  public *addTask(actionIfDone?: () => void) {
     try {
-      const newTaskData = {
+      const taskTypeId = this.rootStore.storeFormUtils.getTaskTypeId();
+      const newTaskData: INewTaskData = {
         fields: {
           ...this.rootStore.storeFormTaskField.formData,
           userId: {
@@ -84,7 +85,7 @@ export class StoreTasks {
             errors: [],
           },
           typeId: {
-            value: '1',
+            value: taskTypeId,
             errors: [],
           },
         },
@@ -93,6 +94,9 @@ export class StoreTasks {
 
       yield extendAxios.post('tasks', newTaskData);
       this.statusAddTask = 'done';
+      if (actionIfDone) {
+        actionIfDone();
+      }
     } catch (error) {
       console.log(error, this.statusAddTask);
       this.statusAddTask = 'error';

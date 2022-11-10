@@ -2,11 +2,29 @@ import { makeAutoObservable } from 'mobx';
 
 import RootStore from '../../root';
 import { TValueOrErrorType } from '../../type';
-import { IWarehousePoint } from '../task/array/type';
 
 export class StoreFormUtils {
   constructor(private readonly rootStore: RootStore) {
     makeAutoObservable(this, {});
+  }
+
+  public getTaskTypeId(): string {
+    if (this.rootStore.storeFormState.currentTaskType === 'acceptance') {
+      return '1';
+    }
+    return '2';
+  }
+
+  public resetTaskForm(): void {
+    this.rootStore.storeFormTaskArray.clearArrays();
+    this.rootStore.storeFormProductList.clearProductList();
+    this.rootStore.storeFormTaskField.clearFormData();
+    this.rootStore.storeProduct.statusAddProducts = 'pending';
+    this.rootStore.storePoint.statusFetchPoints = 'pending';
+    this.rootStore.storeProduct.statusFetchProducts = 'pending';
+    this.rootStore.storeCategory.statusFetchCategories = 'pending';
+    this.rootStore.storeTasks.statusAddTask = 'pending';
+    this.rootStore.storeFormState.isDisplayDefaultErrors = false;
   }
 
   public checkProductErrors(): boolean {
@@ -20,8 +38,11 @@ export class StoreFormUtils {
     return false;
   }
 
-  public checkTaskErrors(): boolean {
-    if (this.checkTaskArrayErrors() || this.checkTaskFieldErrors()) {
+  public checkTaskErrors(isCheckWarehousePoint: boolean = true): boolean {
+    if (
+      this.checkTaskArrayErrors(isCheckWarehousePoint) ||
+      this.checkTaskFieldErrors()
+    ) {
       return true;
     }
     return false;
@@ -38,7 +59,7 @@ export class StoreFormUtils {
     return false;
   }
 
-  private checkTaskArrayErrors(): boolean {
+  private checkTaskArrayErrors(isCheckWarehousePoint: boolean) {
     const { list } = this.rootStore.storeFormProductList;
     const { points } = this.rootStore.storeFormTaskArray.formData;
     const { warehousePoints } = this.rootStore.storeFormTaskArray.formData;
@@ -46,7 +67,7 @@ export class StoreFormUtils {
     if (points.errors.length) {
       return true;
     }
-    if (warehousePoints.errors.length) {
+    if (warehousePoints.errors.length && isCheckWarehousePoint) {
       return true;
     }
     if (!list.length) {

@@ -2,7 +2,7 @@ import './style.scss';
 import '../../style.scss';
 
 import { observer } from 'mobx-react-lite';
-import { FC, useCallback, useEffect, useState } from 'react';
+import { FC, useEffect, useState } from 'react';
 
 import useGetProductListForTable from '../../../../hooks/mapAndPoint/useGetProductListForTable';
 import { ITaskFormFields } from '../../../../store/form/task/field/type';
@@ -24,13 +24,10 @@ const PopupFormTask: FC = observer(() => {
     storeProduct,
     storeFormUtils,
     storeFormState,
-    storeFormProductField,
     storeFormProductList,
     storeFormTaskArray,
     storeFormTaskField,
     storeTasks,
-    storePoint,
-    storeCategory,
   } = useRootStore();
 
   const getProductListForTable = useGetProductListForTable();
@@ -42,32 +39,24 @@ const PopupFormTask: FC = observer(() => {
     storeFormTaskField.setFormField(fieldName, e.target.value);
   }
 
-  const closeHandler = useCallback(() => {
+  function closeHandler() {
     storePopup.hideTaskForm();
-    storeFormTaskArray.clearArrays();
-    storeProduct.statusAddProducts = 'pending';
-    storePoint.statusFetchPoints = 'pending';
-    storeProduct.statusFetchProducts = 'pending';
-    storeCategory.statusFetchCategories = 'pending';
-    storeTasks.statusAddTask = 'pending';
-    storeFormProductList.clearProductList();
-    storeFormTaskField.clearFormData();
-    storeFormState.isDisplayDefaultErrors = false;
-  }, [
-    storeCategory,
-    storeFormProductList,
-    storeFormState,
-    storeFormTaskArray,
-    storeFormTaskField,
-    storePoint,
-    storePopup,
-    storeProduct,
-    storeTasks,
-  ]);
+    storeFormUtils.resetTaskForm();
+    if (isAcceptance) {
+      storeTasks.statusFetchAcceptanceTasks = 'pending';
+    } else {
+      storeTasks.statusFetchShipmentTasks = 'pending';
+    }
+  }
 
   function saveHandler() {
-    if (!storeFormUtils.checkTaskErrors()) {
-      storeProduct.addProducts();
+    if (!storeFormUtils.checkTaskErrors(isAcceptance)) {
+      storeProduct.addProducts(() => {
+        storeTasks.addTask(() => {
+          storeFormTaskField.clearFormData();
+          closeHandler();
+        });
+      });
     } else {
       storeFormState.isDisplayDefaultErrors = true;
     }
@@ -84,8 +73,6 @@ const PopupFormTask: FC = observer(() => {
   }
 
   function openProductFormHandler() {
-    storeFormState.isDisplayDefaultErrors = false;
-    storeFormProductField.clearFormData();
     storePopup.showProductForm();
     storePopup.hideTaskForm();
   }
@@ -96,28 +83,7 @@ const PopupFormTask: FC = observer(() => {
     } else {
       setIsAcceptance(false);
     }
-
-    if (storeProduct.statusAddProducts === 'done') {
-      storeProduct.statusAddProducts = 'pending';
-      storeTasks.addTask();
-    }
-
-    if (storeTasks.statusAddTask === 'done') {
-      storeFormTaskField.clearFormData();
-      closeHandler();
-    }
-  }, [
-    storeFormState,
-    storeFormTaskField,
-    storeFormState.currentTaskType,
-    storeProduct.statusAddProducts,
-    storeTasks.statusAddTask,
-    storeFormProductList,
-    storePopup,
-    storeProduct,
-    storeTasks,
-    closeHandler,
-  ]);
+  }, [storeFormState.currentTaskType]);
 
   return (
     <div className='popup add-task'>
@@ -202,7 +168,9 @@ const PopupFormTask: FC = observer(() => {
               additionalСlasses='table--add-task'
             />
           ) : (
-            ''
+            <div className='add-task__absence-product'>
+              Ни одна партия продукции не добавлена
+            </div>
           )}
         </div>
       </div>

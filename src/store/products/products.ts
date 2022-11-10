@@ -79,7 +79,7 @@ export class StoreProducts {
     }
   }
 
-  public *addProducts() {
+  public *addProducts(actionIfDone?: () => void) {
     try {
       const { list } = this.rootStore.storeFormProductList;
       const newProductData = {
@@ -94,6 +94,9 @@ export class StoreProducts {
         this.rootStore.storeFormTaskArray.addFormArrays('products', productId);
       }
       this.statusAddProducts = 'done';
+      if (actionIfDone) {
+        actionIfDone();
+      }
     } catch (error) {
       this.statusAddProducts = 'error';
     }

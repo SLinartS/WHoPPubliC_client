@@ -6,15 +6,14 @@ import { FC, useEffect } from 'react';
 import { TTaskType } from '../../../store/type';
 import { useRootStore } from '../../../utils/RootStoreProvider/useRootStore';
 import Button from '../../blocks/button/Button';
+import Loader from '../../blocks/loader/Loader';
 import Table from '../../blocks/table/Table';
 
 const Tasks: FC = observer(() => {
-  const { storeTasks, storePopup, storeFormState, storeProduct } =
-    useRootStore();
+  const { storeTasks, storePopup, storeFormState } = useRootStore();
 
   function showAddTaskWindowHandler(taskType: TTaskType) {
     storeFormState.currentTaskType = taskType;
-    storeProduct.statusAddProducts = 'pending';
     storePopup.showTaskForm();
   }
 
@@ -26,7 +25,6 @@ const Tasks: FC = observer(() => {
       storeTasks.fetchShipmentTasks();
     }
   }, [
-    storeTasks,
     storeTasks.statusFetchAcceptanceTasks,
     storeTasks.statusFetchShipmentTasks,
   ]);
@@ -50,7 +48,7 @@ const Tasks: FC = observer(() => {
             additionalСlasses='table--tasks'
           />
         ) : (
-          ''
+          <Loader />
         )}
       </div>
       <div className='tasks__title tasks__title--shipment'>
@@ -71,7 +69,7 @@ const Tasks: FC = observer(() => {
             additionalСlasses='table--tasks'
           />
         ) : (
-          ''
+          <Loader />
         )}
       </div>
     </main>
