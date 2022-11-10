@@ -1,6 +1,6 @@
 import { makeAutoObservable } from 'mobx';
-import deepCopy from '../../../../utils/deepCopy/deepCopy';
 
+import deepCopy from '../../../../utils/deepCopy/deepCopy';
 import RootStore from '../../../root';
 import { IProductFormDataFields } from '../field/type';
 

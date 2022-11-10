@@ -25,8 +25,8 @@
     "build": "react-scripts build",
     "test": "jest",
     "style": "stylelint **/*.scss --fix",
-    "lint": "eslint --fix ./src/",
-    "pret": "prettier --write ./src/"
+    "lint": "eslint --fix --cache ./src/",
+    "pret": "prettier --write --cache ./src/"
   },
   "browserslist": {
     "production": [

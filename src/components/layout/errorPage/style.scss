@@ -1,10 +1,20 @@
+@use '../../../styles/global/colors.scss' as *;
+
 .error-page {
   height: calc(100vh - 10rem);
-  display: flex;
-  align-items: center;
+  display: grid;
+  grid-template-columns: 30rem;
+  row-gap: 2rem;
+  align-content: center;
+  justify-items: center;
   justify-content: center;
 
   &__text {
-    font-size: 3.6rem;
+    font-size: 4rem;
+    text-align: center;
+  }
+
+  &__image {
+    width: 30rem;
   }
 }

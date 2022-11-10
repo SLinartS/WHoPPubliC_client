@@ -8,4 +8,4 @@ export type TChangeFieldHandler = ChangeEventHandler<
   HTMLInputElement | HTMLSelectElement
 >;
 
-export type TMouseButtonEvent = MouseEventHandler<HTMLButtonElement>;
+export type TMouseButtonEventHandler = MouseEventHandler<HTMLButtonElement>;

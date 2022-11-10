@@ -2,10 +2,10 @@ import { observer } from 'mobx-react-lite';
 import { FC } from 'react';
 
 import plusImage from '../../../../../assets/icons/choose.png';
-import { TMouseButtonEvent } from '../../../../../types/form/type';
+import { TMouseButtonEventHandler } from '../../../../../types/form/type';
 
 interface IFormFieldPointProps {
-  clickHandler: TMouseButtonEvent;
+  clickHandler: TMouseButtonEventHandler;
 }
 
 const FormFieldPoint: FC<IFormFieldPointProps> = observer(

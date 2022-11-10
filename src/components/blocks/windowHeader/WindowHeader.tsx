@@ -3,14 +3,14 @@ import './style.scss';
 import { observer } from 'mobx-react-lite';
 import { FC } from 'react';
 
-import { TMouseButtonEvent } from '../../../types/form/type';
+import { TMouseButtonEventHandler } from '../../../types/form/type';
 import Button from '../button/Button';
 
 interface IWindowHeaderProps {
   classes?: string;
   text: string;
-  saveEvent: TMouseButtonEvent;
-  closeEvent: TMouseButtonEvent;
+  saveEvent: TMouseButtonEventHandler;
+  closeEvent: TMouseButtonEventHandler;
 }
 
 const WindowHeader: FC<IWindowHeaderProps> = observer(
