@@ -1,4 +1,5 @@
 import { makeAutoObservable } from 'mobx';
+import deepCopy from '../../../../utils/deepCopy/deepCopy';
 
 import RootStore from '../../../root';
 import { IProductFormDataFields } from '../field/type';
@@ -15,9 +16,7 @@ export class StoreFormProductList {
   }
 
   public addProductToList() {
-    this._list.push({
-      ...this.rootStore.storeFormProductField.formData,
-    });
+    this._list.push(deepCopy(this.rootStore.storeFormProductField.formData));
   }
 
   public removeProductFromList(article: string) {
