@@ -71,10 +71,12 @@ const MapFloor: FC<IMapFloorProps> = observer(
         gridRow: `${-number}/${-number - 1}`,
         background: 'unset',
       };
-
       if (active) {
-        newStyle.background =
-          active && storeFormState.isSelectedMap ? '#c15943' : '';
+        if (storeFormState.isSelectedMap) {
+          newStyle.background = `linear-gradient(180deg, 
+              #d35f48 ${(freeSpace / capacity) * 100}%, 
+              #7fa89c ${(freeSpace / capacity) * 100}%)`;
+        }
       } else {
         newStyle.background = `linear-gradient(180deg, 
           transparent ${(freeSpace / capacity) * 100}%, 

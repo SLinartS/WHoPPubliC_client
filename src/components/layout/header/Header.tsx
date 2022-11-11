@@ -5,8 +5,8 @@ import { FC } from 'react';
 import { Link } from 'react-router-dom';
 
 import appIcon from '../../../assets/images/app-icon.png';
-import HeaderLink from '../../blocks/link/HeaderLink';
-import { IHeaderLinkProps } from '../../blocks/link/type';
+import HeaderLink from './link/HeaderLink';
+import { IHeaderLinkProps } from './link/type';
 
 const Header: FC = observer(() => {
   const HEADER_LINKS: IHeaderLinkProps[] = [
