@@ -8,6 +8,23 @@ export class StoreFormUtils {
     makeAutoObservable(this, {});
   }
 
+  public isEnoughFreeSpace() {
+    if (
+      this.getOccupiedSpace() < this.rootStore.storeFormTaskArray.freeFloorSpace
+    ) {
+      return true;
+    }
+    return false;
+  }
+
+  public getOccupiedSpace(): number {
+    let occepiedSpace = 0;
+    for (const product of this.rootStore.storeFormProductList.list) {
+      occepiedSpace += Number(product.number.value);
+    }
+    return occepiedSpace;
+  }
+
   public getTaskTypeId(): string {
     if (this.rootStore.storeFormState.currentTaskType === 'acceptance') {
       return '1';

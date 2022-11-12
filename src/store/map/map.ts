@@ -36,6 +36,13 @@ export class StoreMap {
     this._mapData[zoneIndex].sections[sectionIndex].blocks[blockIndex].floors[
       floorIndex
     ].active = newStatus;
+
+    this.rootStore.storeFormTaskArray.changeFreeFloorSpace(
+      newStatus,
+      this._mapData[zoneIndex].sections[sectionIndex].blocks[blockIndex].floors[
+        floorIndex
+      ].freeSpace,
+    );
   }
 
   /*  Array of data

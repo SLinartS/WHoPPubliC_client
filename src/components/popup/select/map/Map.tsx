@@ -1,7 +1,7 @@
 import './style.scss';
 
 import { observer } from 'mobx-react-lite';
-import { FC, useEffect } from 'react';
+import { FC, useEffect, useState } from 'react';
 
 import { useRootStore } from '../../../../utils/RootStoreProvider/useRootStore';
 import Loader from '../../../blocks/loader/Loader';
@@ -9,8 +9,15 @@ import Map from '../../../blocks/map/Map';
 import WindowHeader from '../../../blocks/windowHeader/WindowHeader';
 
 const PopupSelectMap: FC = observer(() => {
-  const { storePopup, storeMap, storeFormState, storeFormTaskArray } =
-    useRootStore();
+  const [background, setBackground] = useState<string>('background: ');
+
+  const {
+    storePopup,
+    storeMap,
+    storeFormState,
+    storeFormTaskArray,
+    storeFormUtils,
+  } = useRootStore();
 
   function saveHandler() {
     storePopup.showTaskForm();
@@ -29,6 +36,14 @@ const PopupSelectMap: FC = observer(() => {
   }, []);
 
   useEffect(() => {
+    let backgroundColor: string = '#d35f48';
+    if (storeFormUtils.isEnoughFreeSpace()) {
+      backgroundColor = '#7fa89c';
+    }
+    setBackground(backgroundColor);
+  }, [storeFormUtils.isEnoughFreeSpace()]);
+
+  useEffect(() => {
     if (storeMap.statusFetchMap === 'pending') {
       storeMap.fetchMap();
     }
@@ -40,6 +55,10 @@ const PopupSelectMap: FC = observer(() => {
         text='Выбрать раскладки на складе'
         saveEvent={saveHandler}
         closeEvent={closeHandler}
+      />
+      <div
+        className='select-map__is-enough-free-space'
+        style={{ background }}
       />
       {storeMap.statusFetchMap === 'done' ? (
         <Map additionalClasses='map--select-map' />

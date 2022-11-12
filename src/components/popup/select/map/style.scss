@@ -2,4 +2,11 @@
 
 .select-map {
   background-color: $font-color--white;
+
+  &__is-enough-free-space {
+    margin: 2rem 35% 0 35%;
+    width: 30%;
+    height: 3rem;
+    background: #d35f48;
+  }
 }

@@ -10,6 +10,24 @@ export class StoreFormTaskArray {
     makeAutoObservable(this, {});
   }
 
+  private _freeFloorSpace: number = 0;
+
+  public get freeFloorSpace() {
+    return this._freeFloorSpace;
+  }
+
+  public changeFreeFloorSpace(isAdd: boolean, space: number) {
+    if (isAdd) {
+      this._freeFloorSpace += space;
+    } else {
+      this._freeFloorSpace -= space;
+    }
+  }
+
+  public clearFreeFloorSpace() {
+    this._freeFloorSpace = 0;
+  }
+
   private _formData: ITaskFormDataArrays = {
     products: INITIAL_ARRAY_VALUE,
     points: INITIAL_ARRAY_VALUE,
@@ -31,10 +49,7 @@ export class StoreFormTaskArray {
   public addFormArrays(field: keyof ITaskFormDataArrays, value: number) {
     this._formData[field].value.push(value);
 
-    const validator = new FormArrayValidator(
-      this._formData[field].value,
-    ).notEmpty();
-    this.checkErrorsExist(validator.errors, field);
+    this.checkErrorsExist(field);
   }
 
   public removeFormArrays(field: keyof ITaskFormDataArrays, itemId: number) {
@@ -42,10 +57,7 @@ export class StoreFormTaskArray {
       (id) => id !== itemId,
     );
 
-    const validator = new FormArrayValidator(
-      this._formData[field].value,
-    ).notEmpty();
-    this.checkErrorsExist(validator.errors, field);
+    this.checkErrorsExist(field);
   }
 
   public clearArrays(arrayName?: keyof ITaskFormDataArrays) {
@@ -58,12 +70,13 @@ export class StoreFormTaskArray {
     }
   }
 
-  private checkErrorsExist(
-    errors: string[] | false,
-    field: keyof ITaskFormDataArrays,
-  ) {
-    if (errors) {
-      this._formData[field].errors = errors;
+  private checkErrorsExist(field: keyof ITaskFormDataArrays) {
+    const validator = new FormArrayValidator(
+      this._formData[field].value,
+    ).notEmpty();
+
+    if (validator.errors) {
+      this._formData[field].errors = validator.errors;
     } else {
       this._formData[field].errors = [];
     }
