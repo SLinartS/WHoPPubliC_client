@@ -3,7 +3,6 @@ import { FC, useEffect, useRef, useState } from 'react';
 
 import useCheckIsAdded from '../../../../hooks/mapAndPoint/useCheckIsAdded';
 import useGetFloorCoordinates from '../../../../hooks/mapAndPoint/useGetFloorCoordinates';
-import { IWarehousePoint } from '../../../../store/form/task/array/type';
 import { IFloor } from '../../../../store/map/type';
 import { useRootStore } from '../../../../utils/RootStoreProvider/useRootStore';
 
@@ -30,38 +29,25 @@ const MapFloor: FC<IMapFloorProps> = observer(
         );
 
         if (zone && section && block && floor) {
-          if (
-            checkIsAdded(
-              storeFormTaskArray.getFormArrays(
-                'warehousePoints',
-              ) as IWarehousePoint[],
-              floor.id,
-              'floorId',
-            )
-          ) {
-            storeMap.setFloorActive(
-              zone.index,
-              section.index,
-              block.index,
-              floor.index,
-              false,
-            );
+          let floorActive: boolean = false;
+          const floorIsAlreadyAdded = checkIsAdded(
+            storeFormTaskArray.getFormArrays('warehousePoints'),
+            floor.id,
+          );
+
+          if (floorIsAlreadyAdded) {
             storeFormTaskArray.removeFormArrays('warehousePoints', floor.id);
           } else {
-            storeMap.setFloorActive(
-              zone.index,
-              section.index,
-              block.index,
-              floor.index,
-              true,
-            );
-            storeFormTaskArray.addFormArrays('warehousePoints', {
-              zoneId: zone.id,
-              sectionId: section.id,
-              blockId: block.id,
-              floorId: floor.id,
-            });
+            floorActive = true;
+            storeFormTaskArray.addFormArrays('warehousePoints', floor.id);
           }
+          storeMap.setFloorActive(
+            zone.index,
+            section.index,
+            block.index,
+            floor.index,
+            floorActive,
+          );
         }
       }
     }
@@ -92,6 +78,7 @@ const MapFloor: FC<IMapFloorProps> = observer(
         className='map-block__floor'
         data-floor-id={id}
         data-floor-index={index}
+        data-floor-free-space={freeSpace}
         style={styles}
         onClick={chooseFloor}
       />

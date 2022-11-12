@@ -8,7 +8,7 @@ export interface ITaskFormDataArrays {
     errors: string[];
   };
   warehousePoints: {
-    value: IWarehousePoint[];
+    value: number[];
     errors: string[];
   };
 }

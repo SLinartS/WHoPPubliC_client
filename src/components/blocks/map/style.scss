@@ -52,6 +52,7 @@
       font-size: 2rem;
       color: $table-color--opacity-mid;
       opacity: 0.5;
+      user-select: none;
     }
   }
 
@@ -67,6 +68,7 @@
     right: calc(50% - 2.5rem);
     transform: translate(50%, -50%);
     position: absolute;
+    user-select: none;  
   }
 
   &__section-title {
@@ -81,6 +83,7 @@
     right: calc(0% - 2.5rem);
     transform: translate(50%, -50%);
     position: absolute;
+    user-select: none;
   }
 
   &--select-map {

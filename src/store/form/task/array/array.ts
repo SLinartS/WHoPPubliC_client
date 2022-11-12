@@ -3,7 +3,7 @@ import { makeAutoObservable, toJS } from 'mobx';
 import FormArrayValidator from '../../../../utils/formValidator/formArrayValidator';
 import RootStore from '../../../root';
 import { INITIAL_ARRAY_VALUE } from '../../utils/config';
-import { ITaskFormDataArrays, IWarehousePoint } from './type';
+import { ITaskFormDataArrays } from './type';
 
 export class StoreFormTaskArray {
   constructor(private readonly rootStore: RootStore) {
@@ -28,20 +28,9 @@ export class StoreFormTaskArray {
     return toJS(this._formData[field].errors);
   }
 
-  public addFormArrays(
-    field: keyof ITaskFormDataArrays,
-    value: number | IWarehousePoint,
-  ) {
-    switch (field) {
-      case 'products':
-      case 'points':
-        this._formData[field].value.push(value as number);
-        break;
-      case 'warehousePoints':
-        this._formData[field].value.push(value as IWarehousePoint);
-        break;
-      default:
-    }
+  public addFormArrays(field: keyof ITaskFormDataArrays, value: number) {
+    this._formData[field].value.push(value);
+
     const validator = new FormArrayValidator(
       this._formData[field].value,
     ).notEmpty();
@@ -49,20 +38,10 @@ export class StoreFormTaskArray {
   }
 
   public removeFormArrays(field: keyof ITaskFormDataArrays, itemId: number) {
-    switch (field) {
-      case 'products':
-      case 'points':
-        this._formData[field].value = this._formData[field].value.filter(
-          (id) => id !== itemId,
-        );
-        break;
-      case 'warehousePoints':
-        this._formData[field].value = this._formData[field].value.filter(
-          (warehousePoint) => warehousePoint.floorId !== itemId,
-        );
-        break;
-      default:
-    }
+    this._formData[field].value = this._formData[field].value.filter(
+      (id) => id !== itemId,
+    );
+
     const validator = new FormArrayValidator(
       this._formData[field].value,
     ).notEmpty();

@@ -16,13 +16,14 @@ interface IUseGetFloorCoordinatesReturn {
   floor: {
     id: number;
     index: number;
+    freeSpace: number;
   };
 }
 
 const useGetFloorCoordinates = () => {
   const internalCallback = useCallback(
     (floor: HTMLDivElement): IUseGetFloorCoordinatesReturn => {
-      const { floorId, floorIndex } = floor.dataset;
+      const { floorId, floorIndex, floorFreeSpace } = floor.dataset;
 
       const blockParent: HTMLDivElement = floor.parentNode as HTMLDivElement;
       const { blockId, blockIndex } = blockParent.dataset;
@@ -51,6 +52,7 @@ const useGetFloorCoordinates = () => {
         floor: {
           id: Number(floorId),
           index: Number(floorIndex),
+          freeSpace: Number(floorFreeSpace),
         },
       };
     },

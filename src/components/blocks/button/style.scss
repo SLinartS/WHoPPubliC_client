@@ -8,6 +8,8 @@
   font-weight: bold;
   padding: 1rem 4rem;
   color: $font-color--white;
+  user-select: none;
+  cursor: pointer;
 
   background: $second-color 50%;
   transform: translate(0, -0.4rem);

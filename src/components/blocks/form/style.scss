@@ -18,6 +18,7 @@
     width: fit-content;
     white-space: nowrap;
     margin: 0.5rem 2rem 0.5rem 0;
+    user-select: none;
 
     &--big {
       font-size: 3.6rem;
@@ -72,6 +73,7 @@
     border: none;
     background-color: transparent;
     padding: 0;
+    cursor: pointer;
   }
 
   &__plus-icon {

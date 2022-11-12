@@ -25,26 +25,22 @@ const PointsBlock: FC<IPointsBlockProps> = observer(
         const { point } = getPointCoordinates(pointBlockNode.current);
 
         if (point) {
-          if (
-            checkIsAdded(
-              storeFormTaskArray.getFormArrays('points') as number[],
-              point.id,
-            )
-          ) {
-            storePoint.setPointActive(
-              storeFormState.currentTaskType,
-              point.index,
-              false,
-            );
+          let pointActive: boolean = false;
+          const pointIsAlreadyAdded = checkIsAdded(
+            storeFormTaskArray.getFormArrays('points') as number[],
+            point.id,
+          );
+          if (pointIsAlreadyAdded) {
             storeFormTaskArray.removeFormArrays('points', point.id);
           } else {
-            storePoint.setPointActive(
-              storeFormState.currentTaskType,
-              point.index,
-              true,
-            );
+            pointActive = true;
             storeFormTaskArray.addFormArrays('points', point.id);
           }
+          storePoint.setPointActive(
+            storeFormState.currentTaskType,
+            point.index,
+            pointActive,
+          );
         }
       }
     }

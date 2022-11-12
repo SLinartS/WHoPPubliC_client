@@ -55,8 +55,9 @@
       word-wrap: break-word;
       text-align: center;
       transform: translate(0, -0.4rem);
-      box-shadow: 0 0.4rem 0 0 $main-color-shadow;
       transition: all 0.1s ease-in-out;
+      box-shadow: 0 0.4rem 0 0 $main-color-shadow;
+      user-select: none;
 
       &:hover {
         background: $main-color--hover;
