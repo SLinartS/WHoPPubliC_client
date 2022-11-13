@@ -4,6 +4,7 @@ import { observer } from 'mobx-react-lite';
 import { Key } from 'react';
 
 import TableColumn from './column/Column';
+import TableColumnShell from './column/shell/Shell';
 import TableRow from './row/Row';
 
 interface ITableProps<T> {
@@ -25,11 +26,15 @@ export default observer(function Table<T extends object>({
       style={{ gridTemplateColumns: `repeat(${tableHeader.length}, auto)` }}
     >
       {tableHeader.map((text) => (
-        <TableColumn
+        <TableColumnShell
           key={text}
-          text={text}
-          additionalСlasses='table__block--header'
-        />
+          additionalClasses='table__column-shell--header'
+        >
+          <TableColumn
+            key={text}
+            text={text}
+          />
+        </TableColumnShell>
       ))}
       {data.map((columns) => (
         <TableRow

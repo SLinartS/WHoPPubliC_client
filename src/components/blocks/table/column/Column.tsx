@@ -1,11 +1,10 @@
 import { FC, useEffect, useState } from 'react';
 
 interface TableColumnProps {
-  additionalСlasses?: string;
   text: number | string;
 }
 
-const TableColumn: FC<TableColumnProps> = ({ additionalСlasses, text }) => {
+const TableColumn: FC<TableColumnProps> = ({ text }) => {
   const [formatText, setFormatText] = useState(text);
 
   useEffect(() => {
@@ -18,11 +17,7 @@ const TableColumn: FC<TableColumnProps> = ({ additionalСlasses, text }) => {
     }
   }, [text]);
 
-  return (
-    <div className={`table__block ${additionalСlasses}`}>
-      <p className='table__text'>{formatText}</p>
-    </div>
-  );
+  return <p className='table__column'>{formatText} </p>;
 };
 
 export default TableColumn;

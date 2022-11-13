@@ -1,9 +1,12 @@
 @use '../../../../styles/global/colors.scss' as *;
 
 .select-map {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
   background-color: $font-color--white;
 
-  &__is-enough-free-space {
+  &__free-space-indicator {
     margin: 2rem 35% 0 35%;
     width: 30%;
     height: 3rem;

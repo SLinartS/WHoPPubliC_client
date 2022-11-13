@@ -57,7 +57,7 @@ const PopupSelectMap: FC = observer(() => {
         closeEvent={closeHandler}
       />
       <div
-        className='select-map__is-enough-free-space'
+        className='select-map__free-space-indicator'
         style={{ background }}
       />
       {storeMap.statusFetchMap === 'done' ? (

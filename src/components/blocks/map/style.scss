@@ -68,7 +68,7 @@
     right: calc(50% - 2.5rem);
     transform: translate(50%, -50%);
     position: absolute;
-    user-select: none;  
+    user-select: none;
   }
 
   &__section-title {
@@ -89,8 +89,4 @@
   &--select-map {
     height: calc(100% - 9.2rem);
   }
-}
-
-.table--map {
-  margin: 2rem;
 }

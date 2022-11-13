@@ -59,6 +59,10 @@
       box-shadow: 0 0.4rem 0 0 $main-color-shadow;
       user-select: none;
 
+      &--active {
+        background: $main-color--active;
+      }
+
       &:hover {
         background: $main-color--hover;
         transform: translate(0, -0.5rem);

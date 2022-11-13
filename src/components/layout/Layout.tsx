@@ -3,8 +3,8 @@ import { useRef } from 'react';
 import { Outlet } from 'react-router-dom';
 
 import { useRootStore } from '../../utils/RootStoreProvider/useRootStore';
-import TransitionPopup from '../blocks/transition/popup/TransitionPopup';
-import { ITransitionPopupLayout } from '../blocks/transition/popup/type';
+import TransitionCustom from '../blocks/transition/Transition';
+import { ITransitionCustomLayout } from '../blocks/transition/type';
 import PopupFormProduct from '../popup/form/product/Product';
 import PopupFormTask from '../popup/form/task/Task';
 import PopupSelectMap from '../popup/select/map/Map';
@@ -18,30 +18,38 @@ const Layout = observer(() => {
   const mapNodeRef = useRef<HTMLDivElement>(null);
   const pointsNodeRef = useRef<HTMLDivElement>(null);
 
-  const POPUPS: ITransitionPopupLayout[] = [
+  const POPUPS: ITransitionCustomLayout[] = [
     {
       name: 'productFormPopup',
       trigger: storePopup.productForm,
       nodeRef: productNodeRef,
       children: <PopupFormProduct />,
+      classNames: 'popup',
+      timeout: 200,
     },
     {
       name: 'taskFormPopup',
       trigger: storePopup.taskForm,
       nodeRef: taskNodeRef,
       children: <PopupFormTask />,
+      classNames: 'popup',
+      timeout: 200,
     },
     {
       name: 'selectMapPopup',
       trigger: storePopup.selectMap,
       nodeRef: mapNodeRef,
       children: <PopupSelectMap />,
+      classNames: 'popup',
+      timeout: 200,
     },
     {
       name: 'selectPointsPopup',
       trigger: storePopup.selectPoints,
       nodeRef: pointsNodeRef,
       children: <PopupSelectPoints />,
+      classNames: 'popup',
+      timeout: 200,
     },
   ];
 
@@ -49,15 +57,19 @@ const Layout = observer(() => {
     <>
       <Header />
       <Outlet />
-      {POPUPS.map(({ name, trigger, nodeRef, children }) => (
-        <TransitionPopup
-          key={name}
-          trigger={trigger}
-          nodeRef={nodeRef}
-        >
-          {children}
-        </TransitionPopup>
-      ))}
+      {POPUPS.map(
+        ({ name, trigger, nodeRef, children, classNames, timeout }) => (
+          <TransitionCustom
+            key={name}
+            trigger={trigger}
+            nodeRef={nodeRef}
+            classNames={classNames}
+            timeout={timeout}
+          >
+            {children}
+          </TransitionCustom>
+        ),
+      )}
     </>
   );
 });

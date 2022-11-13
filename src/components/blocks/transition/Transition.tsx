@@ -2,22 +2,22 @@ import { observer } from 'mobx-react-lite';
 import { FC } from 'react';
 import { CSSTransition } from 'react-transition-group';
 
-import { ITransitionPopupProps } from './type';
+import { ITransitionCustomProps } from './type';
 
-const TransitionPopup: FC<ITransitionPopupProps> = observer(
-  ({ trigger, nodeRef, children }) => {
+const TransitionCustom: FC<ITransitionCustomProps> = observer(
+  ({ trigger, nodeRef, children, classNames, timeout }) => {
     return (
       <CSSTransition
         nodeRef={nodeRef}
         in={trigger}
-        timeout={200}
-        classNames='popup'
+        timeout={timeout}
+        classNames={classNames}
         mountOnEnter
         unmountOnExit
       >
         <div
           ref={nodeRef}
-          className='popup-transition-shell'
+          className='transition-shell'
         >
           {children}
         </div>
@@ -26,4 +26,4 @@ const TransitionPopup: FC<ITransitionPopupProps> = observer(
   },
 );
 
-export default TransitionPopup;
+export default TransitionCustom;
