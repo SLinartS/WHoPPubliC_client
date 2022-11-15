@@ -10,16 +10,15 @@
   color: $font-color--white;
   user-select: none;
   cursor: pointer;
-
   background: $second-color 50%;
   transform: translate(0, -0.4rem);
-  box-shadow: 0 0.4rem 0rem 0rem $second-color-shadow;
+  box-shadow: 0 0.4rem 0 0 $second-color-shadow;
   transition: all 0.1s ease-in-out;
 
   &:hover {
     background: $second-color--hover;
     transform: translate(0, -0.5rem);
-    box-shadow: 0 0.5rem 0rem 0rem $second-color-shadow;
+    box-shadow: 0 0.5rem 0 0 $second-color-shadow;
   }
 
   &:active {

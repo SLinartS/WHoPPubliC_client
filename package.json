@@ -26,7 +26,7 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "jest",
-    "style": "stylelint **/*.scss --fix",
+    "style": "stylelint --cache --fix **/*.scss",
     "lint": "eslint --fix --cache ./src/",
     "pret": "prettier --write --cache ./src/"
   },

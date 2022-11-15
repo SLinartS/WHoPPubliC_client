@@ -9,10 +9,7 @@
   column-gap: 0.1rem;
   row-gap: 0.5rem;
   font-size: 1.6rem;
-
-  &--map {
-    margin: 2rem;
-  }
+  position: relative;
 
   &__column {
     margin: 0;
@@ -25,17 +22,24 @@
       justify-content: center;
       width: 100%;
       min-width: 2rem;
+      min-height: 3rem;
       border: 0.1rem solid $font-color--black;
 
       &--header {
         font-weight: bold;
         height: 5rem;
       }
-
-      &--row {
-        min-height: 3rem;
-      }
     }
+  }
+
+  &__hover-helper {
+    width: 100rem;
+    height: 1.6rem;
+    position: absolute;
+  }
+
+  &--map {
+    margin: 2rem;
   }
 }
 
@@ -72,8 +76,8 @@
   .table {
     font-size: 1.4rem;
 
-    &__shell {
-      &--row {
+    &__column {
+      &__shell {
         overflow-wrap: break-word;
         word-break: break-all;
       }
@@ -85,18 +89,14 @@
   .table {
     font-size: 1.2rem;
 
-    &__shell {
-      &--row {
+    &__column {
+      padding: 0 0.2rem;
+      overflow: scroll;
+
+      &__shell {
         overflow-wrap: break-word;
         word-break: break-all;
       }
-    }
-
-    &__column {
-      padding: 0 0.2rem;
-
-      // text-overflow: ellipsis;
-      overflow: scroll;
     }
   }
 }

@@ -3,7 +3,7 @@ import { makeAutoObservable } from 'mobx';
 import RootStore from '../root';
 
 export class StorePopup {
-  constructor(private readonly rootStore: RootStore) {
+  constructor(private readonly root: RootStore) {
     makeAutoObservable(this, {});
   }
 

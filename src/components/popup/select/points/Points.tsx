@@ -9,8 +9,7 @@ import PointsBlock from '../../../blocks/points/block/Block';
 import WindowHeader from '../../../blocks/windowHeader/WindowHeader';
 
 const PopupSelectPoints: FC = observer(() => {
-  const { storePopup, storePoint, storeFormState, storeFormTaskArray } =
-    useRootStore();
+  const { storePopup, storePoint, storeForm } = useRootStore();
 
   function saveHandler() {
     storePopup.showTaskForm();
@@ -20,16 +19,16 @@ const PopupSelectPoints: FC = observer(() => {
   function closeHandler() {
     storePopup.showTaskForm();
     storePopup.hideSelectPoints();
-    storeFormTaskArray.clearArrays('points');
-    storePoint.fetchPoints();
+    storeForm.task.array.clearArrays('points');
+    storePoint.fetch.points();
   }
 
   function displayPointsByTaskType(): ReactNode {
     const PointNodes: ReactNode[] = [];
 
-    let pointsArray = storePoint.points.acceptance;
-    if (storeFormState.currentTaskType === 'shipment') {
-      pointsArray = storePoint.points.shipment;
+    let pointsArray = storePoint.state.points.acceptance;
+    if (storeForm.state.currentTaskType === 'shipment') {
+      pointsArray = storePoint.state.points.shipment;
     }
 
     pointsArray.forEach((point, index) => {
@@ -48,17 +47,17 @@ const PopupSelectPoints: FC = observer(() => {
   }
 
   useEffect(() => {
-    storeFormState.isSelectedPoint = true;
-    if (storePoint.statusFetchPoints === 'pending') {
-      storePoint.fetchPoints();
+    storeForm.state.isSelectedPoint = true;
+    if (storePoint.status.get('fetch') === 'pending') {
+      storePoint.fetch.points();
     }
-  }, [storePoint.statusFetchPoints]);
+  }, [storePoint.status.get('fetch')]);
 
   return (
     <div className='popup select-points'>
       <WindowHeader
         text={`Выбрать точки ${
-          storeFormState.currentTaskType === 'acceptance'
+          storeForm.state.currentTaskType === 'acceptance'
             ? 'приёмки'
             : 'отгрузки'
         }`}
@@ -67,7 +66,7 @@ const PopupSelectPoints: FC = observer(() => {
       />
 
       <div className='points-map'>
-        {storePoint.statusFetchPoints === 'done' ? (
+        {storePoint.status.get('fetch') === 'done' ? (
           <div className='points-map__container'>
             {displayPointsByTaskType()}
           </div>

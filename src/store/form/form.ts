@@ -1,10 +1,10 @@
 import { makeAutoObservable } from 'mobx';
 
-import RootStore from '../../root';
-import { TTaskType } from '../../type';
+import RootStore from '../root';
+import { TTaskType } from '../type';
 
-export class StoreFormState {
-  constructor(private readonly rootStore: RootStore) {
+export class StoreForm {
+  constructor(private readonly root: RootStore) {
     makeAutoObservable(this, {});
   }
 

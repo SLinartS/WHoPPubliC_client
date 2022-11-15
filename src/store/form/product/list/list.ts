@@ -5,7 +5,7 @@ import RootStore from '../../../root';
 import { IProductFormDataFields } from '../field/type';
 
 export class StoreFormProductList {
-  constructor(private readonly rootStore: RootStore) {
+  constructor(private readonly root: RootStore) {
     makeAutoObservable(this, {});
   }
 
@@ -16,7 +16,7 @@ export class StoreFormProductList {
   }
 
   public addProductToList() {
-    this._list.push(deepCopy(this.rootStore.storeFormProductField.formData));
+    this._list.push(deepCopy(this.root.storeForm.product.field.formData));
   }
 
   public removeProductFromList(article: string) {

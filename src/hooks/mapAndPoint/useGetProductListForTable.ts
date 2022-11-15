@@ -12,7 +12,7 @@ interface IProductListForTableData {
 }
 
 const useGetProductListForTable = () => {
-  const { storeFormProductList } = useRootStore();
+  const { storeForm } = useRootStore();
 
   const internalCallback = useCallback((): IProductListForTableData => {
     const productListForTable: IProductListForTableData = {
@@ -28,7 +28,7 @@ const useGetProductListForTable = () => {
       ],
     };
 
-    for (const product of storeFormProductList.list) {
+    for (const product of storeForm.product.list.list) {
       productListForTable.data.push({
         article: product.article.value,
         title: product.title.value,
@@ -41,7 +41,7 @@ const useGetProductListForTable = () => {
     }
 
     return productListForTable;
-  }, [storeFormProductList.list]);
+  }, [storeForm.product.list.list]);
 
   return internalCallback;
 };

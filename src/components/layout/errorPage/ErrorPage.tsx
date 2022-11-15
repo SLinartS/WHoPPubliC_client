@@ -24,7 +24,7 @@ const ErrorPage: FC = observer(() => {
       />
       <Button
         text='Вернуться назад'
-        clickEvent={goBackButtonHandler}
+        clickHandler={goBackButtonHandler}
       />
     </main>
   );

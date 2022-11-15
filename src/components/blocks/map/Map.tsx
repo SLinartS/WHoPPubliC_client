@@ -15,7 +15,7 @@ const Map: FC<IMapProps> = observer(({ additionalClasses }) => {
 
   return (
     <div className={`map-block ${additionalClasses}}`}>
-      {storeMap.mapData.map((zone, zoneIndex) => (
+      {storeMap.state.map.map((zone, zoneIndex) => (
         <Zone
           key={zone.id}
           id={zone.id}

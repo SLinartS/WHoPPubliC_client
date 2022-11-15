@@ -8,21 +8,21 @@ import Loader from '../../blocks/loader/Loader';
 import Map from '../../blocks/map/Map';
 
 const MapPage: FC = observer(() => {
-  const { storeFormState, storeMap } = useRootStore();
+  const { storeForm, storeMap } = useRootStore();
 
   useEffect(() => {
-    storeFormState.isSelectedMap = false;
+    storeForm.state.isSelectedMap = false;
   }, []);
 
   useEffect(() => {
-    if (storeMap.statusFetchMap === 'pending') {
-      storeMap.fetchMap();
+    if (storeMap.status.get('fetch') === 'pending') {
+      storeMap.fetch.map();
     }
-  }, [storeMap.statusFetchMap]);
+  }, [storeMap.status.get('fetch')]);
 
   return (
     <main className='map'>
-      {storeMap.statusFetchMap === 'done' ? <Map /> : <Loader />}
+      {storeMap.status.get('fetch') === 'done' ? <Map /> : <Loader />}
     </main>
   );
 });

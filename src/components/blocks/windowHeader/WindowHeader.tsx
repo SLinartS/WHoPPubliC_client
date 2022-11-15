@@ -20,12 +20,12 @@ const WindowHeader: FC<IWindowHeaderProps> = observer(
       <Button
         additionalСlasses='button--window-header'
         text='Сохранить'
-        clickEvent={saveEvent}
+        clickHandler={saveEvent}
       />
       <Button
         additionalСlasses='button--window-header'
         text='Отмена'
-        clickEvent={closeEvent}
+        clickHandler={closeEvent}
       />
     </div>
   ),

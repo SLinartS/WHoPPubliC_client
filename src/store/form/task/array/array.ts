@@ -2,30 +2,12 @@ import { makeAutoObservable, toJS } from 'mobx';
 
 import FormArrayValidator from '../../../../utils/formValidator/formArrayValidator';
 import RootStore from '../../../root';
-import { INITIAL_ARRAY_VALUE } from '../../utils/config';
+import { INITIAL_ARRAY_VALUE } from '../../config';
 import { ITaskFormDataArrays } from './type';
 
 export class StoreFormTaskArray {
-  constructor(private readonly rootStore: RootStore) {
+  constructor(private readonly root: RootStore) {
     makeAutoObservable(this, {});
-  }
-
-  private _freeFloorSpace: number = 0;
-
-  public get freeFloorSpace() {
-    return this._freeFloorSpace;
-  }
-
-  public changeFreeFloorSpace(isAdd: boolean, space: number) {
-    if (isAdd) {
-      this._freeFloorSpace += space;
-    } else {
-      this._freeFloorSpace -= space;
-    }
-  }
-
-  public clearFreeFloorSpace() {
-    this._freeFloorSpace = 0;
   }
 
   private _formData: ITaskFormDataArrays = {

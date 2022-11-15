@@ -3,10 +3,16 @@ import { FC, useRef, useState } from 'react';
 
 import Button from '../../../../button/Button';
 import TransitionCustom from '../../../../transition/Transition';
-import { ITableColumnShellProps } from '../type';
+import { ITableColumnShellButtonProps } from '../type';
 
-const TableColumnShellDelete: FC<ITableColumnShellProps> = observer(
-  ({ children, additionalClasses }) => {
+const TableColumnShellButton: FC<ITableColumnShellButtonProps> = observer(
+  ({
+    additionalClasses,
+    children,
+    buttonText,
+    buttonClickHandler,
+    buttonAdditionalСlasses,
+  }) => {
     const [isButtonVisible, setIsButtonVisible] = useState<boolean>(false);
     const [isParagraphVisible, setIsParagraphVisible] = useState<boolean>(true);
     const buttonNodeRef = useRef<HTMLDivElement>(null);
@@ -36,8 +42,9 @@ const TableColumnShellDelete: FC<ITableColumnShellProps> = observer(
           trigger={isButtonVisible}
         >
           <Button
-            text='Удалить'
-            additionalСlasses='button__delete'
+            text={buttonText}
+            additionalСlasses={buttonAdditionalСlasses}
+            clickHandler={buttonClickHandler}
           />
         </TransitionCustom>
 
@@ -55,4 +62,4 @@ const TableColumnShellDelete: FC<ITableColumnShellProps> = observer(
   },
 );
 
-export default TableColumnShellDelete;
+export default TableColumnShellButton;

@@ -3,11 +3,11 @@ import { makeAutoObservable, toJS } from 'mobx';
 import deepCopy from '../../../../utils/deepCopy/deepCopy';
 import FormFieldValidator from '../../../../utils/formValidator/formFieldValidator';
 import RootStore from '../../../root';
-import { INITIAL_VALUE } from '../../utils/config';
+import { INITIAL_VALUE } from '../../config';
 import { ITaskFormDataFields } from './type';
 
 export class StoreFormTaskField {
-  constructor(private readonly rootStore: RootStore) {
+  constructor(private readonly root: RootStore) {
     makeAutoObservable(this, {});
   }
 
@@ -21,10 +21,6 @@ export class StoreFormTaskField {
 
   public get formData() {
     return this._formData;
-  }
-
-  public clearFormData() {
-    this._formData = deepCopy(this.initialFormData);
   }
 
   public getFormField(field: keyof ITaskFormDataFields) {
@@ -54,6 +50,10 @@ export class StoreFormTaskField {
     }
     this._formData[field].value = value;
     this.checkErrorsExist(validator.errors, field);
+  }
+
+  public clearFormData() {
+    this._formData = deepCopy(this.initialFormData);
   }
 
   private checkErrorsExist(

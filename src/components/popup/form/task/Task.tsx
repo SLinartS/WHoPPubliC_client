@@ -19,16 +19,7 @@ import WindowHeader from '../../../blocks/windowHeader/WindowHeader';
 
 const PopupFormTask: FC = observer(() => {
   const [isAcceptance, setIsAcceptance] = useState<boolean>(true);
-  const {
-    storePopup,
-    storeProduct,
-    storeFormUtils,
-    storeFormState,
-    storeFormProductList,
-    storeFormTaskArray,
-    storeFormTaskField,
-    storeTasks,
-  } = useRootStore();
+  const { storePopup, storeProduct, storeForm, storeTask } = useRootStore();
 
   const getProductListForTable = useGetProductListForTable();
 
@@ -36,29 +27,29 @@ const PopupFormTask: FC = observer(() => {
     e: TChangeFieldEvent,
     fieldName: keyof ITaskFormFields,
   ) {
-    storeFormTaskField.setFormField(fieldName, e.target.value);
+    storeForm.task.field.setFormField(fieldName, e.target.value);
   }
 
   function closeHandler() {
     storePopup.hideTaskForm();
-    storeFormUtils.resetTaskForm();
+    storeForm.task.utils.resetTaskForm();
     if (isAcceptance) {
-      storeTasks.statusFetchAcceptanceTasks = 'pending';
+      storeTask.status.set('fetchAcceptance', 'pending');
     } else {
-      storeTasks.statusFetchShipmentTasks = 'pending';
+      storeTask.status.set('fetchShipment', 'pending');
     }
   }
 
   function saveHandler() {
-    if (!storeFormUtils.checkTaskErrors(isAcceptance)) {
-      storeProduct.addProducts(() => {
-        storeTasks.addTask(() => {
-          storeFormTaskField.clearFormData();
+    if (!storeForm.task.utils.checkTaskErrors(isAcceptance)) {
+      storeProduct.add.products(() => {
+        storeTask.add.task(() => {
+          storeForm.task.field.clearFormData();
           closeHandler();
         });
       });
     } else {
-      storeFormState.isDisplayDefaultErrors = true;
+      storeForm.state.isDisplayDefaultErrors = true;
     }
   }
 
@@ -78,12 +69,12 @@ const PopupFormTask: FC = observer(() => {
   }
 
   useEffect(() => {
-    if (storeFormState.currentTaskType === 'acceptance') {
+    if (storeForm.state.currentTaskType === 'acceptance') {
       setIsAcceptance(true);
     } else {
       setIsAcceptance(false);
     }
-  }, [storeFormState.currentTaskType]);
+  }, [storeForm.state.currentTaskType]);
 
   return (
     <div className='popup add-task'>
@@ -99,9 +90,9 @@ const PopupFormTask: FC = observer(() => {
             titleText='Название'
             additionalTitleClasses='form-block__title--big'
           >
-            <FormField errors={storeFormTaskField.getFormErrors('article')}>
+            <FormField errors={storeForm.task.field.getFormErrors('article')}>
               <FormFieldInput
-                value={storeFormTaskField.getFormField('article')}
+                value={storeForm.task.field.getFormField('article')}
                 changeHandler={(e) => changeFieldHandler(e, 'article')}
                 additionalСlasses='form-block__input--big'
               />
@@ -115,17 +106,17 @@ const PopupFormTask: FC = observer(() => {
 
         <FormLayout additionalСlasses='form-block--title-info'>
           <FormBlock titleText='Дата начала'>
-            <FormField errors={storeFormTaskField.getFormErrors('dateStart')}>
+            <FormField errors={storeForm.task.field.getFormErrors('dateStart')}>
               <FormFieldInput
-                value={storeFormTaskField.getFormField('dateStart')}
+                value={storeForm.task.field.getFormField('dateStart')}
                 changeHandler={(e) => changeFieldHandler(e, 'dateStart')}
               />
             </FormField>
           </FormBlock>
           <FormBlock titleText='Дата окончания'>
-            <FormField errors={storeFormTaskField.getFormErrors('dateEnd')}>
+            <FormField errors={storeForm.task.field.getFormErrors('dateEnd')}>
               <FormFieldInput
-                value={storeFormTaskField.getFormField('dateEnd')}
+                value={storeForm.task.field.getFormField('dateEnd')}
                 changeHandler={(e) => changeFieldHandler(e, 'dateEnd')}
               />
             </FormField>
@@ -136,14 +127,14 @@ const PopupFormTask: FC = observer(() => {
           <FormBlock
             titleText={`Точки ${isAcceptance ? 'приёмки' : 'отгрузки'}`}
           >
-            <FormField errors={storeFormTaskArray.getFormErrors('points')}>
+            <FormField errors={storeForm.task.array.getFormErrors('points')}>
               <FormFieldPoint clickHandler={openSelectPointsHandler} />
             </FormField>
           </FormBlock>
           {isAcceptance ? (
             <FormBlock titleText='Точки склада'>
               <FormField
-                errors={storeFormTaskArray.getFormErrors('warehousePoints')}
+                errors={storeForm.task.array.getFormErrors('warehousePoints')}
               >
                 <FormFieldPoint clickHandler={openSelectMapHandler} />
               </FormField>
@@ -157,10 +148,10 @@ const PopupFormTask: FC = observer(() => {
           <Button
             additionalСlasses='button--add-task'
             text='Добавить'
-            clickEvent={openProductFormHandler}
+            clickHandler={openProductFormHandler}
           />
 
-          {storeFormProductList.list.length > 0 ? (
+          {storeForm.product.list.list.length > 0 ? (
             <Table
               data={getProductListForTable().data}
               keyWord='article'

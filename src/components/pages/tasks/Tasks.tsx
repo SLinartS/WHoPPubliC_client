@@ -10,24 +10,24 @@ import Loader from '../../blocks/loader/Loader';
 import Table from '../../blocks/table/Table';
 
 const Tasks: FC = observer(() => {
-  const { storeTasks, storePopup, storeFormState } = useRootStore();
+  const { storeTask, storePopup, storeForm } = useRootStore();
 
   function showAddTaskWindowHandler(taskType: TTaskType) {
-    storeFormState.currentTaskType = taskType;
+    storeForm.state.currentTaskType = taskType;
     storePopup.showTaskForm();
   }
 
   useEffect(() => {
-    if (storeTasks.statusFetchAcceptanceTasks === 'pending') {
-      storeTasks.fetchAcceptanceTasks();
+    if (storeTask.status.get('fetchAcceptance') === 'pending') {
+      storeTask.fetch.acceptanceTasks();
     }
-    if (storeTasks.statusFetchShipmentTasks === 'pending') {
-      storeTasks.fetchShipmentTasks();
+  }, [storeTask.status.get('fetchAcceptance')]);
+
+  useEffect(() => {
+    if (storeTask.status.get('fetchShipment') === 'pending') {
+      storeTask.fetch.shipmentTasks();
     }
-  }, [
-    storeTasks.statusFetchAcceptanceTasks,
-    storeTasks.statusFetchShipmentTasks,
-  ]);
+  }, [storeTask.status.get('fetchShipment')]);
 
   return (
     <main className='tasks'>
@@ -38,13 +38,13 @@ const Tasks: FC = observer(() => {
         <Button
           additionalСlasses='button--tasks'
           text='Добавить'
-          clickEvent={() => showAddTaskWindowHandler('acceptance')}
+          clickHandler={() => showAddTaskWindowHandler('acceptance')}
         />
-        {storeTasks.statusFetchAcceptanceTasks === 'done' ? (
+        {storeTask.status.get('fetchAcceptance') === 'done' ? (
           <Table
-            data={storeTasks.tasksAcceptanceList.data}
+            data={storeTask.state.acceptanceList.data}
             keyWord='article'
-            tableHeader={storeTasks.tasksAcceptanceList.tableHeader}
+            tableHeader={storeTask.state.acceptanceList.tableHeader}
             additionalСlasses='table--tasks'
           />
         ) : (
@@ -58,14 +58,14 @@ const Tasks: FC = observer(() => {
         <Button
           additionalСlasses='button--tasks'
           text='Добавить'
-          clickEvent={() => showAddTaskWindowHandler('shipment')}
+          clickHandler={() => showAddTaskWindowHandler('shipment')}
         />
 
-        {storeTasks.statusFetchShipmentTasks === 'done' ? (
+        {storeTask.status.get('fetchShipment') === 'done' ? (
           <Table
-            data={storeTasks.tasksShipmentList.data}
+            data={storeTask.state.shipmentList.data}
             keyWord='article'
-            tableHeader={storeTasks.tasksShipmentList.tableHeader}
+            tableHeader={storeTask.state.shipmentList.tableHeader}
             additionalСlasses='table--tasks'
           />
         ) : (

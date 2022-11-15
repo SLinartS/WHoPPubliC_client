@@ -11,13 +11,7 @@ import WindowHeader from '../../../blocks/windowHeader/WindowHeader';
 const PopupSelectMap: FC = observer(() => {
   const [background, setBackground] = useState<string>('background: ');
 
-  const {
-    storePopup,
-    storeMap,
-    storeFormState,
-    storeFormTaskArray,
-    storeFormUtils,
-  } = useRootStore();
+  const { storePopup, storeMap, storeForm } = useRootStore();
 
   function saveHandler() {
     storePopup.showTaskForm();
@@ -27,27 +21,27 @@ const PopupSelectMap: FC = observer(() => {
   function closeHandler() {
     storePopup.showTaskForm();
     storePopup.hideSelectMap();
-    storeFormTaskArray.clearArrays('warehousePoints');
-    storeMap.fetchMap();
+    storeForm.task.array.clearArrays('warehousePoints');
+    storeMap.fetch.map();
   }
 
   useEffect(() => {
-    storeFormState.isSelectedMap = true;
+    storeForm.state.isSelectedMap = true;
   }, []);
 
   useEffect(() => {
     let backgroundColor: string = '#d35f48';
-    if (storeFormUtils.isEnoughFreeSpace()) {
+    if (storeForm.task.utils.isEnoughFreeSpace()) {
       backgroundColor = '#7fa89c';
     }
     setBackground(backgroundColor);
-  }, [storeFormUtils.isEnoughFreeSpace()]);
+  }, [storeForm.task.utils.isEnoughFreeSpace()]);
 
   useEffect(() => {
-    if (storeMap.statusFetchMap === 'pending') {
-      storeMap.fetchMap();
+    if (storeMap.status.get('fetch') === 'pending') {
+      storeMap.fetch.map();
     }
-  }, [storeMap.statusFetchMap]);
+  }, [storeMap.status.get('fetch')]);
 
   return (
     <div className='popup select-map'>
@@ -60,7 +54,7 @@ const PopupSelectMap: FC = observer(() => {
         className='select-map__free-space-indicator'
         style={{ background }}
       />
-      {storeMap.statusFetchMap === 'done' ? (
+      {storeMap.status.get('fetch') === 'done' ? (
         <Map additionalClasses='map--select-map' />
       ) : (
         <Loader />

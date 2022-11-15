@@ -13,7 +13,7 @@ describe('Button Component Render', () => {
       <Button
         text='TestButtonText'
         additionalСlasses='test-button-class'
-        clickEvent={clickHandler}
+        clickHandler={clickHandler}
       />,
     );
 
@@ -27,7 +27,7 @@ describe('Button Component Render', () => {
       <Button
         text='TestButtonText'
         additionalСlasses='test-button-class'
-        clickEvent={clickHandler}
+        clickHandler={clickHandler}
       />,
     );
 
@@ -41,7 +41,7 @@ describe('Button Component Render', () => {
       <Button
         text='TestButtonText'
         additionalСlasses='test-button-class'
-        clickEvent={clickHandler}
+        clickHandler={clickHandler}
       />,
     );
 

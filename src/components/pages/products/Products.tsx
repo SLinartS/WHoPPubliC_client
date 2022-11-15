@@ -11,10 +11,10 @@ const Products: FC = observer(() => {
   const { storeProduct } = useRootStore();
 
   useEffect(() => {
-    if (storeProduct.statusFetchProducts === 'pending') {
-      storeProduct.fetchProducts();
+    if (storeProduct.status.get('fetch') === 'pending') {
+      storeProduct.fetch.products();
     }
-  }, [storeProduct.statusFetchProducts]);
+  }, [storeProduct.status.get('fetch')]);
 
   return (
     <main className='products'>
@@ -29,11 +29,11 @@ const Products: FC = observer(() => {
         />
       </div>
 
-      {storeProduct.statusFetchProducts === 'done' ? (
+      {storeProduct.status.get('fetch') === 'done' ? (
         <Table
-          data={storeProduct.products.data}
+          data={storeProduct.state.products.data}
           keyWord='article'
-          tableHeader={storeProduct.products.tableHeader}
+          tableHeader={storeProduct.state.products.tableHeader}
           additionalСlasses='table--products'
         />
       ) : (

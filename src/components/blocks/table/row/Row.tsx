@@ -1,9 +1,8 @@
 import { observer } from 'mobx-react-lite';
-import { ReactNode, useState } from 'react';
+import { ReactNode } from 'react';
 
 import TableColumn from '../column/Column';
-import TableColumnShellChange from '../column/shell/change/Shell';
-import TableColumnShellDelete from '../column/shell/delete/Shell';
+import TableColumnShellButton from '../column/shell/button/Shell';
 import TableColumnShell from '../column/shell/Shell';
 
 interface IRowProps<T> {
@@ -13,47 +12,45 @@ interface IRowProps<T> {
 export default observer(function TableRow<T extends object>({
   columns,
 }: IRowProps<T>) {
+  function deleteHandler() {}
+
   function displayTableColumnShell(
     key: string,
     value: any,
     index: number,
   ): ReactNode {
-    if (index === Object.entries(columns).length - 1)
+    const tableColumn: ReactNode = (
+      <TableColumn
+        key={key + value}
+        text={value}
+      />
+    );
+    const columnsLength: number = Object.entries(columns).length;
+    if (index === columnsLength - 1) {
       return (
-        <TableColumnShellDelete
+        <TableColumnShellButton
           key={key + value}
-          additionalClasses='table__column-shell--row'
+          buttonText='Удалить'
+          buttonAdditionalСlasses='button__delete'
+          buttonClickHandler={deleteHandler}
         >
-          <TableColumn
-            key={key + value}
-            text={value}
-          />
-        </TableColumnShellDelete>
-      );
-    if (index === Object.entries(columns).length - 2) {
-      return (
-        <TableColumnShellChange
-          key={key + value}
-          additionalClasses='table__column-shell--row'
-        >
-          <TableColumn
-            key={key + value}
-            text={value}
-          />
-        </TableColumnShellChange>
+          {tableColumn}
+        </TableColumnShellButton>
       );
     }
-    return (
-      <TableColumnShell
-        key={key + value}
-        additionalClasses='table__column-shell--row'
-      >
-        <TableColumn
+    if (index === columnsLength - 2) {
+      return (
+        <TableColumnShellButton
           key={key + value}
-          text={value}
-        />
-      </TableColumnShell>
-    );
+          buttonText='Изменить'
+          buttonAdditionalСlasses='button__delete'
+          buttonClickHandler={deleteHandler}
+        >
+          {tableColumn}
+        </TableColumnShellButton>
+      );
+    }
+    return <TableColumnShell key={key + value}>{tableColumn}</TableColumnShell>;
   }
 
   return (
@@ -61,6 +58,7 @@ export default observer(function TableRow<T extends object>({
       {Object.entries(columns).map(([key, value], index) =>
         displayTableColumnShell(key, value, index),
       )}
+      {/* <div className='table__hover-helper' /> */}
     </>
   );
 });

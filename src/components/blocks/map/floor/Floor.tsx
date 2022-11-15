@@ -16,14 +16,14 @@ interface IMapFloorStyles {
 
 const MapFloor: FC<IMapFloorProps> = observer(
   ({ id, active, number, capacity, freeSpace, index }) => {
-    const { storeFormTaskArray, storeMap, storeFormState } = useRootStore();
+    const { storeForm, storeMap } = useRootStore();
     const [styles, setStyles] = useState<IMapFloorStyles>();
     const floorNode = useRef<HTMLDivElement>(null);
     const getFloorCoordinates = useGetFloorCoordinates();
     const checkIsAdded = useCheckIsAdded();
 
     function chooseFloor() {
-      if (floorNode.current && storeFormState.isSelectedMap) {
+      if (floorNode.current && storeForm.state.isSelectedMap) {
         const { zone, section, block, floor } = getFloorCoordinates(
           floorNode.current,
         );
@@ -31,17 +31,17 @@ const MapFloor: FC<IMapFloorProps> = observer(
         if (zone && section && block && floor) {
           let floorActive: boolean = false;
           const floorIsAlreadyAdded = checkIsAdded(
-            storeFormTaskArray.getFormArrays('warehousePoints'),
+            storeForm.task.array.getFormArrays('warehousePoints'),
             floor.id,
           );
 
           if (floorIsAlreadyAdded) {
-            storeFormTaskArray.removeFormArrays('warehousePoints', floor.id);
+            storeForm.task.array.removeFormArrays('warehousePoints', floor.id);
           } else {
             floorActive = true;
-            storeFormTaskArray.addFormArrays('warehousePoints', floor.id);
+            storeForm.task.array.addFormArrays('warehousePoints', floor.id);
           }
-          storeMap.setFloorActive(
+          storeMap.utils.setFloorActive(
             zone.index,
             section.index,
             block.index,
@@ -58,7 +58,7 @@ const MapFloor: FC<IMapFloorProps> = observer(
         background: 'unset',
       };
       if (active) {
-        if (storeFormState.isSelectedMap) {
+        if (storeForm.state.isSelectedMap) {
           newStyle.background = `linear-gradient(180deg, 
               #d35f48 ${(freeSpace / capacity) * 100}%, 
               #7fa89c ${(freeSpace / capacity) * 100}%)`;
@@ -70,7 +70,7 @@ const MapFloor: FC<IMapFloorProps> = observer(
       }
 
       setStyles(newStyle);
-    }, [active, number, freeSpace, capacity, storeFormState.isSelectedMap]);
+    }, [active, number, freeSpace, capacity, storeForm.state.isSelectedMap]);
 
     return (
       <div
