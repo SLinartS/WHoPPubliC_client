@@ -32,7 +32,7 @@ const PopupFormTask: FC = observer(() => {
 
   function closeHandler() {
     storePopup.hideTaskForm();
-    storeForm.task.utils.resetTaskForm();
+    storeForm.utils.resetForm();
     if (isAcceptance) {
       storeTask.status.set('fetchAcceptance', 'pending');
     } else {
@@ -41,7 +41,7 @@ const PopupFormTask: FC = observer(() => {
   }
 
   function saveHandler() {
-    if (!storeForm.task.utils.checkTaskErrors(isAcceptance)) {
+    if (!storeForm.error.isTaskErrors(isAcceptance)) {
       storeProduct.add.products(() => {
         storeTask.add.task(() => {
           storeForm.task.field.clearFormData();
@@ -156,6 +156,7 @@ const PopupFormTask: FC = observer(() => {
               data={getProductListForTable().data}
               keyWord='article'
               tableHeader={getProductListForTable().tableHeader}
+              valuesType='products'
               additionalСlasses='table--add-task'
             />
           ) : (

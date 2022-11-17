@@ -7,14 +7,14 @@ import { useRootStore } from '../../../utils/RootStoreProvider/useRootStore';
 import Zone from './zone/Zone';
 
 interface IMapProps {
-  additionalClasses?: string;
+  classes?: string;
 }
 
-const Map: FC<IMapProps> = observer(({ additionalClasses }) => {
+const Map: FC<IMapProps> = observer(({ classes }) => {
   const { storeMap } = useRootStore();
 
   return (
-    <div className={`map-block ${additionalClasses}}`}>
+    <div className={`map-block ${classes}`}>
       {storeMap.state.map.map((zone, zoneIndex) => (
         <Zone
           key={zone.id}

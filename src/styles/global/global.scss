@@ -1,0 +1,5 @@
+@use './colors.scss' as *;
+
+.border {
+  border: 0.2rem solid $font-color--black;
+}

@@ -32,7 +32,7 @@ const PopupFormProduct: FC = observer(() => {
   }
 
   function saveHandler() {
-    if (!storeForm.product.utils.checkProductErrors()) {
+    if (!storeForm.error.isProductErrors()) {
       storeForm.product.list.addProductToList();
       storeForm.product.field.clearFormData();
       closeHandler();

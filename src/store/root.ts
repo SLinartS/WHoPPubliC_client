@@ -3,14 +3,14 @@ import { configure } from 'mobx';
 import { StoreCategory } from './category/category';
 import { StoreCategoryFetch } from './category/fetch/fetch';
 import { StoreCategoryStatus } from './category/status/status';
+import { StoreFormError } from './form/error/error';
+import { StoreFormFloorSpace } from './form/floorSpace/floorSpace';
 import { StoreForm } from './form/form';
 import { StoreFormProductField } from './form/product/field/field';
 import { StoreFormProductList } from './form/product/list/list';
-import { StoreFormProductUtils } from './form/product/utils/utils';
 import { StoreFormTaskArray } from './form/task/array/array';
 import { StoreFormTaskField } from './form/task/field/field';
-import { StoreFormTaskFreeSpace } from './form/task/freeSpace/freeSpace';
-import { StoreFormTaskUtils } from './form/task/utils/utils';
+import { StoreFormUtils } from './form/utils/utils';
 import { StoreMapFetch } from './map/fetch/fetch';
 import { StoreMap } from './map/map';
 import { StoreMapStatus } from './map/status/status';
@@ -71,16 +71,16 @@ interface IStoreCategory {
 
 interface IStoreForm {
   state: StoreForm;
+  floorSpace: StoreFormFloorSpace;
+  utils: StoreFormUtils;
+  error: StoreFormError;
   task: {
-    array: StoreFormTaskArray;
     field: StoreFormTaskField;
-    utils: StoreFormTaskUtils;
-    freeSpace: StoreFormTaskFreeSpace;
+    array: StoreFormTaskArray;
   };
   product: {
     list: StoreFormProductList;
     field: StoreFormProductField;
-    utils: StoreFormProductUtils;
   };
 }
 
@@ -141,16 +141,16 @@ class RootStore {
 
     this.storeForm = {
       state: new StoreForm(this),
+      floorSpace: new StoreFormFloorSpace(this),
+      utils: new StoreFormUtils(this),
+      error: new StoreFormError(this),
       task: {
         array: new StoreFormTaskArray(this),
         field: new StoreFormTaskField(this),
-        utils: new StoreFormTaskUtils(this),
-        freeSpace: new StoreFormTaskFreeSpace(this),
       },
       product: {
         list: new StoreFormProductList(this),
         field: new StoreFormProductField(this),
-        utils: new StoreFormProductUtils(this),
       },
     };
   }

@@ -1,11 +1,11 @@
 import './style.scss';
 
 import { observer } from 'mobx-react-lite';
-import { FC, ReactNode, useEffect } from 'react';
+import { FC, useEffect } from 'react';
 
 import { useRootStore } from '../../../../utils/RootStoreProvider/useRootStore';
 import Loader from '../../../blocks/loader/Loader';
-import PointsBlock from '../../../blocks/points/block/Block';
+import Points from '../../../blocks/points/Points';
 import WindowHeader from '../../../blocks/windowHeader/WindowHeader';
 
 const PopupSelectPoints: FC = observer(() => {
@@ -21,29 +21,6 @@ const PopupSelectPoints: FC = observer(() => {
     storePopup.hideSelectPoints();
     storeForm.task.array.clearArrays('points');
     storePoint.fetch.points();
-  }
-
-  function displayPointsByTaskType(): ReactNode {
-    const PointNodes: ReactNode[] = [];
-
-    let pointsArray = storePoint.state.points.acceptance;
-    if (storeForm.state.currentTaskType === 'shipment') {
-      pointsArray = storePoint.state.points.shipment;
-    }
-
-    pointsArray.forEach((point, index) => {
-      PointNodes.push(
-        <PointsBlock
-          key={point.id}
-          id={point.id}
-          text={point.title}
-          index={index}
-          active={point.active}
-        />,
-      );
-    });
-
-    return PointNodes;
   }
 
   useEffect(() => {
@@ -63,17 +40,13 @@ const PopupSelectPoints: FC = observer(() => {
         }`}
         saveEvent={saveHandler}
         closeEvent={closeHandler}
+        textCloseButton='Сбросить'
       />
-
-      <div className='points-map'>
-        {storePoint.status.get('fetch') === 'done' ? (
-          <div className='points-map__container'>
-            {displayPointsByTaskType()}
-          </div>
-        ) : (
-          <Loader />
-        )}
-      </div>
+      {storePoint.status.get('fetch') === 'done' ? (
+        <Points pointsType={storeForm.state.currentTaskType} />
+      ) : (
+        <Loader />
+      )}
     </div>
   );
 });

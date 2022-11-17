@@ -1,10 +1,14 @@
 import { useCallback } from 'react';
 
+import { ITableObject } from '../../components/blocks/table/type';
 import { IProductFormFields } from '../../store/form/product/list/type';
 import { useRootStore } from '../../utils/RootStoreProvider/useRootStore';
 
 interface IProductForTable
-  extends Omit<IProductFormFields, 'yearOfPublication' | 'printDate'> {}
+  extends ITableObject,
+    Omit<IProductFormFields, 'yearOfPublication' | 'printDate'> {
+  id: number;
+}
 
 interface IProductListForTableData {
   data: IProductForTable[];
@@ -28,8 +32,9 @@ const useGetProductListForTable = () => {
       ],
     };
 
-    for (const product of storeForm.product.list.list) {
+    storeForm.product.list.list.forEach((product, index) => {
       productListForTable.data.push({
+        id: index,
         article: product.article.value,
         title: product.title.value,
         author: product.author.value,
@@ -38,7 +43,7 @@ const useGetProductListForTable = () => {
         printingHouse: product.printingHouse.value,
         publishingHouse: product.publishingHouse.value,
       });
-    }
+    });
 
     return productListForTable;
   }, [storeForm.product.list.list]);

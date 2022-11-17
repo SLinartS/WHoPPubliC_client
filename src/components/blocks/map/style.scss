@@ -2,18 +2,17 @@
 @use '../../../styles/global/variables.scss' as v;
 
 .map-block {
-  padding: 2rem 0 0;
+  margin: 2rem;
   height: 100%;
-  width: 100%;
+  width: calc(100% - 2rem);
   display: flex;
   flex-direction: column;
   align-items: center;
-  overflow-y: scroll;
-  box-sizing: border-box;
+  overflow: auto;
 
   &__zone {
     height: 100%;
-    margin: 2rem;
+    margin: 2rem 6rem 2rem 2rem;
     display: flex;
     align-items: center;
     position: relative;

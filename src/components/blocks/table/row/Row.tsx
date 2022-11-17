@@ -1,18 +1,37 @@
 import { observer } from 'mobx-react-lite';
-import { ReactNode } from 'react';
+import { FC, ReactNode } from 'react';
 
+import { useRootStore } from '../../../../utils/RootStoreProvider/useRootStore';
 import TableColumn from '../column/Column';
 import TableColumnShellButton from '../column/shell/button/Shell';
 import TableColumnShell from '../column/shell/Shell';
+import { ITableObject, TTableValuesType } from '../type';
 
-interface IRowProps<T> {
-  columns: T;
+interface IRowProps {
+  columns: ITableObject;
+  valuesType: TTableValuesType;
 }
 
-export default observer(function TableRow<T extends object>({
-  columns,
-}: IRowProps<T>) {
-  function deleteHandler() {}
+const TableRow: FC<IRowProps> = observer(({ columns, valuesType }) => {
+  const { storeTask } = useRootStore();
+
+  function deleteHandler() {
+    switch (valuesType) {
+      case 'products':
+        break;
+      case 'acceptanceTasks':
+        storeTask.delete.task(columns.id, () => {
+          storeTask.fetch.acceptanceTasks();
+        });
+        break;
+      case 'shipmentTasks':
+        storeTask.delete.task(columns.id, () => {
+          storeTask.fetch.shipmentTasks();
+        });
+        break;
+      default:
+    }
+  }
 
   function displayTableColumnShell(
     key: string,
@@ -58,7 +77,8 @@ export default observer(function TableRow<T extends object>({
       {Object.entries(columns).map(([key, value], index) =>
         displayTableColumnShell(key, value, index),
       )}
-      {/* <div className='table__hover-helper' /> */}
     </>
   );
 });
+
+export default TableRow;

@@ -45,6 +45,7 @@ const Tasks: FC = observer(() => {
             data={storeTask.state.acceptanceList.data}
             keyWord='article'
             tableHeader={storeTask.state.acceptanceList.tableHeader}
+            valuesType='acceptanceTasks'
             additionalСlasses='table--tasks'
           />
         ) : (
@@ -66,6 +67,7 @@ const Tasks: FC = observer(() => {
             data={storeTask.state.shipmentList.data}
             keyWord='article'
             tableHeader={storeTask.state.shipmentList.tableHeader}
+            valuesType='shipmentTasks'
             additionalСlasses='table--tasks'
           />
         ) : (

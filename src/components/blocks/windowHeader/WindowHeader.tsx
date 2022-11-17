@@ -9,22 +9,31 @@ import Button from '../button/Button';
 interface IWindowHeaderProps {
   classes?: string;
   text: string;
+  textSaveButton?: string;
+  textCloseButton?: string;
   saveEvent: TMouseButtonEventHandler;
   closeEvent: TMouseButtonEventHandler;
 }
 
 const WindowHeader: FC<IWindowHeaderProps> = observer(
-  ({ classes, text, saveEvent, closeEvent }) => (
+  ({
+    classes,
+    text,
+    textSaveButton = 'Сохранить',
+    textCloseButton = 'Отмена',
+    saveEvent,
+    closeEvent,
+  }) => (
     <div className={`window-header ${classes}`}>
       <h3 className='window-header__title'>{text}</h3>
       <Button
         additionalСlasses='button--window-header'
-        text='Сохранить'
+        text={textSaveButton}
         clickHandler={saveEvent}
       />
       <Button
         additionalСlasses='button--window-header'
-        text='Отмена'
+        text={textCloseButton}
         clickHandler={closeEvent}
       />
     </div>

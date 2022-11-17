@@ -5,6 +5,7 @@ import { FC, useEffect } from 'react';
 
 import { useRootStore } from '../../../utils/RootStoreProvider/useRootStore';
 import Loader from '../../blocks/loader/Loader';
+import SearchField from '../../blocks/searchField/SearchField';
 import Table from '../../blocks/table/Table';
 
 const Products: FC = observer(() => {
@@ -21,19 +22,14 @@ const Products: FC = observer(() => {
       <div className='products__title'>
         <h3 className='products__title-text'>Список товаров</h3>
       </div>
-      <div className='products__action'>
-        <p className='products__search-text'>Поиск: </p>
-        <input
-          type='text'
-          className='products__search-input'
-        />
-      </div>
+      <SearchField />
 
       {storeProduct.status.get('fetch') === 'done' ? (
         <Table
           data={storeProduct.state.products.data}
           keyWord='article'
           tableHeader={storeProduct.state.products.tableHeader}
+          valuesType='products'
           additionalСlasses='table--products'
         />
       ) : (

@@ -1,3 +1,4 @@
+import { ITableObject } from '../../components/blocks/table/type';
 import { ITaskFormDataArrays } from '../form/task/array/type';
 import { TValueOrErrorType } from '../type';
 
@@ -6,7 +7,7 @@ export interface ITasks {
   tableHeader: string[];
 }
 
-export interface ITask {
+export interface ITask extends ITableObject {
   id: number;
   article: string;
   deadlines: string;

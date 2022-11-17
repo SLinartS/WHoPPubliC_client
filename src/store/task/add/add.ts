@@ -11,7 +11,7 @@ export class StoreTaskAdd {
 
   public *task(actionIfDone?: () => void) {
     try {
-      const taskTypeId = this.root.storeForm.task.utils.getTaskTypeId();
+      const taskTypeId = this.root.storeForm.utils.getTaskTypeId();
       const newTaskData: INewTaskData = {
         fields: {
           ...this.root.storeForm.task.field.formData,

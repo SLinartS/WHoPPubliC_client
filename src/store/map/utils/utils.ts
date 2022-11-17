@@ -18,7 +18,7 @@ export class StoreMapUtils {
       blockIndex
     ].floors[floorIndex].active = newStatus;
 
-    this.root.storeForm.task.freeSpace.changeFreeFloorSpace(
+    this.root.storeForm.floorSpace.changeFreeSpace(
       newStatus,
       this.root.storeMap.state.map[zoneIndex].sections[sectionIndex].blocks[
         blockIndex

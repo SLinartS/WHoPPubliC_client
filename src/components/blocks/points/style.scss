@@ -1,0 +1,55 @@
+@use '../../../styles/global/colors.scss' as *;
+
+.points-map {
+  display: flex;
+  justify-content: center;
+  height: 100%;
+  width: calc(100% - 2rem);
+  overflow: auto;
+  margin: 2rem;
+
+  &__container {
+    width: 100%;
+    display: grid;
+    justify-content: center;
+    align-content: flex-start;
+    grid-template-columns: 9rem;
+    row-gap: 3rem;
+    padding: 5rem 0 0;
+  }
+
+  &__points-block {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  &__points-shell {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: $font-color--black;
+    box-sizing: border-box;
+  }
+
+  &__point {
+    background-color: $font-color--white;
+    width: 9rem;
+    height: 9rem;
+    border: 0.2rem solid $font-color--black;
+  }
+
+  &__title {
+    font-size: 2rem;
+    text-align: center;
+  }
+}
+
+@media (max-width: 1230px) {
+  .points-map {
+    &__title {
+      font-size: 1.6rem;
+    }
+  }
+}

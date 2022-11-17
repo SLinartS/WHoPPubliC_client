@@ -31,11 +31,11 @@ const PopupSelectMap: FC = observer(() => {
 
   useEffect(() => {
     let backgroundColor: string = '#d35f48';
-    if (storeForm.task.utils.isEnoughFreeSpace()) {
+    if (storeForm.floorSpace.isEnoughFreeSpace()) {
       backgroundColor = '#7fa89c';
     }
     setBackground(backgroundColor);
-  }, [storeForm.task.utils.isEnoughFreeSpace()]);
+  }, [storeForm.floorSpace.isEnoughFreeSpace()]);
 
   useEffect(() => {
     if (storeMap.status.get('fetch') === 'pending') {
@@ -49,13 +49,14 @@ const PopupSelectMap: FC = observer(() => {
         text='Выбрать раскладки на складе'
         saveEvent={saveHandler}
         closeEvent={closeHandler}
+        textCloseButton='Сбросить'
       />
       <div
         className='select-map__free-space-indicator'
         style={{ background }}
       />
       {storeMap.status.get('fetch') === 'done' ? (
-        <Map additionalClasses='map--select-map' />
+        <Map classes='map--select-map' />
       ) : (
         <Loader />
       )}

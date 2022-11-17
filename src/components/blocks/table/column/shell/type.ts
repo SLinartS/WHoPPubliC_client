@@ -3,7 +3,7 @@ import { ReactElement, ReactNode } from 'react';
 import { TMouseButtonEventHandler } from '../../../../../types/form/type';
 
 export interface ITableColumnShellProps {
-  additionalClasses?: string;
+  classes?: string;
   children: ReactNode | ReactElement;
 }
 

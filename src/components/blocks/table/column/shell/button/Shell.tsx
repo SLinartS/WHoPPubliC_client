@@ -7,7 +7,7 @@ import { ITableColumnShellButtonProps } from '../type';
 
 const TableColumnShellButton: FC<ITableColumnShellButtonProps> = observer(
   ({
-    additionalClasses,
+    classes,
     children,
     buttonText,
     buttonClickHandler,
@@ -30,7 +30,7 @@ const TableColumnShellButton: FC<ITableColumnShellButtonProps> = observer(
 
     return (
       <div
-        className={`table__column-shell ${additionalClasses}`}
+        className={`table__column-shell ${classes}`}
         onMouseEnter={mouseEnterHandler}
         onMouseLeave={mouseLeaveHandler}
       >
