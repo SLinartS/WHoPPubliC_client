@@ -1,20 +1,28 @@
-@use '../../../styles/global/colors.scss' as *;
-@use '../../../styles/global/variables.scss' as v;
+@use '/src/styles/global/colors.scss' as *;
+@use '/src/styles/global/variables.scss' as v;
 
 .window-header {
-  display: grid;
+  display: flex;
   align-items: center;
-  grid-template-columns: repeat(5, 1fr);
-  column-gap: 3rem;
+  justify-content: center;
   background-color: $main-color;
   height: v.$header-height--standart;
   border-radius: 0.5rem 0.5rem 0 0;
   padding: 0 3rem;
+  width: 51.2rem - 6rem;
+
+  &--form {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    column-gap: 3rem;
+    width: calc(100% - 6rem);
+  }
 
   &__title {
     font-size: 3.2rem;
     grid-column: 1/4;
     user-select: none;
+    width: 100%;
   }
 }
 

@@ -1,5 +1,3 @@
-import './style.scss';
-
 import { observer } from 'mobx-react-lite';
 import { FC } from 'react';
 
@@ -13,14 +11,14 @@ interface ITableProps {
   keyWord: keyof ITableObject;
   tableHeader: string[];
   valuesType: TTableValuesType;
-  additionalСlasses?: string;
+  classes?: string;
 }
 
 const Table: FC<ITableProps> = observer(
-  ({ data, keyWord, tableHeader, valuesType, additionalСlasses }) => {
+  ({ data, keyWord, tableHeader, valuesType, classes }) => {
     return (
       <div
-        className={`table ${additionalСlasses}`}
+        className={`table ${classes}`}
         style={{ gridTemplateColumns: `repeat(${tableHeader.length}, auto)` }}
       >
         {tableHeader.map((text) => (

@@ -8,7 +8,7 @@ describe('FormTitle Component Render', () => {
   test('Title are rendered', () => {
     render(
       <FormTitle
-        additionalСlasses='test-form-title-modifier'
+        classes='test-form-title-modifier'
         text='testTitleText'
       />,
     );
@@ -19,7 +19,7 @@ describe('FormTitle Component Render', () => {
   test('An additional class is added', () => {
     render(
       <FormTitle
-        additionalСlasses='test-form-title-modifier'
+        classes='test-form-title-modifier'
         text='testTitleText'
       />,
     );

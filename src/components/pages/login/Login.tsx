@@ -27,7 +27,7 @@ const LoginPage: FC = observer(() => (
         />
       </div>
       <Button
-        additionalСlasses='button--login'
+        classes='button--login'
         text='Войти'
       />
     </div>

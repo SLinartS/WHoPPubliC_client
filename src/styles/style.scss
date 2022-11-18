@@ -5,11 +5,39 @@
 @use './global/normalize.scss';
 @use './global/settings.scss';
 
-// LOADER
-@use './global/loader.scss';
-
 // SCROLLBAR
 @use './global/scrollbar.scss';
 
 // MODIFICATIONS
 @use './global/modifications.scss';
+
+/* BLOCKS  */
+
+// button
+@use '/src/components/blocks/button/style.scss' as *;
+// form
+@use '/src/components/blocks/form/style.scss' as *;
+// loader
+@use '/src/components/blocks/loader/style.scss' as *;
+// map
+@use '/src/components/blocks/map/style.scss' as *;
+// points
+@use '/src/components/blocks/points/style.scss' as *;
+// searchField
+@use '/src/components/blocks/searchField/style.scss' as *;
+// table
+@use '/src/components/blocks/table/style.scss' as *;
+// transition
+
+// windowHeader
+@use '/src/components/blocks/windowHeader/style.scss' as *;
+
+/* LAYOUT */
+
+// errorPage
+@use '/src/components/layout/errorPage/style.scss' as *;
+// header
+@use '/src/components/layout/header/style.scss' as *;
+
+/* POPUP */
+@use './../components/popup/style.scss' as *;

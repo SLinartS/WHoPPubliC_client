@@ -7,7 +7,7 @@ import FormLayout from './Layout';
 describe('FormLayout Component Render', () => {
   test('FormLayout are rendered', () => {
     render(
-      <FormLayout additionalСlasses='test-form-layout-modifier'>
+      <FormLayout classes='test-form-layout-modifier'>
         <p>testChildren</p>
       </FormLayout>,
     );
@@ -19,7 +19,7 @@ describe('FormLayout Component Render', () => {
 
   test('An additional class is added', () => {
     render(
-      <FormLayout additionalСlasses='test-form-layout-modifier'>
+      <FormLayout classes='test-form-layout-modifier'>
         <p>testChildren</p>
       </FormLayout>,
     );
@@ -30,7 +30,7 @@ describe('FormLayout Component Render', () => {
   });
   test('Сhild elements are added', () => {
     render(
-      <FormLayout additionalСlasses='test-form-layout-modifier'>
+      <FormLayout classes='test-form-layout-modifier'>
         <p>testChildren1</p>
         <p>testChildren2</p>
       </FormLayout>,

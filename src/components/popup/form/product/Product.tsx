@@ -1,5 +1,3 @@
-import './style.scss';
-
 import { observer } from 'mobx-react-lite';
 import { FC, useEffect } from 'react';
 
@@ -13,7 +11,7 @@ import FormField from '../../../blocks/form/field/Field';
 import FormFieldInput from '../../../blocks/form/field/input/Input';
 import FormFieldSelect from '../../../blocks/form/field/select/Select';
 import FormLayout from '../../../blocks/form/layout/Layout';
-import WindowHeader from '../../../blocks/windowHeader/WindowHeader';
+import WindowHeaderForm from '../../../blocks/windowHeader/form/Form';
 
 const PopupFormProduct: FC = observer(() => {
   const { storePopup, storeProduct, storeForm, storeCategory } = useRootStore();
@@ -49,14 +47,14 @@ const PopupFormProduct: FC = observer(() => {
   }, []);
 
   return (
-    <div className='popup add-product'>
-      <WindowHeader
-        text='Добавить партию товара'
+    <div className='popup popup--form popup--form-add-product'>
+      <WindowHeaderForm
+        title='Добавить партию товара'
         saveEvent={saveHandler}
         closeEvent={closeHandler}
       />
-      <div className='add-product__content-block'>
-        <FormLayout additionalСlasses='form-block--article-info'>
+      <div className='popup--form-add-product__content-block'>
+        <FormLayout classes='form-block--article-info'>
           <FormBlock
             titleText='Артикул'
             additionalTitleClasses='form-block__title--big'
@@ -67,17 +65,17 @@ const PopupFormProduct: FC = observer(() => {
               <FormFieldInput
                 value={storeForm.product.field.getFormField('article')}
                 changeHandler={(e) => changeFieldHandler(e, 'article')}
-                additionalСlasses='form-block__input--big'
+                classes='form-block__input--big'
               />
             </FormField>
             <Button
-              additionalСlasses='button--window-header'
+              classes='button--window-header'
               text='Сгенерировать'
             />
           </FormBlock>
         </FormLayout>
 
-        <FormLayout additionalСlasses='form-block--title-info'>
+        <FormLayout classes='form-block--title-info'>
           <FormBlock titleText='Название'>
             <FormField errors={storeForm.product.field.getFormErrors('title')}>
               <FormFieldInput
@@ -88,7 +86,7 @@ const PopupFormProduct: FC = observer(() => {
           </FormBlock>
         </FormLayout>
 
-        <FormLayout additionalСlasses='form-block--main-info'>
+        <FormLayout classes='form-block--main-info'>
           <FormBlock titleText='Автор'>
             <FormField errors={storeForm.product.field.getFormErrors('author')}>
               <FormFieldInput
@@ -110,7 +108,7 @@ const PopupFormProduct: FC = observer(() => {
           </FormBlock>
         </FormLayout>
 
-        <FormLayout additionalСlasses='form-block--second-info'>
+        <FormLayout classes='form-block--second-info'>
           <FormBlock titleText='Год издания'>
             <FormField
               errors={storeForm.product.field.getFormErrors(
@@ -137,7 +135,7 @@ const PopupFormProduct: FC = observer(() => {
           </FormBlock>
         </FormLayout>
 
-        <FormLayout additionalСlasses='form-block--other-info'>
+        <FormLayout classes='form-block--other-info'>
           <FormBlock titleText='Дата печати'>
             <FormField
               errors={storeForm.product.field.getFormErrors('printDate')}
@@ -170,15 +168,17 @@ const PopupFormProduct: FC = observer(() => {
           </FormBlock>
         </FormLayout>
 
-        <div className='add-product__photo-block'>
+        <div className='popup--form-add-product__photo-block'>
           <img
             src={imagePlaceholder}
             alt=''
-            className='add-product__photo'
+            className='popup--form-add-product__photo'
           />
-          <p className='add-product__photo-text'>Фотография товара</p>
+          <p className='popup--form-add-product__photo-text'>
+            Фотография товара
+          </p>
         </div>
-        <div className='add-product__empty-block' />
+        <div className='popup--form-add-product__empty-block' />
       </div>
     </div>
   );

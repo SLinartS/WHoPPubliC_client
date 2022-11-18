@@ -1,14 +1,12 @@
-import './style.scss';
-
 import { observer } from 'mobx-react-lite';
 import { FC, useEffect } from 'react';
 
 import { useRootStore } from '../../../../utils/RootStoreProvider/useRootStore';
 import Loader from '../../../blocks/loader/Loader';
 import Points from '../../../blocks/points/Points';
-import WindowHeader from '../../../blocks/windowHeader/WindowHeader';
+import WindowHeaderForm from '../../../blocks/windowHeader/form/Form';
 
-const PopupSelectPoints: FC = observer(() => {
+const PopupFormPoints: FC = observer(() => {
   const { storePopup, storePoint, storeForm } = useRootStore();
 
   function saveHandler() {
@@ -31,9 +29,9 @@ const PopupSelectPoints: FC = observer(() => {
   }, [storePoint.status.get('fetch')]);
 
   return (
-    <div className='popup select-points'>
-      <WindowHeader
-        text={`Выбрать точки ${
+    <div className='popup popup--form popup--form-select'>
+      <WindowHeaderForm
+        title={`Выбрать точки ${
           storeForm.state.currentTaskType === 'acceptance'
             ? 'приёмки'
             : 'отгрузки'
@@ -51,4 +49,4 @@ const PopupSelectPoints: FC = observer(() => {
   );
 });
 
-export default PopupSelectPoints;
+export default PopupFormPoints;

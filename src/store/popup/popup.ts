@@ -74,4 +74,21 @@ export class StorePopup {
   public hideSelectPoints() {
     this._selectPoints = false;
   }
+
+  /*
+    WindowConfirm
+   */
+  private _windowConfirm: boolean = false;
+
+  public get windowConfirm() {
+    return this._windowConfirm;
+  }
+
+  public showWindowConfirm() {
+    this._windowConfirm = true;
+  }
+
+  public hideWindowConfirm() {
+    this._windowConfirm = false;
+  }
 }

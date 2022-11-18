@@ -30,7 +30,7 @@ const Products: FC = observer(() => {
           keyWord='article'
           tableHeader={storeProduct.state.products.tableHeader}
           valuesType='products'
-          additionalСlasses='table--products'
+          classes='table--products'
         />
       ) : (
         <Loader />

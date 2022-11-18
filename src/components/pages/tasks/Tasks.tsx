@@ -36,7 +36,7 @@ const Tasks: FC = observer(() => {
       </div>
       <div className='tasks__block'>
         <Button
-          additionalСlasses='button--tasks'
+          classes='button--tasks'
           text='Добавить'
           clickHandler={() => showAddTaskWindowHandler('acceptance')}
         />
@@ -46,7 +46,7 @@ const Tasks: FC = observer(() => {
             keyWord='article'
             tableHeader={storeTask.state.acceptanceList.tableHeader}
             valuesType='acceptanceTasks'
-            additionalСlasses='table--tasks'
+            classes='table--tasks'
           />
         ) : (
           <Loader />
@@ -57,7 +57,7 @@ const Tasks: FC = observer(() => {
       </div>
       <div className='tasks__block'>
         <Button
-          additionalСlasses='button--tasks'
+          classes='button--tasks'
           text='Добавить'
           clickHandler={() => showAddTaskWindowHandler('shipment')}
         />
@@ -68,7 +68,7 @@ const Tasks: FC = observer(() => {
             keyWord='article'
             tableHeader={storeTask.state.shipmentList.tableHeader}
             valuesType='shipmentTasks'
-            additionalСlasses='table--tasks'
+            classes='table--tasks'
           />
         ) : (
           <Loader />

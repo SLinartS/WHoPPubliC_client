@@ -43,7 +43,7 @@ const TableColumnShellButton: FC<ITableColumnShellButtonProps> = observer(
         >
           <Button
             text={buttonText}
-            additionalСlasses={buttonAdditionalСlasses}
+            classes={buttonAdditionalСlasses}
             clickHandler={buttonClickHandler}
           />
         </TransitionCustom>

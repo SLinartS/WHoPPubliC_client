@@ -1,4 +1,4 @@
-@use '../../../styles/global/colors.scss' as *;
+@use '/src/styles/global/colors.scss' as *;
 
 .button {
   position: relative;
@@ -42,6 +42,13 @@
     padding: 0.4rem 1.4rem;
     margin: 0.1rem 0 0 0;
     font-size: 1.6rem;
+  }
+
+  &__confirm{
+    width: 16rem;
+    padding: 1.6rem 0;
+    margin: 0rem 3rem;
+    font-size: 2.4rem;
   }
 }
 

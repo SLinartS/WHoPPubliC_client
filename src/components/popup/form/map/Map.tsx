@@ -1,14 +1,12 @@
-import './style.scss';
-
 import { observer } from 'mobx-react-lite';
 import { FC, useEffect, useState } from 'react';
 
 import { useRootStore } from '../../../../utils/RootStoreProvider/useRootStore';
 import Loader from '../../../blocks/loader/Loader';
 import Map from '../../../blocks/map/Map';
-import WindowHeader from '../../../blocks/windowHeader/WindowHeader';
+import WindowHeaderForm from '../../../blocks/windowHeader/form/Form';
 
-const PopupSelectMap: FC = observer(() => {
+const PopupFormMap: FC = observer(() => {
   const [background, setBackground] = useState<string>('background: ');
 
   const { storePopup, storeMap, storeForm } = useRootStore();
@@ -44,9 +42,9 @@ const PopupSelectMap: FC = observer(() => {
   }, [storeMap.status.get('fetch')]);
 
   return (
-    <div className='popup select-map'>
-      <WindowHeader
-        text='Выбрать раскладки на складе'
+    <div className='popup popup--form popup--form-select'>
+      <WindowHeaderForm
+        title='Выбрать раскладки на складе'
         saveEvent={saveHandler}
         closeEvent={closeHandler}
         textCloseButton='Сбросить'
@@ -64,4 +62,4 @@ const PopupSelectMap: FC = observer(() => {
   );
 });
 
-export default PopupSelectMap;
+export default PopupFormMap;

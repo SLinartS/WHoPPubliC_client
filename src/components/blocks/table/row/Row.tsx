@@ -13,21 +13,42 @@ interface IRowProps {
 }
 
 const TableRow: FC<IRowProps> = observer(({ columns, valuesType }) => {
-  const { storeTask } = useRootStore();
+  const { storeTask, storeWindow, storePopup } = useRootStore();
 
   function deleteHandler() {
     switch (valuesType) {
       case 'products':
         break;
       case 'acceptanceTasks':
-        storeTask.delete.task(columns.id, () => {
-          storeTask.fetch.acceptanceTasks();
-        });
+        storeWindow.confirm.setting = {
+          title: `Удалить задачу ${columns.id}?`,
+          firstButtonEvent: () => {
+            storeTask.delete.task(columns.id, () => {
+              storePopup.hideWindowConfirm();
+              storeTask.fetch.acceptanceTasks();
+            });
+          },
+          secondButtonEvent: () => {
+            storePopup.hideWindowConfirm();
+          },
+        };
+        storePopup.showWindowConfirm();
+
         break;
       case 'shipmentTasks':
-        storeTask.delete.task(columns.id, () => {
-          storeTask.fetch.shipmentTasks();
-        });
+        storeWindow.confirm.setting = {
+          title: `Удалить задачу ${columns.id}?`,
+          firstButtonEvent: () => {
+            storeTask.delete.task(columns.id, () => {
+              storePopup.hideWindowConfirm();
+              storeTask.fetch.shipmentTasks();
+            });
+          },
+          secondButtonEvent: () => {
+            storePopup.hideWindowConfirm();
+          },
+        };
+        storePopup.showWindowConfirm();
         break;
       default:
     }

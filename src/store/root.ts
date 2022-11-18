@@ -29,6 +29,7 @@ import { StoreTaskDelete } from './task/delete/delete';
 import { StoreTaskFetch } from './task/fetch/fetch';
 import { StoreTaskStatus } from './task/status/status';
 import { StoreTask } from './task/task';
+import { StoreWindowConfirm } from './window/confirm/confirm';
 
 configure({
   enforceActions: 'always',
@@ -84,6 +85,10 @@ interface IStoreForm {
   };
 }
 
+interface IStoreWindow {
+  confirm: StoreWindowConfirm;
+}
+
 class RootStore {
   private static instance: RootStore;
 
@@ -100,6 +105,8 @@ class RootStore {
   public storePopup: StorePopup;
 
   public storeForm: IStoreForm;
+
+  public storeWindow: IStoreWindow;
 
   private constructor() {
     this.storeTask = {
@@ -152,6 +159,10 @@ class RootStore {
         list: new StoreFormProductList(this),
         field: new StoreFormProductField(this),
       },
+    };
+
+    this.storeWindow = {
+      confirm: new StoreWindowConfirm(this),
     };
   }
 

@@ -4,13 +4,13 @@ import { ChangeEvent, FC } from 'react';
 import { TChangeFieldHandler } from '../../../../../types/form/type';
 
 interface IFormFieldInputProps {
-  additionalСlasses?: string;
+  classes?: string;
   value: string;
   changeHandler: TChangeFieldHandler;
 }
 
 const FormFieldInput: FC<IFormFieldInputProps> = observer(
-  ({ additionalСlasses, value, changeHandler }) => {
+  ({ classes, value, changeHandler }) => {
     /*  to remove the error from the absence of onChange. 
         See:
         https://github.com/facebook/react/issues/1118
@@ -22,7 +22,7 @@ const FormFieldInput: FC<IFormFieldInputProps> = observer(
     return (
       <input
         value={value}
-        className={`form-block__input ${additionalСlasses}`}
+        className={`form-block__input ${classes}`}
         onChange={changeLocalHandler}
       />
     );

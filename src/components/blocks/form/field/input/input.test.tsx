@@ -13,7 +13,7 @@ describe('FormFieldInput Component Render', () => {
     const value = '';
     render(
       <FormFieldInput
-        additionalСlasses='test-form-input-modifier'
+        classes='test-form-input-modifier'
         value={value}
         changeHandler={changeHandler}
       />,
@@ -26,7 +26,7 @@ describe('FormFieldInput Component Render', () => {
     const value = 'testValueText';
     render(
       <FormFieldInput
-        additionalСlasses='test-form-input-modifier'
+        classes='test-form-input-modifier'
         value={value}
         changeHandler={changeHandler}
       />,
@@ -43,7 +43,7 @@ describe('FormFieldInput Component Render', () => {
 
     const { user } = setupUserEvent(
       <FormFieldInput
-        additionalСlasses='test-form-input-modifier'
+        classes='test-form-input-modifier'
         value={value}
         changeHandler={changeHandler}
       />,

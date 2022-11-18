@@ -17,7 +17,7 @@ const FormBlock: FC<IFormBlockProps> = observer(
     >
       <FormTitle
         text={titleText}
-        additionalСlasses={additionalTitleClasses}
+        classes={additionalTitleClasses}
       />
       {children}
     </div>

@@ -12,7 +12,7 @@ describe('Button Component Render', () => {
     setupUserEvent(
       <Button
         text='TestButtonText'
-        additionalСlasses='test-button-class'
+        classes='test-button-class'
         clickHandler={clickHandler}
       />,
     );
@@ -26,7 +26,7 @@ describe('Button Component Render', () => {
     setupUserEvent(
       <Button
         text='TestButtonText'
-        additionalСlasses='test-button-class'
+        classes='test-button-class'
         clickHandler={clickHandler}
       />,
     );
@@ -40,7 +40,7 @@ describe('Button Component Render', () => {
     const { user } = setupUserEvent(
       <Button
         text='TestButtonText'
-        additionalСlasses='test-button-class'
+        classes='test-button-class'
         clickHandler={clickHandler}
       />,
     );

@@ -1,6 +1,3 @@
-import './style.scss';
-import '../../style.scss';
-
 import { observer } from 'mobx-react-lite';
 import { FC, useEffect, useState } from 'react';
 
@@ -15,7 +12,7 @@ import FormFieldInput from '../../../blocks/form/field/input/Input';
 import FormFieldPoint from '../../../blocks/form/field/point/Point';
 import FormLayout from '../../../blocks/form/layout/Layout';
 import Table from '../../../blocks/table/Table';
-import WindowHeader from '../../../blocks/windowHeader/WindowHeader';
+import WindowHeaderForm from '../../../blocks/windowHeader/form/Form';
 
 const PopupFormTask: FC = observer(() => {
   const [isAcceptance, setIsAcceptance] = useState<boolean>(true);
@@ -77,15 +74,15 @@ const PopupFormTask: FC = observer(() => {
   }, [storeForm.state.currentTaskType]);
 
   return (
-    <div className='popup add-task'>
-      <WindowHeader
-        text={`Добавить задачу ${isAcceptance ? 'приёмки' : 'отгрузки'}`}
+    <div className='popup popup--form popup--form-add-task'>
+      <WindowHeaderForm
+        title={`Добавить задачу ${isAcceptance ? 'приёмки' : 'отгрузки'}`}
         saveEvent={saveHandler}
         closeEvent={closeHandler}
       />
 
-      <div className='add-task__content-block'>
-        <FormLayout additionalСlasses='form-block--article-info'>
+      <div className='popup--form-add-task__content-block'>
+        <FormLayout classes='form-block--article-info'>
           <FormBlock
             titleText='Название'
             additionalTitleClasses='form-block__title--big'
@@ -94,17 +91,17 @@ const PopupFormTask: FC = observer(() => {
               <FormFieldInput
                 value={storeForm.task.field.getFormField('article')}
                 changeHandler={(e) => changeFieldHandler(e, 'article')}
-                additionalСlasses='form-block__input--big'
+                classes='form-block__input--big'
               />
             </FormField>
             <Button
-              additionalСlasses='button--window-header'
+              classes='button--window-header'
               text='Сгенерировать'
             />
           </FormBlock>
         </FormLayout>
 
-        <FormLayout additionalСlasses='form-block--title-info'>
+        <FormLayout classes='form-block--title-info'>
           <FormBlock titleText='Дата начала'>
             <FormField errors={storeForm.task.field.getFormErrors('dateStart')}>
               <FormFieldInput
@@ -144,9 +141,9 @@ const PopupFormTask: FC = observer(() => {
           )}
         </FormLayout>
 
-        <div className='add-task__table-block'>
+        <div className='popup--form-add-task__table-block'>
           <Button
-            additionalСlasses='button--add-task'
+            classes='button--add-task'
             text='Добавить'
             clickHandler={openProductFormHandler}
           />
@@ -157,10 +154,10 @@ const PopupFormTask: FC = observer(() => {
               keyWord='article'
               tableHeader={getProductListForTable().tableHeader}
               valuesType='products'
-              additionalСlasses='table--add-task'
+              classes='table--add-task'
             />
           ) : (
-            <div className='add-task__absence-product'>
+            <div className='popup--form-add-task__absence-product'>
               Ни одна партия продукции не добавлена
             </div>
           )}
