@@ -11,20 +11,14 @@
   user-select: none;
   cursor: pointer;
   background: $second-color 50%;
-  transform: translate(0, -0.4rem);
-  box-shadow: 0 0.4rem 0 0 $second-color-shadow;
   transition: all 0.1s ease-in-out;
 
   &:hover {
     background: $second-color--hover;
-    transform: translate(0, -0.5rem);
-    box-shadow: 0 0.5rem 0 0 $second-color-shadow;
   }
 
   &:active {
     background: $second-color--active;
-    transform: translate(0, 0);
-    box-shadow: none;
   }
 
   &--add-task {
@@ -45,8 +39,8 @@
   }
 
   &__delete {
-    padding: 0.3rem 1.4rem;
-    margin: 0.5rem 0 0 0;
+    padding: 0.4rem 1.4rem;
+    margin: 0.1rem 0 0 0;
     font-size: 1.6rem;
   }
 }

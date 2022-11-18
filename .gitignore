@@ -3,7 +3,10 @@
 # development files
 .vscode
 .env
+
+# cache
 .eslintcache
+.stylelintcache
 
 # dependencies
 /node_modules
