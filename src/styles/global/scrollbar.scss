@@ -1,0 +1,13 @@
+@use './colors.scss' as *;
+
+div::-webkit-scrollbar {
+  width: 20px;
+}
+div::-webkit-scrollbar-track {
+  background: $font-color--white;
+}
+div::-webkit-scrollbar-thumb {
+  background-color: $main-color;
+  border-radius: 0.5rem;
+  border: 0.3rem solid $font-color--white;
+}
