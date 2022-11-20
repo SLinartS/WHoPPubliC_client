@@ -39,7 +39,7 @@ export class StoreFormFloorSpace {
   public getOccupiedSpace(): number {
     let occepiedSpace = 0;
     for (const product of this.root.storeForm.product.list.list) {
-      occepiedSpace += Number(product.number.value);
+      occepiedSpace += Number(product.fields.number.value);
     }
     return occepiedSpace;
   }

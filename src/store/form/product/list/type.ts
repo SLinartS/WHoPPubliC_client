@@ -1,3 +1,10 @@
+import { IProductFormDataFields } from '../field/type';
+
+export interface IProductFormList {
+  fields: IProductFormDataFields;
+  points: number[];
+}
+
 export interface IProductFormFields {
   article: string;
   title: string;

@@ -9,6 +9,13 @@ export class StoreFormError {
   }
 
   public isProductErrors(): boolean {
+    if (this.isProductArrayErrors() || this.isProductFieldErrors()) {
+      return true;
+    }
+    return false;
+  }
+
+  public isProductFieldErrors(): boolean {
     const fields = this.root.storeForm.product.field.formData;
     for (const value of Object.values(fields)) {
       const typedValue: TValueOrErrorType = value;
@@ -16,6 +23,16 @@ export class StoreFormError {
         return true;
       }
     }
+    return false;
+  }
+
+  public isProductArrayErrors(): boolean {
+    const { points } = this.root.storeForm.product.array.formData;
+
+    if (points.errors.length) {
+      return true;
+    }
+
     return false;
   }
 
@@ -42,12 +59,8 @@ export class StoreFormError {
 
   private isTaskArrayErrors(isCheckWarehousePoint: boolean) {
     const { list } = this.root.storeForm.product.list;
-    const { points } = this.root.storeForm.task.array.formData;
     const { warehousePoints } = this.root.storeForm.task.array.formData;
 
-    if (points.errors.length) {
-      return true;
-    }
     if (warehousePoints.errors.length && isCheckWarehousePoint) {
       return true;
     }

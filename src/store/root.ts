@@ -6,6 +6,7 @@ import { StoreCategoryStatus } from './category/status/status';
 import { StoreFormError } from './form/error/error';
 import { StoreFormFloorSpace } from './form/floorSpace/floorSpace';
 import { StoreForm } from './form/form';
+import { StoreFormProductArray } from './form/product/array/array';
 import { StoreFormProductField } from './form/product/field/field';
 import { StoreFormProductList } from './form/product/list/list';
 import { StoreFormTaskArray } from './form/task/array/array';
@@ -81,6 +82,7 @@ interface IStoreForm {
   };
   product: {
     list: StoreFormProductList;
+    array: StoreFormProductArray;
     field: StoreFormProductField;
   };
 }
@@ -157,6 +159,7 @@ class RootStore {
       },
       product: {
         list: new StoreFormProductList(this),
+        array: new StoreFormProductArray(this),
         field: new StoreFormProductField(this),
       },
     };

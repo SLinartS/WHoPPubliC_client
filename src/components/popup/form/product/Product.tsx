@@ -1,5 +1,5 @@
 import { observer } from 'mobx-react-lite';
-import { FC, useEffect } from 'react';
+import { FC, useEffect, useState } from 'react';
 
 import imagePlaceholder from '../../../../assets/images/placeholder.jpg';
 import { IProductFormFields } from '../../../../store/form/product/list/type';
@@ -9,11 +9,13 @@ import Button from '../../../blocks/button/Button';
 import FormBlock from '../../../blocks/form/block/Block';
 import FormField from '../../../blocks/form/field/Field';
 import FormFieldInput from '../../../blocks/form/field/input/Input';
+import FormFieldPoint from '../../../blocks/form/field/point/Point';
 import FormFieldSelect from '../../../blocks/form/field/select/Select';
 import FormLayout from '../../../blocks/form/layout/Layout';
 import WindowHeaderForm from '../../../blocks/windowHeader/form/Form';
 
 const PopupFormProduct: FC = observer(() => {
+  const [isAcceptance, setIsAcceptance] = useState<boolean>(true);
   const { storePopup, storeProduct, storeForm, storeCategory } = useRootStore();
 
   function changeFieldHandler(
@@ -27,24 +29,38 @@ const PopupFormProduct: FC = observer(() => {
     storePopup.hideProductForm();
     storeForm.state.isDisplayDefaultErrors = false;
     storePopup.showTaskForm();
+    storeCategory.fetch.categories();
+    storeForm.product.field.clearFormData();
   }
 
   function saveHandler() {
     if (!storeForm.error.isProductErrors()) {
       storeForm.product.list.addProductToList();
       storeForm.product.field.clearFormData();
+      storeForm.product.array.clearArrays('points');
       closeHandler();
     } else {
       storeForm.state.isDisplayDefaultErrors = true;
     }
   }
 
+  function openSelectPointsHandler() {
+    storePopup.showSelectPoints();
+    storePopup.hideProductForm();
+  }
+
   useEffect(() => {
     storeForm.state.isDisplayDefaultErrors = false;
     storeProduct.status.set('add', 'pending');
-    storeCategory.fetch.categories();
-    storeForm.product.field.clearFormData();
   }, []);
+
+  useEffect(() => {
+    if (storeForm.state.currentTaskType === 'acceptance') {
+      setIsAcceptance(true);
+    } else {
+      setIsAcceptance(false);
+    }
+  }, [storeForm.state.currentTaskType]);
 
   return (
     <div className='popup popup--form popup--form-add-product'>
@@ -168,6 +184,15 @@ const PopupFormProduct: FC = observer(() => {
           </FormBlock>
         </FormLayout>
 
+        <FormLayout>
+          <FormBlock
+            titleText={`Точки ${isAcceptance ? 'приёмки' : 'отгрузки'}`}
+          >
+            <FormField errors={storeForm.product.array.getFormErrors('points')}>
+              <FormFieldPoint clickHandler={openSelectPointsHandler} />
+            </FormField>
+          </FormBlock>
+        </FormLayout>
         <div className='popup--form-add-product__photo-block'>
           <img
             src={imagePlaceholder}

@@ -10,14 +10,14 @@ const PopupFormPoints: FC = observer(() => {
   const { storePopup, storePoint, storeForm } = useRootStore();
 
   function saveHandler() {
-    storePopup.showTaskForm();
+    storePopup.showProductForm();
     storePopup.hideSelectPoints();
   }
 
   function closeHandler() {
-    storePopup.showTaskForm();
+    storePopup.showProductForm();
     storePopup.hideSelectPoints();
-    storeForm.task.array.clearArrays('points');
+    storeForm.product.array.clearArrays('points');
     storePoint.fetch.points();
   }
 

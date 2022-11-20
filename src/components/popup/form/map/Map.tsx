@@ -50,7 +50,7 @@ const PopupFormMap: FC = observer(() => {
         textCloseButton='Сбросить'
       />
       <div
-        className='select-map__free-space-indicator'
+        className='popup--form-select__free-space-indicator'
         style={{ background }}
       />
       {storeMap.status.get('fetch') === 'done' ? (

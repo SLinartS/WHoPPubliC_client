@@ -16,7 +16,8 @@ import WindowHeaderForm from '../../../blocks/windowHeader/form/Form';
 
 const PopupFormTask: FC = observer(() => {
   const [isAcceptance, setIsAcceptance] = useState<boolean>(true);
-  const { storePopup, storeProduct, storeForm, storeTask } = useRootStore();
+  const { storePopup, storeProduct, storeForm, storeTask, storeCategory } =
+    useRootStore();
 
   const getProductListForTable = useGetProductListForTable();
 
@@ -50,17 +51,13 @@ const PopupFormTask: FC = observer(() => {
     }
   }
 
-  function openSelectPointsHandler() {
-    storePopup.showSelectPoints();
-    storePopup.hideTaskForm();
-  }
-
   function openSelectMapHandler() {
     storePopup.showSelectMap();
     storePopup.hideTaskForm();
   }
 
   function openProductFormHandler() {
+    storeCategory.fetch.categories();
     storePopup.showProductForm();
     storePopup.hideTaskForm();
   }
@@ -121,13 +118,6 @@ const PopupFormTask: FC = observer(() => {
         </FormLayout>
 
         <FormLayout>
-          <FormBlock
-            titleText={`Точки ${isAcceptance ? 'приёмки' : 'отгрузки'}`}
-          >
-            <FormField errors={storeForm.task.array.getFormErrors('points')}>
-              <FormFieldPoint clickHandler={openSelectPointsHandler} />
-            </FormField>
-          </FormBlock>
           {isAcceptance ? (
             <FormBlock titleText='Точки склада'>
               <FormField

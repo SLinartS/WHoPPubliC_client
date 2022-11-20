@@ -35,13 +35,13 @@ const useGetProductListForTable = () => {
     storeForm.product.list.list.forEach((product, index) => {
       productListForTable.data.push({
         id: index,
-        article: product.article.value,
-        title: product.title.value,
-        author: product.author.value,
-        categoryId: product.categoryId.value,
-        number: product.number.value,
-        printingHouse: product.printingHouse.value,
-        publishingHouse: product.publishingHouse.value,
+        article: product.fields.article.value,
+        title: product.fields.title.value,
+        author: product.fields.author.value,
+        categoryId: product.fields.categoryId.value,
+        number: product.fields.number.value,
+        printingHouse: product.fields.printingHouse.value,
+        publishingHouse: product.fields.publishingHouse.value,
       });
     });
 

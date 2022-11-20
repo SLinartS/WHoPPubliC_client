@@ -27,14 +27,14 @@ const PointsBlock: FC<IPointsBlockProps> = observer(
         if (point) {
           let pointActive: boolean = false;
           const pointIsAlreadyAdded = checkIsAdded(
-            storeForm.task.array.getFormArrays('points') as number[],
+            storeForm.product.array.getFormArrays('points') as number[],
             point.id,
           );
           if (pointIsAlreadyAdded) {
-            storeForm.task.array.removeFormArrays('points', point.id);
+            storeForm.product.array.removeFormArrays('points', point.id);
           } else {
             pointActive = true;
-            storeForm.task.array.addFormArrays('points', point.id);
+            storeForm.product.array.addFormArrays('points', point.id);
           }
           storePoint.utils.setPointActive(
             storeForm.state.currentTaskType,

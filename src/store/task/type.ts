@@ -17,14 +17,3 @@ export interface ITask extends ITableObject {
   dateEnd: string;
   operatorLogin: string;
 }
-
-export interface INewTaskData {
-  fields: {
-    userId: TValueOrErrorType;
-    typeId: TValueOrErrorType;
-    article: TValueOrErrorType;
-    dateStart: TValueOrErrorType;
-    dateEnd: TValueOrErrorType;
-  };
-  arrays: ITaskFormDataArrays;
-}

@@ -1,16 +1,8 @@
+import { TArrayOrErrorType } from '../../../type';
+
 export interface ITaskFormDataArrays {
-  products: {
-    value: number[];
-    errors: string[];
-  };
-  points: {
-    value: number[];
-    errors: string[];
-  };
-  warehousePoints: {
-    value: number[];
-    errors: string[];
-  };
+  products: TArrayOrErrorType;
+  warehousePoints: TArrayOrErrorType;
 }
 
 export interface ITaskFormArrays {
