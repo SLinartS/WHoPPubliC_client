@@ -1,4 +1,5 @@
 import { makeAutoObservable } from 'mobx';
+
 import RootStore from '../../root';
 import { IWindowConfirmSettings } from './type';
 

@@ -1,6 +1,7 @@
 import { observer } from 'mobx-react-lite';
 import { FC, ReactNode } from 'react';
 
+import { TTaskType } from '../../../../store/type';
 import { useRootStore } from '../../../../utils/RootStoreProvider/useRootStore';
 import TableColumn from '../column/Column';
 import TableColumnShellButton from '../column/shell/button/Shell';
@@ -15,40 +16,58 @@ interface IRowProps {
 const TableRow: FC<IRowProps> = observer(({ columns, valuesType }) => {
   const { storeTask, storeWindow, storePopup } = useRootStore();
 
+  function deleteTask(
+    taskType: TTaskType,
+    taskId: number,
+    isDeleteProducts: boolean,
+  ): void {
+    storeTask.delete.task(taskId, isDeleteProducts, () => {
+      storePopup.hideWindowConfirm();
+      if (taskType === 'acceptance') {
+        storeTask.status.set('fetchAcceptance', 'pending');
+      }
+      if (taskType === 'shipment') {
+        storeTask.status.set('fetchShipment', 'pending');
+      }
+    });
+  }
+
+  function deleteTaskShell(taskType: TTaskType): void {
+    storeWindow.confirm.setting = {
+      title: `Удалить задачу ${columns.id}?`,
+      firstButtonEvent: () => {
+        storePopup.hideWindowConfirm();
+        setTimeout(() => {
+          storeWindow.confirm.setting = {
+            title: `Удалить связанные с задачей товары?`,
+            firstButtonEvent: () => {
+              deleteTask(taskType, columns.id, true);
+              storePopup.hideWindowConfirm();
+            },
+            secondButtonEvent: () => {
+              deleteTask(taskType, columns.id, false);
+              storePopup.hideWindowConfirm();
+            },
+          };
+          storePopup.showWindowConfirm();
+        }, 200);
+      },
+      secondButtonEvent: () => {
+        storePopup.hideWindowConfirm();
+      },
+    };
+    storePopup.showWindowConfirm();
+  }
+
   function deleteHandler() {
     switch (valuesType) {
       case 'products':
         break;
       case 'acceptanceTasks':
-        storeWindow.confirm.setting = {
-          title: `Удалить задачу ${columns.id}?`,
-          firstButtonEvent: () => {
-            storeTask.delete.task(columns.id, () => {
-              storePopup.hideWindowConfirm();
-              storeTask.fetch.acceptanceTasks();
-            });
-          },
-          secondButtonEvent: () => {
-            storePopup.hideWindowConfirm();
-          },
-        };
-        storePopup.showWindowConfirm();
-
+        deleteTaskShell('acceptance');
         break;
       case 'shipmentTasks':
-        storeWindow.confirm.setting = {
-          title: `Удалить задачу ${columns.id}?`,
-          firstButtonEvent: () => {
-            storeTask.delete.task(columns.id, () => {
-              storePopup.hideWindowConfirm();
-              storeTask.fetch.shipmentTasks();
-            });
-          },
-          secondButtonEvent: () => {
-            storePopup.hideWindowConfirm();
-          },
-        };
-        storePopup.showWindowConfirm();
+        deleteTaskShell('shipment');
         break;
       default:
     }

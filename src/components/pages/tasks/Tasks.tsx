@@ -1,13 +1,16 @@
 import './style.scss';
 
 import { observer } from 'mobx-react-lite';
-import { FC, useEffect } from 'react';
+import { FC, ReactNode, useEffect } from 'react';
 
+import { TTaskStatus } from '../../../store/task/status/type';
+import { TTypeTaskStates } from '../../../store/task/type';
 import { TTaskType } from '../../../store/type';
 import { useRootStore } from '../../../utils/RootStoreProvider/useRootStore';
 import Button from '../../blocks/button/Button';
 import Loader from '../../blocks/loader/Loader';
 import Table from '../../blocks/table/Table';
+import { TTableValuesType } from '../../blocks/table/type';
 
 const Tasks: FC = observer(() => {
   const { storeTask, storePopup, storeForm } = useRootStore();
@@ -29,6 +32,30 @@ const Tasks: FC = observer(() => {
     }
   }, [storeTask.status.get('fetchShipment')]);
 
+  function displayTasksTable(
+    fetchType: TTaskStatus,
+    valuesType: TTableValuesType,
+    listType: TTypeTaskStates,
+  ): ReactNode {
+    if (storeTask.status.get(fetchType) === 'done') {
+      if (storeTask.state[listType].data.length) {
+        return (
+          <Table
+            data={storeTask.state[listType].data}
+            keyWord='article'
+            tableHeader={storeTask.state[listType].tableHeader}
+            valuesType={valuesType}
+            classes='table--tasks'
+          />
+        );
+      }
+      return (
+        <p className='tasks__empty-text'>Отсутствуют добавленные задачи</p>
+      );
+    }
+    return <Loader />;
+  }
+
   return (
     <main className='tasks'>
       <div className='tasks__title'>
@@ -40,16 +67,10 @@ const Tasks: FC = observer(() => {
           text='Добавить'
           clickHandler={() => showAddTaskWindowHandler('acceptance')}
         />
-        {storeTask.status.get('fetchAcceptance') === 'done' ? (
-          <Table
-            data={storeTask.state.acceptanceList.data}
-            keyWord='article'
-            tableHeader={storeTask.state.acceptanceList.tableHeader}
-            valuesType='acceptanceTasks'
-            classes='table--tasks'
-          />
-        ) : (
-          <Loader />
+        {displayTasksTable(
+          'fetchAcceptance',
+          'acceptanceTasks',
+          'acceptanceList',
         )}
       </div>
       <div className='tasks__title tasks__title--shipment'>
@@ -61,18 +82,7 @@ const Tasks: FC = observer(() => {
           text='Добавить'
           clickHandler={() => showAddTaskWindowHandler('shipment')}
         />
-
-        {storeTask.status.get('fetchShipment') === 'done' ? (
-          <Table
-            data={storeTask.state.shipmentList.data}
-            keyWord='article'
-            tableHeader={storeTask.state.shipmentList.tableHeader}
-            valuesType='shipmentTasks'
-            classes='table--tasks'
-          />
-        ) : (
-          <Loader />
-        )}
+        {displayTasksTable('fetchShipment', 'shipmentTasks', 'shipmentList')}
       </div>
     </main>
   );

@@ -2,6 +2,8 @@ import { ITableObject } from '../../components/blocks/table/type';
 import { ITaskFormDataArrays } from '../form/task/array/type';
 import { TValueOrErrorType } from '../type';
 
+export type TTypeTaskStates = 'acceptanceList' | 'shipmentList';
+
 export interface ITasks {
   data: ITask[];
   tableHeader: string[];
