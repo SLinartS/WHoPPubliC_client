@@ -1,4 +1,5 @@
 import { ITableObject } from '../../components/blocks/table/type';
+
 export interface TProductsData {
   data: IProduct[];
   tableHeader: string[];

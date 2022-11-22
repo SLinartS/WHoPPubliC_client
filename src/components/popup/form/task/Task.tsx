@@ -145,6 +145,7 @@ const PopupFormTask: FC = observer(() => {
               tableHeader={getProductListForTable().tableHeader}
               valuesType='products'
               classes='table--add-task'
+              isShowIdColumn={false}
             />
           ) : (
             <div className='popup--form-add-task__absence-product'>

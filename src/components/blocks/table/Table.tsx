@@ -12,10 +12,18 @@ interface ITableProps {
   tableHeader: string[];
   valuesType: TTableValuesType;
   classes?: string;
+  isShowIdColumn?: boolean;
 }
 
 const Table: FC<ITableProps> = observer(
-  ({ data, keyWord, tableHeader, valuesType, classes }) => {
+  ({
+    data,
+    keyWord,
+    tableHeader,
+    valuesType,
+    classes,
+    isShowIdColumn = true,
+  }) => {
     return (
       <div
         className={`table ${classes}`}
@@ -37,6 +45,7 @@ const Table: FC<ITableProps> = observer(
             valuesType={valuesType}
             key={columns[keyWord]}
             columns={columns}
+            isShowIdColumn={isShowIdColumn}
           />
         ))}
       </div>
