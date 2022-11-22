@@ -11,10 +11,10 @@ export class StoreTaskAdd {
 
   public *task(actionIfDone?: () => void) {
     try {
-      const taskTypeId = this.root.storeForm.utils.getTaskTypeId();
+      const taskTypeId = this.root.storePopup.form.utils.utils.getTaskTypeId();
       const requestTaskData: IRequestTaskData = {
         fields: {
-          ...this.root.storeForm.task.field.formData,
+          ...this.root.storePopup.form.task.formData,
           userId: {
             value: '1',
             errors: [],
@@ -24,9 +24,8 @@ export class StoreTaskAdd {
             errors: [],
           },
         },
-        products: this.root.storeForm.task.array.getFormArrays('products'),
-        warehousePoints:
-          this.root.storeForm.task.array.getFormArrays('warehousePoints'),
+        products: this.root.storePopup.select.products.arrayValue,
+        warehousePoints: this.root.storePopup.select.warehousePoints.arrayValue,
       };
 
       yield extendAxios.post('tasks', requestTaskData);

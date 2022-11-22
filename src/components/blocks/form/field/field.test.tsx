@@ -11,7 +11,7 @@ describe('FormField Component Render', () => {
   const root = RootStore.getInstance();
 
   test('FormField are rendered', () => {
-    root.storeForm.state.isDisplayDefaultErrors = true;
+    root.storePopup.form.state.isDisplayDefaultErrors = true;
     setupStoreProvider(
       <FormField errors={['testError']}>
         <p>testChildren1</p>
@@ -39,7 +39,7 @@ describe('FormField Component Render', () => {
     ).toBeInTheDocument();
   });
   test('The error is invisible', () => {
-    root.storeForm.state.isDisplayDefaultErrors = false;
+    root.storePopup.form.state.isDisplayDefaultErrors = false;
     setupStoreProvider(
       <FormField errors={[emptyFieldErrorText]}>
         <p>testChildren1</p>

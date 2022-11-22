@@ -6,20 +6,20 @@ import Button from '../../../blocks/button/Button';
 import WindowHeader from '../../../blocks/windowHeader/WindowHeader';
 
 const WindowConfirm: FC = observer(() => {
-  const { storeWindow } = useRootStore();
+  const { storePopup } = useRootStore();
   return (
     <div className='popup popup--window popup--window-confirm'>
-      <WindowHeader title={storeWindow.confirm.setting.title} />
+      <WindowHeader title={storePopup.windows.confirm.setting.title} />
       <div className='popup--window-confirm__block'>
         <Button
           classes='button__confirm'
           text='Да'
-          clickHandler={storeWindow.confirm.setting.firstButtonEvent}
+          clickHandler={storePopup.windows.confirm.setting.firstButtonEvent}
         />
         <Button
           classes='button__confirm'
           text='Нет'
-          clickHandler={storeWindow.confirm.setting.secondButtonEvent}
+          clickHandler={storePopup.windows.confirm.setting.secondButtonEvent}
         />
       </div>
     </div>

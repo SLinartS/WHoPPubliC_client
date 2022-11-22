@@ -13,11 +13,11 @@ import Table from '../../blocks/table/Table';
 import { TTableValuesType } from '../../blocks/table/type';
 
 const Tasks: FC = observer(() => {
-  const { storeTask, storePopup, storeForm } = useRootStore();
+  const { storeTask, storePopup } = useRootStore();
 
   function showAddTaskWindowHandler(taskType: TTaskType) {
-    storeForm.state.currentTaskType = taskType;
-    storePopup.showTaskForm();
+    storePopup.form.state.currentTaskType = taskType;
+    storePopup.status.showTaskForm();
   }
 
   useEffect(() => {

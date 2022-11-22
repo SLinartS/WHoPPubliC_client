@@ -1,4 +1,4 @@
-import { IProductFormList } from '../../form/product/list/type';
+import { IProductFormList } from '../../popup/form/productList/type';
 
 export interface IRequestProductData {
   products: IProductFormList[];

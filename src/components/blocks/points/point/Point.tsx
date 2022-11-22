@@ -8,14 +8,14 @@ interface IPointProps {
 }
 
 const Point: FC<IPointProps> = observer(({ active }) => {
-  const { storeForm } = useRootStore();
+  const { storePopup } = useRootStore();
 
   return (
     <div
       className='points-map__point'
       style={{
         backgroundColor:
-          active && storeForm.state.isSelectedPoint ? '#c15943' : '',
+          active && storePopup.form.state.isSelectedPoint ? '#c15943' : '',
       }}
     />
   );

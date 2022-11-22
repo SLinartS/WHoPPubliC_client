@@ -2,7 +2,7 @@ import { observer } from 'mobx-react-lite';
 import { FC, useEffect, useState } from 'react';
 
 import useGetProductListForTable from '../../../../hooks/mapAndPoint/useGetProductListForTable';
-import { ITaskFormFields } from '../../../../store/form/task/field/type';
+import { ITaskFormFields } from '../../../../store/popup/form/task/type';
 import { TChangeFieldEvent } from '../../../../types/form/type';
 import { useRootStore } from '../../../../utils/RootStoreProvider/useRootStore';
 import Button from '../../../blocks/button/Button';
@@ -16,8 +16,7 @@ import WindowHeaderForm from '../../../blocks/windowHeader/form/Form';
 
 const PopupFormTask: FC = observer(() => {
   const [isAcceptance, setIsAcceptance] = useState<boolean>(true);
-  const { storePopup, storeProduct, storeForm, storeTask, storeCategory } =
-    useRootStore();
+  const { storePopup, storeProduct, storeTask, storeCategory } = useRootStore();
 
   const getProductListForTable = useGetProductListForTable();
 
@@ -25,12 +24,12 @@ const PopupFormTask: FC = observer(() => {
     e: TChangeFieldEvent,
     fieldName: keyof ITaskFormFields,
   ) {
-    storeForm.task.field.setFormField(fieldName, e.target.value);
+    storePopup.form.task.setFormField(fieldName, e.target.value);
   }
 
   function closeHandler() {
-    storePopup.hideTaskForm();
-    storeForm.utils.resetForm();
+    storePopup.status.hideTaskForm();
+    storePopup.form.utils.utils.resetForm();
     if (isAcceptance) {
       storeTask.status.set('fetchAcceptance', 'pending');
     } else {
@@ -39,36 +38,41 @@ const PopupFormTask: FC = observer(() => {
   }
 
   function saveHandler() {
-    if (!storeForm.error.isTaskErrors(isAcceptance)) {
+    if (!storePopup.form.utils.error.isTaskErrors(isAcceptance)) {
       storeProduct.add.products(() => {
         storeTask.add.task(() => {
-          storeForm.task.field.clearFormData();
+          storePopup.form.task.clearFormData();
           closeHandler();
         });
       });
     } else {
-      storeForm.state.isDisplayDefaultErrors = true;
+      storePopup.form.state.isDisplayDefaultErrors = true;
     }
   }
 
   function openSelectMapHandler() {
-    storePopup.showSelectMap();
-    storePopup.hideTaskForm();
+    storePopup.status.showSelectMap();
+    storePopup.status.hideTaskForm();
   }
 
   function openProductFormHandler() {
     storeCategory.fetch.categories();
-    storePopup.showProductForm();
-    storePopup.hideTaskForm();
+    storePopup.status.showProductForm();
+    storePopup.status.hideTaskForm();
+  }
+
+  function openProductChoiseHandler() {
+    storePopup.status.showSelectProducts();
+    storePopup.status.hideTaskForm();
   }
 
   useEffect(() => {
-    if (storeForm.state.currentTaskType === 'acceptance') {
+    if (storePopup.form.state.currentTaskType === 'acceptance') {
       setIsAcceptance(true);
     } else {
       setIsAcceptance(false);
     }
-  }, [storeForm.state.currentTaskType]);
+  }, [storePopup.form.state.currentTaskType]);
 
   return (
     <div className='popup popup--form popup--form-add-task'>
@@ -84,9 +88,9 @@ const PopupFormTask: FC = observer(() => {
             titleText='Название'
             additionalTitleClasses='form-block__title--big'
           >
-            <FormField errors={storeForm.task.field.getFormErrors('article')}>
+            <FormField errors={storePopup.form.task.getFormErrors('article')}>
               <FormFieldInput
-                value={storeForm.task.field.getFormField('article')}
+                value={storePopup.form.task.getFormField('article')}
                 changeHandler={(e) => changeFieldHandler(e, 'article')}
                 classes='form-block__input--big'
               />
@@ -100,17 +104,17 @@ const PopupFormTask: FC = observer(() => {
 
         <FormLayout classes='form-block--title-info'>
           <FormBlock titleText='Дата начала'>
-            <FormField errors={storeForm.task.field.getFormErrors('dateStart')}>
+            <FormField errors={storePopup.form.task.getFormErrors('dateStart')}>
               <FormFieldInput
-                value={storeForm.task.field.getFormField('dateStart')}
+                value={storePopup.form.task.getFormField('dateStart')}
                 changeHandler={(e) => changeFieldHandler(e, 'dateStart')}
               />
             </FormField>
           </FormBlock>
           <FormBlock titleText='Дата окончания'>
-            <FormField errors={storeForm.task.field.getFormErrors('dateEnd')}>
+            <FormField errors={storePopup.form.task.getFormErrors('dateEnd')}>
               <FormFieldInput
-                value={storeForm.task.field.getFormField('dateEnd')}
+                value={storePopup.form.task.getFormField('dateEnd')}
                 changeHandler={(e) => changeFieldHandler(e, 'dateEnd')}
               />
             </FormField>
@@ -120,9 +124,7 @@ const PopupFormTask: FC = observer(() => {
         <FormLayout>
           {isAcceptance ? (
             <FormBlock titleText='Точки склада'>
-              <FormField
-                errors={storeForm.task.array.getFormErrors('warehousePoints')}
-              >
+              <FormField errors={storePopup.select.warehousePoints.arrayErrors}>
                 <FormFieldPoint clickHandler={openSelectMapHandler} />
               </FormField>
             </FormBlock>
@@ -132,13 +134,21 @@ const PopupFormTask: FC = observer(() => {
         </FormLayout>
 
         <div className='popup--form-add-task__table-block'>
+          {isAcceptance && (
+            <Button
+              classes='button--add-task'
+              text='Добавить'
+              clickHandler={openProductFormHandler}
+            />
+          )}
+
           <Button
             classes='button--add-task'
-            text='Добавить'
-            clickHandler={openProductFormHandler}
+            text='Выбрать'
+            clickHandler={openProductChoiseHandler}
           />
 
-          {storeForm.product.list.list.length > 0 ? (
+          {storePopup.form.productList.list.length > 0 ? (
             <Table
               data={getProductListForTable().data}
               keyWord='article'

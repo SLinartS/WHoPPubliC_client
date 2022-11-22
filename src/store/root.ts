@@ -3,15 +3,6 @@ import { configure } from 'mobx';
 import { StoreCategory } from './category/category';
 import { StoreCategoryFetch } from './category/fetch/fetch';
 import { StoreCategoryStatus } from './category/status/status';
-import { StoreFormError } from './form/error/error';
-import { StoreFormFloorSpace } from './form/floorSpace/floorSpace';
-import { StoreForm } from './form/form';
-import { StoreFormProductArray } from './form/product/array/array';
-import { StoreFormProductField } from './form/product/field/field';
-import { StoreFormProductList } from './form/product/list/list';
-import { StoreFormTaskArray } from './form/task/array/array';
-import { StoreFormTaskField } from './form/task/field/field';
-import { StoreFormUtils } from './form/utils/utils';
 import { StoreMapFetch } from './map/fetch/fetch';
 import { StoreMap } from './map/map';
 import { StoreMapStatus } from './map/status/status';
@@ -20,7 +11,19 @@ import { StorePointFetch } from './point/fetch/fetch';
 import { StorePoint } from './point/point';
 import { StorePointStatus } from './point/status/status';
 import { StorePointUtils } from './point/utils/utils';
-import { StorePopup } from './popup/popup';
+import { StorePopupForm } from './popup/form/form';
+import { StorePopupFormProduct } from './popup/form/product/product';
+import { StorePopupFormProductList } from './popup/form/productList/list';
+import { StorePopupFormTask } from './popup/form/task/task';
+import { StorePopupFormUtilsError } from './popup/form/utils/error/error';
+import { StorePopupFormUtils } from './popup/form/utils/utils';
+import { StorePopupSelectPoints } from './popup/select/points/points';
+import { StorePopupSelectProducts } from './popup/select/products/products';
+import { StorePopupSelectUtilsFloorSpace } from './popup/select/utils/floorSpace/floorSpace';
+import { StorePopupSelectUtils } from './popup/select/utils/utils';
+import { StorePopupSelectWarehousePoints } from './popup/select/warehousePoints/warehousePoints';
+import { StorePopupStatus } from './popup/status/status';
+import { StorePopupWindowConfirm } from './popup/window/confirm/confirm';
 import { StoreProductAdd } from './product/add/add';
 import { StoreProductFetch } from './product/fetch/fetch';
 import { StoreProduct } from './product/product';
@@ -30,7 +33,6 @@ import { StoreTaskDelete } from './task/delete/delete';
 import { StoreTaskFetch } from './task/fetch/fetch';
 import { StoreTaskStatus } from './task/status/status';
 import { StoreTask } from './task/task';
-import { StoreWindowConfirm } from './window/confirm/confirm';
 
 configure({
   enforceActions: 'always',
@@ -71,24 +73,28 @@ interface IStoreCategory {
   fetch: StoreCategoryFetch;
 }
 
-interface IStoreForm {
-  state: StoreForm;
-  floorSpace: StoreFormFloorSpace;
-  utils: StoreFormUtils;
-  error: StoreFormError;
-  task: {
-    field: StoreFormTaskField;
-    array: StoreFormTaskArray;
+interface IStorePopup {
+  status: StorePopupStatus;
+  form: {
+    product: StorePopupFormProduct;
+    task: StorePopupFormTask;
+    productList: StorePopupFormProductList;
+    utils: {
+      utils: StorePopupFormUtils;
+      error: StorePopupFormUtilsError;
+    };
+    state: StorePopupForm;
   };
-  product: {
-    list: StoreFormProductList;
-    array: StoreFormProductArray;
-    field: StoreFormProductField;
+  select: {
+    points: StorePopupSelectPoints;
+    warehousePoints: StorePopupSelectWarehousePoints;
+    products: StorePopupSelectProducts;
+    utils: {
+      utils: StorePopupSelectUtils;
+      floorSpace: StorePopupSelectUtilsFloorSpace;
+    };
   };
-}
-
-interface IStoreWindow {
-  confirm: StoreWindowConfirm;
+  windows: { confirm: StorePopupWindowConfirm };
 }
 
 class RootStore {
@@ -104,11 +110,7 @@ class RootStore {
 
   public storeCategory: IStoreCategory;
 
-  public storePopup: StorePopup;
-
-  public storeForm: IStoreForm;
-
-  public storeWindow: IStoreWindow;
+  public storePopup: IStorePopup;
 
   private constructor() {
     this.storeTask = {
@@ -146,26 +148,28 @@ class RootStore {
       fetch: new StoreCategoryFetch(this),
     };
 
-    this.storePopup = new StorePopup(this);
-
-    this.storeForm = {
-      state: new StoreForm(this),
-      floorSpace: new StoreFormFloorSpace(this),
-      utils: new StoreFormUtils(this),
-      error: new StoreFormError(this),
-      task: {
-        array: new StoreFormTaskArray(this),
-        field: new StoreFormTaskField(this),
+    this.storePopup = {
+      status: new StorePopupStatus(this),
+      form: {
+        product: new StorePopupFormProduct(this),
+        task: new StorePopupFormTask(this),
+        productList: new StorePopupFormProductList(this),
+        utils: {
+          utils: new StorePopupFormUtils(this),
+          error: new StorePopupFormUtilsError(this),
+        },
+        state: new StorePopupForm(this),
       },
-      product: {
-        list: new StoreFormProductList(this),
-        array: new StoreFormProductArray(this),
-        field: new StoreFormProductField(this),
+      select: {
+        points: new StorePopupSelectPoints(this),
+        warehousePoints: new StorePopupSelectWarehousePoints(this),
+        products: new StorePopupSelectProducts(this),
+        utils: {
+          utils: new StorePopupSelectUtils(this),
+          floorSpace: new StorePopupSelectUtilsFloorSpace(this),
+        },
       },
-    };
-
-    this.storeWindow = {
-      confirm: new StoreWindowConfirm(this),
+      windows: { confirm: new StorePopupWindowConfirm(this) },
     };
   }
 

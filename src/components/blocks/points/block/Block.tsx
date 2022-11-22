@@ -15,34 +15,34 @@ interface IPointsBlockProps {
 
 const PointsBlock: FC<IPointsBlockProps> = observer(
   ({ id, text, index, active }) => {
-    const { storeForm, storePoint, storePopup } = useRootStore();
+    const { storePoint, storePopup } = useRootStore();
     const pointBlockNode = useRef<HTMLDivElement>(null);
     const getPointCoordinates = useGetPointCoordinates();
     const checkIsAdded = useCheckIsAdded();
 
     function choosePointBlock() {
-      if (pointBlockNode.current && storeForm.state.isSelectedPoint) {
+      if (pointBlockNode.current && storePopup.form.state.isSelectedPoint) {
         const { point } = getPointCoordinates(pointBlockNode.current);
 
-        storePopup.hideSelectPoints(() => {
+        storePopup.status.hideSelectPoints(() => {
           if (point) {
             const pointIsAlreadyAdded = checkIsAdded(
-              storeForm.product.array.getFormArrays('points') as number[],
+              storePopup.select.points.arrayValue as number[],
               point.id,
             );
             if (!pointIsAlreadyAdded) {
-              storeForm.product.array.clearArrays('points');
+              storePopup.select.points.clearArray();
               storePoint.utils.setAllPointsUnactive();
 
-              storeForm.product.array.addFormArrays('points', point.id);
+              storePopup.select.points.addItem(point.id);
               storePoint.utils.setPointActive(
-                storeForm.state.currentTaskType,
+                storePopup.form.state.currentTaskType,
                 point.index,
                 true,
               );
             }
           }
-          storePopup.showProductForm();
+          storePopup.status.showProductForm();
         });
       }
     }

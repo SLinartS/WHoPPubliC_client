@@ -10,11 +10,11 @@ import Points from '../../blocks/points/Points';
 import SearchField from '../../blocks/searchField/SearchField';
 
 const MapPage: FC = observer(() => {
-  const { storeForm, storeMap, storePoint } = useRootStore();
+  const { storeMap, storePoint, storePopup } = useRootStore();
 
   useEffect(() => {
-    storeForm.state.isSelectedMap = false;
-    storeForm.state.isSelectedPoint = false;
+    storePopup.form.state.isSelectedMap = false;
+    storePopup.form.state.isSelectedPoint = false;
   }, []);
 
   useEffect(() => {

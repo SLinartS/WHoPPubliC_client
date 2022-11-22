@@ -16,14 +16,14 @@ interface IMapFloorStyles {
 
 const MapFloor: FC<IMapFloorProps> = observer(
   ({ id, active, number, capacity, freeSpace, index }) => {
-    const { storeForm, storeMap } = useRootStore();
+    const { storeMap, storePopup } = useRootStore();
     const [styles, setStyles] = useState<IMapFloorStyles>();
     const floorNode = useRef<HTMLDivElement>(null);
     const getFloorCoordinates = useGetFloorCoordinates();
     const checkIsAdded = useCheckIsAdded();
 
     function chooseFloor() {
-      if (floorNode.current && storeForm.state.isSelectedMap) {
+      if (floorNode.current && storePopup.form.state.isSelectedMap) {
         const { zone, section, block, floor } = getFloorCoordinates(
           floorNode.current,
         );
@@ -31,15 +31,15 @@ const MapFloor: FC<IMapFloorProps> = observer(
         if (zone && section && block && floor) {
           let floorActive: boolean = false;
           const floorIsAlreadyAdded = checkIsAdded(
-            storeForm.task.array.getFormArrays('warehousePoints'),
+            storePopup.select.warehousePoints.arrayValue,
             floor.id,
           );
 
           if (floorIsAlreadyAdded) {
-            storeForm.task.array.removeFormArrays('warehousePoints', floor.id);
+            storePopup.select.warehousePoints.removeItem(floor.id);
           } else {
             floorActive = true;
-            storeForm.task.array.addFormArrays('warehousePoints', floor.id);
+            storePopup.select.warehousePoints.addItem(floor.id);
           }
           storeMap.utils.setFloorActive(
             zone.index,
@@ -58,7 +58,7 @@ const MapFloor: FC<IMapFloorProps> = observer(
         background: 'unset',
       };
       if (active) {
-        if (storeForm.state.isSelectedMap) {
+        if (storePopup.form.state.isSelectedMap) {
           newStyle.background = `linear-gradient(180deg, 
               #d35f48 ${(freeSpace / capacity) * 100}%, 
               #7fa89c ${(freeSpace / capacity) * 100}%)`;
@@ -70,7 +70,13 @@ const MapFloor: FC<IMapFloorProps> = observer(
       }
 
       setStyles(newStyle);
-    }, [active, number, freeSpace, capacity, storeForm.state.isSelectedMap]);
+    }, [
+      active,
+      number,
+      freeSpace,
+      capacity,
+      storePopup.form.state.isSelectedMap,
+    ]);
 
     return (
       <div

@@ -5,10 +5,11 @@ import { Outlet } from 'react-router-dom';
 import { useRootStore } from '../../utils/RootStoreProvider/useRootStore';
 import TransitionCustom from '../blocks/transition/Transition';
 import { ITransitionCustomLayout } from '../blocks/transition/type';
-import PopupFormMap from '../popup/form/map/Map';
-import PopupFormPoints from '../popup/form/points/Points';
 import PopupFormProduct from '../popup/form/product/Product';
 import PopupFormTask from '../popup/form/task/Task';
+import PopupSelectMap from '../popup/select/map/Map';
+import PopupSelectPoints from '../popup/select/points/Points';
+import PopupSelectProduct from '../popup/select/product/Product';
 import WindowConfirm from '../popup/window/confirm/Confirm';
 import Header from './header/Header';
 
@@ -16,14 +17,15 @@ const Layout = observer(() => {
   const { storePopup } = useRootStore();
   const productNodeRef = useRef<HTMLDivElement>(null);
   const taskNodeRef = useRef<HTMLDivElement>(null);
-  const mapNodeRef = useRef<HTMLDivElement>(null);
-  const pointsNodeRef = useRef<HTMLDivElement>(null);
+  const selectMapNodeRef = useRef<HTMLDivElement>(null);
+  const selectPointsNodeRef = useRef<HTMLDivElement>(null);
+  const selectProductsNodeRef = useRef<HTMLDivElement>(null);
   const windowConfirmNodeRef = useRef<HTMLDivElement>(null);
 
   const POPUPS: ITransitionCustomLayout[] = [
     {
       name: 'productFormPopup',
-      trigger: storePopup.productFormStatus,
+      trigger: storePopup.status.productFormStatus,
       nodeRef: productNodeRef,
       children: <PopupFormProduct />,
       classNames: 'popup',
@@ -31,7 +33,7 @@ const Layout = observer(() => {
     },
     {
       name: 'taskFormPopup',
-      trigger: storePopup.taskFormStatus,
+      trigger: storePopup.status.taskFormStatus,
       nodeRef: taskNodeRef,
       children: <PopupFormTask />,
       classNames: 'popup',
@@ -39,23 +41,31 @@ const Layout = observer(() => {
     },
     {
       name: 'selectMapPopup',
-      trigger: storePopup.selectMapStatus,
-      nodeRef: mapNodeRef,
-      children: <PopupFormMap />,
+      trigger: storePopup.status.selectMapStatus,
+      nodeRef: selectMapNodeRef,
+      children: <PopupSelectMap />,
       classNames: 'popup',
       timeout: 200,
     },
     {
       name: 'selectPointsPopup',
-      trigger: storePopup.selectPointsStatus,
-      nodeRef: pointsNodeRef,
-      children: <PopupFormPoints />,
+      trigger: storePopup.status.selectPointsStatus,
+      nodeRef: selectPointsNodeRef,
+      children: <PopupSelectPoints />,
+      classNames: 'popup',
+      timeout: 200,
+    },
+    {
+      name: 'selectProductsPopup',
+      trigger: storePopup.status.selectProductsStatus,
+      nodeRef: selectProductsNodeRef,
+      children: <PopupSelectProduct />,
       classNames: 'popup',
       timeout: 200,
     },
     {
       name: 'windowConfirm',
-      trigger: storePopup.windowConfirmStatus,
+      trigger: storePopup.status.windowConfirmStatus,
       nodeRef: windowConfirmNodeRef,
       children: <WindowConfirm />,
       classNames: 'popup',

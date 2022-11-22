@@ -16,7 +16,7 @@ interface IRowProps {
 
 const TableRow: FC<IRowProps> = observer(
   ({ columns, valuesType, isShowIdColumn }) => {
-    const { storeTask, storeWindow, storePopup } = useRootStore();
+    const { storeTask, storePopup } = useRootStore();
 
     function deleteTask(
       taskType: TTaskType,
@@ -24,7 +24,7 @@ const TableRow: FC<IRowProps> = observer(
       isDeleteProducts: boolean,
     ): void {
       storeTask.delete.task(taskId, isDeleteProducts, () => {
-        storePopup.hideWindowConfirm();
+        storePopup.status.hideWindowConfirm();
         if (taskType === 'acceptance') {
           storeTask.status.set('fetchAcceptance', 'pending');
         }
@@ -35,29 +35,29 @@ const TableRow: FC<IRowProps> = observer(
     }
 
     function deleteTaskShell(taskType: TTaskType): void {
-      storeWindow.confirm.setting = {
+      storePopup.windows.confirm.setting = {
         title: `Удалить задачу ${columns.id}?`,
         firstButtonEvent: () => {
-          storePopup.hideWindowConfirm(() => {
-            storeWindow.confirm.setting = {
+          storePopup.status.hideWindowConfirm(() => {
+            storePopup.windows.confirm.setting = {
               title: `Удалить связанные с задачей товары?`,
               firstButtonEvent: () => {
                 deleteTask(taskType, columns.id, true);
-                storePopup.hideWindowConfirm();
+                storePopup.status.hideWindowConfirm();
               },
               secondButtonEvent: () => {
                 deleteTask(taskType, columns.id, false);
-                storePopup.hideWindowConfirm();
+                storePopup.status.hideWindowConfirm();
               },
             };
-            storePopup.showWindowConfirm();
+            storePopup.status.showWindowConfirm();
           });
         },
         secondButtonEvent: () => {
-          storePopup.hideWindowConfirm();
+          storePopup.status.hideWindowConfirm();
         },
       };
-      storePopup.showWindowConfirm();
+      storePopup.status.showWindowConfirm();
     }
 
     function deleteHandler() {

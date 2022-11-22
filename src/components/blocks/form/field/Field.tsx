@@ -13,14 +13,14 @@ interface IFormFieldProps {
 }
 
 const FormField: FC<IFormFieldProps> = observer(({ children, errors }) => {
-  const { storeForm } = useRootStore();
+  const { storePopup } = useRootStore();
 
   function displayError() {
     if (
       errors[0] === emptyFieldErrorText ||
       errors[0] === emptyArrayErrorText
     ) {
-      if (storeForm.state.isDisplayDefaultErrors) {
+      if (storePopup.form.state.isDisplayDefaultErrors) {
         return errors[0];
       }
       return '';
