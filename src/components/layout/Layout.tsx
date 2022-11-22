@@ -23,7 +23,7 @@ const Layout = observer(() => {
   const POPUPS: ITransitionCustomLayout[] = [
     {
       name: 'productFormPopup',
-      trigger: storePopup.productForm,
+      trigger: storePopup.productFormStatus,
       nodeRef: productNodeRef,
       children: <PopupFormProduct />,
       classNames: 'popup',
@@ -31,7 +31,7 @@ const Layout = observer(() => {
     },
     {
       name: 'taskFormPopup',
-      trigger: storePopup.taskForm,
+      trigger: storePopup.taskFormStatus,
       nodeRef: taskNodeRef,
       children: <PopupFormTask />,
       classNames: 'popup',
@@ -39,7 +39,7 @@ const Layout = observer(() => {
     },
     {
       name: 'selectMapPopup',
-      trigger: storePopup.selectMap,
+      trigger: storePopup.selectMapStatus,
       nodeRef: mapNodeRef,
       children: <PopupFormMap />,
       classNames: 'popup',
@@ -47,7 +47,7 @@ const Layout = observer(() => {
     },
     {
       name: 'selectPointsPopup',
-      trigger: storePopup.selectPoints,
+      trigger: storePopup.selectPointsStatus,
       nodeRef: pointsNodeRef,
       children: <PopupFormPoints />,
       classNames: 'popup',
@@ -55,7 +55,7 @@ const Layout = observer(() => {
     },
     {
       name: 'windowConfirm',
-      trigger: storePopup.windowConfirm,
+      trigger: storePopup.windowConfirmStatus,
       nodeRef: windowConfirmNodeRef,
       children: <WindowConfirm />,
       classNames: 'popup',

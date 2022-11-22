@@ -9,7 +9,7 @@ interface IWindowHeaderFormProps {
   title: string;
   textSaveButton?: string;
   textCloseButton?: string;
-  saveEvent: TMouseButtonEventHandler;
+  saveEvent?: TMouseButtonEventHandler;
   closeEvent: TMouseButtonEventHandler;
 }
 
@@ -26,11 +26,14 @@ const WindowHeaderForm: FC<IWindowHeaderFormProps> = observer(
         title={title}
         classes='window-header--form'
       >
-        <Button
-          classes='button--window-header'
-          text={textSaveButton}
-          clickHandler={saveEvent}
-        />
+        {saveEvent && (
+          <Button
+            classes='button--window-header'
+            text={textSaveButton}
+            clickHandler={saveEvent}
+          />
+        )}
+
         <Button
           classes='button--window-header'
           text={textCloseButton}

@@ -7,88 +7,101 @@ export class StorePopup {
     makeAutoObservable(this, {});
   }
 
+  private static doActionAfterHide(actionAfterHide?: () => void) {
+    if (actionAfterHide) {
+      setTimeout(() => {
+        actionAfterHide();
+      }, 200);
+    }
+  }
+
   /*
     ProductForm
    */
-  private _productForm: boolean = false;
+  private productForm: boolean = false;
 
-  public get productForm() {
-    return this._productForm;
+  public get productFormStatus() {
+    return this.productForm;
   }
 
   public showProductForm() {
-    this._productForm = true;
+    this.productForm = true;
   }
 
-  public hideProductForm() {
-    this._productForm = false;
+  public hideProductForm(actionAfterHide?: () => void) {
+    this.productForm = false;
+    StorePopup.doActionAfterHide(actionAfterHide);
   }
 
   /*
     TaskForm
    */
-  private _taskForm: boolean = false;
+  private taskForm: boolean = false;
 
-  public get taskForm() {
-    return this._taskForm;
+  public get taskFormStatus() {
+    return this.taskForm;
   }
 
   public showTaskForm() {
-    this._taskForm = true;
+    this.taskForm = true;
   }
 
-  public hideTaskForm() {
-    this._taskForm = false;
+  public hideTaskForm(actionAfterHide?: () => void) {
+    this.taskForm = false;
+    StorePopup.doActionAfterHide(actionAfterHide);
   }
 
   /*
     SelectMap
    */
-  private _selectMap: boolean = false;
+  private selectMap: boolean = false;
 
-  public get selectMap() {
-    return this._selectMap;
+  public get selectMapStatus() {
+    return this.selectMap;
   }
 
   public showSelectMap() {
-    this._selectMap = true;
+    this.selectMap = true;
   }
 
-  public hideSelectMap() {
-    this._selectMap = false;
+  public hideSelectMap(actionAfterHide?: () => void) {
+    this.selectMap = false;
+    StorePopup.doActionAfterHide(actionAfterHide);
   }
 
   /*
     SelectPoints
    */
-  private _selectPoints: boolean = false;
+  private selectPoints: boolean = false;
 
-  public get selectPoints() {
-    return this._selectPoints;
+  public get selectPointsStatus() {
+    return this.selectPoints;
   }
 
   public showSelectPoints() {
-    this._selectPoints = true;
+    this.selectPoints = true;
   }
 
-  public hideSelectPoints() {
-    this._selectPoints = false;
+  public hideSelectPoints(actionAfterHide?: () => void) {
+    this.selectPoints = false;
+    StorePopup.doActionAfterHide(actionAfterHide);
   }
 
   /*
     WindowConfirm
    */
-  private _windowConfirm: boolean = false;
+  private windowConfirm: boolean = false;
 
-  public get windowConfirm() {
-    return this._windowConfirm;
+  public get windowConfirmStatus() {
+    return this.windowConfirm;
   }
 
   public showWindowConfirm() {
-    this._windowConfirm = true;
+    this.windowConfirm = true;
   }
 
-  public hideWindowConfirm() {
-    this._windowConfirm = false;
+  public hideWindowConfirm(actionAfterHide?: () => void) {
+    this.windowConfirm = false;
+    StorePopup.doActionAfterHide(actionAfterHide);
   }
 }

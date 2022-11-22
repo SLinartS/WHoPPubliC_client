@@ -183,7 +183,6 @@ const PopupFormProduct: FC = observer(() => {
             </FormField>
           </FormBlock>
         </FormLayout>
-
         <FormLayout>
           <FormBlock
             titleText={`Точки ${isAcceptance ? 'приёмки' : 'отгрузки'}`}

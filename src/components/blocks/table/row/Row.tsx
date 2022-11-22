@@ -38,8 +38,7 @@ const TableRow: FC<IRowProps> = observer(
       storeWindow.confirm.setting = {
         title: `Удалить задачу ${columns.id}?`,
         firstButtonEvent: () => {
-          storePopup.hideWindowConfirm();
-          setTimeout(() => {
+          storePopup.hideWindowConfirm(() => {
             storeWindow.confirm.setting = {
               title: `Удалить связанные с задачей товары?`,
               firstButtonEvent: () => {
@@ -52,7 +51,7 @@ const TableRow: FC<IRowProps> = observer(
               },
             };
             storePopup.showWindowConfirm();
-          }, 200);
+          });
         },
         secondButtonEvent: () => {
           storePopup.hideWindowConfirm();
@@ -111,7 +110,6 @@ const TableRow: FC<IRowProps> = observer(
           </TableColumnShellButton>
         );
       }
-      console.log(key, value);
       if (key !== 'id' || isShowIdColumn) {
         return (
           <TableColumnShell key={key + value}>{tableColumn}</TableColumnShell>

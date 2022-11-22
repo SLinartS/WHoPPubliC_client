@@ -15,7 +15,7 @@ interface IPointsBlockProps {
 
 const PointsBlock: FC<IPointsBlockProps> = observer(
   ({ id, text, index, active }) => {
-    const { storeForm, storePoint } = useRootStore();
+    const { storeForm, storePoint, storePopup } = useRootStore();
     const pointBlockNode = useRef<HTMLDivElement>(null);
     const getPointCoordinates = useGetPointCoordinates();
     const checkIsAdded = useCheckIsAdded();
@@ -24,24 +24,26 @@ const PointsBlock: FC<IPointsBlockProps> = observer(
       if (pointBlockNode.current && storeForm.state.isSelectedPoint) {
         const { point } = getPointCoordinates(pointBlockNode.current);
 
-        if (point) {
-          let pointActive: boolean = false;
-          const pointIsAlreadyAdded = checkIsAdded(
-            storeForm.product.array.getFormArrays('points') as number[],
-            point.id,
-          );
-          if (pointIsAlreadyAdded) {
-            storeForm.product.array.removeFormArrays('points', point.id);
-          } else {
-            pointActive = true;
-            storeForm.product.array.addFormArrays('points', point.id);
+        storePopup.hideSelectPoints(() => {
+          if (point) {
+            const pointIsAlreadyAdded = checkIsAdded(
+              storeForm.product.array.getFormArrays('points') as number[],
+              point.id,
+            );
+            if (!pointIsAlreadyAdded) {
+              storeForm.product.array.clearArrays('points');
+              storePoint.utils.setAllPointsUnactive();
+
+              storeForm.product.array.addFormArrays('points', point.id);
+              storePoint.utils.setPointActive(
+                storeForm.state.currentTaskType,
+                point.index,
+                true,
+              );
+            }
           }
-          storePoint.utils.setPointActive(
-            storeForm.state.currentTaskType,
-            point.index,
-            pointActive,
-          );
-        }
+          storePopup.showProductForm();
+        });
       }
     }
 

@@ -36,7 +36,6 @@ const PopupFormPoints: FC = observer(() => {
             ? 'приёмки'
             : 'отгрузки'
         }`}
-        saveEvent={saveHandler}
         closeEvent={closeHandler}
         textCloseButton='Сбросить'
       />

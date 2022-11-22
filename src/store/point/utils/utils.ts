@@ -15,4 +15,15 @@ export class StorePointUtils {
   ) {
     this.root.storePoint.state.points[pointType][pointIndex].active = newStatus;
   }
+
+  public setAllPointsUnactive() {
+    const acceptancePoints = this.root.storePoint.state.points.acceptance;
+    const shipmentPoints = this.root.storePoint.state.points.shipment;
+    for (const point of acceptancePoints) {
+      point.active = false;
+    }
+    for (const point of shipmentPoints) {
+      point.active = false;
+    }
+  }
 }

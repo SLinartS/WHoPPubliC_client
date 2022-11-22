@@ -48,7 +48,6 @@ describe('FormProductListStore', () => {
     );
     root.storeForm.product.list.addProductToList();
     const { list } = root.storeForm.product.list;
-    console.log(list);
     expect(list[0]).not.toEqual(list[1]);
   });
 });
