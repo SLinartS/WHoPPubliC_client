@@ -122,4 +122,22 @@ export class StorePopupStatus {
     this.windowConfirm = false;
     StorePopupStatus.doActionAfterHide(actionAfterHide);
   }
+
+  /*
+    WindowInformation
+   */
+  private windowInformation: boolean = false;
+
+  public get windowInformationStatus() {
+    return this.windowInformation;
+  }
+
+  public showWindowInformation() {
+    this.windowInformation = true;
+  }
+
+  public hideWindowInformation(actionAfterHide?: () => void) {
+    this.windowInformation = false;
+    StorePopupStatus.doActionAfterHide(actionAfterHide);
+  }
 }

@@ -55,12 +55,6 @@ const PopupFormTask: FC = observer(() => {
     storePopup.status.hideTaskForm();
   }
 
-  function openProductFormHandler() {
-    storeCategory.fetch.categories();
-    storePopup.status.showProductForm();
-    storePopup.status.hideTaskForm();
-  }
-
   function openProductChoiseHandler() {
     storePopup.status.showSelectProducts();
     storePopup.status.hideTaskForm();
@@ -134,14 +128,6 @@ const PopupFormTask: FC = observer(() => {
         </FormLayout>
 
         <div className='popup--form-add-task__table-block'>
-          {isAcceptance && (
-            <Button
-              classes='button--add-task'
-              text='Добавить'
-              clickHandler={openProductFormHandler}
-            />
-          )}
-
           <Button
             classes='button--add-task'
             text='Выбрать'

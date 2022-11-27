@@ -4,5 +4,3 @@ export interface ITableObject {
   [index: string]: string | number;
   id: number;
 }
-
-export type TTableValuesType = 'products' | 'acceptanceTasks' | 'shipmentTasks';

@@ -11,6 +11,7 @@ import PopupSelectMap from '../popup/select/map/Map';
 import PopupSelectPoints from '../popup/select/points/Points';
 import PopupSelectProduct from '../popup/select/product/Product';
 import WindowConfirm from '../popup/window/confirm/Confirm';
+import WindowInformation from '../popup/window/information/Information';
 import Header from './header/Header';
 
 const Layout = observer(() => {
@@ -21,6 +22,7 @@ const Layout = observer(() => {
   const selectPointsNodeRef = useRef<HTMLDivElement>(null);
   const selectProductsNodeRef = useRef<HTMLDivElement>(null);
   const windowConfirmNodeRef = useRef<HTMLDivElement>(null);
+  const windowInformationNodeRef = useRef<HTMLDivElement>(null);
 
   const POPUPS: ITransitionCustomLayout[] = [
     {
@@ -68,6 +70,14 @@ const Layout = observer(() => {
       trigger: storePopup.status.windowConfirmStatus,
       nodeRef: windowConfirmNodeRef,
       children: <WindowConfirm />,
+      classNames: 'popup',
+      timeout: 200,
+    },
+    {
+      name: 'windowInformation',
+      trigger: storePopup.status.windowInformationStatus,
+      nodeRef: windowInformationNodeRef,
+      children: <WindowInformation />,
       classNames: 'popup',
       timeout: 200,
     },

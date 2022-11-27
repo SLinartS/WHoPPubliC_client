@@ -1,16 +1,17 @@
 import { observer } from 'mobx-react-lite';
 import { FC } from 'react';
 
+import { ISelectedItems } from '../../../store/table/selectedItem/type';
 import TableColumn from './column/Column';
 import TableColumnShell from './column/shell/Shell';
 import TableRow from './row/Row';
-import { ITableObject, TTableValuesType } from './type';
+import { ITableObject } from './type';
 
 interface ITableProps {
   data: ITableObject[];
   keyWord: keyof ITableObject;
   tableHeader: string[];
-  valuesType: TTableValuesType;
+  valuesType: keyof ISelectedItems;
   classes?: string;
   isShowIdColumn?: boolean;
 }

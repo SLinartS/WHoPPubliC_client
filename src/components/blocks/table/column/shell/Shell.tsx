@@ -4,8 +4,15 @@ import { FC } from 'react';
 import { ITableColumnShellProps } from './type';
 
 const TableColumnShell: FC<ITableColumnShellProps> = observer(
-  ({ children, classes }) => {
-    return <div className={`table__column-shell ${classes}`}>{children}</div>;
+  ({ children, classes, clickHandler }) => {
+    return (
+      <div
+        onClick={clickHandler}
+        className={`table__column-shell ${classes}`}
+      >
+        {children}
+      </div>
+    );
   },
 );
 

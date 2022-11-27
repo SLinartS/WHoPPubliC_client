@@ -24,10 +24,13 @@ import { StorePopupSelectUtils } from './popup/select/utils/utils';
 import { StorePopupSelectWarehousePoints } from './popup/select/warehousePoints/warehousePoints';
 import { StorePopupStatus } from './popup/status/status';
 import { StorePopupWindowConfirm } from './popup/window/confirm/confirm';
+import { StorePopupWindowInformation } from './popup/window/information/information';
 import { StoreProductAdd } from './product/add/add';
+import { StoreProductDelete } from './product/delete/delete';
 import { StoreProductFetch } from './product/fetch/fetch';
 import { StoreProduct } from './product/product';
 import { StoreProductStatus } from './product/status/status';
+import { StoreTableSelectedItem } from './table/selectedItem/selectedItem';
 import { StoreTaskAdd } from './task/add/add';
 import { StoreTaskDelete } from './task/delete/delete';
 import { StoreTaskFetch } from './task/fetch/fetch';
@@ -51,6 +54,7 @@ interface IStoreProduct {
   status: StoreProductStatus;
   fetch: StoreProductFetch;
   add: StoreProductAdd;
+  delete: StoreProductDelete;
 }
 
 interface IStoreMap {
@@ -94,7 +98,14 @@ interface IStorePopup {
       floorSpace: StorePopupSelectUtilsFloorSpace;
     };
   };
-  windows: { confirm: StorePopupWindowConfirm };
+  windows: {
+    confirm: StorePopupWindowConfirm;
+    information: StorePopupWindowInformation;
+  };
+}
+
+interface IStoreTable {
+  selectedItem: StoreTableSelectedItem;
 }
 
 class RootStore {
@@ -112,6 +123,8 @@ class RootStore {
 
   public storePopup: IStorePopup;
 
+  public storeTable: IStoreTable;
+
   private constructor() {
     this.storeTask = {
       state: new StoreTask(this),
@@ -126,6 +139,7 @@ class RootStore {
       status: new StoreProductStatus(this),
       fetch: new StoreProductFetch(this),
       add: new StoreProductAdd(this),
+      delete: new StoreProductDelete(this),
     };
 
     this.storeMap = {
@@ -169,7 +183,14 @@ class RootStore {
           floorSpace: new StorePopupSelectUtilsFloorSpace(this),
         },
       },
-      windows: { confirm: new StorePopupWindowConfirm(this) },
+      windows: {
+        confirm: new StorePopupWindowConfirm(this),
+        information: new StorePopupWindowInformation(this),
+      },
+    };
+
+    this.storeTable = {
+      selectedItem: new StoreTableSelectedItem(this),
     };
   }
 

@@ -10,7 +10,7 @@ const WindowConfirm: FC = observer(() => {
   return (
     <div className='popup popup--window popup--window-confirm'>
       <WindowHeader title={storePopup.windows.confirm.setting.title} />
-      <div className='popup--window-confirm__block'>
+      <div className='popup--window__block'>
         <Button
           classes='button__confirm'
           text='Да'

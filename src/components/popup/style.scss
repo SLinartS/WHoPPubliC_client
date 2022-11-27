@@ -19,12 +19,15 @@
     max-width: 51.2rem;
     height: 28.8rem;
 
-    &-confirm {
-      &__block {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-      }
+    &__block {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    &__text {
+      margin: 0 3rem;
+      text-align: center;
     }
   }
 

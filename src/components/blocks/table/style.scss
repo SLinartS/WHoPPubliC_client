@@ -29,6 +29,10 @@
         font-weight: bold;
         height: 5rem;
       }
+
+      &--selected {
+        background-color: $main-color;
+      }
     }
   }
 

@@ -18,6 +18,14 @@
       margin: 0;
     }
   }
+
+  &__section-button {
+    width: 60%;
+    display: grid;
+    justify-items: center;
+    grid-template-columns: repeat(3, 1fr);
+    column-gap: 2rem;
+  }
 }
 
 .table--products {

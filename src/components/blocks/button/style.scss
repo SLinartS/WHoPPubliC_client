@@ -12,6 +12,7 @@
   cursor: pointer;
   background: $second-color 50%;
   transition: all 0.1s ease-in-out;
+  width: fit-content;
 
   &:hover {
     background: $second-color--hover;
@@ -21,8 +22,19 @@
     background: $second-color--active;
   }
 
+  &--tasks {
+    margin: 2rem 0 0;
+    font-size: 2rem;
+    padding: 1rem 1rem;
+  }
+
+  &--products {
+    margin: 2rem 0 0;
+    font-size: 2rem;
+    padding: 1rem 2rem;
+  }
+
   &--add-task {
-    width: fit-content;
     margin: 2rem 0;
   }
 

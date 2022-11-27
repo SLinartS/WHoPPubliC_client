@@ -9,3 +9,5 @@ export type TChangeFieldHandler = ChangeEventHandler<
 >;
 
 export type TMouseButtonEventHandler = MouseEventHandler<HTMLButtonElement>;
+
+export type TMouseDivEventHandler = MouseEventHandler<HTMLDivElement>;

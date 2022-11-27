@@ -43,17 +43,21 @@
     overflow-y: scroll;
   }
 
+  &__section-button {
+    width: 80%;
+    display: grid;
+    justify-items: center;
+    grid-template-columns: repeat(3, 1fr);
+    column-gap: 2rem;
+  }
+
   &__empty-text {
     margin: 5rem 0 0 0;
     font-size: 3rem;
   }
 }
 
-.button {
-  &--tasks {
-    margin: 2rem 0 0;
-  }
-}
+
 
 .table--tasks {
   margin: 2rem;

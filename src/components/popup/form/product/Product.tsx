@@ -27,18 +27,17 @@ const PopupFormProduct: FC = observer(() => {
 
   function closeHandler() {
     storePopup.status.hideProductForm();
-    storePopup.form.state.isDisplayDefaultErrors = false;
-    storePopup.status.showTaskForm();
-    storeCategory.fetch.categories();
+    storeProduct.fetch.products();
     storePopup.form.product.clearFormData();
   }
 
   function saveHandler() {
     if (!storePopup.form.utils.error.isProductErrors()) {
-      storePopup.form.productList.addProductToList();
-      storePopup.form.product.clearFormData();
-      storePopup.select.points.clearArray();
-      closeHandler();
+      storeProduct.add.products(() => {
+        storePopup.form.product.clearFormData();
+        storePopup.select.points.clearArray();
+        closeHandler();
+      });
     } else {
       storePopup.form.state.isDisplayDefaultErrors = true;
     }

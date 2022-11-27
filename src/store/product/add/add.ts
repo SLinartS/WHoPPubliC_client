@@ -14,19 +14,12 @@ export class StoreProductAdd {
   public *products(actionIfDone?: () => void) {
     try {
       const requestProductData: IRequestProductData = {
-        products: this.root.storePopup.form.productList.list,
+        formData: this.root.storePopup.form.product.formData,
+        pointId: this.root.storePopup.select.points.arrayValue[0],
         userId: '1',
       };
-      const response: AxiosResponse<IProductResponse> =
-        yield extendAxios.post<IProductResponse>(
-          'products',
-          requestProductData,
-        );
+      yield extendAxios.post<IProductResponse>('products', requestProductData);
 
-      this.root.storePopup.select.products.clearArray();
-      for (const productId of response.data.productIds) {
-        this.root.storePopup.select.products.addItem(productId);
-      }
       this.root.storeProduct.status.set('add', 'done');
       if (actionIfDone) {
         actionIfDone();

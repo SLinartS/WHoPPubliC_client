@@ -1,6 +1,7 @@
-import { IProductFormList } from '../../popup/form/productList/type';
+import { IProductFormDataFields } from '../../popup/form/product/type';
 
 export interface IRequestProductData {
-  products: IProductFormList[];
+  formData: IProductFormDataFields;
+  pointId: number;
   userId: '1';
 }

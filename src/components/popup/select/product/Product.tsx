@@ -11,7 +11,6 @@ const PopupSelectProduct: FC = observer(() => {
   function saveHandler() {}
 
   function closeHandler() {
-    storePopup.status.showTaskForm();
     storePopup.status.hideSelectProducts();
   }
 
