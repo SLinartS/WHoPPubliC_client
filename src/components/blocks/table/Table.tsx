@@ -13,18 +13,10 @@ interface ITableProps {
   tableHeader: string[];
   valuesType: keyof ISelectedItems;
   classes?: string;
-  isShowIdColumn?: boolean;
 }
 
 const Table: FC<ITableProps> = observer(
-  ({
-    data,
-    keyWord,
-    tableHeader,
-    valuesType,
-    classes,
-    isShowIdColumn = true,
-  }) => {
+  ({ data, keyWord, tableHeader, valuesType, classes }) => {
     return (
       <div
         className={`table ${classes}`}
@@ -44,9 +36,8 @@ const Table: FC<ITableProps> = observer(
         {data.map((columns) => (
           <TableRow
             valuesType={valuesType}
-            key={columns[keyWord]}
+            key={columns[keyWord] + String(columns.id)}
             columns={columns}
-            isShowIdColumn={isShowIdColumn}
           />
         ))}
       </div>

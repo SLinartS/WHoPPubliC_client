@@ -58,7 +58,7 @@ export class StorePopupFormUtilsError {
   }
 
   private isTaskArrayErrors(isCheckWarehousePoint: boolean) {
-    const { list } = this.root.storePopup.form.productList;
+    const list = this.root.storePopup.select.products.arrayValue;
     const { warehousePoints } = this.root.storePopup.select;
 
     if (warehousePoints.arrayErrors.length && isCheckWarehousePoint) {

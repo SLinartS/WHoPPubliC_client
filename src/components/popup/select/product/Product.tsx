@@ -6,9 +6,21 @@ import Table from '../../../blocks/table/Table';
 import WindowHeaderForm from '../../../blocks/windowHeader/form/Form';
 
 const PopupSelectProduct: FC = observer(() => {
-  const { storeProduct, storePopup } = useRootStore();
+  const { storeProduct, storePopup, storeTable } = useRootStore();
 
-  function saveHandler() {}
+  function saveHandler() {
+    if (storeTable.selectedItem.getItemId('products') === 0) {
+      storePopup.windows.information.setting = {
+        text: 'Выберите продукт для добавления',
+      };
+      storePopup.status.showWindowInformation();
+    } else {
+      storePopup.select.products.addProductToList();
+      storeTable.selectedItem.setItemId('products', 0);
+      storePopup.status.hideSelectProducts();
+      storePopup.status.showTaskForm();
+    }
+  }
 
   function closeHandler() {
     storePopup.status.hideSelectProducts();
@@ -29,9 +41,21 @@ const PopupSelectProduct: FC = observer(() => {
         textSaveButton='Добавить'
       />
       <Table
-        data={storeProduct.state.products.data}
-        keyWord='article'
-        tableHeader={storeProduct.state.products.tableHeader}
+        data={
+          storePopup.form.utils.utils.getFilteredProducts(
+            storePopup.form.utils.utils.getUnselectedProducts(),
+            ['article'],
+            ['Артикул'],
+          ).filteredProducts
+        }
+        keyWord='author'
+        tableHeader={
+          storePopup.form.utils.utils.getFilteredProducts(
+            storePopup.form.utils.utils.getUnselectedProducts(),
+            ['article'],
+            ['Артикул'],
+          ).filteredProductHeader
+        }
         valuesType='products'
         classes='table--add-task'
       />

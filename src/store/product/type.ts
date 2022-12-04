@@ -19,3 +19,7 @@ export interface IProductResponse {
   message: string;
   productIds: number[];
 }
+
+export interface IProductTypeValues extends ITableObject {
+  [key: string]: string | number;
+}

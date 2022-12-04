@@ -2,7 +2,7 @@ import { observer } from 'mobx-react-lite';
 import { FC, useEffect, useState } from 'react';
 
 import imagePlaceholder from '../../../../assets/images/placeholder.jpg';
-import { IProductFormFields } from '../../../../store/popup/form/productList/type';
+import { IProductFormFields } from '../../../../store/popup/form/product/type';
 import { TChangeFieldEvent } from '../../../../types/form/type';
 import { useRootStore } from '../../../../utils/RootStoreProvider/useRootStore';
 import Button from '../../../blocks/button/Button';

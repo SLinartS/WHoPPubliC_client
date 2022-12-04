@@ -3,12 +3,12 @@ import './style.scss';
 import { observer } from 'mobx-react-lite';
 import { FC, useEffect } from 'react';
 
+import { ISelectedItems } from '../../../store/table/selectedItem/type';
 import { useRootStore } from '../../../utils/RootStoreProvider/useRootStore';
 import Button from '../../blocks/button/Button';
 import Loader from '../../blocks/loader/Loader';
 import SearchField from '../../blocks/searchField/SearchField';
 import Table from '../../blocks/table/Table';
-import { ISelectedItems } from '../../../store/table/selectedItem/type';
 
 const Products: FC = observer(() => {
   const { storeProduct, storePopup, storeCategory, storeTable } =
@@ -21,20 +21,26 @@ const Products: FC = observer(() => {
 
   function deleteProduct(itemType: keyof ISelectedItems): void {
     const productId = storeTable.selectedItem.getItemId(itemType);
-
-    storePopup.windows.confirm.setting = {
-      title: `Удалить задачу Id:${productId}?`,
-      firstButtonEvent: () => {
-        storeProduct.delete.product(productId, () => {
-          storeProduct.fetch.products();
+    if (productId === 0) {
+      storePopup.windows.information.setting = {
+        text: 'Выберите строку, чтобы её удалить',
+      };
+      storePopup.status.showWindowInformation();
+    } else {
+      storePopup.windows.confirm.setting = {
+        title: `Удалить задачу Id:${productId}?`,
+        firstButtonEvent: () => {
+          storeProduct.delete.product(productId, () => {
+            storeProduct.fetch.products();
+            storePopup.status.hideWindowConfirm();
+          });
+        },
+        secondButtonEvent: () => {
           storePopup.status.hideWindowConfirm();
-        });
-      },
-      secondButtonEvent: () => {
-        storePopup.status.hideWindowConfirm();
-      },
-    };
-    storePopup.status.showWindowConfirm();
+        },
+      };
+      storePopup.status.showWindowConfirm();
+    }
   }
 
   function deleteHandler(itemType: keyof ISelectedItems) {

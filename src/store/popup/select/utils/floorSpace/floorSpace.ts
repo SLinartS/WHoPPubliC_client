@@ -38,8 +38,10 @@ export class StorePopupSelectUtilsFloorSpace {
 
   public getOccupiedSpace(): number {
     let occepiedSpace = 0;
-    for (const product of this.root.storePopup.form.productList.list) {
-      occepiedSpace += Number(product.fields.number.value);
+    const productListData =
+      this.root.storePopup.select.products.getProductListData();
+    for (const product of productListData) {
+      occepiedSpace += Number(product.number);
     }
     return occepiedSpace;
   }

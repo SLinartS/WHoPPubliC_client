@@ -10,6 +10,7 @@
   row-gap: 0.5rem;
   font-size: 1.6rem;
   position: relative;
+  margin: 0 10rem;
 
   &__column {
     margin: 0;
@@ -44,6 +45,10 @@
 
   &--map {
     margin: 2rem;
+  }
+
+  &--add-task {
+    margin-top: 2rem;
   }
 }
 

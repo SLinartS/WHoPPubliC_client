@@ -1,6 +1,7 @@
 import { makeAutoObservable, toJS } from 'mobx';
 
 import deepCopy from '../../../../utils/deepCopy/deepCopy';
+import { IProduct } from '../../../product/type';
 import RootStore from '../../../root';
 import { TArrayOrErrorType } from '../../../type';
 import { INITIAL_ARRAY_VALUE } from '../../form/config';
@@ -24,19 +25,30 @@ export class StorePopupSelectProducts {
     this.array.errors = newError;
   }
 
-  public addItem(ItemId: number) {
-    this.array.value.push(ItemId);
+  public getProductListData(): IProduct[] {
+    const productList = this.array.value;
+    const productListData: IProduct[] =
+      this.root.storeProduct.state.products.data.filter((product) =>
+        productList.includes(product.id),
+      );
+    return productListData;
+  }
+
+  public addProductToList() {
+    this.array.value.push(
+      this.root.storeTable.selectedItem.getItemId('products'),
+    );
 
     this.root.storePopup.select.utils.utils.checkErrorsExist('products');
   }
 
-  public removeItem(itemId: number) {
+  public removeProductFromList(itemId: number) {
     this.array.value = this.array.value.filter((id) => id !== itemId);
 
     this.root.storePopup.select.utils.utils.checkErrorsExist('products');
   }
 
-  public clearArray() {
+  public clearProductList() {
     this.array = INITIAL_ARRAY_VALUE;
   }
 }

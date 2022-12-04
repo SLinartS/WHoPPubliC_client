@@ -10,53 +10,46 @@ import { ITableObject } from '../type';
 interface IRowProps {
   columns: ITableObject;
   valuesType: keyof ISelectedItems;
-  isShowIdColumn: boolean;
 }
 
-const TableRow: FC<IRowProps> = observer(
-  ({ columns, valuesType, isShowIdColumn }) => {
-    const { storeTable } = useRootStore();
+const TableRow: FC<IRowProps> = observer(({ columns, valuesType }) => {
+  const { storeTable } = useRootStore();
 
-    function selectHandler() {
-      storeTable.selectedItem.setItemId(valuesType, columns.id);
+  function selectHandler() {
+    storeTable.selectedItem.setItemId(valuesType, columns.id);
+  }
+
+  function checkIsSelected() {
+    if (storeTable.selectedItem.getItemId(valuesType) === columns.id) {
+      return 'table__column-shell--selected';
     }
+    return '';
+  }
 
-    function checkIsSelected() {
-      if (storeTable.selectedItem.getItemId(valuesType) === columns.id) {
-        return 'table__column-shell--selected';
-      }
-      return '';
-    }
-
-    function displayTableColumnShell(
-      key: string,
-      value: any,
-    ): ReactNode | null {
-      if (key !== 'id' || isShowIdColumn) {
-        return (
-          <TableColumnShell
-            key={key + value}
-            classes={checkIsSelected()}
-            clickHandler={selectHandler}
-          >
-            <TableColumn
-              key={key + value}
-              text={value}
-            />
-          </TableColumnShell>
-        );
-      }
-      return null;
-    }
-
+  function displayTableColumnShell(key: string, value: any): ReactNode | null {
     return (
-      <>
-        {Object.entries(columns).map(([key, value]) =>
-          displayTableColumnShell(key, value),
-        )}
-      </>
+      <TableColumnShell
+        key={key + value}
+        classes={checkIsSelected()}
+        clickHandler={selectHandler}
+      >
+        <TableColumn
+          key={key + value}
+          text={value}
+        />
+      </TableColumnShell>
     );
-  },
-);
+
+    return null;
+  }
+
+  return (
+    <>
+      {Object.entries(columns).map(([key, value]) =>
+        displayTableColumnShell(key, value),
+      )}
+    </>
+  );
+});
 
 export default TableRow;

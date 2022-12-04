@@ -12,7 +12,7 @@ export class StorePopupSelectUtils {
     selectTitle: 'points' | 'warehousePoints' | 'products',
   ) {
     const validator = new FormArrayValidator(
-      this.root.storePopup.select[selectTitle].arrayValue,
+      this.root.storePopup.select[selectTitle].arrayErrors,
     ).notEmpty();
     if (validator.errors) {
       this.root.storePopup.select[selectTitle].arrayErrors = validator.errors;

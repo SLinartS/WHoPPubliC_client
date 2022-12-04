@@ -39,29 +39,36 @@ const Tasks: FC = observer(() => {
   function deleteTaskShell(taskType: keyof ISelectedItems): void {
     const taskId = storeTable.selectedItem.getItemId(taskType);
 
-    storePopup.windows.confirm.setting = {
-      title: `Удалить задачу Id:${taskId}?`,
-      firstButtonEvent: () => {
-        storePopup.status.hideWindowConfirm(() => {
-          storePopup.windows.confirm.setting = {
-            title: `Удалить связанные с задачей товары?`,
-            firstButtonEvent: () => {
-              deleteTask(taskType, taskId, true);
-              storePopup.status.hideWindowConfirm();
-            },
-            secondButtonEvent: () => {
-              deleteTask(taskType, taskId, false);
-              storePopup.status.hideWindowConfirm();
-            },
-          };
-          storePopup.status.showWindowConfirm();
-        });
-      },
-      secondButtonEvent: () => {
-        storePopup.status.hideWindowConfirm();
-      },
-    };
-    storePopup.status.showWindowConfirm();
+    if (taskId === 0) {
+      storePopup.windows.information.setting = {
+        text: 'Выберите строку, чтобы её удалить',
+      };
+      storePopup.status.showWindowInformation();
+    } else {
+      storePopup.windows.confirm.setting = {
+        title: `Удалить задачу Id:${taskId}?`,
+        firstButtonEvent: () => {
+          storePopup.status.hideWindowConfirm(() => {
+            storePopup.windows.confirm.setting = {
+              title: `Удалить связанные с задачей товары?`,
+              firstButtonEvent: () => {
+                deleteTask(taskType, taskId, true);
+                storePopup.status.hideWindowConfirm();
+              },
+              secondButtonEvent: () => {
+                deleteTask(taskType, taskId, false);
+                storePopup.status.hideWindowConfirm();
+              },
+            };
+            storePopup.status.showWindowConfirm();
+          });
+        },
+        secondButtonEvent: () => {
+          storePopup.status.hideWindowConfirm();
+        },
+      };
+      storePopup.status.showWindowConfirm();
+    }
   }
 
   function deleteHandler(itemType: keyof ISelectedItems) {

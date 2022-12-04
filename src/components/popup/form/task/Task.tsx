@@ -1,7 +1,6 @@
 import { observer } from 'mobx-react-lite';
 import { FC, useEffect, useState } from 'react';
 
-import useGetProductListForTable from '../../../../hooks/mapAndPoint/useGetProductListForTable';
 import { ITaskFormFields } from '../../../../store/popup/form/task/type';
 import { TChangeFieldEvent } from '../../../../types/form/type';
 import { useRootStore } from '../../../../utils/RootStoreProvider/useRootStore';
@@ -16,9 +15,7 @@ import WindowHeaderForm from '../../../blocks/windowHeader/form/Form';
 
 const PopupFormTask: FC = observer(() => {
   const [isAcceptance, setIsAcceptance] = useState<boolean>(true);
-  const { storePopup, storeProduct, storeTask, storeCategory } = useRootStore();
-
-  const getProductListForTable = useGetProductListForTable();
+  const { storePopup, storeTask } = useRootStore();
 
   function changeFieldHandler(
     e: TChangeFieldEvent,
@@ -39,11 +36,9 @@ const PopupFormTask: FC = observer(() => {
 
   function saveHandler() {
     if (!storePopup.form.utils.error.isTaskErrors(isAcceptance)) {
-      storeProduct.add.products(() => {
-        storeTask.add.task(() => {
-          storePopup.form.task.clearFormData();
-          closeHandler();
-        });
+      storeTask.add.task(() => {
+        storePopup.form.task.clearFormData();
+        closeHandler();
       });
     } else {
       storePopup.form.state.isDisplayDefaultErrors = true;
@@ -55,7 +50,7 @@ const PopupFormTask: FC = observer(() => {
     storePopup.status.hideTaskForm();
   }
 
-  function openProductChoiseHandler() {
+  function openSelectProductHandler() {
     storePopup.status.showSelectProducts();
     storePopup.status.hideTaskForm();
   }
@@ -128,20 +123,38 @@ const PopupFormTask: FC = observer(() => {
         </FormLayout>
 
         <div className='popup--form-add-task__table-block'>
-          <Button
-            classes='button--add-task'
-            text='Выбрать'
-            clickHandler={openProductChoiseHandler}
-          />
+          <div className='popup--form-add-task__button-block'>
+            <Button
+              classes='button--add-task'
+              text='Выбрать'
+              clickHandler={openSelectProductHandler}
+            />
+            <Button
+              classes='button--add-task'
+              text='Убрать'
+              clickHandler={openSelectProductHandler}
+            />
+          </div>
 
-          {storePopup.form.productList.list.length > 0 ? (
+          {storePopup.select.products.getProductListData().length > 0 ? (
             <Table
-              data={getProductListForTable().data}
+              data={
+                storePopup.form.utils.utils.getFilteredProducts(
+                  storePopup.select.products.getProductListData(),
+                  [],
+                  [],
+                ).filteredProducts
+              }
               keyWord='article'
-              tableHeader={getProductListForTable().tableHeader}
+              tableHeader={
+                storePopup.form.utils.utils.getFilteredProducts(
+                  storePopup.select.products.getProductListData(),
+                  [],
+                  [],
+                ).filteredProductHeader
+              }
               valuesType='products'
               classes='table--add-task'
-              isShowIdColumn={false}
             />
           ) : (
             <div className='popup--form-add-task__absence-product'>

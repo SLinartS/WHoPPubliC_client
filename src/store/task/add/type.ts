@@ -8,6 +8,6 @@ export interface IRequestTaskData {
     dateStart: TValueOrErrorType;
     dateEnd: TValueOrErrorType;
   };
-  products: number[];
-  warehousePoints: number[];
+  productIds: number[];
+  warehousePointIds: number[];
 }

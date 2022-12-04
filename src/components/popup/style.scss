@@ -125,6 +125,12 @@
         align-items: center;
       }
 
+      &__button-block {
+        display: flex;
+        width: 60%;
+        justify-content: space-around;
+      }
+
       &__absence-product {
         font-size: 2.8rem;
         margin: 5rem 0 0;

@@ -13,7 +13,6 @@ import { StorePointStatus } from './point/status/status';
 import { StorePointUtils } from './point/utils/utils';
 import { StorePopupForm } from './popup/form/form';
 import { StorePopupFormProduct } from './popup/form/product/product';
-import { StorePopupFormProductList } from './popup/form/productList/list';
 import { StorePopupFormTask } from './popup/form/task/task';
 import { StorePopupFormUtilsError } from './popup/form/utils/error/error';
 import { StorePopupFormUtils } from './popup/form/utils/utils';
@@ -82,7 +81,6 @@ interface IStorePopup {
   form: {
     product: StorePopupFormProduct;
     task: StorePopupFormTask;
-    productList: StorePopupFormProductList;
     utils: {
       utils: StorePopupFormUtils;
       error: StorePopupFormUtilsError;
@@ -167,7 +165,6 @@ class RootStore {
       form: {
         product: new StorePopupFormProduct(this),
         task: new StorePopupFormTask(this),
-        productList: new StorePopupFormProductList(this),
         utils: {
           utils: new StorePopupFormUtils(this),
           error: new StorePopupFormUtilsError(this),
