@@ -10,6 +10,7 @@ export class StoreProduct {
 
   private _products: TProductsData = {
     data: [],
+    serviceInformation: [],
     tableHeader: [],
   };
 
@@ -23,6 +24,7 @@ export class StoreProduct {
 
   private _productsOfTask: TProductsData = {
     data: [],
+    serviceInformation: [],
     tableHeader: [],
   };
 

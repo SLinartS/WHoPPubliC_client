@@ -1,6 +1,10 @@
 import { makeAutoObservable } from 'mobx';
 
-import { IProduct, IProductTypeValues } from '../../../product/type';
+import {
+  IProduct,
+  IProductTypeValues,
+  IServiceProductInformation,
+} from '../../../product/type';
 import RootStore from '../../../root';
 
 export class StorePopupFormUtils {
@@ -57,14 +61,27 @@ export class StorePopupFormUtils {
   }
 
   public getUnselectedProducts() {
-    const unselectedProducts: IProduct[] = [];
-    for (const product of this.root.storeProduct.state.products.data) {
-      if (
-        !this.root.storePopup.select.products.arrayValue.includes(product.id)
-      ) {
-        unselectedProducts.push(product);
-      }
-    }
+    let unselectedProducts: IProduct[] =
+      this.root.storeProduct.state.products.data.filter(
+        (product) =>
+          !this.root.storePopup.select.products.arrayValue.includes(product.id),
+      );
+    unselectedProducts = this.getProductsWithoutLinkToTask(unselectedProducts);
     return unselectedProducts;
+  }
+
+  private getProductsWithoutLinkToTask(
+    unselectedProducts: IProduct[],
+  ): IProduct[] {
+    const idsProductsWithoutLinkToTask: number[] =
+      this.root.storeProduct.state.products.serviceInformation
+        .filter((product) => product.isLinkedToTask === false)
+        .map((product) => product.productId);
+
+    const productsWithoutLinkToTask: IProduct[] = unselectedProducts.filter(
+      ($product) => idsProductsWithoutLinkToTask.includes($product.id),
+    );
+
+    return productsWithoutLinkToTask;
   }
 }

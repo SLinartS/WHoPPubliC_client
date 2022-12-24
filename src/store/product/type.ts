@@ -3,6 +3,7 @@ import { ITableObject } from '../../components/blocks/table/type';
 export interface TProductsData {
   data: IProduct[];
   tableHeader: string[];
+  serviceInformation: IServiceProductInformation[];
 }
 
 export interface IProduct extends ITableObject {
@@ -13,6 +14,12 @@ export interface IProduct extends ITableObject {
   category: string;
   number: number;
   printDate: string;
+}
+
+export interface IServiceProductInformation {
+  productId: number;
+  isLinkedToTask: boolean;
+  taskId: number;
 }
 
 export interface IProductResponse {
