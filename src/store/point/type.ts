@@ -6,5 +6,4 @@ export interface IPoints {
 export interface IPoint {
   id: number;
   title: string;
-  active: boolean;
 }

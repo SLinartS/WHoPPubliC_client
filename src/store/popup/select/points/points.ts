@@ -30,6 +30,13 @@ export class StorePopupSelectPoints {
     this.root.storePopup.select.utils.utils.checkErrorsExist('points');
   }
 
+  public checkIsAdded(itemId: number) {
+    if (this.array.value.includes(itemId)) {
+      return true;
+    }
+    return false;
+  }
+
   public removeItem(itemId: number) {
     this.array.value = this.array.value.filter((id) => id !== itemId);
 

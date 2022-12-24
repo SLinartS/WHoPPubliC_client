@@ -33,7 +33,6 @@ const Points: FC<IPointsProps> = observer(({ pointsType, classes }) => {
           id={point.id}
           text={point.title}
           index={index}
-          active={point.active}
         />,
       );
     });

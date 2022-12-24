@@ -25,7 +25,6 @@ export class StorePopupFormUtils {
     this.root.storePopup.select.warehousePoints.clearArray();
     this.root.storePopup.select.products.clearProductList();
     this.root.storePopup.form.task.clearFormData();
-    this.root.storePopup.select.utils.floorSpace.clearFreeSpace();
     this.root.storeProduct.status.set('add', 'pending');
     this.root.storeProduct.status.set('fetch', 'pending');
     this.root.storePoint.status.set('fetch', 'pending');

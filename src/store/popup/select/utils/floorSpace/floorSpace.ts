@@ -7,30 +7,28 @@ export class StorePopupSelectUtilsFloorSpace {
     makeAutoObservable(this, {});
   }
 
-  private _freeSpace: number = 0;
+  private getFreeSpace() {
+    const selectedWarehousePoints =
+      this.root.storePopup.select.warehousePoints.arrayValue;
+    let freeSpace = 0;
 
-  public get freeSpace() {
-    return this._freeSpace;
-  }
+    this.root.storeMap.state.map.forEach((zone) => {
+      zone.sections.forEach((section) => {
+        section.blocks.forEach((block) => {
+          block.floors.forEach((floor) => {
+            if (selectedWarehousePoints.includes(floor.id)) {
+              freeSpace += floor.freeSpace;
+            }
+          });
+        });
+      });
+    });
 
-  public set freeSpace(newSpace: number) {
-    this._freeSpace = newSpace;
-  }
-
-  public changeFreeSpace(isAdd: boolean, space: number) {
-    if (isAdd) {
-      this._freeSpace += space;
-    } else {
-      this._freeSpace -= space;
-    }
-  }
-
-  public clearFreeSpace() {
-    this._freeSpace = 0;
+    return freeSpace;
   }
 
   public isEnoughFreeSpace() {
-    if (this.getOccupiedSpace() < this._freeSpace) {
+    if (this.getOccupiedSpace() < this.getFreeSpace()) {
       return true;
     }
     return false;

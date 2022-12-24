@@ -1,5 +1,5 @@
 import { observer } from 'mobx-react-lite';
-import { FC, useEffect, useState } from 'react';
+import { FC, useCallback, useEffect, useState } from 'react';
 
 import { useRootStore } from '../../../../utils/RootStoreProvider/useRootStore';
 import Loader from '../../../blocks/loader/Loader';
@@ -27,13 +27,17 @@ const PopupSelectMap: FC = observer(() => {
     storePopup.form.state.isSelectedMap = true;
   }, []);
 
+  const isEnoughFreeSpace = useCallback(() => {
+    return storePopup.select.utils.floorSpace.isEnoughFreeSpace();
+  }, [storePopup.select.warehousePoints.arrayValue.length]);
+
   useEffect(() => {
     let backgroundColor: string = '#d35f48';
-    if (storePopup.select.utils.floorSpace.isEnoughFreeSpace()) {
+    if (isEnoughFreeSpace()) {
       backgroundColor = '#7fa89c';
     }
     setBackground(backgroundColor);
-  }, [storePopup.select.utils.floorSpace.isEnoughFreeSpace()]);
+  }, [isEnoughFreeSpace]);
 
   useEffect(() => {
     if (storeMap.status.get('fetch') === 'pending') {
