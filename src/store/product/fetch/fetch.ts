@@ -20,15 +20,4 @@ export class StoreProductFetch {
       this.root.storeProduct.status.set('fetch', 'error');
     }
   }
-
-  public *productsOfTask(taskTitle: string) {
-    try {
-      const response: AxiosResponse<TProductsData> =
-        yield extendAxios.get<TProductsData>(`products/${taskTitle}`);
-      this.root.storeProduct.state.productsOfTask = response.data;
-      this.root.storeProduct.status.set('fetchOfTask', 'done');
-    } catch (error) {
-      this.root.storeProduct.status.set('fetchOfTask', 'error');
-    }
-  }
 }
