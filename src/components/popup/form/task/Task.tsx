@@ -15,7 +15,7 @@ import WindowHeaderForm from '../../../blocks/windowHeader/form/Form';
 
 const PopupFormTask: FC = observer(() => {
   const [isAcceptance, setIsAcceptance] = useState<boolean>(true);
-  const { storePopup, storeTask } = useRootStore();
+  const { storePopup, storeTask, storeProduct } = useRootStore();
 
   function changeFieldHandler(
     e: TChangeFieldEvent,
@@ -64,6 +64,10 @@ const PopupFormTask: FC = observer(() => {
       setIsAcceptance(true);
     } else {
       setIsAcceptance(false);
+    }
+
+    if (storeProduct.status.get('fetch') === 'pending') {
+      storeProduct.fetch.products();
     }
   }, [storePopup.form.state.currentTaskType]);
 

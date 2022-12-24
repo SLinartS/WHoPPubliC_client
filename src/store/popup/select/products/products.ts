@@ -34,6 +34,11 @@ export class StorePopupSelectProducts {
     return productListData;
   }
 
+  public setProductList(productIds: number[]) {
+    this.array.value = productIds;
+    this.root.storePopup.select.utils.utils.checkErrorsExist('products');
+  }
+
   public addProductToList() {
     this.array.value.push(
       this.root.storeTable.selectedItem.getItemId('products'),

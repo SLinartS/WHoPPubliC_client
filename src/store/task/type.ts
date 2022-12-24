@@ -7,6 +7,12 @@ export interface ITasks {
   tableHeader: string[];
 }
 
+export interface IOneTask {
+  taskInfo: ITask;
+  productIds: number[];
+  warehousePointIds: number[];
+}
+
 export interface ITask extends ITableObject {
   id: number;
   article: string;

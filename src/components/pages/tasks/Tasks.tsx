@@ -35,6 +35,20 @@ const Tasks: FC = observer(() => {
       }
     });
   }
+  function changeTask(taskType: keyof ISelectedItems): void {
+    const taskId = storeTable.selectedItem.getItemId(taskType);
+
+    if (taskId === 0) {
+      storePopup.windows.information.setting = {
+        text: 'Выберите строку, чтобы её изменить',
+      };
+      storePopup.status.showWindowInformation();
+    } else {
+      storeTask.fetch.oneTask(taskId, () => {
+        storePopup.status.showTaskForm();
+      });
+    }
+  }
 
   function deleteTaskShell(taskType: keyof ISelectedItems): void {
     const taskId = storeTable.selectedItem.getItemId(taskType);
@@ -134,7 +148,7 @@ const Tasks: FC = observer(() => {
           <Button
             classes='button--tasks'
             text='Изменить'
-            clickHandler={() => deleteHandler('acceptanceTasks')}
+            clickHandler={() => changeTask('acceptanceTasks')}
           />
           <Button
             classes='button--tasks'
@@ -162,7 +176,7 @@ const Tasks: FC = observer(() => {
           <Button
             classes='button--tasks'
             text='Изменить'
-            clickHandler={() => deleteHandler('shipmentTasks')}
+            clickHandler={() => changeTask('shipmentTasks')}
           />
           <Button
             classes='button--tasks'

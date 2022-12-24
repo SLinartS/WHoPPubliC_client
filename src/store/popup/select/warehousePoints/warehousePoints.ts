@@ -24,6 +24,19 @@ export class StorePopupSelectWarehousePoints {
     this.array.errors = newError;
   }
 
+  public setItems(Items: number[]) {
+    this.array.value = Items;
+
+    this.root.storePopup.select.utils.utils.checkErrorsExist('warehousePoints');
+  }
+
+  public checkIsAdded(itemId: number) {
+    if (this.array.value.includes(itemId)) {
+      return true;
+    }
+    return false;
+  }
+
   public addItem(ItemId: number) {
     this.array.value.push(ItemId);
 
