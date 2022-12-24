@@ -24,6 +24,7 @@ const PopupSelectProduct: FC = observer(() => {
 
   function closeHandler() {
     storePopup.status.hideSelectProducts();
+    storePopup.status.showTaskForm();
   }
 
   useEffect(() => {

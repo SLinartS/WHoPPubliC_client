@@ -55,6 +55,10 @@ const PopupFormTask: FC = observer(() => {
     storePopup.status.hideTaskForm();
   }
 
+  function removeProductFromList() {
+    storePopup.select.products.removeProductFromList();
+  }
+
   useEffect(() => {
     if (storePopup.form.state.currentTaskType === 'acceptance') {
       setIsAcceptance(true);
@@ -132,7 +136,7 @@ const PopupFormTask: FC = observer(() => {
             <Button
               classes='button--add-task'
               text='Убрать'
-              clickHandler={openSelectProductHandler}
+              clickHandler={removeProductFromList}
             />
           </div>
 
