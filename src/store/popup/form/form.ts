@@ -1,11 +1,21 @@
 import { makeAutoObservable } from 'mobx';
 
 import RootStore from '../../root';
-import { TTaskType } from '../../type';
+import { TActionTaskType, TTaskType } from '../../type';
 
 export class StorePopupForm {
   constructor(private readonly root: RootStore) {
     makeAutoObservable(this, {});
+  }
+
+  private _taskActionType: TActionTaskType = 'create';
+
+  public get taskActionType() {
+    return this._taskActionType;
+  }
+
+  public set taskActionType(newType: TActionTaskType) {
+    this._taskActionType = newType;
   }
 
   private _isDisplayDefaultErrors: boolean = false;

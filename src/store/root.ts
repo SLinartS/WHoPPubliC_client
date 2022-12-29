@@ -35,6 +35,7 @@ import { StoreTaskDelete } from './task/delete/delete';
 import { StoreTaskFetch } from './task/fetch/fetch';
 import { StoreTaskStatus } from './task/status/status';
 import { StoreTask } from './task/task';
+import { StoreTaskUpdate } from './task/update/update';
 
 configure({
   enforceActions: 'always',
@@ -45,6 +46,7 @@ interface IStoreTask {
   status: StoreTaskStatus;
   fetch: StoreTaskFetch;
   add: StoreTaskAdd;
+  update: StoreTaskUpdate;
   delete: StoreTaskDelete;
 }
 
@@ -129,6 +131,7 @@ class RootStore {
       status: new StoreTaskStatus(this),
       fetch: new StoreTaskFetch(this),
       add: new StoreTaskAdd(this),
+      update: new StoreTaskUpdate(this),
       delete: new StoreTaskDelete(this),
     };
 

@@ -2,4 +2,5 @@ export type TTaskStatus =
   | 'fetchAcceptance'
   | 'fetchShipment'
   | 'delete'
-  | 'add';
+  | 'add'
+  | 'update';

@@ -35,11 +35,24 @@ const PopupFormTask: FC = observer(() => {
   }
 
   function saveHandler() {
+    const { taskActionType } = storePopup.form.state;
+
     if (!storePopup.form.utils.error.isTaskErrors(isAcceptance)) {
-      storeTask.add.task(() => {
-        storePopup.form.task.clearFormData();
-        closeHandler();
-      });
+      switch (taskActionType) {
+        case 'create':
+          storeTask.add.task(() => {
+            storePopup.form.task.clearFormData();
+            closeHandler();
+          });
+          break;
+        case 'change':
+          storeTask.update.task(() => {
+            storePopup.form.task.clearFormData();
+            closeHandler();
+          });
+          break;
+        default:
+      }
     } else {
       storePopup.form.state.isDisplayDefaultErrors = true;
     }

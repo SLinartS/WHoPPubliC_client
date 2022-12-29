@@ -1,16 +1,10 @@
+import { TValueOrErrorType } from '../../../type';
+
 export interface ITaskFormDataFields {
-  article: {
-    value: string;
-    errors: string[];
-  };
-  dateStart: {
-    value: string;
-    errors: string[];
-  };
-  dateEnd: {
-    value: string;
-    errors: string[];
-  };
+  id: TValueOrErrorType;
+  article: TValueOrErrorType;
+  dateStart: TValueOrErrorType;
+  dateEnd: TValueOrErrorType;
 }
 
 export interface ITaskFormFields {

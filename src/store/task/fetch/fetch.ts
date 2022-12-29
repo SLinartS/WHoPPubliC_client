@@ -18,6 +18,7 @@ export class StoreTaskFetch {
       const { taskInfo } = response.data;
       const { storePopup } = this.root;
 
+      storePopup.form.task.setFormField('id', String(taskId));
       storePopup.form.task.setFormField('article', taskInfo.article);
       storePopup.form.task.setFormField('dateEnd', taskInfo.dateEnd);
       storePopup.form.task.setFormField('dateStart', taskInfo.dateStart);

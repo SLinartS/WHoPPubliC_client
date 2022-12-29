@@ -12,6 +12,7 @@ export class StorePopupFormTask {
   }
 
   private readonly initialFormData: ITaskFormDataFields = {
+    id: INITIAL_VALUE,
     article: INITIAL_VALUE,
     dateStart: INITIAL_VALUE,
     dateEnd: INITIAL_VALUE,

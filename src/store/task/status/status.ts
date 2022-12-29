@@ -17,6 +17,8 @@ export class StoreTaskStatus {
 
   private add: TStatus = 'pending';
 
+  private update: TStatus = 'pending';
+
   public get(title: TTaskStatus) {
     return this[title];
   }

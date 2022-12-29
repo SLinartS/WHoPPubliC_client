@@ -16,6 +16,7 @@ const Tasks: FC = observer(() => {
   const { storeTask, storePopup, storeTable } = useRootStore();
 
   function showAddTaskWindowHandler(taskType: TTaskType) {
+    storePopup.form.state.taskActionType = 'create';
     storePopup.form.state.currentTaskType = taskType;
     storePopup.status.showTaskForm();
   }
@@ -36,6 +37,7 @@ const Tasks: FC = observer(() => {
     });
   }
   function changeTask(taskType: keyof ISelectedItems): void {
+    storePopup.form.state.taskActionType = 'change';
     const taskId = storeTable.selectedItem.getItemId(taskType);
 
     if (taskId === 0) {
