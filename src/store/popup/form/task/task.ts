@@ -40,11 +40,11 @@ export class StorePopupFormTask {
         break;
 
       case 'dateStart':
-        validator.notEmpty().dateFormat('yyyy-MM-dd');
+        validator.notEmpty().dateFormat('yyyy-MM-dd HH:mm:ss');
         break;
 
       case 'dateEnd':
-        validator.notEmpty().dateFormat('yyyy-MM-dd');
+        validator.notEmpty().dateFormat('yyyy-MM-dd HH:mm:ss');
         break;
 
       default:

@@ -18,7 +18,7 @@ export class StoreTaskFetch {
       const { taskInfo } = response.data;
       const { storePopup } = this.root;
 
-      storePopup.form.task.setFormField('id', String(taskId));
+      storePopup.form.task.setFormField('id', String(taskInfo.id));
       storePopup.form.task.setFormField('article', taskInfo.article);
       storePopup.form.task.setFormField('dateEnd', taskInfo.dateEnd);
       storePopup.form.task.setFormField('dateStart', taskInfo.dateStart);
@@ -31,9 +31,9 @@ export class StoreTaskFetch {
         actionIfDone();
       }
 
-      this.root.storeTask.status.set('fetchAcceptance', 'done');
+      this.root.storeTask.status.set('fetchOne', 'done');
     } catch (error) {
-      this.root.storeTask.status.set('fetchAcceptance', 'error');
+      this.root.storeTask.status.set('fetchOne', 'error');
     }
   }
 

@@ -13,6 +13,8 @@ export class StoreTaskStatus {
 
   private fetchShipment: TStatus = 'pending';
 
+  private fetchOne: TStatus = 'pending';
+
   private delete: TStatus = 'pending';
 
   private add: TStatus = 'pending';
