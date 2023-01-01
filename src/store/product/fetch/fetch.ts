@@ -2,12 +2,42 @@ import { AxiosResponse } from 'axios';
 import { makeAutoObservable } from 'mobx';
 
 import extendAxios from '../../../utils/extendAxios';
+import { IProductFormDataFields } from '../../popup/form/product/type';
 import RootStore from '../../root';
-import { TProductsData } from '../type';
+import { IOneProduct, TProductsData } from '../type';
 
 export class StoreProductFetch {
   constructor(private readonly root: RootStore) {
     makeAutoObservable(this, {});
+  }
+
+  public *oneProduct(productId: number, actionIfDone?: () => void) {
+    try {
+      const response: AxiosResponse<IOneProduct> =
+        yield extendAxios.get<IOneProduct>(`productinfo/${productId}`);
+
+      const { productInfo } = response.data;
+      const { storePopup } = this.root;
+
+      Object.entries(productInfo).forEach(([key, element]) => {
+        if (key !== 'categoryTitle') {
+          const typedKey = key as keyof IProductFormDataFields;
+          storePopup.form.product.setFormField(typedKey, String(element));
+        }
+      });
+
+      storePopup.select.points.clearArray();
+      storePopup.select.points.addItem(response.data.pointId);
+
+      if (actionIfDone) {
+        actionIfDone();
+      }
+
+      this.root.storeProduct.status.set('fetchOne', 'done');
+    } catch (error) {
+      console.log(error);
+      this.root.storeProduct.status.set('fetchOne', 'error');
+    }
   }
 
   public *products() {

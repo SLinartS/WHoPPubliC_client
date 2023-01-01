@@ -15,6 +15,7 @@ const Products: FC = observer(() => {
     useRootStore();
 
   function openProductFormHandler() {
+    storePopup.form.state.formActionType = 'create';
     storeCategory.fetch.categories();
     storePopup.status.showProductForm();
   }
@@ -40,6 +41,21 @@ const Products: FC = observer(() => {
         },
       };
       storePopup.status.showWindowConfirm();
+    }
+  }
+  function changeProduct(): void {
+    storePopup.form.state.formActionType = 'change';
+    const productId = storeTable.selectedItem.getItemId('products');
+
+    if (productId === 0) {
+      storePopup.windows.information.setting = {
+        text: 'Выберите строку, чтобы её изменить',
+      };
+      storePopup.status.showWindowInformation();
+    } else {
+      storeProduct.fetch.oneProduct(productId, () => {
+        storePopup.status.showProductForm();
+      });
     }
   }
 
@@ -73,7 +89,7 @@ const Products: FC = observer(() => {
         <Button
           classes='button--products'
           text='Изменить'
-          clickHandler={() => deleteHandler('products')}
+          clickHandler={() => changeProduct()}
         />
         <Button
           classes='button--products'

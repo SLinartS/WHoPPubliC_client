@@ -12,6 +12,7 @@ export class StorePopupFormProduct {
   }
 
   private readonly initialFormData: IProductFormDataFields = {
+    id: INITIAL_VALUE,
     article: INITIAL_VALUE,
     title: INITIAL_VALUE,
     author: INITIAL_VALUE,

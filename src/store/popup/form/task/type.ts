@@ -6,9 +6,3 @@ export interface ITaskFormDataFields {
   dateStart: TValueOrErrorType;
   dateEnd: TValueOrErrorType;
 }
-
-export interface ITaskFormFields {
-  article: string;
-  dateStart: string;
-  dateEnd: string;
-}

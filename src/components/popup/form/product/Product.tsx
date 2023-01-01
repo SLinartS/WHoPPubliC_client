@@ -2,7 +2,7 @@ import { observer } from 'mobx-react-lite';
 import { FC, useEffect, useState } from 'react';
 
 import imagePlaceholder from '../../../../assets/images/placeholder.jpg';
-import { IProductFormFields } from '../../../../store/popup/form/product/type';
+import { IProductFormDataFields } from '../../../../store/popup/form/product/type';
 import { TChangeFieldEvent } from '../../../../types/form/type';
 import { useRootStore } from '../../../../utils/RootStoreProvider/useRootStore';
 import Button from '../../../blocks/button/Button';
@@ -20,7 +20,7 @@ const PopupFormProduct: FC = observer(() => {
 
   function changeFieldHandler(
     e: TChangeFieldEvent,
-    fieldName: keyof IProductFormFields,
+    fieldName: keyof IProductFormDataFields,
   ) {
     storePopup.form.product.setFormField(fieldName, e.target.value);
   }
@@ -32,12 +32,25 @@ const PopupFormProduct: FC = observer(() => {
   }
 
   function saveHandler() {
+    const { formActionType } = storePopup.form.state;
+
     if (!storePopup.form.utils.error.isProductErrors()) {
-      storeProduct.add.products(() => {
-        storePopup.form.product.clearFormData();
-        storePopup.select.points.clearArray();
-        closeHandler();
-      });
+      switch (formActionType) {
+        case 'create':
+          storeProduct.add.products(() => {
+            storePopup.form.product.clearFormData();
+            storePopup.select.points.clearArray();
+            closeHandler();
+          });
+          break;
+        case 'change':
+          storeProduct.update.product(() => {
+            storePopup.form.product.clearFormData();
+            closeHandler();
+          });
+          break;
+        default:
+      }
     } else {
       storePopup.form.state.isDisplayDefaultErrors = true;
     }
@@ -46,6 +59,7 @@ const PopupFormProduct: FC = observer(() => {
   function openSelectPointsHandler() {
     storePopup.status.showSelectPoints();
     storePopup.status.hideProductForm();
+    console.log(storePopup.select.points.arrayValue);
   }
 
   useEffect(() => {

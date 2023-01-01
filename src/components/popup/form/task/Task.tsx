@@ -1,7 +1,7 @@
 import { observer } from 'mobx-react-lite';
 import { FC, useEffect, useState } from 'react';
 
-import { ITaskFormFields } from '../../../../store/popup/form/task/type';
+import { ITaskFormDataFields } from '../../../../store/popup/form/task/type';
 import { TChangeFieldEvent } from '../../../../types/form/type';
 import { useRootStore } from '../../../../utils/RootStoreProvider/useRootStore';
 import Button from '../../../blocks/button/Button';
@@ -19,7 +19,7 @@ const PopupFormTask: FC = observer(() => {
 
   function changeFieldHandler(
     e: TChangeFieldEvent,
-    fieldName: keyof ITaskFormFields,
+    fieldName: keyof ITaskFormDataFields,
   ) {
     storePopup.form.task.setFormField(fieldName, e.target.value);
   }
@@ -35,10 +35,10 @@ const PopupFormTask: FC = observer(() => {
   }
 
   function saveHandler() {
-    const { taskActionType } = storePopup.form.state;
+    const { formActionType } = storePopup.form.state;
 
     if (!storePopup.form.utils.error.isTaskErrors(isAcceptance)) {
-      switch (taskActionType) {
+      switch (formActionType) {
         case 'create':
           storeTask.add.task(() => {
             storePopup.form.task.clearFormData();
