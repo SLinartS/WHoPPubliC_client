@@ -20,4 +20,18 @@ export class StoreStateInterface {
   public hidePopupNav() {
     this.isShowPopupNav = false;
   }
+
+  private isViewHeader: boolean = false;
+
+  public getIsViewHeader() {
+    return this.isViewHeader;
+  }
+
+  public showViewHeader() {
+    this.isViewHeader = true;
+  }
+
+  public hideViewHeader() {
+    this.isViewHeader = false;
+  }
 }

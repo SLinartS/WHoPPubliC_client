@@ -1,37 +1,66 @@
 import './style.scss';
 
 import { observer } from 'mobx-react-lite';
-import { FC } from 'react';
+import { FC, useEffect } from 'react';
 
 import appIcon from '../../../assets/icons/app.png';
 import Button from '../../blocks/button/Button';
+import { useRootStore } from '../../../utils/RootStoreProvider/useRootStore';
 
-const LoginPage: FC = observer(() => (
-  <main className='login'>
-    <div className='login__container'>
-      <img
-        className='login__app-icon'
-        src={appIcon}
-        alt='app icon'
-      />
-      <div className='login__inputs-block'>
-        <p className='login__label'>Логин</p>
-        <input
-          type='text'
-          className='login__input'
+import userIcon from '../../../assets/icons/user.svg';
+import passwordIcon from '../../../assets/icons/password.svg';
+import CheckMark from '../../blocks/checkMark/CheckMark';
+
+const LoginPage: FC = observer(() => {
+  const { storeState } = useRootStore();
+
+  useEffect(() => {}, []);
+
+  return (
+    <main className='login'>
+      <div className='login__container'>
+        <img
+          className='login__app-icon'
+          src={appIcon}
+          alt='app icon'
         />
-        <p className='login__label'>Пароль</p>
-        <input
-          type='text'
-          className='login__input'
-        />
+        <h3 className='login__title'>Авторизация</h3>
+        <div className='login__inputs-block'>
+          <img
+            className='login__icon'
+            src={userIcon}
+            alt='user'
+          />
+          <input
+            type='text'
+            className='login__input'
+            placeholder='Логин'
+          />
+          <img
+            className='login__icon'
+            src={passwordIcon}
+            alt='user'
+          />
+          <input
+            type='text'
+            className='login__input'
+            placeholder='Пароль'
+          />
+        </div>
+        <div className='login__low-block'>
+          <CheckMark
+            value='rememberMe'
+            text='Запомнить'
+            classes='check-mark--login'
+          />
+          <Button
+            classes='button--login'
+            text='Войти'
+          />
+        </div>
       </div>
-      <Button
-        classes='button--login'
-        text='Войти'
-      />
-    </div>
-  </main>
-));
+    </main>
+  );
+});
 
 export default LoginPage;

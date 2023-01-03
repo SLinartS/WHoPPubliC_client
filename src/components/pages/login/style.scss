@@ -1,68 +1,103 @@
-@use '/src/styles/global/colors.scss' as *;
-@use '/src/styles/global/variables.scss' as v;
+@use '/src/styles/global/colors.scss' as color;
+@use '/src/styles/global/variables.scss' as variable;
+@use '/src/styles/global/layouts/display.scss';
 
 .login {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: calc(100vh - v.$header-height--standart - 20rem);
+  @extend %flex-center;
+  height: calc(100vh - variable.$header-height--standart - 5rem);
 
   &__container {
-    display: flex;
+    @extend %flex-center;
     flex-direction: column;
-    align-items: center;
   }
 
   &__app-icon {
-    width: 20rem;
+    width: 32rem;
+    height: 29rem;
+    object-fit: cover;
+  }
+
+  &__title {
+    font-size: 4.8rem;
+    margin-bottom: 2rem;
+    font-weight: 500;
   }
 
   &__inputs-block {
-    width: 50rem;
-    margin: 2rem 11.5rem 3rem 0;
+    width: 40rem;
+    margin: 3rem;
     display: grid;
-    grid-template-columns: 1fr 4fr;
+    grid-template-columns: min-content 4fr;
     align-items: center;
-    row-gap: 3rem;
+    row-gap: 2.4rem;
   }
 
-  &__label {
-    font-size: 2.8rem;
-    margin: 0 2rem 0 0;
+  &__icon {
+    height: 5.4rem;
+    width: 5.4rem;
+    box-sizing: border-box;
+    margin: -0.2rem;
+    padding: 1rem;
+    border: 0.2rem solid color.$font-color--black;
+    border-radius: 0.5rem 0 0 0.5rem;
     text-align: right;
-    font-weight: bold;
+    font-weight: 700;
   }
 
   &__input {
-    height: 2.8rem;
+    height: 5.4rem;
+    width: 100%;
+    box-sizing: border-box;
     font-size: 2rem;
-    border: 0.1rem solid $font-color--black;
-    background-color: $font-color--white;
-    border-radius: 0.2rem;
+    padding-left: 1rem;
+    border: 0.2rem solid color.$font-color--black;
+    border-radius: 0 0.5rem 0.5rem 0;
+    background-color: color.$font-color--white;
 
     &:focus {
       outline: none;
-      border: 0.2rem solid $font-color--black;
+      border: 0.2rem solid color.$font-color--black;
     }
+  }
+
+  &__low-block {
+    width: calc(100% - 10rem);
+    @extend %flex-center;
+    justify-content: space-between;
   }
 }
 
 @media (max-width: 700px) {
   .login {
-    &__inputs-block {
-      margin: 1rem 10rem 2rem 0;
-      width: 40rem;
-      row-gap: 2rem;
+    &__app-icon {
+      width: 24rem;
+      height: 22rem;
     }
 
-    &__label {
-      font-size: 2.4rem;
-      margin: 0 1.5rem 0 0;
+    &__title {
+      font-size: 4rem;
+      margin-bottom: 0;
+    }
+
+    &__inputs-block {
+      width: 30rem;
+      margin: 3rem 2rem;
+    }
+
+    &__icon {
+      height: 4rem;
+      width: 4rem;
+      padding: 0.7rem;
     }
 
     &__input {
-      height: 2.4rem;
+      height: 4rem;
       font-size: 1.6rem;
+    }
+
+    &__low-block {
+      width: calc(100% - 6rem);
+      justify-content: space-between;
     }
   }
 }

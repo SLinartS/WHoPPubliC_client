@@ -30,6 +30,7 @@ import { StoreProductFetch } from './product/fetch/fetch';
 import { StoreProduct } from './product/product';
 import { StoreProductStatus } from './product/status/status';
 import { StoreProductUpdate } from './product/update/update';
+import { StoreStateCheckMark } from './state/checkMark';
 import { StoreStateInterface } from './state/interface';
 import { StoreTableSelectedItem } from './table/selectedItem/selectedItem';
 import { StoreTaskAdd } from './task/add/add';
@@ -45,6 +46,7 @@ configure({
 
 interface IStoreState {
   interface: StoreStateInterface;
+  checkMark: StoreStateCheckMark;
   // user: StoreStateUser;
 }
 
@@ -138,6 +140,7 @@ class RootStore {
   private constructor() {
     this.storeState = {
       interface: new StoreStateInterface(this),
+      checkMark: new StoreStateCheckMark(this),
     };
 
     this.storeTask = {

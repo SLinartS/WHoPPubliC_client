@@ -1,0 +1,39 @@
+@use '/src/styles/global/colors.scss' as color;
+@use '/src/styles/global/variables.scss' as variable;
+@use '/src/styles/global/layouts/display.scss';
+
+.check-mark {
+  @extend %flex-center;
+
+  &__checkbox {
+    position: absolute;
+    z-index: -1;
+    opacity: 0;
+  }
+
+  &__checkbox + label {
+    height: 2.4rem;
+    margin-right: 1rem;
+    width: 2.4rem;
+    border: 0.1rem solid color.$font-color--black;
+    border-radius: 0.5rem;
+  }
+
+  &__checkbox:checked + label {
+    background-image: url('../../../assets/icons/checked.svg');
+    background-repeat: no-repeat;
+    background-position: center center;
+  }
+
+  &__title {
+    font-size: 2rem;
+  }
+}
+
+@media (max-width: 700px) {
+  .check-mark {
+    &--login &__title{
+      font-size: 1.6rem;
+    }
+  }
+}
