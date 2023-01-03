@@ -1,10 +1,6 @@
 import { makeAutoObservable } from 'mobx';
 
-import {
-  IProduct,
-  IProductTypeValues,
-  IServiceProductInformation,
-} from '../../../product/type';
+import { IProduct, IProductTypeValues } from '../../../product/type';
 import RootStore from '../../../root';
 
 export class StorePopupFormUtils {

@@ -1,56 +1,54 @@
 import { observer } from 'mobx-react-lite';
-import { FC } from 'react';
+import { FC, MouseEvent } from 'react';
 import { Link } from 'react-router-dom';
 
-import appIcon from '../../../assets/images/app-icon.png';
-import HeaderLink from './link/HeaderLink';
-import { IHeaderLinkProps } from './link/type';
+import appIcon from '../../../assets/icons/app.png';
+import barsIcon from '../../../assets/icons/bars.svg';
+import { useRootStore } from '../../../utils/RootStoreProvider/useRootStore';
+import Nav from './nav/Nav';
 
 const Header: FC = observer(() => {
-  const HEADER_LINKS: IHeaderLinkProps[] = [
-    {
-      text: 'Карта',
-      to: 'map',
-    },
-    {
-      text: 'Задачи',
-      to: 'tasks',
-    },
-    {
-      text: 'Товары',
-      to: 'products',
-    },
-    {
-      text: 'Аккаунты',
-      to: 'accounts',
-    },
-  ];
+  const { storeState } = useRootStore();
+
+  function showPopupNavHandler(e: MouseEvent) {
+    e.stopPropagation();
+    storeState.interface.showPopupNav();
+  }
+
+  function hidePopupNavHandler() {
+    storeState.interface.hidePopupNav();
+  }
 
   return (
     <>
       {/* if (userIsAuth) */}
-      <header className='header'>
-        <Link to='/'>
-          <img
-            className='header__app-icon'
-            src={appIcon}
-            alt='app icon'
-          />
-        </Link>
-        <div className='header__user-info'>
-          <p className='header__user-name'>Евгений Иванович Петров</p>
-          <p className='header__user-role'>Администратор</p>
-        </div>
-        <nav className='header__nav'>
-          {HEADER_LINKS.map((link) => (
-            <HeaderLink
-              key={link.to + link.text}
-              text={link.text}
-              to={link.to}
+      <header
+        className='header'
+        onClick={hidePopupNavHandler}
+      >
+        <div className='header__info'>
+          <Link to='/'>
+            <img
+              className='header__icon'
+              src={appIcon}
+              alt='app icon'
             />
-          ))}
-        </nav>
+          </Link>
+          <div className='header__user'>
+            <p className='header__user-name'>Евгений Иванович Петров</p>
+            <p className='header__user-role'>Администратор</p>
+          </div>
+        </div>
+        <Nav />
+
+        <img
+          onClick={(e) => showPopupNavHandler(e)}
+          className='header__bar'
+          src={barsIcon}
+          alt='bar'
+        />
       </header>
+      {storeState.interface.getIsShowPopupNav() ? <Nav isPopup /> : ''}
 
       {/* {else}
 			<header className='header header--no-auth'>

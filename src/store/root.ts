@@ -30,6 +30,7 @@ import { StoreProductFetch } from './product/fetch/fetch';
 import { StoreProduct } from './product/product';
 import { StoreProductStatus } from './product/status/status';
 import { StoreProductUpdate } from './product/update/update';
+import { StoreStateInterface } from './state/interface';
 import { StoreTableSelectedItem } from './table/selectedItem/selectedItem';
 import { StoreTaskAdd } from './task/add/add';
 import { StoreTaskDelete } from './task/delete/delete';
@@ -41,6 +42,11 @@ import { StoreTaskUpdate } from './task/update/update';
 configure({
   enforceActions: 'always',
 });
+
+interface IStoreState {
+  interface: StoreStateInterface;
+  // user: StoreStateUser;
+}
 
 interface IStoreTask {
   state: StoreTask;
@@ -113,6 +119,8 @@ interface IStoreTable {
 class RootStore {
   private static instance: RootStore;
 
+  public storeState: IStoreState;
+
   public storeTask: IStoreTask;
 
   public storeProduct: IStoreProduct;
@@ -128,6 +136,10 @@ class RootStore {
   public storeTable: IStoreTable;
 
   private constructor() {
+    this.storeState = {
+      interface: new StoreStateInterface(this),
+    };
+
     this.storeTask = {
       state: new StoreTask(this),
       status: new StoreTaskStatus(this),

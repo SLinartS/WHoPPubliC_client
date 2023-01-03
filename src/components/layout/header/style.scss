@@ -1,168 +1,166 @@
-@use '/src/styles/global/colors.scss' as *;
+@use '/src/styles/global/colors.scss' as color;
 @use '/src/styles/global/variables.scss' as v;
+@use '/src/styles/global/layouts/display.scss';
 
 .header {
   height: v.$header-height--standart;
-  display: grid;
-  grid-template-columns: 10rem 31rem 1fr;
-  background-color: $main-color;
-  align-items: center;
-  justify-items: center;
+  @extend %flex-center;
+  justify-content: space-between;
+  background-color: color.$main-color;
+  color: color.$font-color--white;
 
-  &__app-icon {
+  &__info {
+    margin-left: 1rem;
+    @extend %flex-center;
+  }
+
+  &__icon {
     width: 8rem;
-    grid-column: 1/2;
-    grid-row: 1/2;
   }
 
   &__user {
-    &-info {
-      grid-column: 2/3;
-      grid-row: 1/2;
-      width: fit-content;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-    }
-
+    @extend %flex-center;
+    margin-left: 1rem;
+    flex-direction: column;
     &-name {
+      font-weight: bold;
       font-size: 2.4rem;
-      margin: 0;
     }
 
     &-role {
       font-size: 2rem;
-      margin: 1rem 0 0;
+      margin-top: 1rem;
     }
   }
 
   &__nav {
-    grid-column: 3/4;
-    grid-row: 1/2;
     height: 100%;
+    @extend %flex-center;
     justify-self: flex-end;
-    display: flex;
-    align-items: center;
 
-    &-link {
-      display: flex;
-      align-items: center;
+    &-block {
       height: 100%;
-      padding: 0 3rem;
-      color: $font-color--black;
-      font-weight: bold;
-      font-size: 2.4rem;
-      word-wrap: break-word;
-      text-align: center;
+      @extend %flex-center;
+      padding: 0 1.6rem;
       transition: all 0.1s ease-in-out;
-      user-select: none;
 
       &--active {
-        background: $main-color--active;
+        background: color.$main-color--active;
       }
 
       &:hover {
-        background: $main-color--hover;
+        background: color.$main-color--hover;
       }
 
       &:active {
-        background: $main-color--active;
+        background: color.$main-color--active;
       }
+    }
+
+    &-icon {
+      height: 3.2rem;
+      width: 3.2rem;
+    }
+
+    &-link {
+      margin-left: 1rem;
+      color: color.$font-color--white;
+      font-size: 2.4rem;
+      user-select: none;
     }
   }
 
+  &__bar {
+    width: 3rem;
+    height: 3rem;
+    margin-right: 2rem;
+    fill: color.$font-color--white;
+    background-color: transparent;
+    border: none;
+    display: none;
+  }
+
   &--no-auth {
-    display: flex;
-    align-items: center;
     justify-content: center;
   }
 
   &__app-name {
-    font-size: 3.6rem;
+    font-size: 4rem;
   }
 }
 
-@media (max-width: 1050px) {
-  .header__nav-link {
-    padding: 0 2rem;
-  }
-}
-
-@media (max-width: 950px) {
-  .header__nav-link {
-    padding: 0 1rem;
-    font-size: 2.4rem;
-  }
-
+@media (max-width: 1250px) {
   .header {
-    grid-template-columns: 10rem 30rem 1fr;
-
-    &__user {
-      &-name {
-        font-size: 2.4rem;
-        margin: 0;
-      }
-
-      &-role {
-        font-size: 2rem;
-        margin: 1rem 0 0;
-      }
-    }
-  }
-}
-
-@media (max-width: 900px) {
-  .header__nav-link {
-    padding: 0 1rem;
-    font-size: 2rem;
-  }
-
-  .header {
-    height: v.$header-height--mid;
-    grid-template-columns: 8rem 25rem 1fr;
-
-    &__app-icon {
+    &__icon {
       width: 7rem;
     }
 
+    &__nav {
+      &-block {
+        padding: 0 1rem;
+      }
+      &-link {
+        font-size: 2rem;
+      }
+
+      &-icon {
+        height: 2.8rem;
+        width: 2.8rem;
+      }
+    }
+
     &__user {
       &-name {
         font-size: 2rem;
-        margin: 0;
       }
 
       &-role {
         font-size: 1.6rem;
-        margin: 1rem 0 0;
       }
     }
   }
 }
 
-@media (max-width: 750px) {
-  .header__nav-link {
-    padding: 0 1rem;
-    font-size: 1.6rem;
-  }
-
+@media (max-width: 1030px) {
   .header {
-    height: v.$header-height--low;
-    grid-template-columns: 6rem 20rem 1fr;
+    height: v.$header-height--mid;
+    &__icon {
+      width: 6rem;
+    }
 
-    &__app-icon {
-      width: 5rem;
+    &__nav {
+      &-link {
+        font-size: 1.6rem;
+      }
+
+      &-icon {
+        height: 2rem;
+        width: 2rem;
+      }
     }
 
     &__user {
       &-name {
         font-size: 1.6rem;
-        margin: 0;
       }
 
       &-role {
         font-size: 1.2rem;
-        margin: 1rem 0 0;
       }
+    }
+  }
+}
+
+@media (max-width: 850px) {
+  .header {
+    height: v.$header-height--low;
+
+    &__nav {
+      display: none;
+    }
+
+    &__bar {
+      display: flex;
     }
   }
 }

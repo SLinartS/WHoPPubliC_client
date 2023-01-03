@@ -38,6 +38,7 @@
 @use '/src/components/layout/errorPage/style.scss' as *;
 // header
 @use '/src/components/layout/header/style.scss' as *;
+@use '/src/components/layout/header/popupStyle.scss' as *;
 
 /* POPUP */
 @use './../components/popup/style.scss' as *;

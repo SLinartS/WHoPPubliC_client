@@ -3,7 +3,7 @@ import './style.scss';
 import { observer } from 'mobx-react-lite';
 import { FC } from 'react';
 
-import appIcon from '../../../assets/images/app-icon.png';
+import appIcon from '../../../assets/icons/app.png';
 import Button from '../../blocks/button/Button';
 
 const LoginPage: FC = observer(() => (
