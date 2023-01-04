@@ -1,5 +1,5 @@
 import { observer } from 'mobx-react-lite';
-import { FC, useEffect, useState } from 'react';
+import { FC, useEffect } from 'react';
 
 import imagePlaceholder from '../../../../assets/images/placeholder.jpg';
 import { IProductFormDataFields } from '../../../../store/popup/form/product/type';
@@ -15,7 +15,6 @@ import FormLayout from '../../../blocks/form/layout/Layout';
 import WindowHeaderForm from '../../../blocks/windowHeader/form/Form';
 
 const PopupFormProduct: FC = observer(() => {
-  const [isAcceptance, setIsAcceptance] = useState<boolean>(true);
   const { storePopup, storeProduct, storeCategory } = useRootStore();
 
   function changeFieldHandler(
@@ -65,15 +64,8 @@ const PopupFormProduct: FC = observer(() => {
   useEffect(() => {
     storePopup.form.state.isDisplayDefaultErrors = false;
     storeProduct.status.set('add', 'pending');
+    storeCategory.fetch.categories();
   }, []);
-
-  useEffect(() => {
-    if (storePopup.form.state.currentTaskType === 'acceptance') {
-      setIsAcceptance(true);
-    } else {
-      setIsAcceptance(false);
-    }
-  }, [storePopup.form.state.currentTaskType]);
 
   return (
     <div className='popup popup--form popup--form-add-product'>
@@ -197,9 +189,7 @@ const PopupFormProduct: FC = observer(() => {
           </FormBlock>
         </FormLayout>
         <FormLayout>
-          <FormBlock
-            titleText={`Точки ${isAcceptance ? 'приёмки' : 'отгрузки'}`}
-          >
+          <FormBlock titleText='Точки'>
             <FormField errors={storePopup.select.points.arrayErrors}>
               <FormFieldPoint clickHandler={openSelectPointsHandler} />
             </FormField>

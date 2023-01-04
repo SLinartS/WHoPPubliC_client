@@ -9,12 +9,10 @@ import SearchField from '../../blocks/searchField/SearchField';
 import Table from '../../blocks/table/Table';
 
 const Products: FC = observer(() => {
-  const { storeProduct, storePopup, storeCategory, storeTable } =
-    useRootStore();
+  const { storeProduct, storePopup, storeTable } = useRootStore();
 
   function openProductFormHandler() {
     storePopup.form.state.formActionType = 'create';
-    storeCategory.fetch.categories();
     storePopup.status.showProductForm();
   }
 
