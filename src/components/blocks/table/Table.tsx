@@ -10,33 +10,34 @@ import { ITableObject } from './type';
 interface ITableProps {
   data: ITableObject[];
   keyWord: keyof ITableObject;
-  tableHeader: string[];
   valuesType: keyof ISelectedItems;
   classes?: string;
 }
 
 const Table: FC<ITableProps> = observer(
-  ({ data, keyWord, tableHeader, valuesType, classes }) => {
+  ({ data, keyWord, valuesType, classes }) => {
     return (
       <div
         className={`table ${classes}`}
-        style={{ gridTemplateColumns: `repeat(${tableHeader.length}, auto)` }}
+        style={{
+          gridTemplateColumns: `repeat(${Object.values(data[0]).length}, auto)`,
+        }}
       >
-        {tableHeader.map((text) => (
+        {Object.values(data[0]).map((element) => (
           <TableColumnShell
-            key={text}
+            key={element.value + String(Math.random())}
             classes='table__column-shell--header'
           >
             <TableColumn
-              key={text}
-              text={text}
+              key={element.value + String(Math.random())}
+              text={element.alias}
             />
           </TableColumnShell>
         ))}
         {data.map((columns) => (
           <TableRow
             valuesType={valuesType}
-            key={columns[keyWord] + String(columns.id)}
+            key={columns[keyWord].value + String(columns.id.value)}
             columns={columns}
           />
         ))}

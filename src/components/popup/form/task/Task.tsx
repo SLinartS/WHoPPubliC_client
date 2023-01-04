@@ -37,6 +37,10 @@ const PopupFormTask: FC = observer(() => {
   function saveHandler() {
     const { formActionType } = storePopup.form.state;
 
+    if (formActionType === 'create') {
+      storePopup.form.task.setFormField('id', '0');
+    }
+
     if (!storePopup.form.utils.error.isTaskErrors(isAcceptance)) {
       switch (formActionType) {
         case 'create':
@@ -163,17 +167,9 @@ const PopupFormTask: FC = observer(() => {
                 storePopup.form.utils.utils.getFilteredProducts(
                   storePopup.select.products.getProductListData(),
                   [],
-                  [],
                 ).filteredProducts
               }
               keyWord='article'
-              tableHeader={
-                storePopup.form.utils.utils.getFilteredProducts(
-                  storePopup.select.products.getProductListData(),
-                  [],
-                  [],
-                ).filteredProductHeader
-              }
               valuesType='products'
               classes='table--add-task'
             />

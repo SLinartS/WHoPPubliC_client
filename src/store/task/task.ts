@@ -8,7 +8,7 @@ export class StoreTask {
     makeAutoObservable(this, {});
   }
 
-  private _acceptanceList: ITasks = { data: [], tableHeader: [] };
+  private _acceptanceList: ITasks = { data: [] };
 
   public get acceptanceList() {
     return this._acceptanceList;
@@ -18,7 +18,7 @@ export class StoreTask {
     this._acceptanceList = newList;
   }
 
-  private _shipmentList: ITasks = { data: [], tableHeader: [] };
+  private _shipmentList: ITasks = { data: [] };
 
   public get shipmentList() {
     return this._shipmentList;

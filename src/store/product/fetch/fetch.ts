@@ -22,7 +22,7 @@ export class StoreProductFetch {
       Object.entries(productInfo).forEach(([key, element]) => {
         if (key !== 'categoryTitle') {
           const typedKey = key as keyof IProductFormDataFields;
-          storePopup.form.product.setFormField(typedKey, String(element));
+          storePopup.form.product.setFormField(typedKey, String(element.value));
         }
       });
 
@@ -35,7 +35,6 @@ export class StoreProductFetch {
 
       this.root.storeProduct.status.set('fetchOne', 'done');
     } catch (error) {
-      console.log(error);
       this.root.storeProduct.status.set('fetchOne', 'error');
     }
   }

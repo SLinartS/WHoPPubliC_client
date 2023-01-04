@@ -1,8 +1,8 @@
 import { ITableObject } from '../../components/blocks/table/type';
+import { IField } from '../type';
 
 export interface TProductsData {
   data: IProduct[];
-  tableHeader: string[];
   serviceInformation: IServiceProductInformation[];
 }
 
@@ -13,17 +13,17 @@ export interface IOneProduct {
 }
 
 export interface IProduct extends ITableObject {
-  id: number;
-  article: string;
-  title: string;
-  author: string;
-  yearOfPublication: string;
-  number: number;
-  printDate: string;
-  printingHouse: string;
-  publishingHouse: string;
-  categoryTitle: string;
-  categoryId: number;
+  id: IField<number>;
+  article: IField<string>;
+  title: IField<string>;
+  author: IField<string>;
+  yearOfPublication: IField<string>;
+  number: IField<number>;
+  printDate: IField<string>;
+  printingHouse: IField<string>;
+  publishingHouse: IField<string>;
+  categoryTitle: IField<string>;
+  categoryId: IField<number>;
 }
 
 export interface IServiceProductInformation {
@@ -35,8 +35,4 @@ export interface IServiceProductInformation {
 export interface IProductResponse {
   message: string;
   productIds: number[];
-}
-
-export interface IProductTypeValues extends ITableObject {
-  [key: string]: string | number;
 }

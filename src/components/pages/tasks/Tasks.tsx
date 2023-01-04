@@ -62,7 +62,6 @@ const Tasks: FC = observer(() => {
           <Table
             data={storeTask.state[listType].data}
             keyWord='article'
-            tableHeader={storeTask.state[listType].tableHeader}
             valuesType={valuesType}
             classes='table--tasks'
           />

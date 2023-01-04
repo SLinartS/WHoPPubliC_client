@@ -29,7 +29,7 @@ export class StorePopupSelectProducts {
     const productList = this.array.value;
     const productListData: IProduct[] =
       this.root.storeProduct.state.products.data.filter((product) =>
-        productList.includes(product.id),
+        productList.includes(product.id.value),
       );
     return productListData;
   }

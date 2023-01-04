@@ -1,6 +1,7 @@
 import { makeAutoObservable } from 'mobx';
+import { ITableObject } from '../../../../components/blocks/table/type';
 
-import { IProduct, IProductTypeValues } from '../../../product/type';
+import { IProduct } from '../../../product/type';
 import RootStore from '../../../root';
 
 export class StorePopupFormUtils {
@@ -32,11 +33,10 @@ export class StorePopupFormUtils {
   public getFilteredProducts(
     productArray: IProduct[],
     excludeColumns: Array<keyof IProduct>,
-    excludeColumnsHeader: string[],
   ) {
-    const filteredProducts: IProductTypeValues[] = [];
+    const filteredProducts: ITableObject[] = [];
     for (const product of productArray) {
-      let filteredColumns: IProductTypeValues = { id: product.id };
+      let filteredColumns: ITableObject = { id: product.id };
       for (const [key, column] of Object.entries(product)) {
         const typedKey: keyof IProduct = key;
         if (!excludeColumns.includes(typedKey) && key !== 'id') {
@@ -44,22 +44,22 @@ export class StorePopupFormUtils {
         }
       }
       filteredProducts.push(filteredColumns);
-      filteredColumns = { id: 0 };
+      filteredColumns = { id: { value: 0, alias: 'ID' } };
     }
 
-    const filteredProductHeader: string[] =
-      this.root.storeProduct.state.products.tableHeader.filter(
-        (columnHeader) => !excludeColumnsHeader.includes(columnHeader),
-      );
+    // !
+    console.log(this.root.storeAction.delete.deleteController);
 
-    return { filteredProducts, filteredProductHeader };
+    return { filteredProducts };
   }
 
   public getUnselectedProducts() {
     let unselectedProducts: IProduct[] =
       this.root.storeProduct.state.products.data.filter(
         (product) =>
-          !this.root.storePopup.select.products.arrayValue.includes(product.id),
+          !this.root.storePopup.select.products.arrayValue.includes(
+            product.id.value,
+          ),
       );
     unselectedProducts = this.getProductsWithoutLinkToTask(unselectedProducts);
     return unselectedProducts;
@@ -74,7 +74,7 @@ export class StorePopupFormUtils {
         .map((product) => product.productId);
 
     const productsWithoutLinkToTask: IProduct[] = unselectedProducts.filter(
-      ($product) => idsProductsWithoutLinkToTask.includes($product.id),
+      ($product) => idsProductsWithoutLinkToTask.includes($product.id.value),
     );
 
     return productsWithoutLinkToTask;

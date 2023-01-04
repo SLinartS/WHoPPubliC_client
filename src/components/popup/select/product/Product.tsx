@@ -46,17 +46,9 @@ const PopupSelectProduct: FC = observer(() => {
           storePopup.form.utils.utils.getFilteredProducts(
             storePopup.form.utils.utils.getUnselectedProducts(),
             ['article'],
-            ['Артикул'],
           ).filteredProducts
         }
         keyWord='author'
-        tableHeader={
-          storePopup.form.utils.utils.getFilteredProducts(
-            storePopup.form.utils.utils.getUnselectedProducts(),
-            ['article'],
-            ['Артикул'],
-          ).filteredProductHeader
-        }
         valuesType='products'
         classes='table--add-task'
       />

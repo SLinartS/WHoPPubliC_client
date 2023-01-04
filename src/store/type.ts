@@ -6,6 +6,11 @@ export type TValueOrErrorType = {
   errors: string[];
 };
 
+export interface IField<T> {
+  value: T;
+  alias: string;
+}
+
 export type TArrayOrErrorType = {
   value: number[];
   errors: string[];

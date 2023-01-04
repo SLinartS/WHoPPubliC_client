@@ -3,10 +3,14 @@ import { FC, useEffect } from 'react';
 
 import { ISelectedItems } from '../../../store/table/selectedItem/type';
 import { useRootStore } from '../../../utils/RootStoreProvider/useRootStore';
-import Button from '../../blocks/button/Button';
 import Loader from '../../blocks/loader/Loader';
 import SearchField from '../../blocks/searchField/SearchField';
 import Table from '../../blocks/table/Table';
+
+import addIcon from '../../../assets/icons/add.svg';
+import editIcon from '../../../assets/icons/edit.svg';
+import deleteIcon from '../../../assets/icons/delete.svg';
+import SelectTable from '../../blocks/selectTable/SelectTable';
 
 const Products: FC = observer(() => {
   const { storeProduct, storePopup, storeTable, storeAction } = useRootStore();
@@ -44,38 +48,44 @@ const Products: FC = observer(() => {
 
   return (
     <main className='products'>
-      <div className='products__title'>
-        <h3 className='products__title-text'>Список товаров</h3>
-      </div>
-      <SearchField />
       <div className='products__section-button'>
-        <Button
-          classes='button--products'
-          text='Добавить'
-          clickHandler={() => openProductFormHandler()}
+        <SearchField />
+        <img
+          className='products__icon'
+          src={addIcon}
+          alt='add'
+          onClick={openProductFormHandler}
         />
-        <Button
-          classes='button--products'
-          text='Изменить'
-          clickHandler={() => changeProduct()}
+        <img
+          className='products__icon'
+          src={editIcon}
+          alt='add'
+          onClick={changeProduct}
         />
-        <Button
-          classes='button--products'
-          text='Удалить'
-          clickHandler={() => deleteHandler('products')}
+        <img
+          className='products__icon'
+          src={deleteIcon}
+          alt='add'
+          onClick={() => deleteHandler('products')}
         />
       </div>
-      {storeProduct.status.get('fetch') === 'done' ? (
-        <Table
-          data={storeProduct.state.products.data}
-          keyWord='article'
-          tableHeader={storeProduct.state.products.tableHeader}
-          valuesType='products'
-          classes='table--products'
-        />
-      ) : (
-        <Loader />
-      )}
+      <div className='products__table'>
+        {storeProduct.status.get('fetch') === 'done' ? (
+          <Table
+            data={storeProduct.state.products.data}
+            keyWord='article'
+            valuesType='products'
+            classes='table--products'
+          />
+        ) : (
+          <Loader />
+        )}
+      </div>
+      <div className='products__select'>
+        {/* {Object.entries(storeProduct.state.products.data).map((item) => (
+          <SelectTable />
+        ))} */}
+      </div>
     </main>
   );
 });

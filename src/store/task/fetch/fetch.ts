@@ -18,10 +18,10 @@ export class StoreTaskFetch {
       const { taskInfo } = response.data;
       const { storePopup } = this.root;
 
-      storePopup.form.task.setFormField('id', String(taskInfo.id));
-      storePopup.form.task.setFormField('article', taskInfo.article);
-      storePopup.form.task.setFormField('dateEnd', taskInfo.dateEnd);
-      storePopup.form.task.setFormField('dateStart', taskInfo.dateStart);
+      storePopup.form.task.setFormField('id', String(taskInfo.id.value));
+      storePopup.form.task.setFormField('article', taskInfo.article.value);
+      storePopup.form.task.setFormField('dateEnd', taskInfo.dateEnd.value);
+      storePopup.form.task.setFormField('dateStart', taskInfo.dateStart.value);
       storePopup.select.products.setProductList(response.data.productIds);
       storePopup.select.warehousePoints.setItems(
         response.data.warehousePointIds,

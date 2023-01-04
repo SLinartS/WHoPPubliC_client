@@ -73,7 +73,7 @@ export class StoreActionDelete {
 
   private deleteProduct(productId: number): void {
     this.root.storePopup.windows.confirm.setting = {
-      title: `Удалить задачу Id:${productId}?`,
+      title: `Удалить товар Id:${productId}?`,
       firstButtonEvent: () => {
         this.root.storeProduct.delete.product(productId, () => {
           this.root.storeProduct.fetch.products();

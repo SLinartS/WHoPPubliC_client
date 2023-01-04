@@ -33,6 +33,9 @@ const PopupFormProduct: FC = observer(() => {
   function saveHandler() {
     const { formActionType } = storePopup.form.state;
 
+    if (formActionType === 'create') {
+      storePopup.form.product.setFormField('id', '0');
+    }
     if (!storePopup.form.utils.error.isProductErrors()) {
       switch (formActionType) {
         case 'create':
@@ -58,7 +61,6 @@ const PopupFormProduct: FC = observer(() => {
   function openSelectPointsHandler() {
     storePopup.status.showSelectPoints();
     storePopup.status.hideProductForm();
-    console.log(storePopup.select.points.arrayValue);
   }
 
   useEffect(() => {
@@ -198,7 +200,7 @@ const PopupFormProduct: FC = observer(() => {
         <div className='popup--form-add-product__photo-block'>
           <img
             src={imagePlaceholder}
-            alt=''
+            alt='product'
             className='popup--form-add-product__photo'
           />
           <p className='popup--form-add-product__photo-text'>

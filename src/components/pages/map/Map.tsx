@@ -22,7 +22,6 @@ const MapPage: FC = observer(() => {
   return (
     <main className='map'>
       <SearchField />
-      <p className='map__title'>Карта склада</p>
       <div className='map__container'>
         {storeMap.status.get('fetch') === 'done' ? <Map /> : <Loader />}
       </div>

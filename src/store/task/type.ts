@@ -1,10 +1,10 @@
 import { ITableObject } from '../../components/blocks/table/type';
+import { IField } from '../type';
 
 export type TTypeTaskStates = 'acceptanceList' | 'shipmentList';
 
 export interface ITasks {
   data: ITask[];
-  tableHeader: string[];
 }
 
 export interface IOneTask {
@@ -14,10 +14,10 @@ export interface IOneTask {
 }
 
 export interface ITask extends ITableObject {
-  id: number;
-  article: string;
-  deadlines: string;
-  dateStart: string;
-  dateEnd: string;
-  operatorLogin: string;
+  id: IField<number>;
+  article: IField<string>;
+  deadlines: IField<string>;
+  dateStart: IField<string>;
+  dateEnd: IField<string>;
+  operatorLogin: IField<string>;
 }
