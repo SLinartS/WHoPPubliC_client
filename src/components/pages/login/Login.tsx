@@ -1,19 +1,13 @@
-import './style.scss';
-
 import { observer } from 'mobx-react-lite';
 import { FC, useEffect } from 'react';
 
 import appIcon from '../../../assets/icons/app.png';
-import Button from '../../blocks/button/Button';
-import { useRootStore } from '../../../utils/RootStoreProvider/useRootStore';
-
-import userIcon from '../../../assets/icons/user.svg';
 import passwordIcon from '../../../assets/icons/password.svg';
+import userIcon from '../../../assets/icons/user.svg';
+import Button from '../../blocks/button/Button';
 import CheckMark from '../../blocks/checkMark/CheckMark';
 
 const LoginPage: FC = observer(() => {
-  const { storeState } = useRootStore();
-
   useEffect(() => {}, []);
 
   return (

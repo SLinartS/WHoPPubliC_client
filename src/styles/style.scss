@@ -11,6 +11,20 @@
 // MODIFICATIONS
 @use './global/modifications.scss';
 
+/* PAGES */
+// login
+@use '/src/components/pages/login/style.scss' as *;
+// main
+// @use '/src/components/pages/main/style.scss' as *;
+// map
+@use '/src/components/pages/map/style.scss' as *;
+// points
+@use '/src/components/pages/points/style.scss' as *;
+// products
+@use '/src/components/pages/products/style.scss' as *;
+// tasks
+@use '/src/components/pages/tasks/style.scss' as *;
+
 /* BLOCKS  */
 
 // button

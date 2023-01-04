@@ -3,7 +3,7 @@ import { FC, useEffect } from 'react';
 
 import { useRootStore } from '../../../../utils/RootStoreProvider/useRootStore';
 import Loader from '../../../blocks/loader/Loader';
-import Points from '../../../blocks/points/Points';
+import PointsMap from '../../../blocks/points/PointsMap';
 import WindowHeaderForm from '../../../blocks/windowHeader/form/Form';
 
 const PopupSelectPoints: FC = observer(() => {
@@ -35,7 +35,10 @@ const PopupSelectPoints: FC = observer(() => {
         textCloseButton='Сбросить'
       />
       {storePoint.status.get('fetch') === 'done' ? (
-        <Points pointsType={storePopup.form.state.currentTaskType} />
+        <PointsMap
+          pointsType={storePopup.form.state.currentTaskType}
+          classes='points-map--select-points'
+        />
       ) : (
         <Loader />
       )}

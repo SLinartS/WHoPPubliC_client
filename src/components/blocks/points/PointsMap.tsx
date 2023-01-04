@@ -5,12 +5,12 @@ import { TTaskType } from '../../../store/type';
 import { useRootStore } from '../../../utils/RootStoreProvider/useRootStore';
 import PointsBlock from './block/Block';
 
-interface IPointsProps {
+interface IPointsMapProps {
   pointsType: TTaskType;
   classes?: string;
 }
 
-const Points: FC<IPointsProps> = observer(({ pointsType, classes }) => {
+const PointsMap: FC<IPointsMapProps> = observer(({ pointsType, classes }) => {
   const { storePoint } = useRootStore();
   function displayPointsByTaskType(): ReactNode {
     const PointNodes: ReactNode[] = [];
@@ -47,4 +47,4 @@ const Points: FC<IPointsProps> = observer(({ pointsType, classes }) => {
   );
 });
 
-export default Points;
+export default PointsMap;

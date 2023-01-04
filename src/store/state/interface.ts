@@ -21,7 +21,7 @@ export class StoreStateInterface {
     this.isShowPopupNav = false;
   }
 
-  private isViewHeader: boolean = false;
+  private isViewHeader: boolean = true;
 
   public getIsViewHeader() {
     return this.isViewHeader;

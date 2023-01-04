@@ -4,10 +4,11 @@ div::-webkit-scrollbar {
   width: 20px;
 }
 div::-webkit-scrollbar-track {
-  background: $font-color--white;
+  background: $bg-color-grey;
+  border-radius: 1rem;
 }
 div::-webkit-scrollbar-thumb {
   background-color: $main-color;
-  border-radius: 0.5rem;
-  border: 0.3rem solid $font-color--white;
+  border-radius: 0.7rem;
+  border: 0.3rem solid $bg-color-grey;
 }

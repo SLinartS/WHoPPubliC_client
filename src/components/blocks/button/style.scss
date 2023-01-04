@@ -3,7 +3,7 @@
 .button {
   position: relative;
   border: none;
-  border-radius: 0.5rem;
+  border-radius: 1rem;
   font-size: 2.4rem;
   font-weight: 700;
   padding: 1rem 4rem;
@@ -23,13 +23,12 @@
   }
 
   &--tasks {
-    margin: 2rem 0 0;
+    margin: 2rem 0 0 0;
     font-size: 2rem;
     padding: 1rem 1rem;
   }
 
   &--products {
-    margin: 2rem 0 0;
     font-size: 2rem;
     padding: 1rem 2rem;
   }

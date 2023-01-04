@@ -35,12 +35,12 @@ const Point: FC<IPointProps> = observer(({ id }) => {
 
   useEffect(() => {
     const newStyle = {
-      background: 'transparent',
+      background: '#eaeaea',
     };
     if (checkIsAdded()) {
       newStyle.background = `#c15943`;
     } else {
-      newStyle.background = `transparent`;
+      newStyle.background = `#eaeaea`;
     }
     setStyles(newStyle);
   }, [checkIsAdded]);

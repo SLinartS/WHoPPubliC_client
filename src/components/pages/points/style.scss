@@ -1,0 +1,46 @@
+@use '/src/styles/global/colors.scss' as color;
+@use '/src/styles/global/variables.scss' as v;
+@use '/src/styles/global/layouts/display.scss';
+
+.points {
+  height: calc(100vh - v.$header-height--standart);
+  overflow: hidden;
+  @extend %grid-center;
+  align-items: flex-start;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: min-content min-content 1fr;
+
+  &__search {
+    grid-column: 1/3;
+  }
+
+  &__title {
+    grid-row: 2/3;
+    font-size: 3.2rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+  }
+}
+
+@media (max-width: 1030px) {
+  .points {
+    height: calc(100vh - v.$header-height--mid);
+    grid-template-columns: 1fr;
+    grid-template-rows: min-content min-content 1fr min-content 1fr;
+
+    &__search {
+      grid-column: unset;
+    }
+    &__title {
+      grid-row: unset;
+      font-size: 3.2rem;
+      font-weight: 700;
+    }
+  }
+}
+
+@media (max-width: 850px) {
+  .points {
+    height: calc(100vh - v.$header-height--low);
+  }
+}

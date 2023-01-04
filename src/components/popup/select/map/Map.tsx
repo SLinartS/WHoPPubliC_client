@@ -58,7 +58,7 @@ const PopupSelectMap: FC = observer(() => {
         style={{ background }}
       />
       {storeMap.status.get('fetch') === 'done' ? (
-        <Map classes='map--select-map' />
+        <Map classes='map-block--select-map' />
       ) : (
         <Loader />
       )}

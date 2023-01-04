@@ -23,9 +23,9 @@ const MapZone: FC<IMapZoneProps> = observer(
 
       if (tableHeigth && tableWidth) {
         if (tableHeigth > tableWidth) {
-          newZoneLetterFontSize = tableWidth / 13;
+          newZoneLetterFontSize = tableWidth / 20;
         } else {
-          newZoneLetterFontSize = tableHeigth / 13;
+          newZoneLetterFontSize = tableHeigth / 20;
         }
         setZoneLetterFontSize(newZoneLetterFontSize);
       }

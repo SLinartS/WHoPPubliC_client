@@ -5,6 +5,7 @@ import Layout from './components/layout/Layout';
 import Login from './components/pages/login/Login';
 import Main from './components/pages/main/Main';
 import Map from './components/pages/map/Map';
+import Points from './components/pages/points/Points';
 import Products from './components/pages/products/Products';
 import Tasks from './components/pages/tasks/Tasks';
 
@@ -21,6 +22,10 @@ const router = createBrowserRouter([
       {
         path: 'login',
         element: <Login />,
+      },
+      {
+        path: 'points',
+        element: <Points />,
       },
       {
         path: 'map',

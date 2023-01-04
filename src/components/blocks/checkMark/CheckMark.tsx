@@ -1,5 +1,6 @@
 import { observer } from 'mobx-react-lite';
 import { FC, useRef } from 'react';
+
 import { useRootStore } from '../../../utils/RootStoreProvider/useRootStore';
 
 interface ICheckMarkProps {

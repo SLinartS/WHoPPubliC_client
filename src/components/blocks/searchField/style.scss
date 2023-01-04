@@ -1,52 +1,40 @@
-@use '/src/styles/global/colors.scss' as *;
+@use '/src/styles/global/colors.scss' as color;
+@use '/src/styles/global/variables.scss' as v;
+@use '/src/styles/global/layouts/display.scss';
 
 .search-field {
-  display: flex;
-  align-items: center;
-  margin: 3rem 0 0;
+  @extend %flex-center;
+  margin: 3rem 0;
 
-  &__title {
+  &__icon {
+    height: 4rem;
+    width: 4rem;
     font-size: 2rem;
-    margin: 0 1rem 0 0;
+    margin-right: 2rem;
   }
 
   &__input {
-    width: 60rem;
-    height: 2rem;
-    font-size: 2rem;
-    border: 0.1rem solid $font-color--black;
-    border-radius: 0;
+    width: 90rem;
+    height: 5rem;
+    font-size: 2.4rem;
+    border: 0.1rem solid color.$font-color--black;
     margin: 0 2rem 0 0;
-    border-radius: 0.5rem;
+    padding-left: 1rem;
+    border-radius: 1rem;
+    box-sizing: border-box;
+    background: color.$font-color--white;
 
     &:focus {
       outline: none;
-      border: 0.2rem solid $font-color--black;
+      border: 0.2rem solid color.$font-color--black;
     }
   }
 }
 
-@media (max-width: 900px) {
+@media (max-width: 1030px) {
   .search-field {
     &__input {
-      width: 40rem;
-    }
-  }
-}
-
-@media (max-width: 700px) {
-  .search-field {
-    margin: 2rem 0 0;
-
-    &__title {
-      font-size: 1.6rem;
-      margin: 0 1rem 0 0;
-    }
-
-    &__input {
-      width: 35rem;
-      height: 1.6rem;
-      font-size: 1.6rem;
+      width: 45rem;
     }
   }
 }
