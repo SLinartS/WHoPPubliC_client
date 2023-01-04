@@ -11,7 +11,7 @@ import Loader from '../../blocks/loader/Loader';
 import Table from '../../blocks/table/Table';
 
 const Tasks: FC = observer(() => {
-  const { storeTask, storePopup, storeTable } = useRootStore();
+  const { storeTask, storePopup, storeTable, storeAction } = useRootStore();
 
   function showAddTaskWindowHandler(taskType: TTaskType) {
     storePopup.form.state.formActionType = 'create';
@@ -19,21 +19,6 @@ const Tasks: FC = observer(() => {
     storePopup.status.showTaskForm();
   }
 
-  function deleteTask(
-    taskType: keyof ISelectedItems,
-    taskId: number,
-    isDeleteProducts: boolean,
-  ): void {
-    storeTask.delete.task(taskId, isDeleteProducts, () => {
-      storePopup.status.hideWindowConfirm();
-      if (taskType === 'acceptanceTasks') {
-        storeTask.status.set('fetchAcceptance', 'pending');
-      }
-      if (taskType === 'shipmentTasks') {
-        storeTask.status.set('fetchShipment', 'pending');
-      }
-    });
-  }
   function changeTask(taskType: keyof ISelectedItems): void {
     storePopup.form.state.formActionType = 'change';
     const taskId = storeTable.selectedItem.getItemId(taskType);
@@ -50,51 +35,8 @@ const Tasks: FC = observer(() => {
     }
   }
 
-  function deleteTaskShell(taskType: keyof ISelectedItems): void {
-    const taskId = storeTable.selectedItem.getItemId(taskType);
-
-    if (taskId === 0) {
-      storePopup.windows.information.setting = {
-        text: 'Выберите строку, чтобы её удалить',
-      };
-      storePopup.status.showWindowInformation();
-    } else {
-      storePopup.windows.confirm.setting = {
-        title: `Удалить задачу Id:${taskId}?`,
-        firstButtonEvent: () => {
-          storePopup.status.hideWindowConfirm(() => {
-            storePopup.windows.confirm.setting = {
-              title: `Удалить связанные с задачей товары?`,
-              firstButtonEvent: () => {
-                deleteTask(taskType, taskId, true);
-                storePopup.status.hideWindowConfirm();
-              },
-              secondButtonEvent: () => {
-                deleteTask(taskType, taskId, false);
-                storePopup.status.hideWindowConfirm();
-              },
-            };
-            storePopup.status.showWindowConfirm();
-          });
-        },
-        secondButtonEvent: () => {
-          storePopup.status.hideWindowConfirm();
-        },
-      };
-      storePopup.status.showWindowConfirm();
-    }
-  }
-
   function deleteHandler(itemType: keyof ISelectedItems) {
-    switch (itemType) {
-      case 'acceptanceTasks':
-        deleteTaskShell('acceptanceTasks');
-        break;
-      case 'shipmentTasks':
-        deleteTaskShell('shipmentTasks');
-        break;
-      default:
-    }
+    storeAction.delete.deleteController(itemType);
   }
 
   useEffect(() => {

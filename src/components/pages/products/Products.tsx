@@ -9,36 +9,13 @@ import SearchField from '../../blocks/searchField/SearchField';
 import Table from '../../blocks/table/Table';
 
 const Products: FC = observer(() => {
-  const { storeProduct, storePopup, storeTable } = useRootStore();
+  const { storeProduct, storePopup, storeTable, storeAction } = useRootStore();
 
   function openProductFormHandler() {
     storePopup.form.state.formActionType = 'create';
     storePopup.status.showProductForm();
   }
 
-  function deleteProduct(itemType: keyof ISelectedItems): void {
-    const productId = storeTable.selectedItem.getItemId(itemType);
-    if (productId === 0) {
-      storePopup.windows.information.setting = {
-        text: 'Выберите строку, чтобы её удалить',
-      };
-      storePopup.status.showWindowInformation();
-    } else {
-      storePopup.windows.confirm.setting = {
-        title: `Удалить задачу Id:${productId}?`,
-        firstButtonEvent: () => {
-          storeProduct.delete.product(productId, () => {
-            storeProduct.fetch.products();
-            storePopup.status.hideWindowConfirm();
-          });
-        },
-        secondButtonEvent: () => {
-          storePopup.status.hideWindowConfirm();
-        },
-      };
-      storePopup.status.showWindowConfirm();
-    }
-  }
   function changeProduct(): void {
     storePopup.form.state.formActionType = 'change';
     const productId = storeTable.selectedItem.getItemId('products');
@@ -56,12 +33,7 @@ const Products: FC = observer(() => {
   }
 
   function deleteHandler(itemType: keyof ISelectedItems) {
-    switch (itemType) {
-      case 'products':
-        deleteProduct(itemType);
-        break;
-      default:
-    }
+    storeAction.delete.deleteController(itemType);
   }
 
   useEffect(() => {
