@@ -5,12 +5,13 @@ import searchIcon from '../../../assets/icons/search.svg';
 
 interface ISarchFieldProps {
   searchedItemType?: 'products' | 'tasks';
+  classes?: string;
 }
 
 const SearchField: FC<ISarchFieldProps> = observer(
-  ({ searchedItemType = 'products' }) => {
+  ({ searchedItemType = 'products', classes }) => {
     return (
-      <div className='search-field'>
+      <div className={`search-field ${classes}`}>
         <img
           src={searchIcon}
           className='search-field__icon'

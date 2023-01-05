@@ -1,16 +1,15 @@
 import { observer } from 'mobx-react-lite';
 import { FC, useEffect } from 'react';
 
+import addIcon from '../../../assets/icons/add.svg';
+import deleteIcon from '../../../assets/icons/delete.svg';
+import editIcon from '../../../assets/icons/edit.svg';
 import { ISelectedItems } from '../../../store/table/selectedItem/type';
 import { useRootStore } from '../../../utils/RootStoreProvider/useRootStore';
 import Loader from '../../blocks/loader/Loader';
 import SearchField from '../../blocks/searchField/SearchField';
-import Table from '../../blocks/table/Table';
-
-import addIcon from '../../../assets/icons/add.svg';
-import editIcon from '../../../assets/icons/edit.svg';
-import deleteIcon from '../../../assets/icons/delete.svg';
 import SelectTable from '../../blocks/selectTable/SelectTable';
+import Table from '../../blocks/table/Table';
 
 const Products: FC = observer(() => {
   const { storeProduct, storePopup, storeTable, storeAction } = useRootStore();
@@ -42,14 +41,19 @@ const Products: FC = observer(() => {
 
   useEffect(() => {
     if (storeProduct.status.get('fetch') === 'pending') {
-      storeProduct.fetch.products();
+      storeProduct.fetch.products(() => {
+        storeTable.utils.setDefaulMark(
+          'products',
+          storeProduct.state.products.data,
+        );
+      });
     }
   }, [storeProduct.status.get('fetch')]);
 
   return (
     <main className='products'>
       <div className='products__section-button'>
-        <SearchField />
+        <SearchField classes='search-field--products' />
         <img
           className='products__icon'
           src={addIcon}
@@ -76,15 +80,30 @@ const Products: FC = observer(() => {
             keyWord='article'
             valuesType='products'
             classes='table--products'
+            displayedColumns={storeTable.utils.getColumnsWithMark('products')}
           />
         ) : (
           <Loader />
         )}
       </div>
       <div className='products__select'>
-        {/* {Object.entries(storeProduct.state.products.data).map((item) => (
-          <SelectTable />
-        ))} */}
+        {storeProduct.status.get('fetch') === 'done' ? (
+          Object.entries(
+            storeProduct.state.products.data[
+              storeTable.selectedItem.getItemId('products') - 1
+            ],
+          ).map(([key, item]) => (
+            <SelectTable
+              key={key + item.value + item.alias}
+              checkMarkValue={key}
+              alias={item.alias}
+              value={String(item.value)}
+              mark='products'
+            />
+          ))
+        ) : (
+          <Loader />
+        )}
       </div>
     </main>
   );

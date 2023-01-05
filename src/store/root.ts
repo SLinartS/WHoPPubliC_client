@@ -34,6 +34,7 @@ import { StoreProductUpdate } from './product/update/update';
 import { StoreStateCheckMark } from './state/checkMark';
 import { StoreStateInterface } from './state/interface';
 import { StoreTableSelectedItem } from './table/selectedItem/selectedItem';
+import { StoreTableUtils } from './table/utils';
 import { StoreTaskAdd } from './task/add/add';
 import { StoreTaskDelete } from './task/delete/delete';
 import { StoreTaskFetch } from './task/fetch/fetch';
@@ -121,6 +122,7 @@ interface IStorePopup {
 
 interface IStoreTable {
   selectedItem: StoreTableSelectedItem;
+  utils: StoreTableUtils;
 }
 
 class RootStore {
@@ -220,6 +222,7 @@ class RootStore {
 
     this.storeTable = {
       selectedItem: new StoreTableSelectedItem(this),
+      utils: new StoreTableUtils(this),
     };
   }
 

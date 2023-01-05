@@ -45,6 +45,7 @@ const LoginPage: FC = observer(() => {
           <CheckMark
             value='rememberMe'
             text='Запомнить'
+            mark='interface'
             classes='check-mark--login'
           />
           <Button

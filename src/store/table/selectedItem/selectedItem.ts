@@ -9,9 +9,9 @@ export class StoreTableSelectedItem {
   }
 
   private itemId: ISelectedItems = {
-    acceptanceTasks: 0,
-    shipmentTasks: 0,
-    products: 0,
+    acceptanceTasks: 1,
+    shipmentTasks: 1,
+    products: 1,
   };
 
   public getItemId(ItemType: keyof ISelectedItems) {

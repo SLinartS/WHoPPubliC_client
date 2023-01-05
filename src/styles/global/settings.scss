@@ -1,9 +1,5 @@
 @use '/src/styles/global/colors.scss' as *;
 
-#id {
-  position: relative;
-}
-
 html {
   font-size: 10px;
   color: $font-color--black;

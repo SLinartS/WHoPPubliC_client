@@ -1,3 +1,8 @@
 export interface ICheckMark {
-  [lable: string]: boolean;
+  [lable: string]: {
+    value: boolean;
+    mark: TMarkType;
+  };
 }
+
+export type TMarkType = 'interface' | 'products' | 'tasks';

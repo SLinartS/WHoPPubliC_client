@@ -1,0 +1,25 @@
+@use '/src/styles/global/colors.scss' as color;
+@use '/src/styles/global/variables.scss' as v;
+@use '/src/styles/global/layouts/display.scss';
+
+.select-table {
+  display: flex;
+  align-items: flex-start;
+  flex-direction: column;
+  margin: 2rem;
+
+  &__input {
+    width: 90%;
+    height: 6rem;
+    text-align: start;
+    font-size: 2rem;
+    font-weight: 500;
+    resize: none;
+    // user-select: none;
+    padding: 1rem;
+    margin-top: 1rem;
+    border: none;
+    background-color: color.$font-color--white;
+    border-radius: 1rem;
+  }
+}

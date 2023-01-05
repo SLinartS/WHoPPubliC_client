@@ -39,12 +39,16 @@ export class StoreProductFetch {
     }
   }
 
-  public *products() {
+  public *products(actionIfDone?: () => void) {
     try {
       const response: AxiosResponse<TProductsData> =
         yield extendAxios.get<TProductsData>('products');
       this.root.storeProduct.state.products = response.data;
       this.root.storeProduct.status.set('fetch', 'done');
+
+      if (actionIfDone) {
+        actionIfDone();
+      }
     } catch (error) {
       this.root.storeProduct.status.set('fetch', 'error');
     }

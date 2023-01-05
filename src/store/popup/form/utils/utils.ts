@@ -1,6 +1,6 @@
 import { makeAutoObservable } from 'mobx';
-import { ITableObject } from '../../../../components/blocks/table/type';
 
+import { ITableObject } from '../../../../components/blocks/table/type';
 import { IProduct } from '../../../product/type';
 import RootStore from '../../../root';
 

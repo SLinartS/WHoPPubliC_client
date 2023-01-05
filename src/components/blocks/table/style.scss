@@ -52,35 +52,6 @@
   }
 }
 
-.column-shell {
-  &-enter {
-    opacity: 0;
-    position: absolute;
-    transform: rotateY(-180deg);
-  }
-
-  &-enter-active {
-    opacity: 1;
-    transform: rotateY(0deg);
-  }
-
-  &-exit {
-    opacity: 1;
-    position: absolute;
-    transform: rotateY(0);
-  }
-
-  &-exit-active {
-    opacity: 0;
-    transform: rotateY(180deg);
-  }
-
-  &-enter-active,
-  &-exit-active {
-    transition: all 400ms ease-in-out;
-  }
-}
-
 @media (max-width: 900px) {
   .table {
     font-size: 1.4rem;

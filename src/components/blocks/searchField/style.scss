@@ -29,6 +29,10 @@
       border: 0.2rem solid color.$font-color--black;
     }
   }
+
+  &--products {
+    margin: 0;
+  }
 }
 
 @media (max-width: 1030px) {
