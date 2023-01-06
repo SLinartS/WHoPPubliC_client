@@ -15,7 +15,7 @@ import WindowHeaderForm from '../../../blocks/windowHeader/form/Form';
 
 const PopupFormTask: FC = observer(() => {
   const [isAcceptance, setIsAcceptance] = useState<boolean>(true);
-  const { storePopup, storeTask, storeProduct } = useRootStore();
+  const { storePopup, storeTask, storeProduct, storeState } = useRootStore();
 
   function changeFieldHandler(
     e: TChangeFieldEvent,
@@ -77,7 +77,7 @@ const PopupFormTask: FC = observer(() => {
   }
 
   useEffect(() => {
-    if (storePopup.form.state.currentTaskType === 'acceptance') {
+    if (storeState.interface.getCurrentTypeOfTask() === 'acceptance') {
       setIsAcceptance(true);
     } else {
       setIsAcceptance(false);
@@ -86,7 +86,7 @@ const PopupFormTask: FC = observer(() => {
     if (storeProduct.status.get('fetch') === 'pending') {
       storeProduct.fetch.products();
     }
-  }, [storePopup.form.state.currentTaskType]);
+  }, [storeState.interface.getCurrentTypeOfTask()]);
 
   return (
     <div className='popup popup--form popup--form-add-task'>
@@ -163,12 +163,10 @@ const PopupFormTask: FC = observer(() => {
 
           {storePopup.select.products.getProductListData().length > 0 ? (
             <Table
-              data={
-                storePopup.form.utils.utils.getFilteredProducts(
-                  storePopup.select.products.getProductListData(),
-                  [],
-                ).filteredProducts
-              }
+              data={storePopup.form.utils.utils.getFilteredProducts(
+                storePopup.select.products.getProductListData(),
+                [],
+              )}
               keyWord='article'
               valuesType='products'
               classes='table--add-task'

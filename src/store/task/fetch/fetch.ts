@@ -37,27 +37,55 @@ export class StoreTaskFetch {
     }
   }
 
-  public *acceptanceTasks() {
+  public *acceptanceTasks(actionIfDone?: () => void) {
     try {
       const response: AxiosResponse<ITasks> = yield extendAxios.get<ITasks>(
         'tasks/acceptance',
       );
       this.root.storeTask.state.acceptanceList = response.data;
+
+      if (actionIfDone) {
+        actionIfDone();
+      }
+
       this.root.storeTask.status.set('fetchAcceptance', 'done');
     } catch (error) {
       this.root.storeTask.status.set('fetchAcceptance', 'error');
     }
   }
 
-  public *shipmentTasks() {
+  public *shipmentTasks(actionIfDone?: () => void) {
     try {
       const response: AxiosResponse<ITasks> = yield extendAxios.get<ITasks>(
         'tasks/shipment',
       );
       this.root.storeTask.state.shipmentList = response.data;
+
+      if (actionIfDone) {
+        actionIfDone();
+      }
+
       this.root.storeTask.status.set('fetchShipment', 'done');
     } catch (error) {
       this.root.storeTask.status.set('fetchShipment', 'error');
+    }
+  }
+
+  // !not implemented on the server
+  public *intraTasks(actionIfDone?: () => void) {
+    try {
+      const response: AxiosResponse<ITasks> = yield extendAxios.get<ITasks>(
+        'tasks/intra',
+      );
+      this.root.storeTask.state.intraList = response.data;
+
+      if (actionIfDone) {
+        actionIfDone();
+      }
+
+      this.root.storeTask.status.set('fetchIntra', 'done');
+    } catch (error) {
+      this.root.storeTask.status.set('fetchIntra', 'error');
     }
   }
 }

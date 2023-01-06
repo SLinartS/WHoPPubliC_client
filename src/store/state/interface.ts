@@ -1,6 +1,7 @@
 import { makeAutoObservable } from 'mobx';
 
 import RootStore from '../root';
+import { TTaskType } from '../type';
 
 export class StoreStateInterface {
   constructor(private readonly root: RootStore) {
@@ -33,5 +34,15 @@ export class StoreStateInterface {
 
   public hideViewHeader() {
     this.isViewHeader = false;
+  }
+
+  private currentTypeOfTask: TTaskType = 'acceptance';
+
+  public getCurrentTypeOfTask() {
+    return this.currentTypeOfTask;
+  }
+
+  public changeCurrentTypeOfTask(newType: TTaskType) {
+    this.currentTypeOfTask = newType;
   }
 }

@@ -42,12 +42,10 @@ const PopupSelectProduct: FC = observer(() => {
         textSaveButton='Добавить'
       />
       <Table
-        data={
-          storePopup.form.utils.utils.getFilteredProducts(
-            storePopup.form.utils.utils.getUnselectedProducts(),
-            ['article'],
-          ).filteredProducts
-        }
+        data={storePopup.form.utils.utils.getFilteredProducts(
+          storePopup.form.utils.utils.getUnselectedProducts(),
+          ['article'],
+        )}
         keyWord='author'
         valuesType='products'
         classes='table--add-task'

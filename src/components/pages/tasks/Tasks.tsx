@@ -1,25 +1,47 @@
 import { observer } from 'mobx-react-lite';
-import { FC, ReactNode, useEffect } from 'react';
+import { FC, ReactNode } from 'react';
 
+import addIcon from '../../../assets/icons/add.svg';
+import deleteIcon from '../../../assets/icons/delete.svg';
+import editIcon from '../../../assets/icons/edit.svg';
 import { ISelectedItems } from '../../../store/table/selectedItem/type';
 import { TTaskStatus } from '../../../store/task/status/type';
 import { TTypeTaskStates } from '../../../store/task/type';
 import { TTaskType } from '../../../store/type';
 import { useRootStore } from '../../../utils/RootStoreProvider/useRootStore';
-import Button from '../../blocks/button/Button';
 import Loader from '../../blocks/loader/Loader';
+import SearchField from '../../blocks/searchField/SearchField';
 import Table from '../../blocks/table/Table';
+import { TASK_TYPES } from './taskForSwitcher';
 
 const Tasks: FC = observer(() => {
-  const { storeTask, storePopup, storeTable, storeAction } = useRootStore();
+  const { storeTask, storePopup, storeTable, storeAction, storeState } =
+    useRootStore();
 
-  function showAddTaskWindowHandler(taskType: TTaskType) {
+  function getCurrentTypeOfTask(): TTaskType {
+    return storeState.interface.getCurrentTypeOfTask();
+  }
+
+  function getCurrentSelectedItems(): keyof ISelectedItems {
+    switch (getCurrentTypeOfTask()) {
+      case 'intra':
+        return 'intraTasks';
+
+      case 'shipment':
+        return 'shipmentTasks';
+
+      default:
+        return 'acceptanceTasks';
+    }
+  }
+
+  function showAddTaskWindowHandler() {
     storePopup.form.state.formActionType = 'create';
-    storePopup.form.state.currentTaskType = taskType;
     storePopup.status.showTaskForm();
   }
 
-  function changeTask(taskType: keyof ISelectedItems): void {
+  function changeTask(): void {
+    const taskType: keyof ISelectedItems = getCurrentSelectedItems();
     storePopup.form.state.formActionType = 'change';
     const taskId = storeTable.selectedItem.getItemId(taskType);
 
@@ -35,27 +57,32 @@ const Tasks: FC = observer(() => {
     }
   }
 
-  function deleteHandler(itemType: keyof ISelectedItems) {
-    storeAction.delete.deleteController(itemType);
+  function deleteHandler() {
+    const taskType: keyof ISelectedItems = getCurrentSelectedItems();
+    storeAction.delete.deleteController(taskType);
   }
 
-  useEffect(() => {
-    if (storeTask.status.get('fetchAcceptance') === 'pending') {
-      storeTask.fetch.acceptanceTasks();
-    }
-  }, [storeTask.status.get('fetchAcceptance')]);
+  function changeCurrentTypeOfTaskHandler(taskType: TTaskType) {
+    storeState.interface.changeCurrentTypeOfTask(taskType);
+  }
 
-  useEffect(() => {
-    if (storeTask.status.get('fetchShipment') === 'pending') {
-      storeTask.fetch.shipmentTasks();
+  function displayTasksTable(): ReactNode {
+    let fetchType: TTaskStatus = 'fetchAcceptance';
+    let valuesType: keyof ISelectedItems = 'acceptanceTasks';
+    let listType: TTypeTaskStates = 'acceptanceList';
+    switch (storeState.interface.getCurrentTypeOfTask()) {
+      case 'intra':
+        fetchType = 'fetchShipment';
+        valuesType = 'shipmentTasks';
+        listType = 'shipmentList';
+        break;
+      case 'shipment':
+        fetchType = 'fetchShipment';
+        valuesType = 'shipmentTasks';
+        listType = 'shipmentList';
+        break;
+      default:
     }
-  }, [storeTask.status.get('fetchShipment')]);
-
-  function displayTasksTable(
-    fetchType: TTaskStatus,
-    valuesType: keyof ISelectedItems,
-    listType: TTypeTaskStates,
-  ): ReactNode {
     if (storeTask.status.get(fetchType) === 'done') {
       if (storeTask.state[listType].data.length) {
         return (
@@ -71,62 +98,48 @@ const Tasks: FC = observer(() => {
         <p className='tasks__empty-text'>Отсутствуют добавленные задачи</p>
       );
     }
+    storeTask.fetch[valuesType]();
     return <Loader />;
   }
 
   return (
     <main className='tasks'>
-      <div className='tasks__title'>
-        <h3 className='tasks__title-text'>Приёмка</h3>
+      <div className='tasks__section-switcher'>
+        {TASK_TYPES.map(({ type, text }) => (
+          <button
+            key={type + text}
+            className={`tasks__switcher tasks__switcher--${type} ${
+              getCurrentTypeOfTask() === type ? 'tasks__switcher--active' : ''
+            }`}
+            type='button'
+            onClick={() => changeCurrentTypeOfTaskHandler(type)}
+          >
+            {text}
+          </button>
+        ))}
       </div>
-      <div className='tasks__block'>
-        <div className='tasks__section-button'>
-          <Button
-            classes='button--tasks'
-            text='Добавить'
-            clickHandler={() => showAddTaskWindowHandler('acceptance')}
-          />
-          <Button
-            classes='button--tasks'
-            text='Изменить'
-            clickHandler={() => changeTask('acceptanceTasks')}
-          />
-          <Button
-            classes='button--tasks'
-            text='Удалить'
-            clickHandler={() => deleteHandler('acceptanceTasks')}
-          />
-        </div>
-
-        {displayTasksTable(
-          'fetchAcceptance',
-          'acceptanceTasks',
-          'acceptanceList',
-        )}
+      <div className='tasks__section-button'>
+        <SearchField classes='search-field--tasks' />
+        <img
+          className='products__icon'
+          src={addIcon}
+          alt='add'
+          onClick={showAddTaskWindowHandler}
+        />
+        <img
+          className='products__icon'
+          src={editIcon}
+          alt='add'
+          onClick={changeTask}
+        />
+        <img
+          className='products__icon'
+          src={deleteIcon}
+          alt='add'
+          onClick={deleteHandler}
+        />
       </div>
-      <div className='tasks__title tasks__title--shipment'>
-        <h3 className='tasks__title-text tasks__title-text'>Отгрузка</h3>
-      </div>
-      <div className='tasks__block'>
-        <div className='tasks__section-button'>
-          <Button
-            classes='button--tasks'
-            text='Добавить'
-            clickHandler={() => showAddTaskWindowHandler('shipment')}
-          />
-          <Button
-            classes='button--tasks'
-            text='Изменить'
-            clickHandler={() => changeTask('shipmentTasks')}
-          />
-          <Button
-            classes='button--tasks'
-            text='Удалить'
-            clickHandler={() => deleteHandler('shipmentTasks')}
-          />
-        </div>
-        {displayTasksTable('fetchShipment', 'shipmentTasks', 'shipmentList')}
-      </div>
+      <div className='tasks__table'>{displayTasksTable()}</div>
     </main>
   );
 });

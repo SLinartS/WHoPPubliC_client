@@ -19,12 +19,15 @@ interface ITableProps {
 const Table: FC<ITableProps> = observer(
   ({ data, keyWord, valuesType, displayedColumns, classes }) => {
     function countColumnsNumber(): number {
-      if (displayedColumns) {
-        return Object.entries(data[0]).filter(([key]) =>
-          displayedColumns?.includes(key),
-        ).length;
+      if (data[0]) {
+        if (displayedColumns) {
+          return Object.entries(data[0]).filter(([key]) =>
+            displayedColumns?.includes(key),
+          ).length;
+        }
+        return Object.entries(data[0]).length;
       }
-      return Object.entries(data[0]).length;
+      return 1;
     }
 
     function getOneHeader(element: IField<string | number>): ReactNode {
@@ -41,16 +44,19 @@ const Table: FC<ITableProps> = observer(
       );
     }
 
-    function displayHeader(): ReactNode[] {
-      return Object.entries(data[0]).map(([key, element]) => {
-        if (displayedColumns) {
-          if (displayedColumns.includes(key)) {
-            return getOneHeader(element);
+    function displayHeader(): ReactNode {
+      if (data[0]) {
+        return Object.entries(data[0]).map(([key, element]) => {
+          if (displayedColumns) {
+            if (displayedColumns.includes(key)) {
+              return getOneHeader(element);
+            }
+            return null;
           }
-          return null;
-        }
-        return getOneHeader(element);
-      });
+          return getOneHeader(element);
+        });
+      }
+      return <p>Данные отсутствуют</p>;
     }
 
     return (

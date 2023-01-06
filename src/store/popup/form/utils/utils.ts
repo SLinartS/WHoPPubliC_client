@@ -10,10 +10,16 @@ export class StorePopupFormUtils {
   }
 
   public getTaskTypeId(): string {
-    if (this.root.storePopup.form.state.currentTaskType === 'acceptance') {
-      return '1';
+    switch (this.root.storeState.interface.getCurrentTypeOfTask()) {
+      case 'acceptance':
+        return '1';
+      case 'intra':
+        return '3';
+      case 'shipment':
+        return '2';
+      default:
+        return '1';
     }
-    return '2';
   }
 
   public resetForm(): void {
@@ -47,10 +53,7 @@ export class StorePopupFormUtils {
       filteredColumns = { id: { value: 0, alias: 'ID' } };
     }
 
-    // !
-    console.log(this.root.storeAction.delete.deleteController);
-
-    return { filteredProducts };
+    return filteredProducts;
   }
 
   public getUnselectedProducts() {

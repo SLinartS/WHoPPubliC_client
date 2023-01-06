@@ -1,4 +1,6 @@
-@use '/src/styles/global/colors.scss' as *;
+@use '/src/styles/global/colors.scss' as color;
+@use '/src/styles/global/variables.scss' as v;
+@use '/src/styles/global/layouts/display.scss';
 
 .table {
   display: grid;
@@ -18,13 +20,12 @@
     padding: 0 1rem;
 
     &-shell {
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      @extend %flex-center;
       width: 100%;
       min-width: 2rem;
       min-height: 3rem;
-      border: 0.1rem solid $font-color--black;
+      border: 0.1rem solid color.$font-color--black;
+      background-color: color.$font-color--white;
 
       &--header {
         font-weight: 700;
@@ -32,7 +33,7 @@
       }
 
       &--selected {
-        background-color: $main-color;
+        background-color: color.$main-color;
       }
     }
   }

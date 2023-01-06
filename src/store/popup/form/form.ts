@@ -1,7 +1,7 @@
 import { makeAutoObservable } from 'mobx';
 
 import RootStore from '../../root';
-import { TActionType, TTaskType } from '../../type';
+import { TActionType } from '../../type';
 
 export class StorePopupForm {
   constructor(private readonly root: RootStore) {
@@ -26,16 +26,6 @@ export class StorePopupForm {
 
   public set isDisplayDefaultErrors(newStatus: boolean) {
     this._isDisplayDefaultErrors = newStatus;
-  }
-
-  private _currentTaskType: TTaskType = 'acceptance';
-
-  public get currentTaskType() {
-    return this._currentTaskType;
-  }
-
-  public set currentTaskType(newType: TTaskType) {
-    this._currentTaskType = newType;
   }
 
   private _isSelectedMap: boolean = false;

@@ -7,7 +7,7 @@ import PointsMap from '../../../blocks/points/PointsMap';
 import WindowHeaderForm from '../../../blocks/windowHeader/form/Form';
 
 const PopupSelectPoints: FC = observer(() => {
-  const { storePopup, storePoint } = useRootStore();
+  const { storePopup, storePoint, storeState } = useRootStore();
 
   function closeHandler() {
     storePopup.status.showProductForm();
@@ -27,7 +27,7 @@ const PopupSelectPoints: FC = observer(() => {
     <div className='popup popup--form popup--form-select'>
       <WindowHeaderForm
         title={`Выбрать точки ${
-          storePopup.form.state.currentTaskType === 'acceptance'
+          storeState.interface.getCurrentTypeOfTask() === 'acceptance'
             ? 'приёмки'
             : 'отгрузки'
         }`}
@@ -36,7 +36,7 @@ const PopupSelectPoints: FC = observer(() => {
       />
       {storePoint.status.get('fetch') === 'done' ? (
         <PointsMap
-          pointsType={storePopup.form.state.currentTaskType}
+          pointsType={storeState.interface.getCurrentTypeOfTask()}
           classes='points-map--select-points'
         />
       ) : (

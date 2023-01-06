@@ -19,7 +19,6 @@ export class StoreTableUtils {
   }
 
   public setDefaulMark(itemType: TMarkType, data: IProduct[] | ITask[]) {
-    console.log(Object.keys(data[0]));
     Object.keys(data[0]).forEach((key) => {
       this.root.storeState.checkMark.changeCheckedMark(key, true, itemType);
     });

@@ -71,6 +71,7 @@
     "operator-linebreak": "off",
     "object-curly-newline": "off",
     "no-restricted-syntax": "off",
+    "class-methods-use-this": ["warn", { "exceptMethods": ["getFilteredProducts"] }],
     // automatic sorting of imports
     "import/first": "warn",
     "import/newline-after-import": "warn",

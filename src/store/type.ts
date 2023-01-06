@@ -1,5 +1,5 @@
 export type TStatus = 'pending' | 'done' | 'error';
-export type TTaskType = 'acceptance' | 'shipment';
+export type TTaskType = 'acceptance' | 'shipment' | 'intra';
 export type TActionType = 'create' | 'change';
 export type TValueOrErrorType = {
   value: string;

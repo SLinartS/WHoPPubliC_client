@@ -1,114 +1,66 @@
-@use '/src/styles/global/colors.scss' as *;
+@use '/src/styles/global/colors.scss' as color;
 @use '/src/styles/global/variables.scss' as v;
+@use '/src/styles/global/layouts/display.scss';
 
 .tasks {
-  display: grid;
   height: calc(100vh - v.$header-height--standart);
-  grid-template-columns: repeat(2, 1fr);
-  grid-template-rows: 8rem 1fr;
-  justify-items: center;
-  align-items: center;
-  align-content: center;
-  gap: 0.2rem;
-  background-color: $font-color--black;
+  @extend %grid-center;
+  grid-template-columns: 1fr;
+  grid-template-rows: 3fr 1fr 15fr;
 
-  &__title {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 100%;
-    height: 100%;
-    text-align: center;
-    background-color: $font-color--white;
-    user-select: none;
-
-    &--shipment {
-      grid-row: 1/2;
-      grid-column: 2/3;
-    }
-
-    &-text {
-      font-size: 3.2rem;
-      margin: 2rem 0;
-    }
+  &__table {
+    height: calc(100% - 5rem);
+    width: 70%;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    background-color: color.$bg-color-grey;
+    border-radius: 1rem;
   }
 
-  &__block {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 100%;
-    height: 100%;
-    background-color: $font-color--white;
-    overflow-y: scroll;
+  &__section-switcher {
+    margin-bottom: 2rem;
+  }
+
+  &__switcher {
+    height: 6rem;
+    width: 22rem;
+    background: color.$second-color;
+    border: none;
+    border-radius: 1rem;
+    font-size: 2.4rem;
+    color: color.$font-color--white;
+    transition: all 0.1s ease-in-out;
+
+    &--acceptance {
+      border-radius: 1rem 0 0 1rem;
+    }
+    &--intra {
+      border-radius: 0;
+    }
+    &--shipment {
+      border-radius: 0 1rem 1rem 0;
+    }
+
+    &:hover {
+      background: color.$second-color--hover;
+    }
+    &:active {
+      background: color.$second-color--active;
+    }
+    &--active {
+      background: color.$second-color--active;
+    }
   }
 
   &__section-button {
-    width: 80%;
-    display: grid;
-    justify-items: center;
-    grid-template-columns: repeat(3, 1fr);
+    width: 60%;
+    @extend %grid-center;
+    grid-template-columns: repeat(4, 1fr);
     column-gap: 2rem;
   }
 
   &__empty-text {
     margin: 5rem 0 0 0;
     font-size: 3rem;
-  }
-}
-
-.table--tasks {
-  margin: 2rem;
-}
-
-@media (max-width: 1100px) {
-  .tasks {
-    grid-template-columns: repeat(1, 1fr);
-    grid-template-rows: repeat(3, auto) 1fr;
-    align-content: flex-start;
-
-    &__title {
-      &--shipment {
-        grid-row: initial;
-        grid-column: initial;
-      }
-    }
-
-    &__block {
-      height: calc(
-        (100vh - v.$header-height--standart - (7.68rem * 2) - (0.2rem * 3)) / 2
-      );
-    }
-  }
-}
-
-@media (max-width: 900px) {
-  .tasks {
-    &__block {
-      height: calc(
-        (100vh - v.$header-height--mid - (7.68rem * 2) - (0.2rem * 3)) / 2
-      );
-    }
-  }
-}
-
-@media (max-width: 750px) {
-  .tasks {
-    &__block {
-      height: calc(
-        (100vh - v.$header-height--low - (5.219rem * 2) - (0.2rem * 3)) / 2
-      );
-    }
-
-    &__title {
-      &-text {
-        font-size: 2.8rem;
-        margin: 1rem 0;
-      }
-    }
-
-    &__add-task {
-      font-size: 2rem;
-    }
   }
 }

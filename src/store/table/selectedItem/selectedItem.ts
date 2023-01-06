@@ -11,6 +11,7 @@ export class StoreTableSelectedItem {
   private itemId: ISelectedItems = {
     acceptanceTasks: 1,
     shipmentTasks: 1,
+    intraTasks: 1,
     products: 1,
   };
 

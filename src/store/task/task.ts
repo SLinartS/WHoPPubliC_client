@@ -27,4 +27,14 @@ export class StoreTask {
   public set shipmentList(newList: ITasks) {
     this._shipmentList = newList;
   }
+
+  private _intraList: ITasks = { data: [] };
+
+  public get intraList() {
+    return this._intraList;
+  }
+
+  public set intraList(newList: ITasks) {
+    this._intraList = newList;
+  }
 }
