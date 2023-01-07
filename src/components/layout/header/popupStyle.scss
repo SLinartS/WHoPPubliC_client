@@ -19,11 +19,13 @@
     &-icon--popup {
       height: 2.4rem;
       width: 2.4rem;
+      margin-right: 1rem;
     }
 
     &-block--popup {
       height: 100%;
-      width: calc(100% - 3.2rem);
+      width: 100%;
+      box-sizing: border-box;
       @extend %flex-center;
       justify-content: flex-start;
       padding: 1rem 1.6rem;
@@ -43,9 +45,11 @@
     }
 
     &-link--popup {
-      color: color.$font-color--black;
-      margin-left: 1rem;
+      height: 100%;
+      width: calc(100% + 3.2rem);
+      @extend %flex-center;
       font-size: 2rem;
+      color: color.$font-color--black;
       user-select: none;
     }
   }

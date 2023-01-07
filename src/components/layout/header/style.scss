@@ -60,10 +60,13 @@
     &-icon {
       height: 3.2rem;
       width: 3.2rem;
+      margin-right: 1rem;
     }
 
     &-link {
-      margin-left: 1rem;
+      height: 100%;
+      width: calc(100% + 3.2rem);
+      @extend %flex-center;
       color: color.$font-color--white;
       font-size: 2.4rem;
       user-select: none;

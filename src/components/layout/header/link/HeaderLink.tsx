@@ -1,6 +1,6 @@
 import { observer } from 'mobx-react-lite';
 import { FC, useEffect, useState } from 'react';
-import { NavLink, useLocation } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 
 import { IHeaderLinks } from './type';
 
@@ -28,17 +28,19 @@ const HeaderLink: FC<IHeaderLinkProps> = observer(
           isPopup ? '--popup' : ''
         } ${blockActiveStyle}`}
       >
-        <img
-          className={`header__nav-icon${isPopup ? '--popup' : ''}`}
-          src={icon}
-          alt={text}
-        />
-        <NavLink
+        <Link
           to={to}
           className={`header__nav-link${isPopup ? '--popup' : ''}`}
         >
-          {text}
-        </NavLink>
+          <img
+            className={`header__nav-icon${isPopup ? '--popup' : ''}`}
+            src={icon}
+            alt={text}
+          />
+          <p className={`header__nav-text${isPopup ? '--popup' : ''}`}>
+            {text}
+          </p>
+        </Link>
       </div>
     );
   },
