@@ -26,17 +26,21 @@ const Points: FC = observer(() => {
       </div>
 
       <p className='points__title'>Точки приёмки</p>
-      {storePoint.status.get('fetch') === 'done' ? (
-        <PointsMap pointsType='acceptance' />
-      ) : (
-        <Loader />
-      )}
+      <div className='points__block'>
+        {storePoint.status.get('fetch') === 'done' ? (
+          <PointsMap pointsType='acceptance' />
+        ) : (
+          <Loader />
+        )}
+      </div>
       <p className='points__title'>Точки отгрузки</p>
-      {storePoint.status.get('fetch') === 'done' ? (
-        <PointsMap pointsType='shipment' />
-      ) : (
-        <Loader />
-      )}
+      <div className='points__block'>
+        {storePoint.status.get('fetch') === 'done' ? (
+          <PointsMap pointsType='shipment' />
+        ) : (
+          <Loader />
+        )}
+      </div>
     </main>
   );
 });

@@ -22,6 +22,20 @@ export class StoreStateInterface {
     this.isShowPopupNav = false;
   }
 
+  private isShowPopupFilter: boolean = false;
+
+  public getIsShowPopupFilter() {
+    return this.isShowPopupFilter;
+  }
+
+  public showPopupFilter() {
+    this.isShowPopupFilter = true;
+  }
+
+  public hidePopupFilter() {
+    this.isShowPopupFilter = false;
+  }
+
   private isViewHeader: boolean = true;
 
   public getIsViewHeader() {

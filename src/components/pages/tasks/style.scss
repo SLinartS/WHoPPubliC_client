@@ -3,22 +3,19 @@
 @use '/src/styles/global/layouts/display.scss';
 
 .tasks {
-  height: calc(100vh - v.$header-height--standart);
   @extend %grid-center;
+  align-items: flex-start;
   grid-template-columns: 1fr;
-  grid-template-rows: 3fr 1fr 15fr;
+  grid-template-rows: 4fr 4fr 15fr;
 
   &__table {
     height: calc(100% - 5rem);
     width: 70%;
-    overflow-y: scroll;
-    overflow-x: hidden;
-    background-color: color.$bg-color-grey;
     border-radius: 1rem;
   }
 
   &__section-switcher {
-    margin-bottom: 2rem;
+    margin-top: 1.4rem;
   }
 
   &__switcher {
@@ -57,10 +54,42 @@
     @extend %grid-center;
     grid-template-columns: repeat(4, 1fr);
     column-gap: 2rem;
+    margin-top: 1rem;
   }
 
   &__empty-text {
     margin: 5rem 0 0 0;
     font-size: 3rem;
+  }
+}
+
+@media (max-width: 1000px) {
+  .tasks {
+    grid-template-rows: 3fr 3fr 30fr;
+    &__table {
+      width: 70%;
+    }
+
+    &__section-switcher {
+      margin-top: 1rem;
+    }
+
+    &__switcher {
+      height: 3.4rem;
+      width: 14rem;
+      font-size: 1.4rem;
+    }
+
+    &__section-button {
+      margin-top: 0.6rem;
+    }
+  }
+}
+
+@media (max-width: 750px) {
+  .tasks {
+    &__table {
+      width: unset;
+    }
   }
 }

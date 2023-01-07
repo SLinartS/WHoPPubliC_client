@@ -15,7 +15,8 @@ import WindowHeaderForm from '../../../blocks/windowHeader/form/Form';
 
 const PopupFormTask: FC = observer(() => {
   const [isAcceptance, setIsAcceptance] = useState<boolean>(true);
-  const { storePopup, storeTask, storeProduct, storeState } = useRootStore();
+  const { storePopup, storeTask, storeProduct, storeState, storeTable } =
+    useRootStore();
 
   function changeFieldHandler(
     e: TChangeFieldEvent,
@@ -169,6 +170,7 @@ const PopupFormTask: FC = observer(() => {
               )}
               keyWord='article'
               valuesType='products'
+              displayedColumns={storeTable.utils.getColumnsWithMark('products')}
               classes='table--add-task'
             />
           ) : (

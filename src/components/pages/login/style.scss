@@ -4,11 +4,11 @@
 
 .login {
   @extend %flex-center;
-  height: calc(100vh - variable.$header-height--standart - 5rem);
 
   &__container {
     @extend %flex-center;
     flex-direction: column;
+    margin-top: 5rem;
   }
 
   &__app-icon {
@@ -67,21 +67,26 @@
   }
 }
 
-@media (max-width: 700px) {
+@media (max-width: 1000px) {
   .login {
     &__app-icon {
-      width: 24rem;
-      height: 22rem;
+      width: 12rem;
+      height: 11rem;
     }
 
+    &__container {
+      margin-top: 3rem;
+    }
+    
     &__title {
-      font-size: 4rem;
+      font-size: 2.4rem;
       margin-bottom: 0;
     }
 
     &__inputs-block {
-      width: 30rem;
-      margin: 3rem 2rem;
+      width: 25rem;
+      margin: 2rem 1rem;
+      row-gap: 2rem;
     }
 
     &__icon {
@@ -96,7 +101,7 @@
     }
 
     &__low-block {
-      width: calc(100% - 6rem);
+      width: calc(100% - 4rem);
       justify-content: space-between;
     }
   }

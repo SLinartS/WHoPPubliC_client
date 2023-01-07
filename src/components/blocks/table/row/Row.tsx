@@ -2,10 +2,10 @@ import { observer } from 'mobx-react-lite';
 import { FC, ReactNode } from 'react';
 
 import { ISelectedItems } from '../../../../store/table/selectedItem/type';
-import { IField } from '../../../../store/type';
 import { useRootStore } from '../../../../utils/RootStoreProvider/useRootStore';
 import TableColumn from '../column/Column';
 import TableColumnShell from '../column/shell/Shell';
+import { addBorderRadius } from '../helpers';
 import { ITableObject } from '../type';
 
 interface IRowProps {
@@ -22,55 +22,57 @@ const TableRow: FC<IRowProps> = observer(
       storeTable.selectedItem.setItemId(valuesType, columns.id.value);
     }
 
-    function checkIsSelected() {
+    function checkIsSelected(): string {
       if (storeTable.selectedItem.getItemId(valuesType) === columns.id.value) {
         return 'table__column-shell--selected';
       }
       return '';
     }
 
-    function displayTableColumnShell(
-      key: string,
-      value: IField<string | number>,
-    ): ReactNode | null {
-      if (displayedColumns) {
-        if (displayedColumns.includes(key)) {
-          return (
+    function displayColumns(): ReactNode | null {
+      const reactNodes: ReactNode[] = [];
+      let index = -1;
+      const { length } = displayedColumns!;
+      Object.entries(columns).forEach(([key, value]) => {
+        if (displayedColumns) {
+          if (displayedColumns.includes(key)) {
+            index += 1;
+            reactNodes.push(
+              <TableColumnShell
+                key={key + value}
+                classes={`${addBorderRadius(
+                  index,
+                  length,
+                )} ${checkIsSelected()}`}
+                clickHandler={selectHandler}
+              >
+                <TableColumn
+                  key={key + value}
+                  text={value.value}
+                />
+              </TableColumnShell>,
+            );
+          }
+        } else {
+          reactNodes.push(
             <TableColumnShell
               key={key + value}
-              classes={checkIsSelected()}
+              classes={addBorderRadius(index, length)}
               clickHandler={selectHandler}
             >
               <TableColumn
                 key={key + value}
                 text={value.value}
               />
-            </TableColumnShell>
+            </TableColumnShell>,
           );
         }
-        return null;
-      }
-      return (
-        <TableColumnShell
-          key={key + value}
-          classes={checkIsSelected()}
-          clickHandler={selectHandler}
-        >
-          <TableColumn
-            key={key + value}
-            text={value.value}
-          />
-        </TableColumnShell>
-      );
+      });
+
+      return reactNodes;
     }
 
-    return (
-      <>
-        {Object.entries(columns).map(([key, value]) =>
-          displayTableColumnShell(key, value),
-        )}
-      </>
-    );
+    return <>{displayColumns()}</>;
   },
 );
 

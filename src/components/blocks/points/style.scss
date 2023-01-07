@@ -3,12 +3,9 @@
 @use '/src/styles/global/layouts/display.scss';
 
 .points-map {
-  height: calc(100% - 2rem);
-  width: calc(100% - 5rem);
+  width: 100%;
   @extend %flex-center;
-  overflow-y: scroll;
-  overflow-x: hidden;
-  margin: 0rem 2rem;
+  padding: 2rem 0;
   border-radius: 1rem;
   background-color: color.$bg-color-grey;
 
@@ -74,10 +71,8 @@
     }
   }
 }
-@media (max-width: 1030px) {
+@media (max-width: 1000px) {
   .points-map {
-    height: calc(100% - 2rem);
-    width: calc(100% - 5rem);
 
     &__container {
       grid-template-columns: repeat(3, 8rem);

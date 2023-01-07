@@ -8,7 +8,7 @@ const TableColumn: FC<TableColumnProps> = ({ text }) => {
   const [formatText, setFormatText] = useState(text);
 
   useEffect(() => {
-    if (document.documentElement.clientWidth < 950) {
+    if (document.documentElement.clientWidth < 700) {
       if (String(text).length > 15) {
         setFormatText(`${String(text).substring(0, 15)}...`);
       }

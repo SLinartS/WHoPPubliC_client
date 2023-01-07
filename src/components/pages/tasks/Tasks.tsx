@@ -91,6 +91,7 @@ const Tasks: FC = observer(() => {
             keyWord='article'
             valuesType={valuesType}
             classes='table--tasks'
+            displayedColumns={storeTable.utils.getColumnsWithMark('tasks')}
           />
         );
       }
@@ -98,7 +99,9 @@ const Tasks: FC = observer(() => {
         <p className='tasks__empty-text'>Отсутствуют добавленные задачи</p>
       );
     }
-    storeTask.fetch[valuesType]();
+    storeTask.fetch[valuesType](() => {
+      storeTable.utils.setDefaulMark('tasks', storeTask.state[listType].data);
+    });
     return <Loader />;
   }
 

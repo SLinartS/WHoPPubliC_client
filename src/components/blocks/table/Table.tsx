@@ -5,6 +5,7 @@ import { ISelectedItems } from '../../../store/table/selectedItem/type';
 import { IField } from '../../../store/type';
 import TableColumn from './column/Column';
 import TableColumnShell from './column/shell/Shell';
+import { addBorderRadius } from './helpers';
 import TableRow from './row/Row';
 import { ITableObject } from './type';
 
@@ -12,7 +13,7 @@ interface ITableProps {
   data: ITableObject[];
   keyWord: keyof ITableObject;
   valuesType: keyof ISelectedItems;
-  displayedColumns?: string[];
+  displayedColumns: string[];
   classes?: string;
 }
 
@@ -30,11 +31,18 @@ const Table: FC<ITableProps> = observer(
       return 1;
     }
 
-    function getOneHeader(element: IField<string | number>): ReactNode {
+    function getOneHeader(
+      element: IField<string | number>,
+      index: number,
+      length: number,
+    ): ReactNode {
       return (
         <TableColumnShell
           key={element.value + element.alias}
-          classes='table__column-shell--header'
+          classes={`table__column-shell--header ${addBorderRadius(
+            index,
+            length,
+          )}`}
         >
           <TableColumn
             key={element.value + element.alias}
@@ -46,14 +54,13 @@ const Table: FC<ITableProps> = observer(
 
     function displayHeader(): ReactNode {
       if (data[0]) {
+        let index = -1;
         return Object.entries(data[0]).map(([key, element]) => {
-          if (displayedColumns) {
-            if (displayedColumns.includes(key)) {
-              return getOneHeader(element);
-            }
-            return null;
+          if (displayedColumns.includes(key)) {
+            index += 1;
+            return getOneHeader(element, index, displayedColumns!.length);
           }
-          return getOneHeader(element);
+          return null;
         });
       }
       return <p>Данные отсутствуют</p>;

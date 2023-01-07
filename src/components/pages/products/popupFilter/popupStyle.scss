@@ -1,0 +1,22 @@
+@use '/src/styles/global/colors.scss' as color;
+@use '/src/styles/global/variables.scss' as v;
+@use '/src/styles/global/layouts/display.scss';
+
+.popup-filter {
+  width: 100%;
+  background-color: color.$bg-color-grey;
+  border-radius: 1rem;
+  position: absolute;
+  left: 0;
+
+  &__button{
+    width: calc(100% - 2rem);
+    height: 4rem;
+    border: none;
+    border-radius: 1rem;
+    margin: 1rem 1rem 3rem 1rem;
+    font-size: 2rem;
+    color: color.$font-color--white;
+    background-color: color.$third-color;
+  }
+}

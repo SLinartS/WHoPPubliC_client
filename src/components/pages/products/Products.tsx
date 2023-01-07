@@ -1,22 +1,30 @@
 import { observer } from 'mobx-react-lite';
-import { FC, useEffect } from 'react';
+import { FC, MouseEvent, useEffect } from 'react';
 
 import addIcon from '../../../assets/icons/add.svg';
 import deleteIcon from '../../../assets/icons/delete.svg';
 import editIcon from '../../../assets/icons/edit.svg';
+import filterIcon from '../../../assets/icons/sliders.svg';
 import { ISelectedItems } from '../../../store/table/selectedItem/type';
 import { useRootStore } from '../../../utils/RootStoreProvider/useRootStore';
 import Loader from '../../blocks/loader/Loader';
 import SearchField from '../../blocks/searchField/SearchField';
 import SelectTable from '../../blocks/selectTable/SelectTable';
 import Table from '../../blocks/table/Table';
+import PopupFilter from './popupFilter/PopupFilter';
 
 const Products: FC = observer(() => {
-  const { storeProduct, storePopup, storeTable, storeAction } = useRootStore();
+  const { storeProduct, storePopup, storeTable, storeAction, storeState } =
+    useRootStore();
 
   function openProductFormHandler() {
     storePopup.form.state.formActionType = 'create';
     storePopup.status.showProductForm();
+  }
+
+  function showPopupFilterHandler(e: MouseEvent<HTMLDivElement>) {
+    e.stopPropagation();
+    storeState.interface.showPopupFilter();
   }
 
   function changeProduct(): void {
@@ -73,6 +81,18 @@ const Products: FC = observer(() => {
           onClick={() => deleteHandler('products')}
         />
       </div>
+      <div
+        className='products__filters'
+        onClick={showPopupFilterHandler}
+      >
+        <img
+          src={filterIcon}
+          alt='filters'
+          className='products__filters-icon'
+        />
+        <p className='products__filters-text'>Фильтры</p>
+      </div>
+
       <div className='products__table'>
         {storeProduct.status.get('fetch') === 'done' ? (
           <Table
@@ -105,6 +125,7 @@ const Products: FC = observer(() => {
           <Loader />
         )}
       </div>
+      {storeState.interface.getIsShowPopupFilter() ? <PopupFilter /> : ''}
     </main>
   );
 });

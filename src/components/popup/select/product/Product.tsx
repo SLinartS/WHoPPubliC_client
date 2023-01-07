@@ -48,6 +48,7 @@ const PopupSelectProduct: FC = observer(() => {
         )}
         keyWord='author'
         valuesType='products'
+        displayedColumns={storeTable.utils.getColumnsWithMark('products')}
         classes='table--add-task'
       />
     </div>

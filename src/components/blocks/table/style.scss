@@ -12,13 +12,11 @@
   row-gap: 0.5rem;
   font-size: 1.6rem;
   position: relative;
-  margin: 2rem 5% 0 5%;
 
   &__column {
     margin: 0;
     text-align: center;
     padding: 0 1rem;
-
     &-shell {
       @extend %flex-center;
       width: 100%;
@@ -30,10 +28,20 @@
       &--header {
         font-weight: 700;
         height: 5rem;
+        .table__column {
+          word-break: break-all;
+        }
       }
 
       &--selected {
         background-color: color.$main-color;
+      }
+
+      &--first {
+        border-radius: 1rem 0 0 1rem;
+      }
+      &--last {
+        border-radius: 0 1rem 1rem 0;
       }
     }
   }
@@ -58,6 +66,7 @@
     font-size: 1.4rem;
 
     &__column {
+      padding: 0 0.5rem;
       &__shell {
         overflow-wrap: break-word;
         word-break: break-all;
@@ -68,10 +77,10 @@
 
 @media (max-width: 750px) {
   .table {
-    font-size: 1.2rem;
+    font-size: 1rem;
 
     &__column {
-      padding: 0 0.2rem;
+      padding: 0 0.1rem;
 
       &__shell {
         overflow-wrap: break-word;
@@ -80,3 +89,4 @@
     }
   }
 }
+

@@ -3,15 +3,12 @@
 @use '/src/styles/global/layouts/display.scss';
 
 .map-block {
-  height: 100%;
   width: 100%;
   @extend %grid-center;
   grid-template-columns: repeat(2, 1fr);
-  overflow: auto;
   border-radius: 1rem;
 
   &__zone {
-    height: 100%;
     margin: 2rem 6rem 2rem 2rem;
     display: flex;
     align-items: center;
@@ -88,22 +85,8 @@
   }
 }
 
-@media (max-width: 1030px) {
+@media (max-width: 1000px) {
   .map-block {
-    height: calc(100vh - v.$header-height--mid);
-  }
-}
-
-@media (max-width: 850px) {
-  .map-block {
-    height: calc(100vh - v.$header-height--low);
-  }
-}
-
-@media (max-width: 700px) {
-  .map-block {
-    height: calc(100vh - v.$header-height--low);
-
     &__zone {
       margin: 2rem 6rem 2rem 2rem;
       display: flex;

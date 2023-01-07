@@ -4,12 +4,11 @@
 
 .search-field {
   @extend %flex-center;
-  margin: 3rem 0;
+  margin: 0;
 
   &__icon {
     height: 4rem;
     width: 4rem;
-    font-size: 2rem;
     margin-right: 2rem;
   }
 
@@ -29,19 +28,36 @@
       border: 0.2rem solid color.$font-color--black;
     }
   }
-
-  &--products {
-    margin: 0;
-  }
-  &--tasks {
-    margin: 0;
-  }
 }
 
-@media (max-width: 1030px) {
+@media (max-width: 1200px) {
   .search-field {
     &__input {
       width: 45rem;
+    }
+  }
+}
+
+@media (max-width: 1000px) {
+  .search-field {
+    &__icon {
+      height: 3rem;
+      width: 3rem;
+    }
+
+    &__input {
+      height: 3rem;
+      font-size: 2rem;
+      width: 30rem;
+      margin: 0;
+    }
+  }
+}
+
+@media (max-width: 725px) {
+  .search-field {
+    &__input {
+      width: 30rem;
     }
   }
 }

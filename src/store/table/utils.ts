@@ -20,7 +20,11 @@ export class StoreTableUtils {
 
   public setDefaulMark(itemType: TMarkType, data: IProduct[] | ITask[]) {
     Object.keys(data[0]).forEach((key) => {
-      this.root.storeState.checkMark.changeCheckedMark(key, true, itemType);
+      if (!['categoryId', 'printingHouse'].includes(key)) {
+        this.root.storeState.checkMark.changeCheckedMark(key, true, itemType);
+      } else {
+        this.root.storeState.checkMark.changeCheckedMark(key, false, itemType);
+      }
     });
   }
 }
