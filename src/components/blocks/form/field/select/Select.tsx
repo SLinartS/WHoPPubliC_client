@@ -1,41 +1,44 @@
 import { observer } from 'mobx-react-lite';
-import { ChangeEvent, FC } from 'react';
+import { FC } from 'react';
 
-import { ICategory } from '../../../../../store/category/type';
-import { TChangeFieldHandler } from '../../../../../types/form/type';
+import { IOptions } from '../../../../../store/category/type';
+import { IProductFormDataFields } from '../../../../../store/popup/form/product/type';
+import { TChangeFieldEvent } from '../../../../../types/form/type';
+import { useRootStore } from '../../../../../utils/RootStoreProvider/useRootStore';
 
-interface ISelectFieldInputProps {
-  options: ICategory[];
-  value?: string;
-  changeHandler: TChangeFieldHandler;
+interface IFormFieldSelectProps {
+  options: IOptions[];
+  fieldName: keyof IProductFormDataFields;
 }
 
-const FormFieldSelect: FC<ISelectFieldInputProps> = observer(
-  ({ options, changeHandler, value }) => {
-    /*  to remove the error from the absence of onChange. 
-        See:
-        https://github.com/facebook/react/issues/1118
-        https://github.com/facebook/react/issues/22439 */
-    function changeLocalHandler(e: ChangeEvent<HTMLSelectElement>) {
-      changeHandler(e);
+const FormFieldSelect: FC<IFormFieldSelectProps> = observer(
+  ({ options, fieldName }) => {
+    const { storePopup } = useRootStore();
+
+    function changeFieldHandler(e: TChangeFieldEvent) {
+      storePopup.form.product.setFormField(fieldName, e.target.value);
+    }
+
+    function getValue(): string {
+      return storePopup.form.product.getFormField(fieldName);
     }
 
     return (
       <select
-        className='form-block__select'
-        value={value}
-        onChange={changeLocalHandler}
+        className='form-layout__select'
+        value={getValue()}
+        onChange={changeFieldHandler}
       >
         <option
-          className='form-block__option'
+          className='form-layout__option'
           value='unset'
         >
-          --- Выберите категорию ---
+          Выберите категорию
         </option>
         {options.map((option) => (
           <option
             key={option.id}
-            className='form-block__option'
+            className='form-layout__option'
             value={option.id}
           >
             {option.title}

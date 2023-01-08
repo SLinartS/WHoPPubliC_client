@@ -1,0 +1,61 @@
+@use '/src/styles/global/colors.scss' as color;
+@use '/src/styles/global/variables.scss' as v;
+@use '/src/styles/global/layouts/display.scss';
+
+.form-layout {
+  &__field {
+    position: relative;
+    width: 100%;
+    margin: 0;
+
+    &--product {
+      &-article,
+      &-points {
+        width: fit-content;
+      }
+    }
+    &--task {
+      &-points {
+        width: fit-content;
+        align-items: center;
+        justify-content: center;
+      }
+    }
+  }
+
+  &__error {
+    font-size: 1.6rem;
+    color: color.$second-color;
+    width: 100%;
+    position: absolute;
+    top: -2.2rem;
+    text-align: right;
+  }
+
+  &__input,
+  &__select {
+    background-color: color.$font-color--white;
+    font-size: 2rem;
+    height: 4rem;
+    width: 100%;
+    border: 0.1rem solid color.$font-color--black;
+    border-radius: 1rem;
+
+    &:focus {
+      outline: none;
+      border: 0.2rem solid color.$font-color--black;
+    }
+  }
+
+  &__text {
+    font-size: 3.6rem;
+    font-weight: 700;
+  }
+
+  &__choose-icon {
+    display: block;
+    width: 6rem;
+    height: 6rem;
+    cursor: pointer;
+  }
+}

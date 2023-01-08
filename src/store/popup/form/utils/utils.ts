@@ -36,23 +36,18 @@ export class StorePopupFormUtils {
     this.root.storePopup.form.state.isDisplayDefaultErrors = false;
   }
 
-  public getFilteredProducts(
-    productArray: IProduct[],
-    excludeColumns: Array<keyof IProduct>,
-  ) {
+  public getFilteredProducts(productArray: IProduct[]) {
     const filteredProducts: ITableObject[] = [];
     for (const product of productArray) {
       let filteredColumns: ITableObject = { id: product.id };
       for (const [key, column] of Object.entries(product)) {
         const typedKey: keyof IProduct = key;
-        if (!excludeColumns.includes(typedKey) && key !== 'id') {
-          filteredColumns[typedKey] = column;
-        }
+
+        filteredColumns[typedKey] = column;
       }
       filteredProducts.push(filteredColumns);
       filteredColumns = { id: { value: 0, alias: 'ID' } };
     }
-
     return filteredProducts;
   }
 

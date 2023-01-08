@@ -1,26 +1,21 @@
 import { observer } from 'mobx-react-lite';
 import { FC } from 'react';
 
-import plusImage from '../../../../../assets/icons/choose.png';
-import { TMouseButtonEventHandler } from '../../../../../types/form/type';
+import chooseIcon from '../../../../../assets/icons/choose.png';
+import { TMouseImgEventHandler } from '../../../../../types/form/type';
 
 interface IFormFieldPointProps {
-  clickHandler: TMouseButtonEventHandler;
+  clickHandler: TMouseImgEventHandler;
 }
 
 const FormFieldPoint: FC<IFormFieldPointProps> = observer(
   ({ clickHandler }) => (
-    <button
-      type='button'
-      className='form-block__add-point'
+    <img
+      className='form-layout__choose-icon'
+      src={chooseIcon}
+      alt='choose point'
       onClick={clickHandler}
-    >
-      <img
-        className='form-block__plus-icon'
-        src={plusImage}
-        alt='plus'
-      />
-    </button>
+    />
   ),
 );
 

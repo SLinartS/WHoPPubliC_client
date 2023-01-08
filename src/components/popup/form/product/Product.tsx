@@ -1,28 +1,20 @@
 import { observer } from 'mobx-react-lite';
 import { FC, useEffect } from 'react';
 
-import imagePlaceholder from '../../../../assets/images/placeholder.jpg';
-import { IProductFormDataFields } from '../../../../store/popup/form/product/type';
-import { TChangeFieldEvent } from '../../../../types/form/type';
+import imagePlaceholder from '../../../../assets/images/placeholder.png';
 import { useRootStore } from '../../../../utils/RootStoreProvider/useRootStore';
-import Button from '../../../blocks/button/Button';
+import AssembledBlockFieldInput from '../../../blocks/form/assembled/BlockFieldInput';
+import AssembledBlockFieldSelect from '../../../blocks/form/assembled/BlockFieldSelect';
+import AssembledBlockFieldText from '../../../blocks/form/assembled/BlockFieldText';
 import FormBlock from '../../../blocks/form/block/Block';
+import FormBlockTitle from '../../../blocks/form/block/title/Title';
 import FormField from '../../../blocks/form/field/Field';
-import FormFieldInput from '../../../blocks/form/field/input/Input';
 import FormFieldPoint from '../../../blocks/form/field/point/Point';
-import FormFieldSelect from '../../../blocks/form/field/select/Select';
 import FormLayout from '../../../blocks/form/layout/Layout';
 import WindowHeaderForm from '../../../blocks/windowHeader/form/Form';
 
 const PopupFormProduct: FC = observer(() => {
   const { storePopup, storeProduct, storeCategory } = useRootStore();
-
-  function changeFieldHandler(
-    e: TChangeFieldEvent,
-    fieldName: keyof IProductFormDataFields,
-  ) {
-    storePopup.form.product.setFormField(fieldName, e.target.value);
-  }
 
   function closeHandler() {
     storePopup.status.hideProductForm();
@@ -73,127 +65,78 @@ const PopupFormProduct: FC = observer(() => {
     <div className='popup popup--form popup--form-add-product'>
       <WindowHeaderForm
         title='Добавить партию товара'
-        saveEvent={saveHandler}
-        closeEvent={closeHandler}
+        backEventHandler={closeHandler}
+        saveEventHandler={saveHandler}
+        closeEventHandler={closeHandler}
       />
       <div className='popup--form-add-product__content-block'>
-        <FormLayout classes='form-block--article-info'>
-          <FormBlock
+        <FormLayout classes='main-info'>
+          <AssembledBlockFieldInput
+            typeForm='product'
+            fieldName='title'
+            titleText='Название'
+          />
+          <AssembledBlockFieldInput
+            typeForm='product'
+            fieldName='author'
+            titleText='Автор'
+          />
+          <AssembledBlockFieldSelect
+            typeForm='product'
+            fieldName='categoryId'
+            titleText='Категория'
+            options={storeCategory.state.categories}
+          />
+        </FormLayout>
+
+        <FormLayout classes='article-info'>
+          <AssembledBlockFieldText
+            typeForm='product'
+            fieldName='article'
             titleText='Артикул'
-            additionalTitleClasses='form-block__title--big'
+          />
+        </FormLayout>
+
+        <FormLayout classes='second-info'>
+          <AssembledBlockFieldInput
+            typeForm='product'
+            fieldName='yearOfPublication'
+            titleText='Год издания'
+          />
+          <AssembledBlockFieldInput
+            typeForm='product'
+            fieldName='printingHouse'
+            titleText='Типография'
+          />
+          <AssembledBlockFieldInput
+            typeForm='product'
+            fieldName='number'
+            titleText='Количество'
+          />
+          <AssembledBlockFieldInput
+            typeForm='product'
+            fieldName='publishingHouse'
+            titleText='Издательство'
+          />
+          <AssembledBlockFieldInput
+            typeForm='product'
+            fieldName='printDate'
+            titleText='Дата печати'
+          />
+        </FormLayout>
+
+        <FormLayout classes='points'>
+          <FormBlock
+            titleText=''
+            classes='product-points'
           >
             <FormField
-              errors={storePopup.form.product.getFormErrors('article')}
+              customErrors={storePopup.select.points.arrayErrors}
+              typeForm='custom'
+              classes='product-points'
             >
-              <FormFieldInput
-                value={storePopup.form.product.getFormField('article')}
-                changeHandler={(e) => changeFieldHandler(e, 'article')}
-                classes='form-block__input--big'
-              />
-            </FormField>
-            <Button
-              classes='button--window-header'
-              text='Сгенерировать'
-            />
-          </FormBlock>
-        </FormLayout>
-
-        <FormLayout classes='form-block--title-info'>
-          <FormBlock titleText='Название'>
-            <FormField errors={storePopup.form.product.getFormErrors('title')}>
-              <FormFieldInput
-                value={storePopup.form.product.getFormField('title')}
-                changeHandler={(e) => changeFieldHandler(e, 'title')}
-              />
-            </FormField>
-          </FormBlock>
-        </FormLayout>
-
-        <FormLayout classes='form-block--main-info'>
-          <FormBlock titleText='Автор'>
-            <FormField errors={storePopup.form.product.getFormErrors('author')}>
-              <FormFieldInput
-                value={storePopup.form.product.getFormField('author')}
-                changeHandler={(e) => changeFieldHandler(e, 'author')}
-              />
-            </FormField>
-          </FormBlock>
-          <FormBlock titleText='Категория'>
-            <FormField
-              errors={storePopup.form.product.getFormErrors('categoryId')}
-            >
-              <FormFieldSelect
-                value={storePopup.form.product.getFormField('categoryId')}
-                changeHandler={(e) => changeFieldHandler(e, 'categoryId')}
-                options={storeCategory.state.categories}
-              />
-            </FormField>
-          </FormBlock>
-        </FormLayout>
-
-        <FormLayout classes='form-block--second-info'>
-          <FormBlock titleText='Год издания'>
-            <FormField
-              errors={storePopup.form.product.getFormErrors(
-                'yearOfPublication',
-              )}
-            >
-              <FormFieldInput
-                value={storePopup.form.product.getFormField(
-                  'yearOfPublication',
-                )}
-                changeHandler={(e) =>
-                  changeFieldHandler(e, 'yearOfPublication')
-                }
-              />
-            </FormField>
-          </FormBlock>
-          <FormBlock titleText='Количество товаров'>
-            <FormField errors={storePopup.form.product.getFormErrors('number')}>
-              <FormFieldInput
-                value={storePopup.form.product.getFormField('number')}
-                changeHandler={(e) => changeFieldHandler(e, 'number')}
-              />
-            </FormField>
-          </FormBlock>
-        </FormLayout>
-
-        <FormLayout classes='form-block--other-info'>
-          <FormBlock titleText='Дата печати'>
-            <FormField
-              errors={storePopup.form.product.getFormErrors('printDate')}
-            >
-              <FormFieldInput
-                value={storePopup.form.product.getFormField('printDate')}
-                changeHandler={(e) => changeFieldHandler(e, 'printDate')}
-              />
-            </FormField>
-          </FormBlock>
-          <FormBlock titleText='Типография'>
-            <FormField
-              errors={storePopup.form.product.getFormErrors('printingHouse')}
-            >
-              <FormFieldInput
-                value={storePopup.form.product.getFormField('printingHouse')}
-                changeHandler={(e) => changeFieldHandler(e, 'printingHouse')}
-              />
-            </FormField>
-          </FormBlock>
-          <FormBlock titleText='Издательство'>
-            <FormField
-              errors={storePopup.form.product.getFormErrors('publishingHouse')}
-            >
-              <FormFieldInput
-                value={storePopup.form.product.getFormField('publishingHouse')}
-                changeHandler={(e) => changeFieldHandler(e, 'publishingHouse')}
-              />
-            </FormField>
-          </FormBlock>
-        </FormLayout>
-        <FormLayout>
-          <FormBlock titleText='Точки'>
-            <FormField errors={storePopup.select.points.arrayErrors}>
               <FormFieldPoint clickHandler={openSelectPointsHandler} />
+              <FormBlockTitle text='Точки' />
             </FormField>
           </FormBlock>
         </FormLayout>
@@ -207,7 +150,6 @@ const PopupFormProduct: FC = observer(() => {
             Фотография товара
           </p>
         </div>
-        <div className='popup--form-add-product__empty-block' />
       </div>
     </div>
   );

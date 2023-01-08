@@ -1,13 +1,13 @@
 import { observer } from 'mobx-react-lite';
 import { FC, useEffect, useState } from 'react';
 
-import { ITaskFormDataFields } from '../../../../store/popup/form/task/type';
-import { TChangeFieldEvent } from '../../../../types/form/type';
 import { useRootStore } from '../../../../utils/RootStoreProvider/useRootStore';
 import Button from '../../../blocks/button/Button';
+import AssembledBlockFieldInput from '../../../blocks/form/assembled/BlockFieldInput';
+import AssembledBlockFieldText from '../../../blocks/form/assembled/BlockFieldText';
 import FormBlock from '../../../blocks/form/block/Block';
+import FormBlockTitle from '../../../blocks/form/block/title/Title';
 import FormField from '../../../blocks/form/field/Field';
-import FormFieldInput from '../../../blocks/form/field/input/Input';
 import FormFieldPoint from '../../../blocks/form/field/point/Point';
 import FormLayout from '../../../blocks/form/layout/Layout';
 import Table from '../../../blocks/table/Table';
@@ -17,13 +17,6 @@ const PopupFormTask: FC = observer(() => {
   const [isAcceptance, setIsAcceptance] = useState<boolean>(true);
   const { storePopup, storeTask, storeProduct, storeState, storeTable } =
     useRootStore();
-
-  function changeFieldHandler(
-    e: TChangeFieldEvent,
-    fieldName: keyof ITaskFormDataFields,
-  ) {
-    storePopup.form.task.setFormField(fieldName, e.target.value);
-  }
 
   function closeHandler() {
     storePopup.status.hideTaskForm();
@@ -85,7 +78,18 @@ const PopupFormTask: FC = observer(() => {
     }
 
     if (storeProduct.status.get('fetch') === 'pending') {
-      storeProduct.fetch.products();
+      storeProduct.fetch.products(() => {
+        storeTable.utils.setDefaulMark(
+          'products',
+          storeProduct.state.products.data,
+          [
+            'categoryId',
+            'printingHouse',
+            'yearOfPublication',
+            'publishingHouse',
+          ],
+        );
+      });
     }
   }, [storeState.interface.getCurrentTypeOfTask()]);
 
@@ -93,55 +97,50 @@ const PopupFormTask: FC = observer(() => {
     <div className='popup popup--form popup--form-add-task'>
       <WindowHeaderForm
         title={`Добавить задачу ${isAcceptance ? 'приёмки' : 'отгрузки'}`}
-        saveEvent={saveHandler}
-        closeEvent={closeHandler}
+        backEventHandler={closeHandler}
+        saveEventHandler={saveHandler}
+        closeEventHandler={closeHandler}
       />
 
       <div className='popup--form-add-task__content-block'>
-        <FormLayout classes='form-block--article-info'>
-          <FormBlock
-            titleText='Название'
-            additionalTitleClasses='form-block__title--big'
-          >
-            <FormField errors={storePopup.form.task.getFormErrors('article')}>
-              <FormFieldInput
-                value={storePopup.form.task.getFormField('article')}
-                changeHandler={(e) => changeFieldHandler(e, 'article')}
-                classes='form-block__input--big'
-              />
-            </FormField>
-            <Button
-              classes='button--window-header'
-              text='Сгенерировать'
-            />
-          </FormBlock>
+        <FormLayout classes='article-info'>
+          <AssembledBlockFieldText
+            typeForm='task'
+            fieldName='article'
+            titleText='Артикул'
+          />
         </FormLayout>
 
-        <FormLayout classes='form-block--title-info'>
-          <FormBlock titleText='Дата начала'>
-            <FormField errors={storePopup.form.task.getFormErrors('dateStart')}>
-              <FormFieldInput
-                value={storePopup.form.task.getFormField('dateStart')}
-                changeHandler={(e) => changeFieldHandler(e, 'dateStart')}
-              />
-            </FormField>
-          </FormBlock>
-          <FormBlock titleText='Дата окончания'>
-            <FormField errors={storePopup.form.task.getFormErrors('dateEnd')}>
-              <FormFieldInput
-                value={storePopup.form.task.getFormField('dateEnd')}
-                changeHandler={(e) => changeFieldHandler(e, 'dateEnd')}
-              />
-            </FormField>
-          </FormBlock>
+        <FormLayout classes='time-info'>
+          <AssembledBlockFieldInput
+            typeForm='task'
+            fieldName='dateStart'
+            titleText='Дата начала'
+          />
+          <AssembledBlockFieldInput
+            typeForm='task'
+            fieldName='dateEnd'
+            titleText='Дата окончания'
+          />
         </FormLayout>
 
-        <FormLayout>
+        <FormLayout classes='points'>
           {isAcceptance ? (
-            <FormBlock titleText='Точки склада'>
-              <FormField errors={storePopup.select.warehousePoints.arrayErrors}>
+            <FormBlock
+              titleText=''
+              classes='task-points'
+            >
+              <FormField
+                typeForm='custom'
+                customErrors={storePopup.select.warehousePoints.arrayErrors}
+                classes='task-points'
+              >
                 <FormFieldPoint clickHandler={openSelectMapHandler} />
               </FormField>
+              <FormBlockTitle
+                text='Точки'
+                classes='task-points'
+              />
             </FormBlock>
           ) : (
             ''
@@ -166,7 +165,6 @@ const PopupFormTask: FC = observer(() => {
             <Table
               data={storePopup.form.utils.utils.getFilteredProducts(
                 storePopup.select.products.getProductListData(),
-                [],
               )}
               keyWord='article'
               valuesType='products'

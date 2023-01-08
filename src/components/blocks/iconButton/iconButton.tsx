@@ -1,0 +1,31 @@
+import { FC } from 'react';
+
+import backIcon from '../../../assets/icons/back.svg';
+import closeIcon from '../../../assets/icons/close.svg';
+import saveIcon from '../../../assets/icons/save.svg';
+import { IIconButtonProps } from './type';
+
+const IconButton: FC<IIconButtonProps> = ({ eventHandler, iconType }) => {
+  function getIcon(): string {
+    switch (iconType) {
+      case 'back':
+        return backIcon;
+      case 'close':
+        return closeIcon;
+      case 'save':
+        return saveIcon;
+      default:
+        return '';
+    }
+  }
+  return (
+    <img
+      className={`icon-button icon-button--${iconType}`}
+      src={getIcon()}
+      alt='save'
+      onClick={eventHandler}
+    />
+  );
+};
+
+export default IconButton;

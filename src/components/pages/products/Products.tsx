@@ -1,5 +1,5 @@
 import { observer } from 'mobx-react-lite';
-import { FC, MouseEvent, useEffect } from 'react';
+import { FC, MouseEvent, ReactNode, useEffect } from 'react';
 
 import addIcon from '../../../assets/icons/add.svg';
 import deleteIcon from '../../../assets/icons/delete.svg';
@@ -47,12 +47,51 @@ const Products: FC = observer(() => {
     storeAction.delete.deleteController(itemType);
   }
 
+  function getDataForSelects() {
+    const numberProductsWithSelectedId =
+      storeProduct.state.products.data.filter(
+        (product) =>
+          product.id.value === storeTable.selectedItem.getItemId('products'),
+      ).length;
+
+    if (numberProductsWithSelectedId) {
+      return Object.entries(
+        storeProduct.state.products.data.filter(
+          (product) =>
+            product.id.value === storeTable.selectedItem.getItemId('products'),
+        )[0],
+      );
+    }
+    return Object.entries(storeProduct.state.products.data[0]);
+  }
+
+  function displaySelects(): ReactNode[] {
+    const selectNodes: ReactNode[] = [];
+    if (storeProduct.state.products.data[0]) {
+      selectNodes.push(
+        getDataForSelects().map(([key, item]) => (
+          <SelectTable
+            key={key + item.value + item.alias}
+            checkMarkValue={key}
+            alias={item.alias}
+            value={String(item.value)}
+            mark='products'
+          />
+        )),
+      );
+    } else {
+      selectNodes.push(<p>Отсутствуют данные</p>);
+    }
+    return selectNodes;
+  }
+
   useEffect(() => {
     if (storeProduct.status.get('fetch') === 'pending') {
       storeProduct.fetch.products(() => {
         storeTable.utils.setDefaulMark(
           'products',
           storeProduct.state.products.data,
+          ['categoryId', 'printingHouse'],
         );
       });
     }
@@ -108,19 +147,7 @@ const Products: FC = observer(() => {
       </div>
       <div className='products__select'>
         {storeProduct.status.get('fetch') === 'done' ? (
-          Object.entries(
-            storeProduct.state.products.data[
-              storeTable.selectedItem.getItemId('products') - 1
-            ],
-          ).map(([key, item]) => (
-            <SelectTable
-              key={key + item.value + item.alias}
-              checkMarkValue={key}
-              alias={item.alias}
-              value={String(item.value)}
-              mark='products'
-            />
-          ))
+          displaySelects()
         ) : (
           <Loader />
         )}

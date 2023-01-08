@@ -1,9 +1,10 @@
-@use '/src/styles/global/colors.scss' as *;
+@use '/src/styles/global/colors.scss' as color;
 @use '/src/styles/global/variables.scss' as v;
+@use '/src/styles/global/layouts/display.scss';
 
 .popup {
   position: absolute;
-  background-color: $font-color--white;
+  background-color: color.$font-color--white;
   top: 50%;
   left: calc(50% - 2rem);
   transform: translate(-50%, -50%);
@@ -41,7 +42,7 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      background-color: $font-color--white;
+      background-color: color.$font-color--white;
 
       &__free-space-indicator {
         margin: 2rem 35% 0;
@@ -51,13 +52,19 @@
       }
     }
 
+    &-choise {
+      &__table {
+        padding: 0 2rem;
+      }
+    }
+
     &-add-product {
       &__header {
         display: grid;
         align-items: center;
-        grid-template-columns: repeat(5, 1fr);
+        grid-template-columns: 3fr 1fr;
         column-gap: 3rem;
-        background-color: $main-color;
+        background-color: color.$main-color;
         height: v.$header-height--standart;
         border-radius: 1rem 1rem 0 0;
         padding: 0 3rem;
@@ -70,16 +77,16 @@
 
       &__content-block {
         display: grid;
-        grid-template-columns: 2fr 1fr;
-        grid-template-rows: repeat(5, auto) 1fr;
-        background-color: $font-color--black;
+        grid-template-columns: 3fr 1fr;
+        grid-template-rows: repeat(3, auto);
+        background-color: color.$font-color--black;
         gap: 0.2rem;
-        font-size: 2.4rem;
+        font-size: 2rem;
       }
 
       &__photo {
         width: 20rem;
-        height: 50%;
+        height: 20rem;
         padding: 1rem;
 
         &-block {
@@ -87,19 +94,19 @@
           flex-direction: column;
           align-items: center;
           justify-content: center;
-          background-color: $font-color--white;
+          background-color: color.$font-color--white;
           grid-column: 2/3;
-          grid-row: 2/5;
+          grid-row: 2/3;
         }
 
         &-text {
-          margin: 2rem 0 0;
+          margin: 0;
           text-align: center;
         }
       }
 
       &__empty-block {
-        background-color: $font-color--white;
+        background-color: color.$font-color--white;
         grid-column: 1/3;
       }
     }
@@ -107,9 +114,9 @@
     &-add-task {
       &__content-block {
         display: grid;
-        grid-template-columns: 6fr 4fr;
-        grid-template-rows: repeat(2, auto) 1fr;
-        background-color: $font-color--black;
+        grid-template-columns: 4fr 6fr 2fr;
+        grid-template-rows: 12rem 1fr;
+        background-color: color.$font-color--black;
         gap: 0.2rem;
         overflow-y: hidden;
       }
@@ -117,8 +124,8 @@
       &__table-block {
         height: 100%;
         overflow-y: scroll;
-        background-color: $font-color--white;
-        grid-column: 1/3;
+        background-color: color.$font-color--white;
+        grid-column: 1/4;
         display: flex;
         flex-direction: column;
         align-items: center;
@@ -138,6 +145,9 @@
   }
 }
 
+@media (max-width: 700px) {
+}
+
 .popup-enter {
   opacity: 0;
 }
@@ -154,37 +164,4 @@
 .popup-exit-active {
   opacity: 0;
   transition: opacity 200ms ease-in-out;
-}
-
-@media (max-width: 700px) {
-  .popup {
-    &--form {
-      &-add-product {
-        &__content-block {
-          font-size: 1.6rem;
-        }
-
-        &__photo {
-          width: 16rem;
-          height: 60%;
-          padding: 1rem;
-
-          &-text {
-            margin: 2rem 0 0;
-            text-align: center;
-          }
-        }
-      }
-    }
-  }
-}
-
-@media (max-width: 700px) {
-  .popup {
-    &--form {
-      &-add-task {
-        font-size: 2rem;
-      }
-    }
-  }
 }

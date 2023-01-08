@@ -1,44 +1,42 @@
 import { observer } from 'mobx-react-lite';
 import { FC } from 'react';
 
-import { TMouseButtonEventHandler } from '../../../../types/form/type';
-import Button from '../../button/Button';
+import { TMouseImgEventHandler } from '../../../../types/form/type';
+import IconButton from '../../iconButton/iconButton';
 import WindowHeader from '../WindowHeader';
 
 interface IWindowHeaderFormProps {
   title: string;
-  textSaveButton?: string;
-  textCloseButton?: string;
-  saveEvent?: TMouseButtonEventHandler;
-  closeEvent: TMouseButtonEventHandler;
+  backEventHandler?: TMouseImgEventHandler;
+  saveEventHandler?: TMouseImgEventHandler;
+  closeEventHandler: TMouseImgEventHandler;
 }
 
 const WindowHeaderForm: FC<IWindowHeaderFormProps> = observer(
-  ({
-    textSaveButton = 'Сохранить',
-    textCloseButton = 'Отмена',
-    saveEvent,
-    closeEvent,
-    title,
-  }) => {
+  ({ title, backEventHandler, saveEventHandler, closeEventHandler }) => {
     return (
       <WindowHeader
         title={title}
         classes='window-header--form'
       >
-        {saveEvent && (
-          <Button
-            classes='button--window-header'
-            text={textSaveButton}
-            clickHandler={saveEvent}
+        <div className='window-header__button-block'>
+          {backEventHandler && (
+            <IconButton
+              iconType='back'
+              eventHandler={backEventHandler}
+            />
+          )}
+          {saveEventHandler && (
+            <IconButton
+              iconType='save'
+              eventHandler={saveEventHandler}
+            />
+          )}
+          <IconButton
+            iconType='close'
+            eventHandler={closeEventHandler}
           />
-        )}
-
-        <Button
-          classes='button--window-header'
-          text={textCloseButton}
-          clickHandler={closeEvent}
-        />
+        </div>
       </WindowHeader>
     );
   },

@@ -31,8 +31,7 @@ const PopupSelectPoints: FC = observer(() => {
             ? 'приёмки'
             : 'отгрузки'
         }`}
-        closeEvent={closeHandler}
-        textCloseButton='Сбросить'
+        closeEventHandler={closeHandler}
       />
       {storePoint.status.get('fetch') === 'done' ? (
         <PointsMap

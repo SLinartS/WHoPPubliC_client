@@ -49,9 +49,8 @@ const PopupSelectMap: FC = observer(() => {
     <div className='popup popup--form popup--form-select'>
       <WindowHeaderForm
         title='Выбрать раскладки на складе'
-        saveEvent={saveHandler}
-        closeEvent={closeHandler}
-        textCloseButton='Сбросить'
+        saveEventHandler={saveHandler}
+        closeEventHandler={closeHandler}
       />
       <div
         className='popup--form-select__free-space-indicator'

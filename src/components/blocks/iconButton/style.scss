@@ -1,0 +1,42 @@
+@use '/src/styles/global/colors.scss' as color;
+@use '/src/styles/global/variables.scss' as v;
+@use '/src/styles/global/layouts/display.scss';
+
+.icon-button {
+  width: 5rem;
+  height: 5rem;
+  object-fit: cover;
+  box-sizing: border-box;
+  padding: 0.8rem;
+  border-radius: 1rem;
+  border: 0.2rem solid color.$font-color--white;
+  transition: all 0.1s ease-in-out;
+
+  &--back {
+    background-color: color.$second-color;
+    &:hover {
+      background-color: color.$second-color--hover;
+    }
+    &:active {
+      background-color: color.$second-color--active;
+    }
+  }
+  &--save {
+    background-color: color.$third-color;
+    &:hover {
+      background-color: color.$third-color--hover;
+    }
+    &:active {
+      background-color: color.$third-color--active;
+    }
+  }
+  &--close {
+    background-color: color.$fourth-color;
+    &:hover {
+      background-color: color.$fourth-color--hover;
+    }
+    &:active {
+      background-color: color.$fourth-color--active;
+    }
+  }
+}

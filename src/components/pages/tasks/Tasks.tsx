@@ -100,7 +100,11 @@ const Tasks: FC = observer(() => {
       );
     }
     storeTask.fetch[valuesType](() => {
-      storeTable.utils.setDefaulMark('tasks', storeTask.state[listType].data);
+      storeTable.utils.setDefaulMark(
+        'tasks',
+        storeTask.state[listType].data,
+        [],
+      );
     });
     return <Loader />;
   }

@@ -1,29 +1,54 @@
 import { observer } from 'mobx-react-lite';
-import { ChangeEvent, FC } from 'react';
+import { FC } from 'react';
 
-import { TChangeFieldHandler } from '../../../../../types/form/type';
+import { IProductFormDataFields } from '../../../../../store/popup/form/product/type';
+import { ITaskFormDataFields } from '../../../../../store/popup/form/task/type';
+import { TChangeFieldEvent } from '../../../../../types/form/type';
+import { useRootStore } from '../../../../../utils/RootStoreProvider/useRootStore';
 
 interface IFormFieldInputProps {
+  typeForm: 'task' | 'product';
+  fieldName: keyof IProductFormDataFields | keyof ITaskFormDataFields;
   classes?: string;
-  value: string;
-  changeHandler: TChangeFieldHandler;
 }
 
 const FormFieldInput: FC<IFormFieldInputProps> = observer(
-  ({ classes, value, changeHandler }) => {
-    /*  to remove the error from the absence of onChange. 
-        See:
-        https://github.com/facebook/react/issues/1118
-        https://github.com/facebook/react/issues/22439 */
-    function changeLocalHandler(e: ChangeEvent<HTMLInputElement>) {
-      changeHandler(e);
+  ({ typeForm, fieldName, classes }) => {
+    const { storePopup } = useRootStore();
+
+    function changeFieldHandler(e: TChangeFieldEvent) {
+      switch (typeForm) {
+        case 'task':
+          storePopup.form.task.setFormField(
+            fieldName as keyof ITaskFormDataFields,
+            e.target.value,
+          );
+          break;
+        case 'product':
+          storePopup.form.product.setFormField(
+            fieldName as keyof IProductFormDataFields,
+            e.target.value,
+          );
+          break;
+        default:
+      }
+    }
+    function getValue(): string {
+      if (typeForm === 'task') {
+        return storePopup.form.task.getFormField(
+          fieldName as keyof ITaskFormDataFields,
+        );
+      }
+      return storePopup.form.product.getFormField(
+        fieldName as keyof IProductFormDataFields,
+      );
     }
 
     return (
       <input
-        value={value}
-        className={`form-block__input ${classes}`}
-        onChange={changeLocalHandler}
+        value={getValue()}
+        className={`form-layout__input ${classes}`}
+        onChange={changeFieldHandler}
       />
     );
   },

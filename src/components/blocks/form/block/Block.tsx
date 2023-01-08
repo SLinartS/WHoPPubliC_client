@@ -1,23 +1,23 @@
 import { observer } from 'mobx-react-lite';
 import { FC, ReactNode } from 'react';
 
-import FormTitle from '../title/Title';
+import FormTitle from './title/Title';
 
 interface IFormBlockProps {
-  additionalTitleClasses?: string;
   titleText: string;
   children: ReactNode;
+  classes?: string;
 }
 
 const FormBlock: FC<IFormBlockProps> = observer(
-  ({ additionalTitleClasses, titleText, children }) => (
+  ({ classes, titleText, children }) => (
     <div
-      className='form-block__block'
+      className={`form-layout__block form-layout__block--${classes}`}
       data-testid='form-block-div'
     >
       <FormTitle
         text={titleText}
-        classes={additionalTitleClasses}
+        classes={classes}
       />
       {children}
     </div>

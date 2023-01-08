@@ -62,11 +62,32 @@ export class StoreActionDelete {
   ): void {
     this.root.storeTask.delete.task(taskId, isDeleteProducts, () => {
       this.root.storePopup.status.hideWindowConfirm();
-      if (taskType === 'acceptanceTasks') {
-        this.root.storeTask.status.set('fetchAcceptance', 'pending');
-      }
-      if (taskType === 'shipmentTasks') {
-        this.root.storeTask.status.set('fetchShipment', 'pending');
+      switch (taskType) {
+        case 'acceptanceTasks':
+          this.root.storeTask.fetch.acceptanceTasks(() => {
+            this.root.storeTable.selectedItem.setItemId(
+              'acceptanceTasks',
+              this.root.storeTask.state.acceptanceList.data[0].id.value,
+            );
+          });
+          break;
+        case 'intraTasks':
+          this.root.storeTask.fetch.intraTasks(() => {
+            this.root.storeTable.selectedItem.setItemId(
+              'intraTasks',
+              this.root.storeTask.state.intraList.data[0].id.value,
+            );
+          });
+          break;
+        case 'shipmentTasks':
+          this.root.storeTask.fetch.shipmentTasks(() => {
+            this.root.storeTable.selectedItem.setItemId(
+              'shipmentTasks',
+              this.root.storeTask.state.shipmentList.data[0].id.value,
+            );
+          });
+          break;
+        default:
       }
     });
   }
@@ -76,7 +97,12 @@ export class StoreActionDelete {
       title: `Удалить товар Id:${productId}?`,
       firstButtonEvent: () => {
         this.root.storeProduct.delete.product(productId, () => {
-          this.root.storeProduct.fetch.products();
+          this.root.storeProduct.fetch.products(() => {
+            this.root.storeTable.selectedItem.setItemId(
+              'products',
+              this.root.storeProduct.state.products.data[0].id.value,
+            );
+          });
           this.root.storePopup.status.hideWindowConfirm();
         });
       },

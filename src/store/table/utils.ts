@@ -11,16 +11,23 @@ export class StoreTableUtils {
   }
 
   public getColumnsWithMark(itemType: TMarkType) {
-    return Object.entries(
-      this.root.storeState.checkMark.getCheckMarksByType(itemType),
-    )
-      .filter(([key, value]) => value.value === true)
-      .map((item) => item[0]);
+    return (
+      Object.entries(
+        this.root.storeState.checkMark.getCheckMarksByType(itemType),
+      )
+        // eslint-disable-next-line @typescript-eslint/no-unused-vars
+        .filter(([key, value]) => value.value === true)
+        .map((item) => item[0])
+    );
   }
 
-  public setDefaulMark(itemType: TMarkType, data: IProduct[] | ITask[]) {
+  public setDefaulMark(
+    itemType: TMarkType,
+    data: IProduct[] | ITask[],
+    exсludeColumns: string[],
+  ) {
     Object.keys(data[0]).forEach((key) => {
-      if (!['categoryId', 'printingHouse'].includes(key)) {
+      if (!exсludeColumns.includes(key)) {
         this.root.storeState.checkMark.changeCheckedMark(key, true, itemType);
       } else {
         this.root.storeState.checkMark.changeCheckedMark(key, false, itemType);
