@@ -9,6 +9,7 @@ interface ISarchFieldProps {
 }
 
 const SearchField: FC<ISarchFieldProps> = observer(
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   ({ searchedItemType = 'products', classes }) => {
     return (
       <div className={`search-field ${classes}`}>

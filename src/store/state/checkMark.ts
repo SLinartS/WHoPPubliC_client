@@ -24,6 +24,7 @@ export class StoreStateCheckMark {
 
   public getCheckMarksByType(mark: TMarkType) {
     const filteredArray = Object.entries(this.checkMarks).filter(
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
       ([key, item]) => item.mark === mark,
     );
 

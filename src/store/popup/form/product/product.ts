@@ -21,7 +21,10 @@ export class StorePopupFormProduct {
     printDate: INITIAL_VALUE,
     printingHouse: INITIAL_VALUE,
     publishingHouse: INITIAL_VALUE,
-    categoryId: INITIAL_VALUE,
+    categoryId: {
+      value: '1',
+      errors: [],
+    },
   };
 
   private _formData: IProductFormDataFields = deepCopy(this.initialFormData);

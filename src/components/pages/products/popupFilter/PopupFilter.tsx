@@ -1,5 +1,6 @@
 import { observer } from 'mobx-react-lite';
 import { FC } from 'react';
+
 import { useRootStore } from '../../../../utils/RootStoreProvider/useRootStore';
 import Loader from '../../../blocks/loader/Loader';
 import SelectTable from '../../../blocks/selectTable/SelectTable';
