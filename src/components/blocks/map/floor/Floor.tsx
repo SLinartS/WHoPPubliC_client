@@ -42,11 +42,11 @@ const MapFloor: FC<IMapFloorProps> = observer(
       if (checkIsAdded()) {
         newStyle.background = `linear-gradient(180deg, 
               #d35f48 ${(freeSpace / capacity) * 100}%, 
-              #7fa89c ${(freeSpace / capacity) * 100}%)`;
+              #59468B ${(freeSpace / capacity) * 100}%)`;
       } else {
         newStyle.background = `linear-gradient(180deg, 
           transparent ${(freeSpace / capacity) * 100}%, 
-          #7fa89c ${(freeSpace / capacity) * 100}%)`;
+          #59468B ${(freeSpace / capacity) * 100}%)`;
       }
       setStyles(newStyle);
     }, [number, freeSpace, capacity, checkIsAdded]);

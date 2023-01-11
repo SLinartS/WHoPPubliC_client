@@ -82,14 +82,6 @@
     border: none;
     display: none;
   }
-
-  &--no-auth {
-    justify-content: center;
-  }
-
-  &__app-name {
-    font-size: 4rem;
-  }
 }
 
 @media (max-width: 1250px) {
@@ -164,10 +156,6 @@
 
     &__bar {
       display: flex;
-    }
-
-    &__app-name {
-      font-size: 3.2rem;
     }
   }
 }

@@ -36,20 +36,6 @@ export class StoreStateInterface {
     this.isShowPopupFilter = false;
   }
 
-  private isViewHeader: boolean = true;
-
-  public getIsViewHeader() {
-    return this.isViewHeader;
-  }
-
-  public showViewHeader() {
-    this.isViewHeader = true;
-  }
-
-  public hideViewHeader() {
-    this.isViewHeader = false;
-  }
-
   private currentTypeOfTask: TTaskType = 'acceptance';
 
   public getCurrentTypeOfTask() {

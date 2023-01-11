@@ -34,7 +34,7 @@
       }
 
       &--selected {
-        background-color: color.$main-color;
+        background: color.$main-color--hover;
       }
 
       &--first {
