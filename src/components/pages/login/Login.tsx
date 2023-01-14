@@ -14,6 +14,7 @@ const LoginPage: FC = observer(() => {
   return (
     <main className='login'>
       <img
+        draggable='false'
         className='login__left-image'
         src={loginWarehouseImage}
         alt='loginWaregouse'
@@ -21,6 +22,7 @@ const LoginPage: FC = observer(() => {
       <div className='login__container'>
         <div className='login__info-block'>
           <img
+            draggable='false'
             className='login__app-icon'
             src={appIcon}
             alt='app icon'
@@ -35,6 +37,7 @@ const LoginPage: FC = observer(() => {
             placeholder='Логин'
           />
           <img
+            draggable='false'
             className='login__icon'
             src={userIcon}
             alt='user'
@@ -45,6 +48,7 @@ const LoginPage: FC = observer(() => {
             placeholder='Пароль'
           />
           <img
+            draggable='false'
             className='login__icon'
             src={passwordIcon}
             alt='user'

@@ -4,6 +4,7 @@
 
 .check-mark {
   @extend %flex-center;
+  cursor: pointer;
 
   &__checkbox {
     display: none;
@@ -11,10 +12,10 @@
 
   &__checkbox + label {
     height: 2.4rem;
-    margin-right: 1rem;
     width: 2.4rem;
     border: 0.1rem solid color.$font-color--black;
     border-radius: 1rem;
+    cursor: pointer;
   }
 
   &__checkbox:checked + label {
@@ -25,6 +26,9 @@
 
   &__title {
     font-size: 2rem;
+    padding-left: 1rem;
+    user-select: none;
+    cursor: pointer;
   }
 }
 

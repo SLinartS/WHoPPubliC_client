@@ -76,6 +76,8 @@
 
   &--select-map {
     grid-template-columns: 1fr;
+    overflow-y: scroll;
+    overflow-x: hidden;
   }
 }
 

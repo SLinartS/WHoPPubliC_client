@@ -24,6 +24,14 @@ const CheckMark: FC<ICheckMarkProps> = observer(
       );
     }
 
+    function onClickCheckMarkHandler() {
+      storeState.checkMark.changeCheckedMark(
+        value,
+        !inputRef.current!.checked,
+        mark,
+      );
+    }
+
     return (
       <div className={`check-mark ${classes}`}>
         <input
@@ -39,7 +47,12 @@ const CheckMark: FC<ICheckMarkProps> = observer(
           htmlFor={value}
           className='check-mark__label'
         />
-        <p className='check-mark__title'>{text}</p>
+        <p
+          className='check-mark__title'
+          onClick={onClickCheckMarkHandler}
+        >
+          {text}
+        </p>
       </div>
     );
   },
