@@ -10,7 +10,7 @@ export interface ITasks {
 export interface IOneTask {
   taskInfo: ITask;
   productIds: number[];
-  warehousePointIds: number[];
+  floorIds: number[];
 }
 
 export interface ITask extends ITableObject {

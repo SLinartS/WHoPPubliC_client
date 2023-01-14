@@ -14,6 +14,15 @@
   &__icon {
     width: 4rem;
     height: 4rem;
+    transition: all 0.1s ease-in-out;
+    cursor: pointer;
+
+    &:hover {
+      filter: brightness(1.2);
+    }
+    &:active {
+      filter: brightness(0.8);
+    }
   }
 
   &__section-button {

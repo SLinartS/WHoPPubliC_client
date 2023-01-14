@@ -5,7 +5,7 @@ import RootStore from '../../../root';
 import { TArrayOrErrorType } from '../../../type';
 import { INITIAL_ARRAY_VALUE } from '../../form/config';
 
-export class StorePopupSelectWarehousePoints {
+export class StorePopupSelectFloors {
   constructor(private readonly root: RootStore) {
     makeAutoObservable(this, {});
   }
@@ -27,7 +27,7 @@ export class StorePopupSelectWarehousePoints {
   public setItems(Items: number[]) {
     this.array.value = Items;
 
-    this.root.storePopup.select.utils.utils.checkErrorsExist('warehousePoints');
+    this.root.storePopup.select.utils.utils.checkErrorsExist('floors');
   }
 
   public checkIsAdded(itemId: number) {
@@ -40,13 +40,13 @@ export class StorePopupSelectWarehousePoints {
   public addItem(ItemId: number) {
     this.array.value.push(ItemId);
 
-    this.root.storePopup.select.utils.utils.checkErrorsExist('warehousePoints');
+    this.root.storePopup.select.utils.utils.checkErrorsExist('floors');
   }
 
   public removeItem(itemId: number) {
     this.array.value = this.array.value.filter((id) => id !== itemId);
 
-    this.root.storePopup.select.utils.utils.checkErrorsExist('warehousePoints');
+    this.root.storePopup.select.utils.utils.checkErrorsExist('floors');
   }
 
   public clearArray() {

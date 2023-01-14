@@ -132,7 +132,7 @@ const PopupFormTask: FC = observer(() => {
             >
               <FormField
                 typeForm='custom'
-                customErrors={storePopup.select.warehousePoints.arrayErrors}
+                customErrors={storePopup.select.floors.arrayErrors}
                 classes='task-points'
               >
                 <FormFieldPoint clickHandler={openSelectMapHandler} />

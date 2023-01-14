@@ -19,20 +19,19 @@ const MapFloor: FC<IMapFloorProps> = observer(
 
     function chooseFloor() {
       if (storePopup.form.state.isSelectedMap) {
-        const floorIsAlreadyAdded =
-          storePopup.select.warehousePoints.checkIsAdded(id);
+        const floorIsAlreadyAdded = storePopup.select.floors.checkIsAdded(id);
 
         if (floorIsAlreadyAdded) {
-          storePopup.select.warehousePoints.removeItem(id);
+          storePopup.select.floors.removeItem(id);
         } else {
-          storePopup.select.warehousePoints.addItem(id);
+          storePopup.select.floors.addItem(id);
         }
       }
     }
 
     const checkIsAdded = useCallback(() => {
-      return storePopup.select.warehousePoints.checkIsAdded(id);
-    }, [storePopup.select.warehousePoints.arrayValue.length]);
+      return storePopup.select.floors.checkIsAdded(id);
+    }, [storePopup.select.floors.arrayValue.length]);
 
     useEffect(() => {
       const newStyle = {

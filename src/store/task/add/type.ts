@@ -10,5 +10,5 @@ export interface IRequestTaskData {
     dateEnd: TValueOrErrorType;
   };
   productIds: number[];
-  warehousePointIds: number[];
+  floorIds: number[];
 }

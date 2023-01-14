@@ -19,7 +19,7 @@ const PopupSelectMap: FC = observer(() => {
   function closeHandler() {
     storePopup.status.showTaskForm();
     storePopup.status.hideSelectMap();
-    storePopup.select.warehousePoints.clearArray();
+    storePopup.select.floors.clearArray();
     storeMap.fetch.map();
   }
 
@@ -29,7 +29,7 @@ const PopupSelectMap: FC = observer(() => {
 
   const isEnoughFreeSpace = useCallback(() => {
     return storePopup.select.utils.floorSpace.isEnoughFreeSpace();
-  }, [storePopup.select.warehousePoints.arrayValue.length]);
+  }, [storePopup.select.floors.arrayValue.length]);
 
   useEffect(() => {
     let backgroundColor: string = '#d35f48';

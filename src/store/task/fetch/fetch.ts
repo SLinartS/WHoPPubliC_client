@@ -23,9 +23,7 @@ export class StoreTaskFetch {
       storePopup.form.task.setFormField('dateEnd', taskInfo.dateEnd.value);
       storePopup.form.task.setFormField('dateStart', taskInfo.dateStart.value);
       storePopup.select.products.setProductList(response.data.productIds);
-      storePopup.select.warehousePoints.setItems(
-        response.data.warehousePointIds,
-      );
+      storePopup.select.floors.setItems(response.data.floorIds);
 
       if (actionIfDone) {
         actionIfDone();

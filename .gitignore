@@ -3,6 +3,7 @@
 # development files
 .vscode
 .env
+.VSCodeCounter
 
 # cache
 .eslintcache

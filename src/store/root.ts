@@ -17,11 +17,11 @@ import { StorePopupFormProduct } from './popup/form/product/product';
 import { StorePopupFormTask } from './popup/form/task/task';
 import { StorePopupFormUtilsError } from './popup/form/utils/error/error';
 import { StorePopupFormUtils } from './popup/form/utils/utils';
+import { StorePopupSelectFloors } from './popup/select/floors/floors';
 import { StorePopupSelectPoints } from './popup/select/points/points';
 import { StorePopupSelectProducts } from './popup/select/products/products';
 import { StorePopupSelectUtilsFloorSpace } from './popup/select/utils/floorSpace/floorSpace';
 import { StorePopupSelectUtils } from './popup/select/utils/utils';
-import { StorePopupSelectWarehousePoints } from './popup/select/warehousePoints/warehousePoints';
 import { StorePopupStatus } from './popup/status/status';
 import { StorePopupWindowConfirm } from './popup/window/confirm/confirm';
 import { StorePopupWindowInformation } from './popup/window/information/information';
@@ -107,7 +107,7 @@ interface IStorePopup {
   };
   select: {
     points: StorePopupSelectPoints;
-    warehousePoints: StorePopupSelectWarehousePoints;
+    floors: StorePopupSelectFloors;
     products: StorePopupSelectProducts;
     utils: {
       utils: StorePopupSelectUtils;
@@ -207,7 +207,7 @@ class RootStore {
       },
       select: {
         points: new StorePopupSelectPoints(this),
-        warehousePoints: new StorePopupSelectWarehousePoints(this),
+        floors: new StorePopupSelectFloors(this),
         products: new StorePopupSelectProducts(this),
         utils: {
           utils: new StorePopupSelectUtils(this),

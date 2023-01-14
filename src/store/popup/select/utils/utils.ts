@@ -8,9 +8,7 @@ export class StorePopupSelectUtils {
     makeAutoObservable(this, {});
   }
 
-  public checkErrorsExist(
-    selectTitle: 'points' | 'warehousePoints' | 'products',
-  ) {
+  public checkErrorsExist(selectTitle: 'points' | 'floors' | 'products') {
     const validator = new FormArrayValidator(
       this.root.storePopup.select[selectTitle].arrayValue,
     ).notEmpty();

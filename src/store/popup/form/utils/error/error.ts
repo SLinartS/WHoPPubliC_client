@@ -36,11 +36,8 @@ export class StorePopupFormUtilsError {
     return false;
   }
 
-  public isTaskErrors(isCheckWarehousePoint: boolean = true): boolean {
-    if (
-      this.isTaskArrayErrors(isCheckWarehousePoint) ||
-      this.isTaskFieldErrors()
-    ) {
+  public isTaskErrors(isCheckFloor: boolean = true): boolean {
+    if (this.isTaskArrayErrors(isCheckFloor) || this.isTaskFieldErrors()) {
       return true;
     }
     return false;
@@ -57,11 +54,11 @@ export class StorePopupFormUtilsError {
     return false;
   }
 
-  private isTaskArrayErrors(isCheckWarehousePoint: boolean) {
+  private isTaskArrayErrors(isCheckFloor: boolean) {
     const list = this.root.storePopup.select.products.arrayValue;
-    const { warehousePoints } = this.root.storePopup.select;
+    const { floors } = this.root.storePopup.select;
 
-    if (warehousePoints.arrayErrors.length && isCheckWarehousePoint) {
+    if (floors.arrayErrors.length && isCheckFloor) {
       return true;
     }
     if (!list.length) {

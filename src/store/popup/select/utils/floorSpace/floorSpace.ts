@@ -8,15 +8,14 @@ export class StorePopupSelectUtilsFloorSpace {
   }
 
   private getFreeSpace() {
-    const selectedWarehousePoints =
-      this.root.storePopup.select.warehousePoints.arrayValue;
+    const selectedFloors = this.root.storePopup.select.floors.arrayValue;
     let freeSpace = 0;
 
     this.root.storeMap.state.map.forEach((zone) => {
       zone.sections.forEach((section) => {
         section.blocks.forEach((block) => {
           block.floors.forEach((floor) => {
-            if (selectedWarehousePoints.includes(floor.id)) {
+            if (selectedFloors.includes(floor.id)) {
               freeSpace += floor.freeSpace;
             }
           });

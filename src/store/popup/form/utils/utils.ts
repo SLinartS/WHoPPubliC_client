@@ -24,8 +24,8 @@ export class StorePopupFormUtils {
 
   public resetForm(): void {
     this.root.storePopup.select.points.clearArray();
-    this.root.storePopup.select.warehousePoints.clearArray();
-    this.root.storePopup.select.warehousePoints.clearArray();
+    this.root.storePopup.select.floors.clearArray();
+    this.root.storePopup.select.floors.clearArray();
     this.root.storePopup.select.products.clearProductList();
     this.root.storePopup.form.task.clearFormData();
     this.root.storeProduct.status.set('add', 'pending');

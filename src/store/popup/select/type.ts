@@ -1,10 +1,10 @@
 export interface ITaskFormArrays {
   products: number[];
   points: number[];
-  warehousePoints: IWarehousePoint[];
+  floors: IFloor[];
 }
 
-export interface IWarehousePoint {
+export interface IFloor {
   zoneId: number;
   sectionId: number;
   blockId: number;

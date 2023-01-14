@@ -51,7 +51,7 @@
     display: grid;
     grid-template-columns: min-content 4fr;
     grid-auto-flow: column;
-    
+
     align-items: center;
     row-gap: 2.4rem;
 
@@ -84,13 +84,14 @@
     background-color: color.$font-color--white;
     opacity: 0.5;
     outline: none;
+    transition: all 0.1s ease-in-out;
 
     &:focus {
       border: none;
       border-bottom: 0.2rem solid color.$font-color--black;
       opacity: 1;
     }
-    &:focus+img {
+    &:focus + img {
       opacity: 1;
     }
   }

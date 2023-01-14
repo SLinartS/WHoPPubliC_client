@@ -25,8 +25,7 @@ export class StoreTaskAdd {
           },
         },
         productIds: this.root.storePopup.select.products.arrayValue,
-        warehousePointIds:
-          this.root.storePopup.select.warehousePoints.arrayValue,
+        floorIds: this.root.storePopup.select.floors.arrayValue,
       };
 
       yield extendAxios.post('tasks', requestTaskData);
