@@ -101,24 +101,28 @@ const Products: FC = observer(() => {
     <main className='products'>
       <div className='products__section-button'>
         <SearchField classes='search-field--products' />
-        <img
-          className='products__icon'
-          src={addIcon}
-          alt='add'
-          onClick={openProductFormHandler}
-        />
-        <img
-          className='products__icon'
-          src={editIcon}
-          alt='add'
-          onClick={changeProduct}
-        />
-        <img
-          className='products__icon'
-          src={deleteIcon}
-          alt='add'
-          onClick={() => deleteHandler('products')}
-        />
+        {storeState.user.getUserData().role !== 'worker' && (
+          <>
+            <img
+              className='products__icon'
+              src={addIcon}
+              alt='add'
+              onClick={openProductFormHandler}
+            />
+            <img
+              className='products__icon'
+              src={editIcon}
+              alt='add'
+              onClick={changeProduct}
+            />
+            <img
+              className='products__icon'
+              src={deleteIcon}
+              alt='add'
+              onClick={() => deleteHandler('products')}
+            />
+          </>
+        )}
       </div>
       <div
         className='products__filters'

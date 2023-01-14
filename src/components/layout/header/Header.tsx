@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 
 import appIcon from '../../../assets/icons/app.png';
 import barsIcon from '../../../assets/icons/bars.svg';
+import { roleAlias } from '../../../utils/roleAlias/roleAlias';
 import { useRootStore } from '../../../utils/RootStoreProvider/useRootStore';
 import Nav from './nav/Nav';
 
@@ -34,8 +35,12 @@ const Header: FC = observer(() => {
             />
           </Link>
           <div className='header__user'>
-            <p className='header__user-name'>Евгений Иванович Петров</p>
-            <p className='header__user-role'>Администратор</p>
+            <p className='header__user-name'>
+              {storeState.user.getUserData().name}
+            </p>
+            <p className='header__user-role'>
+              {roleAlias(storeState.user.getUserData().role)}
+            </p>
           </div>
         </div>
         <Nav />

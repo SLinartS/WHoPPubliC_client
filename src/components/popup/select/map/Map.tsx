@@ -46,14 +46,14 @@ const PopupSelectMap: FC = observer(() => {
   }, [storeMap.status.get('fetch')]);
 
   return (
-    <div className='popup popup--form popup--form-select'>
+    <div className='popup popup__popup-select popup-select'>
       <WindowHeaderForm
         title='Выбрать раскладки на складе'
         saveEventHandler={saveHandler}
         closeEventHandler={closeHandler}
       />
       <div
-        className='popup--form-select__free-space-indicator'
+        className='popup-select__free-space-indicator'
         style={{ background }}
       />
       {storeMap.status.get('fetch') === 'done' ? (

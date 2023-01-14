@@ -11,14 +11,10 @@ export class StoreTableUtils {
   }
 
   public getColumnsWithMark(itemType: TMarkType) {
-    return (
-      Object.entries(
-        this.root.storeState.checkMark.getCheckMarksByType(itemType),
-      )
-        // eslint-disable-next-line @typescript-eslint/no-unused-vars
-        .filter(([key, value]) => value.value === true)
-        .map((item) => item[0])
-    );
+    return this.root.storeState.checkMark
+      .getCheckMarksByType(itemType)
+      .filter((markItem) => markItem.value === true)
+      .map((markItem) => markItem.label);
   }
 
   public setDefaulMark(

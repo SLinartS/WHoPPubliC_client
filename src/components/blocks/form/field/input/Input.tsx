@@ -9,11 +9,12 @@ import { useRootStore } from '../../../../../utils/RootStoreProvider/useRootStor
 interface IFormFieldInputProps {
   typeForm: 'task' | 'product';
   fieldName: keyof IProductFormDataFields | keyof ITaskFormDataFields;
+  readonly: boolean;
   classes?: string;
 }
 
 const FormFieldInput: FC<IFormFieldInputProps> = observer(
-  ({ typeForm, fieldName, classes }) => {
+  ({ typeForm, fieldName, readonly, classes }) => {
     const { storePopup } = useRootStore();
 
     function changeFieldHandler(e: TChangeFieldEvent) {
@@ -46,6 +47,7 @@ const FormFieldInput: FC<IFormFieldInputProps> = observer(
 
     return (
       <input
+        readOnly={readonly}
         value={getValue()}
         className={`form-layout__input ${classes}`}
         onChange={changeFieldHandler}

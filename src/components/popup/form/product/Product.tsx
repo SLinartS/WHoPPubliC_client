@@ -62,24 +62,26 @@ const PopupFormProduct: FC = observer(() => {
   }, []);
 
   return (
-    <div className='popup popup--form popup--form-add-product'>
+    <div className='popup popup__popup-form popup-form popup-form--add-product'>
       <WindowHeaderForm
         title='Добавить партию товара'
         backEventHandler={closeHandler}
         saveEventHandler={saveHandler}
         closeEventHandler={closeHandler}
       />
-      <div className='popup--form-add-product__content-block'>
+      <div className='popup-form__content-block popup-form__content-block--add-product'>
         <FormLayout classes='main-info'>
           <AssembledBlockFieldInput
             typeForm='product'
             fieldName='title'
             titleText='Название'
+            readonlyInput={false}
           />
           <AssembledBlockFieldInput
             typeForm='product'
             fieldName='author'
             titleText='Автор'
+            readonlyInput={false}
           />
           <AssembledBlockFieldSelect
             typeForm='product'
@@ -102,26 +104,31 @@ const PopupFormProduct: FC = observer(() => {
             typeForm='product'
             fieldName='yearOfPublication'
             titleText='Год издания'
+            readonlyInput={false}
           />
           <AssembledBlockFieldInput
             typeForm='product'
             fieldName='printingHouse'
             titleText='Типография'
+            readonlyInput={false}
           />
           <AssembledBlockFieldInput
             typeForm='product'
             fieldName='number'
             titleText='Количество'
+            readonlyInput={false}
           />
           <AssembledBlockFieldInput
             typeForm='product'
             fieldName='publishingHouse'
             titleText='Издательство'
+            readonlyInput={false}
           />
           <AssembledBlockFieldInput
             typeForm='product'
             fieldName='printDate'
             titleText='Дата печати'
+            readonlyInput={false}
           />
         </FormLayout>
 
@@ -140,15 +147,13 @@ const PopupFormProduct: FC = observer(() => {
             </FormField>
           </FormBlock>
         </FormLayout>
-        <div className='popup--form-add-product__photo-block'>
+        <div className='popup-form__photo-block'>
           <img
             src={imagePlaceholder}
             alt='product'
-            className='popup--form-add-product__photo'
+            className='popup-form__photo'
           />
-          <p className='popup--form-add-product__photo-text'>
-            Фотография товара
-          </p>
+          <p className='popup-form__photo-text'>Фотография товара</p>
         </div>
       </div>
     </div>

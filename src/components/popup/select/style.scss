@@ -1,0 +1,23 @@
+@use '/src/styles/global/colors.scss' as color;
+@use '/src/styles/global/variables.scss' as v;
+@use '/src/styles/global/layouts/display.scss';
+
+.popup-select {
+  display: grid;
+  grid-template-rows: fit-content(100%) 1fr;
+  max-width: 102.4rem;
+  height: 76.8rem;
+
+  &__free-space-indicator {
+    margin: 2rem 35% 0;
+    width: 30%;
+    height: 3rem;
+    background: #d35f48;
+  }
+
+  &__table {
+    &--choise-product {
+      padding: 0 2rem;
+    }
+  }
+}

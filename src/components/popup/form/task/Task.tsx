@@ -94,7 +94,7 @@ const PopupFormTask: FC = observer(() => {
   }, [storeState.interface.getCurrentTypeOfTask()]);
 
   return (
-    <div className='popup popup--form popup--form-add-task'>
+    <div className='popup popup__popup-form popup-form  popup-form--add-task'>
       <WindowHeaderForm
         title={`Добавить задачу ${isAcceptance ? 'приёмки' : 'отгрузки'}`}
         backEventHandler={closeHandler}
@@ -102,7 +102,7 @@ const PopupFormTask: FC = observer(() => {
         closeEventHandler={closeHandler}
       />
 
-      <div className='popup--form-add-task__content-block'>
+      <div className='popup-form__content-block popup-form__content-block--add-task'>
         <FormLayout classes='article-info'>
           <AssembledBlockFieldText
             typeForm='task'
@@ -116,11 +116,13 @@ const PopupFormTask: FC = observer(() => {
             typeForm='task'
             fieldName='dateStart'
             titleText='Дата начала'
+            readonlyInput={false}
           />
           <AssembledBlockFieldInput
             typeForm='task'
             fieldName='dateEnd'
             titleText='Дата окончания'
+            readonlyInput={false}
           />
         </FormLayout>
 
@@ -147,8 +149,8 @@ const PopupFormTask: FC = observer(() => {
           )}
         </FormLayout>
 
-        <div className='popup--form-add-task__table-block'>
-          <div className='popup--form-add-task__button-block'>
+        <div className='popup-form__table-block'>
+          <div className='popup-form__button-block'>
             <Button
               classes='button--add-task'
               text='Выбрать'
@@ -172,7 +174,7 @@ const PopupFormTask: FC = observer(() => {
               classes='table--add-task'
             />
           ) : (
-            <div className='popup--form-add-task__absence-product'>
+            <div className='popup-form__absence-product'>
               Ни одна партия продукции не добавлена
             </div>
           )}

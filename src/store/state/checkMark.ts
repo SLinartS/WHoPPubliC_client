@@ -8,43 +8,55 @@ export class StoreStateCheckMark {
     makeAutoObservable(this, {});
   }
 
-  private checkMarks: ICheckMark = {
-    rememberMe: {
+  private checkMarks: ICheckMark[] = [
+    {
+      label: 'rememberMe',
       value: true,
       mark: 'interface',
     },
-  };
+  ];
 
   public checkMark(label: string) {
-    if (this.checkMarks[label]) {
-      return this.checkMarks[label].value;
+    const mark = this.checkMarks.find((markItem) => markItem.label === label);
+    if (mark) {
+      return mark.value;
     }
     return false;
   }
 
   public getCheckMarksByType(mark: TMarkType) {
-    const filteredArray = Object.entries(this.checkMarks).filter(
-      // eslint-disable-next-line @typescript-eslint/no-unused-vars
-      ([key, item]) => item.mark === mark,
+    const filteredMarks = this.checkMarks.filter(
+      (markItem) => markItem.mark === mark,
     );
-
-    const filteredObject: ICheckMark = {};
-    filteredArray.forEach(([key, value]) => {
-      filteredObject[key] = value;
-    });
-    return filteredObject;
+    return filteredMarks;
   }
 
   public changeCheckedMark(label: string, isChecked: boolean, mark: TMarkType) {
-    this.checkMarks[label] = {
-      value: false,
-      mark: 'interface',
-    };
-    this.checkMarks[label].value = isChecked;
-    this.checkMarks[label].mark = mark;
+    if (
+      this.checkMarks.find(
+        (markItem) => markItem.label === label && markItem.mark === mark,
+      )
+    ) {
+      this.checkMarks = this.checkMarks.map((markItem) => {
+        if (markItem.label === label && markItem.mark === mark) {
+          return {
+            label,
+            value: isChecked,
+            mark,
+          };
+        }
+        return markItem;
+      });
+    } else {
+      this.checkMarks.push({
+        label,
+        value: isChecked,
+        mark,
+      });
+    }
   }
 
   public clearAllMarks() {
-    this.checkMarks = {};
+    this.checkMarks = [];
   }
 }

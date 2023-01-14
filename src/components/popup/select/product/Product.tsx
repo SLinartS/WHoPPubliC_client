@@ -29,19 +29,31 @@ const PopupSelectProduct: FC = observer(() => {
   }
 
   useEffect(() => {
+    console.log(storeProduct.status.get('fetch'));
     if (storeProduct.status.get('fetch') === 'pending') {
-      storeProduct.fetch.products();
+      storeProduct.fetch.products(() => {
+        storeTable.utils.setDefaulMark(
+          'products',
+          storeProduct.state.products.data,
+          [
+            'categoryId',
+            'printingHouse',
+            'yearOfPublication',
+            'publishingHouse',
+          ],
+        );
+      });
     }
   }, []);
 
   return (
-    <div className='popup popup--form popup--form-choise'>
+    <div className='popup popup__popup-select popup-select'>
       <WindowHeaderForm
         title='Выбрать раскладки на складе'
         saveEventHandler={saveHandler}
         closeEventHandler={closeHandler}
       />
-      <div className='popup--form-choise__table'>
+      <div className='popup-select__table--choise-product'>
         {storeProduct.status.get('fetch') === 'done' ? (
           <Table
             data={storePopup.form.utils.utils.getFilteredProducts(

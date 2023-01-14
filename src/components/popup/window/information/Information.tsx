@@ -13,15 +13,15 @@ const WindowInformation: FC = observer(() => {
   }
 
   return (
-    <div className='popup popup--window popup--window-information'>
+    <div className='popup popup__popup-window popup-window popup-window--information'>
       <WindowHeader title='Ошибка!'>
         <Button
           text='Закрыть'
           clickHandler={closeWindowHandler}
         />
       </WindowHeader>
-      <div className='popup--window__block'>
-        <p className='popup--window__text'>
+      <div className='popup-window__block'>
+        <p className='popup-window__text'>
           {storePopup.windows.information.setting.text}
         </p>
       </div>

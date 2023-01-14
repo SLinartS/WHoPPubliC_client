@@ -24,7 +24,7 @@ const PopupSelectPoints: FC = observer(() => {
   }, [storePoint.status.get('fetch')]);
 
   return (
-    <div className='popup popup--form popup--form-select'>
+    <div className='popup popup__popup-select popup-select'>
       <WindowHeaderForm
         title={`Выбрать точки ${
           storeState.interface.getCurrentTypeOfTask() === 'acceptance'

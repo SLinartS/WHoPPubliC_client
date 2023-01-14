@@ -65,3 +65,9 @@
 
 /* POPUP */
 @use './../components/popup/style.scss' as *;
+// form
+@use './../components/popup/form/style.scss' as *;
+// select
+@use './../components/popup/select/style.scss' as *;
+// window
+@use './../components/popup/window/style.scss' as *;

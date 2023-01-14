@@ -4,6 +4,7 @@ import { useRootStore } from '../../utils/RootStoreProvider/useRootStore';
 import { ITransitionCustomLayout } from '../blocks/transition/type';
 import PopupFormProduct from '../popup/form/product/Product';
 import PopupFormTask from '../popup/form/task/Task';
+import PopupFormTaskView from '../popup/form/taskView/taskView';
 import PopupSelectMap from '../popup/select/map/Map';
 import PopupSelectPoints from '../popup/select/points/Points';
 import PopupSelectProduct from '../popup/select/product/Product';
@@ -14,6 +15,7 @@ const usePopupList = () => {
   const { storePopup } = useRootStore();
   const productNodeRef = useRef<HTMLDivElement>(null);
   const taskNodeRef = useRef<HTMLDivElement>(null);
+  const taskViewNodeRef = useRef<HTMLDivElement>(null);
   const selectMapNodeRef = useRef<HTMLDivElement>(null);
   const selectPointsNodeRef = useRef<HTMLDivElement>(null);
   const selectProductsNodeRef = useRef<HTMLDivElement>(null);
@@ -34,6 +36,14 @@ const usePopupList = () => {
       trigger: storePopup.status.taskFormStatus,
       nodeRef: taskNodeRef,
       children: <PopupFormTask />,
+      classNames: 'popup',
+      timeout: 200,
+    },
+    {
+      name: 'taskViewFormPopup',
+      trigger: storePopup.status.taskFormViewStatus,
+      nodeRef: taskViewNodeRef,
+      children: <PopupFormTaskView />,
       classNames: 'popup',
       timeout: 200,
     },

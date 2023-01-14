@@ -8,9 +8,9 @@ import WindowHeader from '../../../blocks/windowHeader/WindowHeader';
 const WindowConfirm: FC = observer(() => {
   const { storePopup } = useRootStore();
   return (
-    <div className='popup popup--window popup--window-confirm'>
+    <div className='popup popup__popup-window popup-window popup-window--confirm'>
       <WindowHeader title={storePopup.windows.confirm.setting.title} />
-      <div className='popup--window__block'>
+      <div className='popup-window__block'>
         <Button
           classes='button__confirm'
           text='Да'

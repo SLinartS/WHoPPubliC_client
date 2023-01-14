@@ -1,5 +1,7 @@
 export interface IHeaderLinks {
   icon: string;
   text: string;
-  to: string;
+  to: TToLinkType;
 }
+
+export type TToLinkType = 'points' | 'map' | 'tasks' | 'products' | 'accounts';

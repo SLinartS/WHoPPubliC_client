@@ -1,0 +1,21 @@
+@use '/src/styles/global/colors.scss' as color;
+@use '/src/styles/global/variables.scss' as v;
+@use '/src/styles/global/layouts/display.scss';
+
+.popup-window {
+  display: grid;
+  grid-template-rows: fit-content(100%) 1fr;
+  max-width: 51.2rem;
+  height: 28.8rem;
+
+  &__block {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  &__text {
+    margin: 0 3rem;
+    text-align: center;
+  }
+}

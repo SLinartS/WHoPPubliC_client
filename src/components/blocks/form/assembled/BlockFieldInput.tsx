@@ -11,12 +11,14 @@ interface IAssembledBlockFieldInputProps {
   typeForm: 'task' | 'product';
   fieldName: keyof IProductFormDataFields | keyof ITaskFormDataFields;
   titleText: string;
+  readonlyInput: boolean;
 }
 
 const AssembledBlockFieldInput: FC<IAssembledBlockFieldInputProps> = ({
   typeForm,
   fieldName,
   titleText,
+  readonlyInput,
 }) => {
   return (
     <FormBlock
@@ -31,6 +33,7 @@ const AssembledBlockFieldInput: FC<IAssembledBlockFieldInputProps> = ({
         <FormFieldInput
           typeForm={typeForm}
           fieldName={fieldName}
+          readonly={readonlyInput}
         />
       </FormField>
     </FormBlock>

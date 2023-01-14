@@ -52,6 +52,24 @@ export class StorePopupStatus {
   }
 
   /*
+    TaskFormView
+   */
+  private taskFormView: boolean = false;
+
+  public get taskFormViewStatus() {
+    return this.taskFormView;
+  }
+
+  public showTaskFormView() {
+    this.taskFormView = true;
+  }
+
+  public hideTaskFormView(actionAfterHide?: () => void) {
+    this.taskFormView = false;
+    StorePopupStatus.doActionAfterHide(actionAfterHide);
+  }
+
+  /*
     SelectMap
    */
   private selectMap: boolean = false;

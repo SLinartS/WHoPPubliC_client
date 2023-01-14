@@ -5,7 +5,7 @@ interface TTaskTypesForSwitcher {
   text: string;
 }
 
-export const TASK_TYPES: TTaskTypesForSwitcher[] = [
+export const TASK_TYPES_FOR_SWITCHER: TTaskTypesForSwitcher[] = [
   {
     type: 'acceptance',
     text: 'Распределение',

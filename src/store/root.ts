@@ -33,6 +33,7 @@ import { StoreProductStatus } from './product/status/status';
 import { StoreProductUpdate } from './product/update/update';
 import { StoreStateCheckMark } from './state/checkMark';
 import { StoreStateInterface } from './state/interface';
+import { StoreStateUser } from './state/user';
 import { StoreTableSelectedItem } from './table/selectedItem/selectedItem';
 import { StoreTableUtils } from './table/utils';
 import { StoreTaskAdd } from './task/add/add';
@@ -53,7 +54,7 @@ interface IStoreAction {
 interface IStoreState {
   interface: StoreStateInterface;
   checkMark: StoreStateCheckMark;
-  // user: StoreStateUser;
+  user: StoreStateUser;
 }
 
 interface IStoreTask {
@@ -154,6 +155,7 @@ class RootStore {
     this.storeState = {
       interface: new StoreStateInterface(this),
       checkMark: new StoreStateCheckMark(this),
+      user: new StoreStateUser(this),
     };
 
     this.storeTask = {

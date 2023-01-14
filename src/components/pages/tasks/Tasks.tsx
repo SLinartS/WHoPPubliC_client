@@ -4,6 +4,7 @@ import { FC, ReactNode } from 'react';
 import addIcon from '../../../assets/icons/add.svg';
 import deleteIcon from '../../../assets/icons/delete.svg';
 import editIcon from '../../../assets/icons/edit.svg';
+import eyeIcon from '../../../assets/icons/eye.svg';
 import { ISelectedItems } from '../../../store/table/selectedItem/type';
 import { TTaskStatus } from '../../../store/task/status/type';
 import { TTypeTaskStates } from '../../../store/task/type';
@@ -12,7 +13,7 @@ import { useRootStore } from '../../../utils/RootStoreProvider/useRootStore';
 import Loader from '../../blocks/loader/Loader';
 import SearchField from '../../blocks/searchField/SearchField';
 import Table from '../../blocks/table/Table';
-import { TASK_TYPES } from './taskForSwitcher';
+import { TASK_TYPES_FOR_SWITCHER } from './taskForSwitcher';
 
 const Tasks: FC = observer(() => {
   const { storeTask, storePopup, storeTable, storeAction, storeState } =
@@ -32,6 +33,22 @@ const Tasks: FC = observer(() => {
 
       default:
         return 'acceptanceTasks';
+    }
+  }
+
+  function showTaskWindowHandler() {
+    const taskType: keyof ISelectedItems = getCurrentSelectedItems();
+    const taskId = storeTable.selectedItem.getItemId(taskType);
+
+    if (taskId === 0) {
+      storePopup.windows.information.setting = {
+        text: 'Выберите строку, чтобы её изменить',
+      };
+      storePopup.status.showWindowInformation();
+    } else {
+      storeTask.fetch.oneTask(taskId, () => {
+        storePopup.status.showTaskFormView();
+      });
     }
   }
 
@@ -112,7 +129,7 @@ const Tasks: FC = observer(() => {
   return (
     <main className='tasks'>
       <div className='tasks__section-switcher'>
-        {TASK_TYPES.map(({ type, text }) => (
+        {TASK_TYPES_FOR_SWITCHER.map(({ type, text }) => (
           <button
             key={type + text}
             className={`tasks__switcher tasks__switcher--${type} ${
@@ -127,24 +144,35 @@ const Tasks: FC = observer(() => {
       </div>
       <div className='tasks__section-button'>
         <SearchField classes='search-field--tasks' />
-        <img
-          className='products__icon'
-          src={addIcon}
-          alt='add'
-          onClick={showAddTaskWindowHandler}
-        />
-        <img
-          className='products__icon'
-          src={editIcon}
-          alt='add'
-          onClick={changeTask}
-        />
-        <img
-          className='products__icon'
-          src={deleteIcon}
-          alt='add'
-          onClick={deleteHandler}
-        />
+        {storeState.user.getUserData().role !== 'worker' ? (
+          <>
+            <img
+              className='products__icon'
+              src={addIcon}
+              alt='add'
+              onClick={showAddTaskWindowHandler}
+            />
+            <img
+              className='products__icon'
+              src={editIcon}
+              alt='add'
+              onClick={changeTask}
+            />
+            <img
+              className='products__icon'
+              src={deleteIcon}
+              alt='add'
+              onClick={deleteHandler}
+            />
+          </>
+        ) : (
+          <img
+            className='products__icon'
+            src={eyeIcon}
+            alt='show'
+            onClick={showTaskWindowHandler}
+          />
+        )}
       </div>
       <div className='tasks__table'>{displayTasksTable()}</div>
     </main>
