@@ -48,6 +48,20 @@
     }
   }
 
+  @keyframes location {
+    0% {
+      background: red;
+    }
+
+    50% {
+      background: aquamarine;
+    }
+
+    100% {
+      background: violet;
+    }
+  }
+
   &__zone-title {
     display: flex;
     justify-content: flex-end;
@@ -72,6 +86,10 @@
     transform: translate(50%, -50%);
     position: absolute;
     user-select: none;
+  }
+
+  &--oneColumn {
+    grid-template-columns: 1fr;
   }
 
   &--select-map {

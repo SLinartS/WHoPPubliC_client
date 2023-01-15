@@ -1,6 +1,7 @@
 import { observer } from 'mobx-react-lite';
 import { FC, useEffect } from 'react';
 
+import { TPointType } from '../../../../store/type';
 import { useRootStore } from '../../../../utils/RootStoreProvider/useRootStore';
 import Loader from '../../../blocks/loader/Loader';
 import PointsMap from '../../../blocks/points/PointsMap';
@@ -10,10 +11,21 @@ const PopupSelectPoints: FC = observer(() => {
   const { storePopup, storePoint, storeState } = useRootStore();
 
   function closeHandler() {
-    storePopup.status.showProductForm();
+    storePopup.status.showFormProduct();
     storePopup.status.hideSelectPoints();
     storePopup.select.points.clearArray();
     storePoint.fetch.points();
+  }
+
+  function getPointType(): TPointType {
+    switch (storeState.interface.getCurrentTypeOfTask()) {
+      case 'acceptance':
+        return 'acceptance';
+      case 'shipment':
+        return 'shipment';
+      default:
+        return 'acceptance';
+    }
   }
 
   useEffect(() => {
@@ -35,7 +47,7 @@ const PopupSelectPoints: FC = observer(() => {
       />
       {storePoint.status.get('fetch') === 'done' ? (
         <PointsMap
-          pointsType={storeState.interface.getCurrentTypeOfTask()}
+          pointsType={getPointType()}
           classes='points-map--select-points'
         />
       ) : (

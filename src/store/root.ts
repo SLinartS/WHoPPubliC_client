@@ -23,6 +23,7 @@ import { StorePopupSelectProducts } from './popup/select/products/products';
 import { StorePopupSelectUtilsFloorSpace } from './popup/select/utils/floorSpace/floorSpace';
 import { StorePopupSelectUtils } from './popup/select/utils/utils';
 import { StorePopupStatus } from './popup/status/status';
+import { StorePopupViewProduct } from './popup/view/product';
 import { StorePopupWindowConfirm } from './popup/window/confirm/confirm';
 import { StorePopupWindowInformation } from './popup/window/information/information';
 import { StoreProductAdd } from './product/add/add';
@@ -114,6 +115,9 @@ interface IStorePopup {
       utils: StorePopupSelectUtils;
       floorSpace: StorePopupSelectUtilsFloorSpace;
     };
+  };
+  view: {
+    product: StorePopupViewProduct;
   };
   windows: {
     confirm: StorePopupWindowConfirm;
@@ -215,6 +219,9 @@ class RootStore {
           utils: new StorePopupSelectUtils(this),
           floorSpace: new StorePopupSelectUtilsFloorSpace(this),
         },
+      },
+      view: {
+        product: new StorePopupViewProduct(this),
       },
       windows: {
         confirm: new StorePopupWindowConfirm(this),

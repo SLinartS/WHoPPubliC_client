@@ -14,15 +14,13 @@
   box-shadow: 0 0 1rem 0;
   width: 95%;
 
-  &-form {
+  &-form,
+  &-view {
     display: grid;
     grid-template-rows: fit-content(100%) 1fr;
     max-width: 102.4rem;
     height: 76.8rem;
   }
-}
-
-@media (max-width: 700px) {
 }
 
 .popup-enter {

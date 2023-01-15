@@ -7,66 +7,88 @@ export class StorePopupStatus {
     makeAutoObservable(this, {});
   }
 
-  private static doActionAfterHide(actionAfterHide?: () => void) {
-    if (actionAfterHide) {
+  // TODO действия не выполняются ДО показа
+  private static doActionWithDelay(action?: () => void) {
+    if (action) {
       setTimeout(() => {
-        actionAfterHide();
+        action();
       }, 200);
     }
   }
 
   /*
-    ProductForm
+    FormProduct
    */
-  private productForm: boolean = false;
+  private formProduct: boolean = false;
 
-  public get productFormStatus() {
-    return this.productForm;
+  public get formProductStatus() {
+    return this.formProduct;
   }
 
-  public showProductForm() {
-    this.productForm = true;
+  public showFormProduct(actionBeforeShow?: () => void) {
+    StorePopupStatus.doActionWithDelay(actionBeforeShow);
+    this.formProduct = true;
   }
 
-  public hideProductForm(actionAfterHide?: () => void) {
-    this.productForm = false;
-    StorePopupStatus.doActionAfterHide(actionAfterHide);
+  public hideFormProduct(actionAfterHide?: () => void) {
+    this.formProduct = false;
+    StorePopupStatus.doActionWithDelay(actionAfterHide);
   }
 
   /*
-    TaskForm
+    FormTask
    */
-  private taskForm: boolean = false;
+  private formTask: boolean = false;
 
-  public get taskFormStatus() {
-    return this.taskForm;
+  public get formTaskStatus() {
+    return this.formTask;
   }
 
-  public showTaskForm() {
-    this.taskForm = true;
+  public showFormTask() {
+    this.formTask = true;
   }
 
-  public hideTaskForm(actionAfterHide?: () => void) {
-    this.taskForm = false;
-    StorePopupStatus.doActionAfterHide(actionAfterHide);
+  public hideFormTask(actionAfterHide?: () => void) {
+    this.formTask = false;
+    StorePopupStatus.doActionWithDelay(actionAfterHide);
   }
 
   /*
-    TaskFormView
+    ViewTask
    */
-  private taskFormView: boolean = false;
+  private viewTask: boolean = false;
 
-  public get taskFormViewStatus() {
-    return this.taskFormView;
+  public get viewTaskStatus() {
+    return this.viewTask;
   }
 
-  public showTaskFormView() {
-    this.taskFormView = true;
+  public showViewTask(actionBeforeShow?: () => void) {
+    StorePopupStatus.doActionWithDelay(actionBeforeShow);
+    this.viewTask = true;
   }
 
-  public hideTaskFormView(actionAfterHide?: () => void) {
-    this.taskFormView = false;
-    StorePopupStatus.doActionAfterHide(actionAfterHide);
+  public hideViewTask(actionAfterHide?: () => void) {
+    this.viewTask = false;
+    StorePopupStatus.doActionWithDelay(actionAfterHide);
+  }
+
+  /*
+    ViewLocation
+   */
+  private viewLocation: boolean = false;
+
+  public get viewLocationStatus() {
+    return this.viewLocation;
+  }
+
+  public showViewLocation(actionBeforeShow?: () => void) {
+    StorePopupStatus.doActionWithDelay(actionBeforeShow);
+    this.viewLocation = true;
+  }
+
+  public hideViewLocation(actionAfterHide?: () => void) {
+    this.viewLocation = false;
+    StorePopupStatus.doActionWithDelay(actionAfterHide);
   }
 
   /*
@@ -84,7 +106,7 @@ export class StorePopupStatus {
 
   public hideSelectMap(actionAfterHide?: () => void) {
     this.selectMap = false;
-    StorePopupStatus.doActionAfterHide(actionAfterHide);
+    StorePopupStatus.doActionWithDelay(actionAfterHide);
   }
 
   /*
@@ -102,7 +124,7 @@ export class StorePopupStatus {
 
   public hideSelectPoints(actionAfterHide?: () => void) {
     this.selectPoints = false;
-    StorePopupStatus.doActionAfterHide(actionAfterHide);
+    StorePopupStatus.doActionWithDelay(actionAfterHide);
   }
 
   /*
@@ -120,7 +142,7 @@ export class StorePopupStatus {
 
   public hideSelectProducts(actionAfterHide?: () => void) {
     this.selectProducts = false;
-    StorePopupStatus.doActionAfterHide(actionAfterHide);
+    StorePopupStatus.doActionWithDelay(actionAfterHide);
   }
 
   /*
@@ -138,7 +160,7 @@ export class StorePopupStatus {
 
   public hideWindowConfirm(actionAfterHide?: () => void) {
     this.windowConfirm = false;
-    StorePopupStatus.doActionAfterHide(actionAfterHide);
+    StorePopupStatus.doActionWithDelay(actionAfterHide);
   }
 
   /*
@@ -156,6 +178,6 @@ export class StorePopupStatus {
 
   public hideWindowInformation(actionAfterHide?: () => void) {
     this.windowInformation = false;
-    StorePopupStatus.doActionAfterHide(actionAfterHide);
+    StorePopupStatus.doActionWithDelay(actionAfterHide);
   }
 }

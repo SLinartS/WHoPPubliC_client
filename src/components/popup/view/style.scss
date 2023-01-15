@@ -1,0 +1,89 @@
+@use '/src/styles/global/colors.scss' as color;
+@use '/src/styles/global/variables.scss' as v;
+@use '/src/styles/global/layouts/display.scss';
+
+.popup-view {
+  &__content-block {
+    display: grid;
+    gap: 0.2rem;
+    overflow-y: hidden;
+    background-color: color.$font-color--black;
+    grid-template-columns: 3fr 6fr;
+    grid-template-rows: 12rem 1fr;
+
+    &--view-location {
+      grid-template-columns: 100%;
+      grid-template-rows: 8rem 1fr;
+      column-gap: 0;
+    }
+  }
+
+  &__table-block {
+    overflow-y: scroll;
+    overflow-x: hidden;
+    background-color: color.$font-color--white;
+    grid-column: 1/4;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 0 2rem;
+
+    &--view-location {
+      padding: 2rem 0 2rem 2rem;
+    }
+  }
+
+  &__button-block {
+    display: flex;
+    width: 60%;
+    justify-content: space-around;
+    width: fit-content;
+  }
+
+  &__icon-button {
+    width: 4rem;
+    height: 4rem;
+    margin: 1rem;
+    transition: all 0.1s ease-in-out;
+    cursor: pointer;
+
+    &:hover {
+      filter: brightness(1.2);
+    }
+    &:active {
+      filter: brightness(0.8);
+    }
+  }
+
+  &__absence-product {
+    font-size: 2.8rem;
+    margin: 5rem 0 0;
+  }
+
+  &__switch {
+    background: color.$third-color;
+    height: 5rem;
+    width: 10rem;
+    border: none;
+    border-radius: 1rem;
+    color: color.$font-color--white;
+
+    &-block {
+      @extend %flex-center;
+      background: color.$font-color--white;
+      gap: 2rem;
+    }
+
+    &-icon {
+      width: 5rem;
+      height: 5rem;
+    }
+
+    &:hover {
+      background: color.$third-color--hover;
+    }
+    &:active {
+      background: color.$third-color--active;
+    }
+  }
+}

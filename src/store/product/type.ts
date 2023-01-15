@@ -30,6 +30,8 @@ export interface IServiceProductInformation {
   productId: number;
   isLinkedToTask: boolean;
   taskId: number;
+  isLinkedFloors: boolean;
+  floorIds: number[];
 }
 
 export interface IProductResponse {

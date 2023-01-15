@@ -5,6 +5,7 @@ import addIcon from '../../../assets/icons/add.svg';
 import deleteIcon from '../../../assets/icons/delete.svg';
 import editIcon from '../../../assets/icons/edit.svg';
 import filterIcon from '../../../assets/icons/sliders.svg';
+import { IProductFormDataFields } from '../../../store/popup/form/product/type';
 import { ISelectedItems } from '../../../store/table/selectedItem/type';
 import { useRootStore } from '../../../utils/RootStoreProvider/useRootStore';
 import Loader from '../../blocks/loader/Loader';
@@ -19,7 +20,7 @@ const Products: FC = observer(() => {
 
   function openProductFormHandler() {
     storePopup.form.state.formActionType = 'create';
-    storePopup.status.showProductForm();
+    storePopup.status.showFormProduct();
   }
 
   function showPopupFilterHandler(e: MouseEvent<HTMLDivElement>) {
@@ -38,7 +39,23 @@ const Products: FC = observer(() => {
       storePopup.status.showWindowInformation();
     } else {
       storeProduct.fetch.oneProduct(productId, () => {
-        storePopup.status.showProductForm();
+        storePopup.status.showFormProduct(() => {
+          const { productInfo } = storeProduct.state.product;
+          const { pointId } = storeProduct.state.product;
+
+          Object.entries(productInfo).forEach(([key, element]) => {
+            if (key !== 'categoryTitle') {
+              const typedKey = key as keyof IProductFormDataFields;
+              storePopup.form.product.setFormField(
+                typedKey,
+                String(element.value),
+              );
+            }
+          });
+
+          storePopup.select.points.clearArray();
+          storePopup.select.points.addItem(pointId);
+        });
       });
     }
   }

@@ -17,7 +17,7 @@ const PopupFormProduct: FC = observer(() => {
   const { storePopup, storeProduct, storeCategory } = useRootStore();
 
   function closeHandler() {
-    storePopup.status.hideProductForm();
+    storePopup.status.hideFormProduct();
     storeProduct.fetch.products();
     storePopup.form.product.clearFormData();
   }
@@ -52,13 +52,25 @@ const PopupFormProduct: FC = observer(() => {
 
   function openSelectPointsHandler() {
     storePopup.status.showSelectPoints();
-    storePopup.status.hideProductForm();
+    storePopup.status.hideFormProduct();
   }
 
   useEffect(() => {
     storePopup.form.state.isDisplayDefaultErrors = false;
     storeProduct.status.set('add', 'pending');
     storeCategory.fetch.categories();
+  }, []);
+
+  useEffect(() => {
+    if (storePopup.form.state.formActionType === 'create') {
+      const generateArticleForProduct = async () => {
+        const generatedArticle =
+          await storePopup.form.utils.utils.generateArticle('product');
+
+        storePopup.form.product.setFormField('article', generatedArticle);
+      };
+      generateArticleForProduct();
+    }
   }, []);
 
   return (

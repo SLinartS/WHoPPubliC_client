@@ -47,14 +47,14 @@ const Tasks: FC = observer(() => {
       storePopup.status.showWindowInformation();
     } else {
       storeTask.fetch.oneTask(taskId, () => {
-        storePopup.status.showTaskFormView();
+        storePopup.status.showViewTask();
       });
     }
   }
 
   function showAddTaskWindowHandler() {
     storePopup.form.state.formActionType = 'create';
-    storePopup.status.showTaskForm();
+    storePopup.status.showFormTask();
   }
 
   function changeTask(): void {
@@ -69,7 +69,7 @@ const Tasks: FC = observer(() => {
       storePopup.status.showWindowInformation();
     } else {
       storeTask.fetch.oneTask(taskId, () => {
-        storePopup.status.showTaskForm();
+        storePopup.status.showFormTask();
       });
     }
   }

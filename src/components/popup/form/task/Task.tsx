@@ -19,7 +19,7 @@ const PopupFormTask: FC = observer(() => {
     useRootStore();
 
   function closeHandler() {
-    storePopup.status.hideTaskForm();
+    storePopup.status.hideFormTask();
     storePopup.form.utils.utils.resetForm();
     if (isAcceptance) {
       storeTask.status.set('fetchAcceptance', 'pending');
@@ -58,12 +58,12 @@ const PopupFormTask: FC = observer(() => {
 
   function openSelectMapHandler() {
     storePopup.status.showSelectMap();
-    storePopup.status.hideTaskForm();
+    storePopup.status.hideFormTask();
   }
 
   function openSelectProductHandler() {
     storePopup.status.showSelectProducts();
-    storePopup.status.hideTaskForm();
+    storePopup.status.hideFormTask();
   }
 
   function removeProductFromList() {
@@ -92,6 +92,18 @@ const PopupFormTask: FC = observer(() => {
       });
     }
   }, [storeState.interface.getCurrentTypeOfTask()]);
+
+  useEffect(() => {
+    if (storePopup.form.state.formActionType === 'create') {
+      const generateArticleForTask = async () => {
+        const generatedArticle =
+          await storePopup.form.utils.utils.generateArticle('task');
+
+        storePopup.form.task.setFormField('article', generatedArticle);
+      };
+      generateArticleForTask();
+    }
+  }, []);
 
   return (
     <div className='popup popup__popup-form popup-form  popup-form--add-task'>

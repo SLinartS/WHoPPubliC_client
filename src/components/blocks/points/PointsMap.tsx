@@ -1,12 +1,12 @@
 import { observer } from 'mobx-react-lite';
 import { FC, ReactNode } from 'react';
 
-import { TTaskType } from '../../../store/type';
+import { TPointType } from '../../../store/type';
 import { useRootStore } from '../../../utils/RootStoreProvider/useRootStore';
 import PointsBlock from './block/Block';
 
 interface IPointsMapProps {
-  pointsType: TTaskType;
+  pointsType: TPointType;
   classes?: string;
 }
 

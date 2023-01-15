@@ -24,7 +24,7 @@ const Point: FC<IPointProps> = observer(({ id }) => {
 
           storePopup.select.points.addItem(id);
         }
-        storePopup.status.showProductForm();
+        storePopup.status.showFormProduct();
       });
     }
   }

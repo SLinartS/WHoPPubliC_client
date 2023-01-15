@@ -12,12 +12,12 @@ const PopupSelectMap: FC = observer(() => {
   const { storePopup, storeMap } = useRootStore();
 
   function saveHandler() {
-    storePopup.status.showTaskForm();
+    storePopup.status.showFormTask();
     storePopup.status.hideSelectMap();
   }
 
   function closeHandler() {
-    storePopup.status.showTaskForm();
+    storePopup.status.showFormTask();
     storePopup.status.hideSelectMap();
     storePopup.select.floors.clearArray();
     storeMap.fetch.map();

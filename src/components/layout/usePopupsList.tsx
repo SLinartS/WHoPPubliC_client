@@ -4,18 +4,20 @@ import { useRootStore } from '../../utils/RootStoreProvider/useRootStore';
 import { ITransitionCustomLayout } from '../blocks/transition/type';
 import PopupFormProduct from '../popup/form/product/Product';
 import PopupFormTask from '../popup/form/task/Task';
-import PopupFormTaskView from '../popup/form/taskView/taskView';
 import PopupSelectMap from '../popup/select/map/Map';
 import PopupSelectPoints from '../popup/select/points/Points';
 import PopupSelectProduct from '../popup/select/product/Product';
+import PopupViewLocation from '../popup/view/location/Location';
+import PopupViewTask from '../popup/view/task/Task';
 import WindowConfirm from '../popup/window/confirm/Confirm';
 import WindowInformation from '../popup/window/information/Information';
 
 const usePopupList = () => {
   const { storePopup } = useRootStore();
-  const productNodeRef = useRef<HTMLDivElement>(null);
-  const taskNodeRef = useRef<HTMLDivElement>(null);
-  const taskViewNodeRef = useRef<HTMLDivElement>(null);
+  const formProductNodeRef = useRef<HTMLDivElement>(null);
+  const formTaskNodeRef = useRef<HTMLDivElement>(null);
+  const viewTaskNodeRef = useRef<HTMLDivElement>(null);
+  const viewLocationNodeRef = useRef<HTMLDivElement>(null);
   const selectMapNodeRef = useRef<HTMLDivElement>(null);
   const selectPointsNodeRef = useRef<HTMLDivElement>(null);
   const selectProductsNodeRef = useRef<HTMLDivElement>(null);
@@ -24,26 +26,34 @@ const usePopupList = () => {
 
   const POPUPS: ITransitionCustomLayout[] = [
     {
-      name: 'productFormPopup',
-      trigger: storePopup.status.productFormStatus,
-      nodeRef: productNodeRef,
+      name: 'formProductPopup',
+      trigger: storePopup.status.formProductStatus,
+      nodeRef: formProductNodeRef,
       children: <PopupFormProduct />,
       classNames: 'popup',
       timeout: 200,
     },
     {
-      name: 'taskFormPopup',
-      trigger: storePopup.status.taskFormStatus,
-      nodeRef: taskNodeRef,
+      name: 'formTaskPopup',
+      trigger: storePopup.status.formTaskStatus,
+      nodeRef: formTaskNodeRef,
       children: <PopupFormTask />,
       classNames: 'popup',
       timeout: 200,
     },
     {
-      name: 'taskViewFormPopup',
-      trigger: storePopup.status.taskFormViewStatus,
-      nodeRef: taskViewNodeRef,
-      children: <PopupFormTaskView />,
+      name: 'viewTaskPopup',
+      trigger: storePopup.status.viewTaskStatus,
+      nodeRef: viewTaskNodeRef,
+      children: <PopupViewTask />,
+      classNames: 'popup',
+      timeout: 200,
+    },
+    {
+      name: 'viewLocationPopup',
+      trigger: storePopup.status.viewLocationStatus,
+      nodeRef: viewLocationNodeRef,
+      children: <PopupViewLocation />,
       classNames: 'popup',
       timeout: 200,
     },

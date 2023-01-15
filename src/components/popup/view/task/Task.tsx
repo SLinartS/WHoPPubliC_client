@@ -10,15 +10,21 @@ import FormLayout from '../../../blocks/form/layout/Layout';
 import Table from '../../../blocks/table/Table';
 import WindowHeaderForm from '../../../blocks/windowHeader/form/Form';
 
-const PopupFormTaskView: FC = observer(() => {
+const PopupViewTask: FC = observer(() => {
   const [isAcceptance, setIsAcceptance] = useState<boolean>(true);
   const { storePopup, storeProduct, storeState, storeTable } = useRootStore();
 
   function closeHandler() {
-    storePopup.status.hideTaskFormView();
+    storePopup.status.hideViewTask();
   }
 
-  function mapOpenHander() {}
+  function viewLocationOpenHander() {
+    storePopup.status.showViewLocation(() => {
+      const productId = storeTable.selectedItem.getItemId('products');
+      // TODO обрабатывать ситуацию, когда вы не выбрана строка
+      storePopup.view.product.setCurrentViewProduct(productId);
+    });
+  }
 
   function markProductAsMoved() {}
 
@@ -46,13 +52,13 @@ const PopupFormTaskView: FC = observer(() => {
   }, [storeState.interface.getCurrentTypeOfTask()]);
 
   return (
-    <div className='popup popup__popup-form popup-form popup-form--view-task'>
+    <div className='popup popup__popup-view popup-view popup-view'>
       <WindowHeaderForm
         title={`Задача ${isAcceptance ? 'приёмки' : 'отгрузки'}`}
         closeEventHandler={closeHandler}
       />
 
-      <div className='popup-form__content-block popup-form__content-block--view-task'>
+      <div className='popup-view__content-block'>
         <FormLayout classes='article-info'>
           <AssembledBlockFieldText
             typeForm='task'
@@ -76,19 +82,19 @@ const PopupFormTaskView: FC = observer(() => {
           />
         </FormLayout>
 
-        <div className='popup-form__table-block popup-form__table-block--view-task'>
-          <div className='popup-form__button-block popup-form__button-block--view-task'>
+        <div className='popup-view__table-block '>
+          <div className='popup-view__button-block'>
             <img
-              className='popup-form__icon-button'
+              className='popup-view__icon-button'
               src={checkIcon}
               alt='add'
               onClick={markProductAsMoved}
             />
             <img
-              className='popup-form__icon-button'
+              className='popup-view__icon-button'
               src={mapIcon}
               alt='add'
-              onClick={mapOpenHander}
+              onClick={viewLocationOpenHander}
             />
           </div>
           {storePopup.select.products.getProductListData().length > 0 ? (
@@ -112,4 +118,4 @@ const PopupFormTaskView: FC = observer(() => {
   );
 });
 
-export default PopupFormTaskView;
+export default PopupViewTask;

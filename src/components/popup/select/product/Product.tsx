@@ -19,13 +19,13 @@ const PopupSelectProduct: FC = observer(() => {
       storePopup.select.products.addProductToList();
       storeTable.selectedItem.setItemId('products', 0);
       storePopup.status.hideSelectProducts();
-      storePopup.status.showTaskForm();
+      storePopup.status.showFormTask();
     }
   }
 
   function closeHandler() {
     storePopup.status.hideSelectProducts();
-    storePopup.status.showTaskForm();
+    storePopup.status.showFormTask();
   }
 
   useEffect(() => {
