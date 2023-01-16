@@ -29,7 +29,6 @@ const PopupSelectProduct: FC = observer(() => {
   }
 
   useEffect(() => {
-    console.log(storeProduct.status.get('fetch'));
     if (storeProduct.status.get('fetch') === 'pending') {
       storeProduct.fetch.products(() => {
         storeTable.utils.setDefaulMark(

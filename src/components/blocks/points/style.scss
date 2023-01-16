@@ -36,6 +36,20 @@
     border-radius: 1rem;
   }
 
+  @keyframes locationPoint {
+    0% {
+      background: red;
+    }
+
+    50% {
+      background: aquamarine;
+    }
+
+    100% {
+      background: violet;
+    }
+  }
+
   &__title {
     font-weight: 700;
     font-size: 2rem;

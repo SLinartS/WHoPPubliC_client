@@ -19,14 +19,24 @@ const PopupViewTask: FC = observer(() => {
   }
 
   function viewLocationOpenHander() {
-    storePopup.status.showViewLocation(() => {
-      const productId = storeTable.selectedItem.getItemId('products');
-      // TODO обрабатывать ситуацию, когда вы не выбрана строка
-      storePopup.view.product.setCurrentViewProduct(productId);
-    });
+    const productId = storeTable.selectedItem.getItemId('products');
+    if (productId === 0) {
+      storePopup.windows.information.setting = {
+        text: 'Выберите продукт, чтобы увидеть информацию об его местоположении',
+      };
+      storePopup.status.showWindowInformation();
+    } else {
+      storePopup.view.product.setCurrentViewProduct(productId, () => {
+        storePopup.status.showViewLocation();
+      });
+    }
   }
 
   function markProductAsMoved() {}
+
+  useEffect(() => {
+    storeTable.selectedItem.setItemId('products', 0);
+  }, []);
 
   useEffect(() => {
     if (storeState.interface.getCurrentTypeOfTask() === 'acceptance') {

@@ -41,7 +41,7 @@ const MapFloor: FC<IMapFloorProps> = observer(
       };
       if (storePopup.view.product.getFloorIds().includes(id)) {
         newStyle.animation =
-          'location 1000ms linear 0s infinite normal forwards';
+          'locationFloor 1000ms linear 0s infinite normal forwards';
       }
       if (checkIsAdded()) {
         newStyle.background = `linear-gradient(180deg, 

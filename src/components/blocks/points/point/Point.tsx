@@ -36,11 +36,16 @@ const Point: FC<IPointProps> = observer(({ id }) => {
   useEffect(() => {
     const newStyle = {
       background: '#eaeaea',
+      animation: 'none',
     };
     if (checkIsAdded()) {
       newStyle.background = `#c15943`;
     } else {
       newStyle.background = `#eaeaea`;
+    }
+    if (storePopup.view.product.getPointId() === id) {
+      newStyle.animation =
+        'locationPoint 1000ms linear 0s infinite normal forwards';
     }
     setStyles(newStyle);
   }, [checkIsAdded]);

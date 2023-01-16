@@ -14,11 +14,15 @@ export class StorePopupViewProduct {
     floorIds: [],
   };
 
-  public getFloorIds() {
+  public getFloorIds(): number[] {
     return this.currentViewProductInformation.floorIds;
   }
 
-  public setCurrentViewProduct(id: number) {
+  public getPointId(): number {
+    return this.currentViewProductInformation.pointId;
+  }
+
+  public setCurrentViewProduct(id: number, actionAfterSetData?: () => void) {
     this.currentViewProductInformation.id = id;
 
     this.root.storeProduct.fetch.oneProduct(id, () => {
@@ -27,8 +31,10 @@ export class StorePopupViewProduct {
       this.currentViewProductInformation.pointId = product.pointId;
       this.currentViewProductInformation.floorIds =
         product.serviceInformation.floorIds;
-    });
 
-    console.log(this.currentViewProductInformation);
+      if (actionAfterSetData) {
+        actionAfterSetData();
+      }
+    });
   }
 }

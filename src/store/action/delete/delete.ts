@@ -65,26 +65,17 @@ export class StoreActionDelete {
       switch (taskType) {
         case 'acceptanceTasks':
           this.root.storeTask.fetch.acceptanceTasks(() => {
-            this.root.storeTable.selectedItem.setItemId(
-              'acceptanceTasks',
-              this.root.storeTask.state.acceptanceList.data[0].id.value,
-            );
+            this.root.storeTable.selectedItem.setItemId('acceptanceTasks', 0);
           });
           break;
         case 'intraTasks':
           this.root.storeTask.fetch.intraTasks(() => {
-            this.root.storeTable.selectedItem.setItemId(
-              'intraTasks',
-              this.root.storeTask.state.intraList.data[0].id.value,
-            );
+            this.root.storeTable.selectedItem.setItemId('intraTasks', 0);
           });
           break;
         case 'shipmentTasks':
           this.root.storeTask.fetch.shipmentTasks(() => {
-            this.root.storeTable.selectedItem.setItemId(
-              'shipmentTasks',
-              this.root.storeTask.state.shipmentList.data[0].id.value,
-            );
+            this.root.storeTable.selectedItem.setItemId('shipmentTasks', 0);
           });
           break;
         default:
@@ -98,10 +89,7 @@ export class StoreActionDelete {
       firstButtonEvent: () => {
         this.root.storeProduct.delete.product(productId, () => {
           this.root.storeProduct.fetch.products(() => {
-            this.root.storeTable.selectedItem.setItemId(
-              'products',
-              this.root.storeProduct.state.products.data[0].id.value,
-            );
+            this.root.storeTable.selectedItem.setItemId('products', 0);
           });
           this.root.storePopup.status.hideWindowConfirm();
         });

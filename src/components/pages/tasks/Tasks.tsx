@@ -46,7 +46,20 @@ const Tasks: FC = observer(() => {
       };
       storePopup.status.showWindowInformation();
     } else {
+      // TODO убрать повтор кода (здесь и при открытии окна редактирования)
       storeTask.fetch.oneTask(taskId, () => {
+        const { taskInfo } = storeTask.state.task;
+        const { productIds } = storeTask.state.task;
+
+        storePopup.form.task.setFormField('id', String(taskInfo.id.value));
+        storePopup.form.task.setFormField('article', taskInfo.article.value);
+        storePopup.form.task.setFormField('dateEnd', taskInfo.dateEnd.value);
+        storePopup.form.task.setFormField(
+          'dateStart',
+          taskInfo.dateStart.value,
+        );
+        storePopup.select.products.setProductList(productIds);
+
         storePopup.status.showViewTask();
       });
     }
@@ -69,6 +82,20 @@ const Tasks: FC = observer(() => {
       storePopup.status.showWindowInformation();
     } else {
       storeTask.fetch.oneTask(taskId, () => {
+        const { taskInfo } = storeTask.state.task;
+        const { productIds } = storeTask.state.task;
+        const { floorIds } = storeTask.state.task;
+
+        storePopup.form.task.setFormField('id', String(taskInfo.id.value));
+        storePopup.form.task.setFormField('article', taskInfo.article.value);
+        storePopup.form.task.setFormField('dateEnd', taskInfo.dateEnd.value);
+        storePopup.form.task.setFormField(
+          'dateStart',
+          taskInfo.dateStart.value,
+        );
+        storePopup.select.products.setProductList(productIds);
+        storePopup.select.floors.setItems(floorIds);
+
         storePopup.status.showFormTask();
       });
     }

@@ -1,10 +1,7 @@
 import { makeAutoObservable } from 'mobx';
 
+import { INITIAL_VALUE_NUMBER, INITIAL_VALUE_STRING } from '../constants';
 import RootStore from '../root';
-import {
-  INITIAL_VALUE_PRODUCT_NUMBER,
-  INITIAL_VALUE_PRODUCT_STRING,
-} from './config';
 import { IOneProduct, TProductsData } from './type';
 
 export class StoreProduct {
@@ -27,17 +24,17 @@ export class StoreProduct {
 
   private _product: IOneProduct = {
     productInfo: {
-      id: INITIAL_VALUE_PRODUCT_NUMBER,
-      article: INITIAL_VALUE_PRODUCT_STRING,
-      title: INITIAL_VALUE_PRODUCT_STRING,
-      author: INITIAL_VALUE_PRODUCT_STRING,
-      yearOfPublication: INITIAL_VALUE_PRODUCT_STRING,
-      number: INITIAL_VALUE_PRODUCT_NUMBER,
-      printDate: INITIAL_VALUE_PRODUCT_STRING,
-      printingHouse: INITIAL_VALUE_PRODUCT_STRING,
-      publishingHouse: INITIAL_VALUE_PRODUCT_STRING,
-      categoryTitle: INITIAL_VALUE_PRODUCT_STRING,
-      categoryId: INITIAL_VALUE_PRODUCT_NUMBER,
+      id: INITIAL_VALUE_NUMBER,
+      article: INITIAL_VALUE_STRING,
+      title: INITIAL_VALUE_STRING,
+      author: INITIAL_VALUE_STRING,
+      yearOfPublication: INITIAL_VALUE_STRING,
+      number: INITIAL_VALUE_NUMBER,
+      printDate: INITIAL_VALUE_STRING,
+      printingHouse: INITIAL_VALUE_STRING,
+      publishingHouse: INITIAL_VALUE_STRING,
+      categoryTitle: INITIAL_VALUE_STRING,
+      categoryId: INITIAL_VALUE_NUMBER,
     },
     pointId: 0,
     serviceInformation: {
@@ -52,7 +49,7 @@ export class StoreProduct {
     return this._product;
   }
 
-  public set product(newProducts: IOneProduct) {
-    this._product = newProducts;
+  public set product(newProduct: IOneProduct) {
+    this._product = newProduct;
   }
 }

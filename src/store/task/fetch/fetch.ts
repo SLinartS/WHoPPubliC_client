@@ -15,15 +15,7 @@ export class StoreTaskFetch {
       const response: AxiosResponse<IOneTask> = yield extendAxios.get<IOneTask>(
         `taskinfo/${taskId}`,
       );
-      const { taskInfo } = response.data;
-      const { storePopup } = this.root;
-
-      storePopup.form.task.setFormField('id', String(taskInfo.id.value));
-      storePopup.form.task.setFormField('article', taskInfo.article.value);
-      storePopup.form.task.setFormField('dateEnd', taskInfo.dateEnd.value);
-      storePopup.form.task.setFormField('dateStart', taskInfo.dateStart.value);
-      storePopup.select.products.setProductList(response.data.productIds);
-      storePopup.select.floors.setItems(response.data.floorIds);
+      this.root.storeTask.state.task = response.data;
 
       if (actionIfDone) {
         actionIfDone();

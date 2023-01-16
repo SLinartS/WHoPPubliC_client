@@ -8,9 +8,12 @@ import PointsMap from '../../../blocks/points/PointsMap';
 import WindowHeaderForm from '../../../blocks/windowHeader/form/Form';
 import { localViewLocationState } from './state';
 import { TInformationOfViewLocation } from './type';
+import { useGetButtonByTypeOfOpenedTask } from './useGetButtonByTypeOfOpenedTask';
 
 const PopupViewLocation: FC = observer(() => {
   const { storePoint, storeMap, storePopup } = useRootStore();
+
+  const { first, second } = useGetButtonByTypeOfOpenedTask();
 
   function closeHandler() {
     storePopup.status.hideViewLocation();
@@ -31,7 +34,12 @@ const PopupViewLocation: FC = observer(() => {
           />
         );
       case 'shipmentPoint':
-        return <PointsMap pointsType='shipment' />;
+        return (
+          <PointsMap
+            pointsType='shipment'
+            classes='points-map--view-points'
+          />
+        );
       case 'floors':
         return <Map classes='map-block--oneColumn' />;
       default:
@@ -39,6 +47,9 @@ const PopupViewLocation: FC = observer(() => {
     }
   }
 
+  useEffect(() => {
+    localViewLocationState.setTypeOfInformation(first.type);
+  }, []);
   useEffect(() => {
     if (storePoint.status.get('fetch') === 'pending') {
       storePoint.fetch.points();
@@ -61,9 +72,9 @@ const PopupViewLocation: FC = observer(() => {
           <button
             className='popup-view__switch'
             type='button'
-            onClick={() => changeTypeInfomationHandler('acceptancePoint')}
+            onClick={() => changeTypeInfomationHandler(first.type)}
           >
-            Точки
+            {first.text}
           </button>
           <img
             className='popup-view__switch-icon'
@@ -73,9 +84,9 @@ const PopupViewLocation: FC = observer(() => {
           <button
             className='popup-view__switch'
             type='button'
-            onClick={() => changeTypeInfomationHandler('floors')}
+            onClick={() => changeTypeInfomationHandler(second.type)}
           >
-            Склад
+            {second.text}
           </button>
         </div>
         <div className='popup-view__table-block popup-view__table-block--view-location'>

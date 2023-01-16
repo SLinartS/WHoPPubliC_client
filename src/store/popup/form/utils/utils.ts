@@ -43,7 +43,6 @@ export class StorePopupFormUtils {
       }
       return result;
     } catch (error) {
-      console.log(error);
       return '< error generating the article >';
     }
   }
