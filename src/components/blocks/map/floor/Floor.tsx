@@ -13,7 +13,7 @@ interface IMapFloorStyles {
 }
 
 const MapFloor: FC<IMapFloorProps> = observer(
-  ({ id, number, capacity, freeSpace, index }) => {
+  ({ id, number, capacity, freeSpace, reservedSpace, index }) => {
     const { storePopup } = useRootStore();
     const [styles, setStyles] = useState<IMapFloorStyles>();
 
@@ -46,10 +46,14 @@ const MapFloor: FC<IMapFloorProps> = observer(
       if (checkIsAdded()) {
         newStyle.background = `linear-gradient(180deg, 
             #e7731f ${(freeSpace / capacity) * 100}%, 
+            #7f8dcf ${(freeSpace / capacity) * 100}%, 
+            #7f8dcf ${(reservedSpace / capacity) * 100}%, 
             #59468B ${(freeSpace / capacity) * 100}%)`;
       } else {
         newStyle.background = `linear-gradient(180deg, 
-            transparent ${(freeSpace / capacity) * 100}%, 
+            transparent ${(freeSpace / capacity) * 100}%,
+            #7f8dcf ${(freeSpace / capacity) * 100}%, 
+            #7f8dcf ${(reservedSpace / capacity) * 100}%, 
             #59468B ${(freeSpace / capacity) * 100}%)`;
       }
 
@@ -62,6 +66,7 @@ const MapFloor: FC<IMapFloorProps> = observer(
         data-floor-id={id}
         data-floor-index={index}
         data-floor-free-space={freeSpace}
+        data-floor-reserved-space={reservedSpace}
         style={styles}
         onClick={chooseFloor}
       />

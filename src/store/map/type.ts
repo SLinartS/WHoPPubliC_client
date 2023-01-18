@@ -22,4 +22,5 @@ export interface IFloor {
   number: number;
   capacity: number;
   freeSpace: number;
+  reservedSpace: number;
 }
