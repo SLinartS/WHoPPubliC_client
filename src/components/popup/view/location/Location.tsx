@@ -16,8 +16,8 @@ const PopupViewLocation: FC = observer(() => {
   const { first, second } = useGetButtonByTypeOfOpenedTask();
 
   function closeHandler() {
-    storePopup.status.hideViewLocation();
-    storePopup.status.showViewTask();
+    storePopup.status.hide('viewLocation');
+    storePopup.status.show('viewTask');
   }
 
   function changeTypeInfomationHandler(newType: TInformationOfViewLocation) {

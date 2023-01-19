@@ -19,7 +19,7 @@ const PopupFormTask: FC = observer(() => {
     useRootStore();
 
   function closeHandler() {
-    storePopup.status.hideFormTask();
+    storePopup.status.hide('formTask');
     storePopup.form.utils.utils.resetForm();
     if (isAcceptance) {
       storeTask.status.set('fetchAcceptance', 'pending');
@@ -57,13 +57,13 @@ const PopupFormTask: FC = observer(() => {
   }
 
   function openSelectMapHandler() {
-    storePopup.status.showSelectMap();
-    storePopup.status.hideFormTask();
+    storePopup.status.show('selectMap');
+    storePopup.status.hide('formTask');
   }
 
   function openSelectProductHandler() {
-    storePopup.status.showSelectProducts();
-    storePopup.status.hideFormTask();
+    storePopup.status.show('selectProducts');
+    storePopup.status.hide('formTask');
   }
 
   function removeProductFromList() {

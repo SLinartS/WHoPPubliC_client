@@ -17,7 +17,7 @@ const PopupFormProduct: FC = observer(() => {
   const { storePopup, storeProduct, storeCategory } = useRootStore();
 
   function closeHandler() {
-    storePopup.status.hideFormProduct();
+    storePopup.status.hide('formProduct');
     storeProduct.fetch.products();
     storePopup.form.product.clearFormData();
   }
@@ -51,8 +51,8 @@ const PopupFormProduct: FC = observer(() => {
   }
 
   function openSelectPointsHandler() {
-    storePopup.status.showSelectPoints();
-    storePopup.status.hideFormProduct();
+    storePopup.status.show('selectPoints');
+    storePopup.status.hide('formProduct');
   }
 
   useEffect(() => {

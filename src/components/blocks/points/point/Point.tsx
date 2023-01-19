@@ -17,14 +17,14 @@ const Point: FC<IPointProps> = observer(({ id }) => {
 
   function choosePointBlock() {
     if (storePopup.form.state.isSelectedPoint) {
-      storePopup.status.hideSelectPoints(() => {
+      storePopup.status.hide('selectPoints', () => {
         const pointIsAlreadyAdded = storePopup.select.points.checkIsAdded(id);
         if (!pointIsAlreadyAdded) {
           storePopup.select.points.clearArray();
 
           storePopup.select.points.addItem(id);
         }
-        storePopup.status.showFormProduct();
+        storePopup.status.show('formProduct');
       });
     }
   }

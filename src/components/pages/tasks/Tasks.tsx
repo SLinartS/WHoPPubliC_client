@@ -44,7 +44,7 @@ const Tasks: FC = observer(() => {
       storePopup.windows.information.setting = {
         text: 'Выберите строку, чтобы её изменить',
       };
-      storePopup.status.showWindowInformation();
+      storePopup.status.show('windowInformation');
     } else {
       // TODO убрать повтор кода (здесь и при открытии окна редактирования)
       storeTask.fetch.oneTask(taskId, () => {
@@ -60,14 +60,14 @@ const Tasks: FC = observer(() => {
         );
         storePopup.select.products.setProductList(productIds);
 
-        storePopup.status.showViewTask();
+        storePopup.status.show('viewTask');
       });
     }
   }
 
   function showAddTaskWindowHandler() {
     storePopup.form.state.formActionType = 'create';
-    storePopup.status.showFormTask();
+    storePopup.status.show('formTask');
   }
 
   function changeTask(): void {
@@ -79,7 +79,7 @@ const Tasks: FC = observer(() => {
       storePopup.windows.information.setting = {
         text: 'Выберите строку, чтобы её изменить',
       };
-      storePopup.status.showWindowInformation();
+      storePopup.status.show('windowInformation');
     } else {
       storeTask.fetch.oneTask(taskId, () => {
         const { taskInfo } = storeTask.state.task;
@@ -96,7 +96,7 @@ const Tasks: FC = observer(() => {
         storePopup.select.products.setProductList(productIds);
         storePopup.select.floors.setItems(floorIds);
 
-        storePopup.status.showFormTask();
+        storePopup.status.show('formTask');
       });
     }
   }

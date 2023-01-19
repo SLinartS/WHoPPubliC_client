@@ -20,7 +20,7 @@ const Products: FC = observer(() => {
 
   function openProductFormHandler() {
     storePopup.form.state.formActionType = 'create';
-    storePopup.status.showFormProduct();
+    storePopup.status.show('formProduct');
   }
 
   function showPopupFilterHandler(e: MouseEvent<HTMLDivElement>) {
@@ -36,10 +36,10 @@ const Products: FC = observer(() => {
       storePopup.windows.information.setting = {
         text: 'Выберите строку, чтобы её изменить',
       };
-      storePopup.status.showWindowInformation();
+      storePopup.status.show('windowInformation');
     } else {
       storeProduct.fetch.oneProduct(productId, () => {
-        storePopup.status.showFormProduct(() => {
+        storePopup.status.show('formProduct', () => {
           const { productInfo } = storeProduct.state.product;
           const { pointId } = storeProduct.state.product;
 

@@ -11,8 +11,8 @@ const PopupSelectPoints: FC = observer(() => {
   const { storePopup, storePoint, storeState } = useRootStore();
 
   function closeHandler() {
-    storePopup.status.showFormProduct();
-    storePopup.status.hideSelectPoints();
+    storePopup.status.show('formProduct');
+    storePopup.status.hide('selectPoints');
     storePopup.select.points.clearArray();
     storePoint.fetch.points();
   }

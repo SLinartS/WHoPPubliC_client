@@ -15,7 +15,7 @@ const PopupViewTask: FC = observer(() => {
   const { storePopup, storeProduct, storeState, storeTable } = useRootStore();
 
   function closeHandler() {
-    storePopup.status.hideViewTask();
+    storePopup.status.hide('viewTask');
   }
 
   function viewLocationOpenHander() {
@@ -24,10 +24,10 @@ const PopupViewTask: FC = observer(() => {
       storePopup.windows.information.setting = {
         text: 'Выберите продукт, чтобы увидеть информацию об его местоположении',
       };
-      storePopup.status.showWindowInformation();
+      storePopup.status.show('windowInformation');
     } else {
       storePopup.view.product.setCurrentViewProduct(productId, () => {
-        storePopup.status.showViewLocation();
+        storePopup.status.show('viewLocation');
       });
     }
   }

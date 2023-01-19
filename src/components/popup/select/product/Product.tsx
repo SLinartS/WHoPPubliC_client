@@ -14,18 +14,18 @@ const PopupSelectProduct: FC = observer(() => {
       storePopup.windows.information.setting = {
         text: 'Выберите продукт для добавления',
       };
-      storePopup.status.showWindowInformation();
+      storePopup.status.show('windowInformation');
     } else {
       storePopup.select.products.addProductToList();
       storeTable.selectedItem.setItemId('products', 0);
-      storePopup.status.hideSelectProducts();
-      storePopup.status.showFormTask();
+      storePopup.status.hide('selectProducts');
+      storePopup.status.show('formTask');
     }
   }
 
   function closeHandler() {
-    storePopup.status.hideSelectProducts();
-    storePopup.status.showFormTask();
+    storePopup.status.hide('selectProducts');
+    storePopup.status.show('formTask');
   }
 
   useEffect(() => {

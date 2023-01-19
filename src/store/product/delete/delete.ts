@@ -24,7 +24,7 @@ export class StoreProductDelete {
       this.root.storePopup.windows.information.setting = {
         text: typeError.response?.data.message,
       };
-      this.root.storePopup.status.showWindowInformation();
+      this.root.storePopup.status.show('windowInformation');
     }
   }
 }

@@ -14,7 +14,7 @@ export class StoreActionDelete {
       this.root.storePopup.windows.information.setting = {
         text: 'Выберите строку, чтобы её удалить',
       };
-      this.root.storePopup.status.showWindowInformation();
+      this.root.storePopup.status.show('windowInformation');
     } else {
       switch (itemType) {
         case 'acceptanceTasks':
@@ -33,26 +33,26 @@ export class StoreActionDelete {
     this.root.storePopup.windows.confirm.setting = {
       title: `Удалить задачу Id:${taskId}?`,
       firstButtonEvent: () => {
-        this.root.storePopup.status.hideWindowConfirm(() => {
+        this.root.storePopup.status.hide('windowConfirm', () => {
           this.root.storePopup.windows.confirm.setting = {
             title: `Удалить связанные с задачей товары?`,
             firstButtonEvent: () => {
               this.deleteTask(taskType, taskId, true);
-              this.root.storePopup.status.hideWindowConfirm();
+              this.root.storePopup.status.hide('windowConfirm');
             },
             secondButtonEvent: () => {
               this.deleteTask(taskType, taskId, false);
-              this.root.storePopup.status.hideWindowConfirm();
+              this.root.storePopup.status.hide('windowConfirm');
             },
           };
-          this.root.storePopup.status.showWindowConfirm();
+          this.root.storePopup.status.show('windowConfirm');
         });
       },
       secondButtonEvent: () => {
-        this.root.storePopup.status.hideWindowConfirm();
+        this.root.storePopup.status.hide('windowConfirm');
       },
     };
-    this.root.storePopup.status.showWindowConfirm();
+    this.root.storePopup.status.show('windowConfirm');
   }
 
   private deleteTask(
@@ -61,7 +61,7 @@ export class StoreActionDelete {
     isDeleteProducts: boolean,
   ): void {
     this.root.storeTask.delete.task(taskId, isDeleteProducts, () => {
-      this.root.storePopup.status.hideWindowConfirm();
+      this.root.storePopup.status.hide('windowConfirm');
       switch (taskType) {
         case 'acceptanceTasks':
           this.root.storeTask.fetch.acceptanceTasks(() => {
@@ -91,13 +91,13 @@ export class StoreActionDelete {
           this.root.storeProduct.fetch.products(() => {
             this.root.storeTable.selectedItem.setItemId('products', 0);
           });
-          this.root.storePopup.status.hideWindowConfirm();
+          this.root.storePopup.status.hide('windowConfirm');
         });
       },
       secondButtonEvent: () => {
-        this.root.storePopup.status.hideWindowConfirm();
+        this.root.storePopup.status.hide('windowConfirm');
       },
     };
-    this.root.storePopup.status.showWindowConfirm();
+    this.root.storePopup.status.show('windowConfirm');
   }
 }

@@ -9,7 +9,7 @@ const WindowInformation: FC = observer(() => {
   const { storePopup } = useRootStore();
 
   function closeWindowHandler() {
-    storePopup.status.hideWindowInformation();
+    storePopup.status.hide('windowInformation');
   }
 
   return (

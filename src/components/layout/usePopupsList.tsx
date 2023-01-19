@@ -27,7 +27,7 @@ const usePopupList = () => {
   const POPUPS: ITransitionCustomLayout[] = [
     {
       name: 'formProductPopup',
-      trigger: storePopup.status.formProductStatus,
+      trigger: storePopup.status.getStatus('formProduct'),
       nodeRef: formProductNodeRef,
       children: <PopupFormProduct />,
       classNames: 'popup',
@@ -35,7 +35,7 @@ const usePopupList = () => {
     },
     {
       name: 'formTaskPopup',
-      trigger: storePopup.status.formTaskStatus,
+      trigger: storePopup.status.getStatus('formTask'),
       nodeRef: formTaskNodeRef,
       children: <PopupFormTask />,
       classNames: 'popup',
@@ -43,7 +43,7 @@ const usePopupList = () => {
     },
     {
       name: 'viewTaskPopup',
-      trigger: storePopup.status.viewTaskStatus,
+      trigger: storePopup.status.getStatus('viewTask'),
       nodeRef: viewTaskNodeRef,
       children: <PopupViewTask />,
       classNames: 'popup',
@@ -51,7 +51,7 @@ const usePopupList = () => {
     },
     {
       name: 'viewLocationPopup',
-      trigger: storePopup.status.viewLocationStatus,
+      trigger: storePopup.status.getStatus('viewLocation'),
       nodeRef: viewLocationNodeRef,
       children: <PopupViewLocation />,
       classNames: 'popup',
@@ -59,7 +59,7 @@ const usePopupList = () => {
     },
     {
       name: 'selectMapPopup',
-      trigger: storePopup.status.selectMapStatus,
+      trigger: storePopup.status.getStatus('selectMap'),
       nodeRef: selectMapNodeRef,
       children: <PopupSelectMap />,
       classNames: 'popup',
@@ -67,7 +67,7 @@ const usePopupList = () => {
     },
     {
       name: 'selectPointsPopup',
-      trigger: storePopup.status.selectPointsStatus,
+      trigger: storePopup.status.getStatus('selectPoints'),
       nodeRef: selectPointsNodeRef,
       children: <PopupSelectPoints />,
       classNames: 'popup',
@@ -75,7 +75,7 @@ const usePopupList = () => {
     },
     {
       name: 'selectProductsPopup',
-      trigger: storePopup.status.selectProductsStatus,
+      trigger: storePopup.status.getStatus('selectProducts'),
       nodeRef: selectProductsNodeRef,
       children: <PopupSelectProduct />,
       classNames: 'popup',
@@ -83,7 +83,7 @@ const usePopupList = () => {
     },
     {
       name: 'windowConfirm',
-      trigger: storePopup.status.windowConfirmStatus,
+      trigger: storePopup.status.getStatus('windowConfirm'),
       nodeRef: windowConfirmNodeRef,
       children: <WindowConfirm />,
       classNames: 'popup',
@@ -91,7 +91,7 @@ const usePopupList = () => {
     },
     {
       name: 'windowInformation',
-      trigger: storePopup.status.windowInformationStatus,
+      trigger: storePopup.status.getStatus('windowInformation'),
       nodeRef: windowInformationNodeRef,
       children: <WindowInformation />,
       classNames: 'popup',
