@@ -1,20 +1,7 @@
-import { useRootStore } from '../../../../utils/RootStoreProvider/useRootStore';
-import { TInformationOfViewLocation } from './type';
+import { useRootStore } from '../../../../../utils/RootStoreProvider/useRootStore';
+import { ILocationButtons } from '../type';
 
-interface IButtonVariation {
-  [label: string]: {
-    first: {
-      type: TInformationOfViewLocation;
-      text: string;
-    };
-    second: {
-      type: TInformationOfViewLocation;
-      text: string;
-    };
-  };
-}
-
-const BUTTON_VARIATIONS: IButtonVariation = {
+const BUTTON_VARIATIONS: ILocationButtons = {
   acceptance: {
     first: { type: 'acceptancePoint', text: 'Точки приёмки' },
     second: { type: 'floors', text: 'Склад' },

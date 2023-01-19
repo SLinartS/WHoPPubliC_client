@@ -12,7 +12,8 @@ import WindowHeaderForm from '../../../blocks/windowHeader/form/Form';
 
 const PopupViewTask: FC = observer(() => {
   const [isAcceptance, setIsAcceptance] = useState<boolean>(true);
-  const { storePopup, storeProduct, storeState, storeTable } = useRootStore();
+  const { storePopup, storeProduct, storeState, storeTable, storeTask } =
+    useRootStore();
 
   function closeHandler() {
     storePopup.status.hide('viewTask');
@@ -32,7 +33,29 @@ const PopupViewTask: FC = observer(() => {
     }
   }
 
-  function markProductAsMoved() {}
+  function markProductAsMoved() {
+    const productId = storeTable.selectedItem.getItemId('products');
+    if (productId === 0) {
+      storePopup.windows.information.setting = {
+        text: 'Выберите продукт, чтобы отметить его перемещённым',
+      };
+      storePopup.status.show('windowInformation');
+    } else {
+      storeProduct.markAsMoved.markAsMoved({ productId });
+    }
+  }
+
+  useEffect(() => {
+    if (storeProduct.status.get('markAsMoved') === 'done') {
+      storeProduct.fetch.products();
+      storeTask.fetch.oneTask(storeTask.state.task.taskInfo.id.value, () => {
+        const { productIds } = storeTask.state.task;
+
+        storePopup.select.products.setProductList(productIds);
+      });
+      storeProduct.status.set('markAsMoved', 'pending');
+    }
+  }, [storeProduct.status.get('markAsMoved')]);
 
   useEffect(() => {
     storeTable.selectedItem.setItemId('products', 0);
@@ -109,9 +132,7 @@ const PopupViewTask: FC = observer(() => {
           </div>
           {storePopup.select.products.getProductListData().length > 0 ? (
             <Table
-              data={storePopup.form.utils.utils.getFilteredProducts(
-                storePopup.select.products.getProductListData(),
-              )}
+              data={storePopup.select.products.getProductListData()}
               keyWord='article'
               valuesType='products'
               displayedColumns={storeTable.utils.getColumnsWithMark('products')}

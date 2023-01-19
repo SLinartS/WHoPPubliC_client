@@ -56,6 +56,6 @@ export class StorePopupSelectProducts {
   }
 
   public clearProductList() {
-    this.array = INITIAL_ARRAY_VALUE;
+    this.array = deepCopy(INITIAL_ARRAY_VALUE);
   }
 }

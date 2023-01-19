@@ -29,6 +29,7 @@ import { StorePopupWindowInformation } from './popup/window/information/informat
 import { StoreProductAdd } from './product/add/add';
 import { StoreProductDelete } from './product/delete/delete';
 import { StoreProductFetch } from './product/fetch/fetch';
+import { StoreProductMarkAsMoved } from './product/markAsMoved/markAsMoved';
 import { StoreProduct } from './product/product';
 import { StoreProductStatus } from './product/status/status';
 import { StoreProductUpdate } from './product/update/update';
@@ -74,6 +75,7 @@ interface IStoreProduct {
   add: StoreProductAdd;
   update: StoreProductUpdate;
   delete: StoreProductDelete;
+  markAsMoved: StoreProductMarkAsMoved;
 }
 
 interface IStoreMap {
@@ -178,6 +180,7 @@ class RootStore {
       add: new StoreProductAdd(this),
       update: new StoreProductUpdate(this),
       delete: new StoreProductDelete(this),
+      markAsMoved: new StoreProductMarkAsMoved(this),
     };
 
     this.storeMap = {

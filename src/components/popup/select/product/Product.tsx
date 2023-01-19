@@ -55,9 +55,7 @@ const PopupSelectProduct: FC = observer(() => {
       <div className='popup-select__table--choise-product'>
         {storeProduct.status.get('fetch') === 'done' ? (
           <Table
-            data={storePopup.form.utils.utils.getFilteredProducts(
-              storePopup.form.utils.utils.getUnselectedProducts(),
-            )}
+            data={storePopup.form.utils.utils.getUnselectedProducts()}
             keyWord='author'
             valuesType='products'
             displayedColumns={storeTable.utils.getColumnsWithMark('products')}

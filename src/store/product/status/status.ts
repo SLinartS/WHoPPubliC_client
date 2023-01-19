@@ -3,7 +3,13 @@ import { makeAutoObservable } from 'mobx';
 import RootStore from '../../root';
 import { TStatus } from '../../type';
 
-export type TProductStatus = 'fetch' | 'fetchOne' | 'add' | 'delete' | 'update';
+export type TProductStatus =
+  | 'fetch'
+  | 'fetchOne'
+  | 'add'
+  | 'delete'
+  | 'update'
+  | 'markAsMoved';
 
 export class StoreProductStatus {
   constructor(private readonly root: RootStore) {
@@ -19,6 +25,8 @@ export class StoreProductStatus {
   private delete: TStatus = 'pending';
 
   private update: TStatus = 'pending';
+
+  private markAsMoved: TStatus = 'pending';
 
   public get(title: TProductStatus) {
     return this[title];

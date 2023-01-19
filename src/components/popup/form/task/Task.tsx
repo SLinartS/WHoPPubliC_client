@@ -177,9 +177,7 @@ const PopupFormTask: FC = observer(() => {
 
           {storePopup.select.products.getProductListData().length > 0 ? (
             <Table
-              data={storePopup.form.utils.utils.getFilteredProducts(
-                storePopup.select.products.getProductListData(),
-              )}
+              data={storePopup.select.products.getProductListData()}
               keyWord='article'
               valuesType='products'
               displayedColumns={storeTable.utils.getColumnsWithMark('products')}

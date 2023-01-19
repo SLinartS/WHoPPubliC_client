@@ -1,7 +1,6 @@
 import { AxiosResponse } from 'axios';
 import { makeAutoObservable } from 'mobx';
 
-import { ITableObject } from '../../../../components/blocks/table/type';
 import extendAxios from '../../../../utils/extendAxios';
 import { IProduct } from '../../../product/type';
 import RootStore from '../../../root';
@@ -59,21 +58,6 @@ export class StorePopupFormUtils {
     this.root.storeCategory.status.set('fetch', 'pending');
     this.root.storeTask.status.set('add', 'pending');
     this.root.storePopup.form.state.isDisplayDefaultErrors = false;
-  }
-
-  public getFilteredProducts(productArray: IProduct[]) {
-    const filteredProducts: ITableObject[] = [];
-    for (const product of productArray) {
-      let filteredColumns: ITableObject = { id: product.id };
-      for (const [key, column] of Object.entries(product)) {
-        const typedKey: keyof IProduct = key;
-
-        filteredColumns[typedKey] = column;
-      }
-      filteredProducts.push(filteredColumns);
-      filteredColumns = { id: { value: 0, alias: 'ID' } };
-    }
-    return filteredProducts;
   }
 
   public getUnselectedProducts() {
