@@ -13,7 +13,7 @@ export class StoreStateUser {
     id: 0,
     login: '',
     name: 'Евгений Иванович Петров',
-    role: 'worker',
+    role: 'admin',
   };
 
   public checkIsAuth(): boolean {

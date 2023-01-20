@@ -13,21 +13,24 @@ interface WindowConfirmTemplateProps {
 const WindowConfirmTemplate: FC<WindowConfirmTemplateProps> = observer(
   ({ text, firstButtonClickHandler, secondButtonClickHandler }) => {
     return (
-      <div className='popup popup__popup-window popup-window popup-window--confirm'>
-        <WindowHeader title={text} />
-        <div className='popup-window__block'>
-          <Button
-            classes='button__confirm'
-            text='Да'
-            clickHandler={firstButtonClickHandler}
-          />
-          <Button
-            classes='button__confirm'
-            text='Нет'
-            clickHandler={secondButtonClickHandler}
-          />
+      <>
+        <div className='popup-window__wrapper' />
+        <div className='popup popup__popup-window popup-window popup-window--confirm'>
+          <WindowHeader title={text} />
+          <div className='popup-window__block'>
+            <Button
+              classes='button__confirm'
+              text='Да'
+              clickHandler={firstButtonClickHandler}
+            />
+            <Button
+              classes='button__confirm'
+              text='Нет'
+              clickHandler={secondButtonClickHandler}
+            />
+          </div>
         </div>
-      </div>
+      </>
     );
   },
 );
