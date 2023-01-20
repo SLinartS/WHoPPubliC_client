@@ -1,11 +1,9 @@
 import { ITableObject } from '../../components/blocks/table/type';
-import { IField } from '../type';
+import { IField, TTaskType } from '../type';
 
-export type TTypeTaskStates = 'acceptanceList' | 'shipmentList';
-
-export interface ITasks {
-  data: ITask[];
-}
+export type ITasks = {
+  [key in TTaskType]: ITask[];
+};
 
 export interface IOneTask {
   taskInfo: ITask;

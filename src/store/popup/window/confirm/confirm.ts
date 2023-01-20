@@ -1,26 +1,29 @@
 import { makeAutoObservable } from 'mobx';
 
+import deepCopy from '../../../../utils/deepCopy/deepCopy';
 import RootStore from '../../../root';
-import { IWindowConfirmSettings } from './type';
+import { IWindowsConfirm } from './type';
 
 export class StorePopupWindowConfirm {
   constructor(private readonly root: RootStore) {
     makeAutoObservable(this, {});
   }
 
-  private readonly _initialSettings: IWindowConfirmSettings = {
-    title: 'testTitle',
-    firstButtonEvent: () => '',
-    secondButtonEvent: () => '',
+  private readonly initialSettings: IWindowsConfirm = {
+    variant: 'deleteProduct',
+    itemType: 'products',
+    itemName: 'products',
+    itemId: 0,
+    text: '',
   };
 
-  private _setting: IWindowConfirmSettings = { ...this._initialSettings };
+  private settings: IWindowsConfirm = deepCopy(this.initialSettings);
 
-  public get setting() {
-    return this._setting;
+  public getSetting() {
+    return this.settings;
   }
 
-  public set setting(newSetting: IWindowConfirmSettings) {
-    this._setting = newSetting;
+  public setSetting(newSettings: IWindowsConfirm) {
+    this.settings = newSettings;
   }
 }

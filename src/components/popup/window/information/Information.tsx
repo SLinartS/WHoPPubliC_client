@@ -10,6 +10,7 @@ const WindowInformation: FC = observer(() => {
 
   function closeWindowHandler() {
     storePopup.status.hide('windowInformation');
+    storePopup.status.hide('windowConfirm');
   }
 
   return (

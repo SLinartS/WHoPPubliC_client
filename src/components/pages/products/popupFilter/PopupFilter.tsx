@@ -16,7 +16,7 @@ const PopupFilter: FC = observer(() => {
     <div className='popup-filter'>
       {Object.entries(
         storeProduct.state.products.data[
-          storeTable.selectedItem.getItemId('products') - 1
+          storeTable.selectedItem.getItemId('products', 'products') - 1
         ],
       ).map(([key, item]) => (
         <SelectTable

@@ -3,7 +3,7 @@ import { makeAutoObservable } from 'mobx';
 
 import extendAxios from '../../../utils/extendAxios';
 import RootStore from '../../root';
-import { IOneTask, ITasks } from '../type';
+import { IOneTask, ITask } from '../type';
 
 export class StoreTaskFetch {
   constructor(private readonly root: RootStore) {
@@ -27,55 +27,55 @@ export class StoreTaskFetch {
     }
   }
 
-  public *acceptanceTasks(actionIfDone?: () => void) {
+  public *acceptance(actionIfDone?: () => void) {
     try {
-      const response: AxiosResponse<ITasks> = yield extendAxios.get<ITasks>(
+      const response: AxiosResponse<ITask[]> = yield extendAxios.get<ITask[]>(
         'tasks/acceptance',
       );
-      this.root.storeTask.state.acceptanceList = response.data;
+      this.root.storeTask.state.setTasks('acceptance', response.data);
 
       if (actionIfDone) {
         actionIfDone();
       }
 
-      this.root.storeTask.status.set('fetchAcceptance', 'done');
+      this.root.storeTask.status.setFetch('acceptance', 'done');
     } catch (error) {
-      this.root.storeTask.status.set('fetchAcceptance', 'error');
+      this.root.storeTask.status.setFetch('acceptance', 'error');
     }
   }
 
-  public *shipmentTasks(actionIfDone?: () => void) {
+  public *shipment(actionIfDone?: () => void) {
     try {
-      const response: AxiosResponse<ITasks> = yield extendAxios.get<ITasks>(
+      const response: AxiosResponse<ITask[]> = yield extendAxios.get<ITask[]>(
         'tasks/shipment',
       );
-      this.root.storeTask.state.shipmentList = response.data;
+      this.root.storeTask.state.setTasks('shipment', response.data);
 
       if (actionIfDone) {
         actionIfDone();
       }
 
-      this.root.storeTask.status.set('fetchShipment', 'done');
+      this.root.storeTask.status.setFetch('shipment', 'done');
     } catch (error) {
-      this.root.storeTask.status.set('fetchShipment', 'error');
+      this.root.storeTask.status.setFetch('shipment', 'error');
     }
   }
 
   // !not implemented on the server
-  public *intraTasks(actionIfDone?: () => void) {
+  public *intra(actionIfDone?: () => void) {
     try {
-      const response: AxiosResponse<ITasks> = yield extendAxios.get<ITasks>(
+      const response: AxiosResponse<ITask[]> = yield extendAxios.get<ITask[]>(
         'tasks/intra',
       );
-      this.root.storeTask.state.intraList = response.data;
+      this.root.storeTask.state.setTasks('intra', response.data);
 
       if (actionIfDone) {
         actionIfDone();
       }
 
-      this.root.storeTask.status.set('fetchIntra', 'done');
+      this.root.storeTask.status.setFetch('intra', 'done');
     } catch (error) {
-      this.root.storeTask.status.set('fetchIntra', 'error');
+      this.root.storeTask.status.setFetch('intra', 'error');
     }
   }
 }

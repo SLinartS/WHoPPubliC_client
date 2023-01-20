@@ -5,18 +5,19 @@ import addIcon from '../../../assets/icons/add.svg';
 import deleteIcon from '../../../assets/icons/delete.svg';
 import editIcon from '../../../assets/icons/edit.svg';
 import filterIcon from '../../../assets/icons/sliders.svg';
-import { IProductFormDataFields } from '../../../store/popup/form/product/type';
-import { ISelectedItems } from '../../../store/table/selectedItem/type';
 import { useRootStore } from '../../../utils/RootStoreProvider/useRootStore';
 import Loader from '../../blocks/loader/Loader';
 import SearchField from '../../blocks/searchField/SearchField';
 import SelectTable from '../../blocks/selectTable/SelectTable';
 import Table from '../../blocks/table/Table';
+import { useChangeProduct } from '../hooks/change/useChangeProduct';
+import { useDeleteController } from '../hooks/delete/useDeleteController';
 import PopupFilter from './popupFilter/PopupFilter';
 
 const Products: FC = observer(() => {
-  const { storeProduct, storePopup, storeTable, storeAction, storeState } =
-    useRootStore();
+  const { storeProduct, storePopup, storeTable, storeState } = useRootStore();
+  const deleteControllerHook = useDeleteController();
+  const changeProductHook = useChangeProduct();
 
   function openProductFormHandler() {
     storePopup.form.state.formActionType = 'create';
@@ -30,52 +31,27 @@ const Products: FC = observer(() => {
 
   function changeProduct(): void {
     storePopup.form.state.formActionType = 'change';
-    const productId = storeTable.selectedItem.getItemId('products');
-
-    if (productId === 0) {
-      storePopup.windows.information.setting = {
-        text: 'Выберите строку, чтобы её изменить',
-      };
-      storePopup.status.show('windowInformation');
-    } else {
-      storeProduct.fetch.oneProduct(productId, () => {
-        storePopup.status.show('formProduct', () => {
-          const { productInfo } = storeProduct.state.product;
-          const { pointId } = storeProduct.state.product;
-
-          Object.entries(productInfo).forEach(([key, element]) => {
-            if (key !== 'categoryTitle') {
-              const typedKey = key as keyof IProductFormDataFields;
-              storePopup.form.product.setFormField(
-                typedKey,
-                String(element.value),
-              );
-            }
-          });
-
-          storePopup.select.points.clearArray();
-          storePopup.select.points.addItem(pointId);
-        });
-      });
-    }
+    changeProductHook();
   }
 
-  function deleteHandler(itemType: keyof ISelectedItems) {
-    storeAction.delete.deleteController(itemType);
+  function deleteHandler() {
+    deleteControllerHook('products', 'products');
   }
 
   function getDataForSelects() {
     const numberProductsWithSelectedId =
       storeProduct.state.products.data.filter(
         (product) =>
-          product.id.value === storeTable.selectedItem.getItemId('products'),
+          product.id.value ===
+          storeTable.selectedItem.getItemId('products', 'products'),
       ).length;
 
     if (numberProductsWithSelectedId) {
       return Object.entries(
         storeProduct.state.products.data.filter(
           (product) =>
-            product.id.value === storeTable.selectedItem.getItemId('products'),
+            product.id.value ===
+            storeTable.selectedItem.getItemId('products', 'products'),
         )[0],
       );
     }
@@ -136,7 +112,7 @@ const Products: FC = observer(() => {
               className='products__icon'
               src={deleteIcon}
               alt='add'
-              onClick={() => deleteHandler('products')}
+              onClick={deleteHandler}
             />
           </>
         )}
@@ -159,6 +135,7 @@ const Products: FC = observer(() => {
             data={storeProduct.state.products.data}
             keyWord='article'
             valuesType='products'
+            selectingValues='products'
             classes='table--products'
             displayedColumns={storeTable.utils.getColumnsWithMark('products')}
           />

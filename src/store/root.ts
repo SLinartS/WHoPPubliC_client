@@ -1,6 +1,5 @@
 import { configure } from 'mobx';
 
-import { StoreActionDelete } from './action/delete/delete';
 import { StoreCategory } from './category/category';
 import { StoreCategoryFetch } from './category/fetch/fetch';
 import { StoreCategoryStatus } from './category/status/status';
@@ -48,10 +47,6 @@ import { StoreTaskUpdate } from './task/update/update';
 configure({
   enforceActions: 'always',
 });
-
-interface IStoreAction {
-  delete: StoreActionDelete;
-}
 
 interface IStoreState {
   interface: StoreStateInterface;
@@ -122,8 +117,8 @@ interface IStorePopup {
     product: StorePopupViewProduct;
   };
   windows: {
-    confirm: StorePopupWindowConfirm;
     information: StorePopupWindowInformation;
+    confirm: StorePopupWindowConfirm;
   };
 }
 
@@ -134,8 +129,6 @@ interface IStoreTable {
 
 class RootStore {
   private static instance: RootStore;
-
-  public storeAction: IStoreAction;
 
   public storeState: IStoreState;
 
@@ -154,10 +147,6 @@ class RootStore {
   public storeTable: IStoreTable;
 
   private constructor() {
-    this.storeAction = {
-      delete: new StoreActionDelete(this),
-    };
-
     this.storeState = {
       interface: new StoreStateInterface(this),
       checkMark: new StoreStateCheckMark(this),
@@ -227,8 +216,8 @@ class RootStore {
         product: new StorePopupViewProduct(this),
       },
       windows: {
-        confirm: new StorePopupWindowConfirm(this),
         information: new StorePopupWindowInformation(this),
+        confirm: new StorePopupWindowConfirm(this),
       },
     };
 

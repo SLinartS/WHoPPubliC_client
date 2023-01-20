@@ -21,8 +21,8 @@ export class StoreTaskDelete {
       }
 
       this.root.storeTask.status.set('delete', 'done');
-      this.root.storeTable.selectedItem.setItemId('acceptanceTasks', 0);
-      this.root.storeTable.selectedItem.setItemId('shipmentTasks', 0);
+      this.root.storeTable.selectedItem.setItemId('tasks', 'acceptance', 0);
+      this.root.storeTable.selectedItem.setItemId('tasks', 'shipment', 0);
       if (actionIfDone) {
         actionIfDone();
       }

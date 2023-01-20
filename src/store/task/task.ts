@@ -2,41 +2,26 @@ import { makeAutoObservable } from 'mobx';
 
 import { INITIAL_VALUE_NUMBER, INITIAL_VALUE_STRING } from '../constants';
 import RootStore from '../root';
-import { IOneTask, ITasks } from './type';
+import { TTaskType } from '../type';
+import { IOneTask, ITask, ITasks } from './type';
 
 export class StoreTask {
   constructor(private readonly root: RootStore) {
     makeAutoObservable(this, {});
   }
 
-  private _acceptanceList: ITasks = { data: [] };
+  private tasks: ITasks = {
+    acceptance: [],
+    shipment: [],
+    intra: [],
+  };
 
-  public get acceptanceList() {
-    return this._acceptanceList;
+  public getTasks(type: TTaskType) {
+    return this.tasks[type];
   }
 
-  public set acceptanceList(newList: ITasks) {
-    this._acceptanceList = newList;
-  }
-
-  private _shipmentList: ITasks = { data: [] };
-
-  public get shipmentList() {
-    return this._shipmentList;
-  }
-
-  public set shipmentList(newList: ITasks) {
-    this._shipmentList = newList;
-  }
-
-  private _intraList: ITasks = { data: [] };
-
-  public get intraList() {
-    return this._intraList;
-  }
-
-  public set intraList(newList: ITasks) {
-    this._intraList = newList;
+  public setTasks(type: TTaskType, newTasks: ITask[]) {
+    this.tasks[type] = newTasks;
   }
 
   private _task: IOneTask = {

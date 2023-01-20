@@ -22,9 +22,9 @@ const PopupFormTask: FC = observer(() => {
     storePopup.status.hide('formTask');
     storePopup.form.utils.utils.resetForm();
     if (isAcceptance) {
-      storeTask.status.set('fetchAcceptance', 'pending');
+      storeTask.status.setFetch('acceptance', 'pending');
     } else {
-      storeTask.status.set('fetchShipment', 'pending');
+      storeTask.status.setFetch('shipment', 'pending');
     }
   }
 
@@ -180,6 +180,7 @@ const PopupFormTask: FC = observer(() => {
               data={storePopup.select.products.getProductListData()}
               keyWord='article'
               valuesType='products'
+              selectingValues='products'
               displayedColumns={storeTable.utils.getColumnsWithMark('products')}
               classes='table--add-task'
             />

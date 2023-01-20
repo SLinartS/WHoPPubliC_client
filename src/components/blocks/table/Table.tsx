@@ -1,8 +1,11 @@
 import { observer } from 'mobx-react-lite';
 import { FC, ReactNode } from 'react';
 
-import { ISelectedItems } from '../../../store/table/selectedItem/type';
-import { IField } from '../../../store/type';
+import {
+  TSelectedItems,
+  TSelectedProducts,
+} from '../../../store/table/selectedItem/type';
+import { IField, TTaskType } from '../../../store/type';
 import TableColumn from './column/Column';
 import TableColumnShell from './column/shell/Shell';
 import { addBorderRadius } from './helpers';
@@ -12,13 +15,21 @@ import { ITableObject } from './type';
 interface ITableProps {
   data: ITableObject[];
   keyWord: keyof ITableObject;
-  valuesType: keyof ISelectedItems;
+  valuesType: keyof TSelectedItems;
+  selectingValues: TTaskType | TSelectedProducts;
   displayedColumns: string[];
   classes?: string;
 }
 
 const Table: FC<ITableProps> = observer(
-  ({ data, keyWord, valuesType, displayedColumns, classes }) => {
+  ({
+    data,
+    keyWord,
+    valuesType,
+    selectingValues,
+    displayedColumns,
+    classes,
+  }) => {
     function countColumnsNumber(): number {
       if (data[0]) {
         if (displayedColumns) {
@@ -77,6 +88,7 @@ const Table: FC<ITableProps> = observer(
         {data.map((columns) => (
           <TableRow
             valuesType={valuesType}
+            selectingValues={selectingValues}
             key={columns[keyWord].value + String(columns.id.value)}
             displayedColumns={displayedColumns}
             columns={columns}

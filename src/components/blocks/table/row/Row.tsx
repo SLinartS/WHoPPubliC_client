@@ -1,7 +1,11 @@
 import { observer } from 'mobx-react-lite';
 import { FC, ReactNode } from 'react';
 
-import { ISelectedItems } from '../../../../store/table/selectedItem/type';
+import {
+  TSelectedItems,
+  TSelectedProducts,
+} from '../../../../store/table/selectedItem/type';
+import { TTaskType } from '../../../../store/type';
 import { useRootStore } from '../../../../utils/RootStoreProvider/useRootStore';
 import TableColumn from '../column/Column';
 import TableColumnShell from '../column/shell/Shell';
@@ -10,20 +14,28 @@ import { ITableObject } from '../type';
 
 interface IRowProps {
   columns: ITableObject;
-  valuesType: keyof ISelectedItems;
+  valuesType: keyof TSelectedItems;
+  selectingValues: TTaskType | TSelectedProducts;
   displayedColumns?: string[];
 }
 
 const TableRow: FC<IRowProps> = observer(
-  ({ columns, valuesType, displayedColumns }) => {
+  ({ columns, valuesType, selectingValues, displayedColumns }) => {
     const { storeTable } = useRootStore();
 
     function selectHandler() {
-      storeTable.selectedItem.setItemId(valuesType, columns.id.value);
+      storeTable.selectedItem.setItemId(
+        valuesType,
+        selectingValues,
+        columns.id.value,
+      );
     }
 
     function checkIsSelected(): string {
-      if (storeTable.selectedItem.getItemId(valuesType) === columns.id.value) {
+      if (
+        storeTable.selectedItem.getItemId(valuesType, selectingValues) ===
+        columns.id.value
+      ) {
         return 'table__column-shell--selected';
       }
       return '';

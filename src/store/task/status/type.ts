@@ -1,8 +1,5 @@
-export type TTaskStatus =
-  | 'fetchAcceptance'
-  | 'fetchShipment'
-  | 'fetchIntra'
-  | 'fetchOne'
-  | 'delete'
-  | 'add'
-  | 'update';
+import { TStatus, TTaskType } from '../../type';
+
+export type TTaskStatus = 'fetchOne' | 'delete' | 'add' | 'update';
+
+export type TTaskFetch = { [key in TTaskType]: TStatus };

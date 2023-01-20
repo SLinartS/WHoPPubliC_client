@@ -23,7 +23,7 @@ export class StoreProductUpdate {
       );
 
       this.root.storeProduct.status.set('update', 'done');
-      this.root.storeTable.selectedItem.setItemId('products', 0);
+      this.root.storeTable.selectedItem.setItemId('products', 'products', 0);
       if (actionIfDone) {
         actionIfDone();
       }

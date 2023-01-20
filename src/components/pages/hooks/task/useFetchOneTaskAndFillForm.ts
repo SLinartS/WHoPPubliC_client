@@ -1,0 +1,34 @@
+import { useCallback } from 'react';
+
+import { TPopups } from '../../../../store/popup/status/type';
+import { TTaskType } from '../../../../store/type';
+import { useRootStore } from '../../../../utils/RootStoreProvider/useRootStore';
+import { useCheckIsSelect } from '../useCheckIsSelect';
+
+export function useFetchOneTaskAndFillForm() {
+  const { storeTask, storePopup } = useRootStore();
+  const checkSelected = useCheckIsSelect();
+
+  return useCallback((itemName: TTaskType, openingWindow: TPopups) => {
+    const checkResult = checkSelected('tasks', itemName);
+    if (checkResult.result) {
+      storeTask.fetch.oneTask(checkResult.itemId, () => {
+        const { taskInfo } = storeTask.state.task;
+        const { productIds } = storeTask.state.task;
+        const { floorIds } = storeTask.state.task;
+
+        storePopup.form.task.setFormField('id', String(taskInfo.id.value));
+        storePopup.form.task.setFormField('article', taskInfo.article.value);
+        storePopup.form.task.setFormField('dateEnd', taskInfo.dateEnd.value);
+        storePopup.form.task.setFormField(
+          'dateStart',
+          taskInfo.dateStart.value,
+        );
+        storePopup.select.products.setProductList(productIds);
+        storePopup.select.floors.setItems(floorIds);
+
+        storePopup.status.show(openingWindow);
+      });
+    }
+  }, []);
+}

@@ -2,28 +2,28 @@ import { observer } from 'mobx-react-lite';
 import { FC } from 'react';
 
 import { useRootStore } from '../../../../utils/RootStoreProvider/useRootStore';
-import Button from '../../../blocks/button/Button';
-import WindowHeader from '../../../blocks/windowHeader/WindowHeader';
+import WindowConfirmDeleteProduct from './deleteProduct/DeleteProduct';
+import WindowConfirmDeleteRelatedProduct from './deleteTask/deleteRelatedProduct/DeleteRelatedProduct';
+import WindowConfirmDeleteTask from './deleteTask/DeleteTask';
 
 const WindowConfirm: FC = observer(() => {
   const { storePopup } = useRootStore();
-  return (
-    <div className='popup popup__popup-window popup-window popup-window--confirm'>
-      <WindowHeader title={storePopup.windows.confirm.setting.title} />
-      <div className='popup-window__block'>
-        <Button
-          classes='button__confirm'
-          text='Да'
-          clickHandler={storePopup.windows.confirm.setting.firstButtonEvent}
-        />
-        <Button
-          classes='button__confirm'
-          text='Нет'
-          clickHandler={storePopup.windows.confirm.setting.secondButtonEvent}
-        />
-      </div>
-    </div>
-  );
+
+  function displayWindow() {
+    const settings = storePopup.windows.confirm.getSetting();
+    switch (settings.variant) {
+      case 'deleteTask':
+        return <WindowConfirmDeleteTask />;
+      case 'deleteRelatedProducts':
+        return <WindowConfirmDeleteRelatedProduct />;
+      case 'deleteProduct':
+        return <WindowConfirmDeleteProduct />;
+      default:
+        return null;
+    }
+  }
+
+  return displayWindow();
 });
 
 export default WindowConfirm;

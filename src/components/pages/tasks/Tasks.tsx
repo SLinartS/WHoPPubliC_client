@@ -5,64 +5,26 @@ import addIcon from '../../../assets/icons/add.svg';
 import deleteIcon from '../../../assets/icons/delete.svg';
 import editIcon from '../../../assets/icons/edit.svg';
 import eyeIcon from '../../../assets/icons/eye.svg';
-import { ISelectedItems } from '../../../store/table/selectedItem/type';
-import { TTaskStatus } from '../../../store/task/status/type';
-import { TTypeTaskStates } from '../../../store/task/type';
 import { TTaskType } from '../../../store/type';
 import { useRootStore } from '../../../utils/RootStoreProvider/useRootStore';
 import Loader from '../../blocks/loader/Loader';
 import SearchField from '../../blocks/searchField/SearchField';
 import Table from '../../blocks/table/Table';
+import { useDeleteController } from '../hooks/delete/useDeleteController';
+import { useFetchOneTaskAndFillForm } from '../hooks/task/useFetchOneTaskAndFillForm';
 import { TASK_TYPES_FOR_SWITCHER } from './taskForSwitcher';
 
 const Tasks: FC = observer(() => {
-  const { storeTask, storePopup, storeTable, storeAction, storeState } =
-    useRootStore();
+  const { storeTask, storePopup, storeTable, storeState } = useRootStore();
+  const deleteControllerHook = useDeleteController();
+  const fetchOneTaskAndFillFormHook = useFetchOneTaskAndFillForm();
 
   function getCurrentTypeOfTask(): TTaskType {
     return storeState.interface.getCurrentTypeOfTask();
   }
 
-  function getCurrentSelectedItems(): keyof ISelectedItems {
-    switch (getCurrentTypeOfTask()) {
-      case 'intra':
-        return 'intraTasks';
-
-      case 'shipment':
-        return 'shipmentTasks';
-
-      default:
-        return 'acceptanceTasks';
-    }
-  }
-
-  function showTaskWindowHandler() {
-    const taskType: keyof ISelectedItems = getCurrentSelectedItems();
-    const taskId = storeTable.selectedItem.getItemId(taskType);
-
-    if (taskId === 0) {
-      storePopup.windows.information.setting = {
-        text: 'Выберите строку, чтобы её изменить',
-      };
-      storePopup.status.show('windowInformation');
-    } else {
-      // TODO убрать повтор кода (здесь и при открытии окна редактирования)
-      storeTask.fetch.oneTask(taskId, () => {
-        const { taskInfo } = storeTask.state.task;
-        const { productIds } = storeTask.state.task;
-
-        storePopup.form.task.setFormField('id', String(taskInfo.id.value));
-        storePopup.form.task.setFormField('article', taskInfo.article.value);
-        storePopup.form.task.setFormField('dateEnd', taskInfo.dateEnd.value);
-        storePopup.form.task.setFormField(
-          'dateStart',
-          taskInfo.dateStart.value,
-        );
-        storePopup.select.products.setProductList(productIds);
-
-        storePopup.status.show('viewTask');
-      });
-    }
+  function showViewTaskWindowHandler() {
+    fetchOneTaskAndFillFormHook(getCurrentTypeOfTask(), 'viewTask');
   }
 
   function showAddTaskWindowHandler() {
@@ -70,40 +32,13 @@ const Tasks: FC = observer(() => {
     storePopup.status.show('formTask');
   }
 
-  function changeTask(): void {
-    const taskType: keyof ISelectedItems = getCurrentSelectedItems();
+  function changeHandler(): void {
     storePopup.form.state.formActionType = 'change';
-    const taskId = storeTable.selectedItem.getItemId(taskType);
-
-    if (taskId === 0) {
-      storePopup.windows.information.setting = {
-        text: 'Выберите строку, чтобы её изменить',
-      };
-      storePopup.status.show('windowInformation');
-    } else {
-      storeTask.fetch.oneTask(taskId, () => {
-        const { taskInfo } = storeTask.state.task;
-        const { productIds } = storeTask.state.task;
-        const { floorIds } = storeTask.state.task;
-
-        storePopup.form.task.setFormField('id', String(taskInfo.id.value));
-        storePopup.form.task.setFormField('article', taskInfo.article.value);
-        storePopup.form.task.setFormField('dateEnd', taskInfo.dateEnd.value);
-        storePopup.form.task.setFormField(
-          'dateStart',
-          taskInfo.dateStart.value,
-        );
-        storePopup.select.products.setProductList(productIds);
-        storePopup.select.floors.setItems(floorIds);
-
-        storePopup.status.show('formTask');
-      });
-    }
+    fetchOneTaskAndFillFormHook(getCurrentTypeOfTask(), 'formTask');
   }
 
   function deleteHandler() {
-    const taskType: keyof ISelectedItems = getCurrentSelectedItems();
-    storeAction.delete.deleteController(taskType);
+    deleteControllerHook('tasks', getCurrentTypeOfTask());
   }
 
   function changeCurrentTypeOfTaskHandler(taskType: TTaskType) {
@@ -111,29 +46,15 @@ const Tasks: FC = observer(() => {
   }
 
   function displayTasksTable(): ReactNode {
-    let fetchType: TTaskStatus = 'fetchAcceptance';
-    let valuesType: keyof ISelectedItems = 'acceptanceTasks';
-    let listType: TTypeTaskStates = 'acceptanceList';
-    switch (storeState.interface.getCurrentTypeOfTask()) {
-      case 'intra':
-        fetchType = 'fetchShipment';
-        valuesType = 'shipmentTasks';
-        listType = 'shipmentList';
-        break;
-      case 'shipment':
-        fetchType = 'fetchShipment';
-        valuesType = 'shipmentTasks';
-        listType = 'shipmentList';
-        break;
-      default:
-    }
-    if (storeTask.status.get(fetchType) === 'done') {
-      if (storeTask.state[listType].data.length) {
+    const typeOfTask = storeState.interface.getCurrentTypeOfTask();
+    if (storeTask.status.getFetch(typeOfTask) === 'done') {
+      if (storeTask.state.getTasks(typeOfTask).length) {
         return (
           <Table
-            data={storeTask.state[listType].data}
+            data={storeTask.state.getTasks(typeOfTask)}
             keyWord='article'
-            valuesType={valuesType}
+            valuesType='tasks'
+            selectingValues={typeOfTask}
             classes='table--tasks'
             displayedColumns={storeTable.utils.getColumnsWithMark('tasks')}
           />
@@ -143,10 +64,10 @@ const Tasks: FC = observer(() => {
         <p className='tasks__empty-text'>Отсутствуют добавленные задачи</p>
       );
     }
-    storeTask.fetch[valuesType](() => {
+    storeTask.fetch[typeOfTask](() => {
       storeTable.utils.setDefaulMark(
         'tasks',
-        storeTask.state[listType].data,
+        storeTask.state.getTasks(typeOfTask),
         [],
       );
     });
@@ -182,13 +103,13 @@ const Tasks: FC = observer(() => {
             <img
               className='products__icon'
               src={editIcon}
-              alt='add'
-              onClick={changeTask}
+              alt='change'
+              onClick={changeHandler}
             />
             <img
               className='products__icon'
               src={deleteIcon}
-              alt='add'
+              alt='delete'
               onClick={deleteHandler}
             />
           </>
@@ -197,7 +118,7 @@ const Tasks: FC = observer(() => {
             className='products__icon'
             src={eyeIcon}
             alt='show'
-            onClick={showTaskWindowHandler}
+            onClick={showViewTaskWindowHandler}
           />
         )}
       </div>

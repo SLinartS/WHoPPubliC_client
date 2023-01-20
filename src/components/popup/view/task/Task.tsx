@@ -20,7 +20,7 @@ const PopupViewTask: FC = observer(() => {
   }
 
   function viewLocationOpenHander() {
-    const productId = storeTable.selectedItem.getItemId('products');
+    const productId = storeTable.selectedItem.getItemId('products', 'products');
     if (productId === 0) {
       storePopup.windows.information.setting = {
         text: 'Выберите продукт, чтобы увидеть информацию об его местоположении',
@@ -34,7 +34,7 @@ const PopupViewTask: FC = observer(() => {
   }
 
   function markProductAsMoved() {
-    const productId = storeTable.selectedItem.getItemId('products');
+    const productId = storeTable.selectedItem.getItemId('products', 'products');
     if (productId === 0) {
       storePopup.windows.information.setting = {
         text: 'Выберите продукт, чтобы отметить его перемещённым',
@@ -58,7 +58,7 @@ const PopupViewTask: FC = observer(() => {
   }, [storeProduct.status.get('markAsMoved')]);
 
   useEffect(() => {
-    storeTable.selectedItem.setItemId('products', 0);
+    storeTable.selectedItem.setItemId('products', 'products', 0);
   }, []);
 
   useEffect(() => {
@@ -135,6 +135,7 @@ const PopupViewTask: FC = observer(() => {
               data={storePopup.select.products.getProductListData()}
               keyWord='article'
               valuesType='products'
+              selectingValues='products'
               displayedColumns={storeTable.utils.getColumnsWithMark('products')}
               classes='table--add-task'
             />

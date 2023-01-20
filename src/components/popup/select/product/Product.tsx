@@ -10,14 +10,14 @@ const PopupSelectProduct: FC = observer(() => {
   const { storeProduct, storePopup, storeTable } = useRootStore();
 
   function saveHandler() {
-    if (storeTable.selectedItem.getItemId('products') === 0) {
+    if (storeTable.selectedItem.getItemId('products', 'products') === 0) {
       storePopup.windows.information.setting = {
         text: 'Выберите продукт для добавления',
       };
       storePopup.status.show('windowInformation');
     } else {
       storePopup.select.products.addProductToList();
-      storeTable.selectedItem.setItemId('products', 0);
+      storeTable.selectedItem.setItemId('products', 'products', 0);
       storePopup.status.hide('selectProducts');
       storePopup.status.show('formTask');
     }
@@ -58,6 +58,7 @@ const PopupSelectProduct: FC = observer(() => {
             data={storePopup.form.utils.utils.getUnselectedProducts()}
             keyWord='author'
             valuesType='products'
+            selectingValues='products'
             displayedColumns={storeTable.utils.getColumnsWithMark('products')}
             classes='table--add-task'
           />

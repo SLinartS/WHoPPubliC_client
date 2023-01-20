@@ -41,7 +41,7 @@ export class StorePopupSelectProducts {
 
   public addProductToList() {
     this.array.value.push(
-      this.root.storeTable.selectedItem.getItemId('products'),
+      this.root.storeTable.selectedItem.getItemId('products', 'products'),
     );
 
     this.root.storePopup.select.utils.utils.checkErrorsExist('products');
@@ -49,7 +49,9 @@ export class StorePopupSelectProducts {
 
   public removeProductFromList() {
     this.array.value = this.array.value.filter(
-      (id) => id !== this.root.storeTable.selectedItem.getItemId('products'),
+      (id) =>
+        id !==
+        this.root.storeTable.selectedItem.getItemId('products', 'products'),
     );
 
     this.root.storePopup.select.utils.utils.checkErrorsExist('products');

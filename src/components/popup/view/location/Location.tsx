@@ -1,31 +1,26 @@
 import { observer } from 'mobx-react-lite';
-import { FC, ReactNode, useEffect } from 'react';
+import { FC, ReactNode, useEffect, useState } from 'react';
 
 import forwardIcon from '../../../../assets/icons/forward.svg';
 import { useRootStore } from '../../../../utils/RootStoreProvider/useRootStore';
 import Map from '../../../blocks/map/Map';
 import PointsMap from '../../../blocks/points/PointsMap';
 import WindowHeaderForm from '../../../blocks/windowHeader/form/Form';
-import { localViewLocationState } from './state';
-import { TInformationOfViewLocation } from './type';
-import { useGetButtonByTypeOfOpenedTask } from './useGetButtonByTypeOfOpenedTask';
+import { useGetButtonByTypeOfOpenedTask } from './hooks/useGetButtonByTypeOfOpenedTask';
+import { TLocation } from './type';
 
 const PopupViewLocation: FC = observer(() => {
-  const { storePoint, storeMap, storePopup } = useRootStore();
-
   const { first, second } = useGetButtonByTypeOfOpenedTask();
+  const [typeOfLocation, setTypeOfLocation] = useState<TLocation>(first.type);
+  const { storePoint, storeMap, storePopup } = useRootStore();
 
   function closeHandler() {
     storePopup.status.hide('viewLocation');
     storePopup.status.show('viewTask');
   }
 
-  function changeTypeInfomationHandler(newType: TInformationOfViewLocation) {
-    localViewLocationState.setTypeOfInformation(newType);
-  }
-
   function displayTable(): ReactNode {
-    switch (localViewLocationState.getTypeOfInformation()) {
+    switch (typeOfLocation) {
       case 'acceptancePoint':
         return (
           <PointsMap
@@ -48,13 +43,11 @@ const PopupViewLocation: FC = observer(() => {
   }
 
   useEffect(() => {
-    localViewLocationState.setTypeOfInformation(first.type);
-  }, []);
-  useEffect(() => {
     if (storePoint.status.get('fetch') === 'pending') {
       storePoint.fetch.points();
     }
   }, [storePoint.status.get('fetch')]);
+
   useEffect(() => {
     if (storeMap.status.get('fetch') === 'pending') {
       storeMap.fetch.map();
@@ -72,7 +65,7 @@ const PopupViewLocation: FC = observer(() => {
           <button
             className='popup-view__switch'
             type='button'
-            onClick={() => changeTypeInfomationHandler(first.type)}
+            onClick={() => setTypeOfLocation(first.type)}
           >
             {first.text}
           </button>
@@ -84,7 +77,7 @@ const PopupViewLocation: FC = observer(() => {
           <button
             className='popup-view__switch'
             type='button'
-            onClick={() => changeTypeInfomationHandler(second.type)}
+            onClick={() => setTypeOfLocation(second.type)}
           >
             {second.text}
           </button>

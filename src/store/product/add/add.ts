@@ -20,7 +20,7 @@ export class StoreProductAdd {
       yield extendAxios.post<IProductResponse>('products', requestProductData);
 
       this.root.storeProduct.status.set('add', 'done');
-      this.root.storeTable.selectedItem.setItemId('products', 0);
+      this.root.storeTable.selectedItem.setItemId('products', 'products', 0);
       if (actionIfDone) {
         actionIfDone();
       }
