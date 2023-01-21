@@ -26,7 +26,7 @@ export function useChangeProduct() {
             }
           });
 
-          storePopup.select.points.clearArray();
+          storePopup.select.points.clear();
           storePopup.select.points.addItem(pointId);
         });
       });

@@ -10,12 +10,12 @@ export class StorePopupSelectUtils {
 
   public checkErrorsExist(selectTitle: 'points' | 'floors' | 'products') {
     const validator = new FormArrayValidator(
-      this.root.storePopup.select[selectTitle].arrayValue,
+      this.root.storePopup.select[selectTitle].values,
     ).notEmpty();
     if (validator.errors) {
-      this.root.storePopup.select[selectTitle].arrayErrors = validator.errors;
+      this.root.storePopup.select[selectTitle].errors = validator.errors;
     } else {
-      this.root.storePopup.select[selectTitle].arrayErrors = [];
+      this.root.storePopup.select[selectTitle].errors = [];
     }
   }
 }

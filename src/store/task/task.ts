@@ -35,6 +35,7 @@ export class StoreTask {
     },
     productIds: [],
     floorIds: [],
+    pointIds: [],
   };
 
   public get task() {

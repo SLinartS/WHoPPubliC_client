@@ -11,16 +11,16 @@ export class StorePopupFormUtils {
     makeAutoObservable(this, {});
   }
 
-  public getTaskTypeId(): string {
+  public getTaskTypeId(): number {
     switch (this.root.storeState.interface.getCurrentTypeOfTask()) {
       case 'acceptance':
-        return '1';
+        return 1;
       case 'intra':
-        return '3';
+        return 3;
       case 'shipment':
-        return '2';
+        return 2;
       default:
-        return '1';
+        return 1;
     }
   }
 
@@ -47,10 +47,10 @@ export class StorePopupFormUtils {
   }
 
   public resetForm(): void {
-    this.root.storePopup.select.points.clearArray();
-    this.root.storePopup.select.floors.clearArray();
-    this.root.storePopup.select.floors.clearArray();
-    this.root.storePopup.select.products.clearProductList();
+    this.root.storePopup.select.points.clear();
+    this.root.storePopup.select.floors.clear();
+    this.root.storePopup.select.floors.clear();
+    this.root.storePopup.select.products.clear();
     this.root.storePopup.form.task.clearFormData();
     this.root.storeProduct.status.set('add', 'pending');
     this.root.storeProduct.status.set('fetch', 'pending');
@@ -60,16 +60,42 @@ export class StorePopupFormUtils {
     this.root.storePopup.form.state.isDisplayDefaultErrors = false;
   }
 
+  public getProductWithoutLinkToFloor() {
+    const products = this.getUnselectedProducts();
+    const productIdsWithoutLinks =
+      this.root.storeProduct.state.products.serviceInformation
+        .filter((product) => !product.isLinkedToFloors)
+        .map((product) => product.productId);
+    const productsWithoutLinks = products.filter((product) =>
+      productIdsWithoutLinks.includes(product.id.value),
+    );
+    return productsWithoutLinks;
+  }
+
+  public getActualProductWithLinkToFloor() {
+    const products = this.getUnselectedProducts();
+    const productIdsWithoutLinks =
+      this.root.storeProduct.state.products.serviceInformation
+        .filter(
+          (product) =>
+            product.isLinkedToFloors && product.actualFloorIds.length > 0,
+        )
+        .map((product) => product.productId);
+    const productsWithoutLinks = products.filter((product) =>
+      productIdsWithoutLinks.includes(product.id.value),
+    );
+    return productsWithoutLinks;
+  }
+
   public getUnselectedProducts() {
-    let unselectedProducts: IProduct[] =
+    const unselectedProducts: IProduct[] =
       this.root.storeProduct.state.products.data.filter(
         (product) =>
-          !this.root.storePopup.select.products.arrayValue.includes(
+          !this.root.storePopup.select.products.values.includes(
             product.id.value,
           ),
       );
-    unselectedProducts = this.getProductsWithoutLinkToTask(unselectedProducts);
-    return unselectedProducts;
+    return this.getProductsWithoutLinkToTask(unselectedProducts);
   }
 
   private getProductsWithoutLinkToTask(

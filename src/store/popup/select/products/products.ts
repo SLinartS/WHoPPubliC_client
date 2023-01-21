@@ -11,22 +11,22 @@ export class StorePopupSelectProducts {
     makeAutoObservable(this, {});
   }
 
-  private array: TArrayOrErrorType = deepCopy(INITIAL_ARRAY_VALUE);
+  private _products: TArrayOrErrorType = deepCopy(INITIAL_ARRAY_VALUE);
 
-  public get arrayValue() {
-    return this.array.value;
+  public get values() {
+    return this._products.value;
   }
 
-  public get arrayErrors() {
-    return toJS(this.array.errors);
+  public get errors() {
+    return toJS(this._products.errors);
   }
 
-  public set arrayErrors(newError: string[]) {
-    this.array.errors = newError;
+  public set errors(newError: string[]) {
+    this._products.errors = newError;
   }
 
   public getProductListData(): IProduct[] {
-    const productList = this.array.value;
+    const productList = this._products.value;
     const productListData: IProduct[] =
       this.root.storeProduct.state.products.data.filter((product) =>
         productList.includes(product.id.value),
@@ -35,12 +35,12 @@ export class StorePopupSelectProducts {
   }
 
   public setProductList(productIds: number[]) {
-    this.array.value = productIds;
+    this._products.value = productIds;
     this.root.storePopup.select.utils.utils.checkErrorsExist('products');
   }
 
   public addProductToList() {
-    this.array.value.push(
+    this._products.value.push(
       this.root.storeTable.selectedItem.getItemId('products', 'products'),
     );
 
@@ -48,7 +48,7 @@ export class StorePopupSelectProducts {
   }
 
   public removeProductFromList() {
-    this.array.value = this.array.value.filter(
+    this._products.value = this._products.value.filter(
       (id) =>
         id !==
         this.root.storeTable.selectedItem.getItemId('products', 'products'),
@@ -57,7 +57,7 @@ export class StorePopupSelectProducts {
     this.root.storePopup.select.utils.utils.checkErrorsExist('products');
   }
 
-  public clearProductList() {
-    this.array = deepCopy(INITIAL_ARRAY_VALUE);
+  public clear() {
+    this._products = deepCopy(INITIAL_ARRAY_VALUE);
   }
 }

@@ -1,7 +1,7 @@
 import { IProductFormDataFields } from '../../popup/form/product/type';
 
 export interface IRequestProductData {
-  formData: IProductFormDataFields;
+  fields: IProductFormDataFields;
   pointId: number;
   userId: '1';
 }

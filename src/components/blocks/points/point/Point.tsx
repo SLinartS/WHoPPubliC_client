@@ -17,21 +17,26 @@ const Point: FC<IPointProps> = observer(({ id }) => {
 
   function choosePointBlock() {
     if (storePopup.form.state.isSelectedPoint) {
-      storePopup.status.hide('selectPoints', () => {
-        const pointIsAlreadyAdded = storePopup.select.points.checkIsAdded(id);
-        if (!pointIsAlreadyAdded) {
-          storePopup.select.points.clearArray();
+      const pointIsAlreadyAdded = storePopup.select.points.checkIsAdded(id);
 
-          storePopup.select.points.addItem(id);
-        }
-        storePopup.status.show('formProduct');
-      });
+      if (storePopup.form.state.isInProductForm) {
+        storePopup.select.points.clear();
+        storePopup.select.points.addItem(id);
+        storePopup.status.hide('selectPoints');
+        storePopup.form.state.isInProductForm = false;
+        return;
+      }
+
+      if (pointIsAlreadyAdded) {
+        storePopup.select.points.removeItem(id);
+      } else {
+        storePopup.select.points.addItem(id);
+      }
     }
   }
-
   const checkIsAdded = useCallback(() => {
     return storePopup.select.points.checkIsAdded(id);
-  }, [storePopup.select.points.arrayValue.length]);
+  }, [storePopup.select.points.values.length]);
 
   useEffect(() => {
     const newStyle = {

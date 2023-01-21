@@ -7,7 +7,7 @@ import Table from '../../../blocks/table/Table';
 import WindowHeaderForm from '../../../blocks/windowHeader/form/Form';
 
 const PopupSelectProduct: FC = observer(() => {
-  const { storeProduct, storePopup, storeTable } = useRootStore();
+  const { storeProduct, storePopup, storeTable, storeState } = useRootStore();
 
   function saveHandler() {
     if (storeTable.selectedItem.getItemId('products', 'products') === 0) {
@@ -19,13 +19,41 @@ const PopupSelectProduct: FC = observer(() => {
       storePopup.select.products.addProductToList();
       storeTable.selectedItem.setItemId('products', 'products', 0);
       storePopup.status.hide('selectProducts');
-      storePopup.status.show('formTask');
     }
   }
 
   function closeHandler() {
     storePopup.status.hide('selectProducts');
-    storePopup.status.show('formTask');
+  }
+
+  function displayTable() {
+    switch (storeState.interface.getCurrentTypeOfTask()) {
+      case 'acceptance':
+        return (
+          <Table
+            data={storePopup.form.utils.utils.getProductWithoutLinkToFloor()}
+            keyWord='author'
+            valuesType='products'
+            selectingValues='products'
+            displayedColumns={storeTable.utils.getColumnsWithMark('products')}
+            classes='table--add-task'
+          />
+        );
+      case 'shipment':
+      case 'intra':
+        return (
+          <Table
+            data={storePopup.form.utils.utils.getActualProductWithLinkToFloor()}
+            keyWord='author'
+            valuesType='products'
+            selectingValues='products'
+            displayedColumns={storeTable.utils.getColumnsWithMark('products')}
+            classes='table--add-task'
+          />
+        );
+      default:
+        return <p>Ошибка</p>;
+    }
   }
 
   useEffect(() => {
@@ -54,14 +82,7 @@ const PopupSelectProduct: FC = observer(() => {
       />
       <div className='popup-select__table--choise-product'>
         {storeProduct.status.get('fetch') === 'done' ? (
-          <Table
-            data={storePopup.form.utils.utils.getUnselectedProducts()}
-            keyWord='author'
-            valuesType='products'
-            selectingValues='products'
-            displayedColumns={storeTable.utils.getColumnsWithMark('products')}
-            classes='table--add-task'
-          />
+          displayTable()
         ) : (
           <Loader />
         )}

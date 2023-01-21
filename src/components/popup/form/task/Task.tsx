@@ -1,5 +1,5 @@
 import { observer } from 'mobx-react-lite';
-import { FC, useEffect, useState } from 'react';
+import { FC, useEffect, useMemo } from 'react';
 
 import { useRootStore } from '../../../../utils/RootStoreProvider/useRootStore';
 import Button from '../../../blocks/button/Button';
@@ -14,18 +14,37 @@ import Table from '../../../blocks/table/Table';
 import WindowHeaderForm from '../../../blocks/windowHeader/form/Form';
 
 const PopupFormTask: FC = observer(() => {
-  const [isAcceptance, setIsAcceptance] = useState<boolean>(true);
   const { storePopup, storeTask, storeProduct, storeState, storeTable } =
     useRootStore();
+
+  const typeOfTaskForm = useMemo(() => {
+    const currentTypeOfTask = storeState.interface.getCurrentTypeOfTask();
+    if (currentTypeOfTask === 'acceptance' || currentTypeOfTask === 'intra') {
+      return 1;
+    }
+    return 2;
+  }, [storeState.interface.getCurrentTypeOfTask()]);
+
+  const windowTitle = useMemo(() => {
+    switch (storeState.interface.getCurrentTypeOfTask()) {
+      case 'acceptance':
+        return 'Добавить задачу распределения';
+      case 'intra':
+        return 'Добавить внутрискладскую задачу';
+      case 'shipment':
+        return 'Добавить задачу отгрузки';
+      default:
+        return '';
+    }
+  }, [storeState.interface.getCurrentTypeOfTask()]);
 
   function closeHandler() {
     storePopup.status.hide('formTask');
     storePopup.form.utils.utils.resetForm();
-    if (isAcceptance) {
-      storeTask.status.setFetch('acceptance', 'pending');
-    } else {
-      storeTask.status.setFetch('shipment', 'pending');
-    }
+    storeTask.status.setFetch(
+      storeState.interface.getCurrentTypeOfTask(),
+      'pending',
+    );
   }
 
   function saveHandler() {
@@ -35,7 +54,9 @@ const PopupFormTask: FC = observer(() => {
       storePopup.form.task.setFormField('id', '0');
     }
 
-    if (!storePopup.form.utils.error.isTaskErrors(isAcceptance)) {
+    const checkFloor = typeOfTaskForm === 1;
+
+    if (!storePopup.form.utils.error.isTaskErrors(checkFloor)) {
       switch (formActionType) {
         case 'create':
           storeTask.add.task(() => {
@@ -58,12 +79,14 @@ const PopupFormTask: FC = observer(() => {
 
   function openSelectMapHandler() {
     storePopup.status.show('selectMap');
-    storePopup.status.hide('formTask');
+  }
+
+  function openSelectPointsHandler() {
+    storePopup.status.show('selectPoints');
   }
 
   function openSelectProductHandler() {
     storePopup.status.show('selectProducts');
-    storePopup.status.hide('formTask');
   }
 
   function removeProductFromList() {
@@ -71,12 +94,6 @@ const PopupFormTask: FC = observer(() => {
   }
 
   useEffect(() => {
-    if (storeState.interface.getCurrentTypeOfTask() === 'acceptance') {
-      setIsAcceptance(true);
-    } else {
-      setIsAcceptance(false);
-    }
-
     if (storeProduct.status.get('fetch') === 'pending') {
       storeProduct.fetch.products(() => {
         storeTable.utils.setDefaulMark(
@@ -106,9 +123,9 @@ const PopupFormTask: FC = observer(() => {
   }, []);
 
   return (
-    <div className='popup popup__popup-form popup-form  popup-form--add-task'>
+    <div className='popup popup__popup-form popup-form popup-form--add-task'>
       <WindowHeaderForm
-        title={`Добавить задачу ${isAcceptance ? 'приёмки' : 'отгрузки'}`}
+        title={windowTitle}
         backEventHandler={closeHandler}
         saveEventHandler={saveHandler}
         closeEventHandler={closeHandler}
@@ -139,25 +156,40 @@ const PopupFormTask: FC = observer(() => {
         </FormLayout>
 
         <FormLayout classes='points'>
-          {isAcceptance ? (
+          {typeOfTaskForm === 1 ? (
             <FormBlock
               titleText=''
               classes='task-points'
             >
               <FormField
                 typeForm='custom'
-                customErrors={storePopup.select.floors.arrayErrors}
+                customErrors={storePopup.select.floors.errors}
                 classes='task-points'
               >
                 <FormFieldPoint clickHandler={openSelectMapHandler} />
+              </FormField>
+              <FormBlockTitle
+                text='Склад'
+                classes='task-points'
+              />
+            </FormBlock>
+          ) : (
+            <FormBlock
+              titleText=''
+              classes='task-points'
+            >
+              <FormField
+                typeForm='custom'
+                customErrors={storePopup.select.points.errors}
+                classes='task-points'
+              >
+                <FormFieldPoint clickHandler={openSelectPointsHandler} />
               </FormField>
               <FormBlockTitle
                 text='Точки'
                 classes='task-points'
               />
             </FormBlock>
-          ) : (
-            ''
           )}
         </FormLayout>
 
@@ -194,5 +226,5 @@ const PopupFormTask: FC = observer(() => {
     </div>
   );
 });
-
+// storePopup.form.state.isInProductForm = false;
 export default PopupFormTask;

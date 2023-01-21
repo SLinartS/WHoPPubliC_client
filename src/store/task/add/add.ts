@@ -10,24 +10,18 @@ export class StoreTaskAdd {
   }
 
   public *task(actionIfDone?: () => void) {
-    try {
-      const taskTypeId = this.root.storePopup.form.utils.utils.getTaskTypeId();
-      const requestTaskData: IRequestTaskData = {
-        fields: {
-          ...this.root.storePopup.form.task.formData,
-          userId: {
-            value: '1',
-            errors: [],
-          },
-          typeId: {
-            value: taskTypeId,
-            errors: [],
-          },
-        },
-        productIds: this.root.storePopup.select.products.arrayValue,
-        floorIds: this.root.storePopup.select.floors.arrayValue,
-      };
+    const { storePopup } = this.root;
+    const taskTypeId = storePopup.form.utils.utils.getTaskTypeId();
+    const requestTaskData: IRequestTaskData = {
+      fields: storePopup.form.task.formData,
+      userId: 1,
+      typeId: taskTypeId,
+      productIds: storePopup.select.products.values,
+      floorIds: storePopup.select.floors.values,
+      pointIds: storePopup.select.points.values,
+    };
 
+    try {
       yield extendAxios.post('tasks', requestTaskData);
       this.root.storeTask.status.set('add', 'done');
       if (actionIfDone) {

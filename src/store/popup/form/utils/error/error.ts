@@ -29,7 +29,7 @@ export class StorePopupFormUtilsError {
   public isProductArrayErrors(): boolean {
     const { points } = this.root.storePopup.select;
 
-    if (points.arrayErrors.length) {
+    if (points.errors.length) {
       return true;
     }
 
@@ -55,10 +55,10 @@ export class StorePopupFormUtilsError {
   }
 
   private isTaskArrayErrors(isCheckFloor: boolean) {
-    const list = this.root.storePopup.select.products.arrayValue;
+    const list = this.root.storePopup.select.products.values;
     const { floors } = this.root.storePopup.select;
 
-    if (floors.arrayErrors.length && isCheckFloor) {
+    if (floors.errors.length && isCheckFloor) {
       return true;
     }
     if (!list.length) {

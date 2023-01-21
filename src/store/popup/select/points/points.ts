@@ -10,40 +10,46 @@ export class StorePopupSelectPoints {
     makeAutoObservable(this, {});
   }
 
-  private array: TArrayOrErrorType = deepCopy(INITIAL_ARRAY_VALUE);
+  private _points: TArrayOrErrorType = deepCopy(INITIAL_ARRAY_VALUE);
 
-  public get arrayValue() {
-    return this.array.value;
+  public get values() {
+    return this._points.value;
   }
 
-  public get arrayErrors() {
-    return toJS(this.array.errors);
+  public get errors() {
+    return toJS(this._points.errors);
   }
 
-  public set arrayErrors(newError: string[]) {
-    this.array.errors = newError;
+  public set errors(newError: string[]) {
+    this._points.errors = newError;
+  }
+
+  public set values(newValues: number[]) {
+    this._points.value = newValues;
+    console.log(this._points.value);
+    this.root.storePopup.select.utils.utils.checkErrorsExist('points');
   }
 
   public addItem(ItemId: number) {
-    this.array.value.push(ItemId);
+    this._points.value.push(ItemId);
 
     this.root.storePopup.select.utils.utils.checkErrorsExist('points');
   }
 
   public checkIsAdded(itemId: number) {
-    if (this.array.value.includes(itemId)) {
+    if (this._points.value.includes(itemId)) {
       return true;
     }
     return false;
   }
 
   public removeItem(itemId: number) {
-    this.array.value = this.array.value.filter((id) => id !== itemId);
+    this._points.value = this._points.value.filter((id) => id !== itemId);
 
     this.root.storePopup.select.utils.utils.checkErrorsExist('points');
   }
 
-  public clearArray() {
-    this.array = INITIAL_ARRAY_VALUE;
+  public clear() {
+    this._points = INITIAL_ARRAY_VALUE;
   }
 }

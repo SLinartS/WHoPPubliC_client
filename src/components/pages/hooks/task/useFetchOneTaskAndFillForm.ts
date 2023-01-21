@@ -13,9 +13,8 @@ export function useFetchOneTaskAndFillForm() {
     const checkResult = checkSelected('tasks', itemName);
     if (checkResult.result) {
       storeTask.fetch.oneTask(checkResult.itemId, () => {
-        const { taskInfo } = storeTask.state.task;
-        const { productIds } = storeTask.state.task;
-        const { floorIds } = storeTask.state.task;
+        const { taskInfo, productIds, floorIds, pointIds } =
+          storeTask.state.task;
 
         storePopup.form.task.setFormField('id', String(taskInfo.id.value));
         storePopup.form.task.setFormField('article', taskInfo.article.value);
@@ -26,6 +25,7 @@ export function useFetchOneTaskAndFillForm() {
         );
         storePopup.select.products.setProductList(productIds);
         storePopup.select.floors.setItems(floorIds);
+        storePopup.select.points.values = pointIds;
 
         storePopup.status.show(openingWindow);
       });

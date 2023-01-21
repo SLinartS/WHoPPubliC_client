@@ -40,8 +40,10 @@ export class StoreProduct {
     serviceInformation: {
       isLinkedToTask: false,
       taskId: 0,
-      isLinkedFloors: false,
+      isLinkedToFloors: false,
       floorIds: [],
+      actualFloorIds: [],
+      pointIds: [],
     },
   };
 

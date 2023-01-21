@@ -13,8 +13,8 @@ export class StoreProductAdd {
   public *products(actionIfDone?: () => void) {
     try {
       const requestProductData: IRequestProductData = {
-        formData: this.root.storePopup.form.product.formData,
-        pointId: this.root.storePopup.select.points.arrayValue[0],
+        fields: this.root.storePopup.form.product.formData,
+        pointId: this.root.storePopup.select.points.values[0],
         userId: '1',
       };
       yield extendAxios.post<IProductResponse>('products', requestProductData);

@@ -12,14 +12,12 @@ const PopupSelectMap: FC = observer(() => {
   const { storePopup, storeMap } = useRootStore();
 
   function saveHandler() {
-    storePopup.status.show('formTask');
     storePopup.status.hide('selectMap');
   }
 
   function closeHandler() {
-    storePopup.status.show('formTask');
     storePopup.status.hide('selectMap');
-    storePopup.select.floors.clearArray();
+    storePopup.select.floors.clear();
     storeMap.fetch.map();
   }
 
@@ -29,7 +27,7 @@ const PopupSelectMap: FC = observer(() => {
 
   const isEnoughFreeSpace = useCallback(() => {
     return storePopup.select.utils.floorSpace.isEnoughFreeSpace();
-  }, [storePopup.select.floors.arrayValue.length]);
+  }, [storePopup.select.floors.values.length]);
 
   useEffect(() => {
     let backgroundColor: string = '#d35f48';

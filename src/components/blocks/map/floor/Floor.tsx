@@ -31,7 +31,7 @@ const MapFloor: FC<IMapFloorProps> = observer(
 
     const checkIsAdded = useCallback(() => {
       return storePopup.select.floors.checkIsAdded(id);
-    }, [storePopup.select.floors.arrayValue.length]);
+    }, [storePopup.select.floors.values.length]);
 
     useEffect(() => {
       const newStyle = {

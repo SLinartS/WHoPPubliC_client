@@ -11,10 +11,14 @@ const PopupSelectPoints: FC = observer(() => {
   const { storePopup, storePoint, storeState } = useRootStore();
 
   function closeHandler() {
-    storePopup.status.show('formProduct');
+    storePopup.form.state.isInProductForm = false;
     storePopup.status.hide('selectPoints');
-    storePopup.select.points.clearArray();
+    storePopup.select.points.clear();
     storePoint.fetch.points();
+  }
+
+  function saveHandler() {
+    storePopup.status.hide('selectPoints');
   }
 
   function getPointType(): TPointType {
@@ -43,6 +47,7 @@ const PopupSelectPoints: FC = observer(() => {
             ? 'приёмки'
             : 'отгрузки'
         }`}
+        saveEventHandler={saveHandler}
         closeEventHandler={closeHandler}
       />
       {storePoint.status.get('fetch') === 'done' ? (

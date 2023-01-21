@@ -8,7 +8,7 @@ export class StorePopupSelectUtilsFloorSpace {
   }
 
   private getFreeSpace() {
-    const selectedFloors = this.root.storePopup.select.floors.arrayValue;
+    const selectedFloors = this.root.storePopup.select.floors.values;
     let freeSpace = 0;
 
     this.root.storeMap.state.map.forEach((zone) => {
@@ -27,7 +27,7 @@ export class StorePopupSelectUtilsFloorSpace {
   }
 
   public isEnoughFreeSpace() {
-    if (this.getOccupiedSpace() < this.getFreeSpace()) {
+    if (this.getOccupiedSpace() <= this.getFreeSpace()) {
       return true;
     }
     return false;

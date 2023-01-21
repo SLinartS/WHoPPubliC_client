@@ -33,7 +33,7 @@ const PopupFormProduct: FC = observer(() => {
         case 'create':
           storeProduct.add.products(() => {
             storePopup.form.product.clearFormData();
-            storePopup.select.points.clearArray();
+            storePopup.select.points.clear();
             closeHandler();
           });
           break;
@@ -51,8 +51,8 @@ const PopupFormProduct: FC = observer(() => {
   }
 
   function openSelectPointsHandler() {
+    storePopup.form.state.isInProductForm = true;
     storePopup.status.show('selectPoints');
-    storePopup.status.hide('formProduct');
   }
 
   useEffect(() => {
@@ -150,7 +150,7 @@ const PopupFormProduct: FC = observer(() => {
             classes='product-points'
           >
             <FormField
-              customErrors={storePopup.select.points.arrayErrors}
+              customErrors={storePopup.select.points.errors}
               typeForm='custom'
               classes='product-points'
             >

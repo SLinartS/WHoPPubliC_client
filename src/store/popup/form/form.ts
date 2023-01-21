@@ -47,4 +47,14 @@ export class StorePopupForm {
   public set isSelectedPoint(newStatus: boolean) {
     this._isSelectedPoint = newStatus;
   }
+
+  private _isInProductForm: boolean = false;
+
+  public get isInProductForm() {
+    return this._isInProductForm;
+  }
+
+  public set isInProductForm(newStatus: boolean) {
+    this._isInProductForm = newStatus;
+  }
 }
