@@ -11,25 +11,27 @@ interface IMapZoneProps extends IZone {
 
 const MapZone: FC<IMapZoneProps> = observer(
   ({ id, zoneLetter, sections, index }) => {
-    const [zoneLetterFontSize, setZoneLetterFontSize] = useState<number>(30);
+    const [zoneLetterFontSize, setZoneLetterFontSize] = useState<number>(1);
 
     const zoneNode = useRef<HTMLDivElement>(null);
 
     useEffect(() => {
-      let newZoneLetterFontSize: number;
+      if (zoneLetterFontSize === 1) {
+        let newZoneLetterFontSize: number;
 
-      const tableHeigth: number | undefined = zoneNode.current?.offsetHeight;
-      const tableWidth: number | undefined = zoneNode.current?.offsetWidth;
+        const tableHeigth: number | undefined = zoneNode.current?.offsetHeight;
+        const tableWidth: number | undefined = zoneNode.current?.offsetWidth;
 
-      if (tableHeigth && tableWidth) {
-        if (tableHeigth > tableWidth) {
-          newZoneLetterFontSize = tableWidth / 20;
-        } else {
-          newZoneLetterFontSize = tableHeigth / 20;
+        if (tableHeigth && tableWidth) {
+          if (tableHeigth > tableWidth) {
+            newZoneLetterFontSize = tableWidth / 20;
+          } else {
+            newZoneLetterFontSize = tableHeigth / 20;
+          }
+          setZoneLetterFontSize(newZoneLetterFontSize);
         }
-        setZoneLetterFontSize(newZoneLetterFontSize);
       }
-    }, [zoneNode.current?.offsetHeight, zoneNode.current?.offsetWidth]);
+    }, []);
 
     return (
       <div

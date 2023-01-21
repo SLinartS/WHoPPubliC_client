@@ -8,12 +8,12 @@
   max-width: 51.2rem;
   height: 28.8rem;
 
-  &__wrapper {
+  &__background {
     position: fixed;
     top: 0;
     left: 0;
     height: 100vh;
-    width: calc(100vw - 20px);
+    width: 100vw;
     background: color.$font-color--black;
     opacity: 0.5;
   }

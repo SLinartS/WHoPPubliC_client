@@ -13,20 +13,20 @@ interface IMapSectionProps extends ISection {
 const MapSection: FC<IMapSectionProps> = observer(
   ({ id, number, blocks, index }) => {
     const [sectionNumberFontSize, setSectionNumberFontSize] =
-      useState<number>(10);
+      useState<number>(1);
 
     const sectionNode = useRef<HTMLDivElement>(null);
 
     useEffect(() => {
-      let newSectionNumberFontSize: number;
+      if (sectionNumberFontSize === 1) {
+        const tableHeigth: number | undefined =
+          sectionNode.current?.offsetHeight;
 
-      const tableHeigth: number | undefined = sectionNode.current?.offsetHeight;
-
-      if (tableHeigth) {
-        newSectionNumberFontSize = tableHeigth / 40;
-        setSectionNumberFontSize(newSectionNumberFontSize);
+        if (tableHeigth) {
+          setSectionNumberFontSize(tableHeigth / 40);
+        }
       }
-    }, [sectionNode.current?.offsetHeight]);
+    }, []);
 
     return (
       <div

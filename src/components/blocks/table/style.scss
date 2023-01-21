@@ -63,9 +63,13 @@
 
     &__column {
       padding: 0 0.5rem;
-      &__shell {
+      &-shell {
         overflow-wrap: break-word;
         word-break: break-all;
+
+        &--header {
+          height: 3rem;
+        }
       }
     }
   }
@@ -78,7 +82,8 @@
     &__column {
       padding: 0 0.1rem;
 
-      &__shell {
+      &-shell {
+        min-height: 2rem;
         overflow-wrap: break-word;
         word-break: break-all;
       }

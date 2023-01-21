@@ -6,7 +6,7 @@
   @extend %grid-center;
   align-items: flex-start;
   grid-template-columns: 1fr;
-  grid-template-rows: 4fr 4fr 15fr;
+  grid-template-rows: 9rem 8rem 1fr;
 
   &__table {
     height: calc(100% - 5rem);
@@ -65,7 +65,7 @@
 
 @media (max-width: 1000px) {
   .tasks {
-    grid-template-rows: 3fr 3fr 30fr;
+    grid-template-rows: 5rem 5rem 30fr;
     &__table {
       width: 70%;
     }

@@ -1,4 +1,4 @@
-import { makeAutoObservable } from 'mobx';
+import { makeAutoObservable, runInAction } from 'mobx';
 
 import RootStore from '../../root';
 import { IPopups, TPopups } from './type';
@@ -12,7 +12,9 @@ export class StorePopupStatus {
   private static doActionWithDelay(action?: () => void) {
     if (action) {
       setTimeout(() => {
-        action();
+        runInAction(() => {
+          action();
+        });
       }, 200);
     }
   }
