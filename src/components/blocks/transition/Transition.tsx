@@ -17,7 +17,7 @@ const TransitionCustom: FC<ITransitionCustomProps> = observer(
       >
         <div
           ref={nodeRef}
-          className='transition-shell'
+          className={classNames}
         >
           {children}
         </div>

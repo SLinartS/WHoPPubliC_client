@@ -14,87 +14,78 @@ import WindowInformation from '../popup/window/information/Information';
 
 const usePopupList = () => {
   const { storePopup } = useRootStore();
-  const formProductNodeRef = useRef<HTMLDivElement>(null);
-  const formTaskNodeRef = useRef<HTMLDivElement>(null);
-  const viewTaskNodeRef = useRef<HTMLDivElement>(null);
-  const viewLocationNodeRef = useRef<HTMLDivElement>(null);
-  const selectMapNodeRef = useRef<HTMLDivElement>(null);
-  const selectPointsNodeRef = useRef<HTMLDivElement>(null);
-  const selectProductsNodeRef = useRef<HTMLDivElement>(null);
-  const windowConfirmNodeRef = useRef<HTMLDivElement>(null);
-  const windowInformationNodeRef = useRef<HTMLDivElement>(null);
 
   const POPUPS: ITransitionCustomLayout[] = [
     {
       name: 'formProductPopup',
       trigger: storePopup.status.getStatus('formProduct'),
-      nodeRef: formProductNodeRef,
+      nodeRef: useRef(null),
       children: <PopupFormProduct />,
-      classNames: 'popup',
+      classNames: 'popup-wrapper',
       timeout: 200,
     },
     {
       name: 'formTaskPopup',
       trigger: storePopup.status.getStatus('formTask'),
-      nodeRef: formTaskNodeRef,
+      nodeRef: useRef(null),
       children: <PopupFormTask />,
-      classNames: 'popup',
+      classNames: 'popup-wrapper',
       timeout: 200,
     },
     {
       name: 'viewTaskPopup',
       trigger: storePopup.status.getStatus('viewTask'),
-      nodeRef: viewTaskNodeRef,
+      nodeRef: useRef(null),
       children: <PopupViewTask />,
-      classNames: 'popup',
+      classNames: 'popup-wrapper',
       timeout: 200,
     },
     {
       name: 'viewLocationPopup',
       trigger: storePopup.status.getStatus('viewLocation'),
-      nodeRef: viewLocationNodeRef,
+      nodeRef: useRef(null),
       children: <PopupViewLocation />,
-      classNames: 'popup',
+      classNames: 'popup-wrapper',
       timeout: 200,
     },
     {
       name: 'selectMapPopup',
       trigger: storePopup.status.getStatus('selectMap'),
-      nodeRef: selectMapNodeRef,
+      nodeRef: useRef(null),
       children: <PopupSelectMap />,
-      classNames: 'popup',
+      classNames: 'popup-wrapper',
       timeout: 200,
     },
     {
       name: 'selectPointsPopup',
       trigger: storePopup.status.getStatus('selectPoints'),
-      nodeRef: selectPointsNodeRef,
+      nodeRef: useRef(null),
       children: <PopupSelectPoints />,
-      classNames: 'popup',
+      classNames: 'popup-wrapper',
       timeout: 200,
     },
     {
       name: 'selectProductsPopup',
       trigger: storePopup.status.getStatus('selectProducts'),
-      nodeRef: selectProductsNodeRef,
+      nodeRef: useRef(null),
       children: <PopupSelectProduct />,
-      classNames: 'popup',
+      classNames: 'popup-wrapper',
       timeout: 200,
     },
     {
       name: 'windowConfirm',
       trigger: storePopup.status.getStatus('windowConfirm'),
-      nodeRef: windowConfirmNodeRef,
+      nodeRef: useRef(null),
       children: <WindowConfirm />,
-      classNames: 'popup',
+      classNames: 'popup-wrapper',
       timeout: 200,
     },
     {
       name: 'windowInformation',
       trigger: storePopup.status.getStatus('windowInformation'),
-      nodeRef: windowInformationNodeRef,
+      nodeRef: useRef(null),
       children: <WindowInformation />,
-      classNames: 'popup',
+      classNames: 'popup-wrapper',
       timeout: 200,
     },
   ];

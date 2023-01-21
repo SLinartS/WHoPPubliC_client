@@ -22,21 +22,3 @@
     height: 76.8rem;
   }
 }
-
-.popup-enter {
-  opacity: 0;
-}
-
-.popup-enter-active {
-  opacity: 1;
-  transition: opacity 200ms ease-in-out;
-}
-
-.popup-exit {
-  opacity: 1;
-}
-
-.popup-exit-active {
-  opacity: 0;
-  transition: opacity 200ms ease-in-out;
-}

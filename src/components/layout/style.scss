@@ -1,0 +1,39 @@
+.pages {
+  width: unset;
+}
+
+.pages-enter {
+  opacity: 0;
+}
+
+.pages-enter-active {
+  opacity: 1;
+  transition: all 200ms ease-in-out;
+}
+
+.pages-exit {
+  opacity: 1;
+}
+
+.pages-exit-active {
+  opacity: 0;
+  transition: all 200ms ease-in-out;
+}
+
+.popup-wrapper-enter {
+  opacity: 0;
+}
+
+.popup-wrapper-enter-active {
+  opacity: 1;
+  transition: opacity 200ms ease-in-out;
+}
+
+.popup-wrapper-exit {
+  opacity: 1;
+}
+
+.popup-wrapper-exit-active {
+  opacity: 0;
+  transition: opacity 200ms ease-in-out;
+}

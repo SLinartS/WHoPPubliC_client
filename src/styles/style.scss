@@ -11,6 +11,9 @@
 // MODIFICATIONS
 @use './global/modifications.scss';
 
+// LAYOUT
+@use '/src/components/layout/style.scss' as *;
+
 /* PAGES */
 // login
 @use '/src/components/pages/login/style.scss' as *;
