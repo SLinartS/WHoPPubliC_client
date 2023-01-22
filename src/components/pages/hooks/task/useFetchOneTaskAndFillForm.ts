@@ -19,10 +19,10 @@ export function useFetchOneTaskAndFillForm() {
 
           storePopup.form.task.setFormField('id', String(taskInfo.id.value));
           storePopup.form.task.setFormField('article', taskInfo.article.value);
-          storePopup.form.task.setFormField('dateEnd', taskInfo.dateEnd.value);
+          storePopup.form.task.setFormField('timeEnd', taskInfo.timeEnd.value);
           storePopup.form.task.setFormField(
-            'dateStart',
-            taskInfo.dateStart.value,
+            'timeStart',
+            taskInfo.timeStart.value,
           );
           storePopup.select.products.setProductList(productIds);
           if (!isView) {

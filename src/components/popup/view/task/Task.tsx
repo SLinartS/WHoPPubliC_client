@@ -103,13 +103,13 @@ const PopupViewTask: FC = observer(() => {
         <FormLayout classes='time-info'>
           <AssembledBlockFieldInput
             typeForm='task'
-            fieldName='dateStart'
+            fieldName='timeStart'
             titleText='Дата начала'
             readonlyInput
           />
           <AssembledBlockFieldInput
             typeForm='task'
-            fieldName='dateEnd'
+            fieldName='timeEnd'
             titleText='Дата окончания'
             readonlyInput
           />

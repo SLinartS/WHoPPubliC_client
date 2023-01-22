@@ -14,8 +14,8 @@ export class StorePopupFormTask {
   private readonly initialFormData: ITaskFormDataFields = {
     id: INITIAL_VALUE,
     article: INITIAL_VALUE,
-    dateStart: INITIAL_VALUE,
-    dateEnd: INITIAL_VALUE,
+    timeStart: INITIAL_VALUE,
+    timeEnd: INITIAL_VALUE,
   };
 
   private _formData: ITaskFormDataFields = deepCopy(this.initialFormData);
@@ -39,11 +39,11 @@ export class StorePopupFormTask {
         validator.notEmpty().minLength(4).maxLength(10);
         break;
 
-      case 'dateStart':
+      case 'timeStart':
         validator.notEmpty().dateFormat('yyyy-MM-dd HH:mm:ss');
         break;
 
-      case 'dateEnd':
+      case 'timeEnd':
         validator.notEmpty().dateFormat('yyyy-MM-dd HH:mm:ss');
         break;
 

@@ -4,8 +4,8 @@ export interface IRequestTaskData {
   fields: {
     id: TValueOrErrorType;
     article: TValueOrErrorType;
-    dateStart: TValueOrErrorType;
-    dateEnd: TValueOrErrorType;
+    timeStart: TValueOrErrorType;
+    timeEnd: TValueOrErrorType;
   };
   userId: number;
   typeId: number;

@@ -16,7 +16,7 @@ export interface ITask extends ITableObject {
   id: IField<number>;
   article: IField<string>;
   deadlines: IField<string>;
-  dateStart: IField<string>;
-  dateEnd: IField<string>;
+  timeStart: IField<string>;
+  timeEnd: IField<string>;
   operatorLogin: IField<string>;
 }
