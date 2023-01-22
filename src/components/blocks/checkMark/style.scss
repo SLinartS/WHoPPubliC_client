@@ -4,6 +4,7 @@
 
 .check-mark {
   @extend %flex-center;
+
   cursor: pointer;
 
   &__checkbox {

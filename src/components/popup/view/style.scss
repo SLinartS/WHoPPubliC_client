@@ -37,7 +37,6 @@
     display: flex;
     width: 60%;
     justify-content: space-around;
-    width: fit-content;
   }
 
   &__icon-button {
@@ -50,6 +49,7 @@
     &:hover {
       filter: brightness(1.2);
     }
+
     &:active {
       filter: brightness(0.8);
     }
@@ -70,6 +70,7 @@
 
     &-block {
       @extend %flex-center;
+
       background: color.$font-color--white;
       gap: 2rem;
     }
@@ -82,6 +83,7 @@
     &:hover {
       background: color.$third-color--hover;
     }
+
     &:active {
       background: color.$third-color--active;
     }

@@ -5,6 +5,7 @@
 .header {
   height: v.$header-height--standart;
   @extend %flex-center;
+
   justify-content: space-between;
   background-color: color.$main-color;
   color: color.$font-color--white;
@@ -20,8 +21,10 @@
 
   &__user {
     @extend %flex-center;
+
     margin-left: 1rem;
     flex-direction: column;
+
     &-name {
       font-weight: 700;
       font-size: 2.4rem;
@@ -36,11 +39,13 @@
   &__nav {
     height: 100%;
     @extend %flex-center;
+
     justify-self: flex-end;
 
     &-block {
       height: 100%;
       @extend %flex-center;
+
       padding: 0 1.6rem;
       transition: all 0.1s ease-in-out;
 
@@ -67,6 +72,7 @@
       height: 100%;
       width: calc(100% + 3.2rem);
       @extend %flex-center;
+
       color: color.$font-color--white;
       font-size: 2.4rem;
       user-select: none;
@@ -94,6 +100,7 @@
       &-block {
         padding: 0 1rem;
       }
+
       &-link {
         font-size: 2rem;
       }
@@ -119,6 +126,7 @@
 @media (max-width: 1030px) {
   .header {
     height: v.$header-height--mid;
+
     &__icon {
       width: 6rem;
     }

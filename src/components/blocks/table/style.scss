@@ -17,8 +17,10 @@
     margin: 0;
     text-align: center;
     padding: 0 1rem;
+
     &-shell {
       @extend %flex-center;
+
       width: 100%;
       min-width: 2rem;
       min-height: 3rem;
@@ -28,6 +30,7 @@
       &--header {
         font-weight: 700;
         height: 5rem;
+
         .table__column {
           word-break: break-all;
         }
@@ -40,6 +43,7 @@
       &--first {
         border-radius: 1rem 0 0 1rem;
       }
+
       &--last {
         border-radius: 0 1rem 1rem 0;
       }
@@ -63,6 +67,7 @@
 
     &__column {
       padding: 0 0.5rem;
+
       &-shell {
         overflow-wrap: break-word;
         word-break: break-all;

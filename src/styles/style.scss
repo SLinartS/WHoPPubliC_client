@@ -17,15 +17,19 @@
 /* PAGES */
 // login
 @use '/src/components/pages/login/style.scss' as *;
+
 // main
 // @use '/src/components/pages/main/style.scss' as *;
 // map
 @use '/src/components/pages/map/style.scss' as *;
+
 // points
 @use '/src/components/pages/points/style.scss' as *;
+
 // products
 @use '/src/components/pages/products/style.scss' as *;
 @use '/src/components/pages/products/popupFilter/popupStyle.scss' as *;
+
 // tasks
 @use '/src/components/pages/tasks/style.scss' as *;
 
@@ -33,26 +37,36 @@
 
 // button
 @use '/src/components/blocks/button/style.scss' as *;
+
 // checkMark
 @use '/src/components/blocks/checkMark/style.scss' as *;
+
 // form
 @use '/src/components/blocks/form/style.scss' as *;
 @use '/src/components/blocks/form/block/style.scss' as *;
 @use '/src/components/blocks/form/field/style.scss' as *;
+
 // iconButton
 @use '/src/components/blocks/iconButton/style.scss' as *;
+
 // loader
 @use '/src/components/blocks/loader/style.scss' as *;
+
 // map
 @use '/src/components/blocks/map/style.scss' as *;
+
 // points
 @use '/src/components/blocks/points/style.scss' as *;
+
 // searchField
 @use '/src/components/blocks/searchField/style.scss' as *;
+
 // selectTable
 @use '/src/components/blocks/selectTable/style.scss' as *;
+
 // table
 @use '/src/components/blocks/table/style.scss' as *;
+
 // transition
 
 // windowHeader
@@ -62,17 +76,22 @@
 
 // errorPage
 @use '/src/components/layout/errorPage/style.scss' as *;
+
 // header
 @use '/src/components/layout/header/style.scss' as *;
 @use '/src/components/layout/header/popupStyle.scss' as *;
 
 /* POPUP */
 @use './../components/popup/style.scss' as *;
+
 // form
 @use './../components/popup/form/style.scss' as *;
+
 // select
 @use './../components/popup/select/style.scss' as *;
+
 // view
 @use './../components/popup/view/style.scss' as *;
+
 // window
 @use './../components/popup/window/style.scss' as *;

@@ -50,7 +50,7 @@ const Point: FC<IPointProps> = observer(({ id }) => {
     }
     if (storePopup.view.product.getPointId() === id) {
       newStyle.animation =
-        'locationPoint 1000ms linear 0s infinite normal forwards';
+        'location-point 1000ms linear 0s infinite normal forwards';
     }
     setStyles(newStyle);
   }, [checkIsAdded]);

@@ -6,11 +6,7 @@ body {
   &::-webkit-scrollbar {
     width: 20px;
   }
-}
 
-div,
-html,
-body {
   &::-webkit-scrollbar-track {
     background: transparent;
     border-radius: 1rem;

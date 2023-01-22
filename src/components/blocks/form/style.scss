@@ -16,6 +16,7 @@
     grid-template-columns: 1fr 1fr;
     column-gap: 4rem;
   }
+
   &--second-info {
     grid-row: 2/4;
     display: grid;
@@ -23,6 +24,7 @@
     grid-template-rows: repeat(3, 10rem);
     column-gap: 4rem;
   }
+
   &--time-info {
     display: grid;
     grid-template-columns: 1fr 1fr;

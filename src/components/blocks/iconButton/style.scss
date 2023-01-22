@@ -15,27 +15,35 @@
 
   &--back {
     background-color: color.$second-color;
+
     &:hover {
       background-color: color.$second-color--hover;
     }
+
     &:active {
       background-color: color.$second-color--active;
     }
   }
+
   &--save {
     background-color: color.$third-color;
+
     &:hover {
       background-color: color.$third-color--hover;
     }
+
     &:active {
       background-color: color.$third-color--active;
     }
   }
+
   &--close {
     background-color: color.$fourth-color;
+
     &:hover {
       background-color: color.$fourth-color--hover;
     }
+
     &:active {
       background-color: color.$fourth-color--active;
     }

@@ -4,6 +4,7 @@
 
 .login {
   @extend %flex-center;
+
   justify-content: space-between;
 
   &__left-image {
@@ -13,6 +14,7 @@
 
   &__info-block {
     @extend %flex-center;
+
     justify-content: space-between;
     column-gap: 2rem;
     position: absolute;
@@ -36,6 +38,7 @@
   &__container {
     width: 60%;
     @extend %flex-center;
+
     flex-direction: column;
   }
 
@@ -51,13 +54,8 @@
     display: grid;
     grid-template-columns: min-content 4fr;
     grid-auto-flow: column;
-
     align-items: center;
     row-gap: 2.4rem;
-
-    &:has(input:focused) {
-      opacity: 1;
-    }
   }
 
   &__icon {
@@ -91,6 +89,7 @@
       border-bottom: 0.2rem solid color.$font-color--black;
       opacity: 1;
     }
+
     &:focus + img {
       opacity: 1;
     }
@@ -99,6 +98,7 @@
   &__low-block {
     width: 45rem;
     @extend %flex-center;
+
     justify-content: space-between;
   }
 }

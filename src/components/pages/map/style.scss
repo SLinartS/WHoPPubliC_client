@@ -5,6 +5,7 @@
 .map {
   width: 100%;
   @extend %flex-center;
+
   justify-content: flex-start;
   flex-direction: column;
 
@@ -15,6 +16,7 @@
   &__container {
     width: calc(100% - 5rem);
     @extend %flex-center;
+
     flex-direction: column;
     border-radius: 1rem;
     margin-bottom: 2.5rem;

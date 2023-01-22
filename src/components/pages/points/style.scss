@@ -4,6 +4,7 @@
 
 .points {
   @extend %grid-center;
+
   align-items: flex-start;
   grid-template-columns: 1fr 1fr;
 
@@ -19,7 +20,7 @@
   }
 
   &__block {
-    margin: 1rem 0 2rem 0;
+    margin: 1rem 0 2rem;
     width: calc(100% - 5rem);
   }
 }
@@ -31,6 +32,7 @@
     &__search {
       grid-column: unset;
     }
+
     &__title {
       grid-row: unset;
       font-size: 2.4rem;
