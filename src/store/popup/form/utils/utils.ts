@@ -64,7 +64,7 @@ export class StorePopupFormUtils {
     const products = this.getUnselectedProducts();
     const productIdsWithoutLinks =
       this.root.storeProduct.state.products.serviceInformation
-        .filter((product) => !product.isLinkedToFloors)
+        .filter((product) => product.floorIds.length === 0)
         .map((product) => product.productId);
     const productsWithoutLinks = products.filter((product) =>
       productIdsWithoutLinks.includes(product.id.value),
@@ -78,7 +78,7 @@ export class StorePopupFormUtils {
       this.root.storeProduct.state.products.serviceInformation
         .filter(
           (product) =>
-            product.isLinkedToFloors && product.actualFloorIds.length > 0,
+            product.floorIds.length > 0 && product.actualFloorIds.length > 0,
         )
         .map((product) => product.productId);
     const productsWithoutLinks = products.filter((product) =>
@@ -103,7 +103,7 @@ export class StorePopupFormUtils {
   ): IProduct[] {
     const idsProductsWithoutLinkToTask: number[] =
       this.root.storeProduct.state.products.serviceInformation
-        .filter((product) => product.isLinkedToTask === false)
+        .filter((product) => product.taskId === 0)
         .map((product) => product.productId);
 
     const productsWithoutLinkToTask: IProduct[] = unselectedProducts.filter(

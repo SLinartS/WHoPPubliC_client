@@ -28,9 +28,7 @@ export interface IProduct extends ITableObject {
 
 export interface IServiceProductInformation {
   productId: number;
-  isLinkedToTask: boolean;
   taskId: number;
-  isLinkedToFloors: boolean;
   floorIds: number[];
   actualFloorIds: number[];
   pointIds: number[];

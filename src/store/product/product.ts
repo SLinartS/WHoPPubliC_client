@@ -38,9 +38,7 @@ export class StoreProduct {
     },
     pointId: 0,
     serviceInformation: {
-      isLinkedToTask: false,
       taskId: 0,
-      isLinkedToFloors: false,
       floorIds: [],
       actualFloorIds: [],
       pointIds: [],
