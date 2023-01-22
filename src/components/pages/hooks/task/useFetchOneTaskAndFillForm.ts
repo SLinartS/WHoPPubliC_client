@@ -9,26 +9,31 @@ export function useFetchOneTaskAndFillForm() {
   const { storeTask, storePopup } = useRootStore();
   const checkSelected = useCheckIsSelect();
 
-  return useCallback((itemName: TTaskType, openingWindow: TPopups) => {
-    const checkResult = checkSelected('tasks', itemName);
-    if (checkResult.result) {
-      storeTask.fetch.oneTask(checkResult.itemId, () => {
-        const { taskInfo, productIds, floorIds, pointIds } =
-          storeTask.state.task;
+  return useCallback(
+    (itemName: TTaskType, openingWindow: TPopups, isView = false) => {
+      const checkResult = checkSelected('tasks', itemName);
+      if (checkResult.result) {
+        storeTask.fetch.oneTask(checkResult.itemId, () => {
+          const { taskInfo, productIds, floorIds, pointIds } =
+            storeTask.state.task;
 
-        storePopup.form.task.setFormField('id', String(taskInfo.id.value));
-        storePopup.form.task.setFormField('article', taskInfo.article.value);
-        storePopup.form.task.setFormField('dateEnd', taskInfo.dateEnd.value);
-        storePopup.form.task.setFormField(
-          'dateStart',
-          taskInfo.dateStart.value,
-        );
-        storePopup.select.products.setProductList(productIds);
-        storePopup.select.floors.setItems(floorIds);
-        storePopup.select.points.values = pointIds;
+          storePopup.form.task.setFormField('id', String(taskInfo.id.value));
+          storePopup.form.task.setFormField('article', taskInfo.article.value);
+          storePopup.form.task.setFormField('dateEnd', taskInfo.dateEnd.value);
+          storePopup.form.task.setFormField(
+            'dateStart',
+            taskInfo.dateStart.value,
+          );
+          storePopup.select.products.setProductList(productIds);
+          if (!isView) {
+            storePopup.select.floors.setItems(floorIds);
+            storePopup.select.points.values = pointIds;
+          }
 
-        storePopup.status.show(openingWindow);
-      });
-    }
-  }, []);
+          storePopup.status.show(openingWindow);
+        });
+      }
+    },
+    [],
+  );
 }

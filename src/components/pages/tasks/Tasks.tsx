@@ -24,7 +24,7 @@ const Tasks: FC = observer(() => {
   }
 
   function showViewTaskWindowHandler() {
-    fetchOneTaskAndFillFormHook(getCurrentTypeOfTask(), 'viewTask');
+    fetchOneTaskAndFillFormHook(getCurrentTypeOfTask(), 'viewTask', true);
   }
 
   function showAddTaskWindowHandler() {

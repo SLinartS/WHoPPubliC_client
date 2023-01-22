@@ -26,7 +26,6 @@ export class StorePopupSelectPoints {
 
   public set values(newValues: number[]) {
     this._points.value = newValues;
-    console.log(this._points.value);
     this.root.storePopup.select.utils.utils.checkErrorsExist('points');
   }
 
