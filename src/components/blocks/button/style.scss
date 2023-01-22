@@ -2,6 +2,8 @@
 @use '/src/styles/global/templates.scss';
 
 .button {
+  @extend %standart-transition;
+
   position: relative;
   border: none;
   border-radius: 1rem;
@@ -12,8 +14,6 @@
   user-select: none;
   cursor: pointer;
   background: $second-color;
-  @extend %standart-transition;
-
   width: fit-content;
 
   &:hover {

@@ -24,14 +24,14 @@
     }
 
     &-block--popup {
+      @extend %flex-center;
+      @extend %standart-transition;
+
       height: 100%;
       width: 100%;
       box-sizing: border-box;
-      @extend %flex-center;
-
       justify-content: flex-start;
       padding: 1rem 1.6rem;
-      @extend %standart-transition;
 
       &--active {
         background: color.$main-color--active;
@@ -47,10 +47,10 @@
     }
 
     &-link--popup {
-      height: 100%;
-      width: calc(100% + 3.2rem);
       @extend %flex-center;
 
+      height: 100%;
+      width: calc(100% + 3.2rem);
       font-size: 2rem;
       color: color.$font-color--black;
       user-select: none;

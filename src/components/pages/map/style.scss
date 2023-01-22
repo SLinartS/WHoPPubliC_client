@@ -2,9 +2,9 @@
 @use '/src/styles/global/templates.scss';
 
 .map {
-  width: 100%;
   @extend %flex-center;
 
+  width: 100%;
   justify-content: flex-start;
   flex-direction: column;
 
@@ -13,9 +13,9 @@
   }
 
   &__container {
-    width: calc(100% - 5rem);
     @extend %flex-center;
 
+    width: calc(100% - 5rem);
     flex-direction: column;
     border-radius: 1rem;
     margin-bottom: 2.5rem;

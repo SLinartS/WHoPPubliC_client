@@ -2,9 +2,9 @@
 @use '/src/styles/global/templates.scss';
 
 .map-block {
-  width: 100%;
   @extend %grid-center;
 
+  width: 100%;
   grid-template-columns: repeat(2, 1fr);
   border-radius: 1rem;
 

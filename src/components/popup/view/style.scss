@@ -39,11 +39,11 @@
   }
 
   &__icon-button {
+    @extend %standart-transition;
+
     width: 4rem;
     height: 4rem;
     margin: 1rem;
-    @extend %standart-transition;
-
     cursor: pointer;
 
     &:hover {

@@ -2,10 +2,10 @@
 @use '/src/styles/global/templates.scss';
 
 .form-layout {
-  background-color: color.$font-color--white;
-  padding: 2rem;
   @extend %flex-center;
 
+  background-color: color.$font-color--white;
+  padding: 2rem;
   flex-direction: column;
 
   &--main-info {

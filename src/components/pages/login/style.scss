@@ -35,9 +35,9 @@
   }
 
   &__container {
-    width: 60%;
     @extend %flex-center;
 
+    width: 60%;
     flex-direction: column;
   }
 
@@ -70,6 +70,8 @@
   }
 
   &__input {
+    @extend %standart-transition;
+
     grid-column: 2/3;
     height: 5.4rem;
     width: 100%;
@@ -81,7 +83,6 @@
     background-color: color.$font-color--white;
     opacity: 0.5;
     outline: none;
-    @extend %standart-transition;
 
     &:focus {
       border: none;
@@ -95,9 +96,9 @@
   }
 
   &__low-block {
-    width: 45rem;
     @extend %flex-center;
 
+    width: 45rem;
     justify-content: space-between;
   }
 }

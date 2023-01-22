@@ -19,6 +19,8 @@
   }
 
   &__switcher {
+    @extend %standart-transition;
+
     height: 6rem;
     width: 22rem;
     background: color.$second-color;
@@ -26,7 +28,6 @@
     border-radius: 1rem;
     font-size: 2.4rem;
     color: color.$font-color--white;
-    @extend %standart-transition;
 
     &--acceptance {
       border-radius: 1rem 0 0 1rem;
@@ -54,9 +55,9 @@
   }
 
   &__section-button {
-    width: 60%;
     @extend %grid-center;
 
+    width: 60%;
     grid-template-columns: repeat(4, 1fr);
     column-gap: 2rem;
     margin-top: 1rem;

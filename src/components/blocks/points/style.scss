@@ -9,10 +9,10 @@
   background-color: color.$bg-color-grey;
 
   &__container {
-    height: calc(100% - 5rem);
-    width: 100%;
     @extend %grid-center;
 
+    height: calc(100% - 5rem);
+    width: 100%;
     align-content: flex-start;
     grid-template-columns: repeat(3, 14rem);
     column-gap: 10rem;

@@ -2,6 +2,8 @@
 @use '/src/styles/global/templates.scss';
 
 .icon-button {
+  @extend %standart-transition;
+
   width: 5rem;
   height: 5rem;
   object-fit: cover;
@@ -9,8 +11,6 @@
   padding: 0.8rem;
   border-radius: 1rem;
   border: 0.2rem solid color.$font-color--white;
-  @extend %standart-transition;
-
   user-select: none;
 
   &--back {
