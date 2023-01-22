@@ -71,7 +71,7 @@ const Tasks: FC = observer(() => {
         [],
       );
     });
-    return <Loader />;
+    return <Loader classes='loader--task-table' />;
   }
 
   return (

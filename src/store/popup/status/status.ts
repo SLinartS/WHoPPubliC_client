@@ -8,7 +8,6 @@ export class StorePopupStatus {
     makeAutoObservable(this, {});
   }
 
-  // TODO действия не выполняются ДО показа
   private static doActionWithDelay(action?: () => void) {
     if (action) {
       setTimeout(() => {

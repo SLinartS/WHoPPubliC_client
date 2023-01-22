@@ -41,10 +41,6 @@ const PopupFormTask: FC = observer(() => {
   function closeHandler() {
     storePopup.status.hide('formTask');
     storePopup.form.utils.utils.resetForm();
-    storeTask.status.setFetch(
-      storeState.interface.getCurrentTypeOfTask(),
-      'pending',
-    );
   }
 
   function saveHandler() {

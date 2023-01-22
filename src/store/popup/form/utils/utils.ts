@@ -51,12 +51,16 @@ export class StorePopupFormUtils {
     this.root.storePopup.select.floors.clear();
     this.root.storePopup.select.floors.clear();
     this.root.storePopup.select.products.clear();
+    this.root.storePopup.form.product.clearFormData();
     this.root.storePopup.form.task.clearFormData();
     this.root.storeProduct.status.set('add', 'pending');
     this.root.storeProduct.status.set('fetch', 'pending');
+    this.root.storeTask.status.set('add', 'pending');
+    this.root.storeTask.status.setFetch('acceptance', 'pending');
+    this.root.storeTask.status.setFetch('intra', 'pending');
+    this.root.storeTask.status.setFetch('shipment', 'pending');
     this.root.storePoint.status.set('fetch', 'pending');
     this.root.storeCategory.status.set('fetch', 'pending');
-    this.root.storeTask.status.set('add', 'pending');
     this.root.storePopup.form.state.isDisplayDefaultErrors = false;
   }
 

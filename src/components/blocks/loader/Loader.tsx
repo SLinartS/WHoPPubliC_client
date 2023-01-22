@@ -1,9 +1,13 @@
 import { observer } from 'mobx-react-lite';
 import { FC } from 'react';
 
-const Loader: FC = observer(() => {
+interface ILoaderProps {
+  classes?: string;
+}
+
+const Loader: FC<ILoaderProps> = observer(({ classes }) => {
   return (
-    <div className='lds-facebook__shell'>
+    <div className={`lds-facebook__shell ${classes}`}>
       <div className='lds-facebook'>
         <div />
         <div />

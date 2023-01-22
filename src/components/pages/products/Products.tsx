@@ -140,16 +140,16 @@ const Products: FC = observer(() => {
             displayedColumns={storeTable.utils.getColumnsWithMark('products')}
           />
         ) : (
-          <Loader />
+          <Loader classes='loader--product-table' />
         )}
       </div>
-      <div className='products__select'>
-        {storeProduct.status.get('fetch') === 'done' ? (
-          displaySelects()
-        ) : (
-          <Loader />
-        )}
-      </div>
+
+      {storeProduct.status.get('fetch') === 'done' ? (
+        <div className='products__select'>{displaySelects()}</div>
+      ) : (
+        <Loader classes='loader--product-select' />
+      )}
+
       {storeState.interface.getIsShowPopupFilter() ? <PopupFilter /> : ''}
     </main>
   );

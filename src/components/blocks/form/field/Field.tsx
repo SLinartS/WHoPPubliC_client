@@ -1,6 +1,7 @@
 import { observer } from 'mobx-react-lite';
 import { FC, ReactNode } from 'react';
 
+import errorIcon from '../../../../assets/icons/error.svg';
 import { IProductFormDataFields } from '../../../../store/popup/form/product/type';
 import { ITaskFormDataFields } from '../../../../store/popup/form/task/type';
 import {
@@ -60,7 +61,19 @@ const FormField: FC<IFormFieldProps> = observer(
         className={`form-layout__field form-layout__field--${classes}`}
         data-testid='form-field'
       >
-        <p className='form-layout__error'>{displayError()}</p>
+        {displayError() ? (
+          <>
+            <img
+              className='form-layout__error-image'
+              src={errorIcon}
+              alt='error'
+            />
+            <p className='form-layout__error'>{displayError()}</p>
+          </>
+        ) : (
+          ''
+        )}
+
         {children}
       </div>
     );

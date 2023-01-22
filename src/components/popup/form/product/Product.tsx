@@ -18,8 +18,7 @@ const PopupFormProduct: FC = observer(() => {
 
   function closeHandler() {
     storePopup.status.hide('formProduct');
-    storeProduct.fetch.products();
-    storePopup.form.product.clearFormData();
+    storePopup.form.utils.utils.resetForm();
   }
 
   function saveHandler() {
@@ -58,8 +57,6 @@ const PopupFormProduct: FC = observer(() => {
   }
 
   useEffect(() => {
-    storePopup.form.state.isDisplayDefaultErrors = false;
-    storeProduct.status.set('add', 'pending');
     storeCategory.fetch.categories();
   }, []);
 

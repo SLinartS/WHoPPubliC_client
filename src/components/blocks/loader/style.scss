@@ -1,5 +1,47 @@
 @use '/src/styles/global/colors.scss' as *;
 
+.loader {
+  &--product-table {
+    margin-top: 25rem;
+  }
+
+  &--task-table {
+    margin-top: 10rem;
+  }
+
+  &--map {
+    margin-top: 20rem;
+  }
+
+  &--point {
+    margin-top: 10rem;
+  }
+}
+
+@media (max-width: 1000px) {
+  .loader {
+    &--product-table {
+      margin-top: 5rem;
+    }
+
+    &--task-table {
+      margin-top: 5rem;
+    }
+
+    &--map {
+      margin-top: 5rem;
+    }
+
+    &--point {
+      margin-top: 5rem;
+    }
+  }
+
+  body .lds-facebook {
+    transform: scale(1);
+  }
+}
+
 .lds-facebook {
   display: inline-block;
   position: relative;
@@ -40,6 +82,7 @@
   left: 56px;
   animation-delay: 0;
 }
+
 @keyframes lds-facebook {
   0% {
     top: 8px;
