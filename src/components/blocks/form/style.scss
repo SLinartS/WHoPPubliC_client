@@ -1,19 +1,16 @@
 @use '/src/styles/global/colors.scss' as color;
-
-@use '/src/styles/global/variables.scss' as v;
-@use '/src/styles/global/layouts/display.scss';
+@use '/src/styles/global/templates.scss';
 
 .form-layout {
   background-color: color.$font-color--white;
   padding: 2rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  @extend %flex-center;
+
   flex-direction: column;
 
   &--main-info {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: repeat(2, calc(50% - 2rem));
     column-gap: 4rem;
   }
 

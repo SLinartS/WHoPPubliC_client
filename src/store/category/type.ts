@@ -1,4 +1,4 @@
-export interface IOptions {
+export interface IOption {
   id: number;
   title: string;
 }

@@ -35,12 +35,14 @@ const PopupFormProduct: FC = observer(() => {
             storePopup.form.product.clearFormData();
             storePopup.select.points.clear();
             closeHandler();
+            storeProduct.status.set('fetch', 'pending');
           });
           break;
         case 'change':
           storeProduct.update.product(() => {
             storePopup.form.product.clearFormData();
             closeHandler();
+            storeProduct.status.set('fetch', 'pending');
           });
           break;
         default:
@@ -88,12 +90,14 @@ const PopupFormProduct: FC = observer(() => {
             fieldName='title'
             titleText='Название'
             readonlyInput={false}
+            placeholder='Иван-царевич и серый волк'
           />
           <AssembledBlockFieldInput
             typeForm='product'
             fieldName='author'
             titleText='Автор'
             readonlyInput={false}
+            placeholder='Отсутствует'
           />
           <AssembledBlockFieldSelect
             typeForm='product'
@@ -117,30 +121,35 @@ const PopupFormProduct: FC = observer(() => {
             fieldName='yearOfPublication'
             titleText='Год издания'
             readonlyInput={false}
+            placeholder='1998'
           />
           <AssembledBlockFieldInput
             typeForm='product'
             fieldName='printingHouse'
             titleText='Типография'
             readonlyInput={false}
+            placeholder='ОФСЕТ МОСКВА'
           />
           <AssembledBlockFieldInput
             typeForm='product'
             fieldName='number'
             titleText='Количество'
             readonlyInput={false}
+            placeholder='300'
           />
           <AssembledBlockFieldInput
             typeForm='product'
             fieldName='publishingHouse'
             titleText='Издательство'
             readonlyInput={false}
+            placeholder='АСТ'
           />
           <AssembledBlockFieldInput
             typeForm='product'
             fieldName='printDate'
             titleText='Дата печати'
             readonlyInput={false}
+            placeholder='2020.05.26'
           />
         </FormLayout>
 

@@ -1,50 +1,110 @@
 import { observer } from 'mobx-react-lite';
-import { FC } from 'react';
+import { FC, useEffect, useMemo, useState } from 'react';
 
-import { IOptions } from '../../../../../store/category/type';
+import { IOption } from '../../../../../store/category/type';
 import { IProductFormDataFields } from '../../../../../store/popup/form/product/type';
-import { TChangeFieldEvent } from '../../../../../types/form/type';
 import { useRootStore } from '../../../../../utils/RootStoreProvider/useRootStore';
 
 interface IFormFieldSelectProps {
-  options: IOptions[];
+  options: IOption[];
   fieldName: keyof IProductFormDataFields;
 }
 
+const initialCurrentOption: IOption = {
+  id: 1,
+  title: '',
+};
+
 const FormFieldSelect: FC<IFormFieldSelectProps> = observer(
   ({ options, fieldName }) => {
-    const { storePopup } = useRootStore();
+    const { storePopup, storeCategory } = useRootStore();
 
-    function changeFieldHandler(e: TChangeFieldEvent) {
-      storePopup.form.product.setFormField(fieldName, e.target.value);
-    }
-
-    function getValue(): string {
+    const getValue = useMemo(() => {
       return storePopup.form.product.getFormField(fieldName);
+    }, [storePopup.form.product.getFormField(fieldName)]);
+
+    const [isOpenDowndrop, setIsOpenDownDrop] = useState<boolean>(false);
+
+    const [currentOption, setCurrentOption] =
+      useState<IOption>(initialCurrentOption);
+
+    function changeFieldHandler(option: IOption) {
+      storePopup.form.product.setFormField(fieldName, String(option.id));
+      setCurrentOption({ id: option.id, title: option.title });
+      setIsOpenDownDrop(false);
     }
+
+    function getText() {
+      const text = currentOption.title;
+      if (text.length >= 30) {
+        const animationDuration = Math.round(250000 / text.length);
+        return (
+          <>
+            <p
+              className='custom-select__text custom-select__text--button'
+              style={{
+                animation: `running-line ${animationDuration}ms linear infinite`,
+              }}
+            >
+              {text}
+            </p>
+            <p
+              className='custom-select__text custom-select__text-phantom'
+              style={{
+                animation: `running-line-phantom ${animationDuration}ms linear infinite`,
+              }}
+            >
+              {text}
+            </p>
+          </>
+        );
+      }
+      return (
+        <p className='custom-select__text custom-select__text--button'>
+          {text}
+        </p>
+      );
+    }
+
+    useEffect(() => {
+      if (storeCategory.status.get('fetch') === 'done') {
+        setCurrentOption({
+          id: Number(getValue),
+          title: options[Number(getValue) - 1].title,
+        });
+      }
+    }, [storeCategory.status.get('fetch'), getValue]);
 
     return (
-      <select
-        className='form-layout__select'
-        value={getValue()}
-        onChange={changeFieldHandler}
-      >
-        <option
-          className='form-layout__option'
-          value='unset'
+      <div className='custom-select'>
+        <button
+          type='button'
+          className='custom-select__button'
+          onClick={() => setIsOpenDownDrop(!isOpenDowndrop)}
         >
-          Выберите категорию
-        </option>
-        {options.map((option) => (
-          <option
-            key={option.id}
-            className='form-layout__option'
-            value={option.id}
-          >
-            {option.title}
-          </option>
-        ))}
-      </select>
+          {getText()}
+        </button>
+        {isOpenDowndrop && (
+          <div className='custom-select__downdrop'>
+            {options.map((option) => (
+              <div
+                className={`custom-select__option ${
+                  currentOption.id === option.id
+                    ? 'custom-select__option--active'
+                    : ''
+                }`}
+                key={option.id}
+                data-option-value={option.id}
+                onClick={() =>
+                  changeFieldHandler({ id: option.id, title: option.title })
+                }
+              >
+                <p className='custom-select__text'>{option.title}</p>
+              </div>
+            ))}
+          </div>
+        )}
+      </div>
     );
   },
 );

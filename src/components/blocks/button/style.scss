@@ -1,4 +1,5 @@
 @use '/src/styles/global/colors.scss' as *;
+@use '/src/styles/global/templates.scss';
 
 .button {
   position: relative;
@@ -11,7 +12,8 @@
   user-select: none;
   cursor: pointer;
   background: $second-color;
-  transition: all 0.1s ease-in-out;
+  @extend %standart-transition;
+
   width: fit-content;
 
   &:hover {

@@ -1,6 +1,5 @@
 @use '/src/styles/global/colors.scss' as color;
-@use '/src/styles/global/variables.scss' as variable;
-@use '/src/styles/global/layouts/display.scss';
+@use '/src/styles/global/templates.scss';
 
 .check-mark {
   @extend %flex-center;

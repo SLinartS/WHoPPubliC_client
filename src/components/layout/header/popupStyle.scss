@@ -1,6 +1,5 @@
 @use '/src/styles/global/colors.scss' as color;
-@use '/src/styles/global/variables.scss' as v;
-@use '/src/styles/global/layouts/display.scss';
+@use '/src/styles/global/templates.scss';
 
 .header {
   &__nav {
@@ -32,7 +31,7 @@
 
       justify-content: flex-start;
       padding: 1rem 1.6rem;
-      transition: all 0.1s ease-in-out;
+      @extend %standart-transition;
 
       &--active {
         background: color.$main-color--active;

@@ -1,9 +1,9 @@
 @use '/src/styles/global/colors.scss' as color;
-@use '/src/styles/global/variables.scss' as v;
-@use '/src/styles/global/layouts/display.scss';
+@use '/src/styles/global/variables.scss' as variable;
+@use '/src/styles/global/templates.scss';
 
 .header {
-  height: v.$header-height--standart;
+  height: variable.$header-height--standart;
   @extend %flex-center;
 
   justify-content: space-between;
@@ -47,7 +47,7 @@
       @extend %flex-center;
 
       padding: 0 1.6rem;
-      transition: all 0.1s ease-in-out;
+      @extend %standart-transition;
 
       &--active {
         background: color.$main-color--active;
@@ -125,7 +125,7 @@
 
 @media (max-width: 1030px) {
   .header {
-    height: v.$header-height--mid;
+    height: variable.$header-height--mid;
 
     &__icon {
       width: 6rem;
@@ -156,7 +156,7 @@
 
 @media (max-width: 850px) {
   .header {
-    height: v.$header-height--low;
+    height: variable.$header-height--low;
 
     &__nav {
       display: none;

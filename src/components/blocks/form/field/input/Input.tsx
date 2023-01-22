@@ -10,11 +10,12 @@ interface IFormFieldInputProps {
   typeForm: 'task' | 'product';
   fieldName: keyof IProductFormDataFields | keyof ITaskFormDataFields;
   readonly: boolean;
+  placeholder?: string;
   classes?: string;
 }
 
 const FormFieldInput: FC<IFormFieldInputProps> = observer(
-  ({ typeForm, fieldName, readonly, classes }) => {
+  ({ typeForm, fieldName, readonly, placeholder, classes }) => {
     const { storePopup } = useRootStore();
 
     function changeFieldHandler(e: TChangeFieldEvent) {
@@ -49,8 +50,11 @@ const FormFieldInput: FC<IFormFieldInputProps> = observer(
       <input
         readOnly={readonly}
         value={getValue()}
-        className={`form-layout__input ${classes}`}
+        className={`form-layout__input ${classes} ${
+          getValue() ? 'form-layout__input--active' : ''
+        }`}
         onChange={changeFieldHandler}
+        placeholder={placeholder}
       />
     );
   },

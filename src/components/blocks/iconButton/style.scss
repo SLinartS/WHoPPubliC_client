@@ -1,6 +1,5 @@
 @use '/src/styles/global/colors.scss' as color;
-@use '/src/styles/global/variables.scss' as v;
-@use '/src/styles/global/layouts/display.scss';
+@use '/src/styles/global/templates.scss';
 
 .icon-button {
   width: 5rem;
@@ -10,7 +9,8 @@
   padding: 0.8rem;
   border-radius: 1rem;
   border: 0.2rem solid color.$font-color--white;
-  transition: all 0.1s ease-in-out;
+  @extend %standart-transition;
+
   user-select: none;
 
   &--back {

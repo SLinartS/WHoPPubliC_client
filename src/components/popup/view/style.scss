@@ -1,6 +1,5 @@
 @use '/src/styles/global/colors.scss' as color;
-@use '/src/styles/global/variables.scss' as v;
-@use '/src/styles/global/layouts/display.scss';
+@use '/src/styles/global/templates.scss';
 
 .popup-view {
   &__content-block {
@@ -43,7 +42,8 @@
     width: 4rem;
     height: 4rem;
     margin: 1rem;
-    transition: all 0.1s ease-in-out;
+    @extend %standart-transition;
+
     cursor: pointer;
 
     &:hover {

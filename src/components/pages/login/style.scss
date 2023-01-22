@@ -1,6 +1,5 @@
 @use '/src/styles/global/colors.scss' as color;
-@use '/src/styles/global/variables.scss' as variable;
-@use '/src/styles/global/layouts/display.scss';
+@use '/src/styles/global/templates.scss';
 
 .login {
   @extend %flex-center;
@@ -82,7 +81,7 @@
     background-color: color.$font-color--white;
     opacity: 0.5;
     outline: none;
-    transition: all 0.1s ease-in-out;
+    @extend %standart-transition;
 
     &:focus {
       border: none;

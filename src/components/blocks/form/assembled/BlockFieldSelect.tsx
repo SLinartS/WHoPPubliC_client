@@ -1,6 +1,6 @@
-import React, { FC } from 'react';
+import { FC } from 'react';
 
-import { IOptions } from '../../../../store/category/type';
+import { IOption } from '../../../../store/category/type';
 import { IProductFormDataFields } from '../../../../store/popup/form/product/type';
 import { camelToKebab } from '../../../../utils/stringStyleConvert/camelToKebab';
 import FormBlock from '../block/Block';
@@ -11,7 +11,7 @@ interface IAssembledBlockFieldSelectProps {
   typeForm: 'task' | 'product';
   fieldName: keyof IProductFormDataFields;
   titleText: string;
-  options: IOptions[];
+  options: IOption[];
 }
 
 const AssembledBlockFieldSelect: FC<IAssembledBlockFieldSelectProps> = ({

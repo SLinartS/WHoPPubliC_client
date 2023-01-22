@@ -1,6 +1,5 @@
 @use '/src/styles/global/colors.scss' as color;
-@use '/src/styles/global/variables.scss' as v;
-@use '/src/styles/global/layouts/display.scss';
+@use '/src/styles/global/templates.scss';
 
 .form-layout {
   &__field {
@@ -33,18 +32,25 @@
     text-align: right;
   }
 
-  &__input,
-  &__select {
-    background-color: color.$font-color--white;
+  &__input {
     font-size: 2rem;
     height: 4rem;
     width: 100%;
-    border: 0.1rem solid color.$font-color--black;
-    border-radius: 1rem;
+    border: none;
+    border-bottom: 0.2rem solid color.$font-color--black;
+    background: color.$font-color--white;
+    opacity: 0.5;
+    outline: none;
+    @extend %standart-transition;
+
+    &--active {
+      opacity: 1;
+    }
 
     &:focus {
-      outline: none;
-      border: 0.2rem solid color.$font-color--black;
+      border: none;
+      border-bottom: 0.2rem solid color.$font-color--black;
+      opacity: 1;
     }
   }
 

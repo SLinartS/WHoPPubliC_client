@@ -1,13 +1,13 @@
 @use '/src/styles/global/colors.scss' as color;
-@use '/src/styles/global/variables.scss' as v;
-@use '/src/styles/global/layouts/display.scss';
+@use '/src/styles/global/variables.scss' as variable;
+@use '/src/styles/global/templates.scss';
 
 .window-header {
   display: flex;
   align-items: center;
   justify-content: center;
   background-color: color.$main-color;
-  height: v.$header-height--standart;
+  height: variable.$header-height--standart;
   border-radius: 1rem 1rem 0 0;
   padding: 0 3rem;
   width: 51.2rem - 6rem;

@@ -1,6 +1,4 @@
 @use '/src/styles/global/colors.scss' as color;
-@use '/src/styles/global/variables.scss' as v;
-@use '/src/styles/global/layouts/display.scss';
 
 .select-table {
   width: calc(100% - 6rem);
@@ -16,8 +14,6 @@
     font-size: 2rem;
     font-weight: 500;
     resize: none;
-
-    // user-select: none;
     padding: 1rem;
     margin-top: 1rem;
     border: none;

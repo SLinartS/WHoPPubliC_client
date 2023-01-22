@@ -74,6 +74,9 @@
 
 /* LAYOUT */
 
+// customSelect
+@use '/src/components/blocks/form/field/select/style.scss' as *;
+
 // errorPage
 @use '/src/components/layout/errorPage/style.scss' as *;
 

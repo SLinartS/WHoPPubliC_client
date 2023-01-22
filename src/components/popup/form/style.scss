@@ -1,6 +1,5 @@
 @use '/src/styles/global/colors.scss' as color;
-@use '/src/styles/global/variables.scss' as v;
-@use '/src/styles/global/layouts/display.scss';
+@use '/src/styles/global/templates.scss';
 
 .popup-form {
   &__content-block {
@@ -31,10 +30,9 @@
     padding: 1rem;
 
     &-block {
-      display: flex;
+      @extend %flex-center;
+
       flex-direction: column;
-      align-items: center;
-      justify-content: center;
       background-color: color.$font-color--white;
       grid-column: 2/3;
       grid-row: 2/3;
@@ -71,7 +69,8 @@
     width: 4rem;
     height: 4rem;
     margin: 1rem;
-    transition: all 0.1s ease-in-out;
+    @extend %standart-transition;
+
     cursor: pointer;
 
     &:hover {
