@@ -8,8 +8,13 @@ export type ITasks = {
 export interface IOneTask {
   taskInfo: ITask;
   productIds: number[];
-  floorIds: number[];
+  floorInfo: ITaskFloorInfo[];
   pointIds: number[];
+}
+
+interface ITaskFloorInfo {
+  floorId: number;
+  occupiedSpace: number;
 }
 
 export interface ITask extends ITableObject {

@@ -1,6 +1,6 @@
 import { makeAutoObservable } from 'mobx';
-import deepCopy from '../../utils/deepCopy/deepCopy';
 
+import deepCopy from '../../utils/deepCopy/deepCopy';
 import { INITIAL_VALUE_NUMBER, INITIAL_VALUE_STRING } from '../constants';
 import RootStore from '../root';
 import { TTaskType } from '../type';
@@ -16,7 +16,7 @@ const initialOneTask: IOneTask = {
     operatorLogin: INITIAL_VALUE_STRING,
   },
   productIds: [],
-  floorIds: [],
+  floorInfo: [],
   pointIds: [],
 };
 

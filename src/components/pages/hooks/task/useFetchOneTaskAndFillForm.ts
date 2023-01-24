@@ -19,7 +19,7 @@ export function useFetchOneTaskAndFillForm() {
       const checkResult = checkSelected('tasks', itemName, warningText);
       if (checkResult.result) {
         storeTask.fetch.oneTask(checkResult.itemId, () => {
-          const { taskInfo, productIds, floorIds, pointIds } =
+          const { taskInfo, productIds, floorInfo, pointIds } =
             storeTask.state.task;
 
           const { task } = storePopup.form;
@@ -29,7 +29,9 @@ export function useFetchOneTaskAndFillForm() {
           task.setFormField('timeStart', taskInfo.timeStart.value);
           storePopup.select.products.setProductList(productIds);
           if (!isView) {
-            storePopup.select.floors.setItems(floorIds);
+            storePopup.select.floors.setItems(
+              floorInfo.map((floor) => floor.floorId),
+            );
             storePopup.select.points.values = pointIds;
           }
           storePopup.status.show(openingWindow);

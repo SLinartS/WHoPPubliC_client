@@ -11,7 +11,7 @@ interface IMapFloorProps extends IFloor {
 
 const MapFloor: FC<IMapFloorProps> = observer(
   ({ id, number, capacity, freeSpace, reservedSpace, index }) => {
-    const { storePopup } = useRootStore();
+    const { storePopup, storeTask } = useRootStore();
     const checkCurrentOrFutureFloorhook = useCheckCurrentOrFutureFloor();
 
     function chooseFloor() {
@@ -35,23 +35,30 @@ const MapFloor: FC<IMapFloorProps> = observer(
         gridRow: `${-number}/${-number - 1}`,
         background: 'unset',
       };
-      const freeSpacePercent = (freeSpace / capacity) * 100;
-      const reservedSpacePercent =
-        (freeSpace / capacity + reservedSpace / capacity) * 100;
-
+      let freeSpaceRaw = freeSpace / capacity;
+      let reservedSpaceRaw = freeSpaceRaw + reservedSpace / capacity;
       if (checkIsAdded) {
+        const floorInfo = storeTask.state.task.floorInfo.find(
+          (floor) => floor.floorId === id,
+        );
+        if (floorInfo) {
+          freeSpaceRaw = (freeSpace + floorInfo.occupiedSpace) / capacity;
+          reservedSpaceRaw =
+            freeSpace / capacity + reservedSpace / capacity - freeSpaceRaw;
+        }
+
         newStyle.background = `linear-gradient(180deg, 
-            #e7731f ${freeSpacePercent}%, 
-            #7f8dcf ${freeSpacePercent}%, 
-            #7f8dcf ${reservedSpacePercent}%, 
-            #59468B ${reservedSpacePercent}%, 
+            #e7731f ${freeSpaceRaw * 100}%, 
+            #7f8dcf ${freeSpaceRaw * 100}%, 
+            #7f8dcf ${reservedSpaceRaw * 100}%, 
+            #59468B ${reservedSpaceRaw * 100}%, 
             #59468B ${100}%)`;
       } else {
         newStyle.background = `linear-gradient(180deg, 
-            transparent ${freeSpacePercent}%,
-            #7f8dcf ${freeSpacePercent}%, 
-            #7f8dcf ${reservedSpacePercent}%, 
-            #59468B ${reservedSpacePercent}%, 
+            transparent ${freeSpaceRaw * 100}%,
+            #7f8dcf ${freeSpaceRaw * 100}%, 
+            #7f8dcf ${reservedSpaceRaw * 100}%, 
+            #59468B ${reservedSpaceRaw * 100}%, 
             #59468B ${100}%)`;
       }
       return newStyle;

@@ -21,7 +21,7 @@ const Products: FC = observer(() => {
   const changeProductHook = useChangeProduct();
   const getSelectsHook = useGetSelects();
 
-  function openProductFormHandler() {
+  function addHandler() {
     storePopup.form.state.formActionType = 'create';
     storePopup.status.show('formProduct');
   }
@@ -68,7 +68,7 @@ const Products: FC = observer(() => {
           <>
             <ButtonIcon
               src={addIcon}
-              clickHandler={openProductFormHandler}
+              clickHandler={addHandler}
               alt='add'
             />
             <ButtonIcon

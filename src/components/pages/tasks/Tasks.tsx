@@ -33,7 +33,7 @@ const Tasks: FC = observer(() => {
     );
   }
 
-  function showAddTaskWindowHandler() {
+  function addHandler() {
     storePopup.form.state.formActionType = 'create';
     storePopup.status.show('formTask');
   }
@@ -110,7 +110,7 @@ const Tasks: FC = observer(() => {
           <>
             <ButtonIcon
               src={addIcon}
-              clickHandler={showAddTaskWindowHandler}
+              clickHandler={addHandler}
               alt='add'
             />
             <ButtonIcon

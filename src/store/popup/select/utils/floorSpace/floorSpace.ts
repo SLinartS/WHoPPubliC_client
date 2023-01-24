@@ -16,7 +16,14 @@ export class StorePopupSelectUtilsFloorSpace {
         section.blocks.forEach((block) => {
           block.floors.forEach((floor) => {
             if (selectedFloors.includes(floor.id)) {
-              freeSpace += floor.freeSpace;
+              const floorInfo = this.root.storeTask.state.task.floorInfo.find(
+                (floorItem) => floorItem.floorId === floor.id,
+              );
+              if (floorInfo) {
+                freeSpace += floor.freeSpace + floorInfo.occupiedSpace;
+              } else {
+                freeSpace += floor.freeSpace;
+              }
             }
           });
         });
