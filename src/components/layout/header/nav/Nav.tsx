@@ -15,7 +15,7 @@ const Nav: FC<INavProps> = observer(({ isPopup = false }) => {
 
   function getLinksByUserRole(): IHeaderLinks[] {
     const excludeLinks: TToLinkType[] = [];
-    switch (storeState.user.getUserData().role) {
+    switch (storeState.user.userData.role) {
       case 'admin':
         break;
       case 'operator':

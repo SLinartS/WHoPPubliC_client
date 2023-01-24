@@ -35,11 +35,9 @@ const Header: FC = observer(() => {
             />
           </Link>
           <div className='header__user'>
-            <p className='header__user-name'>
-              {storeState.user.getUserData().name}
-            </p>
+            <p className='header__user-name'>{storeState.user.userData.name}</p>
             <p className='header__user-role'>
-              {roleAlias(storeState.user.getUserData().role)}
+              {roleAlias(storeState.user.userData.role)}
             </p>
           </div>
         </div>

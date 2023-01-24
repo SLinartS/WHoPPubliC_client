@@ -92,7 +92,7 @@ const Tasks: FC = observer(() => {
       </div>
       <div className='tasks__section-button'>
         <SearchField classes='search-field--tasks' />
-        {storeState.user.getUserData().role !== 'worker' ? (
+        {storeState.user.userData.role !== 'worker' ? (
           <>
             <img
               className='products__icon'

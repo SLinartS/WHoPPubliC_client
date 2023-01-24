@@ -94,7 +94,7 @@ const Products: FC = observer(() => {
     <main className='products'>
       <div className='products__section-button'>
         <SearchField classes='search-field--products' />
-        {storeState.user.getUserData().role !== 'worker' && (
+        {storeState.user.userData.role !== 'worker' && (
           <>
             <img
               className='products__icon'

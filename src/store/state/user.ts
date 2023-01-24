@@ -1,26 +1,27 @@
 import { makeAutoObservable } from 'mobx';
 
 import RootStore from '../root';
-import { IUserData } from './type';
+import { IUser } from './type';
 
 export class StoreStateUser {
   constructor(private readonly root: RootStore) {
     makeAutoObservable(this, {});
   }
 
-  private userData: IUserData = {
-    isAuth: false,
+  private _userData: IUser = {
     id: 0,
     login: '',
     name: 'Евгений Иванович Петров',
     role: 'admin',
   };
 
-  public checkIsAuth(): boolean {
-    return this.userData.isAuth;
+  private _isAuth: boolean = false;
+
+  public get isAuth(): boolean {
+    return this._isAuth;
   }
 
-  public getUserData(): IUserData {
+  public get userData(): IUser {
     return this.userData;
   }
 }

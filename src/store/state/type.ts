@@ -6,8 +6,7 @@ export interface ICheckMark {
 
 export type TMarkType = 'interface' | 'products' | 'tasks';
 
-export interface IUserData {
-  isAuth: boolean;
+export interface IUser {
   id: number;
   login: string;
   name: string;
