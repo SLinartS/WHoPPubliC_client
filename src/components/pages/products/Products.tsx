@@ -8,16 +8,17 @@ import filterIcon from '../../../assets/icons/sliders.svg';
 import { useRootStore } from '../../../utils/RootStoreProvider/useRootStore';
 import Loader from '../../blocks/loader/Loader';
 import SearchField from '../../blocks/searchField/SearchField';
-import SelectTable from '../../blocks/selectTable/SelectTable';
 import Table from '../../blocks/table/Table';
 import { useChangeProduct } from '../hooks/change/useChangeProduct';
 import { useDeleteController } from '../hooks/delete/useDeleteController';
+import { useGetSelects } from '../hooks/product/useGetSelects';
 import PopupFilter from './popupFilter/PopupFilter';
 
 const Products: FC = observer(() => {
   const { storeProduct, storePopup, storeTable, storeState } = useRootStore();
   const deleteControllerHook = useDeleteController();
   const changeProductHook = useChangeProduct();
+  const getSelectsHook = useGetSelects();
 
   function openProductFormHandler() {
     storePopup.form.state.formActionType = 'create';
@@ -38,44 +39,8 @@ const Products: FC = observer(() => {
     deleteControllerHook('products', 'products');
   }
 
-  function getDataForSelects() {
-    const numberProductsWithSelectedId =
-      storeProduct.state.products.data.filter(
-        (product) =>
-          product.id.value ===
-          storeTable.selectedItem.getItemId('products', 'products'),
-      ).length;
-
-    if (numberProductsWithSelectedId) {
-      return Object.entries(
-        storeProduct.state.products.data.filter(
-          (product) =>
-            product.id.value ===
-            storeTable.selectedItem.getItemId('products', 'products'),
-        )[0],
-      );
-    }
-    return Object.entries(storeProduct.state.products.data[0]);
-  }
-
   function displaySelects(): ReactNode[] {
-    const selectNodes: ReactNode[] = [];
-    if (storeProduct.state.products.data[0]) {
-      selectNodes.push(
-        getDataForSelects().map(([key, item]) => (
-          <SelectTable
-            key={key + item.value + item.alias}
-            checkMarkValue={key}
-            alias={item.alias}
-            value={String(item.value)}
-            mark='products'
-          />
-        )),
-      );
-    } else {
-      selectNodes.push(<p>Отсутствуют данные</p>);
-    }
-    return selectNodes;
+    return getSelectsHook();
   }
 
   useEffect(() => {
