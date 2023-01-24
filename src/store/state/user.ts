@@ -22,6 +22,6 @@ export class StoreStateUser {
   }
 
   public get userData(): IUser {
-    return this.userData;
+    return this._userData;
   }
 }
