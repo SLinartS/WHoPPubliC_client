@@ -4,6 +4,7 @@ import React, { FC, useEffect } from 'react';
 import { useRootStore } from '../../../../utils/RootStoreProvider/useRootStore';
 import Loader from '../../../blocks/loader/Loader';
 import Table from '../../../blocks/table/Table';
+import { ITableObject } from '../../../blocks/table/type';
 import WindowHeaderForm from '../../../blocks/windowHeader/form/Form';
 
 const PopupSelectProduct: FC = observer(() => {
@@ -27,33 +28,23 @@ const PopupSelectProduct: FC = observer(() => {
   }
 
   function displayTable() {
-    switch (storeState.interface.getCurrentTypeOfTask()) {
-      case 'acceptance':
-        return (
-          <Table
-            data={storePopup.form.utils.utils.getProductWithoutLinkToFloor()}
-            keyWord='author'
-            valuesType='products'
-            selectingValues='products'
-            displayedColumns={storeTable.utils.getColumnsWithMark('products')}
-            classes='table--add-task'
-          />
-        );
-      case 'shipment':
-      case 'intra':
-        return (
-          <Table
-            data={storePopup.form.utils.utils.getActualProductWithLinkToFloor()}
-            keyWord='author'
-            valuesType='products'
-            selectingValues='products'
-            displayedColumns={storeTable.utils.getColumnsWithMark('products')}
-            classes='table--add-task'
-          />
-        );
-      default:
-        return <p>Ошибка</p>;
+    let data: ITableObject[] = [];
+    const currentTypeOfTask = storeState.interface.getCurrentTypeOfTask();
+    if (currentTypeOfTask === 'acceptance') {
+      data = storePopup.form.utils.utils.getProductWithoutLinkToFloor();
+    } else {
+      data = storePopup.form.utils.utils.getActualProductWithLinkToFloor();
     }
+    return (
+      <Table
+        data={data}
+        keyWord='author'
+        valuesType='products'
+        selectingValues='products'
+        displayedColumns={storeTable.utils.getColumnsWithMark('products')}
+        classes='table--add-task'
+      />
+    );
   }
 
   useEffect(() => {
