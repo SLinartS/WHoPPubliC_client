@@ -32,24 +32,47 @@
   }
 
   &__point {
+    position: relative;
     width: 14rem;
     height: 14rem;
     background-color: color.$font-color--white;
     border: 0.2rem solid color.$font-color--black;
     border-radius: 1rem;
-  }
 
-  @keyframes location-point {
-    0% {
-      background: red;
-    }
+    &--animation {
+      &-current {
+        animation: location-current 2000ms linear 0s infinite normal forwards;
 
-    50% {
-      background: aquamarine;
-    }
+        &::after {
+          width: 10rem;
+          height: 10rem;
+          content: '';
+          position: absolute;
+          top: -25%;
+          left: calc(50% - 5rem);
+          background: url('../../../assets/icons/arrow-up.svg');
+          background-repeat: no-repeat;
+          background-position: center;
+          animation: location-pseudo 2000ms linear 0s infinite normal forwards;
+        }
+      }
 
-    100% {
-      background: violet;
+      &-future {
+        animation: location-future 2000ms linear 0s infinite normal forwards;
+
+        &::after {
+          width: 10rem;
+          height: 10rem;
+          content: '';
+          position: absolute;
+          top: -25%;
+          left: calc(50% - 5rem);
+          background: url('../../../assets/icons/arrow-down.svg');
+          background-repeat: no-repeat;
+          background-position: center;
+          animation: location-pseudo 2000ms linear 0s infinite normal forwards;
+        }
+      }
     }
   }
 

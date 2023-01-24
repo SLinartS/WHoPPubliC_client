@@ -3,7 +3,7 @@ import { FC, ReactNode } from 'react';
 
 import { TPointType } from '../../../store/type';
 import { useRootStore } from '../../../utils/RootStoreProvider/useRootStore';
-import PointsBlock from './block/Block';
+import Point from './point/Point';
 
 interface IPointsMapProps {
   pointsType: TPointType;
@@ -28,11 +28,12 @@ const PointsMap: FC<IPointsMapProps> = observer(({ pointsType, classes }) => {
 
     pointsArray.forEach((point, index) => {
       PointNodes.push(
-        <PointsBlock
+        <Point
           key={point.id}
           id={point.id}
           text={point.title}
           index={index}
+          pointsType={pointsType}
         />,
       );
     });

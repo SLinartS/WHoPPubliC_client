@@ -13,8 +13,7 @@
   }
 
   &__table {
-    &--choise-product {
-      padding: 0 2rem;
-    }
+    padding: 2rem;
+    overflow-y: auto;
   }
 }

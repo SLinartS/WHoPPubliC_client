@@ -10,12 +10,14 @@ import AssembledBlockFieldText from '../../../blocks/form/assembled/BlockFieldTe
 import FormLayout from '../../../blocks/form/layout/Layout';
 import Table from '../../../blocks/table/Table';
 import WindowHeaderForm from '../../../blocks/windowHeader/form/Form';
+import { useFetchOneProductAndFillForm } from '../../../pages/hooks/task/useFetchOneProductAndFillForm';
 import { useCheckIsSelect } from '../../../pages/hooks/useCheckIsSelect';
 
 const PopupViewTask: FC = observer(() => {
   const { storePopup, storeProduct, storeState, storeTable, storeTask } =
     useRootStore();
   const checkIsSelectHook = useCheckIsSelect();
+  const fetchOneProductAndFillFormHook = useFetchOneProductAndFillForm();
 
   const windowTitle = useMemo(() => {
     switch (storeState.interface.getCurrentTypeOfTask()) {
@@ -32,6 +34,7 @@ const PopupViewTask: FC = observer(() => {
 
   function closeHandler() {
     storePopup.status.hide('viewTask');
+    storePopup.form.utils.utils.resetForm();
   }
 
   function viewLocationOpenHander() {
@@ -41,9 +44,11 @@ const PopupViewTask: FC = observer(() => {
       'Выберите партию продуктов, чтобы увидеть информацию об их местоположении',
     );
     if (checkResult.result) {
-      storePopup.view.product.setCurrentViewProduct(checkResult.itemId, () => {
-        storePopup.status.show('viewLocation');
-      });
+      fetchOneProductAndFillFormHook(
+        'viewLocation',
+        'Выберите партию продуктов, чтобы увидеть информацию об их местоположении',
+        true,
+      );
     }
   }
 

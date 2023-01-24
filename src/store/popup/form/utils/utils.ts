@@ -47,21 +47,25 @@ export class StorePopupFormUtils {
   }
 
   public resetForm(): void {
-    this.root.storePopup.select.points.clear();
-    this.root.storePopup.select.floors.clear();
-    this.root.storePopup.select.floors.clear();
-    this.root.storePopup.select.products.clear();
-    this.root.storePopup.form.product.clearFormData();
-    this.root.storePopup.form.task.clearFormData();
-    this.root.storeProduct.status.set('add', 'pending');
-    this.root.storeProduct.status.set('fetch', 'pending');
-    this.root.storeTask.status.set('add', 'pending');
-    this.root.storeTask.status.setFetch('acceptance', 'pending');
-    this.root.storeTask.status.setFetch('intra', 'pending');
-    this.root.storeTask.status.setFetch('shipment', 'pending');
-    this.root.storePoint.status.set('fetch', 'pending');
-    this.root.storeCategory.status.set('fetch', 'pending');
-    this.root.storePopup.form.state.isDisplayDefaultErrors = false;
+    const { storePopup, storeProduct, storeTask, storePoint, storeCategory } =
+      this.root;
+    storePopup.select.points.clear();
+    storePopup.select.floors.clear();
+    storePopup.select.floors.clear();
+    storePopup.select.products.clear();
+    storePopup.form.product.clearFormData();
+    storePopup.form.task.clearFormData();
+    storeProduct.status.set('add', 'pending');
+    storeProduct.status.set('fetch', 'pending');
+    storeProduct.state.clearProduct();
+    storeTask.status.set('add', 'pending');
+    storeTask.status.setFetch('acceptance', 'pending');
+    storeTask.status.setFetch('intra', 'pending');
+    storeTask.status.setFetch('shipment', 'pending');
+    storeTask.state.clearTask();
+    storePoint.status.set('fetch', 'pending');
+    storeCategory.status.set('fetch', 'pending');
+    storePopup.form.state.isDisplayDefaultErrors = false;
   }
 
   public getProductWithoutLinkToFloor() {

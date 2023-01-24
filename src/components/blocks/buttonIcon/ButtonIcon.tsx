@@ -1,6 +1,7 @@
+import './style.scss';
+
 import { observer } from 'mobx-react-lite';
 import { FC } from 'react';
-import './style.scss';
 
 interface IButtonIconProps {
   src: string;

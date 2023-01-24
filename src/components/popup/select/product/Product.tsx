@@ -71,7 +71,7 @@ const PopupSelectProduct: FC = observer(() => {
         saveEventHandler={saveHandler}
         closeEventHandler={closeHandler}
       />
-      <div className='popup-select__table--choise-product'>
+      <div className='popup-select__table'>
         {storeProduct.status.get('fetch') === 'done' ? (
           displayTable()
         ) : (

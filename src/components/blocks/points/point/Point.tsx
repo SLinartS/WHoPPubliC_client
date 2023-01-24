@@ -1,19 +1,18 @@
 import { observer } from 'mobx-react-lite';
-import { FC, useCallback, useEffect, useState } from 'react';
+import { FC, useMemo } from 'react';
 
+import { TPointType } from '../../../../store/type';
 import { useRootStore } from '../../../../utils/RootStoreProvider/useRootStore';
 
 interface IPointProps {
   id: number;
+  text: string;
+  index: number;
+  pointsType: TPointType;
 }
 
-interface IBlockPointStyles {
-  [key: string]: string;
-}
-
-const Point: FC<IPointProps> = observer(({ id }) => {
-  const { storePopup } = useRootStore();
-  const [styles, setStyles] = useState<IBlockPointStyles>();
+const Point: FC<IPointProps> = observer(({ id, text, index, pointsType }) => {
+  const { storePopup, storeProduct } = useRootStore();
 
   function choosePointBlock() {
     if (storePopup.form.state.isSelectedPoint) {
@@ -34,33 +33,47 @@ const Point: FC<IPointProps> = observer(({ id }) => {
       }
     }
   }
-  const checkIsAdded = useCallback(() => {
+  const checkIsAdded = useMemo(() => {
     return storePopup.select.points.checkIsAdded(id);
   }, [storePopup.select.points.values.length]);
 
-  useEffect(() => {
+  const styles = useMemo(() => {
     const newStyle = {
       background: '#eaeaea',
-      animation: 'none',
     };
-    if (checkIsAdded()) {
+    if (checkIsAdded) {
       newStyle.background = `#c15943`;
     } else {
       newStyle.background = `#eaeaea`;
     }
-    if (storePopup.view.product.getPointId() === id) {
-      newStyle.animation =
-        'location-point 1000ms linear 0s infinite normal forwards';
-    }
-    setStyles(newStyle);
+    return newStyle;
   }, [checkIsAdded]);
+
+  const classes = useMemo(() => {
+    let newClasses = '';
+    if (storeProduct.state.product.serviceInformation.pointIds.includes(id)) {
+      if (pointsType === 'acceptance') {
+        newClasses += 'points-map__point--animation-current';
+      } else {
+        newClasses += 'points-map__point--animation-future';
+      }
+    }
+    return newClasses;
+  }, [storeProduct.state.product.serviceInformation.pointIds]);
 
   return (
     <div
-      className='points-map__point'
-      onClick={choosePointBlock}
-      style={styles}
-    />
+      className='points-map__points-block'
+      data-point-id={id}
+      data-point-index={index}
+    >
+      <div
+        className={`points-map__point ${classes}`}
+        onClick={choosePointBlock}
+        style={styles}
+      />
+      <p className='points-map__title'>{text}</p>
+    </div>
   );
 });
 

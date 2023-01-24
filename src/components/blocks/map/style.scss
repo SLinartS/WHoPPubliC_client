@@ -36,6 +36,7 @@
   &__floor {
     @extend %flex-center;
 
+    position: relative;
     border: 0.1rem solid color.$table-color;
     width: 5rem;
     height: 5rem;
@@ -48,19 +49,41 @@
       color: color.$table-color;
       user-select: none;
     }
-  }
 
-  @keyframes location-floor {
-    0% {
-      background: red;
-    }
+    &--animation {
+      &-current {
+        animation: location-current 2000ms linear 0s infinite normal forwards;
 
-    50% {
-      background: aquamarine;
-    }
+        &::after {
+          width: 5rem;
+          height: 5rem;
+          content: '';
+          position: absolute;
+          top: -50%;
+          left: calc(50% - 2.5rem);
+          background: url('../../../assets/icons/arrow-up.svg');
+          background-repeat: no-repeat;
+          background-position: center;
+          animation: location-pseudo 2000ms linear 0s infinite normal forwards;
+        }
+      }
 
-    100% {
-      background: violet;
+      &-future {
+        animation: location-future 2000ms linear 0s infinite normal forwards;
+
+        &::after {
+          width: 5rem;
+          height: 5rem;
+          content: '';
+          position: absolute;
+          top: -50%;
+          left: calc(50% - 2.5rem);
+          background: url('../../../assets/icons/arrow-down.svg');
+          background-repeat: no-repeat;
+          background-position: center;
+          animation: location-pseudo 2000ms linear 0s infinite normal forwards;
+        }
+      }
     }
   }
 
