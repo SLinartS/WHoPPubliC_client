@@ -1,47 +1,60 @@
 import { observer } from 'mobx-react-lite';
-import { FC, useEffect, useState } from 'react';
+import { FC, useEffect, useMemo } from 'react';
 
 import checkIcon from '../../../../assets/icons/check.svg';
 import mapIcon from '../../../../assets/icons/map.svg';
 import { useRootStore } from '../../../../utils/RootStoreProvider/useRootStore';
+import ButtonIcon from '../../../blocks/buttonIcon/ButtonIcon';
 import AssembledBlockFieldInput from '../../../blocks/form/assembled/BlockFieldInput';
 import AssembledBlockFieldText from '../../../blocks/form/assembled/BlockFieldText';
 import FormLayout from '../../../blocks/form/layout/Layout';
 import Table from '../../../blocks/table/Table';
 import WindowHeaderForm from '../../../blocks/windowHeader/form/Form';
+import { useCheckIsSelect } from '../../../pages/hooks/useCheckIsSelect';
 
 const PopupViewTask: FC = observer(() => {
-  const [isAcceptance, setIsAcceptance] = useState<boolean>(true);
   const { storePopup, storeProduct, storeState, storeTable, storeTask } =
     useRootStore();
+  const checkIsSelectHook = useCheckIsSelect();
+
+  const windowTitle = useMemo(() => {
+    switch (storeState.interface.getCurrentTypeOfTask()) {
+      case 'acceptance':
+        return 'Задача распределения';
+      case 'intra':
+        return 'Внутрискладская задача';
+      case 'shipment':
+        return 'Задача отгрузки';
+      default:
+        return '';
+    }
+  }, [storeState.interface.getCurrentTypeOfTask()]);
 
   function closeHandler() {
     storePopup.status.hide('viewTask');
   }
 
   function viewLocationOpenHander() {
-    const productId = storeTable.selectedItem.getItemId('products', 'products');
-    if (productId === 0) {
-      storePopup.windows.information.setting = {
-        text: 'Выберите продукт, чтобы увидеть информацию об его местоположении',
-      };
-      storePopup.status.show('windowInformation');
-    } else {
-      storePopup.view.product.setCurrentViewProduct(productId, () => {
+    const checkResult = checkIsSelectHook(
+      'products',
+      'products',
+      'Выберите партию продуктов, чтобы увидеть информацию об их местоположении',
+    );
+    if (checkResult.result) {
+      storePopup.view.product.setCurrentViewProduct(checkResult.itemId, () => {
         storePopup.status.show('viewLocation');
       });
     }
   }
 
   function markProductAsMoved() {
-    const productId = storeTable.selectedItem.getItemId('products', 'products');
-    if (productId === 0) {
-      storePopup.windows.information.setting = {
-        text: 'Выберите продукт, чтобы отметить его перемещённым',
-      };
-      storePopup.status.show('windowInformation');
-    } else {
-      storeProduct.markAsMoved.markAsMoved({ productId });
+    const checkResult = checkIsSelectHook(
+      'products',
+      'products',
+      'Выберите партию продуктов, чтобы отметить её перемещённой',
+    );
+    if (checkResult.result) {
+      storeProduct.markAsMoved.markAsMoved(checkResult.itemId);
     }
   }
 
@@ -62,12 +75,6 @@ const PopupViewTask: FC = observer(() => {
   }, []);
 
   useEffect(() => {
-    if (storeState.interface.getCurrentTypeOfTask() === 'acceptance') {
-      setIsAcceptance(true);
-    } else {
-      setIsAcceptance(false);
-    }
-
     if (storeProduct.status.get('fetch') === 'pending') {
       storeProduct.fetch.products(() => {
         storeTable.utils.setDefaulMark(
@@ -87,7 +94,7 @@ const PopupViewTask: FC = observer(() => {
   return (
     <div className='popup popup__popup-view popup-view popup-view'>
       <WindowHeaderForm
-        title={`Задача ${isAcceptance ? 'приёмки' : 'отгрузки'}`}
+        title={windowTitle}
         closeEventHandler={closeHandler}
       />
 
@@ -117,17 +124,15 @@ const PopupViewTask: FC = observer(() => {
 
         <div className='popup-view__table-block '>
           <div className='popup-view__button-block'>
-            <img
-              className='popup-view__icon-button'
+            <ButtonIcon
               src={checkIcon}
-              alt='add'
-              onClick={markProductAsMoved}
-            />
-            <img
-              className='popup-view__icon-button'
+              clickHandler={markProductAsMoved}
+              alt='markAsMoved'
+            />{' '}
+            <ButtonIcon
               src={mapIcon}
-              alt='add'
-              onClick={viewLocationOpenHander}
+              clickHandler={viewLocationOpenHander}
+              alt='viewLocation'
             />
           </div>
           {storePopup.select.products.getProductListData().length > 0 ? (

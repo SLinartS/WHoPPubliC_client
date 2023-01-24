@@ -10,8 +10,13 @@ export function useFetchOneTaskAndFillForm() {
   const checkSelected = useCheckIsSelect();
 
   return useCallback(
-    (itemName: TTaskType, openingWindow: TPopups, isView = false) => {
-      const checkResult = checkSelected('tasks', itemName);
+    (
+      itemName: TTaskType,
+      openingWindow: TPopups,
+      warningText: string,
+      isView = false,
+    ) => {
+      const checkResult = checkSelected('tasks', itemName, warningText);
       if (checkResult.result) {
         storeTask.fetch.oneTask(checkResult.itemId, () => {
           const { taskInfo, productIds, floorIds, pointIds } =

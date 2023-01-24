@@ -18,8 +18,9 @@ export function useDeleteController() {
     (
       itemType: keyof TSelectedItems,
       itemName: TTaskType | TSelectedProducts,
+      warningText: string,
     ) => {
-      const checkResult = checkSelected(itemType, itemName);
+      const checkResult = checkSelected(itemType, itemName, warningText);
       if (checkResult.result) {
         switch (itemName) {
           case 'acceptance':

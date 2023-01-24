@@ -9,7 +9,11 @@ export class StoreProductMarkAsMoved {
     makeAutoObservable(this, {});
   }
 
-  public *markAsMoved(requestData: IMarkAsMovedRequestData) {
+  public *markAsMoved(productId: number) {
+    const requestData: IMarkAsMovedRequestData = {
+      productId,
+    };
+
     try {
       yield extendAxios.patch('product/markAsMoved', requestData);
 

@@ -9,7 +9,8 @@ export function useChangeProduct() {
   const checkSelected = useCheckIsSelect();
 
   return useCallback(() => {
-    const checkResult = checkSelected('products', 'products');
+    const warningText = 'Выберите строку, чтобы изменить партию продуктов';
+    const checkResult = checkSelected('products', 'products', warningText);
     if (checkResult.result) {
       storeProduct.fetch.oneProduct(checkResult.itemId, () => {
         storePopup.status.show('formProduct', () => {

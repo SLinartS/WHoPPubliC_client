@@ -11,22 +11,6 @@
   row-gap: 1rem;
   margin: 0 2rem 2rem;
 
-  &__icon {
-    @extend %standart-transition;
-
-    width: 4rem;
-    height: 4rem;
-    cursor: pointer;
-
-    &:hover {
-      filter: brightness(1.2);
-    }
-
-    &:active {
-      filter: brightness(0.8);
-    }
-  }
-
   &__section-button {
     @extend %grid-center;
 

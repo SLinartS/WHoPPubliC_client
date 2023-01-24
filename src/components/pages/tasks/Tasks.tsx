@@ -7,6 +7,7 @@ import editIcon from '../../../assets/icons/edit.svg';
 import eyeIcon from '../../../assets/icons/eye.svg';
 import { TTaskType } from '../../../store/type';
 import { useRootStore } from '../../../utils/RootStoreProvider/useRootStore';
+import ButtonIcon from '../../blocks/buttonIcon/ButtonIcon';
 import Loader from '../../blocks/loader/Loader';
 import SearchField from '../../blocks/searchField/SearchField';
 import Table from '../../blocks/table/Table';
@@ -24,7 +25,12 @@ const Tasks: FC = observer(() => {
   }
 
   function showViewTaskWindowHandler() {
-    fetchOneTaskAndFillFormHook(getCurrentTypeOfTask(), 'viewTask', true);
+    fetchOneTaskAndFillFormHook(
+      getCurrentTypeOfTask(),
+      'viewTask',
+      'Выберите строку, чтобы просмотреть информацию о задаче',
+      true,
+    );
   }
 
   function showAddTaskWindowHandler() {
@@ -34,11 +40,19 @@ const Tasks: FC = observer(() => {
 
   function changeHandler(): void {
     storePopup.form.state.formActionType = 'change';
-    fetchOneTaskAndFillFormHook(getCurrentTypeOfTask(), 'formTask');
+    fetchOneTaskAndFillFormHook(
+      getCurrentTypeOfTask(),
+      'formTask',
+      'Выберите строку, чтобы изменить задачу',
+    );
   }
 
   function deleteHandler() {
-    deleteControllerHook('tasks', getCurrentTypeOfTask());
+    deleteControllerHook(
+      'tasks',
+      getCurrentTypeOfTask(),
+      'Выберите строку, чтобы удалить задачу',
+    );
   }
 
   function changeCurrentTypeOfTaskHandler(taskType: TTaskType) {
@@ -94,31 +108,27 @@ const Tasks: FC = observer(() => {
         <SearchField classes='search-field--tasks' />
         {storeState.user.userData.role !== 'worker' ? (
           <>
-            <img
-              className='products__icon'
+            <ButtonIcon
               src={addIcon}
+              clickHandler={showAddTaskWindowHandler}
               alt='add'
-              onClick={showAddTaskWindowHandler}
             />
-            <img
-              className='products__icon'
+            <ButtonIcon
               src={editIcon}
+              clickHandler={changeHandler}
               alt='change'
-              onClick={changeHandler}
             />
-            <img
-              className='products__icon'
+            <ButtonIcon
               src={deleteIcon}
+              clickHandler={deleteHandler}
               alt='delete'
-              onClick={deleteHandler}
             />
           </>
         ) : (
-          <img
-            className='products__icon'
+          <ButtonIcon
             src={eyeIcon}
+            clickHandler={showViewTaskWindowHandler}
             alt='show'
-            onClick={showViewTaskWindowHandler}
           />
         )}
       </div>

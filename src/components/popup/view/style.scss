@@ -34,25 +34,8 @@
 
   &__button-block {
     display: flex;
-    width: 60%;
+    width: 15rem;
     justify-content: space-around;
-  }
-
-  &__icon-button {
-    @extend %standart-transition;
-
-    width: 4rem;
-    height: 4rem;
-    margin: 1rem;
-    cursor: pointer;
-
-    &:hover {
-      filter: brightness(1.2);
-    }
-
-    &:active {
-      filter: brightness(0.8);
-    }
   }
 
   &__absence-product {
@@ -78,6 +61,10 @@
     &-icon {
       width: 5rem;
       height: 5rem;
+    }
+
+    &--active {
+      background: color.$third-color--active;
     }
 
     &:hover {

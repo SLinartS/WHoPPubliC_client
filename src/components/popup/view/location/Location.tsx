@@ -63,7 +63,9 @@ const PopupViewLocation: FC = observer(() => {
       <div className='popup-view__content-block popup-view__content-block--view-location'>
         <div className='popup-view__switch-block'>
           <button
-            className='popup-view__switch'
+            className={`popup-view__switch ${
+              typeOfLocation === first.type ? 'popup-view__switch--active' : ''
+            }`}
             type='button'
             onClick={() => setTypeOfLocation(first.type)}
           >
@@ -75,7 +77,9 @@ const PopupViewLocation: FC = observer(() => {
             alt='forward'
           />
           <button
-            className='popup-view__switch'
+            className={`popup-view__switch ${
+              typeOfLocation === second.type ? 'popup-view__switch--active' : ''
+            }`}
             type='button'
             onClick={() => setTypeOfLocation(second.type)}
           >

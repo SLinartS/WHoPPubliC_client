@@ -18,11 +18,12 @@ export function useCheckIsSelect() {
     (
       itemType: keyof TSelectedItems,
       itemName: TTaskType | TSelectedProducts,
+      warningText: string,
     ): IReturnCheckIsSelect => {
       const itemId = storeTable.selectedItem.getItemId(itemType, itemName);
       if (itemId === 0) {
         storePopup.windows.information.setting = {
-          text: 'Выберите строку, чтобы её удалить',
+          text: warningText,
         };
         storePopup.status.show('windowInformation');
         return { result: false, itemId };

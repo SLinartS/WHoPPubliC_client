@@ -6,6 +6,7 @@ import deleteIcon from '../../../assets/icons/delete.svg';
 import editIcon from '../../../assets/icons/edit.svg';
 import filterIcon from '../../../assets/icons/sliders.svg';
 import { useRootStore } from '../../../utils/RootStoreProvider/useRootStore';
+import ButtonIcon from '../../blocks/buttonIcon/ButtonIcon';
 import Loader from '../../blocks/loader/Loader';
 import SearchField from '../../blocks/searchField/SearchField';
 import Table from '../../blocks/table/Table';
@@ -30,13 +31,17 @@ const Products: FC = observer(() => {
     storeState.interface.showPopupFilter();
   }
 
-  function changeProduct(): void {
+  function changeHandler(): void {
     storePopup.form.state.formActionType = 'change';
     changeProductHook();
   }
 
   function deleteHandler() {
-    deleteControllerHook('products', 'products');
+    deleteControllerHook(
+      'products',
+      'products',
+      'Выберите строку, чтобы удалить партию продуктов',
+    );
   }
 
   function displaySelects(): ReactNode[] {
@@ -61,23 +66,20 @@ const Products: FC = observer(() => {
         <SearchField classes='search-field--products' />
         {storeState.user.userData.role !== 'worker' && (
           <>
-            <img
-              className='products__icon'
+            <ButtonIcon
               src={addIcon}
+              clickHandler={openProductFormHandler}
               alt='add'
-              onClick={openProductFormHandler}
             />
-            <img
-              className='products__icon'
+            <ButtonIcon
               src={editIcon}
-              alt='add'
-              onClick={changeProduct}
+              clickHandler={changeHandler}
+              alt='change'
             />
-            <img
-              className='products__icon'
+            <ButtonIcon
               src={deleteIcon}
-              alt='add'
-              onClick={deleteHandler}
+              clickHandler={deleteHandler}
+              alt='delete'
             />
           </>
         )}
