@@ -5,7 +5,7 @@
   &__content-block {
     display: grid;
     gap: 0.2rem;
-    overflow-y: hidden;
+    overflow: hidden;
     background-color: color.$font-color--black;
 
     &--add-product {
@@ -14,7 +14,7 @@
     }
 
     &--add-task {
-      grid-template-columns: 3fr 7fr 2fr;
+      grid-template-columns: 27% 57% 16%;
       grid-template-rows: 12rem 1fr;
     }
 
@@ -46,7 +46,8 @@
 
   &__table-block {
     height: 100%;
-    overflow: scroll;
+    overflow-y: scroll;
+    overflow-x: hidden;
     background-color: color.$font-color--white;
     grid-column: 1/4;
     display: flex;

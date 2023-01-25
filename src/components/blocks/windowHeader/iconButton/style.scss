@@ -25,6 +25,18 @@
     }
   }
 
+  &--reset {
+    background-color: color.$second-color;
+
+    &:hover {
+      background-color: color.$second-color--hover;
+    }
+
+    &:active {
+      background-color: color.$second-color--active;
+    }
+  }
+
   &--save {
     background-color: color.$third-color;
 

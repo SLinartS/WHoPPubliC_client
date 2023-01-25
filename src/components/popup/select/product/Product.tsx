@@ -29,7 +29,7 @@ const PopupSelectProduct: FC = observer(() => {
 
   function displayTable() {
     let data: ITableObject[] = [];
-    const currentTypeOfTask = storeState.interface.getCurrentTypeOfTask();
+    const { currentTypeOfTask } = storeState.interface;
     if (currentTypeOfTask === 'acceptance') {
       data = storePopup.form.utils.utils.getProductWithoutLinkToFloor();
     } else {

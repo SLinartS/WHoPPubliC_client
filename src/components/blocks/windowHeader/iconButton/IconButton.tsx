@@ -1,8 +1,11 @@
+import './style.scss';
+
 import { FC } from 'react';
 
-import backIcon from '../../../assets/icons/back.svg';
-import closeIcon from '../../../assets/icons/close.svg';
-import saveIcon from '../../../assets/icons/save.svg';
+import backIcon from '../../../../assets/icons/back.svg';
+import closeIcon from '../../../../assets/icons/close.svg';
+import resetIcon from '../../../../assets/icons/reset.svg';
+import saveIcon from '../../../../assets/icons/save.svg';
 import { IIconButtonProps } from './type';
 
 const IconButton: FC<IIconButtonProps> = ({ eventHandler, iconType }) => {
@@ -10,6 +13,8 @@ const IconButton: FC<IIconButtonProps> = ({ eventHandler, iconType }) => {
     switch (iconType) {
       case 'back':
         return backIcon;
+      case 'reset':
+        return resetIcon;
       case 'close':
         return closeIcon;
       case 'save':

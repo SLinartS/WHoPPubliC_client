@@ -20,13 +20,9 @@ const Tasks: FC = observer(() => {
   const deleteControllerHook = useDeleteController();
   const fetchOneTaskAndFillFormHook = useFetchOneTaskAndFillForm();
 
-  function getCurrentTypeOfTask(): TTaskType {
-    return storeState.interface.getCurrentTypeOfTask();
-  }
-
   function showViewTaskWindowHandler() {
     fetchOneTaskAndFillFormHook(
-      getCurrentTypeOfTask(),
+      storeState.interface.currentTypeOfTask,
       'viewTask',
       'Выберите строку, чтобы просмотреть информацию о задаче',
       true,
@@ -41,7 +37,7 @@ const Tasks: FC = observer(() => {
   function changeHandler(): void {
     storePopup.form.state.formActionType = 'change';
     fetchOneTaskAndFillFormHook(
-      getCurrentTypeOfTask(),
+      storeState.interface.currentTypeOfTask,
       'formTask',
       'Выберите строку, чтобы изменить задачу',
     );
@@ -50,17 +46,17 @@ const Tasks: FC = observer(() => {
   function deleteHandler() {
     deleteControllerHook(
       'tasks',
-      getCurrentTypeOfTask(),
+      storeState.interface.currentTypeOfTask,
       'Выберите строку, чтобы удалить задачу',
     );
   }
 
   function changeCurrentTypeOfTaskHandler(taskType: TTaskType) {
-    storeState.interface.changeCurrentTypeOfTask(taskType);
+    storeState.interface.currentTypeOfTask = taskType;
   }
 
   function displayTasksTable(): ReactNode {
-    const typeOfTask = storeState.interface.getCurrentTypeOfTask();
+    const typeOfTask = storeState.interface.currentTypeOfTask;
     if (storeTask.status.getFetch(typeOfTask) === 'done') {
       if (storeTask.state.getTasks(typeOfTask).length) {
         return (
@@ -95,7 +91,9 @@ const Tasks: FC = observer(() => {
           <button
             key={type + text}
             className={`tasks__switcher tasks__switcher--${type} ${
-              getCurrentTypeOfTask() === type ? 'tasks__switcher--active' : ''
+              storeState.interface.currentTypeOfTask === type
+                ? 'tasks__switcher--active'
+                : ''
             }`}
             type='button'
             onClick={() => changeCurrentTypeOfTaskHandler(type)}

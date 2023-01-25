@@ -10,7 +10,7 @@ import AssembledBlockFieldText from '../../../blocks/form/assembled/BlockFieldTe
 import FormLayout from '../../../blocks/form/layout/Layout';
 import Table from '../../../blocks/table/Table';
 import WindowHeaderForm from '../../../blocks/windowHeader/form/Form';
-import { useFetchOneProductAndFillForm } from '../../../pages/hooks/task/useFetchOneProductAndFillForm';
+import { useFetchOneProductAndFillForm } from '../../../pages/hooks/product/useFetchOneProductAndFillForm';
 import { useCheckIsSelect } from '../../../pages/hooks/useCheckIsSelect';
 
 const PopupViewTask: FC = observer(() => {
@@ -20,7 +20,7 @@ const PopupViewTask: FC = observer(() => {
   const fetchOneProductAndFillFormHook = useFetchOneProductAndFillForm();
 
   const windowTitle = useMemo(() => {
-    switch (storeState.interface.getCurrentTypeOfTask()) {
+    switch (storeState.interface.currentTypeOfTask) {
       case 'acceptance':
         return 'Задача распределения';
       case 'intra':
@@ -30,7 +30,7 @@ const PopupViewTask: FC = observer(() => {
       default:
         return '';
     }
-  }, [storeState.interface.getCurrentTypeOfTask()]);
+  }, [storeState.interface.currentTypeOfTask]);
 
   function closeHandler() {
     storePopup.status.hide('viewTask');
@@ -94,7 +94,7 @@ const PopupViewTask: FC = observer(() => {
         );
       });
     }
-  }, [storeState.interface.getCurrentTypeOfTask()]);
+  }, [storeState.interface.currentTypeOfTask]);
 
   return (
     <div className='popup popup__popup-view popup-view popup-view'>

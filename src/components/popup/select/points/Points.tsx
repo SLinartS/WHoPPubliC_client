@@ -22,7 +22,7 @@ const PopupSelectPoints: FC = observer(() => {
   }
 
   function getPointType(): TPointType {
-    switch (storeState.interface.getCurrentTypeOfTask()) {
+    switch (storeState.interface.currentTypeOfTask) {
       case 'acceptance':
         return 'acceptance';
       case 'shipment':
@@ -43,7 +43,7 @@ const PopupSelectPoints: FC = observer(() => {
     <div className='popup popup__popup-select popup-select'>
       <WindowHeaderForm
         title={`Выбрать точки ${
-          storeState.interface.getCurrentTypeOfTask() === 'acceptance'
+          storeState.interface.currentTypeOfTask === 'acceptance'
             ? 'приёмки'
             : 'отгрузки'
         }`}

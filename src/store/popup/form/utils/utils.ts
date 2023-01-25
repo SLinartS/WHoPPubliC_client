@@ -12,7 +12,7 @@ export class StorePopupFormUtils {
   }
 
   public getTaskTypeId(): number {
-    switch (this.root.storeState.interface.getCurrentTypeOfTask()) {
+    switch (this.root.storeState.interface.currentTypeOfTask) {
       case 'acceptance':
         return 1;
       case 'intra':

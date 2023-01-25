@@ -18,5 +18,5 @@ const BUTTON_VARIATIONS: ILocationButtons = {
 
 export const useGetButtonByTypeOfOpenedTask = () => {
   const { storeState } = useRootStore();
-  return BUTTON_VARIATIONS[storeState.interface.getCurrentTypeOfTask()];
+  return BUTTON_VARIATIONS[storeState.interface.currentTypeOfTask];
 };

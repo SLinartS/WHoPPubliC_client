@@ -12,21 +12,33 @@ import FormFieldPoint from '../../../blocks/form/field/point/Point';
 import FormLayout from '../../../blocks/form/layout/Layout';
 import Table from '../../../blocks/table/Table';
 import WindowHeaderForm from '../../../blocks/windowHeader/form/Form';
+import { useFetchOneTaskAndFillForm } from '../../../pages/hooks/task/useFetchOneTaskAndFillForm';
 
 const PopupFormTask: FC = observer(() => {
   const { storePopup, storeTask, storeProduct, storeState, storeTable } =
     useRootStore();
+  const fetchOneTaskAndFillFormHook = useFetchOneTaskAndFillForm();
+
+  function generateArticle() {
+    const generateArticleForTask = async () => {
+      const generatedArticle =
+        await storePopup.form.utils.utils.generateArticle('task');
+
+      storePopup.form.task.setFormField('article', generatedArticle);
+    };
+    generateArticleForTask();
+  }
 
   const typeOfTaskForm = useMemo(() => {
-    const currentTypeOfTask = storeState.interface.getCurrentTypeOfTask();
+    const { currentTypeOfTask } = storeState.interface;
     if (currentTypeOfTask === 'acceptance' || currentTypeOfTask === 'intra') {
       return 1;
     }
     return 2;
-  }, [storeState.interface.getCurrentTypeOfTask()]);
+  }, [storeState.interface.currentTypeOfTask]);
 
   const windowTitle = useMemo(() => {
-    switch (storeState.interface.getCurrentTypeOfTask()) {
+    switch (storeState.interface.currentTypeOfTask) {
       case 'acceptance':
         return 'Добавить задачу распределения';
       case 'intra':
@@ -36,7 +48,21 @@ const PopupFormTask: FC = observer(() => {
       default:
         return '';
     }
-  }, [storeState.interface.getCurrentTypeOfTask()]);
+  }, [storeState.interface.currentTypeOfTask]);
+
+  function resetHandler() {
+    const { formActionType } = storePopup.form.state;
+    if (formActionType === 'create') {
+      generateArticle();
+    }
+    if (formActionType === 'change') {
+      fetchOneTaskAndFillFormHook(
+        storeState.interface.currentTypeOfTask,
+        'formTask',
+        'Выберите строку, чтобы изменить задачу',
+      );
+    }
+  }
 
   function closeHandler() {
     storePopup.status.hide('formTask');
@@ -56,13 +82,11 @@ const PopupFormTask: FC = observer(() => {
       switch (formActionType) {
         case 'create':
           storeTask.add.task(() => {
-            storePopup.form.task.clearFormData();
             closeHandler();
           });
           break;
         case 'change':
           storeTask.update.task(() => {
-            storePopup.form.task.clearFormData();
             closeHandler();
           });
           break;
@@ -104,17 +128,11 @@ const PopupFormTask: FC = observer(() => {
         );
       });
     }
-  }, [storeState.interface.getCurrentTypeOfTask()]);
+  }, [storeState.interface.currentTypeOfTask]);
 
   useEffect(() => {
     if (storePopup.form.state.formActionType === 'create') {
-      const generateArticleForTask = async () => {
-        const generatedArticle =
-          await storePopup.form.utils.utils.generateArticle('task');
-
-        storePopup.form.task.setFormField('article', generatedArticle);
-      };
-      generateArticleForTask();
+      generateArticle();
     }
   }, []);
 
@@ -122,7 +140,7 @@ const PopupFormTask: FC = observer(() => {
     <div className='popup popup__popup-form popup-form popup-form--add-task'>
       <WindowHeaderForm
         title={windowTitle}
-        backEventHandler={closeHandler}
+        resetEventHandler={resetHandler}
         saveEventHandler={saveHandler}
         closeEventHandler={closeHandler}
       />

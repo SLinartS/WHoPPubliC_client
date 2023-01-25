@@ -39,7 +39,10 @@ export function useFetchOneProductAndFillForm() {
           product.setFormField('printingHouse', printingHouse.value);
           product.setFormField('publishingHouse', publishingHouse.value);
           product.setFormField('title', title.value);
-          product.setFormField('yearOfPublication', yearOfPublication.value);
+          product.setFormField(
+            'yearOfPublication',
+            String(yearOfPublication.value),
+          );
 
           if (!isView) {
             storePopup.select.points.values = [pointId];

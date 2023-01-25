@@ -36,13 +36,13 @@ export class StoreStateInterface {
     this.isShowPopupFilter = false;
   }
 
-  private currentTypeOfTask: TTaskType = 'acceptance';
+  private _currentTypeOfTask: TTaskType = 'acceptance';
 
-  public getCurrentTypeOfTask() {
-    return this.currentTypeOfTask;
+  public get currentTypeOfTask() {
+    return this._currentTypeOfTask;
   }
 
-  public changeCurrentTypeOfTask(newType: TTaskType) {
-    this.currentTypeOfTask = newType;
+  public set currentTypeOfTask(newType: TTaskType) {
+    this._currentTypeOfTask = newType;
   }
 }

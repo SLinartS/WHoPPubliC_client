@@ -12,9 +12,35 @@ import FormField from '../../../blocks/form/field/Field';
 import FormFieldPoint from '../../../blocks/form/field/point/Point';
 import FormLayout from '../../../blocks/form/layout/Layout';
 import WindowHeaderForm from '../../../blocks/windowHeader/form/Form';
+import { useFetchOneProductAndFillForm } from '../../../pages/hooks/product/useFetchOneProductAndFillForm';
 
 const PopupFormProduct: FC = observer(() => {
   const { storePopup, storeProduct, storeCategory } = useRootStore();
+  const fetchOneProductAndFillFormHook = useFetchOneProductAndFillForm();
+
+  function generateArticle() {
+    const generateArticleForProduct = async () => {
+      const generatedArticle =
+        await storePopup.form.utils.utils.generateArticle('product');
+
+      storePopup.form.product.setFormField('article', generatedArticle);
+    };
+    generateArticleForProduct();
+  }
+
+  function resetHandler() {
+    const { formActionType } = storePopup.form.state;
+    if (formActionType === 'create') {
+      storePopup.form.product.clearFormData();
+      generateArticle();
+    }
+    if (formActionType === 'change') {
+      fetchOneProductAndFillFormHook(
+        'formProduct',
+        'Выберите строку, чтобы изменить задачу',
+      );
+    }
+  }
 
   function closeHandler() {
     storePopup.status.hide('formProduct');
@@ -62,13 +88,7 @@ const PopupFormProduct: FC = observer(() => {
 
   useEffect(() => {
     if (storePopup.form.state.formActionType === 'create') {
-      const generateArticleForProduct = async () => {
-        const generatedArticle =
-          await storePopup.form.utils.utils.generateArticle('product');
-
-        storePopup.form.product.setFormField('article', generatedArticle);
-      };
-      generateArticleForProduct();
+      generateArticle();
     }
   }, []);
 
@@ -76,7 +96,7 @@ const PopupFormProduct: FC = observer(() => {
     <div className='popup popup__popup-form popup-form popup-form--add-product'>
       <WindowHeaderForm
         title='Добавить партию товара'
-        backEventHandler={closeHandler}
+        resetEventHandler={resetHandler}
         saveEventHandler={saveHandler}
         closeEventHandler={closeHandler}
       />
