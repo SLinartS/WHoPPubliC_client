@@ -1,0 +1,41 @@
+@use '@styles/colors.scss' as color;
+@use '@styles/templates.scss';
+
+.check-mark {
+  @extend %flex-center;
+
+  cursor: pointer;
+
+  &__checkbox {
+    display: none;
+  }
+
+  &__checkbox + label {
+    height: 2.4rem;
+    width: 2.4rem;
+    border: 0.1rem solid color.$font-color--black;
+    border-radius: 1rem;
+    cursor: pointer;
+  }
+
+  &__checkbox:checked + label {
+    background-image: url('~@assets/icons/checked.svg');
+    background-repeat: no-repeat;
+    background-position: center center;
+  }
+
+  &__title {
+    font-size: 2rem;
+    padding-left: 1rem;
+    user-select: none;
+    cursor: pointer;
+  }
+}
+
+@media (max-width: 1000px) {
+  .check-mark {
+    &--login &__title {
+      font-size: 1.4rem;
+    }
+  }
+}

@@ -1,0 +1,18 @@
+@use '@styles/templates.scss';
+
+.main-page {
+  @extend %flex-center;
+
+  height: 50rem;
+
+  &__welcome-icon {
+    height: 12rem;
+    width: 12rem;
+    margin-right: 3rem;
+  }
+
+  &__username {
+    font-size: 4rem;
+    font-weight: 700;
+  }
+}

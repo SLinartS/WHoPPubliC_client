@@ -1,0 +1,116 @@
+@use '@styles/colors.scss' as color;
+@use '@styles/templates.scss';
+
+.form-layout {
+  &__field {
+    position: relative;
+    width: 100%;
+    margin: 0;
+
+    &--product {
+      &-article,
+      &-points {
+        width: fit-content;
+      }
+
+      &-points .form-layout__error-image {
+        right: -5rem;
+        top: 40%;
+      }
+
+      &-points .form-layout__error {
+        top: 40%;
+        right: -1rem;
+      }
+    }
+
+    &--task {
+      &-points {
+        width: fit-content;
+        align-items: center;
+        justify-content: center;
+      }
+
+      &-points .form-layout__error-image {
+        right: -4rem;
+        top: 70%;
+      }
+
+      &-points .form-layout__error {
+        top: 70%;
+        right: 0;
+      }
+    }
+  }
+
+  &__error {
+    @extend %flex-center;
+    @extend %standart-transition;
+
+    min-height: 3rem;
+    max-width: 30rem;
+    position: absolute;
+    right: 4rem;
+    top: 50%;
+    transform: translate(0, -50%);
+    font-size: 1.6rem;
+    padding: 1rem 0.6rem;
+    color: color.$second-color;
+    border: 0.2rem solid color.$second-color;
+    background: color.$font-color--white;
+    border-radius: 1rem;
+    text-align: center;
+    visibility: hidden;
+    opacity: 0;
+    z-index: 1;
+
+    &-image {
+      position: absolute;
+      right: 1rem;
+      top: 50%;
+      transform: translate(0, -50%);
+      z-index: 1;
+      cursor: pointer;
+
+      &:hover + .form-layout__error {
+        opacity: 1;
+        visibility: visible;
+      }
+    }
+  }
+
+  &__input {
+    @extend %standart-transition;
+
+    font-size: 2rem;
+    height: 4rem;
+    width: 100%;
+    border: none;
+    border-bottom: 0.2rem solid color.$font-color--black;
+    background: color.$font-color--white;
+    opacity: 0.5;
+    outline: none;
+
+    &--active {
+      opacity: 1;
+    }
+
+    &:focus {
+      border: none;
+      border-bottom: 0.2rem solid color.$font-color--black;
+      opacity: 1;
+    }
+  }
+
+  &__text {
+    font-size: 3.6rem;
+    font-weight: 700;
+  }
+
+  &__choose-icon {
+    display: block;
+    width: 6rem;
+    height: 6rem;
+    cursor: pointer;
+  }
+}

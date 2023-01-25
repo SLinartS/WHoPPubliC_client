@@ -1,0 +1,39 @@
+import './style.scss';
+
+import Loader from '@components/loader/Loader';
+import Map from '@components/map/Map';
+import SearchField from '@components/searchField/SearchField';
+import { useRootStore } from '@helpers/RootStoreProvider/useRootStore';
+import { observer } from 'mobx-react-lite';
+import { FC, useEffect } from 'react';
+
+const MapPage: FC = () => {
+  const { storeMap, storePopup } = useRootStore();
+
+  useEffect(() => {
+    storePopup.form.state.isSelectedMap = false;
+  }, []);
+
+  useEffect(() => {
+    if (storeMap.status.get('fetch') === 'pending') {
+      storeMap.fetch.map();
+    }
+  }, [storeMap.status.get('fetch')]);
+
+  return (
+    <main className='map'>
+      <div className='map__search'>
+        <SearchField />
+      </div>
+      {storeMap.status.get('fetch') === 'done' ? (
+        <div className='map__container'>
+          <Map />
+        </div>
+      ) : (
+        <Loader classes='loader--map' />
+      )}
+    </main>
+  );
+};
+
+export default observer(MapPage);

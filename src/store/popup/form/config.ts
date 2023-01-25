@@ -1,7 +1,7 @@
 import {
   emptyArrayErrorText,
   emptyFieldErrorText,
-} from '../../../utils/formValidator/config';
+} from '@helpers/formValidator/config';
 
 export const INITIAL_VALUE = {
   value: '',

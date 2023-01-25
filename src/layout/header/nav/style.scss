@@ -1,0 +1,59 @@
+@use '@styles/colors.scss' as color;
+@use '@styles/templates.scss';
+
+.header {
+  &__nav {
+    &--popup {
+      @extend %flex-center;
+
+      flex-direction: column;
+      position: absolute;
+      top: 2rem;
+      right: 2rem;
+      z-index: 1;
+      background-color: color.$font-color--white;
+      box-shadow: 0 0 1rem 0 color.$font-color--black;
+      color: color.$font-color--black;
+      border-radius: 1rem;
+    }
+
+    &-icon--popup {
+      height: 2.4rem;
+      width: 2.4rem;
+      margin-right: 1rem;
+    }
+
+    &-block--popup {
+      @extend %flex-center;
+      @extend %standart-transition;
+
+      height: 100%;
+      width: 100%;
+      box-sizing: border-box;
+      justify-content: flex-start;
+      padding: 1rem 1.6rem;
+
+      &--active {
+        background: color.$main-color--active;
+      }
+
+      &:hover {
+        background: color.$main-color--hover;
+      }
+
+      &:active {
+        background: color.$main-color--active;
+      }
+    }
+
+    &-link--popup {
+      @extend %flex-center;
+
+      height: 100%;
+      width: calc(100% + 3.2rem);
+      font-size: 2rem;
+      color: color.$font-color--black;
+      user-select: none;
+    }
+  }
+}

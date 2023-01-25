@@ -1,0 +1,72 @@
+@use '@styles/colors.scss' as color;
+@use '@styles/templates.scss';
+
+.search-field {
+  @extend %flex-center;
+
+  margin: 0;
+
+  &__icon {
+    height: 4rem;
+    width: 4rem;
+    margin-right: 2rem;
+    cursor: pointer;
+
+    &:hover {
+      filter: brightness(1.2);
+    }
+
+    &:active {
+      filter: brightness(0.8);
+    }
+  }
+
+  &__input {
+    width: 90rem;
+    height: 5rem;
+    font-size: 2.4rem;
+    border: 0.1rem solid color.$font-color--black;
+    margin: 0 2rem 0 0;
+    padding-left: 1rem;
+    border-radius: 1rem;
+    box-sizing: border-box;
+    background: color.$font-color--white;
+
+    &:focus {
+      outline: none;
+      border: 0.2rem solid color.$font-color--black;
+    }
+  }
+}
+
+@media (max-width: 1200px) {
+  .search-field {
+    &__input {
+      width: 45rem;
+    }
+  }
+}
+
+@media (max-width: 1000px) {
+  .search-field {
+    &__icon {
+      height: 3rem;
+      width: 3rem;
+    }
+
+    &__input {
+      height: 3rem;
+      font-size: 2rem;
+      width: 30rem;
+      margin: 0;
+    }
+  }
+}
+
+@media (max-width: 725px) {
+  .search-field {
+    &__input {
+      width: 30rem;
+    }
+  }
+}

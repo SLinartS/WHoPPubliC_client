@@ -1,0 +1,144 @@
+@use '@styles/colors.scss' as color;
+@use '@styles/templates.scss';
+
+.map-block {
+  @extend %grid-center;
+
+  width: 100%;
+  grid-template-columns: repeat(2, 1fr);
+  border-radius: 1rem;
+
+  &__zone {
+    margin: 2rem 6rem 2rem 2rem;
+    display: flex;
+    align-items: center;
+    position: relative;
+    transform: translate(15%, 0);
+  }
+
+  &__section {
+    display: flex;
+    width: fit-content;
+    position: relative;
+    margin: 2rem 4rem;
+  }
+
+  &__block {
+    @extend %grid-center;
+
+    grid-template-columns: 5rem;
+    grid-template-rows: repeat(5, 5rem);
+    gap: 0.1rem;
+    margin: 0 0.1rem 0 0;
+    box-sizing: border-box;
+  }
+
+  &__floor {
+    @extend %flex-center;
+
+    position: relative;
+    border: 0.1rem solid color.$table-color;
+    width: 5rem;
+    height: 5rem;
+    transition: all 0.5s ease-in-out;
+
+    &--title {
+      border: none;
+      font-weight: 700;
+      font-size: 2rem;
+      color: color.$table-color;
+      user-select: none;
+    }
+
+    &--animation {
+      &-current {
+        animation: location-current 2000ms linear 0s infinite normal forwards;
+
+        &::after {
+          width: 5rem;
+          height: 5rem;
+          content: '';
+          position: absolute;
+          top: -50%;
+          left: calc(50% - 2.5rem);
+          background: url('~@assets/icons/arrow-up.svg');
+          background-repeat: no-repeat;
+          background-position: center;
+          animation: location-pseudo 2000ms linear 0s infinite normal forwards;
+        }
+      }
+
+      &-future {
+        animation: location-future 2000ms linear 0s infinite normal forwards;
+
+        &::after {
+          width: 5rem;
+          height: 5rem;
+          content: '';
+          position: absolute;
+          top: -50%;
+          left: calc(50% - 2.5rem);
+          background: url('~@assets/icons/arrow-down.svg');
+          background-repeat: no-repeat;
+          background-position: center;
+          animation: location-pseudo 2000ms linear 0s infinite normal forwards;
+        }
+      }
+    }
+  }
+
+  &__zone-title {
+    display: flex;
+    justify-content: flex-end;
+    color: color.$table-color;
+    font-weight: 700;
+    top: calc(5.4rem);
+    left: -15rem;
+    transform: translate(50%, 0);
+    position: absolute;
+    user-select: none;
+  }
+
+  &__section-title {
+    color: color.$table-color;
+    font-size: 10rem;
+    font-weight: 700;
+    margin: 0;
+    text-align: center;
+    line-height: 1em;
+    top: calc(50% + 2.5rem);
+    right: calc(0% - 2.5rem);
+    transform: translate(50%, -50%);
+    position: absolute;
+    user-select: none;
+  }
+
+  &--oneColumn {
+    grid-template-columns: 1fr;
+  }
+
+  &--select-map {
+    grid-template-columns: 1fr;
+    overflow-y: scroll;
+    overflow-x: hidden;
+  }
+}
+
+@media (max-width: 1350px) {
+  .map-block {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 1000px) {
+  .map-block {
+    &__zone {
+      margin: 2rem 6rem 2rem 2rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      position: relative;
+      transform: translate(15%, 0);
+    }
+  }
+}

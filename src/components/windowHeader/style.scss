@@ -1,0 +1,33 @@
+@use '@styles/colors.scss' as color;
+@use '@styles/variables.scss' as variable;
+@use '@styles/templates.scss';
+
+.window-header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: color.$main-color;
+  height: variable.$header-height--standart;
+  border-radius: 1rem 1rem 0 0;
+  padding: 0 3rem;
+  width: 51.2rem - 6rem;
+
+  &--form {
+    justify-content: space-between;
+    column-gap: 3rem;
+    width: calc(100% - 6rem);
+  }
+
+  &__button-block {
+    display: flex;
+    column-gap: 3rem;
+  }
+
+  &__title {
+    font-size: 3.2rem;
+    color: color.$font-color--white;
+    grid-column: 1/4;
+    user-select: none;
+    width: 100%;
+  }
+}

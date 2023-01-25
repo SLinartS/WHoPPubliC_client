@@ -1,7 +1,7 @@
+import FormFieldValidator from '@helpers/formValidator/formFieldValidator';
 import { makeAutoObservable, toJS } from 'mobx';
 
 import deepCopy from '../../../../utils/deepCopy/deepCopy';
-import FormFieldValidator from '../../../../utils/formValidator/formFieldValidator';
 import RootStore from '../../../root';
 import { INITIAL_VALUE } from '../config';
 import { ITaskFormDataFields } from './type';

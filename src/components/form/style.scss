@@ -1,0 +1,30 @@
+@use '@styles/colors.scss' as color;
+@use '@styles/templates.scss';
+
+.form-layout {
+  @extend %flex-center;
+
+  background-color: color.$font-color--white;
+  padding: 2rem;
+  flex-direction: column;
+
+  &--main-info {
+    display: grid;
+    grid-template-columns: repeat(2, calc(50% - 2rem));
+    column-gap: 4rem;
+  }
+
+  &--second-info {
+    grid-row: 2/4;
+    display: grid;
+    grid-template-columns: 2fr 5fr;
+    grid-template-rows: repeat(3, 10rem);
+    column-gap: 4rem;
+  }
+
+  &--time-info {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    column-gap: 4rem;
+  }
+}

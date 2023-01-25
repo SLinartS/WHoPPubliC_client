@@ -1,5 +1,5 @@
-@use '/src/styles/global/colors.scss' as *;
+@use '@styles/colors.scss' as color;
 
 .border {
-  border: 0.2rem solid $font-color--black;
+  border: 0.2rem solid color.$font-color--black;
 }

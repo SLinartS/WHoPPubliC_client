@@ -1,6 +1,6 @@
+import FormArrayValidator from '@helpers/formValidator/formArrayValidator';
 import { makeAutoObservable } from 'mobx';
 
-import FormArrayValidator from '../../../../utils/formValidator/formArrayValidator';
 import RootStore from '../../../root';
 
 export class StorePopupSelectUtils {

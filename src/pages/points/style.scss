@@ -1,0 +1,45 @@
+@use '@styles/colors.scss' as color;
+@use '@styles/templates.scss';
+
+.points {
+  @extend %grid-center;
+
+  align-items: flex-start;
+  grid-template-columns: 1fr 1fr;
+
+  &__search {
+    grid-column: 1/3;
+    margin: 2rem 0;
+  }
+
+  &__title {
+    grid-row: 2/3;
+    font-size: 3.2rem;
+    font-weight: 700;
+  }
+
+  &__block {
+    margin: 1rem 0 2rem;
+    width: calc(100% - 5rem);
+  }
+}
+
+@media (max-width: 1000px) {
+  .points {
+    grid-template-columns: 1fr;
+
+    &__search {
+      grid-column: unset;
+    }
+
+    &__title {
+      grid-row: unset;
+      font-size: 2.4rem;
+    }
+
+    &__block {
+      margin: 1rem;
+      width: calc(100% - 2rem);
+    }
+  }
+}

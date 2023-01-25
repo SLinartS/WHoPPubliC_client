@@ -1,12 +1,12 @@
 import './styles/style.scss';
 
+import { RootStoreProvider } from '@helpers/RootStoreProvider/RootStoreProvider';
 import { StrictMode } from 'react';
 import ReactDOM from 'react-dom/client';
 import { RouterProvider } from 'react-router-dom';
 
 import reportWebVitals from './reportWebVitals';
 import router from './router';
-import { RootStoreProvider } from './utils/RootStoreProvider/RootStoreProvider';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement,

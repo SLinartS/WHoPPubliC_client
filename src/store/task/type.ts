@@ -1,4 +1,5 @@
-import { ITableObject } from '../../components/blocks/table/type';
+import { ITableObject } from '@components/table/type';
+
 import { IField, TTaskType } from '../type';
 
 export type ITasks = {
