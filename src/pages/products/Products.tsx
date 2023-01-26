@@ -11,7 +11,7 @@ import Table from '@components/table/Table';
 import { useRootStore } from '@helpers/RootStoreProvider/useRootStore';
 import { useGetSelects } from '@hooks/product/useGetSelects';
 import { observer } from 'mobx-react-lite';
-import { FC, MouseEvent, ReactNode, useEffect } from 'react';
+import { FC, MouseEvent, useEffect } from 'react';
 
 import { useChangeProduct } from '../hooks/change/useChangeProduct';
 import { useDeleteController } from '../hooks/delete/useDeleteController';
@@ -44,10 +44,6 @@ const Products: FC = () => {
       'products',
       'Выберите строку, чтобы удалить партию продуктов',
     );
-  }
-
-  function displaySelects(): ReactNode[] {
-    return getSelectsHook();
   }
 
   useEffect(() => {
@@ -114,7 +110,7 @@ const Products: FC = () => {
       </div>
 
       {storeProduct.status.get('fetch') === 'done' ? (
-        <div className='products__select'>{displaySelects()}</div>
+        <div className='products__select'>{getSelectsHook()}</div>
       ) : (
         <Loader classes='loader--product-select' />
       )}
