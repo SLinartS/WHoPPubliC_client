@@ -9,5 +9,6 @@ export interface ITransitionCustomProps {
 }
 
 export interface ITransitionCustomLayout extends ITransitionCustomProps {
+  type: string;
   name: string;
 }

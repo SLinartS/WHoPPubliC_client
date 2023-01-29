@@ -1,4 +1,5 @@
 import { ITableObject } from '@components/table/type';
+import { IProductFormDataFields } from '@store/popup/form/product/type';
 
 import { IField } from '../type';
 
@@ -38,4 +39,10 @@ export interface IServiceProductInformation {
 export interface IProductResponse {
   message: string;
   productIds: number[];
+}
+
+export interface IRequestProduct {
+  fields: IProductFormDataFields;
+  pointId: number;
+  userId: '1';
 }

@@ -67,7 +67,7 @@ const PopupSelectProduct: FC = () => {
   }, []);
 
   return (
-    <div className='popup popup__popup-select popup-select'>
+    <>
       <WindowHeaderForm
         title='Выбрать раскладки на складе'
         saveEventHandler={saveHandler}
@@ -80,7 +80,7 @@ const PopupSelectProduct: FC = () => {
           <Loader />
         )}
       </div>
-    </div>
+    </>
   );
 };
 

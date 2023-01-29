@@ -21,10 +21,11 @@ export function useCheckIsSelect() {
     ): IReturnCheckIsSelect => {
       const itemId = storeTable.selectedItem.getItemId(itemType, itemName);
       if (itemId === 0) {
-        storePopup.windows.information.setting = {
-          text: warningText,
-        };
-        storePopup.status.show('windowInformation');
+        storePopup.status.show('windowInformation', () => {
+          storePopup.windows.information.setting = {
+            text: warningText,
+          };
+        });
         return { result: false, itemId };
       }
       return { result: true, itemId };

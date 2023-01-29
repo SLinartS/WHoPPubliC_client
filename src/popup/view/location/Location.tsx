@@ -58,7 +58,7 @@ const PopupViewLocation: FC = () => {
   }, [storeMap.status.get('fetch')]);
 
   return (
-    <div className='popup popup__popup-view popup-view popup-view'>
+    <>
       <WindowHeaderForm
         title='Расположение товара'
         closeEventHandler={closeHandler}
@@ -93,7 +93,7 @@ const PopupViewLocation: FC = () => {
           {displayTable()}
         </div>
       </div>
-    </div>
+    </>
   );
 };
 

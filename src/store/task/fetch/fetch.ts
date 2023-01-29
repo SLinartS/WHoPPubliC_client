@@ -61,7 +61,6 @@ export class StoreTaskFetch {
     }
   }
 
-  // !not implemented on the server
   public *intra(actionIfDone?: () => void) {
     try {
       const response: AxiosResponse<ITask[]> = yield extendAxios.get<ITask[]>(

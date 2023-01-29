@@ -5,11 +5,16 @@ html,
 body {
   &::-webkit-scrollbar {
     width: 20px;
+    height: 20px;
   }
 
   &::-webkit-scrollbar-track {
     background: transparent;
     border-radius: 1rem;
+  }
+
+  &::-webkit-scrollbar-corner {
+    background: transparent;
   }
 }
 

@@ -46,7 +46,7 @@ const PopupSelectMap: FC = () => {
   }, [storeMap.status.get('fetch')]);
 
   return (
-    <div className='popup popup__popup-select popup-select'>
+    <>
       <WindowHeaderForm
         title='Выбрать раскладки на складе'
         saveEventHandler={saveHandler}
@@ -61,7 +61,7 @@ const PopupSelectMap: FC = () => {
       ) : (
         <Loader />
       )}
-    </div>
+    </>
   );
 };
 

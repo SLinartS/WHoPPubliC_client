@@ -9,6 +9,7 @@
     background-color: color.$font-color--black;
     grid-template-columns: 3fr 6fr;
     grid-template-rows: 12rem 1fr;
+    border-radius: 1rem;
 
     &--view-location {
       grid-template-columns: 100%;

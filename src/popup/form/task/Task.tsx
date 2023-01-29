@@ -139,7 +139,7 @@ const PopupFormTask: FC = () => {
   }, []);
 
   return (
-    <div className='popup popup__popup-form popup-form popup-form--add-task'>
+    <>
       <WindowHeaderForm
         title={windowTitle}
         resetEventHandler={resetHandler}
@@ -241,7 +241,7 @@ const PopupFormTask: FC = () => {
           )}
         </div>
       </div>
-    </div>
+    </>
   );
 };
 

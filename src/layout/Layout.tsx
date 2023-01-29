@@ -5,6 +5,7 @@ import { observer } from 'mobx-react-lite';
 import { useRef } from 'react';
 import { useLocation, useOutlet } from 'react-router-dom';
 import { CSSTransition, SwitchTransition } from 'react-transition-group';
+import Popup from 'src/popup/Popup';
 
 import Header from './header/Header';
 import usePopupList from './usePopupsList';
@@ -43,15 +44,20 @@ const Layout = () => {
       </SwitchTransition>
 
       {POPUPS.map(
-        ({ name, trigger, nodeRef, children, classNames, timeout }) => (
+        ({ type, name, trigger, nodeRef, children, classNames, timeout }) => (
           <TransitionCustom
-            key={name}
+            key={type + name}
             trigger={trigger}
             nodeRef={nodeRef}
             classNames={classNames}
             timeout={timeout}
           >
-            {children}
+            <Popup
+              type={type}
+              classes={name}
+            >
+              {children}
+            </Popup>
           </TransitionCustom>
         ),
       )}

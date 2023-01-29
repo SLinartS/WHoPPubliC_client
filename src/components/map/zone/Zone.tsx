@@ -1,41 +1,58 @@
+import addIcon from '@assets/icons/add-white.svg';
+import changeIcon from '@assets/icons/edit-white.svg';
+import minusIcon from '@assets/icons/minus.svg';
+import ButtonIcon from '@components/buttonIcon/ButtonIcon';
+import { useRootStore } from '@helpers/RootStoreProvider/useRootStore';
 import { IZone } from '@store/map/type';
 import { observer } from 'mobx-react-lite';
-import { FC, useEffect, useRef, useState } from 'react';
+import { FC } from 'react';
 
+import { useAddSection } from '../hooks/add/useAddSection';
+import { useRemoveSection } from '../hooks/remove/useRemoveSection';
+import { useRemoveZone } from '../hooks/remove/useRemoveZone';
 import MapInfoZoneLetter from '../info/zoneLetter/ZoneLetter';
 import MapSection from '../section/Section';
 
 interface IMapZoneProps extends IZone {
   index: number;
+  isEditZoneButton?: boolean;
+  isEdit?: boolean;
 }
 
-const MapZone: FC<IMapZoneProps> = ({ id, zoneLetter, sections, index }) => {
-  const [zoneLetterFontSize, setZoneLetterFontSize] = useState<number>(1);
+const MapZone: FC<IMapZoneProps> = ({
+  id,
+  zoneLetter,
+  sections,
+  index,
+  isEditZoneButton = false,
+  isEdit = false,
+}) => {
+  const { storePopup } = useRootStore();
+  const addSectionHook = useAddSection();
+  const removeSectionHook = useRemoveSection();
+  const removeZoneHook = useRemoveZone();
 
-  const zoneNode = useRef<HTMLDivElement>(null);
+  function addHandler() {
+    addSectionHook();
+  }
 
-  useEffect(() => {
-    if (zoneLetterFontSize === 1) {
-      let newZoneLetterFontSize: number;
+  function removeHandler() {
+    removeSectionHook();
+  }
 
-      const tableHeigth: number | undefined = zoneNode.current?.offsetHeight;
-      const tableWidth: number | undefined = zoneNode.current?.offsetWidth;
+  function removeZoneHandler() {
+    removeZoneHook(id);
+  }
 
-      if (tableHeigth && tableWidth) {
-        if (tableHeigth > tableWidth) {
-          newZoneLetterFontSize = tableWidth / 20;
-        } else {
-          newZoneLetterFontSize = tableHeigth / 20;
-        }
-        setZoneLetterFontSize(newZoneLetterFontSize);
-      }
-    }
-  }, []);
+  function openZoneChangeHandler() {
+    storePopup.status.show('formMap', () => {
+      storePopup.form.map.setCurrentZoneId(id);
+    });
+  }
 
   return (
     <div
       className='map-block__zone'
-      ref={zoneNode}
       data-zone-id={id}
       data-zone-index={index}
     >
@@ -46,12 +63,41 @@ const MapZone: FC<IMapZoneProps> = ({ id, zoneLetter, sections, index }) => {
           number={section.number}
           blocks={section.blocks}
           index={sectionIndex}
+          isEdit={isEdit}
         />
       ))}
+      {isEdit && (
+        <div className='map-block__buttons map-block__buttons--section'>
+          <ButtonIcon
+            src={addIcon}
+            clickHandler={addHandler}
+            classes='map-block__button'
+          />
+          <ButtonIcon
+            src={minusIcon}
+            clickHandler={removeHandler}
+            classes='map-block__button'
+          />
+        </div>
+      )}
       <MapInfoZoneLetter
-        fontSize={zoneLetterFontSize}
+        fontSize={15}
         zoneLetter={zoneLetter}
       />
+      {isEditZoneButton && (
+        <div className='map-block__buttons map-block__buttons--zone'>
+          <ButtonIcon
+            src={changeIcon}
+            clickHandler={openZoneChangeHandler}
+            classes='map-block__button'
+          />
+          <ButtonIcon
+            src={minusIcon}
+            clickHandler={removeZoneHandler}
+            classes='map-block__button'
+          />
+        </div>
+      )}
     </div>
   );
 };

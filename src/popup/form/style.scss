@@ -7,6 +7,7 @@
     gap: 0.2rem;
     overflow: hidden;
     background-color: color.$font-color--black;
+    border-radius: 1rem;
 
     &--add-product {
       grid-template-columns: 3fr 1fr;
@@ -16,6 +17,17 @@
     &--add-task {
       grid-template-columns: 27% 57% 16%;
       grid-template-rows: 12rem 1fr;
+    }
+
+    &--add-map {
+      height: 100%;
+      padding: 2rem 5rem 0 2rem;
+      overflow: scroll;
+      justify-items: center;
+      align-items: center;
+      background-color: color.$font-color--white;
+      grid-template-columns: 1fr;
+      grid-template-rows: 1fr;
     }
 
     &--view-task {

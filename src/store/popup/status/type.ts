@@ -5,6 +5,7 @@ export type IPopups = {
 export type TPopups =
   | 'formProduct'
   | 'formTask'
+  | 'formMap'
   | 'viewTask'
   | 'viewLocation'
   | 'selectMap'

@@ -99,7 +99,7 @@ const PopupViewTask: FC = () => {
   }, [storeState.interface.currentTypeOfTask]);
 
   return (
-    <div className='popup popup__popup-view popup-view popup-view'>
+    <>
       <WindowHeaderForm
         title={windowTitle}
         closeEventHandler={closeHandler}
@@ -158,7 +158,7 @@ const PopupViewTask: FC = () => {
           )}
         </div>
       </div>
-    </div>
+    </>
   );
 };
 

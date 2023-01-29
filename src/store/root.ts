@@ -3,15 +3,18 @@ import { configure } from 'mobx';
 import { StoreCategory } from './category/category';
 import { StoreCategoryFetch } from './category/fetch/fetch';
 import { StoreCategoryStatus } from './category/status/status';
+import { StoreMapDelete } from './map/delete/delete';
 import { StoreMapFetch } from './map/fetch/fetch';
 import { StoreMap } from './map/map';
 import { StoreMapStatus } from './map/status/status';
+import { StoreMapUpdate } from './map/update/update';
 import { StoreMapUtils } from './map/utils/utils';
 import { StorePointFetch } from './point/fetch/fetch';
 import { StorePoint } from './point/point';
 import { StorePointStatus } from './point/status/status';
 import { StorePointUtils } from './point/utils/utils';
 import { StorePopupForm } from './popup/form/form';
+import { StorePopupFormMap } from './popup/form/map/map';
 import { StorePopupFormProduct } from './popup/form/product/product';
 import { StorePopupFormTask } from './popup/form/task/task';
 import { StorePopupFormUtilsError } from './popup/form/utils/error/error';
@@ -76,6 +79,8 @@ interface IStoreMap {
   state: StoreMap;
   status: StoreMapStatus;
   fetch: StoreMapFetch;
+  update: StoreMapUpdate;
+  delete: StoreMapDelete;
   utils: StoreMapUtils;
 }
 
@@ -97,6 +102,7 @@ interface IStorePopup {
   form: {
     product: StorePopupFormProduct;
     task: StorePopupFormTask;
+    map: StorePopupFormMap;
     utils: {
       utils: StorePopupFormUtils;
       error: StorePopupFormUtilsError;
@@ -172,6 +178,8 @@ class RootStore {
       state: new StoreMap(this),
       status: new StoreMapStatus(this),
       fetch: new StoreMapFetch(this),
+      update: new StoreMapUpdate(this),
+      delete: new StoreMapDelete(this),
       utils: new StoreMapUtils(this),
     };
 
@@ -193,6 +201,7 @@ class RootStore {
       form: {
         product: new StorePopupFormProduct(this),
         task: new StorePopupFormTask(this),
+        map: new StorePopupFormMap(this),
         utils: {
           utils: new StorePopupFormUtils(this),
           error: new StorePopupFormUtilsError(this),

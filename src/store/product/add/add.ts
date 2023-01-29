@@ -2,8 +2,7 @@ import { makeAutoObservable } from 'mobx';
 
 import extendAxios from '../../../utils/extendAxios';
 import RootStore from '../../root';
-import { IProductResponse } from '../type';
-import { IRequestProductData } from './type';
+import { IProductResponse, IRequestProduct } from '../type';
 
 export class StoreProductAdd {
   constructor(private readonly root: RootStore) {
@@ -12,7 +11,7 @@ export class StoreProductAdd {
 
   public *products(actionIfDone?: () => void) {
     try {
-      const requestProductData: IRequestProductData = {
+      const requestProductData: IRequestProduct = {
         fields: this.root.storePopup.form.product.formData,
         pointId: this.root.storePopup.select.points.values[0],
         userId: '1',

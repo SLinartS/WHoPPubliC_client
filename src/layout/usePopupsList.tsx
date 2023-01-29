@@ -2,6 +2,7 @@ import { ITransitionCustomLayout } from '@components/transition/type';
 import { useRootStore } from '@helpers/RootStoreProvider/useRootStore';
 import { useRef } from 'react';
 
+import PopupFormMap from '../popup/form/map/Map';
 import PopupFormProduct from '../popup/form/product/Product';
 import PopupFormTask from '../popup/form/task/Task';
 import PopupSelectMap from '../popup/select/map/Map';
@@ -17,7 +18,8 @@ const usePopupList = () => {
 
   const POPUPS: ITransitionCustomLayout[] = [
     {
-      name: 'formProductPopup',
+      type: 'form',
+      name: 'add-product',
       trigger: storePopup.status.getStatus('formProduct'),
       nodeRef: useRef(null),
       children: <PopupFormProduct />,
@@ -25,7 +27,8 @@ const usePopupList = () => {
       timeout: 200,
     },
     {
-      name: 'formTaskPopup',
+      type: 'form',
+      name: 'add-task',
       trigger: storePopup.status.getStatus('formTask'),
       nodeRef: useRef(null),
       children: <PopupFormTask />,
@@ -33,7 +36,17 @@ const usePopupList = () => {
       timeout: 200,
     },
     {
-      name: 'viewTaskPopup',
+      type: 'form',
+      name: 'add-map',
+      trigger: storePopup.status.getStatus('formMap'),
+      nodeRef: useRef(null),
+      children: <PopupFormMap />,
+      classNames: 'popup-wrapper',
+      timeout: 200,
+    },
+    {
+      type: 'view',
+      name: 'task',
       trigger: storePopup.status.getStatus('viewTask'),
       nodeRef: useRef(null),
       children: <PopupViewTask />,
@@ -41,7 +54,8 @@ const usePopupList = () => {
       timeout: 200,
     },
     {
-      name: 'viewLocationPopup',
+      type: 'view',
+      name: 'location',
       trigger: storePopup.status.getStatus('viewLocation'),
       nodeRef: useRef(null),
       children: <PopupViewLocation />,
@@ -49,7 +63,8 @@ const usePopupList = () => {
       timeout: 200,
     },
     {
-      name: 'selectMapPopup',
+      type: 'select',
+      name: 'map',
       trigger: storePopup.status.getStatus('selectMap'),
       nodeRef: useRef(null),
       children: <PopupSelectMap />,
@@ -57,7 +72,8 @@ const usePopupList = () => {
       timeout: 200,
     },
     {
-      name: 'selectPointsPopup',
+      type: 'select',
+      name: 'point',
       trigger: storePopup.status.getStatus('selectPoints'),
       nodeRef: useRef(null),
       children: <PopupSelectPoints />,
@@ -65,7 +81,8 @@ const usePopupList = () => {
       timeout: 200,
     },
     {
-      name: 'selectProductsPopup',
+      type: 'select',
+      name: 'product',
       trigger: storePopup.status.getStatus('selectProducts'),
       nodeRef: useRef(null),
       children: <PopupSelectProduct />,
@@ -73,7 +90,8 @@ const usePopupList = () => {
       timeout: 200,
     },
     {
-      name: 'windowConfirm',
+      type: 'window',
+      name: 'confirm',
       trigger: storePopup.status.getStatus('windowConfirm'),
       nodeRef: useRef(null),
       children: <WindowConfirm />,
@@ -81,7 +99,8 @@ const usePopupList = () => {
       timeout: 200,
     },
     {
-      name: 'windowInformation',
+      type: 'window',
+      name: 'information',
       trigger: storePopup.status.getStatus('windowInformation'),
       nodeRef: useRef(null),
       children: <WindowInformation />,

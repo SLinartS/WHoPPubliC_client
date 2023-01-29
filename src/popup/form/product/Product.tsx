@@ -95,7 +95,7 @@ const PopupFormProduct: FC = () => {
   }, []);
 
   return (
-    <div className='popup popup__popup-form popup-form popup-form--add-product'>
+    <>
       <WindowHeaderForm
         title='Добавить партию товара'
         resetEventHandler={resetHandler}
@@ -196,7 +196,7 @@ const PopupFormProduct: FC = () => {
           <p className='popup-form__photo-text'>Фотография товара</p>
         </div>
       </div>
-    </div>
+    </>
   );
 };
 

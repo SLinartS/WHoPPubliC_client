@@ -7,12 +7,18 @@ interface IButtonIconProps {
   src: string;
   clickHandler: () => void;
   alt?: string;
+  classes?: string;
 }
 
-const ButtonIcon: FC<IButtonIconProps> = ({ src, clickHandler, alt }) => {
+const ButtonIcon: FC<IButtonIconProps> = ({
+  src,
+  clickHandler,
+  alt,
+  classes,
+}) => {
   return (
     <img
-      className='button-icon'
+      className={`button-icon ${classes}`}
       src={src}
       alt={alt}
       onClick={clickHandler}

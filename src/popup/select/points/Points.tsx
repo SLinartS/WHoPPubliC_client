@@ -42,7 +42,7 @@ const PopupSelectPoints: FC = () => {
   }, [storePoint.status.get('fetch')]);
 
   return (
-    <div className='popup popup__popup-select popup-select'>
+    <>
       <WindowHeaderForm
         title={`Выбрать точки ${
           storeState.interface.currentTypeOfTask === 'acceptance'
@@ -60,7 +60,7 @@ const PopupSelectPoints: FC = () => {
       ) : (
         <Loader />
       )}
-    </div>
+    </>
   );
 };
 

@@ -21,6 +21,7 @@ export class StorePopupStatus {
   private popups: IPopups = {
     formProduct: false,
     formTask: false,
+    formMap: false,
     viewTask: false,
     viewLocation: false,
     selectMap: false,

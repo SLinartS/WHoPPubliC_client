@@ -24,3 +24,7 @@ export interface IFloor {
   freeSpace: number;
   reservedSpace: number;
 }
+
+export interface IRequestMap {
+  zone: IZone;
+}
