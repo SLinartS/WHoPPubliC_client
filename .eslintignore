@@ -1,5 +1,4 @@
 **/tests/
 scripts
 craco.config.cjs
-# /*.ts
-# /*.js
+/*config.js
