@@ -1,6 +1,7 @@
 @use '@styles/colors.scss' as color;
 
 div,
+main,
 html,
 body {
   &::-webkit-scrollbar {
@@ -18,6 +19,7 @@ body {
   }
 }
 
+main,
 div {
   &::-webkit-scrollbar-thumb {
     background-color: color.$main-color;

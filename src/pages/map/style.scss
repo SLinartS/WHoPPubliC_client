@@ -2,10 +2,10 @@
 @use '@styles/templates.scss';
 
 .map {
-  @extend %flex-center;
+  @extend %grid-center;
 
-  width: 100%;
   justify-content: flex-start;
+  align-items: flex-start;
   flex-direction: column;
 
   &__search {
@@ -13,15 +13,9 @@
   }
 
   &__container {
-    @extend %flex-center;
-
-    justify-content: flex-start;
     position: relative;
-    width: calc(100vw - 5rem);
-    overflow: scroll;
-    flex-direction: column;
+    margin: 0 2rem 2rem;
     border-radius: 1rem;
-    margin-bottom: 2.5rem;
     background-color: color.$bg-color-grey;
   }
 
