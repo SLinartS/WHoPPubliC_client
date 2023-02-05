@@ -145,7 +145,6 @@ const PopupViewTask: FC = () => {
           {storePopup.select.products.getProductListData().length > 0 ? (
             <Table
               data={storePopup.select.products.getProductListData()}
-              keyWord='article'
               valuesType='products'
               selectingValues='products'
               displayedColumns={storeTable.utils.getColumnsWithMark('products')}

@@ -1,5 +1,8 @@
 import { configure } from 'mobx';
 
+import { StoreAccountActions } from './accounts/actions';
+import { StoreAccount } from './accounts/state';
+import { StoreAccountStatus } from './accounts/status';
 import { StoreCategory } from './category/category';
 import { StoreCategoryFetch } from './category/fetch/fetch';
 import { StoreCategoryStatus } from './category/status/status';
@@ -75,6 +78,12 @@ interface IStoreProduct {
   markAsMoved: StoreProductMarkAsMoved;
 }
 
+interface IStoreAccount {
+  state: StoreAccount;
+  status: StoreAccountStatus;
+  actions: StoreAccountActions;
+}
+
 interface IStoreMap {
   state: StoreMap;
   status: StoreMapStatus;
@@ -138,6 +147,8 @@ class RootStore {
 
   public storeProduct: IStoreProduct;
 
+  public storeAccount: IStoreAccount;
+
   public storeMap: IStoreMap;
 
   public storePoint: IStorePoint;
@@ -172,6 +183,12 @@ class RootStore {
       update: new StoreProductUpdate(this),
       delete: new StoreProductDelete(this),
       markAsMoved: new StoreProductMarkAsMoved(this),
+    };
+
+    this.storeAccount = {
+      state: new StoreAccount(this),
+      status: new StoreAccountStatus(this),
+      actions: new StoreAccountActions(this),
     };
 
     this.storeMap = {

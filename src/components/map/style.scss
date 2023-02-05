@@ -73,13 +73,15 @@ html .map-block {
 
     &-reset {
       position: absolute;
-      top: 2rem;
-      right: 2rem;
+      top: 10rem;
+      left: 2rem;
     }
   }
 
   &__zone {
-    margin: 2rem 6rem 2rem 18rem;
+    margin: 2rem 3rem 2rem 18rem;
+    padding-right: 10rem;
+    padding-right: 10rem;
     display: grid;
     grid-template-columns: auto auto;
     align-items: center;

@@ -1,6 +1,7 @@
 import './style.scss';
 
 import {
+  TSelectedAccounts,
   TSelectedItems,
   TSelectedProducts,
 } from '@store/table/selectedItem/type';
@@ -16,16 +17,14 @@ import { ITableObject } from './type';
 
 interface ITableProps {
   data: ITableObject[];
-  keyWord: keyof ITableObject;
   valuesType: keyof TSelectedItems;
-  selectingValues: TTaskType | TSelectedProducts;
+  selectingValues: TTaskType | TSelectedProducts | TSelectedAccounts;
   displayedColumns: string[];
   classes?: string;
 }
 
 const Table: FC<ITableProps> = ({
   data,
-  keyWord,
   valuesType,
   selectingValues,
   displayedColumns,
@@ -90,7 +89,7 @@ const Table: FC<ITableProps> = ({
         <TableRow
           valuesType={valuesType}
           selectingValues={selectingValues}
-          key={columns[keyWord].value + String(columns.id.value)}
+          key={selectingValues + String(columns.id.value)}
           displayedColumns={displayedColumns}
           columns={columns}
         />

@@ -6,16 +6,12 @@
 
   align-items: flex-start;
   grid-template-columns: 1fr;
-  grid-template-rows: 9rem 8rem 1fr;
+  grid-template-rows: 8rem 7rem 1fr;
 
   &__table {
     height: calc(100% - 5rem);
     width: 70%;
     border-radius: 1rem;
-  }
-
-  &__section-switcher {
-    margin-top: 1.4rem;
   }
 
   &__switcher {
@@ -55,12 +51,11 @@
   }
 
   &__section-button {
-    @extend %grid-center;
+    @extend %flex-center;
 
-    width: 60%;
-    grid-template-columns: repeat(4, 1fr);
+    width: calc(100% - 4rem);
     column-gap: 2rem;
-    margin-top: 1rem;
+    margin-top: 2rem;
   }
 
   &__empty-text {

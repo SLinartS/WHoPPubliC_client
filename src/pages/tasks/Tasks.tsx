@@ -64,7 +64,6 @@ const Tasks: FC = () => {
         return (
           <Table
             data={storeTask.state.getTasks(typeOfTask)}
-            keyWord='article'
             valuesType='tasks'
             selectingValues={typeOfTask}
             classes='table--tasks'
@@ -88,22 +87,6 @@ const Tasks: FC = () => {
 
   return (
     <main className='tasks'>
-      <div className='tasks__section-switcher'>
-        {TASK_TYPES_FOR_SWITCHER.map(({ type, text }) => (
-          <button
-            key={type + text}
-            className={`tasks__switcher tasks__switcher--${type} ${
-              storeState.interface.currentTypeOfTask === type
-                ? 'tasks__switcher--active'
-                : ''
-            }`}
-            type='button'
-            onClick={() => changeCurrentTypeOfTaskHandler(type)}
-          >
-            {text}
-          </button>
-        ))}
-      </div>
       <div className='tasks__section-button'>
         <SearchField classes='search-field--tasks' />
         {storeState.user.userData.role !== 'worker' ? (
@@ -131,6 +114,22 @@ const Tasks: FC = () => {
             alt='show'
           />
         )}
+      </div>
+      <div className='tasks__section-switcher'>
+        {TASK_TYPES_FOR_SWITCHER.map(({ type, text }) => (
+          <button
+            key={type + text}
+            className={`tasks__switcher tasks__switcher--${type} ${
+              storeState.interface.currentTypeOfTask === type
+                ? 'tasks__switcher--active'
+                : ''
+            }`}
+            type='button'
+            onClick={() => changeCurrentTypeOfTaskHandler(type)}
+          >
+            {text}
+          </button>
+        ))}
       </div>
       <div className='tasks__table'>{displayTasksTable()}</div>
     </main>

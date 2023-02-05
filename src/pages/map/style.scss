@@ -2,20 +2,24 @@
 @use '@styles/templates.scss';
 
 .map {
-  @extend %grid-center;
+  @extend %flex-center;
 
+  overflow: hidden;
   justify-content: flex-start;
   align-items: flex-start;
   flex-direction: column;
 
   &__search {
-    margin: 2rem 0;
+    width: calc(100% - 6rem);
+    margin: 2rem 0 0 2rem;
   }
 
   &__container {
+    width: calc(100vw - 6rem);
     position: relative;
-    margin: 0 2rem 2rem;
+    margin: 2rem 0 2rem 2rem;
     border-radius: 1rem;
+    overflow: scroll;
     background-color: color.$bg-color-grey;
   }
 

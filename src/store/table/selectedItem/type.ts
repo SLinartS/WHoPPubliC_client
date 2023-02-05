@@ -7,6 +7,11 @@ export type TSelectedItems = {
   products: {
     [key in TSelectedProducts]: number;
   };
+  accounts: {
+    [key in TSelectedAccounts]: number;
+  };
 };
 
 export type TSelectedProducts = 'products';
+
+export type TSelectedAccounts = 'accounts';

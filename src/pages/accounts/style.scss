@@ -1,0 +1,18 @@
+@use '@styles/templates.scss';
+
+.accounts {
+
+  width: 100%;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+
+
+  &__section-button {
+    @extend %flex-center;
+
+    width: calc(100% - 4rem);
+    column-gap: 2rem;
+    margin: 2rem 0;
+  }
+}

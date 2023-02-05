@@ -1,5 +1,6 @@
 import { useRootStore } from '@helpers/RootStoreProvider/useRootStore';
 import {
+  TSelectedAccounts,
   TSelectedItems,
   TSelectedProducts,
 } from '@store/table/selectedItem/type';
@@ -15,7 +16,7 @@ import { ITableObject } from '../type';
 interface IRowProps {
   columns: ITableObject;
   valuesType: keyof TSelectedItems;
-  selectingValues: TTaskType | TSelectedProducts;
+  selectingValues: TTaskType | TSelectedProducts | TSelectedAccounts;
   displayedColumns?: string[];
 }
 

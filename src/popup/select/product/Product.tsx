@@ -40,7 +40,6 @@ const PopupSelectProduct: FC = () => {
     return (
       <Table
         data={data}
-        keyWord='author'
         valuesType='products'
         selectingValues='products'
         displayedColumns={storeTable.utils.getColumnsWithMark('products')}

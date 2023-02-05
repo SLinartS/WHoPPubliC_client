@@ -2,7 +2,7 @@ import { makeAutoObservable } from 'mobx';
 
 import RootStore from '../../root';
 import { TTaskType } from '../../type';
-import { TSelectedItems, TSelectedProducts } from './type';
+import { TSelectedAccounts, TSelectedItems, TSelectedProducts } from './type';
 
 export class StoreTableSelectedItem {
   constructor(private readonly root: RootStore) {
@@ -18,17 +18,22 @@ export class StoreTableSelectedItem {
     products: {
       products: 0,
     },
+    accounts: {
+      accounts: 0,
+    },
   };
 
   public getItemId(
     itemType: keyof TSelectedItems,
-    itemName: TTaskType | TSelectedProducts,
+    itemName: TTaskType | TSelectedProducts | TSelectedAccounts,
   ) {
     switch (itemType) {
       case 'tasks':
         return this.itemId[itemType][itemName as TTaskType];
       case 'products':
         return this.itemId[itemType][itemName as TSelectedProducts];
+      case 'accounts':
+        return this.itemId[itemType][itemName as TSelectedAccounts];
       default:
         return 0;
     }
@@ -36,7 +41,7 @@ export class StoreTableSelectedItem {
 
   public setItemId(
     itemType: keyof TSelectedItems,
-    itemName: TTaskType | TSelectedProducts,
+    itemName: TTaskType | TSelectedProducts | TSelectedAccounts,
     newTaskId: number,
   ) {
     switch (itemType) {
@@ -45,6 +50,9 @@ export class StoreTableSelectedItem {
         break;
       case 'products':
         this.itemId[itemType][itemName as TSelectedProducts] = newTaskId;
+        break;
+      case 'accounts':
+        this.itemId[itemType][itemName as TSelectedAccounts] = newTaskId;
         break;
       default:
     }

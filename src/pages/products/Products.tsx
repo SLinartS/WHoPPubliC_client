@@ -98,7 +98,6 @@ const Products: FC = () => {
         {storeProduct.status.get('fetch') === 'done' ? (
           <Table
             data={storeProduct.state.products.data}
-            keyWord='article'
             valuesType='products'
             selectingValues='products'
             classes='table--products'
