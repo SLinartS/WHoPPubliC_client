@@ -1,5 +1,6 @@
 import { useRootStore } from '@helpers/RootStoreProvider/useRootStore';
 import {
+  TSelectedAccounts,
   TSelectedItems,
   TSelectedProducts,
 } from '@store/table/selectedItem/type';
@@ -16,7 +17,7 @@ export function useCheckIsSelect() {
   return useCallback(
     (
       itemType: keyof TSelectedItems,
-      itemName: TTaskType | TSelectedProducts,
+      itemName: TTaskType | TSelectedProducts | TSelectedAccounts,
       warningText: string,
     ): IReturnCheckIsSelect => {
       const itemId = storeTable.selectedItem.getItemId(itemType, itemName);

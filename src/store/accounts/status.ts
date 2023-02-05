@@ -2,7 +2,7 @@ import RootStore from '@store/root';
 import { TStatus } from '@store/type';
 import { makeAutoObservable } from 'mobx';
 
-export type TAccountStatus = 'fetch' | 'show' | 'create' | 'update' | 'destroy';
+export type TAccountStatus = 'fetch' | 'show' | 'store' | 'update' | 'destroy';
 
 export class StoreAccountStatus {
   constructor(private readonly root: RootStore) {
@@ -13,7 +13,7 @@ export class StoreAccountStatus {
 
   private show: TStatus = 'pending';
 
-  private create: TStatus = 'pending';
+  private store: TStatus = 'pending';
 
   private update: TStatus = 'pending';
 

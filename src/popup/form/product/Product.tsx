@@ -13,8 +13,9 @@ import FormLayout from '@components/form/layout/Layout';
 import WindowHeaderForm from '@components/windowHeader/form/Form';
 import { useRootStore } from '@helpers/RootStoreProvider/useRootStore';
 import { useFetchOneProductAndFillForm } from '@hooks/product/useFetchOneProductAndFillForm';
+import { IOption } from '@store/category/type';
 import { observer } from 'mobx-react-lite';
-import { FC, useEffect } from 'react';
+import { FC, useEffect, useMemo } from 'react';
 
 const PopupFormProduct: FC = () => {
   const { storePopup, storeProduct, storeCategory } = useRootStore();
@@ -29,6 +30,24 @@ const PopupFormProduct: FC = () => {
     };
     generateArticleForProduct();
   }
+
+  function changeSelectHandler(option: IOption) {
+    storePopup.form.product.setFormField('categoryId', String(option.id));
+  }
+
+  const currentCategoryValue = useMemo(() => {
+    const id = Number(storePopup.form.product.getFormField('categoryId'));
+    const title = storeCategory.state.categories.find(
+      (category) => category.id === id,
+    )?.title;
+    if (title) {
+      return { id, title };
+    }
+    return { id, title: '' };
+  }, [
+    storeCategory.status.get('fetch'),
+    storePopup.form.product.getFormField('categoryId'),
+  ]);
 
   function resetHandler() {
     const { formActionType } = storePopup.form.state;
@@ -123,6 +142,8 @@ const PopupFormProduct: FC = () => {
             fieldName='categoryId'
             titleText='Категория'
             options={storeCategory.state.categories}
+            currentOption={currentCategoryValue}
+            changeHandler={changeSelectHandler}
           />
         </FormLayout>
 

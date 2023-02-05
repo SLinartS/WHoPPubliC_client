@@ -72,12 +72,4 @@ export default class FormFieldValidator {
     this._errors.push('Значение не содержится в списке');
     return this;
   }
-
-  public categorySelected() {
-    if (this._value !== 'unset') {
-      return this;
-    }
-    this._errors.push('Категория издания не выбрана');
-    return this;
-  }
 }

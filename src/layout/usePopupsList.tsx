@@ -2,6 +2,7 @@ import { ITransitionCustomLayout } from '@components/transition/type';
 import { useRootStore } from '@helpers/RootStoreProvider/useRootStore';
 import { useRef } from 'react';
 
+import PopupFormAccount from '../popup/form/account/Account';
 import PopupFormMap from '../popup/form/map/Map';
 import PopupFormProduct from '../popup/form/product/Product';
 import PopupFormTask from '../popup/form/task/Task';
@@ -41,6 +42,15 @@ const usePopupList = () => {
       trigger: storePopup.status.getStatus('formMap'),
       nodeRef: useRef(null),
       children: <PopupFormMap />,
+      classNames: 'popup-wrapper',
+      timeout: 200,
+    },
+    {
+      type: 'form',
+      name: 'add-account',
+      trigger: storePopup.status.getStatus('formAccount'),
+      nodeRef: useRef(null),
+      children: <PopupFormAccount />,
       classNames: 'popup-wrapper',
       timeout: 200,
     },

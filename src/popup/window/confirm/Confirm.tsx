@@ -5,6 +5,7 @@ import { useRootStore } from '@helpers/RootStoreProvider/useRootStore';
 import { observer } from 'mobx-react-lite';
 import { FC } from 'react';
 
+import WindowConfirmDeleteAccount from './deleteAccount/DeleteAccount';
 import WindowConfirmDeleteProduct from './deleteProduct/DeleteProduct';
 import WindowConfirmDeleteRelatedProduct from './deleteTask/deleteRelatedProduct/DeleteRelatedProduct';
 import WindowConfirmDeleteTask from './deleteTask/DeleteTask';
@@ -21,6 +22,8 @@ const WindowConfirm: FC = () => {
         return <WindowConfirmDeleteRelatedProduct />;
       case 'deleteProduct':
         return <WindowConfirmDeleteProduct />;
+      case 'deleteAccount':
+        return <WindowConfirmDeleteAccount />;
       default:
         return null;
     }

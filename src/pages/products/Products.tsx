@@ -9,18 +9,18 @@ import Loader from '@components/loader/Loader';
 import SearchField from '@components/searchField/SearchField';
 import Table from '@components/table/Table';
 import { useRootStore } from '@helpers/RootStoreProvider/useRootStore';
+import { useFetchOneProductAndFillForm } from '@hooks/product/useFetchOneProductAndFillForm';
 import { useGetSelects } from '@hooks/product/useGetSelects';
 import { observer } from 'mobx-react-lite';
 import { FC, MouseEvent, useEffect } from 'react';
 
-import { useChangeProduct } from '../hooks/change/useChangeProduct';
 import { useDeleteController } from '../hooks/delete/useDeleteController';
 import PopupFilter from './popupFilter/PopupFilter';
 
 const Products: FC = () => {
   const { storeProduct, storePopup, storeTable, storeState } = useRootStore();
   const deleteControllerHook = useDeleteController();
-  const changeProductHook = useChangeProduct();
+  const fetchOneProductAndFillFormHook = useFetchOneProductAndFillForm();
   const getSelectsHook = useGetSelects();
 
   function addHandler() {
@@ -35,7 +35,10 @@ const Products: FC = () => {
 
   function changeHandler(): void {
     storePopup.form.state.formActionType = 'change';
-    changeProductHook();
+    fetchOneProductAndFillFormHook(
+      'formProduct',
+      'Выберите строку, чтобы изменить партию продуктов',
+    );
   }
 
   function deleteHandler() {

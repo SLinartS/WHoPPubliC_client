@@ -22,6 +22,7 @@ export class StorePopupStatus {
     formProduct: false,
     formTask: false,
     formMap: false,
+    formAccount: false,
     viewTask: false,
     viewLocation: false,
     selectMap: false,

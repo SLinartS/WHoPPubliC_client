@@ -1,4 +1,5 @@
 import { useRootStore } from '@helpers/RootStoreProvider/useRootStore';
+import { IProductFormDataFields } from '@store/popup/form/product/type';
 import { TPopups } from '@store/popup/status/type';
 import { useCallback } from 'react';
 
@@ -15,34 +16,15 @@ export function useFetchOneProductAndFillForm() {
         storeProduct.fetch.oneProduct(checkResult.itemId, () => {
           const { pointId, productInfo } = storeProduct.state.product;
 
-          const {
-            id,
-            article,
-            author,
-            categoryId,
-            number,
-            printDate,
-            printingHouse,
-            publishingHouse,
-            title,
-            yearOfPublication,
-          } = productInfo;
-
-          const { product } = storePopup.form;
-
-          product.setFormField('id', String(id.value));
-          product.setFormField('article', article.value);
-          product.setFormField('author', author.value);
-          product.setFormField('categoryId', String(categoryId.value));
-          product.setFormField('number', String(number.value));
-          product.setFormField('printDate', printDate.value);
-          product.setFormField('printingHouse', printingHouse.value);
-          product.setFormField('publishingHouse', publishingHouse.value);
-          product.setFormField('title', title.value);
-          product.setFormField(
-            'yearOfPublication',
-            String(yearOfPublication.value),
-          );
+          Object.entries(productInfo).forEach(([key, element]) => {
+            if (key !== 'categoryTitle') {
+              const typedKey = key as keyof IProductFormDataFields;
+              storePopup.form.product.setFormField(
+                typedKey,
+                String(element.value),
+              );
+            }
+          });
 
           if (!isView) {
             storePopup.select.points.values = [pointId];

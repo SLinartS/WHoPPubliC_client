@@ -12,7 +12,7 @@ export class StoreTaskUpdate {
   public *task(actionIfDone?: () => void) {
     const { storePopup } = this.root;
     const taskTypeId = storePopup.form.utils.utils.getTaskTypeId();
-    const requestTaskData: IRequestTaskData = {
+    const requestData: IRequestTaskData = {
       fields: storePopup.form.task.formData,
       userId: 1,
       typeId: taskTypeId,
@@ -21,7 +21,7 @@ export class StoreTaskUpdate {
       pointIds: storePopup.select.points.values,
     };
     try {
-      yield extendAxios.put('tasks', requestTaskData);
+      yield extendAxios.put('tasks', requestData);
       this.root.storeTask.status.set('update', 'done');
       if (actionIfDone) {
         actionIfDone();

@@ -1,36 +1,24 @@
 import './style.scss';
 
-import { useRootStore } from '@helpers/RootStoreProvider/useRootStore';
 import { IOption } from '@store/category/type';
-import { IProductFormDataFields } from '@store/popup/form/product/type';
 import { observer } from 'mobx-react-lite';
-import { FC, useEffect, useMemo, useState } from 'react';
+import { FC, useState } from 'react';
 
 interface IFormFieldSelectProps {
   options: IOption[];
-  fieldName: keyof IProductFormDataFields;
+  currentOption: IOption;
+  changeHandler: (option: IOption) => void;
 }
 
-const initialCurrentOption: IOption = {
-  id: 1,
-  title: '',
-};
-
-const FormFieldSelect: FC<IFormFieldSelectProps> = ({ options, fieldName }) => {
-  const { storePopup, storeCategory } = useRootStore();
-
-  const getValue = useMemo(() => {
-    return storePopup.form.product.getFormField(fieldName);
-  }, [storePopup.form.product.getFormField(fieldName)]);
-
+const FormFieldSelect: FC<IFormFieldSelectProps> = ({
+  options,
+  currentOption,
+  changeHandler,
+}) => {
   const [isOpenDowndrop, setIsOpenDownDrop] = useState<boolean>(false);
 
-  const [currentOption, setCurrentOption] =
-    useState<IOption>(initialCurrentOption);
-
   function changeFieldHandler(option: IOption) {
-    storePopup.form.product.setFormField(fieldName, String(option.id));
-    setCurrentOption({ id: option.id, title: option.title });
+    changeHandler(option);
     setIsOpenDownDrop(false);
   }
 
@@ -63,15 +51,6 @@ const FormFieldSelect: FC<IFormFieldSelectProps> = ({ options, fieldName }) => {
       <p className='custom-select__text custom-select__text--button'>{text}</p>
     );
   }
-
-  useEffect(() => {
-    if (storeCategory.status.get('fetch') === 'done') {
-      setCurrentOption({
-        id: Number(getValue),
-        title: options[Number(getValue) - 1].title,
-      });
-    }
-  }, [storeCategory.status.get('fetch'), getValue]);
 
   return (
     <div className='custom-select'>

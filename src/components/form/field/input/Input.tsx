@@ -1,13 +1,17 @@
 import { TChangeFieldEvent } from '@gtypes/form/type';
 import { useRootStore } from '@helpers/RootStoreProvider/useRootStore';
+import { IAccountFormDataFields } from '@store/popup/form/account/type';
 import { IProductFormDataFields } from '@store/popup/form/product/type';
 import { ITaskFormDataFields } from '@store/popup/form/task/type';
 import { observer } from 'mobx-react-lite';
 import { FC } from 'react';
 
 interface IFormFieldInputProps {
-  typeForm: 'task' | 'product';
-  fieldName: keyof IProductFormDataFields | keyof ITaskFormDataFields;
+  typeForm: 'task' | 'product' | 'account';
+  fieldName:
+    | keyof IProductFormDataFields
+    | keyof ITaskFormDataFields
+    | keyof IAccountFormDataFields;
   readonly: boolean;
   placeholder?: string;
   classes?: string;
@@ -36,18 +40,32 @@ const FormFieldInput: FC<IFormFieldInputProps> = ({
           e.target.value,
         );
         break;
+      case 'account':
+        storePopup.form.account.setFormField(
+          fieldName as keyof IAccountFormDataFields,
+          e.target.value,
+        );
+        break;
       default:
     }
   }
   function getValue(): string {
-    if (typeForm === 'task') {
-      return storePopup.form.task.getFormField(
-        fieldName as keyof ITaskFormDataFields,
-      );
+    switch (typeForm) {
+      case 'task':
+        return storePopup.form.task.getFormField(
+          fieldName as keyof ITaskFormDataFields,
+        );
+      case 'product':
+        return storePopup.form.product.getFormField(
+          fieldName as keyof IProductFormDataFields,
+        );
+      case 'account':
+        return storePopup.form.account.getFormField(
+          fieldName as keyof IAccountFormDataFields,
+        );
+      default:
+        return '';
     }
-    return storePopup.form.product.getFormField(
-      fieldName as keyof IProductFormDataFields,
-    );
   }
 
   return (

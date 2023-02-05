@@ -1,6 +1,6 @@
 import { configure } from 'mobx';
 
-import { StoreAccountActions } from './accounts/actions';
+import { StoreAccountAction } from './accounts/action';
 import { StoreAccount } from './accounts/state';
 import { StoreAccountStatus } from './accounts/status';
 import { StoreCategory } from './category/category';
@@ -16,6 +16,7 @@ import { StorePointFetch } from './point/fetch/fetch';
 import { StorePoint } from './point/point';
 import { StorePointStatus } from './point/status/status';
 import { StorePointUtils } from './point/utils/utils';
+import { StorePopupFormAccount } from './popup/form/account/account';
 import { StorePopupForm } from './popup/form/form';
 import { StorePopupFormMap } from './popup/form/map/map';
 import { StorePopupFormProduct } from './popup/form/product/product';
@@ -37,6 +38,9 @@ import { StoreProductMarkAsMoved } from './product/markAsMoved/markAsMoved';
 import { StoreProduct } from './product/product';
 import { StoreProductStatus } from './product/status/status';
 import { StoreProductUpdate } from './product/update/update';
+import { StoreRoleAction } from './roles/action';
+import { StoreRole } from './roles/role';
+import { StoreRoleStatus } from './roles/status/status';
 import { StoreStateCheckMark } from './state/checkMark';
 import { StoreStateInterface } from './state/interface';
 import { StoreStateUser } from './state/user';
@@ -81,7 +85,7 @@ interface IStoreProduct {
 interface IStoreAccount {
   state: StoreAccount;
   status: StoreAccountStatus;
-  actions: StoreAccountActions;
+  action: StoreAccountAction;
 }
 
 interface IStoreMap {
@@ -106,12 +110,19 @@ interface IStoreCategory {
   fetch: StoreCategoryFetch;
 }
 
+interface IStoreRole {
+  state: StoreRole;
+  status: StoreRoleStatus;
+  action: StoreRoleAction;
+}
+
 interface IStorePopup {
   status: StorePopupStatus;
   form: {
     product: StorePopupFormProduct;
     task: StorePopupFormTask;
     map: StorePopupFormMap;
+    account: StorePopupFormAccount;
     utils: {
       utils: StorePopupFormUtils;
       error: StorePopupFormUtilsError;
@@ -155,6 +166,8 @@ class RootStore {
 
   public storeCategory: IStoreCategory;
 
+  public storeRole: IStoreRole;
+
   public storePopup: IStorePopup;
 
   public storeTable: IStoreTable;
@@ -188,7 +201,7 @@ class RootStore {
     this.storeAccount = {
       state: new StoreAccount(this),
       status: new StoreAccountStatus(this),
-      actions: new StoreAccountActions(this),
+      action: new StoreAccountAction(this),
     };
 
     this.storeMap = {
@@ -213,11 +226,18 @@ class RootStore {
       fetch: new StoreCategoryFetch(this),
     };
 
+    this.storeRole = {
+      state: new StoreRole(this),
+      status: new StoreRoleStatus(this),
+      action: new StoreRoleAction(this),
+    };
+
     this.storePopup = {
       status: new StorePopupStatus(this),
       form: {
         product: new StorePopupFormProduct(this),
         task: new StorePopupFormTask(this),
+        account: new StorePopupFormAccount(this),
         map: new StorePopupFormMap(this),
         utils: {
           utils: new StorePopupFormUtils(this),

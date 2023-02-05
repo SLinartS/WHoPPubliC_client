@@ -27,4 +27,22 @@
     grid-template-columns: 1fr 1fr;
     column-gap: 4rem;
   }
+
+  &--name-info {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    column-gap: 4rem;
+  }
+
+  &--contact-info {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    column-gap: 4rem;
+  }
+
+  &--login-info {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    column-gap: 4rem;
+  }
 }

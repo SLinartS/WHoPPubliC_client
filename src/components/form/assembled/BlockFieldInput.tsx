@@ -1,3 +1,4 @@
+import { IAccountFormDataFields } from '@store/popup/form/account/type';
 import { IProductFormDataFields } from '@store/popup/form/product/type';
 import { ITaskFormDataFields } from '@store/popup/form/task/type';
 import { camelToKebab } from '@utils/stringStyleConvert/camelToKebab';
@@ -9,8 +10,11 @@ import FormField from '../field/Field';
 import FormFieldInput from '../field/input/Input';
 
 interface IAssembledBlockFieldInputProps {
-  typeForm: 'task' | 'product';
-  fieldName: keyof IProductFormDataFields | keyof ITaskFormDataFields;
+  typeForm: 'task' | 'product' | 'account';
+  fieldName:
+    | keyof IProductFormDataFields
+    | keyof ITaskFormDataFields
+    | keyof IAccountFormDataFields;
   titleText: string;
   readonlyInput: boolean;
   placeholder?: string;

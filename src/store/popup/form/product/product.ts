@@ -75,11 +75,6 @@ export class StorePopupFormProduct {
       case 'publishingHouse':
         validator.notEmpty().minLength(4).maxLength(30);
         break;
-
-      case 'categoryId':
-        validator.categorySelected();
-        break;
-
       default:
     }
     this._formData[field].value = value;

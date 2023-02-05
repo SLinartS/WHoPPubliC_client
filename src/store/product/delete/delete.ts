@@ -21,10 +21,11 @@ export class StoreProductDelete {
     } catch (error) {
       const typeError = error as AxiosError<IResponseProductDelete>;
       this.root.storeProduct.status.set('delete', 'error');
-      this.root.storePopup.windows.information.setting = {
-        text: typeError.response?.data.message,
-      };
-      this.root.storePopup.status.show('windowInformation');
+      this.root.storePopup.status.show('windowInformation', () => {
+        this.root.storePopup.windows.information.setting = {
+          text: typeError.response?.data.message,
+        };
+      });
     }
   }
 }

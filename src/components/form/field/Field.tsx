@@ -6,6 +6,7 @@ import {
   emptyFieldErrorText,
 } from '@helpers/formValidator/config';
 import { useRootStore } from '@helpers/RootStoreProvider/useRootStore';
+import { IAccountFormDataFields } from '@store/popup/form/account/type';
 import { IProductFormDataFields } from '@store/popup/form/product/type';
 import { ITaskFormDataFields } from '@store/popup/form/task/type';
 import { observer } from 'mobx-react-lite';
@@ -13,8 +14,11 @@ import { FC, ReactNode } from 'react';
 
 interface IFormFieldProps {
   children: ReactNode;
-  typeForm: 'task' | 'product' | 'custom';
-  fieldName?: keyof IProductFormDataFields | keyof ITaskFormDataFields;
+  typeForm: 'task' | 'product' | 'account' | 'custom';
+  fieldName?:
+    | keyof IProductFormDataFields
+    | keyof ITaskFormDataFields
+    | keyof IAccountFormDataFields;
   customErrors?: string[];
   classes?: string;
 }
@@ -39,6 +43,11 @@ const FormField: FC<IFormFieldProps> = ({
       case 'product':
         errors = storePopup.form.product.getFormErrors(
           fieldName as keyof IProductFormDataFields,
+        );
+        break;
+      case 'account':
+        errors = storePopup.form.account.getFormErrors(
+          fieldName as keyof IAccountFormDataFields,
         );
         break;
       case 'custom':

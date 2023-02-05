@@ -11,12 +11,12 @@ export class StoreProductAdd {
 
   public *products(actionIfDone?: () => void) {
     try {
-      const requestProductData: IRequestProduct = {
+      const requestData: IRequestProduct = {
         fields: this.root.storePopup.form.product.formData,
         pointId: this.root.storePopup.select.points.values[0],
         userId: '1',
       };
-      yield extendAxios.post<IProductResponse>('products', requestProductData);
+      yield extendAxios.post<IProductResponse>('products', requestData);
 
       this.root.storeProduct.status.set('add', 'done');
       this.root.storeTable.selectedItem.setItemId('products', 'products', 0);
