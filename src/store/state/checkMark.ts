@@ -12,37 +12,39 @@ export class StoreStateCheckMark {
     {
       label: 'rememberMe',
       value: true,
-      mark: 'interface',
+      type: 'interface',
     },
   ];
 
-  public checkMark(label: string) {
-    const mark = this.checkMarks.find((markItem) => markItem.label === label);
+  public checkMark(label: string, type: TMarkType) {
+    const mark = this.checkMarks.find(
+      (markItem) => markItem.label === label && markItem.type === type,
+    );
     if (mark) {
       return mark.value;
     }
     return false;
   }
 
-  public getCheckMarksByType(mark: TMarkType) {
+  public getCheckMarksByType(type: TMarkType) {
     const filteredMarks = this.checkMarks.filter(
-      (markItem) => markItem.mark === mark,
+      (markItem) => markItem.type === type,
     );
     return filteredMarks;
   }
 
-  public changeCheckedMark(label: string, isChecked: boolean, mark: TMarkType) {
+  public changeCheckedMark(label: string, isChecked: boolean, type: TMarkType) {
     if (
       this.checkMarks.find(
-        (markItem) => markItem.label === label && markItem.mark === mark,
+        (markItem) => markItem.label === label && markItem.type === type,
       )
     ) {
       this.checkMarks = this.checkMarks.map((markItem) => {
-        if (markItem.label === label && markItem.mark === mark) {
+        if (markItem.label === label && markItem.type === type) {
           return {
             label,
             value: isChecked,
-            mark,
+            type,
           };
         }
         return markItem;
@@ -51,7 +53,7 @@ export class StoreStateCheckMark {
       this.checkMarks.push({
         label,
         value: isChecked,
-        mark,
+        type,
       });
     }
   }

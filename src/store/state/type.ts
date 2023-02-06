@@ -1,7 +1,7 @@
 export interface ICheckMark {
   label: string;
   value: boolean;
-  mark: TMarkType;
+  type: TMarkType;
 }
 
 export type TMarkType = 'interface' | 'products' | 'tasks' | 'accounts';

@@ -4,6 +4,7 @@ import addIcon from '@assets/icons/add.svg';
 import deleteIcon from '@assets/icons/delete.svg';
 import editIcon from '@assets/icons/edit.svg';
 import ButtonIcon from '@components/buttonIcon/ButtonIcon';
+import Loader from '@components/loader/Loader';
 import SearchField from '@components/searchField/SearchField';
 import Table from '@components/table/Table';
 import { useRootStore } from '@helpers/RootStoreProvider/useRootStore';
@@ -46,7 +47,7 @@ const Accounts = () => {
         storeTable.utils.setDefaulMark(
           'accounts',
           storeAccount.state.accounts,
-          [],
+          ['password', 'roleId'],
         );
       });
     }
@@ -75,7 +76,7 @@ const Accounts = () => {
       </div>
 
       <div className='accounts__table'>
-        {storeAccount.status.get('fetch') === 'done' && (
+        {storeAccount.status.get('fetch') === 'done' ? (
           <Table
             data={storeAccount.state.accounts}
             valuesType='accounts'
@@ -83,6 +84,8 @@ const Accounts = () => {
             classes='table--accounts'
             displayedColumns={storeTable.utils.getColumnsWithMark('accounts')}
           />
+        ) : (
+          <Loader classes='loader--account-table' />
         )}
       </div>
     </main>

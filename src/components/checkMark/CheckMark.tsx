@@ -16,13 +16,7 @@ const CheckMark: FC<ICheckMarkProps> = ({ value, text, mark, classes }) => {
 
   const inputRef = useRef<HTMLInputElement>(null);
 
-  function changeCheckMarkHandler() {
-    storeState.checkMark.changeCheckedMark(
-      value,
-      inputRef.current!.checked,
-      mark,
-    );
-  }
+  function errorStub() {}
 
   function onClickCheckMarkHandler() {
     storeState.checkMark.changeCheckedMark(
@@ -35,24 +29,20 @@ const CheckMark: FC<ICheckMarkProps> = ({ value, text, mark, classes }) => {
   return (
     <div className={`check-mark ${classes}`}>
       <input
-        id={value}
+        id={value + mark}
         ref={inputRef}
         className='check-mark__checkbox'
         type='checkbox'
         value={value}
-        onChange={changeCheckMarkHandler}
-        checked={storeState.checkMark.checkMark(value)}
+        onChange={errorStub}
+        checked={storeState.checkMark.checkMark(value, mark)}
       />
       <label
-        htmlFor={value}
+        htmlFor={value + mark}
         className='check-mark__label'
-      />
-      <p
-        className='check-mark__title'
         onClick={onClickCheckMarkHandler}
-      >
-        {text}
-      </p>
+      />
+      <p className='check-mark__title'>{text}</p>
     </div>
   );
 };
