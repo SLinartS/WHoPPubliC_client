@@ -6,7 +6,7 @@
   grid-template-rows: fit-content(100%) 1fr;
   max-width: 51.2rem;
   height: 28.8rem;
-  border-radius: 1rem;
+  border-radius: 0.5rem;
 
   &__block {
     @extend %flex-center;

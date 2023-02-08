@@ -1,5 +1,21 @@
 @use '@styles/colors.scss' as color;
 
+textarea {
+  &::-webkit-scrollbar {
+    width: 15px;
+    height: 15px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: transparent;
+    border-radius: 1rem;
+  }
+
+  &::-webkit-scrollbar-corner {
+    background: transparent;
+  }
+}
+
 div,
 main,
 html,
@@ -19,6 +35,7 @@ body {
   }
 }
 
+textarea,
 main,
 div {
   &::-webkit-scrollbar-thumb {
@@ -35,5 +52,28 @@ body {
     background-color: color.$main-color;
     border: 0.2rem solid transparent;
     background-clip: content-box;
+  }
+}
+
+@media (max-width: 1000px) {
+  div,
+  main,
+  html,
+  body {
+    &::-webkit-scrollbar {
+      width: 15px;
+      height: 15px;
+    }
+
+    &::-webkit-scrollbar-track {
+      border-radius: 0.5rem;
+    }
+  }
+
+  main,
+  div {
+    &::-webkit-scrollbar-thumb {
+      border-radius: 0.6rem;
+    }
   }
 }

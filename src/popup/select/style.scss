@@ -3,14 +3,14 @@
   grid-template-rows: fit-content(100%) 1fr;
   max-width: 102.4rem;
   height: 76.8rem;
-  border-radius: 1rem;
+  border-radius: 0.5rem;
 
   &__free-space-indicator {
     margin: 2rem 35% 0;
     width: 30%;
     height: 3rem;
     background: #d35f48;
-    border-radius: 1rem;
+    border-radius: 0.5rem;
   }
 
   &__table {

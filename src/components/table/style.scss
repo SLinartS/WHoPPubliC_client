@@ -3,25 +3,18 @@
 
 .table {
   display: grid;
-  height: fit-content;
-  max-width: 160rem;
   grid-template-columns: repeat(6, auto);
-  grid-auto-rows: min-content;
-  column-gap: 0.1rem;
   row-gap: 0.5rem;
   font-size: 1.6rem;
-  position: relative;
 
   &__column {
-    margin: 0;
     text-align: center;
-    padding: 0 1rem;
+    padding: 0.4rem 1rem;
 
     &-shell {
       @extend %flex-center;
 
       width: 100%;
-      min-width: 2rem;
       min-height: 3rem;
       border: 0.1rem solid color.$font-color--black;
       background-color: color.$font-color--white;
@@ -29,10 +22,6 @@
       &--header {
         font-weight: 700;
         height: 5rem;
-
-        .table__column {
-          word-break: break-all;
-        }
       }
 
       &--selected {
@@ -40,11 +29,11 @@
       }
 
       &--first {
-        border-radius: 1rem 0 0 1rem;
+        border-radius: 0.5rem 0 0 0.5rem;
       }
 
       &--last {
-        border-radius: 0 1rem 1rem 0;
+        border-radius: 0 0.5rem 0.5rem 0;
       }
     }
   }
@@ -58,6 +47,10 @@
   &--map {
     margin: 2rem;
   }
+
+  &--products {
+    transform: rotateX(180deg);
+  }
 }
 
 @media (max-width: 900px) {
@@ -68,9 +61,6 @@
       padding: 0 0.5rem;
 
       &-shell {
-        overflow-wrap: break-word;
-        word-break: break-all;
-
         &--header {
           height: 3rem;
         }
@@ -88,8 +78,6 @@
 
       &-shell {
         min-height: 2.4rem;
-        overflow-wrap: break-word;
-        word-break: break-all;
       }
     }
   }

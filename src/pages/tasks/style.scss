@@ -6,27 +6,27 @@
 
   align-items: flex-start;
   grid-template-columns: 1fr;
-  grid-template-rows: 8rem 7rem 1fr;
+  grid-template-rows: 7rem 7rem 1fr;
 
   &__table {
     height: calc(100% - 5rem);
     width: 70%;
-    border-radius: 1rem;
+    border-radius: 0.5rem;
   }
 
   &__switcher {
     @extend %standart-transition;
 
-    height: 6rem;
-    width: 22rem;
+    height: 5rem;
+    width: 20rem;
     background: color.$second-color;
     border: none;
-    border-radius: 1rem;
-    font-size: 2.4rem;
+    border-radius: 0.5rem;
+    font-size: 2rem;
     color: color.$font-color--white;
 
     &--acceptance {
-      border-radius: 1rem 0 0 1rem;
+      border-radius: 0.5rem 0 0 0.5rem;
     }
 
     &--intra {
@@ -34,7 +34,7 @@
     }
 
     &--shipment {
-      border-radius: 0 1rem 1rem 0;
+      border-radius: 0 0.5rem 0.5rem 0;
     }
 
     &:hover {
@@ -55,7 +55,7 @@
 
     width: calc(100% - 4rem);
     column-gap: 2rem;
-    margin-top: 2rem;
+    margin-top: 1.4rem;
   }
 
   &__empty-text {

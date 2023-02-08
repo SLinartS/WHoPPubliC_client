@@ -1,20 +1,44 @@
 @use '@styles/colors.scss' as color;
+@use '@styles/variables.scss' as variable;
 
 .popup-filter {
   width: 100%;
+  height: calc(100vh - variable.$header-height--standart);
   background-color: color.$bg-color-grey;
-  border-radius: 1rem;
+  border-radius: 0.5rem;
   position: absolute;
+  overflow-y: scroll;
   left: 0;
 
   &__button {
     width: calc(100% - 2rem);
     height: 4rem;
     border: none;
-    border-radius: 1rem;
-    margin: 1rem 1rem 3rem;
+    border-radius: 0.5rem;
+    margin: 1rem;
     font-size: 2rem;
     color: color.$font-color--white;
     background-color: color.$third-color;
+    cursor: pointer;
+
+    &:hover {
+      background: color.$third-color--hover;
+    }
+
+    &:active {
+      background: color.$third-color--active;
+    }
+  }
+}
+
+@media (max-width: 100px) {
+  .popup-filter {
+    height: calc(100vh - variable.$header-height--mid);
+  }
+}
+
+@media (max-width: 850px) {
+  .popup-filter {
+    height: calc(100vh - variable.$header-height--low);
   }
 }

@@ -8,14 +8,14 @@ html .map-block {
   justify-items: flex-start;
   align-items: flex-start;
   grid-template-columns: repeat(2, auto);
-  border-radius: 1rem;
+  border-radius: 0.5rem;
 
   &__buttons {
     display: flex;
     gap: 1rem;
     margin: 1rem;
     padding: 0.4rem;
-    border-radius: 1rem;
+    border-radius: 0.5rem;
     background: color.$third-color;
 
     &--floor {

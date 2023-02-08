@@ -28,11 +28,11 @@
 
     &-name {
       font-weight: 700;
-      font-size: 2.4rem;
+      font-size: 2rem;
     }
 
     &-role {
-      font-size: 2rem;
+      font-size: 1.6rem;
       margin-top: 1rem;
     }
   }
@@ -64,8 +64,8 @@
     }
 
     &-icon {
-      height: 3.2rem;
-      width: 3.2rem;
+      height: 3rem;
+      width: 3rem;
       margin-right: 1rem;
     }
 
@@ -75,7 +75,7 @@
       height: 100%;
       width: calc(100% + 3.2rem);
       color: color.$font-color--white;
-      font-size: 2.4rem;
+      font-size: 2rem;
       user-select: none;
     }
   }
@@ -159,12 +159,28 @@
   .header {
     height: variable.$header-height--low;
 
+    &__icon {
+      width: 4rem;
+    }
+
     &__nav {
       display: none;
     }
 
     &__bar {
       display: flex;
+      width: 2.5rem;
+      height: 2.5rem;
+    }
+
+    &__user {
+      &-name {
+        font-size: 1.4rem;
+      }
+
+      &-role {
+        margin-top: 0;
+      }
     }
   }
 }

@@ -16,7 +16,6 @@ const PopupFilter: FC = () => {
 
   return storeProduct.status.get('fetch') === 'done' ? (
     <div className='popup-filter'>
-      {getSelectsHook()}
       <button
         className='popup-filter__button'
         type='button'
@@ -24,6 +23,7 @@ const PopupFilter: FC = () => {
       >
         Показать
       </button>
+      {getSelectsHook()}
     </div>
   ) : (
     <Loader />

@@ -6,12 +6,12 @@
 
   align-items: flex-start;
   grid-template-columns: 1fr 1fr;
-  grid-template-rows: 10rem 5rem auto;
+  grid-template-rows: 7rem 5rem auto;
 
   &__search {
     width: calc(100% - 4rem);
     grid-column: 1/3;
-    margin: 2rem 0;
+    margin: 1rem 0;
   }
 
   &__title {
