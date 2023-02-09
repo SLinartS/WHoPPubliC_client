@@ -3,7 +3,7 @@ import extendAxios from '@utils/extendAxios';
 import { AxiosResponse } from 'axios';
 import { makeAutoObservable } from 'mobx';
 
-import { ICheckArticleResponse } from './type';
+import { ICheckArticleResponse, ICheckZoneLetterResponse } from './type';
 
 export class StoreUtils {
   constructor(private readonly root: RootStore) {
@@ -16,6 +16,12 @@ export class StoreUtils {
     return this._article;
   }
 
+  private _zoneLetter: string = '';
+
+  public get zoneLetter() {
+    return this._zoneLetter;
+  }
+
   public *generateArticle(type: 'task' | 'product', actionIsDone: () => void) {
     try {
       const response: AxiosResponse<ICheckArticleResponse> =
@@ -24,6 +30,17 @@ export class StoreUtils {
       actionIsDone();
     } catch (error) {
       this._article = '< error generating the article >';
+    }
+  }
+
+  public *generateZoneLetter(actionIsDone: () => void) {
+    try {
+      const response: AxiosResponse<ICheckZoneLetterResponse> =
+        yield extendAxios.get<AxiosResponse>(`generate/zoneletter`);
+      this._zoneLetter = response.data.letter;
+      actionIsDone();
+    } catch (error) {
+      this._zoneLetter = '< error generating the zoneletter >';
     }
   }
 }
