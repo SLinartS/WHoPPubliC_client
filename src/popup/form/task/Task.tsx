@@ -15,6 +15,8 @@ import { useRootStore } from '@helpers/RootStoreProvider/useRootStore';
 import { useFetchOneTaskAndFillForm } from '@hooks/task/useFetchOneTaskAndFillForm';
 import { observer } from 'mobx-react-lite';
 import { FC, useEffect, useMemo } from 'react';
+import { useIsTaskErrors } from 'src/popup/hooks/errors/task/useIsTaskError';
+import { useResetForm } from 'src/popup/hooks/resetForm/useResetForm';
 
 const PopupFormTask: FC = () => {
   const {
@@ -25,11 +27,13 @@ const PopupFormTask: FC = () => {
     storeTable,
     storeUtils,
   } = useRootStore();
-  const fetchOneTaskAndFillFormHook = useFetchOneTaskAndFillForm();
+  const fetchOneTaskAndFillForm = useFetchOneTaskAndFillForm();
+  const isTaskErrors = useIsTaskErrors();
+  const resetForm = useResetForm();
 
   function generateArticle() {
     storeUtils.generateArticle('task', () => {
-      storePopup.form.product.setFormField('article', storeUtils.article);
+      storePopup.form.task.setFormField('article', storeUtils.article);
     });
   }
 
@@ -60,7 +64,7 @@ const PopupFormTask: FC = () => {
       generateArticle();
     }
     if (formActionType === 'change') {
-      fetchOneTaskAndFillFormHook(
+      fetchOneTaskAndFillForm(
         storeState.interface.currentTypeOfTask,
         'formTask',
         'Выберите строку, чтобы изменить задачу',
@@ -70,7 +74,7 @@ const PopupFormTask: FC = () => {
 
   function closeHandler() {
     storePopup.status.hide('formTask');
-    storePopup.form.utils.utils.resetForm();
+    resetForm();
   }
 
   function saveHandler() {
@@ -82,7 +86,7 @@ const PopupFormTask: FC = () => {
 
     const checkFloor = typeOfTaskForm === 1;
 
-    if (!storePopup.form.utils.error.isTaskErrors(checkFloor)) {
+    if (!isTaskErrors(checkFloor)) {
       // !
       switch (formActionType) {
         case 'create':

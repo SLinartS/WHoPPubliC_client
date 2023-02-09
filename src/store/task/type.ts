@@ -35,7 +35,7 @@ export interface IRequestTaskData {
     timeEnd: TValueOrErrorType;
   };
   userId: number;
-  typeId: number;
+  type: TTaskType;
   productIds: number[];
   floorIds: number[];
   pointIds: number[];

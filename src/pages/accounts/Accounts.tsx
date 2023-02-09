@@ -16,8 +16,8 @@ import { useDeleteController } from '../hooks/delete/useDeleteController';
 
 const Accounts = () => {
   const { storeAccount, storeTable, storePopup } = useRootStore();
-  const fetchOneAccountAndFillFormHook = useFetchOneAccountAndFillForm();
-  const deleteControllerHook = useDeleteController();
+  const fetchOneAccountAndFillForm = useFetchOneAccountAndFillForm();
+  const deleteController = useDeleteController();
 
   function addHandler() {
     storePopup.form.state.formActionType = 'create';
@@ -27,14 +27,14 @@ const Accounts = () => {
   function changeHandler() {
     storePopup.form.state.formActionType = 'change';
     storePopup.form.account.setFormError('password', []);
-    fetchOneAccountAndFillFormHook(
+    fetchOneAccountAndFillForm(
       'formAccount',
       'Выберите строку, чтобы изменить данные аккаунта пользователя',
     );
   }
 
   function deleteHandler() {
-    deleteControllerHook(
+    deleteController(
       'accounts',
       'accounts',
       'Выберите строку, чтобы удалить аккаунт пользователя',

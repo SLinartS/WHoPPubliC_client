@@ -5,6 +5,7 @@
   @extend %flex-center;
 
   justify-content: space-between;
+  overflow-x: hidden;
 
   &__left-image {
     width: 40%;

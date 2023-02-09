@@ -24,15 +24,15 @@ const MapBlock: FC<IMapBlockProps> = ({
   sectionId,
   isEdit = false,
 }) => {
-  const addFloorHook = useAddFloor();
-  const removeFloorHook = useRemoveFloor();
+  const addFloor = useAddFloor();
+  const removeFloor = useRemoveFloor();
 
   function addHandler() {
-    addFloorHook(sectionId);
+    addFloor(sectionId);
   }
 
   function removeHandler() {
-    removeFloorHook(sectionId);
+    removeFloor(sectionId);
   }
 
   return (

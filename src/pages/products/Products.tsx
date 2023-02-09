@@ -19,9 +19,9 @@ import PopupFilter from './popupFilter/PopupFilter';
 
 const Products: FC = () => {
   const { storeProduct, storePopup, storeTable, storeState } = useRootStore();
-  const deleteControllerHook = useDeleteController();
-  const fetchOneProductAndFillFormHook = useFetchOneProductAndFillForm();
-  const getSelectsHook = useGetSelects();
+  const deleteController = useDeleteController();
+  const fetchOneProductAndFillForm = useFetchOneProductAndFillForm();
+  const getSelects = useGetSelects();
 
   function addHandler() {
     storePopup.form.state.formActionType = 'create';
@@ -35,14 +35,14 @@ const Products: FC = () => {
 
   function changeHandler(): void {
     storePopup.form.state.formActionType = 'change';
-    fetchOneProductAndFillFormHook(
+    fetchOneProductAndFillForm(
       'formProduct',
       'Выберите строку, чтобы изменить партию продуктов',
     );
   }
 
   function deleteHandler() {
-    deleteControllerHook(
+    deleteController(
       'products',
       'products',
       'Выберите строку, чтобы удалить партию продуктов',
@@ -112,7 +112,7 @@ const Products: FC = () => {
       </div>
 
       {storeProduct.status.get('fetch') === 'done' ? (
-        <div className='products__select'>{getSelectsHook()}</div>
+        <div className='products__select'>{getSelects()}</div>
       ) : (
         <Loader classes='loader--product-select' />
       )}

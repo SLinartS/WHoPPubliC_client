@@ -23,15 +23,15 @@ const MapSection: FC<IMapSectionProps> = ({
   index,
   isEdit = false,
 }) => {
-  const addBlockHook = useAddBlock();
-  const removeBlockHook = useRemoveBlock();
+  const addBlock = useAddBlock();
+  const removeBlock = useRemoveBlock();
 
   function addHandler() {
-    addBlockHook(id);
+    addBlock(id);
   }
 
   function removeHandler() {
-    removeBlockHook(id);
+    removeBlock(id);
   }
 
   return (

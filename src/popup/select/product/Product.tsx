@@ -8,9 +8,13 @@ import WindowHeaderForm from '@components/windowHeader/form/Form';
 import { useRootStore } from '@helpers/RootStoreProvider/useRootStore';
 import { observer } from 'mobx-react-lite';
 import { FC, useEffect } from 'react';
+import { useGetActualProductWithLinkToFloor } from 'src/popup/hooks/productList/useGetActualProductWithLinkToFloor';
+import { useGetProductWithoutLinkToFloor } from 'src/popup/hooks/productList/useGetProductWithoutLinkToFloor';
 
 const PopupSelectProduct: FC = () => {
   const { storeProduct, storePopup, storeTable, storeState } = useRootStore();
+  const getProductWithoutLinkToFloor = useGetProductWithoutLinkToFloor();
+  const getActualProductWithLinkToFloor = useGetActualProductWithLinkToFloor();
 
   function saveHandler() {
     if (storeTable.selectedItem.getItemId('products', 'products') === 0) {
@@ -33,9 +37,9 @@ const PopupSelectProduct: FC = () => {
     let data: ITableObject[] = [];
     const { currentTypeOfTask } = storeState.interface;
     if (currentTypeOfTask === 'acceptance') {
-      data = storePopup.form.utils.utils.getProductWithoutLinkToFloor();
+      data = getProductWithoutLinkToFloor();
     } else {
-      data = storePopup.form.utils.utils.getActualProductWithLinkToFloor();
+      data = getActualProductWithLinkToFloor();
     }
     return (
       <Table

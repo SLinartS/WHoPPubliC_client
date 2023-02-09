@@ -17,12 +17,9 @@ import { StorePopupForm } from './popup/form/form';
 import { StorePopupFormMap } from './popup/form/map/map';
 import { StorePopupFormProduct } from './popup/form/product/product';
 import { StorePopupFormTask } from './popup/form/task/task';
-import { StorePopupFormUtilsError } from './popup/form/utils/error/error';
-import { StorePopupFormUtils } from './popup/form/utils/utils';
 import { StorePopupSelectFloors } from './popup/select/floors/floors';
 import { StorePopupSelectPoints } from './popup/select/points/points';
 import { StorePopupSelectProducts } from './popup/select/products/products';
-import { StorePopupSelectUtilsFloorSpace } from './popup/select/utils/floorSpace/floorSpace';
 import { StorePopupSelectUtils } from './popup/select/utils/utils';
 import { StorePopupStatus } from './popup/status/status';
 import { StorePopupWindowConfirm } from './popup/window/confirm/confirm';
@@ -104,10 +101,6 @@ interface IStorePopup {
     task: StorePopupFormTask;
     map: StorePopupFormMap;
     account: StorePopupFormAccount;
-    utils: {
-      utils: StorePopupFormUtils;
-      error: StorePopupFormUtilsError;
-    };
     state: StorePopupForm;
   };
   select: {
@@ -116,7 +109,6 @@ interface IStorePopup {
     products: StorePopupSelectProducts;
     utils: {
       utils: StorePopupSelectUtils;
-      floorSpace: StorePopupSelectUtilsFloorSpace;
     };
   };
   windows: {
@@ -213,10 +205,6 @@ class RootStore {
         task: new StorePopupFormTask(this),
         account: new StorePopupFormAccount(this),
         map: new StorePopupFormMap(this),
-        utils: {
-          utils: new StorePopupFormUtils(this),
-          error: new StorePopupFormUtilsError(this),
-        },
         state: new StorePopupForm(this),
       },
       select: {
@@ -225,7 +213,6 @@ class RootStore {
         products: new StorePopupSelectProducts(this),
         utils: {
           utils: new StorePopupSelectUtils(this),
-          floorSpace: new StorePopupSelectUtilsFloorSpace(this),
         },
       },
       windows: {

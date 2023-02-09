@@ -6,12 +6,14 @@ import Map from '@components/map/Map';
 import WindowHeaderForm from '@components/windowHeader/form/Form';
 import { useRootStore } from '@helpers/RootStoreProvider/useRootStore';
 import { observer } from 'mobx-react-lite';
-import { FC, useEffect, useMemo, useState } from 'react';
+import { FC, useEffect, useState } from 'react';
+import { useIsEnoughFreeSpace } from 'src/popup/hooks/floorSpace/useIsEnoughFreeSpace';
 
 const PopupSelectMap: FC = () => {
   const [background, setBackground] = useState<string>('background: ');
 
   const { storePopup, storeMap } = useRootStore();
+  const isEnoughFreeSpace = useIsEnoughFreeSpace();
 
   function saveHandler() {
     storePopup.status.hide('selectMap');
@@ -26,10 +28,6 @@ const PopupSelectMap: FC = () => {
   useEffect(() => {
     storePopup.form.state.isSelectedMap = true;
   }, []);
-
-  const isEnoughFreeSpace = useMemo(() => {
-    return storePopup.select.utils.floorSpace.isEnoughFreeSpace();
-  }, [storePopup.select.floors.values.length, storeMap.state.map]);
 
   useEffect(() => {
     let backgroundColor: string = '#d35f48';

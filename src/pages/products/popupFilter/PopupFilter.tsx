@@ -8,7 +8,7 @@ import { FC } from 'react';
 
 const PopupFilter: FC = () => {
   const { storeProduct, storeState } = useRootStore();
-  const getSelectsHook = useGetSelects();
+  const getSelects = useGetSelects();
 
   function hidePopupFilterHandler() {
     storeState.interface.hidePopupFilter();
@@ -23,7 +23,7 @@ const PopupFilter: FC = () => {
       >
         Показать
       </button>
-      {getSelectsHook()}
+      {getSelects()}
     </div>
   ) : (
     <Loader />

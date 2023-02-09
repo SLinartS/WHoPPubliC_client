@@ -28,20 +28,20 @@ const MapZone: FC<IMapZoneProps> = ({
   isEdit = false,
 }) => {
   const { storePopup } = useRootStore();
-  const addSectionHook = useAddSection();
-  const removeSectionHook = useRemoveSection();
-  const removeZoneHook = useRemoveZone();
+  const addSection = useAddSection();
+  const removeSection = useRemoveSection();
+  const removeZone = useRemoveZone();
 
   function addHandler() {
-    addSectionHook();
+    addSection();
   }
 
   function removeHandler() {
-    removeSectionHook();
+    removeSection();
   }
 
   function removeZoneHandler() {
-    removeZoneHook(id);
+    removeZone(id);
   }
 
   function openZoneChangeHandler() {

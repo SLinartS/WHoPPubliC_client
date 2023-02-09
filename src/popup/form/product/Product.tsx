@@ -16,11 +16,15 @@ import { useFetchOneProductAndFillForm } from '@hooks/product/useFetchOneProduct
 import { IOption } from '@store/category/type';
 import { observer } from 'mobx-react-lite';
 import { FC, useEffect, useMemo } from 'react';
+import { useIsProductErrors } from 'src/popup/hooks/errors/product/useIsProductErrors';
+import { useResetForm } from 'src/popup/hooks/resetForm/useResetForm';
 
 const PopupFormProduct: FC = () => {
   const { storePopup, storeProduct, storeCategory, storeUtils } =
     useRootStore();
-  const fetchOneProductAndFillFormHook = useFetchOneProductAndFillForm();
+  const fetchOneProductAndFillForm = useFetchOneProductAndFillForm();
+  const resetForm = useResetForm();
+  const isProductErrors = useIsProductErrors();
 
   function generateArticle() {
     storeUtils.generateArticle('product', () => {
@@ -53,7 +57,7 @@ const PopupFormProduct: FC = () => {
       generateArticle();
     }
     if (formActionType === 'change') {
-      fetchOneProductAndFillFormHook(
+      fetchOneProductAndFillForm(
         'formProduct',
         'Выберите строку, чтобы изменить задачу',
       );
@@ -62,7 +66,7 @@ const PopupFormProduct: FC = () => {
 
   function closeHandler() {
     storePopup.status.hide('formProduct');
-    storePopup.form.utils.utils.resetForm();
+    resetForm();
   }
 
   function saveHandler() {
@@ -71,7 +75,7 @@ const PopupFormProduct: FC = () => {
     if (formActionType === 'create') {
       storePopup.form.product.setFormField('id', '0');
     }
-    if (!storePopup.form.utils.error.isProductErrors()) {
+    if (!isProductErrors()) {
       switch (formActionType) {
         case 'create':
           storeProduct.action.create(() => {

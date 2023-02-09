@@ -10,7 +10,7 @@ import { useIsAccountError } from 'src/popup/hooks/errorCheck/useIsAccountErrors
 
 const PopupFormAccount: FC = () => {
   const { storePopup, storeRole, storeAccount } = useRootStore();
-  const isAccountErrorHook = useIsAccountError();
+  const isAccountError = useIsAccountError();
 
   function closeHandler() {
     storePopup.status.hide('formAccount');
@@ -25,7 +25,7 @@ const PopupFormAccount: FC = () => {
       storePopup.form.account.setFormField('id', '0');
     }
 
-    if (!isAccountErrorHook()) {
+    if (!isAccountError()) {
       switch (formActionType) {
         case 'create':
           storeAccount.action.store(() => {

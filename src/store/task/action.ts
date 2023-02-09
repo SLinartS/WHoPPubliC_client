@@ -14,7 +14,7 @@ export class StoreTaskAction {
   public *fetch(taskType: TTaskType, actionIfDone?: () => void) {
     try {
       const response: AxiosResponse<ITask[]> =
-        yield extendAxios.get<AxiosResponse>(`tasks/${taskType}`);
+        yield extendAxios.get<AxiosResponse>(`tasks?type=${taskType}`);
       this.root.storeTask.state.setTasks(taskType, response.data);
 
       if (actionIfDone) {
@@ -45,11 +45,12 @@ export class StoreTaskAction {
 
   public *create(actionIfDone?: () => void) {
     const { storePopup } = this.root;
-    const taskTypeId = storePopup.form.utils.utils.getTaskTypeId();
+
+    const taskType = this.root.storeState.interface.currentTypeOfTask;
     const requestTaskData: IRequestTaskData = {
       fields: storePopup.form.task.formData,
       userId: 1,
-      typeId: taskTypeId,
+      type: taskType,
       productIds: storePopup.select.products.values,
       floorIds: storePopup.select.floors.values,
       pointIds: storePopup.select.points.values,
@@ -68,11 +69,11 @@ export class StoreTaskAction {
 
   public *update(actionIfDone?: () => void) {
     const { storePopup } = this.root;
-    const taskTypeId = storePopup.form.utils.utils.getTaskTypeId();
+    const taskType = this.root.storeState.interface.currentTypeOfTask;
     const requestData: IRequestTaskData = {
       fields: storePopup.form.task.formData,
       userId: 1,
-      typeId: taskTypeId,
+      type: taskType,
       productIds: storePopup.select.products.values,
       floorIds: storePopup.select.floors.values,
       pointIds: storePopup.select.points.values,

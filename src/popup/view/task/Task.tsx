@@ -14,12 +14,14 @@ import { useFetchOneProductAndFillForm } from '@hooks/product/useFetchOneProduct
 import { useCheckIsSelect } from '@hooks/useCheckIsSelect';
 import { observer } from 'mobx-react-lite';
 import { FC, useEffect, useMemo } from 'react';
+import { useResetForm } from 'src/popup/hooks/resetForm/useResetForm';
 
 const PopupViewTask: FC = () => {
   const { storePopup, storeProduct, storeState, storeTable, storeTask } =
     useRootStore();
-  const checkIsSelectHook = useCheckIsSelect();
-  const fetchOneProductAndFillFormHook = useFetchOneProductAndFillForm();
+  const checkIsSelect = useCheckIsSelect();
+  const fetchOneProductAndFillForm = useFetchOneProductAndFillForm();
+  const resetForm = useResetForm();
 
   const windowTitle = useMemo(() => {
     switch (storeState.interface.currentTypeOfTask) {
@@ -36,17 +38,17 @@ const PopupViewTask: FC = () => {
 
   function closeHandler() {
     storePopup.status.hide('viewTask');
-    storePopup.form.utils.utils.resetForm();
+    resetForm();
   }
 
   function viewLocationOpenHander() {
-    const checkResult = checkIsSelectHook(
+    const checkResult = checkIsSelect(
       'products',
       'products',
       'Выберите партию продуктов, чтобы увидеть информацию об их местоположении',
     );
     if (checkResult.result) {
-      fetchOneProductAndFillFormHook(
+      fetchOneProductAndFillForm(
         'viewLocation',
         'Выберите партию продуктов, чтобы увидеть информацию об их местоположении',
         true,
@@ -55,7 +57,7 @@ const PopupViewTask: FC = () => {
   }
 
   function markProductAsMoved() {
-    const checkResult = checkIsSelectHook(
+    const checkResult = checkIsSelect(
       'products',
       'products',
       'Выберите партию продуктов, чтобы отметить её перемещённой',

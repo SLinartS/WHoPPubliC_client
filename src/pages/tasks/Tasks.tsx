@@ -19,11 +19,11 @@ import { TASK_TYPES_FOR_SWITCHER } from './taskForSwitcher';
 
 const Tasks: FC = () => {
   const { storeTask, storePopup, storeTable, storeState } = useRootStore();
-  const deleteControllerHook = useDeleteController();
-  const fetchOneTaskAndFillFormHook = useFetchOneTaskAndFillForm();
+  const deleteController = useDeleteController();
+  const fetchOneTaskAndFillForm = useFetchOneTaskAndFillForm();
 
   function showViewTaskWindowHandler() {
-    fetchOneTaskAndFillFormHook(
+    fetchOneTaskAndFillForm(
       storeState.interface.currentTypeOfTask,
       'viewTask',
       'Выберите строку, чтобы просмотреть информацию о задаче',
@@ -38,7 +38,7 @@ const Tasks: FC = () => {
 
   function changeHandler(): void {
     storePopup.form.state.formActionType = 'change';
-    fetchOneTaskAndFillFormHook(
+    fetchOneTaskAndFillForm(
       storeState.interface.currentTypeOfTask,
       'formTask',
       'Выберите строку, чтобы изменить задачу',
@@ -46,7 +46,7 @@ const Tasks: FC = () => {
   }
 
   function deleteHandler() {
-    deleteControllerHook(
+    deleteController(
       'tasks',
       storeState.interface.currentTypeOfTask,
       'Выберите строку, чтобы удалить задачу',

@@ -17,7 +17,7 @@ interface IMapProps {
 
 const Map: FC<IMapProps> = ({ classes, isEditZoneButton = false }) => {
   const { storeMap, storePopup } = useRootStore();
-  const addZoneHook = useAddZone();
+  const addZone = useAddZone();
 
   function resetMapHandler() {
     storeMap.status.set('fetch', 'pending');
@@ -40,7 +40,7 @@ const Map: FC<IMapProps> = ({ classes, isEditZoneButton = false }) => {
         <div className='map-block__buttons map-block__buttons--map'>
           <ButtonIcon
             src={addIcon}
-            clickHandler={addZoneHook}
+            clickHandler={addZone}
             classes='map-block__button'
           />
         </div>
