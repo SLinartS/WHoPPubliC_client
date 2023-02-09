@@ -36,7 +36,7 @@ export class StoreProductAction {
   public *show(productId: number, actionIfDone?: () => void) {
     try {
       const response: AxiosResponse<IOneProduct> =
-        yield extendAxios.get<IOneProduct>(`productinfo/${productId}`);
+        yield extendAxios.get<IOneProduct>(`products/${productId}`);
 
       this.root.storeProduct.state.product = response.data;
 
@@ -116,7 +116,7 @@ export class StoreProductAction {
     };
 
     try {
-      yield extendAxios.patch('product/markAsMoved', requestData);
+      yield extendAxios.patch('products/markAsMoved', requestData);
 
       this.root.storeProduct.status.set('markAsMoved', 'done');
     } catch (error) {

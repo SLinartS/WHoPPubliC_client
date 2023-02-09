@@ -30,7 +30,7 @@ export class StoreTaskAction {
   public *show(taskId: number, actionIfDone?: () => void) {
     try {
       const response: AxiosResponse<IOneTask> =
-        yield extendAxios.get<AxiosResponse>(`taskinfo/${taskId}`);
+        yield extendAxios.get<AxiosResponse>(`tasks/${taskId}`);
       this.root.storeTask.state.task = response.data;
 
       if (actionIfDone) {
