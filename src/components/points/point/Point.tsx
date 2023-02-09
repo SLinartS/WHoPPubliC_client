@@ -1,7 +1,10 @@
 import { useRootStore } from '@helpers/RootStoreProvider/useRootStore';
 import { TPointType } from '@store/type';
 import { observer } from 'mobx-react-lite';
-import { FC, useMemo } from 'react';
+import { FC } from 'react';
+
+import { useGetPointClasses } from '../hooks/useGetPointClasses';
+import { useGetPointStyles } from '../hooks/useGetPointStyles';
 
 interface IPointProps {
   id: number;
@@ -11,7 +14,9 @@ interface IPointProps {
 }
 
 const Point: FC<IPointProps> = ({ id, text, index, pointsType }) => {
-  const { storePopup, storeProduct } = useRootStore();
+  const { storePopup } = useRootStore();
+  const styles = useGetPointStyles(id);
+  const classes = useGetPointClasses(id, pointsType);
 
   function choosePointBlock() {
     if (storePopup.form.state.isSelectedPoint) {
@@ -32,33 +37,6 @@ const Point: FC<IPointProps> = ({ id, text, index, pointsType }) => {
       }
     }
   }
-  const checkIsAdded = useMemo(() => {
-    return storePopup.select.points.checkIsAdded(id);
-  }, [storePopup.select.points.values.length]);
-
-  const styles = useMemo(() => {
-    const newStyle = {
-      background: '#eaeaea',
-    };
-    if (checkIsAdded) {
-      newStyle.background = `#c15943`;
-    } else {
-      newStyle.background = `#eaeaea`;
-    }
-    return newStyle;
-  }, [checkIsAdded]);
-
-  const classes = useMemo(() => {
-    let newClasses = '';
-    if (storeProduct.state.product.serviceInformation.pointIds.includes(id)) {
-      if (pointsType === 'acceptance') {
-        newClasses += 'points-map__point--animation-current';
-      } else {
-        newClasses += 'points-map__point--animation-future';
-      }
-    }
-    return newClasses;
-  }, [storeProduct.state.product.serviceInformation.pointIds]);
 
   return (
     <div

@@ -12,7 +12,7 @@ interface INavProps {
   isPopup?: boolean;
 }
 
-const Nav: FC<INavProps> = ({ isPopup = false }) => {
+const HeaderNav: FC<INavProps> = ({ isPopup = false }) => {
   const { storeState } = useRootStore();
 
   function getLinksByUserRole(): IHeaderLinks[] {
@@ -47,4 +47,4 @@ const Nav: FC<INavProps> = ({ isPopup = false }) => {
   );
 };
 
-export default observer(Nav);
+export default observer(HeaderNav);

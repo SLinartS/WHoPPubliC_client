@@ -11,6 +11,7 @@ export interface IUser {
   login: string;
   name: string;
   role: TUserRole;
+  roleAlias: string;
 }
 
 export type TUserRole = 'worker' | 'operator' | 'admin';

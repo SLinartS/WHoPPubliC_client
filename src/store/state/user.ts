@@ -13,6 +13,7 @@ export class StoreStateUser {
     login: '',
     name: 'Евгений Иванович Петров',
     role: 'admin',
+    roleAlias: 'Администратор',
   };
 
   private _isAuth: boolean = false;

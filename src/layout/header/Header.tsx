@@ -2,13 +2,12 @@ import './style.scss';
 
 import appIcon from '@assets/icons/app.png';
 import barsIcon from '@assets/icons/bars.svg';
-import { roleAlias } from '@helpers/roleAlias/roleAlias';
 import { useRootStore } from '@helpers/RootStoreProvider/useRootStore';
 import { observer } from 'mobx-react-lite';
 import { FC, MouseEvent } from 'react';
 import { Link } from 'react-router-dom';
 
-import Nav from './nav/Nav';
+import HeaderNav from './nav/Nav';
 
 const Header: FC = () => {
   const { storeState } = useRootStore();
@@ -39,11 +38,11 @@ const Header: FC = () => {
           <div className='header__user'>
             <p className='header__user-name'>{storeState.user.userData.name}</p>
             <p className='header__user-role'>
-              {roleAlias(storeState.user.userData.role)}
+              {storeState.user.userData.roleAlias}
             </p>
           </div>
         </div>
-        <Nav />
+        <HeaderNav />
 
         <img
           onClick={(e) => showPopupNavHandler(e)}
@@ -52,7 +51,7 @@ const Header: FC = () => {
           alt='bar'
         />
       </header>
-      {storeState.interface.getIsShowPopupNav() ? <Nav isPopup /> : ''}
+      {storeState.interface.getIsShowPopupNav() ? <HeaderNav isPopup /> : ''}
     </>
   );
 };
