@@ -22,8 +22,7 @@ export function useGetFloorStyles(
       );
       if (floorInfo) {
         freeSpaceRaw = (freeSpace + floorInfo.occupiedSpace) / capacity;
-        reservedSpaceRaw =
-          freeSpace / capacity + reservedSpace / capacity - freeSpaceRaw;
+        reservedSpaceRaw = freeSpace / capacity + reservedSpace / capacity;
       }
 
       newStyle.background = `linear-gradient(180deg, 
