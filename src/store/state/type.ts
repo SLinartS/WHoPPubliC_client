@@ -4,7 +4,7 @@ export interface ICheckMark {
   type: TMarkType;
 }
 
-export type TMarkType = 'interface' | 'products' | 'tasks' | 'accounts';
+export type TMarkType = 'interface' | 'products' | 'tasks' | 'users';
 
 export interface IUser {
   id: number;

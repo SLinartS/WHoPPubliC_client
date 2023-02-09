@@ -50,7 +50,7 @@ export class StoreProductAction {
     }
   }
 
-  public *create(actionIfDone?: () => void) {
+  public *store(actionIfDone?: () => void) {
     try {
       const requestData: IRequestProduct = {
         fields: this.root.storePopup.form.product.formData,

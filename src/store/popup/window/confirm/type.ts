@@ -1,7 +1,7 @@
 import {
-  TSelectedAccounts,
   TSelectedItems,
   TSelectedProducts,
+  TSelectedUsers,
 } from '../../../table/selectedItem/type';
 import { TTaskType } from '../../../type';
 
@@ -10,11 +10,11 @@ export interface IWindowsConfirm {
   text: string;
   itemId: number;
   itemType: keyof TSelectedItems;
-  itemName: TTaskType | TSelectedProducts | TSelectedAccounts;
+  itemName: TTaskType | TSelectedProducts | TSelectedUsers;
 }
 
 export type TWindowsConfirmVariants =
   | 'deleteTask'
   | 'deleteRelatedProducts'
   | 'deleteProduct'
-  | 'deleteAccount';
+  | 'deleteUser';

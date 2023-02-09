@@ -1,6 +1,6 @@
-import { IAccountFormDataFields } from '@store/popup/form/account/type';
 import { IProductFormDataFields } from '@store/popup/form/product/type';
 import { ITaskFormDataFields } from '@store/popup/form/task/type';
+import { IUserFormDataFields } from '@store/popup/form/user/type';
 import { camelToKebab } from '@utils/stringStyleConvert/camelToKebab';
 import { observer } from 'mobx-react-lite';
 import { FC } from 'react';
@@ -10,11 +10,11 @@ import FormField from '../field/Field';
 import FormFieldInput from '../field/input/Input';
 
 interface IAssembledBlockFieldInputProps {
-  typeForm: 'task' | 'product' | 'account';
+  typeForm: 'task' | 'product' | 'user';
   fieldName:
     | keyof IProductFormDataFields
     | keyof ITaskFormDataFields
-    | keyof IAccountFormDataFields;
+    | keyof IUserFormDataFields;
   titleText: string;
   readonlyInput: boolean;
   placeholder?: string;

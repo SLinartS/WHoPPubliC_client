@@ -1,8 +1,8 @@
 import { useRootStore } from '@helpers/RootStoreProvider/useRootStore';
 import {
-  TSelectedAccounts,
   TSelectedItems,
   TSelectedProducts,
+  TSelectedUsers,
 } from '@store/table/selectedItem/type';
 import { TTaskType } from '@store/type';
 import { observer } from 'mobx-react-lite';
@@ -16,7 +16,7 @@ import { ITableObject } from '../type';
 interface IRowProps {
   columns: ITableObject;
   valuesType: keyof TSelectedItems;
-  selectingValues: TTaskType | TSelectedProducts | TSelectedAccounts;
+  selectingValues: TTaskType | TSelectedProducts | TSelectedUsers;
   displayedColumns?: string[];
 }
 

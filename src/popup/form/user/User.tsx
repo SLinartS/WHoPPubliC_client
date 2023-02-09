@@ -6,14 +6,14 @@ import { useRootStore } from '@helpers/RootStoreProvider/useRootStore';
 import { IOption } from '@store/category/type';
 import { observer } from 'mobx-react-lite';
 import { FC, useEffect, useMemo } from 'react';
-import { useIsAccountError } from 'src/popup/hooks/errorCheck/useIsAccountErrors';
+import { useIsUserError } from 'src/popup/hooks/errorCheck/useIsUserErrors';
 
-const PopupFormAccount: FC = () => {
-  const { storePopup, storeRole, storeAccount } = useRootStore();
-  const isAccountError = useIsAccountError();
+const PopupFormUser: FC = () => {
+  const { storePopup, storeRole, storeUser } = useRootStore();
+  const isUserError = useIsUserError();
 
   function closeHandler() {
-    storePopup.status.hide('formAccount');
+    storePopup.status.hide('formUser');
   }
 
   function resetHandler() {}
@@ -22,25 +22,25 @@ const PopupFormAccount: FC = () => {
     const { formActionType } = storePopup.form.state;
 
     if (formActionType === 'create') {
-      storePopup.form.account.setFormField('id', '0');
+      storePopup.form.user.setFormField('id', '0');
     }
 
-    if (!isAccountError()) {
+    if (!isUserError()) {
       switch (formActionType) {
         case 'create':
-          storeAccount.action.store(() => {
-            storePopup.status.hide('formAccount', () => {
-              storePopup.form.account.clearFormData();
+          storeUser.action.store(() => {
+            storePopup.status.hide('formUser', () => {
+              storePopup.form.user.clearFormData();
             });
-            storeAccount.status.set('fetch', 'pending');
+            storeUser.status.set('fetch', 'pending');
           });
           break;
-        case 'change':
-          storeAccount.action.update(() => {
-            storePopup.status.hide('formAccount', () => {
-              storePopup.form.account.clearFormData();
+        case 'update':
+          storeUser.action.update(() => {
+            storePopup.status.hide('formUser', () => {
+              storePopup.form.user.clearFormData();
             });
-            storeAccount.status.set('fetch', 'pending');
+            storeUser.status.set('fetch', 'pending');
           });
           break;
         default:
@@ -51,11 +51,11 @@ const PopupFormAccount: FC = () => {
   }
 
   function changeSelectHandler(option: IOption) {
-    storePopup.form.account.setFormField('roleId', String(option.id));
+    storePopup.form.user.setFormField('roleId', String(option.id));
   }
 
   const currentRoleValue = useMemo(() => {
-    const id = Number(storePopup.form.account.getFormField('roleId'));
+    const id = Number(storePopup.form.user.getFormField('roleId'));
     const title = storeRole.state.roles.find((role) => role.id === id)?.title;
     if (title) {
       return { id, title };
@@ -63,7 +63,7 @@ const PopupFormAccount: FC = () => {
     return { id, title: '' };
   }, [
     storeRole.status.get('fetch'),
-    storePopup.form.account.getFormField('roleId'),
+    storePopup.form.user.getFormField('roleId'),
   ]);
 
   useEffect(() => {
@@ -80,24 +80,24 @@ const PopupFormAccount: FC = () => {
         saveEventHandler={saveHandler}
         closeEventHandler={closeHandler}
       />
-      <div className='popup-form__content-block popup-form__content-block--add-account'>
+      <div className='popup-form__content-block popup-form__content-block--add-user'>
         <FormLayout classes='name-info'>
           <AssembledBlockFieldInput
-            typeForm='account'
+            typeForm='user'
             fieldName='name'
             titleText='Имя'
             readonlyInput={false}
             placeholder='Иван'
           />
           <AssembledBlockFieldInput
-            typeForm='account'
+            typeForm='user'
             fieldName='surname'
             titleText='Фамилия'
             readonlyInput={false}
             placeholder='Иванович'
           />
           <AssembledBlockFieldInput
-            typeForm='account'
+            typeForm='user'
             fieldName='patronymic'
             titleText='Отчество'
             readonlyInput={false}
@@ -107,14 +107,14 @@ const PopupFormAccount: FC = () => {
 
         <FormLayout classes='contact-info'>
           <AssembledBlockFieldInput
-            typeForm='account'
+            typeForm='user'
             fieldName='email'
             titleText='E-mail'
             readonlyInput={false}
             placeholder='inan-ivanov-95@mail.ru'
           />
           <AssembledBlockFieldInput
-            typeForm='account'
+            typeForm='user'
             fieldName='phone'
             titleText='Номер телефона'
             readonlyInput={false}
@@ -124,14 +124,14 @@ const PopupFormAccount: FC = () => {
 
         <FormLayout classes='login-info'>
           <AssembledBlockFieldInput
-            typeForm='account'
+            typeForm='user'
             fieldName='login'
             titleText='Логин'
             readonlyInput={false}
             placeholder='JDU34'
           />
           <AssembledBlockFieldSelect
-            typeForm='account'
+            typeForm='user'
             fieldName='roleId'
             titleText='Роль'
             options={storeRole.state.roles}
@@ -139,7 +139,7 @@ const PopupFormAccount: FC = () => {
             changeHandler={changeSelectHandler}
           />
           <AssembledBlockFieldInput
-            typeForm='account'
+            typeForm='user'
             fieldName='password'
             titleText='Пароль'
             readonlyInput={false}
@@ -151,4 +151,4 @@ const PopupFormAccount: FC = () => {
   );
 };
 
-export default observer(PopupFormAccount);
+export default observer(PopupFormUser);

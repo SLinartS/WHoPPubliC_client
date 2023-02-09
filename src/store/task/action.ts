@@ -43,7 +43,7 @@ export class StoreTaskAction {
     }
   }
 
-  public *create(actionIfDone?: () => void) {
+  public *store(actionIfDone?: () => void) {
     const { storePopup } = this.root;
 
     const taskType = this.root.storeState.interface.currentTypeOfTask;

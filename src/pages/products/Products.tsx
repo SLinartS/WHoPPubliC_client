@@ -34,7 +34,7 @@ const Products: FC = () => {
   }
 
   function changeHandler(): void {
-    storePopup.form.state.formActionType = 'change';
+    storePopup.form.state.formActionType = 'update';
     fetchOneProductAndFillForm(
       'formProduct',
       'Выберите строку, чтобы изменить партию продуктов',

@@ -3,75 +3,75 @@ import extendAxios from '@utils/extendAxios';
 import { AxiosError, AxiosResponse } from 'axios';
 import { makeAutoObservable } from 'mobx';
 
-import { IAccount, IRequestAccountData, IResponseAccountDelete } from './type';
+import { IRequestUserData, IResponseUserDelete, IUser } from './type';
 
-export class StoreAccountAction {
+export class StoreUserAction {
   constructor(private readonly root: RootStore) {
     makeAutoObservable(this, {});
   }
 
   public *fetch(actionIfDone?: () => void) {
     try {
-      const response: AxiosResponse<IAccount[]> =
+      const response: AxiosResponse<IUser[]> =
         yield extendAxios.get<AxiosResponse>('users');
-      this.root.storeAccount.state.accounts = response.data;
+      this.root.storeUser.state.users = response.data;
 
       if (actionIfDone) {
         actionIfDone();
       }
 
-      this.root.storeAccount.status.set('fetch', 'done');
+      this.root.storeUser.status.set('fetch', 'done');
     } catch (error) {
-      this.root.storeAccount.status.set('fetch', 'error');
+      this.root.storeUser.status.set('fetch', 'error');
     }
   }
 
   public *show(id: number, actionIfDone?: () => void) {
     try {
-      const response: AxiosResponse<IAccount> =
+      const response: AxiosResponse<IUser> =
         yield extendAxios.get<AxiosResponse>(`users/${id}`);
-      this.root.storeAccount.state.account = response.data;
+      this.root.storeUser.state.user = response.data;
 
       if (actionIfDone) {
         actionIfDone();
       }
 
-      this.root.storeAccount.status.set('show', 'done');
+      this.root.storeUser.status.set('show', 'done');
     } catch (error) {
-      this.root.storeAccount.status.set('show', 'error');
+      this.root.storeUser.status.set('show', 'error');
     }
   }
 
   public *store(actionIfDone?: () => void) {
     const { storePopup } = this.root;
-    const requestData: IRequestAccountData = {
-      fields: storePopup.form.account.formData,
+    const requestData: IRequestUserData = {
+      fields: storePopup.form.user.formData,
     };
     try {
       yield extendAxios.post(`users`, requestData);
-      this.root.storeAccount.status.set('store', 'done');
+      this.root.storeUser.status.set('store', 'done');
       if (actionIfDone) {
         actionIfDone();
       }
     } catch (error) {
-      this.root.storeAccount.status.set('store', 'error');
+      this.root.storeUser.status.set('store', 'error');
     }
   }
 
   public *update(actionIfDone?: () => void) {
     const { storePopup } = this.root;
-    const requestData: IRequestAccountData = {
-      fields: storePopup.form.account.formData,
+    const requestData: IRequestUserData = {
+      fields: storePopup.form.user.formData,
     };
     const userId = requestData.fields.id.value;
     try {
       yield extendAxios.put(`users/${userId}`, requestData);
-      this.root.storeAccount.status.set('update', 'done');
+      this.root.storeUser.status.set('update', 'done');
       if (actionIfDone) {
         actionIfDone();
       }
     } catch (error) {
-      this.root.storeAccount.status.set('update', 'error');
+      this.root.storeUser.status.set('update', 'error');
     }
   }
 
@@ -79,13 +79,13 @@ export class StoreAccountAction {
     try {
       yield extendAxios.delete(`users/${id}`);
 
-      this.root.storeAccount.status.set('destroy', 'done');
+      this.root.storeUser.status.set('destroy', 'done');
       if (actionIfDone) {
         actionIfDone();
       }
     } catch (error) {
-      const typeError = error as AxiosError<IResponseAccountDelete>;
-      this.root.storeAccount.status.set('destroy', 'error');
+      const typeError = error as AxiosError<IResponseUserDelete>;
+      this.root.storeUser.status.set('destroy', 'error');
       this.root.storePopup.status.show('windowInformation', () => {
         this.root.storePopup.windows.information.setting = {
           text: typeError.response?.data.message,

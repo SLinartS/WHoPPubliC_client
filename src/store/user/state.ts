@@ -3,14 +3,14 @@ import deepCopy from '@utils/deepCopy/deepCopy';
 import { makeAutoObservable } from 'mobx';
 
 import RootStore from '../root';
-import { IAccount } from './type';
+import { IUser } from './type';
 
-export class StoreAccount {
+export class StoreUser {
   constructor(private readonly root: RootStore) {
     makeAutoObservable(this, {});
   }
 
-  private readonly initialOneAccount: IAccount = {
+  private readonly initialOneUser: IUser = {
     id: INITIAL_VALUE_NUMBER,
     email: INITIAL_VALUE_STRING,
     phone: INITIAL_VALUE_STRING,
@@ -23,23 +23,23 @@ export class StoreAccount {
     roleId: INITIAL_VALUE_NUMBER,
   };
 
-  private _accounts: IAccount[] = [];
+  private _users: IUser[] = [];
 
-  public get accounts() {
-    return this._accounts;
+  public get users() {
+    return this._users;
   }
 
-  public set accounts(newAccounts: IAccount[]) {
-    this._accounts = newAccounts;
+  public set users(newUsers: IUser[]) {
+    this._users = newUsers;
   }
 
-  private _account: IAccount = deepCopy(this.initialOneAccount);
+  private _user: IUser = deepCopy(this.initialOneUser);
 
-  public get account() {
-    return this._account;
+  public get user() {
+    return this._user;
   }
 
-  public set account(newAccount: IAccount) {
-    this._account = newAccount;
+  public set user(newUser: IUser) {
+    this._user = newUser;
   }
 }

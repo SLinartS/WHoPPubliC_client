@@ -63,7 +63,7 @@ const PopupFormTask: FC = () => {
     if (formActionType === 'create') {
       generateArticle();
     }
-    if (formActionType === 'change') {
+    if (formActionType === 'update') {
       fetchOneTaskAndFillForm(
         storeState.interface.currentTypeOfTask,
         'formTask',
@@ -90,11 +90,11 @@ const PopupFormTask: FC = () => {
       // !
       switch (formActionType) {
         case 'create':
-          storeTask.action.create(() => {
+          storeTask.action.store(() => {
             closeHandler();
           });
           break;
-        case 'change':
+        case 'update':
           storeTask.action.update(() => {
             closeHandler();
           });

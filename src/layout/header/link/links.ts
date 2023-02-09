@@ -1,8 +1,8 @@
-import accountsIcon from '@assets/icons/accounts.svg';
 import mapIcon from '@assets/icons/map.svg';
 import pointsIcon from '@assets/icons/points.svg';
 import productsIcon from '@assets/icons/products.svg';
 import tasksIcon from '@assets/icons/tasks.svg';
+import usersIcon from '@assets/icons/users.svg';
 
 import { IHeaderLinks } from './type';
 
@@ -28,8 +28,8 @@ export const HEADER_LINKS: IHeaderLinks[] = [
     to: 'products',
   },
   {
-    icon: accountsIcon,
+    icon: usersIcon,
     text: 'Аккаунты',
-    to: 'accounts',
+    to: 'users',
   },
 ];

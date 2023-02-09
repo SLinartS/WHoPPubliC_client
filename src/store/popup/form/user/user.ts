@@ -4,14 +4,14 @@ import { makeAutoObservable, toJS } from 'mobx';
 
 import RootStore from '../../../root';
 import { INITIAL_VALUE } from '../config';
-import { IAccountFormDataFields } from './type';
+import { IUserFormDataFields } from './type';
 
-export class StorePopupFormAccount {
+export class StorePopupFormUser {
   constructor(private readonly root: RootStore) {
     makeAutoObservable(this, {});
   }
 
-  private readonly initialFormData: IAccountFormDataFields = {
+  private readonly initialFormData: IUserFormDataFields = {
     id: INITIAL_VALUE,
     email: INITIAL_VALUE,
     phone: INITIAL_VALUE,
@@ -26,25 +26,25 @@ export class StorePopupFormAccount {
     },
   };
 
-  private _formData: IAccountFormDataFields = deepCopy(this.initialFormData);
+  private _formData: IUserFormDataFields = deepCopy(this.initialFormData);
 
   public get formData() {
     return this._formData;
   }
 
-  public getFormField(field: keyof IAccountFormDataFields) {
+  public getFormField(field: keyof IUserFormDataFields) {
     return this._formData[field].value;
   }
 
-  public getFormErrors(field: keyof IAccountFormDataFields) {
+  public getFormErrors(field: keyof IUserFormDataFields) {
     return toJS(this._formData[field].errors);
   }
 
-  public setFormError(field: keyof IAccountFormDataFields, error: string[]) {
+  public setFormError(field: keyof IUserFormDataFields, error: string[]) {
     this._formData[field].errors = error;
   }
 
-  public setFormField(field: keyof IAccountFormDataFields, value: string) {
+  public setFormField(field: keyof IUserFormDataFields, value: string) {
     const validator = new FormFieldValidator(value);
     switch (field) {
       case 'email':
@@ -84,7 +84,7 @@ export class StorePopupFormAccount {
 
   private checkErrorsExist(
     errors: string[] | false,
-    field: keyof IAccountFormDataFields,
+    field: keyof IUserFormDataFields,
   ) {
     if (errors) {
       this._formData[field].errors = errors;

@@ -1,6 +1,6 @@
 import { TValueOrErrorType } from '../../../type';
 
-export interface IAccountFormDataFields {
+export interface IUserFormDataFields {
   id: TValueOrErrorType;
   email: TValueOrErrorType;
   phone: TValueOrErrorType;

@@ -37,7 +37,7 @@ const Tasks: FC = () => {
   }
 
   function changeHandler(): void {
-    storePopup.form.state.formActionType = 'change';
+    storePopup.form.state.formActionType = 'update';
     fetchOneTaskAndFillForm(
       storeState.interface.currentTypeOfTask,
       'formTask',

@@ -1,8 +1,5 @@
 import { configure } from 'mobx';
 
-import { StoreAccountAction } from './accounts/action';
-import { StoreAccount } from './accounts/state';
-import { StoreAccountStatus } from './accounts/status';
 import { StoreCategoryAction } from './category/action';
 import { StoreCategory } from './category/state';
 import { StoreCategoryStatus } from './category/status';
@@ -12,11 +9,11 @@ import { StoreMapStatus } from './map/status';
 import { StorePointAction } from './point/action';
 import { StorePoint } from './point/state';
 import { StorePointStatus } from './point/status';
-import { StorePopupFormAccount } from './popup/form/account/account';
 import { StorePopupForm } from './popup/form/form';
 import { StorePopupFormMap } from './popup/form/map/map';
 import { StorePopupFormProduct } from './popup/form/product/product';
 import { StorePopupFormTask } from './popup/form/task/task';
+import { StorePopupFormUser } from './popup/form/user/user';
 import { StorePopupSelectFloors } from './popup/select/floors/floors';
 import { StorePopupSelectPoints } from './popup/select/points/points';
 import { StorePopupSelectProducts } from './popup/select/products/products';
@@ -38,6 +35,9 @@ import { StoreTableUtils } from './table/utils';
 import { StoreTaskAction } from './task/action';
 import { StoreTaskStatus } from './task/status';
 import { StoreTask } from './task/task';
+import { StoreUserAction } from './user/action';
+import { StoreUser } from './user/state';
+import { StoreUserStatus } from './user/status';
 import { StoreUtils } from './utils/utils';
 
 configure({
@@ -64,10 +64,10 @@ interface IStoreProduct {
   action: StoreProductAction;
 }
 
-interface IStoreAccount {
-  state: StoreAccount;
-  status: StoreAccountStatus;
-  action: StoreAccountAction;
+interface IStoreUser {
+  state: StoreUser;
+  status: StoreUserStatus;
+  action: StoreUserAction;
 }
 
 interface IStoreMap {
@@ -100,7 +100,7 @@ interface IStorePopup {
     product: StorePopupFormProduct;
     task: StorePopupFormTask;
     map: StorePopupFormMap;
-    account: StorePopupFormAccount;
+    user: StorePopupFormUser;
     state: StorePopupForm;
   };
   select: {
@@ -133,7 +133,7 @@ class RootStore {
 
   public storeProduct: IStoreProduct;
 
-  public storeAccount: IStoreAccount;
+  public storeUser: IStoreUser;
 
   public storeMap: IStoreMap;
 
@@ -168,10 +168,10 @@ class RootStore {
       action: new StoreProductAction(this),
     };
 
-    this.storeAccount = {
-      state: new StoreAccount(this),
-      status: new StoreAccountStatus(this),
-      action: new StoreAccountAction(this),
+    this.storeUser = {
+      state: new StoreUser(this),
+      status: new StoreUserStatus(this),
+      action: new StoreUserAction(this),
     };
 
     this.storeMap = {
@@ -203,7 +203,7 @@ class RootStore {
       form: {
         product: new StorePopupFormProduct(this),
         task: new StorePopupFormTask(this),
-        account: new StorePopupFormAccount(this),
+        user: new StorePopupFormUser(this),
         map: new StorePopupFormMap(this),
         state: new StorePopupForm(this),
       },

@@ -8,55 +8,54 @@ import Loader from '@components/loader/Loader';
 import SearchField from '@components/searchField/SearchField';
 import Table from '@components/table/Table';
 import { useRootStore } from '@helpers/RootStoreProvider/useRootStore';
-import { useFetchOneAccountAndFillForm } from '@hooks/account/useFetchOneAccountAndFillForm';
+import { useFetchOneUserAndFillForm } from '@hooks/user/useFetchOneUserAndFillForm';
 import { observer } from 'mobx-react-lite';
 import { useEffect } from 'react';
 
 import { useDeleteController } from '../hooks/delete/useDeleteController';
 
-const Accounts = () => {
-  const { storeAccount, storeTable, storePopup } = useRootStore();
-  const fetchOneAccountAndFillForm = useFetchOneAccountAndFillForm();
+const Users = () => {
+  const { storeUser, storeTable, storePopup } = useRootStore();
+  const fetchOneUserAndFillForm = useFetchOneUserAndFillForm();
   const deleteController = useDeleteController();
 
   function addHandler() {
     storePopup.form.state.formActionType = 'create';
-    storePopup.status.show('formAccount');
+    storePopup.status.show('formUser');
   }
 
   function changeHandler() {
-    storePopup.form.state.formActionType = 'change';
-    storePopup.form.account.setFormError('password', []);
-    fetchOneAccountAndFillForm(
-      'formAccount',
+    storePopup.form.state.formActionType = 'update';
+    storePopup.form.user.setFormError('password', []);
+    fetchOneUserAndFillForm(
+      'formUser',
       'Выберите строку, чтобы изменить данные аккаунта пользователя',
     );
   }
 
   function deleteHandler() {
     deleteController(
-      'accounts',
-      'accounts',
+      'users',
+      'users',
       'Выберите строку, чтобы удалить аккаунт пользователя',
     );
   }
 
   useEffect(() => {
-    if (storeAccount.status.get('fetch') === 'pending') {
-      storeAccount.action.fetch(() => {
-        storeTable.utils.setDefaulMark(
-          'accounts',
-          storeAccount.state.accounts,
-          ['password', 'roleId'],
-        );
+    if (storeUser.status.get('fetch') === 'pending') {
+      storeUser.action.fetch(() => {
+        storeTable.utils.setDefaulMark('users', storeUser.state.users, [
+          'password',
+          'roleId',
+        ]);
       });
     }
-  }, [storeAccount.status.get('fetch')]);
+  }, [storeUser.status.get('fetch')]);
 
   return (
-    <main className='accounts'>
-      <div className='accounts__section-button'>
-        <SearchField classes='search-field--accounts' />
+    <main className='users'>
+      <div className='users__section-button'>
+        <SearchField classes='search-field--users' />
 
         <ButtonIcon
           src={addIcon}
@@ -75,21 +74,21 @@ const Accounts = () => {
         />
       </div>
 
-      <div className='accounts__table'>
-        {storeAccount.status.get('fetch') === 'done' ? (
+      <div className='users__table'>
+        {storeUser.status.get('fetch') === 'done' ? (
           <Table
-            data={storeAccount.state.accounts}
-            valuesType='accounts'
-            selectingValues='accounts'
-            classes='table--accounts'
-            displayedColumns={storeTable.utils.getColumnsWithMark('accounts')}
+            data={storeUser.state.users}
+            valuesType='users'
+            selectingValues='users'
+            classes='table--users'
+            displayedColumns={storeTable.utils.getColumnsWithMark('users')}
           />
         ) : (
-          <Loader classes='loader--account-table' />
+          <Loader classes='loader--user-table' />
         )}
       </div>
     </main>
   );
 };
 
-export default observer(Accounts);
+export default observer(Users);

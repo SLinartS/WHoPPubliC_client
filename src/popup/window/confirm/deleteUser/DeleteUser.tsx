@@ -4,14 +4,14 @@ import { FC } from 'react';
 
 import WindowConfirmTemplate from '../template/Template';
 
-const WindowConfirmDeleteAccount: FC = () => {
-  const { storeAccount, storeTable, storePopup } = useRootStore();
+const WindowConfirmDeleteUser: FC = () => {
+  const { storeUser, storeTable, storePopup } = useRootStore();
 
   function firstButtonClickHandler() {
     const settings = storePopup.windows.confirm.getSetting();
-    storeAccount.action.destroy(settings.itemId, () => {
-      storeAccount.action.fetch(() => {
-        storeTable.selectedItem.setItemId('accounts', 'accounts', 0);
+    storeUser.action.destroy(settings.itemId, () => {
+      storeUser.action.fetch(() => {
+        storeTable.selectedItem.setItemId('users', 'users', 0);
       });
       storePopup.status.hide('windowConfirm');
     });
@@ -30,4 +30,4 @@ const WindowConfirmDeleteAccount: FC = () => {
   );
 };
 
-export default observer(WindowConfirmDeleteAccount);
+export default observer(WindowConfirmDeleteUser);

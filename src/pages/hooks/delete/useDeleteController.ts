@@ -1,26 +1,26 @@
 import { useCheckIsSelect } from '@hooks/useCheckIsSelect';
 import {
-  TSelectedAccounts,
   TSelectedItems,
   TSelectedProducts,
+  TSelectedUsers,
 } from '@store/table/selectedItem/type';
 import { TTaskType } from '@store/type';
 import { useCallback } from 'react';
 
-import { useDeleteAccount } from './useDeleteAccount';
 import { useDeleteProduct } from './useDeleteProduct';
 import { useDeleteTask } from './useDeleteTask';
+import { useDeleteUser } from './useDeleteUser';
 
 export function useDeleteController() {
   const deleteTask = useDeleteTask();
   const deleteProduct = useDeleteProduct();
-  const deleteAccount = useDeleteAccount();
+  const deleteUser = useDeleteUser();
   const checkSelected = useCheckIsSelect();
 
   return useCallback(
     (
       itemType: keyof TSelectedItems,
-      itemName: TTaskType | TSelectedProducts | TSelectedAccounts,
+      itemName: TTaskType | TSelectedProducts | TSelectedUsers,
       warningText: string,
     ) => {
       const checkResult = checkSelected(itemType, itemName, warningText);
@@ -34,8 +34,8 @@ export function useDeleteController() {
           case 'products':
             deleteProduct(checkResult.itemId);
             break;
-          case 'accounts':
-            deleteAccount(checkResult.itemId);
+          case 'users':
+            deleteUser(checkResult.itemId);
             break;
           default:
         }

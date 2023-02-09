@@ -1,8 +1,8 @@
 import { ITableObject } from '@components/table/type';
-import { IAccountFormDataFields } from '@store/popup/form/account/type';
+import { IUserFormDataFields } from '@store/popup/form/user/type';
 import { IField } from '@store/type';
 
-export interface IAccount extends ITableObject {
+export interface IUser extends ITableObject {
   id: IField<number>;
   email: IField<string>;
   phone: IField<string>;
@@ -13,10 +13,10 @@ export interface IAccount extends ITableObject {
   roleId: IField<number>;
 }
 
-export interface IRequestAccountData {
-  fields: IAccountFormDataFields;
+export interface IRequestUserData {
+  fields: IUserFormDataFields;
 }
 
-export interface IResponseAccountDelete {
+export interface IResponseUserDelete {
   message: string;
 }

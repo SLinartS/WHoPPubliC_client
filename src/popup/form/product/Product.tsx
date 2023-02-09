@@ -56,7 +56,7 @@ const PopupFormProduct: FC = () => {
       storePopup.form.product.clearFormData();
       generateArticle();
     }
-    if (formActionType === 'change') {
+    if (formActionType === 'update') {
       fetchOneProductAndFillForm(
         'formProduct',
         'Выберите строку, чтобы изменить задачу',
@@ -78,14 +78,14 @@ const PopupFormProduct: FC = () => {
     if (!isProductErrors()) {
       switch (formActionType) {
         case 'create':
-          storeProduct.action.create(() => {
+          storeProduct.action.store(() => {
             storePopup.form.product.clearFormData();
             storePopup.select.points.clear();
             closeHandler();
             storeProduct.status.set('fetch', 'pending');
           });
           break;
-        case 'change':
+        case 'update':
           storeProduct.action.update(() => {
             storePopup.form.product.clearFormData();
             closeHandler();

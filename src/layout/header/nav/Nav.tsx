@@ -21,13 +21,13 @@ const HeaderNav: FC<INavProps> = ({ isPopup = false }) => {
       case 'admin':
         break;
       case 'operator':
-        excludeLinks.push('accounts');
+        excludeLinks.push('users');
         break;
       case 'worker':
-        excludeLinks.push('accounts', 'products');
+        excludeLinks.push('users', 'products');
         break;
       default:
-        excludeLinks.push('points', 'map', 'tasks', 'products', 'accounts');
+        excludeLinks.push('points', 'map', 'tasks', 'products', 'users');
     }
     return HEADER_LINKS.filter((link) => !excludeLinks.includes(link.to));
   }

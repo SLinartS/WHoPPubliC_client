@@ -6,7 +6,7 @@ export type TPopups =
   | 'formProduct'
   | 'formTask'
   | 'formMap'
-  | 'formAccount'
+  | 'formUser'
   | 'viewTask'
   | 'viewLocation'
   | 'selectMap'

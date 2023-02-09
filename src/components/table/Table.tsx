@@ -1,9 +1,9 @@
 import './style.scss';
 
 import {
-  TSelectedAccounts,
   TSelectedItems,
   TSelectedProducts,
+  TSelectedUsers,
 } from '@store/table/selectedItem/type';
 import { IField, TTaskType } from '@store/type';
 import { observer } from 'mobx-react-lite';
@@ -18,7 +18,7 @@ import { ITableObject } from './type';
 interface ITableProps {
   data: ITableObject[];
   valuesType: keyof TSelectedItems;
-  selectingValues: TTaskType | TSelectedProducts | TSelectedAccounts;
+  selectingValues: TTaskType | TSelectedProducts | TSelectedUsers;
   displayedColumns: string[];
   classes?: string;
 }

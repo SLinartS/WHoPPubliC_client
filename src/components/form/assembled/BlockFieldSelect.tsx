@@ -1,6 +1,6 @@
 import { IOption } from '@store/category/type';
-import { IAccountFormDataFields } from '@store/popup/form/account/type';
 import { IProductFormDataFields } from '@store/popup/form/product/type';
+import { IUserFormDataFields } from '@store/popup/form/user/type';
 import { camelToKebab } from '@utils/stringStyleConvert/camelToKebab';
 import { observer } from 'mobx-react-lite';
 import { FC } from 'react';
@@ -10,8 +10,8 @@ import FormField from '../field/Field';
 import FormFieldSelect from '../field/select/Select';
 
 interface IAssembledBlockFieldSelectProps {
-  typeForm: 'task' | 'product' | 'account';
-  fieldName: keyof IProductFormDataFields | keyof IAccountFormDataFields;
+  typeForm: 'task' | 'product' | 'user';
+  fieldName: keyof IProductFormDataFields | keyof IUserFormDataFields;
   titleText: string;
   options: IOption[];
   currentOption: IOption;

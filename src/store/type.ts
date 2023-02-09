@@ -1,7 +1,7 @@
 export type TStatus = 'pending' | 'done' | 'error';
 export type TTaskType = 'acceptance' | 'shipment' | 'intra';
 export type TPointType = 'acceptance' | 'shipment';
-export type TActionType = 'create' | 'change';
+export type TActionType = 'create' | 'update';
 export type TValueOrErrorType = {
   value: string;
   errors: string[];
