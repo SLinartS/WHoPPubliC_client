@@ -16,3 +16,7 @@ export type TArrayOrErrorType = {
   value: number[];
   errors: string[];
 };
+
+export interface IResponseApi {
+  message: string;
+}

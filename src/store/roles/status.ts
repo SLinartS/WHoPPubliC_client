@@ -1,7 +1,6 @@
+import RootStore from '@store/root';
+import { TStatus } from '@store/type';
 import { makeAutoObservable } from 'mobx';
-
-import RootStore from '../../root';
-import { TStatus } from '../../type';
 
 export type TRoleStatus = 'fetch';
 

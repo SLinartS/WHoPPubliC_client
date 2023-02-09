@@ -9,8 +9,8 @@ const WindowConfirmDeleteProduct: FC = () => {
 
   function firstButtonClickHandler() {
     const settings = storePopup.windows.confirm.getSetting();
-    storeProduct.delete.product(settings.itemId, () => {
-      storeProduct.fetch.products(() => {
+    storeProduct.action.destroy(settings.itemId, () => {
+      storeProduct.action.fetch(() => {
         storeTable.selectedItem.setItemId('products', 'products', 0);
       });
       storePopup.status.hide('windowConfirm');

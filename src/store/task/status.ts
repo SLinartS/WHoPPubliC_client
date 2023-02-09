@@ -1,8 +1,10 @@
+import RootStore from '@store/root';
+import { TStatus, TTaskType } from '@store/type';
 import { makeAutoObservable } from 'mobx';
 
-import RootStore from '../../root';
-import { TStatus, TTaskType } from '../../type';
-import { TTaskFetch, TTaskStatus } from './type';
+export type TTaskStatus = 'fetchOne' | 'delete' | 'add' | 'update';
+
+export type TTaskFetch = { [key in TTaskType]: TStatus };
 
 export class StoreTaskStatus {
   constructor(private readonly root: RootStore) {

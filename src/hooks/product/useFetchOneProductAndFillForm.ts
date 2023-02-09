@@ -13,7 +13,7 @@ export function useFetchOneProductAndFillForm() {
     (openingWindow: TPopups, warningText: string, isView = false) => {
       const checkResult = checkSelected('products', 'products', warningText);
       if (checkResult.result) {
-        storeProduct.fetch.oneProduct(checkResult.itemId, () => {
+        storeProduct.action.show(checkResult.itemId, () => {
           const { pointId, productInfo } = storeProduct.state.product;
 
           Object.entries(productInfo).forEach(([key, element]) => {

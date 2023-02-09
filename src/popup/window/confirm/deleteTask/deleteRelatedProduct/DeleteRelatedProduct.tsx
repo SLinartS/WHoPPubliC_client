@@ -10,9 +10,9 @@ const WindowConfirmDeleteRelatedProduct: FC = () => {
 
   function deleteTask(isDeleteProduct: boolean) {
     const settings = storePopup.windows.confirm.getSetting();
-    storeTask.delete.task(settings.itemId, isDeleteProduct, () => {
+    storeTask.action.destroy(settings.itemId, isDeleteProduct, () => {
       storePopup.status.hide('windowConfirm', () => {
-        storeTask.fetch[settings.itemName as TTaskType](() => {
+        storeTask.action.fetch(settings.itemName as TTaskType, () => {
           storeTable.selectedItem.setItemId('tasks', settings.itemName, 0);
         });
       });

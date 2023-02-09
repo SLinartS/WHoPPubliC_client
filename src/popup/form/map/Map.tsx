@@ -8,7 +8,7 @@ const PopupFormMap: FC = () => {
   const { storePopup, storeMap } = useRootStore();
 
   function saveHandler() {
-    storeMap.update.mapUpdate(() => {
+    storeMap.action.update(() => {
       storePopup.status.hide('formMap');
       storeMap.status.set('fetch', 'pending');
     });

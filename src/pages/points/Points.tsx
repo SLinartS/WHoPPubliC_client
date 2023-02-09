@@ -16,7 +16,7 @@ const Points: FC = () => {
 
   useEffect(() => {
     if (storePoint.status.get('fetch') === 'pending') {
-      storePoint.fetch.points();
+      storePoint.action.fetch();
     }
   }, [storePoint.status.get('fetch')]);
 

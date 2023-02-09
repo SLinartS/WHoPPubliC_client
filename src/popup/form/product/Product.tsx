@@ -74,7 +74,7 @@ const PopupFormProduct: FC = () => {
     if (!storePopup.form.utils.error.isProductErrors()) {
       switch (formActionType) {
         case 'create':
-          storeProduct.add.products(() => {
+          storeProduct.action.create(() => {
             storePopup.form.product.clearFormData();
             storePopup.select.points.clear();
             closeHandler();
@@ -82,7 +82,7 @@ const PopupFormProduct: FC = () => {
           });
           break;
         case 'change':
-          storeProduct.update.product(() => {
+          storeProduct.action.update(() => {
             storePopup.form.product.clearFormData();
             closeHandler();
             storeProduct.status.set('fetch', 'pending');
@@ -101,7 +101,7 @@ const PopupFormProduct: FC = () => {
   }
 
   useEffect(() => {
-    storeCategory.fetch.categories();
+    storeCategory.action.fetch();
   }, []);
 
   useEffect(() => {

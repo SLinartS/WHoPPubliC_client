@@ -46,3 +46,11 @@ export interface IRequestProduct {
   pointId: number;
   userId: '1';
 }
+
+export interface IResponseApi {
+  message: string;
+}
+
+export interface IMarkAsMovedRequestData {
+  productId: number;
+}

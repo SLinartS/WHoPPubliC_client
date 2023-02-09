@@ -83,14 +83,15 @@ const PopupFormTask: FC = () => {
     const checkFloor = typeOfTaskForm === 1;
 
     if (!storePopup.form.utils.error.isTaskErrors(checkFloor)) {
+      // !
       switch (formActionType) {
         case 'create':
-          storeTask.add.task(() => {
+          storeTask.action.create(() => {
             closeHandler();
           });
           break;
         case 'change':
-          storeTask.update.task(() => {
+          storeTask.action.update(() => {
             closeHandler();
           });
           break;
@@ -119,7 +120,7 @@ const PopupFormTask: FC = () => {
 
   useEffect(() => {
     if (storeProduct.status.get('fetch') === 'pending') {
-      storeProduct.fetch.products(() => {
+      storeProduct.action.fetch(() => {
         storeTable.utils.setDefaulMark(
           'products',
           storeProduct.state.products.data,

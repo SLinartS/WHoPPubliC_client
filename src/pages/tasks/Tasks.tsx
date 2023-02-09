@@ -75,7 +75,7 @@ const Tasks: FC = () => {
         <p className='tasks__empty-text'>Отсутствуют добавленные задачи</p>
       );
     }
-    storeTask.fetch[typeOfTask](() => {
+    storeTask.action.fetch(typeOfTask, () => {
       storeTable.utils.setDefaulMark(
         'tasks',
         storeTask.state.getTasks(typeOfTask),

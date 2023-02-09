@@ -51,7 +51,7 @@ const Products: FC = () => {
 
   useEffect(() => {
     if (storeProduct.status.get('fetch') === 'pending') {
-      storeProduct.fetch.products(() => {
+      storeProduct.action.fetch(() => {
         storeTable.utils.setDefaulMark(
           'products',
           storeProduct.state.products.data,

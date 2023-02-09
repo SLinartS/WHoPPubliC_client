@@ -61,14 +61,14 @@ const PopupViewTask: FC = () => {
       'Выберите партию продуктов, чтобы отметить её перемещённой',
     );
     if (checkResult.result) {
-      storeProduct.markAsMoved.markAsMoved(checkResult.itemId);
+      storeProduct.action.markAsMoved(checkResult.itemId);
     }
   }
 
   useEffect(() => {
     if (storeProduct.status.get('markAsMoved') === 'done') {
-      storeProduct.fetch.products();
-      storeTask.fetch.oneTask(storeTask.state.task.taskInfo.id.value, () => {
+      storeProduct.action.fetch();
+      storeTask.action.show(storeTask.state.task.taskInfo.id.value, () => {
         const { productIds } = storeTask.state.task;
 
         storePopup.select.products.setProductList(productIds);
@@ -83,7 +83,7 @@ const PopupViewTask: FC = () => {
 
   useEffect(() => {
     if (storeProduct.status.get('fetch') === 'pending') {
-      storeProduct.fetch.products(() => {
+      storeProduct.action.fetch(() => {
         storeTable.utils.setDefaulMark(
           'products',
           storeProduct.state.products.data,

@@ -16,7 +16,7 @@ const PopupSelectPoints: FC = () => {
     storePopup.form.state.isInProductForm = false;
     storePopup.status.hide('selectPoints');
     storePopup.select.points.clear();
-    storePoint.fetch.points();
+    storePoint.action.fetch();
   }
 
   function saveHandler() {
@@ -37,7 +37,7 @@ const PopupSelectPoints: FC = () => {
   useEffect(() => {
     storePopup.form.state.isSelectedPoint = true;
     if (storePoint.status.get('fetch') === 'pending') {
-      storePoint.fetch.points();
+      storePoint.action.fetch();
     }
   }, [storePoint.status.get('fetch')]);
 

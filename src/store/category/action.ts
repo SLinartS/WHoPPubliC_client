@@ -1,20 +1,19 @@
+import RootStore from '@store/root';
+import extendAxios from '@utils/extendAxios';
 import { AxiosResponse } from 'axios';
 import { makeAutoObservable } from 'mobx';
 
-import extendAxios from '../../../utils/extendAxios';
-import RootStore from '../../root';
-import { IOption } from '../type';
+import { IOption } from './type';
 
-export class StoreCategoryFetch {
+export class StoreCategoryAction {
   constructor(private readonly root: RootStore) {
     makeAutoObservable(this, {});
   }
 
-  public *categories() {
+  public *fetch() {
     try {
-      const response: AxiosResponse<IOption[]> = yield extendAxios.get<
-        IOption[]
-      >('categories');
+      const response: AxiosResponse<IOption[]> =
+        yield extendAxios.get<AxiosResponse>('categories');
 
       this.root.storeCategory.state.categories = response.data;
 

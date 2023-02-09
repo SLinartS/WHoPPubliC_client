@@ -19,7 +19,7 @@ const MapPage: FC = () => {
 
   useEffect(() => {
     if (storeMap.status.get('fetch') === 'pending') {
-      storeMap.fetch.map();
+      storeMap.action.fetch();
     }
   }, [storeMap.status.get('fetch')]);
 

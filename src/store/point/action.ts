@@ -1,20 +1,19 @@
+import RootStore from '@store/root';
+import extendAxios from '@utils/extendAxios';
 import { AxiosResponse } from 'axios';
 import { makeAutoObservable } from 'mobx';
 
-import extendAxios from '../../../utils/extendAxios';
-import RootStore from '../../root';
-import { IPoints } from '../type';
+import { IPoints } from './type';
 
-export class StorePointFetch {
+export class StorePointAction {
   constructor(private readonly root: RootStore) {
     makeAutoObservable(this, {});
   }
 
-  public *points() {
+  public *fetch() {
     try {
-      const response: AxiosResponse<IPoints> = yield extendAxios.get<IPoints>(
-        'points',
-      );
+      const response: AxiosResponse<IPoints> =
+        yield extendAxios.get<AxiosResponse>('points');
       this.root.storePoint.state.points = response.data;
       this.root.storePoint.status.set('fetch', 'done');
     } catch (error) {

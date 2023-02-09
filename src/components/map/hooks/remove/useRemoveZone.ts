@@ -8,7 +8,7 @@ export function useRemoveZone() {
   const checkOccupiedSpace = useCheckOccupiedSpace();
   return useCallback((zoneId: number) => {
     if (!checkOccupiedSpace('zone', { zoneId })) {
-      storeMap.delete.delete(zoneId, () => {
+      storeMap.action.destroy(zoneId, () => {
         storeMap.status.set('fetch', 'pending');
       });
     } else {

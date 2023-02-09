@@ -18,7 +18,7 @@ export function useFetchOneTaskAndFillForm() {
     ) => {
       const checkResult = checkSelected('tasks', itemName, warningText);
       if (checkResult.result) {
-        storeTask.fetch.oneTask(checkResult.itemId, () => {
+        storeTask.action.show(checkResult.itemId, () => {
           const { taskInfo, productIds, floorInfo, pointIds } =
             storeTask.state.task;
 
