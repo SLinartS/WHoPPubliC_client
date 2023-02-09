@@ -1,10 +1,7 @@
-import { AxiosResponse } from 'axios';
 import { makeAutoObservable } from 'mobx';
 
-import extendAxios from '../../../../utils/extendAxios';
 import { IProduct } from '../../../product/type';
 import RootStore from '../../../root';
-import { ICheckArticleResponse } from './type';
 
 export class StorePopupFormUtils {
   constructor(private readonly root: RootStore) {
@@ -21,28 +18,6 @@ export class StorePopupFormUtils {
         return 2;
       default:
         return 1;
-    }
-  }
-
-  public async generateArticle(type: 'task' | 'product'): Promise<string> {
-    let result = '';
-    const characters =
-      'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-    const charactersLength = characters.length;
-    for (let i = 0; i < 4; i += 1) {
-      result += characters[Math.floor(Math.random() * charactersLength)];
-    }
-    try {
-      const response: AxiosResponse<ICheckArticleResponse> =
-        await extendAxios.get<ICheckArticleResponse>(
-          `check-article/${type}/${result}`,
-        );
-      if (response.data.isActionExist) {
-        return await this.generateArticle(type);
-      }
-      return result;
-    } catch (error) {
-      return '< error generating the article >';
     }
   }
 

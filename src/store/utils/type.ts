@@ -1,3 +1,3 @@
 export interface ICheckArticleResponse {
-  isActionExist: boolean;
+  article: string;
 }

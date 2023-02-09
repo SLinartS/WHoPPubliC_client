@@ -17,18 +17,20 @@ import { observer } from 'mobx-react-lite';
 import { FC, useEffect, useMemo } from 'react';
 
 const PopupFormTask: FC = () => {
-  const { storePopup, storeTask, storeProduct, storeState, storeTable } =
-    useRootStore();
+  const {
+    storePopup,
+    storeTask,
+    storeProduct,
+    storeState,
+    storeTable,
+    storeUtils,
+  } = useRootStore();
   const fetchOneTaskAndFillFormHook = useFetchOneTaskAndFillForm();
 
   function generateArticle() {
-    const generateArticleForTask = async () => {
-      const generatedArticle =
-        await storePopup.form.utils.utils.generateArticle('task');
-
-      storePopup.form.task.setFormField('article', generatedArticle);
-    };
-    generateArticleForTask();
+    storeUtils.generateArticle('task', () => {
+      storePopup.form.product.setFormField('article', storeUtils.article);
+    });
   }
 
   const typeOfTaskForm = useMemo(() => {

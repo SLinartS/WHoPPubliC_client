@@ -18,17 +18,14 @@ import { observer } from 'mobx-react-lite';
 import { FC, useEffect, useMemo } from 'react';
 
 const PopupFormProduct: FC = () => {
-  const { storePopup, storeProduct, storeCategory } = useRootStore();
+  const { storePopup, storeProduct, storeCategory, storeUtils } =
+    useRootStore();
   const fetchOneProductAndFillFormHook = useFetchOneProductAndFillForm();
 
   function generateArticle() {
-    const generateArticleForProduct = async () => {
-      const generatedArticle =
-        await storePopup.form.utils.utils.generateArticle('product');
-
-      storePopup.form.product.setFormField('article', generatedArticle);
-    };
-    generateArticleForProduct();
+    storeUtils.generateArticle('product', () => {
+      storePopup.form.product.setFormField('article', storeUtils.article);
+    });
   }
 
   function changeSelectHandler(option: IOption) {

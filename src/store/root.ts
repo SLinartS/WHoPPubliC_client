@@ -52,10 +52,13 @@ import { StoreTaskFetch } from './task/fetch/fetch';
 import { StoreTaskStatus } from './task/status/status';
 import { StoreTask } from './task/task';
 import { StoreTaskUpdate } from './task/update/update';
+import { StoreUtils } from './utils/utils';
 
 configure({
   enforceActions: 'always',
 });
+
+type IStoreUtils = StoreUtils;
 
 interface IStoreState {
   interface: StoreStateInterface;
@@ -152,6 +155,8 @@ interface IStoreTable {
 class RootStore {
   private static instance: RootStore;
 
+  public storeUtils: IStoreUtils;
+
   public storeState: IStoreState;
 
   public storeTask: IStoreTask;
@@ -173,6 +178,8 @@ class RootStore {
   public storeTable: IStoreTable;
 
   private constructor() {
+    this.storeUtils = new StoreUtils(this);
+
     this.storeState = {
       interface: new StoreStateInterface(this),
       checkMark: new StoreStateCheckMark(this),
