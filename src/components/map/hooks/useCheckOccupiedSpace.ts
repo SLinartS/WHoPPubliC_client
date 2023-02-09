@@ -12,60 +12,55 @@ export function useCheckOccupiedSpace() {
   const { storePopup, storeMap } = useRootStore();
 
   return useCallback((type: TCheckType, coordinates: ICoordinates): boolean => {
-    let isOccupied = false;
-
     if (type === 'floor') {
-      storePopup.form.map.currentZone.sections.forEach((section) => {
+      return storePopup.form.map.currentZone.sections.some((section) => {
         if (section.id === coordinates.sectionId) {
-          section.blocks.forEach((block) => {
-            if (block.floors[0].capacity - block.floors[0].freeSpace !== 0) {
-              isOccupied = true;
-            }
+          return section.blocks.some((block) => {
+            return block.floors[0].capacity - block.floors[0].freeSpace !== 0;
           });
         }
+        return false;
       });
     }
 
     if (type === 'block') {
-      storePopup.form.map.currentZone.sections.forEach((section) => {
+      return storePopup.form.map.currentZone.sections.some((section) => {
         if (section.id === coordinates.sectionId) {
-          section.blocks[section.blocks.length - 1].floors.forEach((floor) => {
-            if (floor.capacity - floor.freeSpace !== 0) {
-              isOccupied = true;
-            }
-          });
+          return section.blocks[section.blocks.length - 1].floors.some(
+            (floor) => {
+              return floor.capacity - floor.freeSpace !== 0;
+            },
+          );
         }
+        return false;
       });
     }
 
     if (type === 'section') {
-      storePopup.form.map.currentZone.sections[
+      return storePopup.form.map.currentZone.sections[
         storePopup.form.map.currentZone.sections.length - 1
-      ].blocks.forEach((block) => {
-        block.floors.forEach((floor) => {
-          if (floor.capacity - floor.freeSpace !== 0) {
-            isOccupied = true;
-          }
+      ].blocks.some((block) => {
+        return block.floors.some((floor) => {
+          return floor.capacity - floor.freeSpace !== 0;
         });
       });
     }
 
     if (type === 'zone') {
-      storeMap.state.map.forEach((zone) => {
+      return storeMap.state.map.some((zone) => {
         if (zone.id === coordinates.zoneId) {
-          zone.sections.forEach((section) => {
-            section.blocks.forEach((block) => {
-              block.floors.forEach((floor) => {
-                if (floor.capacity - floor.freeSpace !== 0) {
-                  isOccupied = true;
-                }
+          return zone.sections.some((section) => {
+            return section.blocks.some((block) => {
+              return block.floors.some((floor) => {
+                return floor.capacity - floor.freeSpace !== 0;
               });
             });
           });
         }
+        return false;
       });
     }
 
-    return isOccupied;
+    return true;
   }, []);
 }
