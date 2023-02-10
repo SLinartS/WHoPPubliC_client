@@ -50,6 +50,7 @@ export class StoreUserAction {
     try {
       yield extendAxios.post(`users`, requestData);
       this.root.storeUser.status.set('store', 'done');
+      this.root.storeTable.selectedItem.setItemId('users', 'users', 0);
       if (actionIfDone) {
         actionIfDone();
       }

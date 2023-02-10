@@ -1,6 +1,4 @@
 import { IOption } from '@store/category/type';
-import { IProductFormDataFields } from '@store/popup/form/product/type';
-import { IUserFormDataFields } from '@store/popup/form/user/type';
 import { camelToKebab } from '@utils/stringStyleConvert/camelToKebab';
 import { observer } from 'mobx-react-lite';
 import { FC } from 'react';
@@ -10,12 +8,13 @@ import FormField from '../field/Field';
 import FormFieldSelect from '../field/select/Select';
 
 interface IAssembledBlockFieldSelectProps {
-  typeForm: 'task' | 'product' | 'user';
-  fieldName: keyof IProductFormDataFields | keyof IUserFormDataFields;
-  titleText: string;
   options: IOption[];
-  currentOption: IOption;
+  errors: string[];
   changeHandler: (option: IOption) => void;
+  currentOption: IOption;
+  typeForm: string;
+  fieldName: string;
+  titleText: string;
 }
 
 const AssembledBlockFieldSelect: FC<IAssembledBlockFieldSelectProps> = ({
@@ -23,6 +22,7 @@ const AssembledBlockFieldSelect: FC<IAssembledBlockFieldSelectProps> = ({
   fieldName,
   titleText,
   options,
+  errors,
   currentOption,
   changeHandler,
 }) => {
@@ -32,8 +32,7 @@ const AssembledBlockFieldSelect: FC<IAssembledBlockFieldSelectProps> = ({
       classes={`${typeForm}-${camelToKebab(fieldName)}`}
     >
       <FormField
-        typeForm={typeForm}
-        fieldName={fieldName}
+        errors={errors}
         classes={`${typeForm}-${camelToKebab(fieldName)}`}
       >
         <FormFieldSelect

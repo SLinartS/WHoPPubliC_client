@@ -1,8 +1,4 @@
 .popup-select {
-  display: grid;
-  grid-template-rows: fit-content(100%) 1fr;
-  max-width: 102.4rem;
-  height: 76.8rem;
   border-radius: 0.5rem;
 
   &__free-space-indicator {

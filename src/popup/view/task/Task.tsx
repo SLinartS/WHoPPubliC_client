@@ -41,6 +41,8 @@ const PopupViewTask: FC = () => {
     resetForm();
   }
 
+  function changeFieldHandlerPlug() {}
+
   function viewLocationOpenHander() {
     const checkResult = checkIsSelect(
       'products',
@@ -110,6 +112,8 @@ const PopupViewTask: FC = () => {
       <div className='popup-view__content-block'>
         <FormLayout classes='article-info'>
           <AssembledBlockFieldText
+            value={storePopup.form.task.getFormField('article')}
+            errors={storePopup.form.task.getFormErrors('article')}
             typeForm='task'
             fieldName='article'
             titleText='Артикул'
@@ -118,16 +122,22 @@ const PopupViewTask: FC = () => {
 
         <FormLayout classes='time-info'>
           <AssembledBlockFieldInput
+            value={storePopup.form.task.getFormField('timeStart')}
+            errors={storePopup.form.task.getFormErrors('timeStart')}
+            changeHandler={changeFieldHandlerPlug}
             typeForm='task'
             fieldName='timeStart'
             titleText='Дата начала'
-            readonlyInput
+            readonly
           />
           <AssembledBlockFieldInput
+            value={storePopup.form.task.getFormField('timeEnd')}
+            errors={storePopup.form.task.getFormErrors('timeEnd')}
+            changeHandler={changeFieldHandlerPlug}
             typeForm='task'
             fieldName='timeEnd'
             titleText='Дата окончания'
-            readonlyInput
+            readonly
           />
         </FormLayout>
 

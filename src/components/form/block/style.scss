@@ -24,9 +24,7 @@
 
     &--task {
       &-article {
-        flex-direction: row;
         align-items: center;
-        column-gap: 2rem;
       }
 
       &-points {
@@ -42,15 +40,10 @@
     user-select: none;
     margin-bottom: 0.4rem;
 
-    &--task {
-      &-article {
-        font-size: 3.2rem;
-      }
-    }
-
+    &--task,
     &--product {
       &-article {
-        font-size: 3.2rem;
+        font-size: 2.8rem;
       }
     }
   }

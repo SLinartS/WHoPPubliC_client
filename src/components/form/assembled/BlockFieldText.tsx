@@ -1,5 +1,3 @@
-import { IProductFormDataFields } from '@store/popup/form/product/type';
-import { ITaskFormDataFields } from '@store/popup/form/task/type';
 import { camelToKebab } from '@utils/stringStyleConvert/camelToKebab';
 import { observer } from 'mobx-react-lite';
 import { FC } from 'react';
@@ -9,15 +7,19 @@ import FormField from '../field/Field';
 import FormFieldText from '../field/text/Text';
 
 interface IAssembledBlockFieldTextProps {
-  typeForm: 'task' | 'product';
-  fieldName: keyof IProductFormDataFields | keyof ITaskFormDataFields;
+  value: string;
+  errors: string[];
+  typeForm: string;
+  fieldName: string;
   titleText: string;
 }
 
 const AssembledBlockFieldText: FC<IAssembledBlockFieldTextProps> = ({
+  value,
   typeForm,
   fieldName,
   titleText,
+  errors,
 }) => {
   return (
     <FormBlock
@@ -25,14 +27,10 @@ const AssembledBlockFieldText: FC<IAssembledBlockFieldTextProps> = ({
       classes={`${typeForm}-${camelToKebab(fieldName)}`}
     >
       <FormField
-        typeForm={typeForm}
-        fieldName={fieldName}
+        errors={errors}
         classes={`${typeForm}-${camelToKebab(fieldName)}`}
       >
-        <FormFieldText
-          typeForm={typeForm}
-          fieldName={fieldName}
-        />
+        <FormFieldText value={value} />
       </FormField>
     </FormBlock>
   );

@@ -14,6 +14,7 @@ import WindowHeaderForm from '@components/windowHeader/form/Form';
 import { useRootStore } from '@helpers/RootStoreProvider/useRootStore';
 import { useFetchOneProductAndFillForm } from '@hooks/product/useFetchOneProductAndFillForm';
 import { IOption } from '@store/category/type';
+import { IProductFormDataFields } from '@store/popup/form/product/type';
 import { observer } from 'mobx-react-lite';
 import { FC, useEffect, useMemo } from 'react';
 import { useIsProductErrors } from 'src/popup/hooks/errors/product/useIsProductErrors';
@@ -34,6 +35,13 @@ const PopupFormProduct: FC = () => {
 
   function changeSelectHandler(option: IOption) {
     storePopup.form.product.setFormField('categoryId', String(option.id));
+  }
+
+  function changeFieldHandler(
+    newValue: string,
+    fieldName: keyof IProductFormDataFields,
+  ) {
+    storePopup.form.product.setFormField(fieldName, String(newValue));
   }
 
   const currentCategoryValue = useMemo(() => {
@@ -125,26 +133,33 @@ const PopupFormProduct: FC = () => {
       <div className='popup-form__content-block popup-form__content-block--add-product'>
         <FormLayout classes='main-info'>
           <AssembledBlockFieldInput
+            value={storePopup.form.product.getFormField('title')}
+            errors={storePopup.form.product.getFormErrors('title')}
+            changeHandler={changeFieldHandler}
             typeForm='product'
             fieldName='title'
             titleText='Название'
-            readonlyInput={false}
+            readonly={false}
             placeholder='Иван-царевич и серый волк'
           />
           <AssembledBlockFieldInput
+            value={storePopup.form.product.getFormField('author')}
+            errors={storePopup.form.product.getFormErrors('author')}
+            changeHandler={changeFieldHandler}
             typeForm='product'
             fieldName='author'
             titleText='Автор'
-            readonlyInput={false}
+            readonly={false}
             placeholder='Отсутствует'
           />
           <AssembledBlockFieldSelect
+            options={storeCategory.state.categories}
+            errors={storePopup.form.product.getFormErrors('categoryId')}
+            changeHandler={changeSelectHandler}
+            currentOption={currentCategoryValue}
             typeForm='product'
             fieldName='categoryId'
             titleText='Категория'
-            options={storeCategory.state.categories}
-            currentOption={currentCategoryValue}
-            changeHandler={changeSelectHandler}
           />
         </FormLayout>
 
@@ -152,6 +167,8 @@ const PopupFormProduct: FC = () => {
           <AssembledBlockFieldText
             typeForm='product'
             fieldName='article'
+            value={storePopup.form.product.getFormField('article')}
+            errors={storePopup.form.product.getFormErrors('article')}
             titleText='Артикул'
           />
         </FormLayout>
@@ -161,35 +178,50 @@ const PopupFormProduct: FC = () => {
             typeForm='product'
             fieldName='yearOfPublication'
             titleText='Год издания'
-            readonlyInput={false}
+            value={storePopup.form.product.getFormField('yearOfPublication')}
+            changeHandler={changeFieldHandler}
+            errors={storePopup.form.product.getFormErrors('yearOfPublication')}
+            readonly={false}
             placeholder='1998'
           />
           <AssembledBlockFieldInput
             typeForm='product'
             fieldName='printingHouse'
             titleText='Типография'
-            readonlyInput={false}
+            value={storePopup.form.product.getFormField('printingHouse')}
+            changeHandler={changeFieldHandler}
+            errors={storePopup.form.product.getFormErrors('printingHouse')}
+            readonly={false}
             placeholder='ОФСЕТ МОСКВА'
           />
           <AssembledBlockFieldInput
             typeForm='product'
             fieldName='number'
             titleText='Количество'
-            readonlyInput={false}
+            value={storePopup.form.product.getFormField('number')}
+            changeHandler={changeFieldHandler}
+            errors={storePopup.form.product.getFormErrors('number')}
+            readonly={false}
             placeholder='300'
           />
           <AssembledBlockFieldInput
             typeForm='product'
             fieldName='publishingHouse'
             titleText='Издательство'
-            readonlyInput={false}
+            value={storePopup.form.product.getFormField('publishingHouse')}
+            changeHandler={changeFieldHandler}
+            errors={storePopup.form.product.getFormErrors('publishingHouse')}
+            readonly={false}
             placeholder='АСТ'
           />
           <AssembledBlockFieldInput
             typeForm='product'
             fieldName='printDate'
             titleText='Дата печати'
-            readonlyInput={false}
+            value={storePopup.form.product.getFormField('printDate')}
+            changeHandler={changeFieldHandler}
+            errors={storePopup.form.product.getFormErrors('printDate')}
+            readonly={false}
             placeholder='2020.05.26'
           />
         </FormLayout>
@@ -200,8 +232,7 @@ const PopupFormProduct: FC = () => {
             classes='product-points'
           >
             <FormField
-              customErrors={storePopup.select.points.errors}
-              typeForm='custom'
+              errors={storePopup.select.points.errors}
               classes='product-points'
             >
               <FormFieldPoint clickHandler={openSelectPointsHandler} />

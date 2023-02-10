@@ -13,6 +13,7 @@ import Table from '@components/table/Table';
 import WindowHeaderForm from '@components/windowHeader/form/Form';
 import { useRootStore } from '@helpers/RootStoreProvider/useRootStore';
 import { useFetchOneTaskAndFillForm } from '@hooks/task/useFetchOneTaskAndFillForm';
+import { ITaskFormDataFields } from '@store/popup/form/task/type';
 import { observer } from 'mobx-react-lite';
 import { FC, useEffect, useMemo } from 'react';
 import { useIsTaskErrors } from 'src/popup/hooks/errors/task/useIsTaskError';
@@ -35,6 +36,13 @@ const PopupFormTask: FC = () => {
     storeUtils.generateArticle('task', () => {
       storePopup.form.task.setFormField('article', storeUtils.article);
     });
+  }
+
+  function changeFieldHandler(
+    newValue: string,
+    fieldName: keyof ITaskFormDataFields,
+  ) {
+    storePopup.form.task.setFormField(fieldName, String(newValue));
   }
 
   const typeOfTaskForm = useMemo(() => {
@@ -87,7 +95,6 @@ const PopupFormTask: FC = () => {
     const checkFloor = typeOfTaskForm === 1;
 
     if (!isTaskErrors(checkFloor)) {
-      // !
       switch (formActionType) {
         case 'create':
           storeTask.action.store(() => {
@@ -157,6 +164,8 @@ const PopupFormTask: FC = () => {
       <div className='popup-form__content-block popup-form__content-block--add-task'>
         <FormLayout classes='article-info'>
           <AssembledBlockFieldText
+            value={storePopup.form.task.getFormField('article')}
+            errors={storePopup.form.task.getFormErrors('article')}
             typeForm='task'
             fieldName='article'
             titleText='Артикул'
@@ -165,17 +174,23 @@ const PopupFormTask: FC = () => {
 
         <FormLayout classes='time-info'>
           <AssembledBlockFieldInput
+            value={storePopup.form.task.getFormField('timeStart')}
+            errors={storePopup.form.task.getFormErrors('timeStart')}
+            changeHandler={changeFieldHandler}
             typeForm='task'
             fieldName='timeStart'
             titleText='Дата начала'
-            readonlyInput={false}
+            readonly={false}
             placeholder='2022.09.26 16:08:30'
           />
           <AssembledBlockFieldInput
+            value={storePopup.form.task.getFormField('timeEnd')}
+            errors={storePopup.form.task.getFormErrors('timeEnd')}
+            changeHandler={changeFieldHandler}
             typeForm='task'
             fieldName='timeEnd'
             titleText='Дата окончания'
-            readonlyInput={false}
+            readonly={false}
             placeholder='2022.09.27 10:00:20'
           />
         </FormLayout>
@@ -187,8 +202,7 @@ const PopupFormTask: FC = () => {
               classes='task-points'
             >
               <FormField
-                typeForm='custom'
-                customErrors={storePopup.select.floors.errors}
+                errors={storePopup.select.floors.errors}
                 classes='task-points'
               >
                 <FormFieldPoint clickHandler={openSelectMapHandler} />
@@ -204,8 +218,7 @@ const PopupFormTask: FC = () => {
               classes='task-points'
             >
               <FormField
-                typeForm='custom'
-                customErrors={storePopup.select.points.errors}
+                errors={storePopup.select.points.errors}
                 classes='task-points'
               >
                 <FormFieldPoint clickHandler={openSelectPointsHandler} />

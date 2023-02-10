@@ -14,11 +14,13 @@
   width: 95%;
 
   &-form,
-  &-view {
+  &-view,
+  &-select {
     display: grid;
     grid-template-rows: fit-content(100%) 1fr;
     max-width: 102.4rem;
-    height: 76.8rem;
+    max-height: 76.8rem;
+    height: calc(100% - 5rem);
   }
 
   &__background {

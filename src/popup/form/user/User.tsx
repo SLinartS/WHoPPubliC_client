@@ -4,6 +4,7 @@ import FormLayout from '@components/form/layout/Layout';
 import WindowHeaderForm from '@components/windowHeader/form/Form';
 import { useRootStore } from '@helpers/RootStoreProvider/useRootStore';
 import { IOption } from '@store/category/type';
+import { IUserFormDataFields } from '@store/popup/form/user/type';
 import { observer } from 'mobx-react-lite';
 import { FC, useEffect, useMemo } from 'react';
 import { useIsUserError } from 'src/popup/hooks/errorCheck/useIsUserErrors';
@@ -54,6 +55,13 @@ const PopupFormUser: FC = () => {
     storePopup.form.user.setFormField('roleId', String(option.id));
   }
 
+  function changeFieldHandler(
+    newValue: string,
+    fieldName: keyof IUserFormDataFields,
+  ) {
+    storePopup.form.user.setFormField(fieldName, String(newValue));
+  }
+
   const currentRoleValue = useMemo(() => {
     const id = Number(storePopup.form.user.getFormField('roleId'));
     const title = storeRole.state.roles.find((role) => role.id === id)?.title;
@@ -83,66 +91,88 @@ const PopupFormUser: FC = () => {
       <div className='popup-form__content-block popup-form__content-block--add-user'>
         <FormLayout classes='name-info'>
           <AssembledBlockFieldInput
+            value={storePopup.form.user.getFormField('name')}
+            errors={storePopup.form.user.getFormErrors('name')}
+            changeHandler={changeFieldHandler}
             typeForm='user'
             fieldName='name'
             titleText='Имя'
-            readonlyInput={false}
+            readonly={false}
             placeholder='Иван'
           />
           <AssembledBlockFieldInput
+            value={storePopup.form.user.getFormField('surname')}
+            errors={storePopup.form.user.getFormErrors('surname')}
+            changeHandler={changeFieldHandler}
             typeForm='user'
             fieldName='surname'
             titleText='Фамилия'
-            readonlyInput={false}
+            readonly={false}
             placeholder='Иванович'
           />
           <AssembledBlockFieldInput
+            value={storePopup.form.user.getFormField('patronymic')}
+            errors={storePopup.form.user.getFormErrors('patronymic')}
+            changeHandler={changeFieldHandler}
             typeForm='user'
             fieldName='patronymic'
             titleText='Отчество'
-            readonlyInput={false}
+            readonly={false}
             placeholder='Иванов'
           />
         </FormLayout>
 
         <FormLayout classes='contact-info'>
           <AssembledBlockFieldInput
+            value={storePopup.form.user.getFormField('email')}
+            errors={storePopup.form.user.getFormErrors('email')}
+            changeHandler={changeFieldHandler}
             typeForm='user'
             fieldName='email'
             titleText='E-mail'
-            readonlyInput={false}
+            readonly={false}
             placeholder='inan-ivanov-95@mail.ru'
           />
           <AssembledBlockFieldInput
+            value={storePopup.form.user.getFormField('phone')}
+            errors={storePopup.form.user.getFormErrors('phone')}
+            changeHandler={changeFieldHandler}
             typeForm='user'
             fieldName='phone'
             titleText='Номер телефона'
-            readonlyInput={false}
+            readonly={false}
             placeholder='+7 (925) 161-05-03'
           />
         </FormLayout>
 
         <FormLayout classes='login-info'>
           <AssembledBlockFieldInput
+            value={storePopup.form.user.getFormField('login')}
+            errors={storePopup.form.user.getFormErrors('login')}
+            changeHandler={changeFieldHandler}
             typeForm='user'
             fieldName='login'
             titleText='Логин'
-            readonlyInput={false}
+            readonly={false}
             placeholder='JDU34'
           />
           <AssembledBlockFieldSelect
+            options={storeRole.state.roles}
+            errors={storePopup.form.user.getFormErrors('roleId')}
+            changeHandler={changeSelectHandler}
+            currentOption={currentRoleValue}
             typeForm='user'
             fieldName='roleId'
             titleText='Роль'
-            options={storeRole.state.roles}
-            currentOption={currentRoleValue}
-            changeHandler={changeSelectHandler}
           />
           <AssembledBlockFieldInput
+            value={storePopup.form.user.getFormField('password')}
+            errors={storePopup.form.user.getFormErrors('password')}
+            changeHandler={changeFieldHandler}
             typeForm='user'
             fieldName='password'
             titleText='Пароль'
-            readonlyInput={false}
+            readonly={false}
             placeholder='*******'
           />
         </FormLayout>

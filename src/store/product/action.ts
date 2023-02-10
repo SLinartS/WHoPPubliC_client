@@ -44,9 +44,9 @@ export class StoreProductAction {
         actionIfDone();
       }
 
-      this.root.storeProduct.status.set('fetchOne', 'done');
+      this.root.storeProduct.status.set('show', 'done');
     } catch (error) {
-      this.root.storeProduct.status.set('fetchOne', 'error');
+      this.root.storeProduct.status.set('show', 'error');
     }
   }
 
@@ -59,13 +59,13 @@ export class StoreProductAction {
       };
       yield extendAxios.post<IProductResponse>('products', requestData);
 
-      this.root.storeProduct.status.set('add', 'done');
+      this.root.storeProduct.status.set('store', 'done');
       this.root.storeTable.selectedItem.setItemId('products', 'products', 0);
       if (actionIfDone) {
         actionIfDone();
       }
     } catch (error) {
-      this.root.storeProduct.status.set('add', 'error');
+      this.root.storeProduct.status.set('store', 'error');
     }
   }
 
@@ -95,13 +95,13 @@ export class StoreProductAction {
     try {
       yield extendAxios.delete(`products/${productId}`);
 
-      this.root.storeProduct.status.set('delete', 'done');
+      this.root.storeProduct.status.set('destroy', 'done');
       if (actionIfDone) {
         actionIfDone();
       }
     } catch (error) {
       const typeError = error as AxiosError<IResponseApi>;
-      this.root.storeProduct.status.set('delete', 'error');
+      this.root.storeProduct.status.set('destroy', 'error');
       this.root.storePopup.status.show('windowInformation', () => {
         this.root.storePopup.windows.information.setting = {
           text: typeError.response?.data.message,

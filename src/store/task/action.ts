@@ -37,9 +37,9 @@ export class StoreTaskAction {
         actionIfDone();
       }
 
-      this.root.storeTask.status.set('fetchOne', 'done');
+      this.root.storeTask.status.set('show', 'done');
     } catch (error) {
-      this.root.storeTask.status.set('fetchOne', 'error');
+      this.root.storeTask.status.set('show', 'error');
     }
   }
 
@@ -58,12 +58,12 @@ export class StoreTaskAction {
 
     try {
       yield extendAxios.post('tasks', requestTaskData);
-      this.root.storeTask.status.set('add', 'done');
+      this.root.storeTask.status.set('store', 'done');
       if (actionIfDone) {
         actionIfDone();
       }
     } catch (error) {
-      this.root.storeTask.status.set('add', 'error');
+      this.root.storeTask.status.set('store', 'error');
     }
   }
 
@@ -101,14 +101,14 @@ export class StoreTaskAction {
         yield extendAxios.delete(`tasks/${taskId}?deleteProducts=0`);
       }
 
-      this.root.storeTask.status.set('delete', 'done');
+      this.root.storeTask.status.set('destroy', 'done');
       this.root.storeTable.selectedItem.setItemId('tasks', 'acceptance', 0);
       this.root.storeTable.selectedItem.setItemId('tasks', 'shipment', 0);
       if (actionIfDone) {
         actionIfDone();
       }
     } catch (error) {
-      this.root.storeTask.status.set('delete', 'error');
+      this.root.storeTask.status.set('destroy', 'error');
     }
   }
 }

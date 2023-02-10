@@ -2,7 +2,7 @@ import RootStore from '@store/root';
 import { TStatus, TTaskType } from '@store/type';
 import { makeAutoObservable } from 'mobx';
 
-export type TTaskStatus = 'fetchOne' | 'delete' | 'add' | 'update';
+export type TTaskStatus = 'show' | 'store' | 'update' | 'destroy';
 
 export type TTaskFetch = { [key in TTaskType]: TStatus };
 
@@ -17,13 +17,13 @@ export class StoreTaskStatus {
     intra: 'pending',
   };
 
-  private fetchOne: TStatus = 'pending';
+  private show: TStatus = 'pending';
 
-  private delete: TStatus = 'pending';
-
-  private add: TStatus = 'pending';
+  private store: TStatus = 'pending';
 
   private update: TStatus = 'pending';
+
+  private destroy: TStatus = 'pending';
 
   public getFetch(taskType: TTaskType) {
     return this.fetch[taskType];

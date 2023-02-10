@@ -4,10 +4,10 @@ import { makeAutoObservable } from 'mobx';
 
 export type TProductStatus =
   | 'fetch'
-  | 'fetchOne'
-  | 'add'
-  | 'delete'
+  | 'show'
+  | 'store'
   | 'update'
+  | 'destroy'
   | 'markAsMoved';
 
 export class StoreProductStatus {
@@ -17,13 +17,13 @@ export class StoreProductStatus {
 
   private fetch: TStatus = 'pending';
 
-  private fetchOne: TStatus = 'pending';
+  private show: TStatus = 'pending';
 
-  private add: TStatus = 'pending';
-
-  private delete: TStatus = 'pending';
+  private store: TStatus = 'pending';
 
   private update: TStatus = 'pending';
+
+  private destroy: TStatus = 'pending';
 
   private markAsMoved: TStatus = 'pending';
 

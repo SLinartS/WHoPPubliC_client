@@ -41,12 +41,12 @@ export class StoreMapAction {
     try {
       yield extendAxios.delete(`map/${zoneId}`);
 
-      this.root.storeMap.status.set('delete', 'done');
+      this.root.storeMap.status.set('destroy', 'done');
       if (actionIfDone) {
         actionIfDone();
       }
     } catch (error) {
-      this.root.storeMap.status.set('delete', 'error');
+      this.root.storeMap.status.set('destroy', 'error');
     }
   }
 }
