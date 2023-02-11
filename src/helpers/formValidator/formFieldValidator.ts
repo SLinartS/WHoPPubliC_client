@@ -48,11 +48,34 @@ export default class FormFieldValidator {
     return this;
   }
 
-  public dateFormat(format: string) {
+  public hasOnlyLetterAndDigits() {
+    if (/^[\da-zA-Zа-яА-яёЁ ]+$/.test(this._value)) {
+      return this;
+    }
+    this._errors.push(`Поле должно содержать только цифры или буквы`);
+    return this;
+  }
+
+  public dateFormat(format: string, formatAlias: string) {
     if (DateTime.fromFormat(this._value, format).isValid) {
       return this;
     }
-    this._errors.push(`Дата не соответствует формату "${format}"`);
+    this._errors.push(
+      `Дата не соответствует формату «${formatAlias}» или введена несуществующая дата`,
+    );
+    return this;
+  }
+
+  public notBeforeToday() {
+    if (
+      DateTime.fromFormat(this._value, 'dd.MM.yyyy HH:mm').toMillis() >
+      DateTime.now().toMillis()
+    ) {
+      return this;
+    }
+    this._errors.push(
+      `Нелья указать время начала/окончания меньше, чем сейчас`,
+    );
     return this;
   }
 
@@ -61,7 +84,7 @@ export default class FormFieldValidator {
     if (value > min && value < max) {
       return this;
     }
-    this._errors.push(`Число выходит за диапазон "${min}-${max}"`);
+    this._errors.push(`Число выходит за диапазон «${min}-${max}»`);
     return this;
   }
 

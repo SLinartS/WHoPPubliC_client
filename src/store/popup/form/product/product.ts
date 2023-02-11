@@ -42,18 +42,31 @@ export class StorePopupFormProduct {
   }
 
   public setFormField(field: keyof IProductFormDataFields, value: string) {
-    const validator = new FormFieldValidator(value);
+    const trimValue = value.trim();
+    const validator = new FormFieldValidator(trimValue);
     switch (field) {
       case 'article':
-        validator.notEmpty().minLength(4).maxLength(10);
+        validator
+          .notEmpty()
+          .minLength(4)
+          .maxLength(10)
+          .hasOnlyLetterAndDigits();
         break;
 
       case 'title':
-        validator.notEmpty().minLength(4).maxLength(30);
+        validator
+          .notEmpty()
+          .minLength(4)
+          .maxLength(30)
+          .hasOnlyLetterAndDigits();
         break;
 
       case 'author':
-        validator.notEmpty().minLength(4).maxLength(30);
+        validator
+          .notEmpty()
+          .minLength(4)
+          .maxLength(30)
+          .hasOnlyLetterAndDigits();
         break;
 
       case 'yearOfPublication':
@@ -65,19 +78,27 @@ export class StorePopupFormProduct {
         break;
 
       case 'printDate':
-        validator.notEmpty().dateFormat('yyyy-MM-dd');
+        validator.notEmpty().dateFormat('dd.MM.yyyy', 'дд.ММ.гггг');
         break;
 
       case 'printingHouse':
-        validator.notEmpty().minLength(4).maxLength(30);
+        validator
+          .notEmpty()
+          .minLength(4)
+          .maxLength(30)
+          .hasOnlyLetterAndDigits();
         break;
 
       case 'publishingHouse':
-        validator.notEmpty().minLength(4).maxLength(30);
+        validator
+          .notEmpty()
+          .minLength(4)
+          .maxLength(30)
+          .hasOnlyLetterAndDigits();
         break;
       default:
     }
-    this._formData[field].value = value;
+    this._formData[field].value = trimValue;
     this.checkErrorsExist(validator.errors, field);
   }
 

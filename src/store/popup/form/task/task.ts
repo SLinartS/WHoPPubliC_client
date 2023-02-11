@@ -33,23 +33,30 @@ export class StorePopupFormTask {
   }
 
   public setFormField(field: keyof ITaskFormDataFields, value: string) {
-    const validator = new FormFieldValidator(value);
+    const trimValue = value.trim();
+    const validator = new FormFieldValidator(trimValue);
     switch (field) {
       case 'article':
         validator.notEmpty().minLength(4).maxLength(10);
         break;
 
       case 'timeStart':
-        validator.notEmpty().dateFormat('yyyy-MM-dd HH:mm:ss');
+        validator
+          .notEmpty()
+          .dateFormat('dd.MM.yyyy HH:mm', 'дд.ММ.гггг чч:мм')
+          .notBeforeToday();
         break;
 
       case 'timeEnd':
-        validator.notEmpty().dateFormat('yyyy-MM-dd HH:mm:ss');
+        validator
+          .notEmpty()
+          .dateFormat('dd.MM.yyyy HH:mm', 'дд.ММ.гггг чч:мм')
+          .notBeforeToday();
         break;
 
       default:
     }
-    this._formData[field].value = value;
+    this._formData[field].value = trimValue;
     this.checkErrorsExist(validator.errors, field);
   }
 
