@@ -48,33 +48,33 @@ export class StorePopupFormUser {
     const validator = new FormFieldValidator(value);
     switch (field) {
       case 'email':
-        validator.notEmpty().maxLength(30);
+        validator.notEmpty().maxLength(30).email();
         break;
 
       case 'phone':
-        validator.notEmpty().maxLength(30);
+        validator.notEmpty().minLength(11).maxLength(11).hasOnlyDigits();
         break;
 
       case 'name':
-        validator.notEmpty().minLength(2).maxLength(30);
+        validator.notEmpty().minLength(2).maxLength(30).hasOnlyLetters();
         break;
 
       case 'login':
-        validator.notEmpty().minLength(6).maxLength(30);
+        validator.notEmpty().minLength(6).maxLength(30).login();
         break;
 
       case 'password':
         if (this.root.storePopup.form.state.formActionType === 'create') {
-          validator.notEmpty().minLength(6).maxLength(30);
+          validator.notEmpty().minLength(6).maxLength(30).login();
         }
         break;
 
       case 'surname':
-        validator.notEmpty().minLength(2).maxLength(30);
+        validator.notEmpty().minLength(2).maxLength(30).hasOnlyLetters();
         break;
 
       case 'patronymic':
-        validator.notEmpty().maxLength(30);
+        validator.notEmpty().maxLength(30).hasOnlyLetters();
         break;
       default:
     }

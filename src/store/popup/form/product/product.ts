@@ -50,7 +50,7 @@ export class StorePopupFormProduct {
           .notEmpty()
           .minLength(4)
           .maxLength(10)
-          .hasOnlyLetterAndDigits();
+          .hasOnlyValidCharacters();
         break;
 
       case 'title':
@@ -58,7 +58,7 @@ export class StorePopupFormProduct {
           .notEmpty()
           .minLength(4)
           .maxLength(30)
-          .hasOnlyLetterAndDigits();
+          .hasOnlyValidCharacters();
         break;
 
       case 'author':
@@ -66,7 +66,7 @@ export class StorePopupFormProduct {
           .notEmpty()
           .minLength(4)
           .maxLength(30)
-          .hasOnlyLetterAndDigits();
+          .hasOnlyValidCharacters();
         break;
 
       case 'yearOfPublication':
@@ -86,7 +86,7 @@ export class StorePopupFormProduct {
           .notEmpty()
           .minLength(4)
           .maxLength(30)
-          .hasOnlyLetterAndDigits();
+          .hasOnlyValidCharacters();
         break;
 
       case 'publishingHouse':
@@ -94,7 +94,7 @@ export class StorePopupFormProduct {
           .notEmpty()
           .minLength(4)
           .maxLength(30)
-          .hasOnlyLetterAndDigits();
+          .hasOnlyValidCharacters();
         break;
       default:
     }

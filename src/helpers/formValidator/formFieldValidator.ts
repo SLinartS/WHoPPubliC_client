@@ -48,11 +48,39 @@ export default class FormFieldValidator {
     return this;
   }
 
-  public hasOnlyLetterAndDigits() {
-    if (/^[\da-zA-Zа-яА-яёЁ ]+$/.test(this._value)) {
+  public login() {
+    if (/^[\da-z\s\-_]+$/i.test(this._value)) {
       return this;
     }
-    this._errors.push(`Поле должно содержать только цифры или буквы`);
+    this._errors.push(
+      `Поле должно содержать только цифры, латинские буквы, знаки «-», «_»`,
+    );
+    return this;
+  }
+
+  public hasOnlyLetters() {
+    if (/^[\da-zа-яё\s]+$/i.test(this._value)) {
+      return this;
+    }
+    this._errors.push(`Поле должно содержать только буквы и пробелы`);
+    return this;
+  }
+
+  public hasOnlyValidCharacters() {
+    if (/^[\da-zа-яё\s\-_]+$/i.test(this._value)) {
+      return this;
+    }
+    this._errors.push(
+      `Поле должно содержать только цифры, буквы, пробелы или знак «-»`,
+    );
+    return this;
+  }
+
+  public email() {
+    if (/^[\da-z-.]+[@]{1}[\da-z-.]+$/i.test(this._value)) {
+      return this;
+    }
+    this._errors.push(`Поле должно совпадать с шаблоном «my@mail.ru»`);
     return this;
   }
 
