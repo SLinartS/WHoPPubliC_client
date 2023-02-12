@@ -3,29 +3,35 @@ import { observer } from 'mobx-react-lite';
 
 import FormBlock from '../block/Block';
 import FormField from '../field/Field';
-import FormFieldInput from '../field/input/Input';
+import FormFieldTime from '../field/time/Time';
 
-interface IAssembledBlockFieldInputProps<T> {
+interface IAssembledBlockFieldTimeProps<T, I> {
   value: string;
   errors: string[];
-  changeHandler: (newValue: string, fieldName: keyof T) => void;
+  changeHandler: (
+    newValue: string,
+    fieldName: keyof T,
+    additionalInformation: I,
+  ) => void;
   typeForm: string;
   fieldName: keyof T;
+  additionalInformation: I;
   titleText: string;
   readonly?: boolean;
   placeholder?: string;
 }
 
-const AssembledBlockFieldInput = <T extends unknown>({
-  typeForm,
-  fieldName,
-  titleText,
+const AssembledBlockFieldTime = <T, I extends unknown>({
+  value,
   errors,
   changeHandler,
-  value,
+  typeForm,
+  fieldName,
+  additionalInformation,
+  titleText,
   readonly = false,
   placeholder,
-}: IAssembledBlockFieldInputProps<T>) => {
+}: IAssembledBlockFieldTimeProps<T, I>) => {
   return (
     <FormBlock
       titleText={titleText}
@@ -35,10 +41,11 @@ const AssembledBlockFieldInput = <T extends unknown>({
         errors={[errors]}
         classes={`${typeForm}-${camelToKebab(String(fieldName))}`}
       >
-        <FormFieldInput
+        <FormFieldTime
           value={value}
           changeHandler={changeHandler}
           fieldName={fieldName}
+          additionalInformation={additionalInformation}
           readonly={readonly}
           placeholder={placeholder}
         />
@@ -47,4 +54,4 @@ const AssembledBlockFieldInput = <T extends unknown>({
   );
 };
 
-export default observer(AssembledBlockFieldInput);
+export default observer(AssembledBlockFieldTime);

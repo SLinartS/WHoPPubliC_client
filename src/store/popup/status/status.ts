@@ -28,6 +28,7 @@ export class StorePopupStatus {
     selectMap: false,
     selectPoints: false,
     selectProducts: false,
+    selectWorkSchedule: false,
     windowConfirm: false,
     windowInformation: false,
   };

@@ -1,6 +1,6 @@
 import { ITableObject } from '@components/table/type';
 
-import { IField, TTaskType, TValueOrErrorType } from '../type';
+import { IField, TTaskType } from '../type';
 
 export type ITasks = {
   [key in TTaskType]: ITask[];
@@ -28,15 +28,17 @@ export interface ITask extends ITableObject {
 }
 
 export interface IRequestTaskData {
-  fields: {
-    id: TValueOrErrorType;
-    article: TValueOrErrorType;
-    timeStart: TValueOrErrorType;
-    timeEnd: TValueOrErrorType;
-  };
+  fields: IRequestTaskField;
   userId: number;
   type: TTaskType;
   productIds: number[];
   floorIds: number[];
   pointIds: number[];
+}
+
+export interface IRequestTaskField {
+  id: string;
+  article: string;
+  timeStart: string;
+  timeEnd: string;
 }

@@ -2,7 +2,7 @@ import '../style.scss';
 import '../../style.scss';
 
 import Button from '@components/button/Button';
-import AssembledBlockFieldInput from '@components/form/assembled/BlockFieldInput';
+import AssembledBlockFieldDatetime from '@components/form/assembled/BlockFieldDatetime';
 import AssembledBlockFieldText from '@components/form/assembled/BlockFieldText';
 import FormBlock from '@components/form/block/Block';
 import FormBlockTitle from '@components/form/block/title/Title';
@@ -173,25 +173,33 @@ const PopupFormTask: FC = () => {
         </FormLayout>
 
         <FormLayout classes='time-info'>
-          <AssembledBlockFieldInput
-            value={storePopup.form.task.getFormField('timeStart')}
-            errors={storePopup.form.task.getFormErrors('timeStart')}
-            changeHandler={changeFieldHandler}
+          <AssembledBlockFieldDatetime
+            valueDate={storePopup.form.task.getFormField('dateStart')}
+            valueTime={storePopup.form.task.getFormField('timeStart')}
+            errorsDate={storePopup.form.task.getFormErrors('dateStart')}
+            errorsTime={storePopup.form.task.getFormErrors('timeStart')}
+            changeDateHandler={changeFieldHandler}
+            changeTimeHandler={changeFieldHandler}
             typeForm='task'
-            fieldName='timeStart'
+            fieldNameDate='dateStart'
+            fieldNameTime='timeStart'
             titleText='Дата начала'
-            readonly={false}
-            placeholder='2022.09.26 16:08:30'
+            placeholderDate='2022.09.26'
+            placeholderTime='16:08'
           />
-          <AssembledBlockFieldInput
-            value={storePopup.form.task.getFormField('timeEnd')}
-            errors={storePopup.form.task.getFormErrors('timeEnd')}
-            changeHandler={changeFieldHandler}
+          <AssembledBlockFieldDatetime
+            valueDate={storePopup.form.task.getFormField('dateEnd')}
+            valueTime={storePopup.form.task.getFormField('timeEnd')}
+            errorsDate={storePopup.form.task.getFormErrors('dateEnd')}
+            errorsTime={storePopup.form.task.getFormErrors('timeEnd')}
+            changeDateHandler={changeFieldHandler}
+            changeTimeHandler={changeFieldHandler}
             typeForm='task'
-            fieldName='timeEnd'
+            fieldNameDate='dateEnd'
+            fieldNameTime='timeEnd'
             titleText='Дата окончания'
-            readonly={false}
-            placeholder='2022.09.27 10:00:20'
+            placeholderDate='2022.09.26'
+            placeholderTime='16:08'
           />
         </FormLayout>
 
@@ -202,7 +210,7 @@ const PopupFormTask: FC = () => {
               classes='task-points'
             >
               <FormField
-                errors={storePopup.select.floors.errors}
+                errors={[storePopup.select.floors.errors]}
                 classes='task-points'
               >
                 <FormFieldPoint clickHandler={openSelectMapHandler} />
@@ -218,7 +226,7 @@ const PopupFormTask: FC = () => {
               classes='task-points'
             >
               <FormField
-                errors={storePopup.select.points.errors}
+                errors={[storePopup.select.points.errors]}
                 classes='task-points'
               >
                 <FormFieldPoint clickHandler={openSelectPointsHandler} />

@@ -3,24 +3,27 @@ import deepCopy from '@utils/deepCopy/deepCopy';
 import { makeAutoObservable } from 'mobx';
 
 import RootStore from '../root';
-import { IUser } from './type';
+import { IOneUser, IUser } from './type';
 
 export class StoreUser {
   constructor(private readonly root: RootStore) {
     makeAutoObservable(this, {});
   }
 
-  private readonly initialOneUser: IUser = {
-    id: INITIAL_VALUE_NUMBER,
-    email: INITIAL_VALUE_STRING,
-    phone: INITIAL_VALUE_STRING,
-    login: INITIAL_VALUE_STRING,
-    password: INITIAL_VALUE_STRING,
-    name: INITIAL_VALUE_STRING,
-    surname: INITIAL_VALUE_STRING,
-    patronymic: INITIAL_VALUE_STRING,
-    roleAlias: INITIAL_VALUE_STRING,
-    roleId: INITIAL_VALUE_NUMBER,
+  private readonly initialOneUser: IOneUser = {
+    userInfo: {
+      id: INITIAL_VALUE_NUMBER,
+      email: INITIAL_VALUE_STRING,
+      phone: INITIAL_VALUE_STRING,
+      login: INITIAL_VALUE_STRING,
+      password: INITIAL_VALUE_STRING,
+      name: INITIAL_VALUE_STRING,
+      surname: INITIAL_VALUE_STRING,
+      patronymic: INITIAL_VALUE_STRING,
+      roleAlias: INITIAL_VALUE_STRING,
+      roleId: INITIAL_VALUE_NUMBER,
+    },
+    workSchedules: [],
   };
 
   private _users: IUser[] = [];
@@ -33,13 +36,13 @@ export class StoreUser {
     this._users = newUsers;
   }
 
-  private _user: IUser = deepCopy(this.initialOneUser);
+  private _user: IOneUser = deepCopy(this.initialOneUser);
 
   public get user() {
     return this._user;
   }
 
-  public set user(newUser: IUser) {
+  public set user(newUser: IOneUser) {
     this._user = newUser;
   }
 }

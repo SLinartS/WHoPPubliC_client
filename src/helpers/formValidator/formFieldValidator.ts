@@ -89,14 +89,14 @@ export default class FormFieldValidator {
       return this;
     }
     this._errors.push(
-      `Дата не соответствует формату «${formatAlias}» или введена несуществующая дата`,
+      `Поле не соответствует формату «${formatAlias}» или введено недопустимое значение`,
     );
     return this;
   }
 
   public notBeforeToday() {
     if (
-      DateTime.fromFormat(this._value, 'dd.MM.yyyy HH:mm').toMillis() >
+      DateTime.fromFormat(this._value, 'dd.MM.yyyy').toMillis() >
       DateTime.now().toMillis()
     ) {
       return this;

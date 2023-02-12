@@ -11,7 +11,7 @@ import { FC, ReactNode } from 'react';
 
 interface IFormFieldProps {
   children: ReactNode;
-  errors: string[];
+  errors: string[][];
   classes?: string;
 }
 
@@ -19,19 +19,25 @@ const FormField: FC<IFormFieldProps> = ({ children, errors, classes }) => {
   const { storePopup } = useRootStore();
 
   function displayError() {
-    if (errors) {
-      if (
-        errors[0] === emptyFieldErrorText ||
-        errors[0] === emptyArrayErrorText
-      ) {
-        if (storePopup.form.state.isDisplayDefaultErrors) {
-          return errors[0];
+    let displayedErrors: string[] = [];
+    for (let i = 0; i < errors.length; i += 1) {
+      if (errors[i][0]) {
+        if (
+          errors[i][0] === emptyFieldErrorText ||
+          errors[i][0] === emptyArrayErrorText
+        ) {
+          if (storePopup.form.state.isDisplayDefaultErrors) {
+            displayedErrors.push(errors[i][0]);
+          }
+        } else {
+          displayedErrors.push(errors[i][0]);
         }
-        return '';
       }
-      return errors[0];
     }
-    return '';
+    if (displayedErrors.length > 1) {
+      displayedErrors = displayedErrors.map((error) => `${error}. `);
+    }
+    return displayedErrors;
   }
 
   return (
@@ -39,7 +45,7 @@ const FormField: FC<IFormFieldProps> = ({ children, errors, classes }) => {
       className={`form-layout__field form-layout__field--${classes}`}
       data-testid='form-field'
     >
-      {displayError() ? (
+      {displayError().length ? (
         <>
           <img
             className='form-layout__error-image'

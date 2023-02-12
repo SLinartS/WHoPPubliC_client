@@ -4,7 +4,7 @@ import extendAxios from '@utils/extendAxios';
 import { AxiosResponse } from 'axios';
 import { makeAutoObservable } from 'mobx';
 
-import { IOneTask, IRequestTaskData, ITask } from './type';
+import { IOneTask, IRequestTaskData, IRequestTaskField, ITask } from './type';
 
 export class StoreTaskAction {
   constructor(private readonly root: RootStore) {
@@ -45,10 +45,11 @@ export class StoreTaskAction {
 
   public *store(actionIfDone?: () => void) {
     const { storePopup } = this.root;
-
     const taskType = this.root.storeState.interface.currentTypeOfTask;
+    const fields = this.getRequestFields();
+
     const requestTaskData: IRequestTaskData = {
-      fields: storePopup.form.task.formData,
+      fields,
       userId: 1,
       type: taskType,
       productIds: storePopup.select.products.values,
@@ -70,8 +71,10 @@ export class StoreTaskAction {
   public *update(actionIfDone?: () => void) {
     const { storePopup } = this.root;
     const taskType = this.root.storeState.interface.currentTypeOfTask;
+    const fields = this.getRequestFields();
+
     const requestData: IRequestTaskData = {
-      fields: storePopup.form.task.formData,
+      fields,
       userId: 1,
       type: taskType,
       productIds: storePopup.select.products.values,
@@ -110,5 +113,15 @@ export class StoreTaskAction {
     } catch (error) {
       this.root.storeTask.status.set('destroy', 'error');
     }
+  }
+
+  private getRequestFields(): IRequestTaskField {
+    const { formData } = this.root.storePopup.form.task;
+    return {
+      id: formData.id.value,
+      article: formData.article.value,
+      timeStart: `${formData.dateStart.value} ${formData.timeStart.value}`,
+      timeEnd: `${formData.dateEnd.value} ${formData.timeEnd.value}`,
+    };
   }
 }

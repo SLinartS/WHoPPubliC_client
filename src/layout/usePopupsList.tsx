@@ -9,6 +9,7 @@ import PopupFormUser from '../popup/form/user/User';
 import PopupSelectMap from '../popup/select/map/Map';
 import PopupSelectPoints from '../popup/select/points/Points';
 import PopupSelectProduct from '../popup/select/product/Product';
+import PopupSelectWorkSchedule from '../popup/select/workSchedule/WorkSchedule';
 import PopupViewLocation from '../popup/view/location/Location';
 import PopupViewTask from '../popup/view/task/Task';
 import WindowConfirm from '../popup/window/confirm/Confirm';
@@ -96,6 +97,15 @@ const usePopupList = () => {
       trigger: storePopup.status.getStatus('selectProducts'),
       nodeRef: useRef(null),
       children: <PopupSelectProduct />,
+      classNames: 'popup-wrapper',
+      timeout: 200,
+    },
+    {
+      type: 'select',
+      name: 'work-schedule',
+      trigger: storePopup.status.getStatus('selectWorkSchedule'),
+      nodeRef: useRef(null),
+      children: <PopupSelectWorkSchedule />,
       classNames: 'popup-wrapper',
       timeout: 200,
     },

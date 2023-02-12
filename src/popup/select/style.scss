@@ -13,4 +13,19 @@
     padding: 2rem;
     overflow-y: auto;
   }
+
+  &__work-schedule {
+    display: grid;
+    align-items: center;
+    grid-template-columns: 1fr;
+    margin: 2rem 6rem;
+    row-gap: 2rem;
+
+    &-item {
+      display: grid;
+      align-items: center;
+      grid-template-columns: 1fr 2fr 2fr;
+      column-gap: 6rem;
+    }
+  }
 }

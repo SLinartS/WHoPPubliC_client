@@ -3,8 +3,8 @@ import './style.scss';
 import appIcon from '@assets/icons/app.png';
 import passwordIcon from '@assets/icons/password.svg';
 import userIcon from '@assets/icons/user.svg';
-import Button from '@components//button/Button';
-import CheckMark from '@components//checkMark/CheckMark';
+import Button from '@components/button/Button';
+import CheckMark from '@components/checkMark/CheckMark';
 import { observer } from 'mobx-react-lite';
 import { FC, useEffect } from 'react';
 

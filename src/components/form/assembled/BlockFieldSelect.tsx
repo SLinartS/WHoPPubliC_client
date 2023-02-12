@@ -32,7 +32,7 @@ const AssembledBlockFieldSelect: FC<IAssembledBlockFieldSelectProps> = ({
       classes={`${typeForm}-${camelToKebab(fieldName)}`}
     >
       <FormField
-        errors={errors}
+        errors={[errors]}
         classes={`${typeForm}-${camelToKebab(fieldName)}`}
       >
         <FormFieldSelect

@@ -18,6 +18,7 @@ import { StorePopupSelectFloors } from './popup/select/floors/floors';
 import { StorePopupSelectPoints } from './popup/select/points/points';
 import { StorePopupSelectProducts } from './popup/select/products/products';
 import { StorePopupSelectUtils } from './popup/select/utils/utils';
+import { StorePopupSelectWorkSchedules } from './popup/select/workSchedules/workSchedules';
 import { StorePopupStatus } from './popup/status/status';
 import { StorePopupWindowConfirm } from './popup/window/confirm/confirm';
 import { StorePopupWindowInformation } from './popup/window/information/information';
@@ -107,6 +108,7 @@ interface IStorePopup {
     points: StorePopupSelectPoints;
     floors: StorePopupSelectFloors;
     products: StorePopupSelectProducts;
+    workSchedules: StorePopupSelectWorkSchedules;
     utils: {
       utils: StorePopupSelectUtils;
     };
@@ -211,6 +213,7 @@ class RootStore {
         points: new StorePopupSelectPoints(this),
         floors: new StorePopupSelectFloors(this),
         products: new StorePopupSelectProducts(this),
+        workSchedules: new StorePopupSelectWorkSchedules(this),
         utils: {
           utils: new StorePopupSelectUtils(this),
         },

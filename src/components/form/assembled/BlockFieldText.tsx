@@ -27,7 +27,7 @@ const AssembledBlockFieldText: FC<IAssembledBlockFieldTextProps> = ({
       classes={`${typeForm}-${camelToKebab(fieldName)}`}
     >
       <FormField
-        errors={errors}
+        errors={[errors]}
         classes={`${typeForm}-${camelToKebab(fieldName)}`}
       >
         <FormFieldText value={value} />

@@ -94,6 +94,7 @@
     background: color.$font-color--white;
     opacity: 0.5;
     outline: none;
+    box-sizing: border-box;
 
     &--active {
       opacity: 1;
@@ -103,6 +104,16 @@
       border: none;
       border-bottom: 0.2rem solid color.$font-color--black;
       opacity: 1;
+    }
+  }
+
+  &__datetime {
+    display: grid;
+    grid-template-columns: 4fr 3fr;
+    column-gap: 2rem;
+
+    .form-layout__input:nth-child(2) {
+      min-width: 9rem;
     }
   }
 

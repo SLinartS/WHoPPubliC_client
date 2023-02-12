@@ -51,6 +51,10 @@ const PopupFormUser: FC = () => {
     }
   }
 
+  function openSelectWorkSchedulesHandler() {
+    storePopup.status.show('selectWorkSchedule');
+  }
+
   function changeSelectHandler(option: IOption) {
     storePopup.form.user.setFormField('roleId', String(option.id));
   }
@@ -97,7 +101,6 @@ const PopupFormUser: FC = () => {
             typeForm='user'
             fieldName='name'
             titleText='Имя'
-            readonly={false}
             placeholder='Иван'
           />
           <AssembledBlockFieldInput
@@ -107,7 +110,6 @@ const PopupFormUser: FC = () => {
             typeForm='user'
             fieldName='surname'
             titleText='Фамилия'
-            readonly={false}
             placeholder='Иванович'
           />
           <AssembledBlockFieldInput
@@ -117,9 +119,16 @@ const PopupFormUser: FC = () => {
             typeForm='user'
             fieldName='patronymic'
             titleText='Отчество'
-            readonly={false}
             placeholder='Иванов'
           />
+          <div>
+            <button
+              type='button'
+              onClick={openSelectWorkSchedulesHandler}
+            >
+              График работы
+            </button>
+          </div>
         </FormLayout>
 
         <FormLayout classes='contact-info'>
@@ -130,7 +139,6 @@ const PopupFormUser: FC = () => {
             typeForm='user'
             fieldName='email'
             titleText='E-mail'
-            readonly={false}
             placeholder='inan-ivanov-95@mail.ru'
           />
           <AssembledBlockFieldInput
@@ -140,7 +148,6 @@ const PopupFormUser: FC = () => {
             typeForm='user'
             fieldName='phone'
             titleText='Номер телефона'
-            readonly={false}
             placeholder='+7 (925) 161-05-03'
           />
         </FormLayout>
@@ -153,7 +160,6 @@ const PopupFormUser: FC = () => {
             typeForm='user'
             fieldName='login'
             titleText='Логин'
-            readonly={false}
             placeholder='JDU34'
           />
           <AssembledBlockFieldSelect
@@ -172,7 +178,6 @@ const PopupFormUser: FC = () => {
             typeForm='user'
             fieldName='password'
             titleText='Пароль'
-            readonly={false}
             placeholder='*******'
           />
         </FormLayout>

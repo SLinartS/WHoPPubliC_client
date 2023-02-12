@@ -1,7 +1,7 @@
 import './style.scss';
 
 import question404Image from '@assets/icons/404-question.png';
-import Button from '@components//button/Button';
+import Button from '@components/button/Button';
 import { observer } from 'mobx-react-lite';
 import { FC } from 'react';
 import { useNavigate } from 'react-router-dom';

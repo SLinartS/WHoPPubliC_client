@@ -139,7 +139,6 @@ const PopupFormProduct: FC = () => {
             typeForm='product'
             fieldName='title'
             titleText='Название'
-            readonly={false}
             placeholder='Иван-царевич и серый волк'
           />
           <AssembledBlockFieldInput
@@ -149,7 +148,6 @@ const PopupFormProduct: FC = () => {
             typeForm='product'
             fieldName='author'
             titleText='Автор'
-            readonly={false}
             placeholder='Отсутствует'
           />
           <AssembledBlockFieldSelect
@@ -181,7 +179,6 @@ const PopupFormProduct: FC = () => {
             value={storePopup.form.product.getFormField('yearOfPublication')}
             changeHandler={changeFieldHandler}
             errors={storePopup.form.product.getFormErrors('yearOfPublication')}
-            readonly={false}
             placeholder='1998'
           />
           <AssembledBlockFieldInput
@@ -191,7 +188,6 @@ const PopupFormProduct: FC = () => {
             value={storePopup.form.product.getFormField('printingHouse')}
             changeHandler={changeFieldHandler}
             errors={storePopup.form.product.getFormErrors('printingHouse')}
-            readonly={false}
             placeholder='ОФСЕТ МОСКВА'
           />
           <AssembledBlockFieldInput
@@ -201,7 +197,6 @@ const PopupFormProduct: FC = () => {
             value={storePopup.form.product.getFormField('number')}
             changeHandler={changeFieldHandler}
             errors={storePopup.form.product.getFormErrors('number')}
-            readonly={false}
             placeholder='300'
           />
           <AssembledBlockFieldInput
@@ -211,7 +206,6 @@ const PopupFormProduct: FC = () => {
             value={storePopup.form.product.getFormField('publishingHouse')}
             changeHandler={changeFieldHandler}
             errors={storePopup.form.product.getFormErrors('publishingHouse')}
-            readonly={false}
             placeholder='АСТ'
           />
           <AssembledBlockFieldInput
@@ -221,7 +215,6 @@ const PopupFormProduct: FC = () => {
             value={storePopup.form.product.getFormField('printDate')}
             changeHandler={changeFieldHandler}
             errors={storePopup.form.product.getFormErrors('printDate')}
-            readonly={false}
             placeholder='2020.05.26'
           />
         </FormLayout>
@@ -232,7 +225,7 @@ const PopupFormProduct: FC = () => {
             classes='product-points'
           >
             <FormField
-              errors={storePopup.select.points.errors}
+              errors={[storePopup.select.points.errors]}
               classes='product-points'
             >
               <FormFieldPoint clickHandler={openSelectPointsHandler} />

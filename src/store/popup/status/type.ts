@@ -12,5 +12,6 @@ export type TPopups =
   | 'selectMap'
   | 'selectPoints'
   | 'selectProducts'
+  | 'selectWorkSchedule'
   | 'windowConfirm'
   | 'windowInformation';
