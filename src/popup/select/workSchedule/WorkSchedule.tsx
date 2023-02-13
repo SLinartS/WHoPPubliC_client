@@ -42,6 +42,11 @@ const PopupSelectWorkSchedule = () => {
       <div className='popup-select__content'>
         {storeUser.status.get('show') === 'done' ? (
           <div className='popup-select__work-schedule'>
+            <div className='popup-select__work-schedule-item'>
+              <p />
+              <p>Начало</p>
+              <p>Конец</p>
+            </div>
             {(
               Object.keys(
                 storePopup.select.workSchedules.workSchedules,
@@ -65,7 +70,6 @@ const PopupSelectWorkSchedule = () => {
                   typeForm='work-schedule'
                   fieldName='startTime'
                   additionalInformation={indexDayOfWeek}
-                  titleText='Начало рабочего дня'
                   placeholder='08:00'
                 />
                 <AssembledBlockFieldTime
@@ -81,7 +85,6 @@ const PopupSelectWorkSchedule = () => {
                   typeForm='work-schedule'
                   fieldName='endTime'
                   additionalInformation={indexDayOfWeek}
-                  titleText='Конец рабочего дня'
                   placeholder='16:00'
                 />
               </div>

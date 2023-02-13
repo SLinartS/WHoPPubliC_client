@@ -16,7 +16,7 @@ interface IAssembledBlockFieldTimeProps<T, I> {
   typeForm: string;
   fieldName: keyof T;
   additionalInformation: I;
-  titleText: string;
+  titleText?: string;
   readonly?: boolean;
   placeholder?: string;
 }

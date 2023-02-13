@@ -21,7 +21,7 @@ const FormField: FC<IFormFieldProps> = ({ children, errors, classes }) => {
   function displayError() {
     let displayedErrors: string[] = [];
     for (let i = 0; i < errors.length; i += 1) {
-      if (errors[i][0]) {
+      if (errors[i].length > 0) {
         if (
           errors[i][0] === emptyFieldErrorText ||
           errors[i][0] === emptyArrayErrorText

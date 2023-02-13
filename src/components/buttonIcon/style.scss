@@ -6,6 +6,7 @@
   width: 3rem;
   height: 3rem;
   cursor: pointer;
+  user-select: none;
 
   &:hover {
     filter: brightness(1.2);
