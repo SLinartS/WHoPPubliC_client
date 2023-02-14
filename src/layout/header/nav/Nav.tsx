@@ -13,11 +13,11 @@ interface INavProps {
 }
 
 const HeaderNav: FC<INavProps> = ({ isPopup = false }) => {
-  const { storeState } = useRootStore();
+  const { storeAuth } = useRootStore();
 
   function getLinksByUserRole(): IHeaderLinks[] {
     const excludeLinks: TToLinkType[] = [];
-    switch (storeState.user.userData.role) {
+    switch (storeAuth.state.userData.role) {
       case 'admin':
         break;
       case 'operator':

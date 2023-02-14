@@ -10,7 +10,7 @@ import { Link } from 'react-router-dom';
 import HeaderNav from './nav/Nav';
 
 const Header: FC = () => {
-  const { storeState } = useRootStore();
+  const { storeState, storeAuth } = useRootStore();
 
   function showPopupNavHandler(e: MouseEvent) {
     e.stopPropagation();
@@ -36,9 +36,9 @@ const Header: FC = () => {
             />
           </Link>
           <div className='header__user'>
-            <p className='header__user-name'>{storeState.user.userData.name}</p>
+            <p className='header__user-name'>{storeAuth.state.userData.name}</p>
             <p className='header__user-role'>
-              {storeState.user.userData.roleAlias}
+              {storeAuth.state.userData.roleAlias}
             </p>
           </div>
         </div>

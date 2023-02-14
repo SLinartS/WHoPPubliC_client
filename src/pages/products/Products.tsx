@@ -18,7 +18,8 @@ import { useDeleteController } from '../hooks/delete/useDeleteController';
 import PopupFilter from './popupFilter/PopupFilter';
 
 const Products: FC = () => {
-  const { storeProduct, storePopup, storeTable, storeState } = useRootStore();
+  const { storeProduct, storePopup, storeTable, storeState, storeAuth } =
+    useRootStore();
   const deleteController = useDeleteController();
   const fetchOneProductAndFillForm = useFetchOneProductAndFillForm();
   const getSelects = useGetSelects();
@@ -65,7 +66,7 @@ const Products: FC = () => {
     <main className='products'>
       <div className='products__section-button'>
         <SearchField classes='search-field--products' />
-        {storeState.user.userData.role !== 'worker' && (
+        {storeAuth.state.userData.role !== 'worker' && (
           <>
             <ButtonIcon
               src={addIcon}

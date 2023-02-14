@@ -6,10 +6,10 @@ import { observer } from 'mobx-react-lite';
 import { FC } from 'react';
 
 const MainPage: FC = () => {
-  const { storeState } = useRootStore();
+  const { storeAuth } = useRootStore();
 
   function getName() {
-    return storeState.user.userData.name.split(' ').slice(0, 2).join(' ');
+    return storeAuth.state.userData.name.split(' ').slice(0, 2).join(' ');
   }
 
   return (

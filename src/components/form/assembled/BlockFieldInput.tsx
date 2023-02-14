@@ -5,18 +5,21 @@ import FormBlock from '../block/Block';
 import FormField from '../field/Field';
 import FormFieldInput from '../field/input/Input';
 
-interface IAssembledBlockFieldInputProps<T> {
+interface IAssembledBlockFieldInputProps<T, I> {
   value: string;
   errors: string[];
   changeHandler: (newValue: string, fieldName: keyof T) => void;
   typeForm: string;
   fieldName: keyof T;
-  titleText: string;
+  titleText?: string;
   readonly?: boolean;
   placeholder?: string;
+  classes?: string;
+  onFocusHandler?: (status: boolean, additionalInformation: I) => void;
+  additionalInformation?: I;
 }
 
-const AssembledBlockFieldInput = <T extends unknown>({
+const AssembledBlockFieldInput = <T, I extends unknown>({
   typeForm,
   fieldName,
   titleText,
@@ -25,7 +28,10 @@ const AssembledBlockFieldInput = <T extends unknown>({
   value,
   readonly = false,
   placeholder,
-}: IAssembledBlockFieldInputProps<T>) => {
+  classes,
+  onFocusHandler,
+  additionalInformation,
+}: IAssembledBlockFieldInputProps<T, I>) => {
   return (
     <FormBlock
       titleText={titleText}
@@ -41,6 +47,9 @@ const AssembledBlockFieldInput = <T extends unknown>({
           fieldName={fieldName}
           readonly={readonly}
           placeholder={placeholder}
+          classes={classes}
+          onFocusHandler={onFocusHandler}
+          additionalInformation={additionalInformation}
         />
       </FormField>
     </FormBlock>

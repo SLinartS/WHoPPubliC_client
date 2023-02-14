@@ -68,6 +68,10 @@
     text-align: right;
     font-weight: 700;
     opacity: 0.5;
+
+    &--active {
+      opacity: 1;
+    }
   }
 
   &__input {
@@ -88,10 +92,6 @@
     &:focus {
       border: none;
       border-bottom: 0.2rem solid color.$font-color--black;
-      opacity: 1;
-    }
-
-    &:focus + img {
       opacity: 1;
     }
   }

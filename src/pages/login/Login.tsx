@@ -5,13 +5,52 @@ import passwordIcon from '@assets/icons/password.svg';
 import userIcon from '@assets/icons/user.svg';
 import Button from '@components/button/Button';
 import CheckMark from '@components/checkMark/CheckMark';
+import BlockFieldInput from '@components/form/assembled/BlockFieldInput';
+import { useRootStore } from '@helpers/RootStoreProvider/useRootStore';
+import { IAuthorizationData } from '@store/authorization/type';
 import { observer } from 'mobx-react-lite';
-import { FC, useEffect } from 'react';
+import { FC, useRef } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 import loginWarehouseImage from '../../assets/images/login-warehouse.png';
+import { useIsLoginError } from '../hooks/errors/useIsUserErrors';
 
 const LoginPage: FC = () => {
-  useEffect(() => {}, []);
+  const { storeAuth, storePopup } = useRootStore();
+  const imgRefs = {
+    login: useRef<HTMLImageElement>(null),
+    password: useRef<HTMLImageElement>(null),
+  };
+  const isLoginError = useIsLoginError();
+  const navigate = useNavigate();
+
+  function changeFieldHandler(
+    newValue: string,
+    fieldName: keyof IAuthorizationData,
+  ) {
+    storeAuth.state.setAuthField(fieldName, newValue);
+  }
+
+  function onFocusHandler(
+    status: boolean,
+    additionalInfo: keyof typeof imgRefs,
+  ) {
+    if (status) {
+      imgRefs[additionalInfo].current?.classList.add('login__icon--active');
+    } else {
+      imgRefs[additionalInfo].current?.classList.remove('login__icon--active');
+    }
+  }
+
+  function loginHandler() {
+    if (!isLoginError()) {
+      storeAuth.action.authorization(() => {
+        navigate('/');
+      });
+    } else {
+      storePopup.form.state.isDisplayDefaultErrors = true;
+    }
+  }
 
   return (
     <main className='login'>
@@ -33,27 +72,42 @@ const LoginPage: FC = () => {
         </div>
         <h3 className='login__title'>Авторизация</h3>
         <div className='login__inputs-block'>
-          <input
-            type='text'
-            className='login__input'
-            placeholder='Логин'
-          />
           <img
+            ref={imgRefs.login}
             draggable='false'
             className='login__icon'
             src={userIcon}
             alt='user'
           />
-          <input
-            type='text'
-            className='login__input'
-            placeholder='Пароль'
+          <BlockFieldInput
+            value={storeAuth.state.auth.login.value}
+            errors={storeAuth.state.auth.login.errors}
+            changeHandler={changeFieldHandler}
+            fieldName='login'
+            typeForm=''
+            placeholder='Логин'
+            classes='login__input'
+            onFocusHandler={onFocusHandler}
+            additionalInformation='login'
           />
+
           <img
+            ref={imgRefs.password}
             draggable='false'
             className='login__icon'
             src={passwordIcon}
             alt='user'
+          />
+          <BlockFieldInput
+            value={storeAuth.state.auth.password.value}
+            errors={storeAuth.state.auth.password.errors}
+            changeHandler={changeFieldHandler}
+            fieldName='password'
+            typeForm=''
+            placeholder='Пароль'
+            classes='login__input'
+            onFocusHandler={onFocusHandler}
+            additionalInformation='password'
           />
         </div>
         <div className='login__low-block'>
@@ -66,6 +120,7 @@ const LoginPage: FC = () => {
           <Button
             classes='button--login'
             text='Войти'
+            clickHandler={loginHandler}
           />
         </div>
       </div>

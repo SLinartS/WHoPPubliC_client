@@ -1,5 +1,8 @@
 import { configure } from 'mobx';
 
+import { StoreAuthorizationAction } from './authorization/action';
+import { StoreAuthorization } from './authorization/state';
+import { StoreAuthorizationStatus } from './authorization/status';
 import { StoreCategoryAction } from './category/action';
 import { StoreCategory } from './category/state';
 import { StoreCategoryStatus } from './category/status';
@@ -30,7 +33,6 @@ import { StoreRole } from './roles/state';
 import { StoreRoleStatus } from './roles/status';
 import { StoreStateCheckMark } from './state/checkMark';
 import { StoreStateInterface } from './state/interface';
-import { StoreStateUser } from './state/user';
 import { StoreTableSelectedItem } from './table/selectedItem/selectedItem';
 import { StoreTableUtils } from './table/utils';
 import { StoreTaskAction } from './task/action';
@@ -45,12 +47,15 @@ configure({
   enforceActions: 'always',
 });
 
-type IStoreUtils = StoreUtils;
+interface IStoreAuthorization {
+  state: StoreAuthorization;
+  status: StoreAuthorizationStatus;
+  action: StoreAuthorizationAction;
+}
 
 interface IStoreState {
   interface: StoreStateInterface;
   checkMark: StoreStateCheckMark;
-  user: StoreStateUser;
 }
 
 interface IStoreTask {
@@ -127,7 +132,9 @@ interface IStoreTable {
 class RootStore {
   private static instance: RootStore;
 
-  public storeUtils: IStoreUtils;
+  public storeAuth: IStoreAuthorization;
+
+  public storeUtils: StoreUtils;
 
   public storeState: IStoreState;
 
@@ -150,12 +157,17 @@ class RootStore {
   public storeTable: IStoreTable;
 
   private constructor() {
+    this.storeAuth = {
+      state: new StoreAuthorization(this),
+      status: new StoreAuthorizationStatus(this),
+      action: new StoreAuthorizationAction(this),
+    };
+
     this.storeUtils = new StoreUtils(this);
 
     this.storeState = {
       interface: new StoreStateInterface(this),
       checkMark: new StoreStateCheckMark(this),
-      user: new StoreStateUser(this),
     };
 
     this.storeTask = {

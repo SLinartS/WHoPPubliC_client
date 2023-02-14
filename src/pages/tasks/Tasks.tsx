@@ -18,7 +18,8 @@ import { useDeleteController } from '../hooks/delete/useDeleteController';
 import { TASK_TYPES_FOR_SWITCHER } from './taskForSwitcher';
 
 const Tasks: FC = () => {
-  const { storeTask, storePopup, storeTable, storeState } = useRootStore();
+  const { storeTask, storePopup, storeTable, storeState, storeAuth } =
+    useRootStore();
   const deleteController = useDeleteController();
   const fetchOneTaskAndFillForm = useFetchOneTaskAndFillForm();
 
@@ -89,7 +90,7 @@ const Tasks: FC = () => {
     <main className='tasks'>
       <div className='tasks__section-button'>
         <SearchField classes='search-field--tasks' />
-        {storeState.user.userData.role !== 'worker' ? (
+        {storeAuth.state.userData.role !== 'worker' ? (
           <>
             <ButtonIcon
               src={addIcon}
