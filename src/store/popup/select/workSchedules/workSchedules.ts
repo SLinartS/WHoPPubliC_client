@@ -1,5 +1,8 @@
 import FormFieldValidator from '@helpers/formValidator/formFieldValidator';
-import { INITIAL_VALUE } from '@store/popup/form/config';
+import {
+  INITIAL_VALUE_TIME_END,
+  INITIAL_VALUE_TIME_START,
+} from '@store/popup/form/config';
 import { makeAutoObservable } from 'mobx';
 
 import deepCopy from '../../../../utils/deepCopy/deepCopy';
@@ -12,8 +15,8 @@ export class StorePopupSelectWorkSchedules {
   }
 
   private readonly initialWorkSchedule: IOneWorkScheduleSelectData = {
-    startTime: INITIAL_VALUE,
-    endTime: INITIAL_VALUE,
+    startTime: INITIAL_VALUE_TIME_START,
+    endTime: INITIAL_VALUE_TIME_END,
   };
 
   private readonly initialFormData: TWorkScheduleSelectData = {
