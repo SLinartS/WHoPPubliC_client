@@ -12,6 +12,7 @@ export class StoreMapAction {
 
   public *fetch() {
     try {
+      this.root.storeMap.status.set('fetch', 'during');
       const response: AxiosResponse<IZone[]> =
         yield extendAxios.get<AxiosResponse>('map');
       this.root.storeMap.state.map = response.data;
@@ -23,6 +24,7 @@ export class StoreMapAction {
 
   public *update(actionIfDone?: () => void) {
     try {
+      this.root.storeMap.status.set('update', 'during');
       const requestZoneData: IRequestMap = {
         zone: this.root.storePopup.form.map.currentZone,
       };
@@ -39,6 +41,7 @@ export class StoreMapAction {
 
   public *destroy(zoneId: number, actionIfDone?: () => void) {
     try {
+      this.root.storeMap.status.set('destroy', 'during');
       yield extendAxios.delete(`map/${zoneId}`);
 
       this.root.storeMap.status.set('destroy', 'done');

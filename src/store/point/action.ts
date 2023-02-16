@@ -12,6 +12,7 @@ export class StorePointAction {
 
   public *fetch() {
     try {
+      this.root.storePoint.status.set('fetch', 'during');
       const response: AxiosResponse<IPoints> =
         yield extendAxios.get<AxiosResponse>('points');
       this.root.storePoint.state.points = response.data;

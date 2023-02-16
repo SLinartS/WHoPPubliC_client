@@ -46,6 +46,7 @@ const LoginPage: FC = () => {
     if (!isLoginError()) {
       storeAuth.action.authorization(() => {
         navigate('/');
+        storeAuth.state.clearAuth();
       });
     } else {
       storePopup.form.state.isDisplayDefaultErrors = true;

@@ -1,8 +1,9 @@
 import './style.scss';
 
 import TransitionCustom from '@components/transition/Transition';
+import { useRouterProtect } from '@hooks/useRouterProtect/useRouterProtect';
 import { observer } from 'mobx-react-lite';
-import { useRef } from 'react';
+import { useEffect, useRef } from 'react';
 import { useLocation, useOutlet } from 'react-router-dom';
 import { CSSTransition, SwitchTransition } from 'react-transition-group';
 import Popup from 'src/popup/Popup';
@@ -12,6 +13,7 @@ import usePopupList from './usePopupsList';
 
 const Layout = () => {
   const POPUPS = usePopupList();
+  const routerProtect = useRouterProtect();
 
   const location = useLocation();
 
@@ -20,6 +22,10 @@ const Layout = () => {
   const pagesRef = useRef<HTMLDivElement>(null);
 
   const currentOutlet = useOutlet();
+
+  useEffect(() => {
+    routerProtect(location.pathname.substring(1));
+  }, []);
 
   return (
     <>

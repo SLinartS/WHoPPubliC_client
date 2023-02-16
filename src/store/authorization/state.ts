@@ -4,7 +4,7 @@ import RootStore from '@store/root';
 import deepCopy from '@utils/deepCopy/deepCopy';
 import { makeAutoObservable } from 'mobx';
 
-import { IAuthorizationData, IUser } from './type';
+import { IAuthorizationData, IUserData } from './type';
 
 export class StoreAuthorization {
   constructor(private readonly root: RootStore) {
@@ -16,18 +16,33 @@ export class StoreAuthorization {
     password: INITIAL_VALUE,
   };
 
-  private readonly initialUserData: IUser = {
+  private readonly initialUserData: IUserData = {
     id: 0,
     login: '',
     name: '',
-    token: '',
-    role: null,
+    role: '',
     roleAlias: '',
   };
 
-  private _auth: IAuthorizationData = deepCopy(this.initialAuthData);
+  private _userData: IUserData = deepCopy(this.initialUserData);
 
-  private _userData: IUser = deepCopy(this.initialUserData);
+  public get isAuth(): boolean {
+    return Boolean(this._userData.id);
+  }
+
+  public get userData(): IUserData {
+    return this._userData;
+  }
+
+  public set userData(newUserData: IUserData) {
+    this._userData = newUserData;
+  }
+
+  public clearUserData() {
+    this._userData = deepCopy(this.initialUserData);
+  }
+
+  private _auth: IAuthorizationData = deepCopy(this.initialAuthData);
 
   public get auth() {
     return this._auth;
@@ -52,26 +67,6 @@ export class StoreAuthorization {
 
   public clearAuth() {
     this._auth = deepCopy(this.initialAuthData);
-  }
-
-  public getTokenAuth() {
-    return this._userData.token;
-  }
-
-  public clearToken() {
-    this._userData.token = '';
-  }
-
-  public get isAuth(): boolean {
-    return Boolean(this._userData.id);
-  }
-
-  public get userData(): IUser {
-    return this._userData;
-  }
-
-  public set userData(newUserData: IUser) {
-    this._userData = newUserData;
   }
 
   private checkErrorsExist(

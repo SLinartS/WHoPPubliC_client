@@ -11,6 +11,7 @@ export class StoreRoleAction {
 
   public *fetch() {
     try {
+      this.root.storeRole.status.set('fetch', 'during');
       const response: AxiosResponse<IOption[]> =
         yield extendAxios.get<AxiosResponse>('roles');
 

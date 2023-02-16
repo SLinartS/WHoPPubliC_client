@@ -5,18 +5,31 @@ export interface IAuthorizationData {
   password: TValueOrErrorType;
 }
 
-export interface IUser {
+export interface IUserData {
   id: number;
   login: string;
   name: string;
-  token: string;
   role: TUserRole;
   roleAlias: string;
 }
 
-export type TUserRole = null | 'worker' | 'operator' | 'admin';
+export interface ITokens {
+  access: string;
+  refresh: string;
+}
+
+export interface IResponseUserData {
+  userData: IUserData;
+  tokens: ITokens;
+}
+
+export type TUserRole = '' | 'worker' | 'operator' | 'admin';
 
 export interface IRequestLoginData {
   login: string;
   password: string;
+}
+
+export interface IRequestLogoutData {
+  userId: number;
 }

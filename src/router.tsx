@@ -1,3 +1,4 @@
+import AxiosInterceptor from '@helpers/AxiosInterceptor/AxiosInterceptor';
 import { createBrowserRouter } from 'react-router-dom';
 
 import ErrorPage from './layout/errorPage/ErrorPage';
@@ -13,7 +14,11 @@ import Users from './pages/users/Users';
 const router = createBrowserRouter([
   {
     path: '/',
-    element: <Layout />,
+    element: (
+      <AxiosInterceptor>
+        <Layout />
+      </AxiosInterceptor>
+    ),
     errorElement: <ErrorPage />,
     children: [
       {

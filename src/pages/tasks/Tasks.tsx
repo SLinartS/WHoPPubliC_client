@@ -76,13 +76,15 @@ const Tasks: FC = () => {
         <p className='tasks__empty-text'>Отсутствуют добавленные задачи</p>
       );
     }
-    storeTask.action.fetch(typeOfTask, () => {
-      storeTable.utils.setDefaulMark(
-        'tasks',
-        storeTask.state.getTasks(typeOfTask),
-        [],
-      );
-    });
+    if (storeTask.status.getFetch(typeOfTask) === 'pending') {
+      storeTask.action.fetch(typeOfTask, () => {
+        storeTable.utils.setDefaulMark(
+          'tasks',
+          storeTask.state.getTasks(typeOfTask),
+          [],
+        );
+      });
+    }
     return <Loader classes='loader--task-table' />;
   }
 
