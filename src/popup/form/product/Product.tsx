@@ -210,11 +210,11 @@ const PopupFormProduct: FC = () => {
           />
           <AssembledBlockFieldInput
             typeForm='product'
-            fieldName='printDate'
+            fieldName='yearOfPrinting'
             titleText='Дата печати'
-            value={storePopup.form.product.getFormField('printDate')}
+            value={storePopup.form.product.getFormField('yearOfPrinting')}
             changeHandler={changeFieldHandler}
-            errors={storePopup.form.product.getFormErrors('printDate')}
+            errors={storePopup.form.product.getFormErrors('yearOfPrinting')}
             placeholder='2020.05.26'
           />
         </FormLayout>

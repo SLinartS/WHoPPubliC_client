@@ -25,7 +25,7 @@ const Layout = () => {
 
   useEffect(() => {
     routerProtect(location.pathname.substring(1));
-  }, []);
+  }, [location.pathname]);
 
   return (
     <>

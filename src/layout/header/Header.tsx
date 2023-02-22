@@ -2,15 +2,18 @@ import './style.scss';
 
 import appIcon from '@assets/icons/app.png';
 import barsIcon from '@assets/icons/bars.svg';
+import logoutIcon from '@assets/icons/logout.svg';
+import ButtonIcon from '@components/buttonIcon/ButtonIcon';
 import { useRootStore } from '@helpers/RootStoreProvider/useRootStore';
 import { observer } from 'mobx-react-lite';
 import { FC, MouseEvent } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 import HeaderNav from './nav/Nav';
 
 const Header: FC = () => {
   const { storeState, storeAuth } = useRootStore();
+  const navigate = useNavigate();
 
   function showPopupNavHandler(e: MouseEvent) {
     e.stopPropagation();
@@ -19,6 +22,12 @@ const Header: FC = () => {
 
   function hidePopupNavHandler() {
     storeState.interface.hidePopupNav();
+  }
+
+  function logoutHandler() {
+    storeAuth.action.logout(() => {
+      navigate('/login');
+    });
   }
 
   return (
@@ -41,6 +50,12 @@ const Header: FC = () => {
               {storeAuth.state.userData.roleAlias}
             </p>
           </div>
+          <ButtonIcon
+            src={logoutIcon}
+            classes='header__logout'
+            alt='logout'
+            clickHandler={logoutHandler}
+          />
         </div>
         <HeaderNav />
 

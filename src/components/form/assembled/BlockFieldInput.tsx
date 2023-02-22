@@ -1,5 +1,6 @@
 import { camelToKebab } from '@utils/stringStyleConvert/camelToKebab';
 import { observer } from 'mobx-react-lite';
+import { HTMLInputTypeAttribute } from 'react';
 
 import FormBlock from '../block/Block';
 import FormField from '../field/Field';
@@ -15,8 +16,13 @@ interface IAssembledBlockFieldInputProps<T, I> {
   readonly?: boolean;
   placeholder?: string;
   classes?: string;
-  onFocusHandler?: (status: boolean, additionalInformation: I) => void;
+  onFocusHandler?: (
+    status: boolean,
+    additionalInformation: I,
+    isHaveValue: boolean,
+  ) => void;
   additionalInformation?: I;
+  inputType?: HTMLInputTypeAttribute;
 }
 
 const AssembledBlockFieldInput = <T, I extends unknown>({
@@ -31,6 +37,7 @@ const AssembledBlockFieldInput = <T, I extends unknown>({
   classes,
   onFocusHandler,
   additionalInformation,
+  inputType = 'text',
 }: IAssembledBlockFieldInputProps<T, I>) => {
   return (
     <FormBlock
@@ -50,6 +57,7 @@ const AssembledBlockFieldInput = <T, I extends unknown>({
           classes={classes}
           onFocusHandler={onFocusHandler}
           additionalInformation={additionalInformation}
+          inputType={inputType}
         />
       </FormField>
     </FormBlock>

@@ -14,12 +14,17 @@ export function useRouterProtect() {
       navigate('/login');
     }
     if (['operator'].includes(storeAuth.state.userData.role)) {
-      if (['users'].includes(route)) {
+      if (!['points', 'map', 'tasks', 'products'].includes(route)) {
         navigate('/');
       }
     }
     if (['worker'].includes(storeAuth.state.userData.role)) {
-      if (['users', 'products'].includes(route)) {
+      if (!['points', 'map', 'tasks'].includes(route)) {
+        navigate('/');
+      }
+    }
+    if (['admin'].includes(storeAuth.state.userData.role)) {
+      if (!['points', 'map', 'tasks', 'products', 'users'].includes(route)) {
         navigate('/');
       }
     }

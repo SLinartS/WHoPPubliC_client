@@ -7,7 +7,7 @@ export interface IProductFormDataFields {
   author: TValueOrErrorType;
   yearOfPublication: TValueOrErrorType;
   number: TValueOrErrorType;
-  printDate: TValueOrErrorType;
+  yearOfPrinting: TValueOrErrorType;
   printingHouse: TValueOrErrorType;
   publishingHouse: TValueOrErrorType;
   categoryId: TValueOrErrorType;

@@ -13,7 +13,7 @@ const initialOneProduct: IOneProduct = {
     author: INITIAL_VALUE_STRING,
     yearOfPublication: INITIAL_VALUE_STRING,
     number: INITIAL_VALUE_NUMBER,
-    printDate: INITIAL_VALUE_STRING,
+    yearOfPrinting: INITIAL_VALUE_STRING,
     printingHouse: INITIAL_VALUE_STRING,
     publishingHouse: INITIAL_VALUE_STRING,
     categoryTitle: INITIAL_VALUE_STRING,

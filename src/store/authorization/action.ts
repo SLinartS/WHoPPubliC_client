@@ -42,6 +42,7 @@ export class StoreAuthorizationAction {
     try {
       yield extendAxios.post<AxiosResponse>('/logout', requestData);
       this.root.storeAuth.state.clearUserData();
+      localStorage.clear();
       this.root.storeAuth.status.set('auth', 'done');
       actionIfDone();
     } catch (error) {

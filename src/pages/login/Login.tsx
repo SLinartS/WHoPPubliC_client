@@ -34,8 +34,9 @@ const LoginPage: FC = () => {
   function onFocusHandler(
     status: boolean,
     additionalInfo: keyof typeof imgRefs,
+    isHaveValue: boolean,
   ) {
-    if (status) {
+    if (status || isHaveValue) {
       imgRefs[additionalInfo].current?.classList.add('login__icon--active');
     } else {
       imgRefs[additionalInfo].current?.classList.remove('login__icon--active');
@@ -59,7 +60,7 @@ const LoginPage: FC = () => {
         draggable='false'
         className='login__left-image'
         src={loginWarehouseImage}
-        alt='loginWaregouse'
+        alt='loginWarehouse'
       />
       <div className='login__container'>
         <div className='login__info-block'>
@@ -109,6 +110,7 @@ const LoginPage: FC = () => {
             classes='login__input'
             onFocusHandler={onFocusHandler}
             additionalInformation='password'
+            inputType='password'
           />
         </div>
         <div className='login__low-block'>

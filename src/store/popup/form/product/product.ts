@@ -18,7 +18,7 @@ export class StorePopupFormProduct {
     author: INITIAL_VALUE,
     yearOfPublication: INITIAL_VALUE,
     number: INITIAL_VALUE,
-    printDate: INITIAL_VALUE,
+    yearOfPrinting: INITIAL_VALUE,
     printingHouse: INITIAL_VALUE,
     publishingHouse: INITIAL_VALUE,
     categoryId: {
@@ -77,7 +77,7 @@ export class StorePopupFormProduct {
         validator.notEmpty().hasOnlyDigits().outOfRange(1, 100000);
         break;
 
-      case 'printDate':
+      case 'yearOfPrinting':
         validator.notEmpty().dateFormat('dd.MM.yyyy', 'дд.ММ.гггг');
         break;
 

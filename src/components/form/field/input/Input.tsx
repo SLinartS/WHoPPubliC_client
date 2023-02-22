@@ -1,5 +1,6 @@
 import { TChangeFieldEvent } from '@gtypes/form/type';
 import { observer } from 'mobx-react-lite';
+import { HTMLInputTypeAttribute } from 'react';
 
 interface IFormFieldInputProps<T, I> {
   fieldName: keyof T;
@@ -8,8 +9,13 @@ interface IFormFieldInputProps<T, I> {
   readonly: boolean;
   placeholder?: string;
   classes?: string;
-  onFocusHandler?: (status: boolean, additionalInformation: I) => void;
+  onFocusHandler?: (
+    status: boolean,
+    additionalInformation: I,
+    isHaveValue: boolean,
+  ) => void;
   additionalInformation?: I;
+  inputType?: HTMLInputTypeAttribute;
 }
 
 const FormFieldInput = <T, I>({
@@ -21,6 +27,7 @@ const FormFieldInput = <T, I>({
   classes,
   onFocusHandler,
   additionalInformation,
+  inputType = 'text',
 }: IFormFieldInputProps<T, I>) => {
   function changeFieldHandler(e: TChangeFieldEvent) {
     changeHandler(e.target.value, fieldName);
@@ -28,12 +35,12 @@ const FormFieldInput = <T, I>({
 
   function onFocus() {
     if (onFocusHandler && additionalInformation) {
-      onFocusHandler(true, additionalInformation);
+      onFocusHandler(true, additionalInformation, Boolean(value));
     }
   }
   function onBlur() {
     if (onFocusHandler && additionalInformation) {
-      onFocusHandler(false, additionalInformation);
+      onFocusHandler(false, additionalInformation, Boolean(value));
     }
   }
 
@@ -48,6 +55,7 @@ const FormFieldInput = <T, I>({
       placeholder={placeholder}
       onFocus={onFocus}
       onBlur={onBlur}
+      type={inputType}
     />
   );
 };
