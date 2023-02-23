@@ -9,7 +9,7 @@ import BlockFieldInput from '@components/form/assembled/BlockFieldInput';
 import { useRootStore } from '@helpers/RootStoreProvider/useRootStore';
 import { IAuthorizationData } from '@store/authorization/type';
 import { observer } from 'mobx-react-lite';
-import { FC, useRef } from 'react';
+import { FC, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import loginWarehouseImage from '../../assets/images/login-warehouse.png';
@@ -17,6 +17,8 @@ import { useIsLoginError } from '../hooks/errors/useIsUserErrors';
 
 const LoginPage: FC = () => {
   const { storeAuth, storePopup } = useRootStore();
+  const [isSubmitButtonDisabled, setIsSubmitButtonDisabled] =
+    useState<boolean>(false);
   const imgRefs = {
     login: useRef<HTMLImageElement>(null),
     password: useRef<HTMLImageElement>(null),
@@ -45,9 +47,11 @@ const LoginPage: FC = () => {
 
   function loginHandler() {
     if (!isLoginError()) {
+      setIsSubmitButtonDisabled(true);
       storeAuth.action.authorization(() => {
         navigate('/');
         storeAuth.state.clearAuth();
+        setIsSubmitButtonDisabled(false);
       });
     } else {
       storePopup.form.state.isDisplayDefaultErrors = true;
@@ -124,6 +128,7 @@ const LoginPage: FC = () => {
             classes='button--login'
             text='Войти'
             clickHandler={loginHandler}
+            isDisabled={isSubmitButtonDisabled}
           />
         </div>
       </div>

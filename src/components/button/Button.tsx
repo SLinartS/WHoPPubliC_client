@@ -8,14 +8,21 @@ interface IButtonProps {
   classes?: string;
   text: string;
   clickHandler?: TMouseButtonEventHandler;
+  isDisabled?: boolean;
 }
 
-const Button: FC<IButtonProps> = ({ classes, text, clickHandler }) => {
+const Button: FC<IButtonProps> = ({
+  classes,
+  text,
+  clickHandler,
+  isDisabled = false,
+}) => {
   return (
     <button
       type='button'
       onClick={clickHandler}
       className={`button ${classes}`}
+      disabled={isDisabled}
     >
       {text}
     </button>

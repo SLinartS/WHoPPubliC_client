@@ -5,7 +5,7 @@
 .header {
   @extend %flex-center;
 
-  height: variable.$header-height--standart;
+  height: variable.$header-height--standard;
   justify-content: space-between;
   background-color: color.$main-color;
   color: color.$font-color--white;
@@ -49,7 +49,7 @@
 
     &-block {
       @extend %flex-center;
-      @extend %standart-transition;
+      @extend %standard-transition;
 
       height: 100%;
       padding: 0 1.6rem;

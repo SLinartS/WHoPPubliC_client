@@ -2,7 +2,7 @@
 @use '@styles/templates.scss';
 
 .button {
-  @extend %standart-transition;
+  @extend %standard-transition;
 
   position: relative;
   border: none;
