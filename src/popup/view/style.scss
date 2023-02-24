@@ -16,6 +16,12 @@
       grid-template-rows: 8rem 1fr;
       column-gap: 0;
     }
+
+    &--map-products {
+      grid-template-columns: 100%;
+      grid-template-rows: 100%;
+      column-gap: 0;
+    }
   }
 
   &__table-block {
@@ -23,12 +29,17 @@
     overflow-x: hidden;
     background-color: color.$font-color--white;
     grid-column: 1/4;
+    height: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
     padding: 0 2rem;
 
     &--view-location {
+      padding: 2rem 0 2rem 2rem;
+    }
+
+    &--map-products {
       padding: 2rem 0 2rem 2rem;
     }
   }

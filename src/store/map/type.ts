@@ -23,6 +23,7 @@ export interface IFloor {
   capacity: number;
   freeSpace: number;
   reservedSpace: number;
+  productIds: number[];
 }
 
 export interface IRequestMap {

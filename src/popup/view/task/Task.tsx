@@ -160,7 +160,7 @@ const PopupViewTask: FC = () => {
               valuesType='products'
               selectingValues='products'
               displayedColumns={storeTable.utils.getColumnsWithMark('products')}
-              classes='table--add-task'
+              classes='table--view-task'
             />
           ) : (
             <div className='popup--form-add-task__absence-product'>

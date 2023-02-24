@@ -66,14 +66,14 @@
     text-align: center;
     visibility: hidden;
     opacity: 0;
-    z-index: 1;
+    z-index: 6;
 
     &-image {
       position: absolute;
       right: 1rem;
       top: 50%;
       transform: translate(0, -50%);
-      z-index: 1;
+      z-index: 6;
       cursor: pointer;
 
       &:hover + .form-layout__error {

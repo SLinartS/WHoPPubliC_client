@@ -25,6 +25,7 @@ export class StorePopupStatus {
     formUser: false,
     viewTask: false,
     viewLocation: false,
+    viewMapProducts: false,
     selectMap: false,
     selectPoints: false,
     selectProducts: false,

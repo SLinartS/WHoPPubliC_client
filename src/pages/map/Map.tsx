@@ -19,16 +19,22 @@ const MapPage: FC = () => {
 
   useEffect(() => {
     if (storeMap.status.get('fetch') === 'pending') {
-      storeMap.action.fetch();
+      storeMap.action.fetch('');
     }
   }, [storeMap.status.get('fetch')]);
+
+  function searchHandler(newValue: string) {
+    storeMap.action.fetch(newValue);
+  }
 
   return (
     <main className='map'>
       <div className='map__search'>
-        <SearchField />
+        <SearchField searchHandler={searchHandler} />
       </div>
-      {storeMap.status.get('fetch') === 'done' ? (
+      {storeMap.status.get('fetch') === 'pending' ? (
+        <Loader classes='loader--map' />
+      ) : (
         <div className='map__container'>
           <ButtonIcon
             src={gearIcon}
@@ -39,8 +45,6 @@ const MapPage: FC = () => {
           />
           <Map isEditZoneButton={editMap} />
         </div>
-      ) : (
-        <Loader classes='loader--map' />
       )}
     </main>
   );

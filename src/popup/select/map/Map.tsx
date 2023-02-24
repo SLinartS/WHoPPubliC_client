@@ -22,7 +22,7 @@ const PopupSelectMap: FC = () => {
   function closeHandler() {
     storePopup.status.hide('selectMap');
     storePopup.select.floors.clear();
-    storeMap.action.fetch();
+    storeMap.action.fetch('');
   }
 
   useEffect(() => {
@@ -39,7 +39,7 @@ const PopupSelectMap: FC = () => {
 
   useEffect(() => {
     if (storeMap.status.get('fetch') === 'pending') {
-      storeMap.action.fetch();
+      storeMap.action.fetch('');
     }
   }, [storeMap.status.get('fetch')]);
 

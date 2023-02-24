@@ -2,6 +2,7 @@
 @use '@styles/templates.scss';
 
 .table {
+  width: calc(100% - 1rem);
   display: grid;
   grid-template-columns: repeat(6, auto);
   row-gap: 0.5rem;

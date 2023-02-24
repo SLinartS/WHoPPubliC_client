@@ -15,7 +15,7 @@ const FormFieldSelect: FC<IFormFieldSelectProps> = ({
   currentOption,
   changeHandler,
 }) => {
-  const [isOpenDowndrop, setIsOpenDownDrop] = useState<boolean>(false);
+  const [isOpenDownDrop, setIsOpenDownDrop] = useState<boolean>(false);
 
   function changeFieldHandler(option: IOption) {
     changeHandler(option);
@@ -57,12 +57,12 @@ const FormFieldSelect: FC<IFormFieldSelectProps> = ({
       <button
         type='button'
         className='custom-select__button'
-        onClick={() => setIsOpenDownDrop(!isOpenDowndrop)}
+        onClick={() => setIsOpenDownDrop(!isOpenDownDrop)}
       >
         {getText()}
       </button>
-      {isOpenDowndrop && (
-        <div className='custom-select__downdrop'>
+      {isOpenDownDrop && (
+        <div className='custom-select__down-drop'>
           {options.map((option) => (
             <div
               className={`custom-select__option ${

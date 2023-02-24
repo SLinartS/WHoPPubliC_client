@@ -53,7 +53,7 @@ const PopupViewLocation: FC = () => {
 
   useEffect(() => {
     if (storeMap.status.get('fetch') === 'pending') {
-      storeMap.action.fetch();
+      storeMap.action.fetch('');
     }
   }, [storeMap.status.get('fetch')]);
 

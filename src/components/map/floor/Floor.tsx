@@ -3,6 +3,7 @@ import { IFloor } from '@store/map/type';
 import { observer } from 'mobx-react-lite';
 import { FC } from 'react';
 
+import { useMapProductOpenHandler } from '../hooks/mapProduct/useMapProductOpenHandler';
 import { useGetFloorClasses } from '../hooks/useGetFloorClasses';
 import { useGetFloorStyles } from '../hooks/useGetFloorStyles';
 
@@ -16,6 +17,7 @@ const MapFloor: FC<IMapFloorProps> = ({
   capacity,
   freeSpace,
   reservedSpace,
+  productIds,
   index,
 }) => {
   const { storePopup } = useRootStore();
@@ -27,6 +29,7 @@ const MapFloor: FC<IMapFloorProps> = ({
     reservedSpace,
   );
   const floorClasses = useGetFloorClasses(id);
+  const openMapProductsHandler = useMapProductOpenHandler(productIds);
 
   function chooseFloor() {
     if (storePopup.form.state.isSelectedMap) {
@@ -49,7 +52,14 @@ const MapFloor: FC<IMapFloorProps> = ({
       data-floor-reserved-space={reservedSpace}
       style={floorStyles}
       onClick={chooseFloor}
-    />
+    >
+      <div
+        className={`map-block__floor-link ${
+          productIds.length ? 'map-block__floor-link--active' : ''
+        }`}
+        onClick={openMapProductsHandler}
+      />
+    </div>
   );
 };
 

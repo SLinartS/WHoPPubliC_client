@@ -10,11 +10,13 @@ export class StoreMapAction {
     makeAutoObservable(this, {});
   }
 
-  public *fetch() {
+  public *fetch(search: string) {
     try {
       this.root.storeMap.status.set('fetch', 'during');
       const response: AxiosResponse<IZone[]> =
-        yield extendAxios.get<AxiosResponse>('map');
+        yield extendAxios.get<AxiosResponse>(
+          `map${search ? `?search=${search}` : ''}`,
+        );
       this.root.storeMap.state.map = response.data;
       this.root.storeMap.status.set('fetch', 'done');
     } catch (error) {

@@ -11,6 +11,7 @@ import PopupSelectPoints from '../popup/select/points/Points';
 import PopupSelectProduct from '../popup/select/product/Product';
 import PopupSelectWorkSchedule from '../popup/select/workSchedule/WorkSchedule';
 import PopupViewLocation from '../popup/view/location/Location';
+import PopupViewMapProducts from '../popup/view/mapProducts/MapProducts';
 import PopupViewTask from '../popup/view/task/Task';
 import WindowConfirm from '../popup/window/confirm/Confirm';
 import WindowInformation from '../popup/window/information/Information';
@@ -70,6 +71,15 @@ const usePopupList = () => {
       trigger: storePopup.status.getStatus('viewLocation'),
       nodeRef: useRef(null),
       children: <PopupViewLocation />,
+      classNames: 'popup-wrapper',
+      timeout: 200,
+    },
+    {
+      type: 'view',
+      name: 'map-products',
+      trigger: storePopup.status.getStatus('viewMapProducts'),
+      nodeRef: useRef(null),
+      children: <PopupViewMapProducts />,
       classNames: 'popup-wrapper',
       timeout: 200,
     },

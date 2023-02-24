@@ -1,4 +1,4 @@
-export type TStatus = 'pending' | 'during' | 'done' | 'error';
+export type TStatus = 'pending' | 'during' | 'update' | 'done' | 'error';
 export type TTaskType = 'acceptance' | 'shipment' | 'intra';
 export type TPointType = 'acceptance' | 'shipment';
 export type TActionType = 'create' | 'update';

@@ -26,6 +26,7 @@ export function useAddBlock() {
               capacity: 300,
               freeSpace: 300,
               reservedSpace: 0,
+              productIds: [],
             });
           }
         });
