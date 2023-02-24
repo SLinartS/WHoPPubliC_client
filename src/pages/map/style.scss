@@ -10,12 +10,12 @@
   flex-direction: column;
 
   &__search {
-    width: calc(100% - 6rem);
+    width: calc(100% - 4rem);
     margin: 2rem 0 0 2rem;
   }
 
   &__container {
-    width: calc(100vw - 6rem);
+    width: calc(100vw - 4rem);
     position: relative;
     margin: 2rem 0 2rem 2rem;
     border-radius: 0.5rem;
@@ -40,11 +40,11 @@
 @media (max-width: 1000px) {
   .map {
     &__search {
-      margin: 1rem 0;
+      margin: 1rem 0 1rem 2rem;
     }
 
     &__container {
-      width: calc(100% - 2rem);
+      width: calc(100% - 4rem);
       margin-bottom: 1rem;
     }
   }

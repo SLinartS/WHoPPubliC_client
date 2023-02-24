@@ -20,7 +20,9 @@ const HeaderLink: FC<IHeaderLinkProps> = ({
 
   useEffect(() => {
     if (location.pathname.substring(1) === to) {
-      setBlockActiveStyle('header__nav-block--active');
+      setBlockActiveStyle(
+        `header__nav-block${isPopup ? '--popup' : ''}--active`,
+      );
     } else {
       setBlockActiveStyle('');
     }

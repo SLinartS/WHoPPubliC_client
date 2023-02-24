@@ -43,7 +43,7 @@ const PopupViewTask: FC = () => {
 
   function changeFieldHandlerPlug() {}
 
-  function viewLocationOpenHander() {
+  function viewLocationOpenHandler() {
     const checkResult = checkIsSelect(
       'products',
       'products',
@@ -71,7 +71,7 @@ const PopupViewTask: FC = () => {
 
   useEffect(() => {
     if (storeProduct.status.get('markAsMoved') === 'done') {
-      storeProduct.action.fetch();
+      storeProduct.action.fetch('');
       storeTask.action.show(storeTask.state.task.taskInfo.id.value, () => {
         const { productIds } = storeTask.state.task;
 
@@ -87,8 +87,8 @@ const PopupViewTask: FC = () => {
 
   useEffect(() => {
     if (storeProduct.status.get('fetch') === 'pending') {
-      storeProduct.action.fetch(() => {
-        storeTable.utils.setDefaulMark(
+      storeProduct.action.fetch('', () => {
+        storeTable.utils.setDefaultMark(
           'products',
           storeProduct.state.products.data,
           [
@@ -150,7 +150,7 @@ const PopupViewTask: FC = () => {
             />{' '}
             <ButtonIcon
               src={mapIcon}
-              clickHandler={viewLocationOpenHander}
+              clickHandler={viewLocationOpenHandler}
               alt='viewLocation'
             />
           </div>

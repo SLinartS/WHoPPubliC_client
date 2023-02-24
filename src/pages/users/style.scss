@@ -1,15 +1,16 @@
 @use '@styles/templates.scss';
 
 .users {
-  width: 100%;
+  width: calc(100% - 2rem);
   display: flex;
   align-items: center;
   flex-direction: column;
+  margin: 0 0 0 2rem;
 
   &__section-button {
     @extend %flex-center;
 
-    width: calc(100% - 4rem);
+    width: calc(100% - 2rem);
     column-gap: 2rem;
     margin: 1.4rem 0;
   }

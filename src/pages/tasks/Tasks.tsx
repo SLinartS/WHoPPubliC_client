@@ -58,6 +58,21 @@ const Tasks: FC = () => {
     storeState.interface.currentTypeOfTask = taskType;
   }
 
+  function fetchTasks(search: string) {
+    const typeOfTask = storeState.interface.currentTypeOfTask;
+    storeTask.action.fetch(typeOfTask, search, () => {
+      storeTable.utils.setDefaultMark(
+        'tasks',
+        storeTask.state.getTasks(typeOfTask),
+        [],
+      );
+    });
+  }
+
+  function searchHandler(newValue: string) {
+    fetchTasks(newValue);
+  }
+
   function displayTasksTable(): ReactNode {
     const typeOfTask = storeState.interface.currentTypeOfTask;
     if (storeTask.status.getFetch(typeOfTask) === 'done') {
@@ -77,13 +92,7 @@ const Tasks: FC = () => {
       );
     }
     if (storeTask.status.getFetch(typeOfTask) === 'pending') {
-      storeTask.action.fetch(typeOfTask, () => {
-        storeTable.utils.setDefaulMark(
-          'tasks',
-          storeTask.state.getTasks(typeOfTask),
-          [],
-        );
-      });
+      fetchTasks('');
     }
     return <Loader classes='loader--task-table' />;
   }
@@ -91,7 +100,10 @@ const Tasks: FC = () => {
   return (
     <main className='tasks'>
       <div className='tasks__section-button'>
-        <SearchField classes='search-field--tasks' />
+        <SearchField
+          searchHandler={searchHandler}
+          classes='search-field--tasks'
+        />
         {storeAuth.state.userData.role !== 'worker' ? (
           <>
             <ButtonIcon

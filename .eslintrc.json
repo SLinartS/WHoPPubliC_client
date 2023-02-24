@@ -101,6 +101,7 @@
     "padded-blocks": "off",
     "no-multiple-empty-lines": "off",
     "linebreak-style": "off",
-    "react/jsx-curly-spacing": "warn"
+    "react/jsx-curly-spacing": "warn",
+    "react/no-unused-prop-types": "warn"
   }
 }

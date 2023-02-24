@@ -29,6 +29,10 @@ const Products: FC = () => {
     storePopup.status.show('formProduct');
   }
 
+  function searchHandler(newValue: string) {
+    storeProduct.action.fetch(newValue);
+  }
+
   function showPopupFilterHandler(e: MouseEvent<HTMLDivElement>) {
     e.stopPropagation();
     storeState.interface.showPopupFilter();
@@ -52,8 +56,8 @@ const Products: FC = () => {
 
   useEffect(() => {
     if (storeProduct.status.get('fetch') === 'pending') {
-      storeProduct.action.fetch(() => {
-        storeTable.utils.setDefaulMark(
+      storeProduct.action.fetch('', () => {
+        storeTable.utils.setDefaultMark(
           'products',
           storeProduct.state.products.data,
           ['categoryId', 'printingHouse'],
@@ -65,7 +69,10 @@ const Products: FC = () => {
   return (
     <main className='products'>
       <div className='products__section-button'>
-        <SearchField classes='search-field--products' />
+        <SearchField
+          searchHandler={searchHandler}
+          classes='search-field--products'
+        />
         {storeAuth.state.userData.role !== 'worker' && (
           <>
             <ButtonIcon

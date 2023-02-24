@@ -11,11 +11,17 @@ export class StoreTaskAction {
     makeAutoObservable(this, {});
   }
 
-  public *fetch(taskType: TTaskType, actionIfDone?: () => void) {
+  public *fetch(
+    taskType: TTaskType,
+    search: string,
+    actionIfDone?: () => void,
+  ) {
     try {
       this.root.storeTask.status.setFetch(taskType, 'during');
       const response: AxiosResponse<ITask[]> =
-        yield extendAxios.get<AxiosResponse>(`tasks?type=${taskType}`);
+        yield extendAxios.get<AxiosResponse>(
+          `tasks?type=${taskType}${search ? `&search=${search}` : ''}`,
+        );
       this.root.storeTask.state.setTasks(taskType, response.data);
 
       if (actionIfDone) {

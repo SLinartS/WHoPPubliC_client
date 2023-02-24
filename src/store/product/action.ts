@@ -17,11 +17,13 @@ export class StoreProductAction {
     makeAutoObservable(this, {});
   }
 
-  public *fetch(actionIfDone?: () => void) {
+  public *fetch(search: string, actionIfDone?: () => void) {
     try {
       this.root.storeProduct.status.set('fetch', 'during');
       const response: AxiosResponse<TProductsData> =
-        yield extendAxios.get<TProductsData>('products');
+        yield extendAxios.get<TProductsData>(
+          `products${search ? `?search=${search}` : ''}`,
+        );
       this.root.storeProduct.state.products = response.data;
 
       if (actionIfDone) {

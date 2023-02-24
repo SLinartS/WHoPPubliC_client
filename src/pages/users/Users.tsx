@@ -24,6 +24,10 @@ const Users = () => {
     storePopup.status.show('formUser');
   }
 
+  function searchHandler(newValue: string) {
+    storeUser.action.fetch(newValue);
+  }
+
   function changeHandler() {
     storePopup.form.state.formActionType = 'update';
     storePopup.form.user.setFormError('password', []);
@@ -43,8 +47,8 @@ const Users = () => {
 
   useEffect(() => {
     if (storeUser.status.get('fetch') === 'pending') {
-      storeUser.action.fetch(() => {
-        storeTable.utils.setDefaulMark('users', storeUser.state.users, [
+      storeUser.action.fetch('', () => {
+        storeTable.utils.setDefaultMark('users', storeUser.state.users, [
           'password',
           'roleId',
         ]);
@@ -55,7 +59,10 @@ const Users = () => {
   return (
     <main className='users'>
       <div className='users__section-button'>
-        <SearchField classes='search-field--users' />
+        <SearchField
+          searchHandler={searchHandler}
+          classes='search-field--users'
+        />
 
         <ButtonIcon
           src={addIcon}

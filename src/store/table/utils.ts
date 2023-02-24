@@ -18,13 +18,13 @@ export class StoreTableUtils {
       .map((markItem) => markItem.label);
   }
 
-  public setDefaulMark(
+  public setDefaultMark(
     itemType: TMarkType,
     data: IProduct[] | ITask[] | IUser[],
-    exсludeColumns: string[],
+    excludeColumns: string[],
   ) {
     Object.keys(data[0]).forEach((key) => {
-      if (!exсludeColumns.includes(key)) {
+      if (!excludeColumns.includes(key)) {
         this.root.storeState.checkMark.changeCheckedMark(key, true, itemType);
       } else {
         this.root.storeState.checkMark.changeCheckedMark(key, false, itemType);

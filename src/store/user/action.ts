@@ -24,11 +24,13 @@ export class StoreUserAction {
     makeAutoObservable(this, {});
   }
 
-  public *fetch(actionIfDone?: () => void) {
+  public *fetch(search: string, actionIfDone?: () => void) {
     try {
       this.root.storeUser.status.set('fetch', 'during');
       const response: AxiosResponse<IUser[]> =
-        yield extendAxios.get<AxiosResponse>('users');
+        yield extendAxios.get<AxiosResponse>(
+          `users${search ? `?search=${search}` : ''}`,
+        );
       this.root.storeUser.state.users = response.data;
 
       if (actionIfDone) {
