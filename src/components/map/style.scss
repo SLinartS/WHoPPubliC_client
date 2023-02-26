@@ -178,19 +178,18 @@ html .map-block {
   &__zone-title {
     display: flex;
     justify-content: flex-end;
-    top: calc(5.4rem);
+    top: 5.4rem;
     left: -15rem;
     transform: translate(50%, 0);
     position: absolute;
     color: color.$table-color;
     font-weight: 700;
     user-select: none;
-    font-size: 14rem;
+    font-size: 15rem;
   }
 
   &__section-title {
     color: color.$table-color;
-    font-size: 8rem;
     font-weight: 700;
     margin: 0;
     text-align: center;
@@ -200,6 +199,7 @@ html .map-block {
     transform: translate(100%, -50%);
     position: absolute;
     user-select: none;
+    font-size: 8rem;
   }
 
   &--oneColumn {
@@ -222,11 +222,49 @@ html .map-block {
 @media (max-width: 1000px) {
   html .map-block {
     &__zone {
-      margin: 2rem 6rem 2rem 10rem;
       display: flex;
       flex-direction: column;
       align-items: center;
       position: relative;
+      margin: 2rem 3rem 2rem 11rem;
+    }
+
+    &__section {
+      margin: 2rem 2rem 2rem 3rem;
+    }
+
+    &__block {
+      grid-template-columns: 4rem;
+      grid-template-rows: repeat(5, 4rem);
+    }
+
+    &__floor {
+      width: 4rem;
+      height: 4rem;
+    }
+
+    &__zone-title {
+      left: -9rem;
+      font-size: 10rem;
+      top: 4.4rem;
+    }
+
+    &__section-title {
+      font-size: 5rem;
+    }
+
+    &__button-reset {
+      left: 7rem;
+    }
+
+    &__buttons--zone {
+      top: 5.2rem;
+      left: -11rem;
+
+      .map-block__button {
+        width: 3rem;
+        height: 3rem;
+      }
     }
   }
 }

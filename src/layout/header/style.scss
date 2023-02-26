@@ -52,7 +52,6 @@
       @extend %standard-transition;
 
       height: 100%;
-      padding: 0 1.6rem;
 
       &--active {
         background: color.$main-color--active;
@@ -81,6 +80,7 @@
       color: color.$font-color--white;
       font-size: 2rem;
       user-select: none;
+      padding: 0 1.6rem;
     }
   }
 
@@ -102,12 +102,9 @@
     }
 
     &__nav {
-      &-block {
-        padding: 0 1rem;
-      }
-
       &-link {
         font-size: 2rem;
+        padding: 0 1rem;
       }
 
       &-icon {
@@ -128,7 +125,7 @@
   }
 }
 
-@media (max-width: 1030px) {
+@media (max-width: 1000px) {
   .header {
     height: variable.$header-height--mid;
 

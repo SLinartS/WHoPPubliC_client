@@ -31,10 +31,13 @@
       width: 100%;
       box-sizing: border-box;
       justify-content: flex-start;
-      padding: 1rem 1.6rem;
 
       &--active {
         background: color.$main-color;
+
+        a {
+          color: color.$font-color--white;
+        }
       }
 
       &:hover {
@@ -43,6 +46,11 @@
 
       &:active {
         background: color.$main-color--active;
+      }
+
+      a {
+        display: flex;
+        justify-content: flex-start;
       }
     }
 
@@ -53,6 +61,7 @@
       width: calc(100% + 3.2rem);
       font-size: 2rem;
       color: color.$font-color--black;
+      padding: 1rem 1.6rem;
       user-select: none;
     }
   }

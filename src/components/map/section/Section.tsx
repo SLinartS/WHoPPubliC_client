@@ -67,10 +67,7 @@ const MapSection: FC<IMapSectionProps> = ({
           />
         </div>
       )}
-      <MapInfoSectionNumber
-        fontSize={8}
-        number={number}
-      />
+      <MapInfoSectionNumber number={number} />
     </div>
   );
 };

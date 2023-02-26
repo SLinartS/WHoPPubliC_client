@@ -4,7 +4,7 @@ import '../../style.scss';
 import checkIcon from '@assets/icons/check.svg';
 import mapIcon from '@assets/icons/map.svg';
 import ButtonIcon from '@components/buttonIcon/ButtonIcon';
-import AssembledBlockFieldInput from '@components/form/assembled/BlockFieldInput';
+import AssembledBlockFieldDatetime from '@components/form/assembled/BlockFieldDatetime';
 import AssembledBlockFieldText from '@components/form/assembled/BlockFieldText';
 import FormLayout from '@components/form/layout/Layout';
 import Table from '@components/table/Table';
@@ -109,8 +109,8 @@ const PopupViewTask: FC = () => {
         closeEventHandler={closeHandler}
       />
 
-      <div className='popup-view__content-block'>
-        <FormLayout classes='article-info'>
+      <div className='popup-view__content-block popup-view__content-block--view-task'>
+        <FormLayout classes='article-info-view-task'>
           <AssembledBlockFieldText
             value={storePopup.form.task.getFormField('article')}
             errors={storePopup.form.task.getFormErrors('article')}
@@ -120,22 +120,30 @@ const PopupViewTask: FC = () => {
           />
         </FormLayout>
 
-        <FormLayout classes='time-info'>
-          <AssembledBlockFieldInput
-            value={storePopup.form.task.getFormField('timeStart')}
-            errors={storePopup.form.task.getFormErrors('timeStart')}
-            changeHandler={changeFieldHandlerPlug}
+        <FormLayout classes='time-info-view-task'>
+          <AssembledBlockFieldDatetime
+            valueDate={storePopup.form.task.getFormField('dateStart')}
+            valueTime={storePopup.form.task.getFormField('timeStart')}
+            errorsDate={[]}
+            errorsTime={[]}
+            changeDateHandler={changeFieldHandlerPlug}
+            changeTimeHandler={changeFieldHandlerPlug}
             typeForm='task'
-            fieldName='timeStart'
+            fieldNameDate='dateStart'
+            fieldNameTime='timeStart'
             titleText='Дата начала'
             readonly
           />
-          <AssembledBlockFieldInput
-            value={storePopup.form.task.getFormField('timeEnd')}
-            errors={storePopup.form.task.getFormErrors('timeEnd')}
-            changeHandler={changeFieldHandlerPlug}
+          <AssembledBlockFieldDatetime
+            valueDate={storePopup.form.task.getFormField('dateEnd')}
+            valueTime={storePopup.form.task.getFormField('timeEnd')}
+            errorsDate={[]}
+            errorsTime={[]}
+            changeDateHandler={changeFieldHandlerPlug}
+            changeTimeHandler={changeFieldHandlerPlug}
             typeForm='task'
-            fieldName='timeEnd'
+            fieldNameDate='dateEnd'
+            fieldNameTime='timeEnd'
             titleText='Дата окончания'
             readonly
           />

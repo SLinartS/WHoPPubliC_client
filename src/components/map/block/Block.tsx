@@ -35,10 +35,19 @@ const MapBlock: FC<IMapBlockProps> = ({
     removeFloor(sectionId);
   }
 
+  function getBlockHeight() {
+    if (window.screen.width < 1000) {
+      return '4rem';
+    }
+    return '5rem';
+  }
+
   return (
     <div
       className='map-block__block'
-      style={{ gridTemplateRows: `repeat(${floors.length + 1}, 5rem` }}
+      style={{
+        gridTemplateRows: `repeat(${floors.length + 1}, ${getBlockHeight()}`,
+      }}
       data-block-id={id}
       data-block-index={index}
     >

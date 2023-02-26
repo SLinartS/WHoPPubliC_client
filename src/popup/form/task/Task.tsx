@@ -184,7 +184,7 @@ const PopupFormTask: FC = () => {
             fieldNameDate='dateStart'
             fieldNameTime='timeStart'
             titleText='Дата начала'
-            placeholderDate='2022.09.26'
+            placeholderDate='26.09.2022'
             placeholderTime='16:08'
           />
           <AssembledBlockFieldDatetime
@@ -198,8 +198,8 @@ const PopupFormTask: FC = () => {
             fieldNameDate='dateEnd'
             fieldNameTime='timeEnd'
             titleText='Дата окончания'
-            placeholderDate='2022.09.26'
-            placeholderTime='16:08'
+            placeholderDate='27:09:2022'
+            placeholderTime='17:50'
           />
         </FormLayout>
 

@@ -1,6 +1,7 @@
 import './style.scss';
 
 import TransitionCustom from '@components/transition/Transition';
+import { useRootStore } from '@helpers/RootStoreProvider/useRootStore';
 import { useRouterProtect } from '@hooks/useRouterProtect/useRouterProtect';
 import { observer } from 'mobx-react-lite';
 import { useEffect, useRef } from 'react';
@@ -12,6 +13,7 @@ import Header from './header/Header';
 import usePopupList from './usePopupsList';
 
 const Layout = () => {
+  const { storeState } = useRootStore();
   const POPUPS = usePopupList();
   const routerProtect = useRouterProtect();
 
@@ -22,6 +24,10 @@ const Layout = () => {
   const pagesRef = useRef<HTMLDivElement>(null);
 
   const currentOutlet = useOutlet();
+
+  function hidePopupNavHandler() {
+    storeState.interface.hidePopupNav();
+  }
 
   useEffect(() => {
     routerProtect(location.pathname.substring(1));
@@ -43,6 +49,7 @@ const Layout = () => {
           <div
             ref={pagesRef}
             className='pages'
+            onClick={hidePopupNavHandler}
           >
             {currentOutlet}
           </div>

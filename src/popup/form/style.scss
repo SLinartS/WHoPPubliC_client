@@ -4,10 +4,8 @@
 .popup-form {
   &__content-block {
     display: grid;
-    gap: 0.2rem;
     overflow: hidden;
-    background-color: color.$font-color--black;
-    border-radius: 0.5rem;
+    border-radius: 0 0 0.5rem 0.5rem;
 
     &--add-product {
       grid-template-columns: 3fr 1fr;
@@ -55,6 +53,7 @@
       background-color: color.$font-color--white;
       grid-column: 2/3;
       grid-row: 2/3;
+      border-left: 0.2rem solid color.$font-color--black;
     }
 
     &-text {
@@ -64,7 +63,6 @@
   }
 
   &__table-block {
-    height: 100%;
     overflow-y: scroll;
     overflow-x: hidden;
     background-color: color.$font-color--white;
@@ -72,21 +70,62 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 0 2rem;
+    padding: 2rem;
   }
 
   &__button-block {
     display: flex;
-    width: 60%;
-    justify-content: space-around;
+    justify-content: center;
 
     &--view-task {
       width: fit-content;
+    }
+
+    button:nth-child(1) {
+      margin-right: 4rem;
     }
   }
 
   &__absence-product {
     font-size: 2.8rem;
+    text-align: center;
     margin: 5rem 0 0;
+  }
+}
+
+@media (max-width: 1000px) {
+  .popup-form {
+    &__content-block {
+      overflow-y: scroll;
+
+      &--add-product {
+        grid-template-columns: 50% 50%;
+        grid-template-rows: repeat(5, auto);
+      }
+
+      &--add-task {
+        grid-template-columns: 50% 50%;
+        grid-template-rows: 8rem 16rem 1fr;
+      }
+    }
+
+    &__table-block {
+      grid-column: 1/3;
+      overflow-y: visible;
+      overflow-x: visible;
+      padding: 1rem 2rem 2rem;
+    }
+
+    &__absence-product {
+      font-size: 1.6rem;
+      margin: 5rem 0 0;
+    }
+
+    &__photo-block {
+      grid-row: 4/5;
+      grid-column: 1/3;
+      padding: 0 0 2rem;
+      border-left: none color.$font-color--black;
+    }
   }
 }

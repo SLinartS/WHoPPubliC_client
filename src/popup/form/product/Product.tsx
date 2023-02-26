@@ -161,7 +161,7 @@ const PopupFormProduct: FC = () => {
           />
         </FormLayout>
 
-        <FormLayout classes='article-info'>
+        <FormLayout classes='article-info-product'>
           <AssembledBlockFieldText
             typeForm='product'
             fieldName='article'
@@ -219,7 +219,7 @@ const PopupFormProduct: FC = () => {
           />
         </FormLayout>
 
-        <FormLayout classes='points'>
+        <FormLayout classes='points-product'>
           <FormBlock
             titleText=''
             classes='product-points'

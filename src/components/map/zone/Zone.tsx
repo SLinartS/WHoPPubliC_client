@@ -80,10 +80,7 @@ const MapZone: FC<IMapZoneProps> = ({
           />
         </div>
       )}
-      <MapInfoZoneLetter
-        fontSize={15}
-        zoneLetter={zoneLetter}
-      />
+      <MapInfoZoneLetter zoneLetter={zoneLetter} />
       {isEditZoneButton && (
         <div className='map-block__buttons map-block__buttons--zone'>
           <ButtonIcon

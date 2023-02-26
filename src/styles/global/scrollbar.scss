@@ -1,5 +1,7 @@
 @use '@styles/colors.scss' as color;
 
+$background-color: transparent;
+
 textarea {
   &::-webkit-scrollbar {
     width: 15px;
@@ -7,12 +9,11 @@ textarea {
   }
 
   &::-webkit-scrollbar-track {
-    background: transparent;
-    border-radius: 1rem;
+    background: $background-color;
   }
 
   &::-webkit-scrollbar-corner {
-    background: transparent;
+    background: $background-color;
   }
 }
 
@@ -26,12 +27,11 @@ body {
   }
 
   &::-webkit-scrollbar-track {
-    background: transparent;
-    border-radius: 1rem;
+    background: $background-color;
   }
 
   &::-webkit-scrollbar-corner {
-    background: transparent;
+    background: $background-color;
   }
 }
 
@@ -41,7 +41,7 @@ div {
   &::-webkit-scrollbar-thumb {
     background-color: color.$main-color;
     border-radius: 0.7rem;
-    border: 0.3rem solid transparent;
+    border: 0.3rem solid $background-color;
     background-clip: content-box;
   }
 }
@@ -50,7 +50,7 @@ html,
 body {
   &::-webkit-scrollbar-thumb {
     background-color: color.$main-color;
-    border: 0.2rem solid transparent;
+    border: 0.2rem solid $background-color;
     background-clip: content-box;
   }
 }
@@ -63,10 +63,6 @@ body {
     &::-webkit-scrollbar {
       width: 15px;
       height: 15px;
-    }
-
-    &::-webkit-scrollbar-track {
-      border-radius: 0.5rem;
     }
   }
 

@@ -116,6 +116,7 @@
     }
   }
 }
+
 @media (max-width: 1000px) {
   .points-map {
     &__container {
@@ -126,6 +127,50 @@
     &__point {
       width: 8rem;
       height: 8rem;
+
+      &--animation {
+        &-current {
+          &::after {
+            width: 8rem;
+            height: 8rem;
+            top: -35%;
+            left: calc(50% - 4rem);
+          }
+        }
+      }
+    }
+
+    &__title {
+      font-size: 1.6rem;
+    }
+  }
+}
+@media (max-width: 600px) {
+  .points-map {
+    &__container {
+      grid-template-columns: repeat(3, 8rem);
+      column-gap: 2rem;
+      row-gap: 2rem;
+    }
+
+    &__point {
+      width: 6rem;
+      height: 6rem;
+
+      &--animation {
+        &-current {
+          &::after {
+            width: 7rem;
+            height: 7rem;
+            top: -45%;
+            left: calc(50% - 3.5rem);
+          }
+        }
+      }
+    }
+
+    &__title {
+      font-size: 1.2rem;
     }
   }
 }

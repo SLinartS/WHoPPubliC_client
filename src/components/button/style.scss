@@ -36,7 +36,7 @@
   }
 
   &--add-task {
-    margin: 2rem 0;
+    margin: 0 0 2rem;
   }
 
   &--window-header {
@@ -73,6 +73,12 @@
     &--login {
       font-size: 2rem;
       padding: 0.8rem 2rem;
+    }
+
+    &--add-task {
+      font-size: 1.6rem;
+      padding: 0.8rem 2rem;
+      margin: 0 0 1rem;
     }
   }
 }

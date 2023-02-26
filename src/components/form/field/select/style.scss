@@ -119,3 +119,22 @@
     transform: translateX(0%);
   }
 }
+
+@media (max-width: 1000px) {
+  .custom-select {
+    font-size: 1.6rem;
+
+    &__button {
+      &::before,
+      &::after {
+        width: 3rem;
+        height: 3rem;
+      }
+    }
+
+    &__option {
+      width: 100%;
+      padding: 0.5rem;
+    }
+  }
+}

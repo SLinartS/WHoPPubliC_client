@@ -5,14 +5,15 @@
 .map {
   @extend %grid-center;
 
-  width: calc(100% - 4rem);
+  width: calc(100% - 2rem);
   align-items: flex-start;
   grid-template-columns: 1fr;
   grid-template-rows: 7rem calc(
-      100vh - variable.$header-height--standard - 7rem - 2rem
+      100vh - variable.$header-height--standard - 7rem - 2rem - 0.5rem
     );
   margin: 0 0 0 2rem;
   overflow: hidden;
+  row-gap: 0.5rem;
 
   &__search {
     width: calc(100% - 4rem);
@@ -44,12 +45,14 @@
 
 @media (max-width: 1000px) {
   .map {
-    grid-template-rows: 7rem calc(
-        100vh - variable.$header-height--mid - 7rem - 2rem
+    grid-template-rows: 5rem calc(
+        100vh - variable.$header-height--mid - 5rem - 2rem - 0.5rem
       );
+    width: 100%;
+    margin: 0;
 
     &__search {
-      margin: 1rem 0 1rem 2rem;
+      width: calc(100% - 2rem);
     }
 
     &__container {
@@ -61,8 +64,8 @@
 
 @media (max-width: 850px) {
   .map {
-    grid-template-rows: 7rem calc(
-        100vh - variable.$header-height--low - 7rem - 2rem
+    grid-template-rows: 5rem calc(
+        100vh - variable.$header-height--low - 5rem - 2rem - 0.5rem
       );
   }
 }

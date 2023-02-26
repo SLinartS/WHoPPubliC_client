@@ -22,7 +22,7 @@ const PopupViewLocation: FC = () => {
     storePopup.status.show('viewTask');
   }
 
-  function displayTable(): ReactNode {
+  function displayMap(): ReactNode {
     switch (typeOfLocation) {
       case 'acceptancePoint':
         return (
@@ -83,8 +83,8 @@ const PopupViewLocation: FC = () => {
             {second.text}
           </button>
         </div>
-        <div className='popup-view__table-block popup-view__table-block--view-location'>
-          {displayTable()}
+        <div className='popup-view__map-block popup-view__map-block--view-location'>
+          {displayMap()}
         </div>
       </div>
     </>
