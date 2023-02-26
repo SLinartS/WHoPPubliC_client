@@ -37,7 +37,12 @@
     // prettier-eslint
     "arrow-body-style": "off",
     "prefer-arrow-callback": "off",
-    "prettier/prettier": ["error", { "endOfLine": "auto" }],
+    "prettier/prettier": [
+      "warn",
+      {
+        "endOfLine": "auto"
+      }
+    ],
     // react
     "react/jsx-filename-extension": ["warn", { "extensions": [".tsx"] }],
     "react/react-in-jsx-scope": "off",
@@ -64,7 +69,7 @@
     "import/prefer-default-export": "off",
     "import/no-cycle": "off",
     "grouped-accessor-pairs": "off",
-    "generator-star-spacing": ["error", { "before": true, "after": false }],
+    "generator-star-spacing": "off",
     "no-tabs": "off",
     "indent": ["warn", 2, { "SwitchCase": 1 }],
     "@typescript-eslint/indent": "off",

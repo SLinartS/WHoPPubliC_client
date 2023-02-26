@@ -32,9 +32,7 @@ const MapPage: FC = () => {
       <div className='map__search'>
         <SearchField searchHandler={searchHandler} />
       </div>
-      {storeMap.status.get('fetch') === 'pending' ? (
-        <Loader classes='loader--map' />
-      ) : (
+      {['done', 'update'].includes(storeMap.status.get('fetch')) ? (
         <div className='map__container'>
           <ButtonIcon
             src={gearIcon}
@@ -45,6 +43,8 @@ const MapPage: FC = () => {
           />
           <Map isEditZoneButton={editMap} />
         </div>
+      ) : (
+        <Loader />
       )}
     </main>
   );

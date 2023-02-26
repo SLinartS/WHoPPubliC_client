@@ -45,14 +45,14 @@ const LoginPage: FC = () => {
     }
   }
 
-  function loginHandler() {
+  async function loginHandler() {
     if (!isLoginError()) {
       setIsSubmitButtonDisabled(true);
-      storeAuth.action.authorization(() => {
+      await storeAuth.action.authorization(() => {
         navigate('/');
         storeAuth.state.clearAuth();
-        setIsSubmitButtonDisabled(false);
       });
+      setIsSubmitButtonDisabled(false);
     } else {
       storePopup.form.state.isDisplayDefaultErrors = true;
     }

@@ -2,45 +2,15 @@
 
 .loader {
   &--product-table {
-    margin-top: 25rem;
+    transform: rotateX(180deg);
   }
 
-  &--user-table {
-    margin-top: 10rem;
-  }
-
-  &--task-table {
-    margin-top: 10rem;
-  }
-
-  &--map {
-    margin-top: 20rem;
-  }
-
-  &--point {
-    margin-top: 10rem;
+  &__error-message {
+    font-size: 2rem;
   }
 }
 
 @media (max-width: 1000px) {
-  .loader {
-    &--product-table {
-      margin-top: 5rem;
-    }
-
-    &--task-table {
-      margin-top: 5rem;
-    }
-
-    &--map {
-      margin-top: 5rem;
-    }
-
-    &--point {
-      margin-top: 5rem;
-    }
-  }
-
   body .lds-facebook {
     transform: scale(1);
   }

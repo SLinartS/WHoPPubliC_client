@@ -94,7 +94,7 @@ const Tasks: FC = () => {
     if (storeTask.status.getFetch(typeOfTask) === 'pending') {
       fetchTasks('');
     }
-    return <Loader classes='loader--task-table' />;
+    return <Loader />;
   }
 
   return (

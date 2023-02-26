@@ -91,7 +91,7 @@ const Users = () => {
             displayedColumns={storeTable.utils.getColumnsWithMark('users')}
           />
         ) : (
-          <Loader classes='loader--user-table' />
+          <Loader />
         )}
       </div>
     </main>

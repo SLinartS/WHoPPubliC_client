@@ -1,3 +1,4 @@
+import { useRootStore } from '@helpers/RootStoreProvider/useRootStore';
 import { IResponseUserData } from '@store/authorization/type';
 import extendAxios from '@utils/extendAxios';
 import axios, { AxiosResponse } from 'axios';
@@ -9,6 +10,7 @@ interface AxiosInterceptorProps {
 }
 
 const AxiosInterceptor: FC<AxiosInterceptorProps> = ({ children }) => {
+  const { storeAuth } = useRootStore();
   const navigate = useNavigate();
   const [isSet, setIsSet] = useState(false);
 
@@ -39,6 +41,7 @@ const AxiosInterceptor: FC<AxiosInterceptorProps> = ({ children }) => {
             localStorage.removeItem('accessToken');
             localStorage.removeItem('refreshToken');
             localStorage.removeItem('userData');
+            storeAuth.state.clearUserData();
             navigate('/login');
           }
         }

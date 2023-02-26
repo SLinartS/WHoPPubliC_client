@@ -122,7 +122,7 @@ const Products: FC = () => {
       {storeProduct.status.get('fetch') === 'done' ? (
         <div className='products__select'>{getSelects()}</div>
       ) : (
-        <Loader classes='loader--product-select' />
+        <Loader />
       )}
 
       {storeState.interface.getIsShowPopupFilter() ? <PopupFilter /> : ''}

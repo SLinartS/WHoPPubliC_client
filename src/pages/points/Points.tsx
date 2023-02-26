@@ -31,7 +31,7 @@ const Points: FC = () => {
         {storePoint.status.get('fetch') === 'done' ? (
           <PointsMap pointsType='acceptance' />
         ) : (
-          <Loader classes='loader--point' />
+          <Loader />
         )}
       </div>
       <p className='points__title'>Точки отгрузки</p>
@@ -39,7 +39,7 @@ const Points: FC = () => {
         {storePoint.status.get('fetch') === 'done' ? (
           <PointsMap pointsType='shipment' />
         ) : (
-          <Loader classes='loader--point' />
+          <Loader />
         )}
       </div>
     </main>
