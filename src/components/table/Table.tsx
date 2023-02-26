@@ -78,22 +78,24 @@ const Table: FC<ITableProps> = ({
   }
 
   return (
-    <div
-      className={`table ${classes}`}
-      style={{
-        gridTemplateColumns: `repeat(${countColumnsNumber()}, auto)`,
-      }}
-    >
-      {displayHeader()}
-      {data.map((columns) => (
-        <TableRow
-          valuesType={valuesType}
-          selectingValues={selectingValues}
-          key={selectingValues + String(columns.id.value)}
-          displayedColumns={displayedColumns}
-          columns={columns}
-        />
-      ))}
+    <div className={`table-wrapper ${classes}`}>
+      <div
+        className='table'
+        style={{
+          gridTemplateColumns: `repeat(${countColumnsNumber()}, auto)`,
+        }}
+      >
+        {displayHeader()}
+        {data.map((columns) => (
+          <TableRow
+            valuesType={valuesType}
+            selectingValues={selectingValues}
+            key={selectingValues + String(columns.id.value)}
+            displayedColumns={displayedColumns}
+            columns={columns}
+          />
+        ))}
+      </div>
     </div>
   );
 };

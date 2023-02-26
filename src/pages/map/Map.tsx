@@ -15,6 +15,7 @@ const MapPage: FC = () => {
 
   useEffect(() => {
     storePopup.form.state.isSelectedMap = false;
+    storePopup.form.state.isViewMap = false;
   }, []);
 
   useEffect(() => {

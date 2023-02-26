@@ -82,7 +82,6 @@ const Tasks: FC = () => {
             data={storeTask.state.getTasks(typeOfTask)}
             valuesType='tasks'
             selectingValues={typeOfTask}
-            classes='table--tasks'
             displayedColumns={storeTable.utils.getColumnsWithMark('tasks')}
           />
         );

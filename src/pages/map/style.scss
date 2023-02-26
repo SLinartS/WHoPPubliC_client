@@ -1,23 +1,28 @@
 @use '@styles/colors.scss' as color;
 @use '@styles/templates.scss';
+@use '@styles/variables.scss' as variable;
 
 .map {
-  @extend %flex-center;
+  @extend %grid-center;
 
-  overflow: hidden;
-  justify-content: flex-start;
+  width: calc(100% - 4rem);
   align-items: flex-start;
-  flex-direction: column;
+  grid-template-columns: 1fr;
+  grid-template-rows: 7rem calc(
+      100vh - variable.$header-height--standard - 7rem - 2rem
+    );
+  margin: 0 0 0 2rem;
+  overflow: hidden;
 
   &__search {
     width: calc(100% - 4rem);
-    margin: 2rem 0 0 2rem;
+    align-self: center;
   }
 
   &__container {
+    height: 100%;
     width: calc(100vw - 4rem);
     position: relative;
-    margin: 2rem 0 2rem 2rem;
     border-radius: 0.5rem;
     overflow: scroll;
     background-color: color.$bg-color-grey;
@@ -39,13 +44,25 @@
 
 @media (max-width: 1000px) {
   .map {
+    grid-template-rows: 7rem calc(
+        100vh - variable.$header-height--mid - 7rem - 2rem
+      );
+
     &__search {
       margin: 1rem 0 1rem 2rem;
     }
 
     &__container {
-      width: calc(100% - 4rem);
+      width: calc(100% - 2rem);
       margin-bottom: 1rem;
     }
+  }
+}
+
+@media (max-width: 850px) {
+  .map {
+    grid-template-rows: 7rem calc(
+        100vh - variable.$header-height--low - 7rem - 2rem
+      );
   }
 }

@@ -1,24 +1,27 @@
 @use '@styles/colors.scss' as color;
 @use '@styles/templates.scss';
+@use '@styles/variables.scss' as variable;
 
 .products {
   @extend %grid-center;
 
   width: calc(100% - 2rem);
   align-items: flex-start;
-  grid-template-columns: 3fr 1fr;
-  grid-template-rows: 6rem 1fr;
+  grid-template-columns: calc(75vw - 7rem) 25vw;
+  grid-template-rows: 7rem calc(
+      100vh - variable.$header-height--standard - 7rem - 2rem
+    );
   column-gap: 3rem;
   row-gap: 1rem;
-  margin: 0 2rem 2rem;
+  margin: 0 2rem;
 
   &__section-button {
     @extend %flex-center;
 
     grid-column: 1/3;
-    width: calc(100% - 2rem);
+    width: calc(100% - 4rem);
     column-gap: 2rem;
-    margin: 1.4rem 2rem 0 0;
+    margin: 1.4rem 0 0;
   }
 
   &__table {
@@ -27,10 +30,7 @@
     grid-column: 1/2;
     box-sizing: border-box;
     border-radius: 0.5rem;
-    overflow-y: hidden;
-    overflow-x: scroll;
-    margin: 0, 2rem;
-    transform: rotateX(180deg);
+    margin: 0 2rem;
   }
 
   &__select {
@@ -39,7 +39,7 @@
     height: 100%;
     background-color: color.$bg-color-grey;
     border-radius: 0.5rem;
-    margin-right: 2rem;
+    margin: 0 2rem 0 0;
 
     &--popup {
       position: absolute;
@@ -78,8 +78,10 @@
 
 @media (max-width: 1000px) {
   .products {
-    grid-template-columns: 1fr;
-    grid-template-rows: 4rem 4rem 1fr;
+    grid-template-columns: calc(100vw - 4rem);
+    grid-template-rows: 4rem 4rem calc(
+        100vh - variable.$header-height--mid - 4rem - 4rem - 2rem
+      );
 
     &__select {
       display: none;
@@ -110,10 +112,17 @@
   }
 }
 
-@media (max-width: 750px) {
+@media (max-width: 850px) {
   .products {
     grid-template-rows: 4rem 3rem 1fr;
+    grid-template-rows: 4rem 3rem calc(
+        100vh - variable.$header-height--low - 4rem - 3rem - 2rem
+      );
+  }
+}
 
+@media (max-width: 750px) {
+  .products {
     &__filters {
       height: 3rem;
 

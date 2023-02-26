@@ -11,7 +11,7 @@ html {
 
 main {
   overflow: scroll;
-  height: 100vh;
+  height: calc(100vh - variable.$header-height--standard);
   width: 100vw;
 }
 

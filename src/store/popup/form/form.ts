@@ -38,6 +38,16 @@ export class StorePopupForm {
     this._isSelectedMap = newStatus;
   }
 
+  private _isViewMap: boolean = false;
+
+  public get isViewMap() {
+    return this._isViewMap;
+  }
+
+  public set isViewMap(newStatus: boolean) {
+    this._isViewMap = newStatus;
+  }
+
   private _isSelectedPoint: boolean = false;
 
   public get isSelectedPoint() {

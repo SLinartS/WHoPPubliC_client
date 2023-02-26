@@ -87,7 +87,6 @@ const Users = () => {
             data={storeUser.state.users}
             valuesType='users'
             selectingValues='users'
-            classes='table--users'
             displayedColumns={storeTable.utils.getColumnsWithMark('users')}
           />
         ) : (

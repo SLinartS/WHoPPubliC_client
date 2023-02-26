@@ -111,7 +111,6 @@ const Products: FC = () => {
             data={storeProduct.state.products.data}
             valuesType='products'
             selectingValues='products'
-            classes='table--products'
             displayedColumns={storeTable.utils.getColumnsWithMark('products')}
           />
         ) : (

@@ -23,6 +23,12 @@ const Map: FC<IMapProps> = ({ classes, isEditZoneButton = false }) => {
     storeMap.status.set('fetch', 'pending');
   }
 
+  function isDisplayResetButton(): boolean {
+    return (
+      !storePopup.form.state.isSelectedMap && !storePopup.form.state.isViewMap
+    );
+  }
+
   return (
     <div className={`map-block ${classes}`}>
       {storeMap.state.map.map((zone, zoneIndex) => (
@@ -45,7 +51,7 @@ const Map: FC<IMapProps> = ({ classes, isEditZoneButton = false }) => {
           />
         </div>
       )}
-      {!storePopup.form.state.isSelectedMap && (
+      {isDisplayResetButton() && (
         <ButtonIcon
           src={resetIcon}
           clickHandler={resetMapHandler}

@@ -1,17 +1,43 @@
 @use '@styles/templates.scss';
+@use '@styles/variables.scss' as variable;
 
 .users {
+  @extend %grid-center;
+
   width: calc(100% - 2rem);
-  display: flex;
-  align-items: center;
-  flex-direction: column;
+  align-items: flex-start;
+  grid-template-columns: calc(100vw - 4rem);
+  grid-template-rows: 7rem calc(
+      100vh - variable.$header-height--standard - 7rem - 2rem
+    );
   margin: 0 0 0 2rem;
+
+  &__table {
+    width: 100%;
+    max-width: 150rem;
+  }
 
   &__section-button {
     @extend %flex-center;
 
-    width: calc(100% - 2rem);
+    align-self: center;
+    width: calc(100% - 4rem);
     column-gap: 2rem;
-    margin: 1.4rem 0;
+  }
+}
+
+@media (max-width: 1000px) {
+  .tasks {
+    grid-template-rows: 7rem 5rem calc(
+        100vh - variable.$header-height--mid - 7rem - 5rem - 2rem
+      );
+  }
+}
+
+@media (max-width: 850px) {
+  .tasks {
+    grid-template-rows: 7rem 5rem calc(
+        100vh - variable.$header-height--low - 7rem - 5rem - 2rem
+      );
   }
 }

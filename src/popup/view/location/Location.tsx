@@ -46,16 +46,10 @@ const PopupViewLocation: FC = () => {
   }
 
   useEffect(() => {
-    if (storePoint.status.get('fetch') === 'pending') {
-      storePoint.action.fetch();
-    }
-  }, [storePoint.status.get('fetch')]);
-
-  useEffect(() => {
-    if (storeMap.status.get('fetch') === 'pending') {
-      storeMap.action.fetch('');
-    }
-  }, [storeMap.status.get('fetch')]);
+    storePoint.action.fetch();
+    storeMap.action.fetch('');
+    storePopup.form.state.isViewMap = true;
+  }, []);
 
   return (
     <>

@@ -3,10 +3,18 @@
 
 .table {
   width: calc(100% - 1rem);
+  transform: rotateX(180deg);
   display: grid;
   grid-template-columns: repeat(6, auto);
   row-gap: 0.5rem;
   font-size: 1.6rem;
+
+  &-wrapper {
+    width: 100%;
+    overflow-x: scroll;
+    overflow-y: hidden;
+    transform: rotateX(180deg);
+  }
 
   &__column {
     text-align: center;
@@ -43,14 +51,6 @@
     width: 100rem;
     height: 1.6rem;
     position: absolute;
-  }
-
-  &--map {
-    margin: 2rem;
-  }
-
-  &--products {
-    transform: rotateX(180deg);
   }
 }
 

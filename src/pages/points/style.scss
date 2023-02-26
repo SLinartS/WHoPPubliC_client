@@ -1,17 +1,22 @@
 @use '@styles/colors.scss' as color;
 @use '@styles/templates.scss';
+@use '@styles/variables.scss' as variable;
 
 .points {
   @extend %grid-center;
 
+  width: calc(100% - 2rem);
   align-items: flex-start;
   grid-template-columns: 1fr 1fr;
-  grid-template-rows: 7rem 5rem auto;
+  grid-template-rows: 7rem 5rem calc(
+      100vh - variable.$header-height--standard - 7rem - 5rem - 2rem
+    );
+  margin: 0 0 0 2rem;
 
   &__search {
     width: calc(100% - 4rem);
     grid-column: 1/3;
-    margin: 1rem 0;
+    align-self: center;
   }
 
   &__title {
@@ -29,6 +34,9 @@
 @media (max-width: 1000px) {
   .points {
     grid-template-columns: 1fr;
+    grid-template-rows: 7rem 5rem calc(
+        100vh - variable.$header-height--mid - 7rem - 5rem - 2rem
+      );
 
     &__search {
       grid-column: unset;
@@ -43,5 +51,13 @@
       margin: 1rem;
       width: calc(100% - 2rem);
     }
+  }
+}
+
+@media (max-width: 850px) {
+  .points {
+    grid-template-rows: 7rem 5rem calc(
+        100vh - variable.$header-height--low - 7rem - 5rem - 2rem
+      );
   }
 }
