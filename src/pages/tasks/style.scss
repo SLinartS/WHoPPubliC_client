@@ -17,6 +17,7 @@
   &__table {
     width: calc(100% - 2rem);
     max-width: 100rem;
+    min-width: 30rem;
   }
 
   &__section-switcher {
@@ -37,6 +38,7 @@
     border-radius: 0.5rem;
     font-size: 2rem;
     color: color.$font-color--white;
+    cursor: pointer;
 
     &--acceptance {
       border-radius: 0.5rem 0 0 0.5rem;

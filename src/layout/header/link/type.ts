@@ -4,4 +4,10 @@ export interface IHeaderLinks {
   to: TToLinkType;
 }
 
-export type TToLinkType = 'points' | 'map' | 'tasks' | 'products' | 'users';
+export type TToLinkType =
+  | 'points'
+  | 'map'
+  | 'tasks'
+  | 'products'
+  | 'users'
+  | 'performance-report';

@@ -9,6 +9,9 @@ import { StoreCategoryStatus } from './category/status';
 import { StoreMapAction } from './map/action';
 import { StoreMap } from './map/state';
 import { StoreMapStatus } from './map/status';
+import { StorePerformanceReportAction } from './performanceReport/action';
+import { StorePerformanceReport } from './performanceReport/state';
+import { StorePerformanceReportStatus } from './performanceReport/status';
 import { StorePointAction } from './point/action';
 import { StorePoint } from './point/state';
 import { StorePointStatus } from './point/status';
@@ -46,6 +49,12 @@ import { StoreUtils } from './utils/utils';
 configure({
   enforceActions: 'always',
 });
+
+interface IStorePerformanceReport {
+  state: StorePerformanceReport;
+  status: StorePerformanceReportStatus;
+  action: StorePerformanceReportAction;
+}
 
 interface IStoreAuthorization {
   state: StoreAuthorization;
@@ -132,6 +141,8 @@ interface IStoreTable {
 class RootStore {
   private static instance: RootStore;
 
+  public storePerformanceReport: IStorePerformanceReport;
+
   public storeAuth: IStoreAuthorization;
 
   public storeUtils: StoreUtils;
@@ -157,6 +168,12 @@ class RootStore {
   public storeTable: IStoreTable;
 
   private constructor() {
+    this.storePerformanceReport = {
+      state: new StorePerformanceReport(this),
+      status: new StorePerformanceReportStatus(this),
+      action: new StorePerformanceReportAction(this),
+    };
+
     this.storeAuth = {
       state: new StoreAuthorization(this),
       status: new StoreAuthorizationStatus(this),

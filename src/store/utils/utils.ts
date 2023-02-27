@@ -36,11 +36,11 @@ export class StoreUtils {
   public *generateZoneLetter(actionIsDone: () => void) {
     try {
       const response: AxiosResponse<ICheckZoneLetterResponse> =
-        yield extendAxios.get<AxiosResponse>(`generate/zoneletter`);
+        yield extendAxios.get<AxiosResponse>(`generate/zone-letter`);
       this._zoneLetter = response.data.letter;
       actionIsDone();
     } catch (error) {
-      this._zoneLetter = '< error generating the zoneletter >';
+      this._zoneLetter = '< error generating the zone letter >';
     }
   }
 }

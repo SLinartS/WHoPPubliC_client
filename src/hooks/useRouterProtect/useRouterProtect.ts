@@ -24,7 +24,16 @@ export function useRouterProtect() {
       }
     }
     if (['admin'].includes(storeAuth.state.userData.role)) {
-      if (!['points', 'map', 'tasks', 'products', 'users'].includes(route)) {
+      if (
+        ![
+          'points',
+          'map',
+          'tasks',
+          'products',
+          'users',
+          'performance-report',
+        ].includes(route)
+      ) {
         navigate('/');
       }
     }

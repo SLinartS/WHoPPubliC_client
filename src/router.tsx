@@ -6,6 +6,7 @@ import Layout from './layout/Layout';
 import Login from './pages/login/Login';
 import Main from './pages/main/Main';
 import Map from './pages/map/Map';
+import PerformanceReport from './pages/performanceReport/PerformanceReport';
 import Points from './pages/points/Points';
 import Products from './pages/products/Products';
 import Tasks from './pages/tasks/Tasks';
@@ -48,6 +49,10 @@ const router = createBrowserRouter([
       {
         path: 'users',
         element: <Users />,
+      },
+      {
+        path: 'performance-report',
+        element: <PerformanceReport />,
       },
     ],
   },
