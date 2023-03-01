@@ -114,7 +114,7 @@ const Products: FC = () => {
             displayedColumns={storeTable.utils.getColumnsWithMark('products')}
           />
         ) : (
-          <Loader classes='loader--product-table' />
+          <Loader />
         )}
       </div>
 

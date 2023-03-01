@@ -5,7 +5,7 @@ import passwordIcon from '@assets/icons/password.svg';
 import userIcon from '@assets/icons/user.svg';
 import Button from '@components/button/Button';
 import CheckMark from '@components/checkMark/CheckMark';
-import BlockFieldInput from '@components/form/assembled/BlockFieldInput';
+import AssembledBlockFieldInput from '@components/form/assembled/BlockFieldInput';
 import { useRootStore } from '@helpers/RootStoreProvider/useRootStore';
 import { IAuthorizationData } from '@store/authorization/type';
 import { observer } from 'mobx-react-lite';
@@ -13,7 +13,7 @@ import { FC, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import loginWarehouseImage from '../../assets/images/login-warehouse.png';
-import { useIsLoginError } from '../hooks/errors/useIsUserErrors';
+import { useIsLoginErrors } from '../hooks/errors/useIsLoginErrors';
 
 const LoginPage: FC = () => {
   const { storeAuth, storePopup } = useRootStore();
@@ -23,7 +23,7 @@ const LoginPage: FC = () => {
     login: useRef<HTMLImageElement>(null),
     password: useRef<HTMLImageElement>(null),
   };
-  const isLoginError = useIsLoginError();
+  const isLoginErrors = useIsLoginErrors();
   const navigate = useNavigate();
 
   function changeFieldHandler(
@@ -46,7 +46,7 @@ const LoginPage: FC = () => {
   }
 
   async function loginHandler() {
-    if (!isLoginError()) {
+    if (!isLoginErrors()) {
       setIsSubmitButtonDisabled(true);
       await storeAuth.action.authorization(() => {
         navigate('/');
@@ -85,7 +85,7 @@ const LoginPage: FC = () => {
             src={userIcon}
             alt='user'
           />
-          <BlockFieldInput
+          <AssembledBlockFieldInput
             value={storeAuth.state.auth.login.value}
             errors={storeAuth.state.auth.login.errors}
             changeHandler={changeFieldHandler}
@@ -104,7 +104,7 @@ const LoginPage: FC = () => {
             src={passwordIcon}
             alt='user'
           />
-          <BlockFieldInput
+          <AssembledBlockFieldInput
             value={storeAuth.state.auth.password.value}
             errors={storeAuth.state.auth.password.errors}
             changeHandler={changeFieldHandler}

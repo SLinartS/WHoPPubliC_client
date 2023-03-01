@@ -1,10 +1,6 @@
 @use '@styles/colors.scss' as color;
 
 .loader {
-  &--product-table {
-    transform: rotateX(180deg);
-  }
-
   &__error-message {
     font-size: 2rem;
   }

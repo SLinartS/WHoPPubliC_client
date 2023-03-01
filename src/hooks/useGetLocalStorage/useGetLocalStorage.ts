@@ -11,8 +11,12 @@ export function useGetLocalStorage() {
         case 'userData': {
           const userDataStr = localStorage.getItem('userData');
           if (userDataStr) {
-            const userData: IUserData = JSON.parse(userDataStr);
-            storeAuth.state.userData = userData;
+            try {
+              const userData: IUserData = JSON.parse(userDataStr);
+              storeAuth.state.userData = userData;
+            } catch (error) {
+              localStorage.removeItem('userData');
+            }
           }
           break;
         }

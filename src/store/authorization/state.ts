@@ -1,6 +1,7 @@
 import FormFieldValidator from '@helpers/formValidator/formFieldValidator';
 import { INITIAL_VALUE } from '@store/popup/form/config';
 import RootStore from '@store/root';
+import { IResponseError } from '@store/type';
 import deepCopy from '@utils/deepCopy/deepCopy';
 import { makeAutoObservable } from 'mobx';
 
@@ -46,6 +47,17 @@ export class StoreAuthorization {
 
   public get auth() {
     return this._auth;
+  }
+
+  public setAuthFieldError(errors: IResponseError<keyof IAuthorizationData>) {
+    Object.entries(errors).forEach(([fieldName, fieldErrors]) => {
+      const typedFieldName = fieldName as keyof IAuthorizationData;
+      if (fieldErrors instanceof Array) {
+        this._auth[typedFieldName].errors = fieldErrors;
+      } else {
+        this._auth[typedFieldName].errors = [fieldErrors];
+      }
+    });
   }
 
   public setAuthField(field: keyof IAuthorizationData, value: string) {

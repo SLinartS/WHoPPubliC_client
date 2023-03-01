@@ -1,9 +1,11 @@
 import RootStore from '@store/root';
+import { IResponse } from '@store/type';
 import extendAxios from '@utils/extendAxios';
-import { AxiosResponse } from 'axios';
+import { AxiosError, AxiosResponse } from 'axios';
 import { makeAutoObservable } from 'mobx';
 
 import {
+  IAuthorizationData,
   IRequestLoginData,
   IRequestLogoutData,
   IResponseUserData,
@@ -21,15 +23,25 @@ export class StoreAuthorizationAction {
     };
 
     try {
-      const response: AxiosResponse<IResponseUserData> =
-        yield extendAxios.post<AxiosResponse>('/login', requestData);
-      this.root.storeAuth.state.userData = response.data.userData;
-      localStorage.setItem('userData', JSON.stringify(response.data.userData));
-      localStorage.setItem('accessToken', response.data.tokens.access);
-      localStorage.setItem('refreshToken', response.data.tokens.refresh);
+      const response: AxiosResponse<
+        IResponse<IResponseUserData, keyof IAuthorizationData>
+      > = yield extendAxios.post<AxiosResponse>('/login', requestData);
+
+      const { data } = response.data;
+      this.root.storeAuth.state.userData = data.userData;
+      localStorage.setItem('userData', JSON.stringify(data.userData));
+      localStorage.setItem('accessToken', data.tokens.access);
+      localStorage.setItem('refreshToken', data.tokens.refresh);
       this.root.storeAuth.status.set('auth', 'done');
       actionIfDone();
-    } catch (error) {
+    } catch (e) {
+      const error = e as AxiosError;
+      const response = error.response as AxiosResponse<
+        IResponse<IResponseUserData, keyof IAuthorizationData>
+      >;
+      if (response.status === 404 && response.data.errors) {
+        this.root.storeAuth.state.setAuthFieldError(response.data.errors);
+      }
       this.root.storeAuth.status.set('auth', 'error');
     }
   }

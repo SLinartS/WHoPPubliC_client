@@ -18,7 +18,7 @@
     max-width: 150rem;
     @extend %grid-center;
 
-    grid-template-columns: 26rem auto auto;
+    grid-template-columns: 27rem auto auto;
     column-gap: 2rem;
     row-gap: 2rem;
     margin: 2rem 0 0;
@@ -27,12 +27,6 @@
   &__search {
     width: calc(100% - 4rem);
     align-self: center;
-  }
-
-  &__button-generate {
-    &-block {
-      align-self: center;
-    }
   }
 
   &__report {
@@ -61,7 +55,7 @@
     margin: 0;
 
     &__table {
-      grid-template-columns: 20rem auto auto;
+      grid-template-columns: 21rem auto auto;
       column-gap: 1rem;
       row-gap: 1rem;
       margin: 2rem 0 0;

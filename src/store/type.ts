@@ -20,3 +20,12 @@ export type TArrayOrErrorType = {
 export interface IResponseApi {
   message: string;
 }
+
+export interface IResponse<T, E extends string> {
+  errors: IResponseError<E>;
+  data: T;
+}
+
+export type IResponseError<E extends string> = {
+  [key in E]: string[] | string;
+};
