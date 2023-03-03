@@ -65,6 +65,7 @@ export class StoreUserAction {
     const workSchedules = this.getRequestWorkSchedules();
     const requestData: IRequestUserData = {
       fields,
+      id: fields.id,
       workSchedules,
     };
     try {
@@ -85,12 +86,12 @@ export class StoreUserAction {
     const workSchedules = this.getRequestWorkSchedules();
     const requestData: IRequestUserData = {
       fields,
+      id: fields.id,
       workSchedules,
     };
-    const userId = requestData.fields.id;
     try {
       this.root.storeUser.status.set('update', 'during');
-      yield extendAxios.put(`users/${userId}`, requestData);
+      yield extendAxios.put('users', requestData);
       this.root.storeUser.status.set('update', 'done');
       if (actionIfDone) {
         actionIfDone();

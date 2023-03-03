@@ -28,6 +28,7 @@ interface IWorkSchedule {
 
 export interface IRequestUserData {
   fields: TRequestUserFields;
+  id: string;
   workSchedules: TRequestUserWorkSchedules;
 }
 
