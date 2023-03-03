@@ -1,6 +1,6 @@
 import './style.scss';
 
-import gearIcon from '@assets/icons/gear.svg';
+import gearIcon from '@assets/icons/gear/gear-second.svg';
 import ButtonIcon from '@components/buttonIcon/ButtonIcon';
 import Loader from '@components/loader/Loader';
 import Map from '@components/map/Map';

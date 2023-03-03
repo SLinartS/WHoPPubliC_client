@@ -26,8 +26,6 @@ export class StorePopupSelectFloors {
 
   public setItems(Items: number[]) {
     this._floors.value = Items;
-
-    this.root.storePopup.select.utils.utils.checkErrorsExist('floors');
   }
 
   public checkIsAdded(itemId: number) {
@@ -39,14 +37,10 @@ export class StorePopupSelectFloors {
 
   public addItem(ItemId: number) {
     this._floors.value.push(ItemId);
-
-    this.root.storePopup.select.utils.utils.checkErrorsExist('floors');
   }
 
   public removeItem(itemId: number) {
     this._floors.value = this._floors.value.filter((id) => id !== itemId);
-
-    this.root.storePopup.select.utils.utils.checkErrorsExist('floors');
   }
 
   public clear() {

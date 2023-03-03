@@ -7,7 +7,7 @@ import { IOption } from '@store/category/type';
 import { IUserFormDataFields } from '@store/popup/form/user/type';
 import { observer } from 'mobx-react-lite';
 import { FC, useEffect, useMemo } from 'react';
-import { useIsUserError } from 'src/popup/hooks/errorCheck/useIsUserErrors';
+import { useIsUserError } from 'src/popup/hooks/errors/user/useIsUserErrors';
 
 const PopupFormUser: FC = () => {
   const { storePopup, storeRole, storeUser } = useRootStore();
@@ -46,8 +46,6 @@ const PopupFormUser: FC = () => {
           break;
         default:
       }
-    } else {
-      storePopup.form.state.isDisplayDefaultErrors = true;
     }
   }
 
@@ -148,7 +146,7 @@ const PopupFormUser: FC = () => {
             typeForm='user'
             fieldName='phone'
             titleText='Номер телефона'
-            placeholder='+7 (925) 161-05-03'
+            placeholder='+79251610503'
           />
         </FormLayout>
 

@@ -1,6 +1,6 @@
 import './style.scss';
 
-import searchIcon from '@assets/icons/search.svg';
+import searchIcon from '@assets/icons/search/search-second.svg';
 import { TChangeFieldEvent } from '@gtypes/form/type';
 import { observer } from 'mobx-react-lite';
 import { FC, useState } from 'react';

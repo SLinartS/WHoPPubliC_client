@@ -1,9 +1,9 @@
-import performanceReportIcon from '@assets/icons/file.svg';
-import mapIcon from '@assets/icons/map.svg';
-import pointsIcon from '@assets/icons/points.svg';
-import productsIcon from '@assets/icons/products.svg';
-import tasksIcon from '@assets/icons/tasks.svg';
-import usersIcon from '@assets/icons/users.svg';
+import performanceReportIcon from '@assets/icons/file/file-second.svg';
+import mapIcon from '@assets/icons/map/map-second.svg';
+import pointsIcon from '@assets/icons/points/points-second.svg';
+import productsIcon from '@assets/icons/products/products-second.svg';
+import tasksIcon from '@assets/icons/tasks/tasks-second.svg';
+import usersIcon from '@assets/icons/users/users-second.svg';
 
 import { IHeaderLinks } from './type';
 

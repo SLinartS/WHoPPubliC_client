@@ -102,8 +102,6 @@ const PopupFormProduct: FC = () => {
           break;
         default:
       }
-    } else {
-      storePopup.form.state.isDisplayDefaultErrors = true;
     }
   }
 
@@ -215,7 +213,7 @@ const PopupFormProduct: FC = () => {
             value={storePopup.form.product.getFormField('yearOfPrinting')}
             changeHandler={changeFieldHandler}
             errors={storePopup.form.product.getFormErrors('yearOfPrinting')}
-            placeholder='2020.05.26'
+            placeholder='26.05.2022'
           />
         </FormLayout>
 

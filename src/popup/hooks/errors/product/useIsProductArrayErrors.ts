@@ -7,7 +7,8 @@ export function useIsProductArrayErrors() {
   return useCallback((): boolean => {
     const { points } = storePopup.select;
 
-    if (points.errors.length) {
+    if (!points.values.length) {
+      points.errors = ['Точки не выбраны'];
       return true;
     }
 

@@ -6,13 +6,14 @@ export function useIsTaskArrayErrors() {
 
   return useCallback(
     (isCheckFloor: boolean) => {
-      const list = storePopup.select.products.values;
-      const { floors } = storePopup.select;
+      const { floors, products } = storePopup.select;
 
-      if (floors.errors.length && isCheckFloor) {
+      if (!floors.values.length && isCheckFloor) {
+        floors.errors = ['Точки не выбраны'];
         return true;
       }
-      if (!list.length) {
+      if (!products.values.length) {
+        products.errors = ['Точки не выбраны'];
         return true;
       }
 

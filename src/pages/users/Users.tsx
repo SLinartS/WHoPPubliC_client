@@ -1,8 +1,8 @@
 import './style.scss';
 
-import addIcon from '@assets/icons/add.svg';
-import deleteIcon from '@assets/icons/delete.svg';
-import editIcon from '@assets/icons/edit.svg';
+import addIcon from '@assets/icons/add/add-second.svg';
+import deleteIcon from '@assets/icons/delete/delete-second.svg';
+import editIcon from '@assets/icons/edit/edit-second.svg';
 import ButtonIcon from '@components/buttonIcon/ButtonIcon';
 import Loader from '@components/loader/Loader';
 import SearchField from '@components/searchField/SearchField';

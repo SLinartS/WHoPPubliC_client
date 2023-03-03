@@ -1,4 +1,5 @@
 import { useRootStore } from '@helpers/RootStoreProvider/useRootStore';
+import { IUserFormDataFields } from '@store/popup/form/user/type';
 import { TValueOrErrorType } from '@store/type';
 import { useCallback } from 'react';
 
@@ -7,12 +8,15 @@ export function useIsUserError() {
 
   return useCallback(() => {
     const fields = storePopup.form.user.formData;
-    for (const value of Object.values(fields)) {
-      const typedValue: TValueOrErrorType = value;
+    let result = false;
+    for (const [key, value] of Object.entries(fields)) {
+      const typedKey = key as keyof IUserFormDataFields;
+      const typedValue = value as TValueOrErrorType;
+      storePopup.form.user.setFormField(typedKey, typedValue.value);
       if (typedValue.errors.length) {
-        return true;
+        result = true;
       }
     }
-    return false;
+    return result;
   }, []);
 }

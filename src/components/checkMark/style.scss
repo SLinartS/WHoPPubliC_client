@@ -19,7 +19,7 @@
   }
 
   &__checkbox:checked + label {
-    background-image: url('~@assets/icons/checked.svg');
+    background-image: url('~@assets/icons/check/check.svg');
     background-repeat: no-repeat;
     background-position: center center;
   }

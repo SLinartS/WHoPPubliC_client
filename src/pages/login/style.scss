@@ -73,6 +73,11 @@
     &--active {
       opacity: 1;
     }
+
+    html &--error {
+      opacity: 1;
+      border-color: color.$fourth-color;
+    }
   }
 
   &__input {

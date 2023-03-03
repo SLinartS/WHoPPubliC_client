@@ -58,6 +58,7 @@ const AssembledBlockFieldInput = <T, I extends unknown>({
           onFocusHandler={onFocusHandler}
           additionalInformation={additionalInformation}
           inputType={inputType}
+          errors={errors}
         />
       </FormField>
     </FormBlock>

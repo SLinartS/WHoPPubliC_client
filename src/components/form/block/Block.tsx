@@ -12,10 +12,7 @@ interface IFormBlockProps {
 }
 
 const FormBlock: FC<IFormBlockProps> = ({ classes, titleText, children }) => (
-  <div
-    className={`form-layout__block form-layout__block--${classes}`}
-    data-testid='form-block-div'
-  >
+  <div className={`form-layout__block form-layout__block--${classes}`}>
     {titleText && (
       <FormTitle
         text={titleText}

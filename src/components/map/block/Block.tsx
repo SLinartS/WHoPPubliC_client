@@ -1,5 +1,5 @@
-import addIcon from '@assets/icons/add-white.svg';
-import minusIcon from '@assets/icons/minus.svg';
+import addIcon from '@assets/icons/add/add-white.svg';
+import minusIcon from '@assets/icons/minus/minus-white.svg';
 import ButtonIcon from '@components/buttonIcon/ButtonIcon';
 import { IBlock } from '@store/map/type';
 import { observer } from 'mobx-react-lite';

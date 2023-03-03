@@ -7,6 +7,8 @@ import { useRootStore } from '@helpers/RootStoreProvider/useRootStore';
 import { observer } from 'mobx-react-lite';
 import { FC, useEffect } from 'react';
 
+import PerformanceReportItem from './item/PerformanceReportItem';
+
 const PerformanceReport: FC = () => {
   const { storePerformanceReport } = useRootStore();
 
@@ -49,23 +51,13 @@ const PerformanceReport: FC = () => {
       <div className='performance-reports__table'>
         {storePerformanceReport.status.get('fetch') === 'done' ? (
           storePerformanceReport.state.reports.map((report) => (
-            <>
-              <p className='performance-reports__report-title'>
-                {report.title.substring(19)}
-              </p>
-              <Button
-                text='Скачать'
-                clickHandler={() =>
-                  downloadReportHandler(report.id, report.title)
-                }
-                classes='performance-reports__report-button'
-              />
-              <Button
-                text='Удалить'
-                clickHandler={() => deleteReportHandler(report.id)}
-                classes='performance-reports__report-button'
-              />
-            </>
+            <PerformanceReportItem
+              key={report.id}
+              id={report.id}
+              title={report.title.substring(19)}
+              downloadReportHandler={downloadReportHandler}
+              deleteReportHandler={deleteReportHandler}
+            />
           ))
         ) : (
           <Loader />

@@ -1,6 +1,6 @@
 import './style.scss';
 
-import welcomeIcon from '@assets/icons/welcome.svg';
+import welcomeIcon from '@assets/images/welcome.svg';
 import { useRootStore } from '@helpers/RootStoreProvider/useRootStore';
 import { observer } from 'mobx-react-lite';
 import { FC } from 'react';

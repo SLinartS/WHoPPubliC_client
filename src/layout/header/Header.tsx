@@ -1,8 +1,8 @@
 import './style.scss';
 
-import appIcon from '@assets/icons/app.png';
-import barsIcon from '@assets/icons/bars.svg';
-import logoutIcon from '@assets/icons/logout.svg';
+import barsIcon from '@assets/icons/bars/bars-white.svg';
+import logoutIcon from '@assets/icons/logout/logout-second.svg';
+import appIcon from '@assets/images/app.png';
 import ButtonIcon from '@components/buttonIcon/ButtonIcon';
 import { useRootStore } from '@helpers/RootStoreProvider/useRootStore';
 import { observer } from 'mobx-react-lite';

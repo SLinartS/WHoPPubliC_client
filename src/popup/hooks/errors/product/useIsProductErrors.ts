@@ -8,9 +8,9 @@ export function useIsProductErrors() {
   const isProductFieldErrors = useIsProductFieldErrors();
 
   return useCallback((): boolean => {
-    if (isProductArrayErrors() || isProductFieldErrors()) {
+    if (isProductFieldErrors() || isProductArrayErrors()) {
       return true;
     }
     return false;
-  }, [isProductArrayErrors(), isProductFieldErrors()]);
+  }, []);
 }

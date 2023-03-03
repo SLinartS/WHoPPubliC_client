@@ -104,9 +104,17 @@
       opacity: 1;
     }
 
+    html &--error {
+      border-color: color.$fourth-color;
+      opacity: 1;
+
+      &:focus {
+        opacity: 1;
+        border-color: color.$fourth-color;
+      }
+    }
+
     &:focus {
-      border: none;
-      border-bottom: 0.2rem solid color.$font-color--black;
       opacity: 1;
     }
   }

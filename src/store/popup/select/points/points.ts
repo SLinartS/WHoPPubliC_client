@@ -26,13 +26,10 @@ export class StorePopupSelectPoints {
 
   public set values(newValues: number[]) {
     this._points.value = newValues;
-    this.root.storePopup.select.utils.utils.checkErrorsExist('points');
   }
 
   public addItem(ItemId: number) {
     this._points.value.push(ItemId);
-
-    this.root.storePopup.select.utils.utils.checkErrorsExist('points');
   }
 
   public checkIsAdded(itemId: number) {
@@ -44,8 +41,6 @@ export class StorePopupSelectPoints {
 
   public removeItem(itemId: number) {
     this._points.value = this._points.value.filter((id) => id !== itemId);
-
-    this.root.storePopup.select.utils.utils.checkErrorsExist('points');
   }
 
   public clear() {

@@ -31,6 +31,5 @@ export function useResetForm() {
     storeUser.status.set('fetch', 'pending');
     storePoint.status.set('fetch', 'pending');
     storeCategory.status.set('fetch', 'pending');
-    storePopup.form.state.isDisplayDefaultErrors = false;
   }, []);
 }

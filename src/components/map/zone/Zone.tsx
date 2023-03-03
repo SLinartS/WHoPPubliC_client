@@ -1,6 +1,6 @@
-import addIcon from '@assets/icons/add-white.svg';
-import changeIcon from '@assets/icons/edit-white.svg';
-import minusIcon from '@assets/icons/minus.svg';
+import addIcon from '@assets/icons/add/add-white.svg';
+import changeIcon from '@assets/icons/edit/edit-white.svg';
+import minusIcon from '@assets/icons/minus/minus-white.svg';
 import ButtonIcon from '@components/buttonIcon/ButtonIcon';
 import { useRootStore } from '@helpers/RootStoreProvider/useRootStore';
 import { IZone } from '@store/map/type';

@@ -18,16 +18,6 @@ export class StorePopupForm {
     this._formActionType = newType;
   }
 
-  private _isDisplayDefaultErrors: boolean = false;
-
-  public get isDisplayDefaultErrors() {
-    return this._isDisplayDefaultErrors;
-  }
-
-  public set isDisplayDefaultErrors(newStatus: boolean) {
-    this._isDisplayDefaultErrors = newStatus;
-  }
-
   private _isSelectedMap: boolean = false;
 
   public get isSelectedMap() {

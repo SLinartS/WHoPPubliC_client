@@ -7,13 +7,10 @@ export function useIsTaskErrors() {
   const isTaskArrayErrors = useIsTaskArrayErrors();
   const isTaskFieldErrors = useIsTaskFieldErrors();
 
-  return useCallback(
-    (isCheckFloor: boolean = true): boolean => {
-      if (isTaskArrayErrors(isCheckFloor) || isTaskFieldErrors()) {
-        return true;
-      }
-      return false;
-    },
-    [isTaskArrayErrors, isTaskFieldErrors],
-  );
+  return useCallback((isCheckFloor: boolean = true): boolean => {
+    if (isTaskFieldErrors() || isTaskArrayErrors(isCheckFloor)) {
+      return true;
+    }
+    return false;
+  }, []);
 }

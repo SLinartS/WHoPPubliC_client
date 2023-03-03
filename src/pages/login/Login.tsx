@@ -1,28 +1,32 @@
 import './style.scss';
 
-import appIcon from '@assets/icons/app.png';
-import passwordIcon from '@assets/icons/password.svg';
-import userIcon from '@assets/icons/user.svg';
+import passwordIcon from '@assets/icons/password/password.svg';
+import passwordErrorIcon from '@assets/icons/password/password-fourth.svg';
+import userIcon from '@assets/icons/user/user.svg';
+import userErrorIcon from '@assets/icons/user/user-fourth.svg';
+import appIcon from '@assets/images/app.png';
 import Button from '@components/button/Button';
 import CheckMark from '@components/checkMark/CheckMark';
 import AssembledBlockFieldInput from '@components/form/assembled/BlockFieldInput';
 import { useRootStore } from '@helpers/RootStoreProvider/useRootStore';
 import { IAuthorizationData } from '@store/authorization/type';
 import { observer } from 'mobx-react-lite';
-import { FC, useRef, useState } from 'react';
+import { FC, useEffect, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import loginWarehouseImage from '../../assets/images/login-warehouse.png';
 import { useIsLoginErrors } from '../hooks/errors/useIsLoginErrors';
 
 const LoginPage: FC = () => {
-  const { storeAuth, storePopup } = useRootStore();
+  const { storeAuth } = useRootStore();
   const [isSubmitButtonDisabled, setIsSubmitButtonDisabled] =
     useState<boolean>(false);
   const imgRefs = {
     login: useRef<HTMLImageElement>(null),
     password: useRef<HTMLImageElement>(null),
   };
+  const [loginError, setLoginError] = useState<boolean>(false);
+  const [passwordError, setPasswordError] = useState<boolean>(false);
   const isLoginErrors = useIsLoginErrors();
   const navigate = useNavigate();
 
@@ -53,10 +57,30 @@ const LoginPage: FC = () => {
         storeAuth.state.clearAuth();
       });
       setIsSubmitButtonDisabled(false);
-    } else {
-      storePopup.form.state.isDisplayDefaultErrors = true;
     }
   }
+
+  useEffect(() => {
+    const { errors } = storeAuth.state.auth.login;
+    if (errors && errors.length && errors[0] && errors[0].length) {
+      imgRefs.login.current?.classList.add('login__icon--error');
+      setLoginError(true);
+    } else {
+      imgRefs.login.current?.classList.remove('login__icon--error');
+      setLoginError(false);
+    }
+  }, [storeAuth.state.auth.login.errors]);
+
+  useEffect(() => {
+    const { errors } = storeAuth.state.auth.password;
+    if (errors && errors.length && errors[0] && errors[0].length) {
+      imgRefs.password.current?.classList.add('login__icon--error');
+      setPasswordError(true);
+    } else {
+      imgRefs.password.current?.classList.remove('login__icon--error');
+      setPasswordError(false);
+    }
+  }, [storeAuth.state.auth.password.errors]);
 
   return (
     <main className='login'>
@@ -82,7 +106,7 @@ const LoginPage: FC = () => {
             ref={imgRefs.login}
             draggable='false'
             className='login__icon'
-            src={userIcon}
+            src={loginError ? userErrorIcon : userIcon}
             alt='user'
           />
           <AssembledBlockFieldInput
@@ -101,7 +125,7 @@ const LoginPage: FC = () => {
             ref={imgRefs.password}
             draggable='false'
             className='login__icon'
-            src={passwordIcon}
+            src={passwordError ? passwordErrorIcon : passwordIcon}
             alt='user'
           />
           <AssembledBlockFieldInput

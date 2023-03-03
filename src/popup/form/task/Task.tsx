@@ -54,13 +54,18 @@ const PopupFormTask: FC = () => {
   }, [storeState.interface.currentTypeOfTask]);
 
   const windowTitle = useMemo(() => {
+    const action =
+      storePopup.form.state.formActionType === 'create'
+        ? 'Добавить'
+        : 'Изменить';
+
     switch (storeState.interface.currentTypeOfTask) {
       case 'acceptance':
-        return 'Добавить задачу распределения';
+        return `${action} задачу распределения`;
       case 'intra':
-        return 'Добавить внутрискладскую задачу';
+        return `${action} внутрискладскую задачу`;
       case 'shipment':
-        return 'Добавить задачу отгрузки';
+        return `${action} задачу отгрузки`;
       default:
         return '';
     }
@@ -108,8 +113,6 @@ const PopupFormTask: FC = () => {
           break;
         default:
       }
-    } else {
-      storePopup.form.state.isDisplayDefaultErrors = true;
     }
   }
 

@@ -1,4 +1,5 @@
 import { useRootStore } from '@helpers/RootStoreProvider/useRootStore';
+import { IProductFormDataFields } from '@store/popup/form/product/type';
 import { TValueOrErrorType } from '@store/type';
 import { useCallback } from 'react';
 
@@ -6,12 +7,15 @@ export function useIsProductFieldErrors() {
   const { storePopup } = useRootStore();
   return useCallback((): boolean => {
     const fields = storePopup.form.product.formData;
-    for (const value of Object.values(fields)) {
-      const typedValue: TValueOrErrorType = value;
+    let result = false;
+    for (const [key, value] of Object.entries(fields)) {
+      const typedKey = key as keyof IProductFormDataFields;
+      const typedValue = value as TValueOrErrorType;
+      storePopup.form.product.setFormField(typedKey, typedValue.value);
       if (typedValue.errors.length) {
-        return true;
+        result = true;
       }
     }
-    return false;
+    return result;
   }, [storePopup.form.product.formData]);
 }

@@ -1,7 +1,7 @@
 import '../style.scss';
 import '../../style.scss';
 
-import forwardIcon from '@assets/icons/forward.svg';
+import forwardIcon from '@assets/icons/forward/forward-second.svg';
 import Map from '@components/map/Map';
 import PointsMap from '@components/points/PointsMap';
 import WindowHeaderForm from '@components/windowHeader/form/Form';

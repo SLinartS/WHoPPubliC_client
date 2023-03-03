@@ -1,9 +1,9 @@
 import './style.scss';
 
-import backIcon from '@assets/icons/back.svg';
-import closeIcon from '@assets/icons/close.svg';
-import resetIcon from '@assets/icons/reset.svg';
-import saveIcon from '@assets/icons/save.svg';
+import backIcon from '@assets/icons/arrow/left/arrow-left-white.svg';
+import closeIcon from '@assets/icons/close/close-white.svg';
+import resetIcon from '@assets/icons/reset/reset-white.svg';
+import saveIcon from '@assets/icons/save/save-white.svg';
 import { observer } from 'mobx-react-lite';
 import { FC } from 'react';
 

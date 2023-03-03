@@ -36,15 +36,12 @@ export class StorePopupSelectProducts {
 
   public setProductList(productIds: number[]) {
     this._products.value = productIds;
-    this.root.storePopup.select.utils.utils.checkErrorsExist('products');
   }
 
   public addProductToList() {
     this._products.value.push(
       this.root.storeTable.selectedItem.getItemId('products', 'products'),
     );
-
-    this.root.storePopup.select.utils.utils.checkErrorsExist('products');
   }
 
   public removeProductFromList() {
@@ -53,8 +50,6 @@ export class StorePopupSelectProducts {
         id !==
         this.root.storeTable.selectedItem.getItemId('products', 'products'),
     );
-
-    this.root.storePopup.select.utils.utils.checkErrorsExist('products');
   }
 
   public clear() {

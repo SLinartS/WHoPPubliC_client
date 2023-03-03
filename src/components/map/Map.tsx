@@ -1,7 +1,7 @@
 import './style.scss';
 
-import addIcon from '@assets/icons/add-white.svg';
-import resetIcon from '@assets/icons/reset-orange.svg';
+import addIcon from '@assets/icons/add/add-white.svg';
+import resetIcon from '@assets/icons/reset/reset-second.svg';
 import ButtonIcon from '@components/buttonIcon/ButtonIcon';
 import { useRootStore } from '@helpers/RootStoreProvider/useRootStore';
 import { observer } from 'mobx-react-lite';

@@ -8,14 +8,15 @@ export function useIsLoginErrors() {
 
   return useCallback(() => {
     const fields = storeAuth.state.auth;
+    let result = false;
     for (const [key, value] of Object.entries(fields)) {
       const typedKey = key as keyof IAuthorizationData;
       const typedValue = value as TValueOrErrorType;
       storeAuth.state.setAuthField(typedKey, typedValue.value);
       if (typedValue.errors.length) {
-        return true;
+        result = true;
       }
     }
-    return false;
+    return result;
   }, []);
 }

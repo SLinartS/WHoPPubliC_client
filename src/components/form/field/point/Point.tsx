@@ -1,4 +1,4 @@
-import chooseIcon from '@assets/icons/choose.png';
+import chooseIcon from '@assets/images/choose.png';
 import { TMouseImgEventHandler } from '@gtypes/form/type';
 import { observer } from 'mobx-react-lite';
 import { FC } from 'react';

@@ -1,8 +1,8 @@
 import '../style.scss';
 import '../../style.scss';
 
-import checkIcon from '@assets/icons/check.svg';
-import mapIcon from '@assets/icons/map.svg';
+import checkIcon from '@assets/icons/check/check-second.svg';
+import mapIcon from '@assets/icons/map/map-second.svg';
 import ButtonIcon from '@components/buttonIcon/ButtonIcon';
 import AssembledBlockFieldDatetime from '@components/form/assembled/BlockFieldDatetime';
 import AssembledBlockFieldText from '@components/form/assembled/BlockFieldText';
