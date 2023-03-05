@@ -1,6 +1,6 @@
 import { ITableObject } from '@components/table/type';
 import { IUserFormDataFields } from '@store/popup/form/user/type';
-import { TDayOfWeek } from '@store/popup/select/workSchedules/type';
+import { TWorkScheduleSelectData } from '@store/popup/select/workSchedules/type';
 import { IField } from '@store/type';
 
 export interface IUser extends ITableObject {
@@ -27,24 +27,10 @@ interface IWorkSchedule {
 }
 
 export interface IRequestUserData {
-  fields: TRequestUserFields;
-  id: string;
-  workSchedules: TRequestUserWorkSchedules;
+  fields: IUserFormDataFields;
+  workSchedules: TWorkScheduleSelectData;
 }
 
 export interface IResponseUserDelete {
   message: string;
-}
-
-export type TRequestUserFields = {
-  [key in keyof IUserFormDataFields]: string;
-};
-
-export type TRequestUserWorkSchedules = {
-  [key in TDayOfWeek]: IRequestUserWorkSchedule;
-};
-
-export interface IRequestUserWorkSchedule {
-  startTime: string;
-  endTime: string;
 }

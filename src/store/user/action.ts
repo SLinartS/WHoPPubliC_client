@@ -1,23 +1,9 @@
-import { IUserFormDataFields } from '@store/popup/form/user/type';
-import {
-  IOneWorkScheduleSelectData,
-  TDayOfWeek,
-} from '@store/popup/select/workSchedules/type';
 import RootStore from '@store/root';
-import { TValueOrErrorType } from '@store/type';
 import extendAxios from '@utils/extendAxios';
 import { AxiosError, AxiosResponse } from 'axios';
 import { makeAutoObservable } from 'mobx';
 
-import {
-  IOneUser,
-  IRequestUserData,
-  IRequestUserWorkSchedule,
-  IResponseUserDelete,
-  IUser,
-  TRequestUserFields,
-  TRequestUserWorkSchedules,
-} from './type';
+import { IOneUser, IRequestUserData, IResponseUserDelete, IUser } from './type';
 
 export class StoreUserAction {
   constructor(private readonly root: RootStore) {
@@ -61,12 +47,10 @@ export class StoreUserAction {
   }
 
   public *store(actionIfDone?: () => void) {
-    const fields = this.getRequestFields();
-    const workSchedules = this.getRequestWorkSchedules();
+    const fields = this.root.storePopup.form.user.formData;
     const requestData: IRequestUserData = {
       fields,
-      id: fields.id,
-      workSchedules,
+      workSchedules: this.root.storePopup.select.workSchedules.workSchedules,
     };
     try {
       this.root.storeUser.status.set('store', 'during');
@@ -82,12 +66,10 @@ export class StoreUserAction {
   }
 
   public *update(actionIfDone?: () => void) {
-    const fields = this.getRequestFields();
-    const workSchedules = this.getRequestWorkSchedules();
+    const fields = this.root.storePopup.form.user.formData;
     const requestData: IRequestUserData = {
       fields,
-      id: fields.id,
-      workSchedules,
+      workSchedules: this.root.storePopup.select.workSchedules.workSchedules,
     };
     try {
       this.root.storeUser.status.set('update', 'during');
@@ -119,51 +101,5 @@ export class StoreUserAction {
         };
       });
     }
-  }
-
-  private getRequestFields(): TRequestUserFields {
-    const { storePopup } = this.root;
-    return (
-      (
-        Object.entries(storePopup.form.user.formData) as [
-          keyof IUserFormDataFields,
-          TValueOrErrorType,
-        ][]
-      )
-        .map(([key, value]): [keyof IUserFormDataFields, string] => [
-          key,
-          value.value,
-        ])
-        /* eslint-disable no-param-reassign */
-        .reduce((newFields, [key, value]) => {
-          newFields[key] = value;
-          return newFields;
-        }, {} as TRequestUserFields)
-    );
-    /* eslint-enable no-param-reassign */
-  }
-
-  private getRequestWorkSchedules(): TRequestUserWorkSchedules {
-    const { storePopup } = this.root;
-    return (
-      (
-        Object.entries(
-          storePopup.select.workSchedules.workSchedules,
-        ) as unknown as [TDayOfWeek, IOneWorkScheduleSelectData][]
-      )
-        .map(([key, schedule]): [TDayOfWeek, IRequestUserWorkSchedule] => [
-          key,
-          {
-            startTime: schedule.startTime.value,
-            endTime: schedule.endTime.value,
-          },
-        ])
-        /* eslint-disable no-param-reassign */
-        .reduce((newFields, [key, value]) => {
-          newFields[key] = value;
-          return newFields;
-        }, {} as TRequestUserWorkSchedules)
-    );
-    /* eslint-enable no-param-reassign */
   }
 }

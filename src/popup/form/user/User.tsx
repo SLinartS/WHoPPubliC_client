@@ -3,21 +3,37 @@ import AssembledBlockFieldSelect from '@components/form/assembled/BlockFieldSele
 import FormLayout from '@components/form/layout/Layout';
 import WindowHeaderForm from '@components/windowHeader/form/Form';
 import { useRootStore } from '@helpers/RootStoreProvider/useRootStore';
+import { useFetchOneUserAndFillForm } from '@hooks/user/useFetchOneUserAndFillForm';
 import { IOption } from '@store/category/type';
 import { IUserFormDataFields } from '@store/popup/form/user/type';
 import { observer } from 'mobx-react-lite';
 import { FC, useEffect, useMemo } from 'react';
 import { useIsUserError } from 'src/popup/hooks/errors/user/useIsUserErrors';
+import { useResetForm } from 'src/popup/hooks/resetForm/useResetForm';
 
 const PopupFormUser: FC = () => {
   const { storePopup, storeRole, storeUser } = useRootStore();
+  const fetchOneUserAndFillForm = useFetchOneUserAndFillForm();
   const isUserError = useIsUserError();
+  const resetForm = useResetForm();
 
   function closeHandler() {
     storePopup.status.hide('formUser');
+    resetForm();
   }
 
-  function resetHandler() {}
+  function resetHandler() {
+    const { formActionType } = storePopup.form.state;
+    if (formActionType === 'create') {
+      storePopup.form.user.clearFormData();
+    }
+    if (formActionType === 'update') {
+      fetchOneUserAndFillForm(
+        'formUser',
+        'Выберите строку, чтобы изменить данные аккаунта пользователя',
+      );
+    }
+  }
 
   function saveHandler() {
     const { formActionType } = storePopup.form.state;
