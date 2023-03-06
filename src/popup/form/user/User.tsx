@@ -1,3 +1,4 @@
+import Button from '@components/button/Button';
 import AssembledBlockFieldInput from '@components/form/assembled/BlockFieldInput';
 import AssembledBlockFieldSelect from '@components/form/assembled/BlockFieldSelect';
 import FormLayout from '@components/form/layout/Layout';
@@ -21,6 +22,15 @@ const PopupFormUser: FC = () => {
     storePopup.status.hide('formUser');
     resetForm();
   }
+
+  const windowTitle = useMemo(() => {
+    const action =
+      storePopup.form.state.formActionType === 'create'
+        ? 'Добавить'
+        : 'Изменить';
+
+    return `${action} аккаунт`;
+  }, []);
 
   function resetHandler() {
     const { formActionType } = storePopup.form.state;
@@ -101,7 +111,7 @@ const PopupFormUser: FC = () => {
   return (
     <>
       <WindowHeaderForm
-        title='Добавить партию товара'
+        title={windowTitle}
         resetEventHandler={resetHandler}
         saveEventHandler={saveHandler}
         closeEventHandler={closeHandler}
@@ -135,14 +145,12 @@ const PopupFormUser: FC = () => {
             titleText='Отчество'
             placeholder='Иванов'
           />
-          <div>
-            <button
-              type='button'
-              onClick={openSelectWorkSchedulesHandler}
-            >
-              График работы
-            </button>
-          </div>
+
+          <Button
+            text='График работы'
+            clickHandler={openSelectWorkSchedulesHandler}
+            classes=''
+          />
         </FormLayout>
 
         <FormLayout classes='contact-info'>

@@ -37,6 +37,15 @@ const PopupFormProduct: FC = () => {
     storePopup.form.product.setFormField('categoryId', String(option.id));
   }
 
+  const windowTitle = useMemo(() => {
+    const action =
+      storePopup.form.state.formActionType === 'create'
+        ? 'Добавить'
+        : 'Изменить';
+
+    return `${action} партию товара`;
+  }, []);
+
   function changeFieldHandler(
     newValue: string,
     fieldName: keyof IProductFormDataFields,
@@ -123,7 +132,7 @@ const PopupFormProduct: FC = () => {
   return (
     <>
       <WindowHeaderForm
-        title='Добавить партию товара'
+        title={windowTitle}
         resetEventHandler={resetHandler}
         saveEventHandler={saveHandler}
         closeEventHandler={closeHandler}
