@@ -8,7 +8,8 @@ export type TProductStatus =
   | 'store'
   | 'update'
   | 'destroy'
-  | 'markAsMoved';
+  | 'markAsMoved'
+  | 'addImage';
 
 export class StoreProductStatus {
   constructor(private readonly root: RootStore) {
@@ -26,6 +27,8 @@ export class StoreProductStatus {
   private destroy: TStatus = 'pending';
 
   private markAsMoved: TStatus = 'pending';
+
+  private addImage: TStatus = 'pending';
 
   public get(title: TProductStatus) {
     return this[title];

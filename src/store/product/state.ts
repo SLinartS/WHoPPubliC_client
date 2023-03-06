@@ -16,6 +16,7 @@ const initialOneProduct: IOneProduct = {
     yearOfPrinting: INITIAL_VALUE_STRING,
     printingHouse: INITIAL_VALUE_STRING,
     publishingHouse: INITIAL_VALUE_STRING,
+    imageUrl: INITIAL_VALUE_STRING,
     categoryTitle: INITIAL_VALUE_STRING,
     categoryId: INITIAL_VALUE_NUMBER,
   },

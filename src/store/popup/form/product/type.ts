@@ -12,3 +12,8 @@ export interface IProductFormDataFields {
   publishingHouse: TValueOrErrorType;
   categoryId: TValueOrErrorType;
 }
+
+export interface IFile {
+  value: File | null;
+  errors: string[];
+}

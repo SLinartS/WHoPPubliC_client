@@ -16,7 +16,7 @@ import { useFetchOneProductAndFillForm } from '@hooks/product/useFetchOneProduct
 import { IOption } from '@store/category/type';
 import { IProductFormDataFields } from '@store/popup/form/product/type';
 import { observer } from 'mobx-react-lite';
-import { FC, useEffect, useMemo } from 'react';
+import { FC, useEffect, useMemo, useRef, useState } from 'react';
 import { useIsProductErrors } from 'src/popup/hooks/errors/product/useIsProductErrors';
 import { useResetForm } from 'src/popup/hooks/resetForm/useResetForm';
 
@@ -26,6 +26,9 @@ const PopupFormProduct: FC = () => {
   const fetchOneProductAndFillForm = useFetchOneProductAndFillForm();
   const resetForm = useResetForm();
   const isProductErrors = useIsProductErrors();
+  const fileInputRef = useRef<HTMLInputElement>(null);
+  const [selectedImageName, setSelectedImageName] =
+    useState<string>('Выберите файл');
 
   function generateArticle() {
     storeUtils.generateArticle('product', () => {
@@ -46,11 +49,31 @@ const PopupFormProduct: FC = () => {
     return `${action} партию товара`;
   }, []);
 
+  const imageUrl = useMemo(() => {
+    const imagePath = storeProduct.state.product.productInfo.imageUrl.value;
+    if (imagePath) {
+      return `${process.env.REACT_APP_STATIC_FILES_URL}public/${imagePath}`;
+    }
+    return imagePlaceholder;
+  }, []);
+
   function changeFieldHandler(
     newValue: string,
     fieldName: keyof IProductFormDataFields,
   ) {
     storePopup.form.product.setFormField(fieldName, String(newValue));
+  }
+
+  function changeFileHandler() {
+    const files = fileInputRef.current?.files;
+    if (files) {
+      storePopup.form.product.setFileValue(files[0]);
+      setSelectedImageName(
+        `${files[0].name.substring(0, 10)}${
+          files[0].name.length > 10 ? '...' : ''
+        }`,
+      );
+    }
   }
 
   const currentCategoryValue = useMemo(() => {
@@ -96,17 +119,21 @@ const PopupFormProduct: FC = () => {
       switch (formActionType) {
         case 'create':
           storeProduct.action.store(() => {
-            storePopup.form.product.clearFormData();
-            storePopup.select.points.clear();
-            closeHandler();
-            storeProduct.status.set('fetch', 'pending');
+            storeProduct.action.addFile(() => {
+              storePopup.form.product.clearFormData();
+              storePopup.select.points.clear();
+              closeHandler();
+              storeProduct.status.set('fetch', 'pending');
+            });
           });
           break;
         case 'update':
           storeProduct.action.update(() => {
-            storePopup.form.product.clearFormData();
-            closeHandler();
-            storeProduct.status.set('fetch', 'pending');
+            storeProduct.action.addFile(() => {
+              storePopup.form.product.clearFormData();
+              closeHandler();
+              storeProduct.status.set('fetch', 'pending');
+            });
           });
           break;
         default:
@@ -240,14 +267,37 @@ const PopupFormProduct: FC = () => {
             </FormField>
           </FormBlock>
         </FormLayout>
-        <div className='popup-form__photo-block'>
-          <img
-            src={imagePlaceholder}
-            alt='product'
-            className='popup-form__photo'
-          />
-          <p className='popup-form__photo-text'>Фотография товара</p>
-        </div>
+        <FormLayout classes='photo-product'>
+          <FormBlock
+            titleText=''
+            classes='product-photo'
+          >
+            <FormField
+              errors={[storePopup.form.product.getFileErrors()]}
+              classes='product-photo'
+            >
+              <img
+                src={imageUrl}
+                alt='product'
+                className='popup-form__photo'
+              />
+              <label
+                htmlFor='photo'
+                className='popup-form__photo-label'
+              >
+                {selectedImageName}
+              </label>
+              <input
+                id='photo'
+                ref={fileInputRef}
+                type='file'
+                name='image'
+                onChange={changeFileHandler}
+                className='popup-form__photo-input'
+              />
+            </FormField>
+          </FormBlock>
+        </FormLayout>
       </div>
     </>
   );

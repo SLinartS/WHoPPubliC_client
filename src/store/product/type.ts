@@ -24,6 +24,7 @@ export interface IProduct extends ITableObject {
   yearOfPrinting: IField<string>;
   printingHouse: IField<string>;
   publishingHouse: IField<string>;
+  imageUrl: IField<string>;
   categoryTitle: IField<string>;
   categoryId: IField<number>;
 }

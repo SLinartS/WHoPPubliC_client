@@ -17,7 +17,7 @@ export function useFetchOneProductAndFillForm() {
           const { pointId, productInfo } = storeProduct.state.product;
 
           Object.entries(productInfo).forEach(([key, element]) => {
-            if (key !== 'categoryTitle') {
+            if (!['categoryTitle', 'imageUrl'].includes(key)) {
               const typedKey = key as keyof IProductFormDataFields;
               storePopup.form.product.setFormField(
                 typedKey,

@@ -4,7 +4,7 @@ import { makeAutoObservable, toJS } from 'mobx';
 
 import RootStore from '../../../root';
 import { INITIAL_VALUE } from '../config';
-import { IProductFormDataFields } from './type';
+import { IFile, IProductFormDataFields } from './type';
 
 export class StorePopupFormProduct {
   constructor(private readonly root: RootStore) {
@@ -100,6 +100,27 @@ export class StorePopupFormProduct {
     }
     this._formData[field].value = trimValue;
     this.checkErrorsExist(validator.errors, field);
+  }
+
+  private _file: IFile = {
+    value: null,
+    errors: [],
+  };
+
+  public getFile() {
+    return this._file;
+  }
+
+  public setFileValue(file: File) {
+    this._file.value = file;
+  }
+
+  public getFileErrors() {
+    return this._file.errors;
+  }
+
+  public setFileErrors(errors: string[]) {
+    this._file.errors = errors;
   }
 
   private checkErrorsExist(

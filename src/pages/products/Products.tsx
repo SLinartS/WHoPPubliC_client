@@ -60,7 +60,7 @@ const Products: FC = () => {
         storeTable.utils.setDefaultMark(
           'products',
           storeProduct.state.products.data,
-          ['categoryId', 'printingHouse'],
+          ['categoryId', 'printingHouse', 'imageUrl'],
         );
       });
     }

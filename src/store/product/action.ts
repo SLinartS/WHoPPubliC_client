@@ -74,6 +74,32 @@ export class StoreProductAction {
     }
   }
 
+  public *addFile(actionIfDone?: () => void) {
+    try {
+      this.root.storeProduct.status.set('addImage', 'during');
+      const file = this.root.storePopup.form.product.getFile().value;
+      if (!file) {
+        throw new Error('file not found');
+      }
+      const productId = this.root.storePopup.form.product.formData.id.value;
+      const formData = new FormData();
+      formData.append('id', String(productId));
+      formData.append('photo', file);
+      yield extendAxios.post('products-add-image', formData, {
+        headers: {
+          'Content-Type': 'form/multipart',
+        },
+      });
+
+      this.root.storeProduct.status.set('addImage', 'done');
+      if (actionIfDone) {
+        actionIfDone();
+      }
+    } catch (error) {
+      this.root.storeProduct.status.set('addImage', 'error');
+    }
+  }
+
   public *update(actionIfDone?: () => void) {
     try {
       this.root.storeProduct.status.set('update', 'during');

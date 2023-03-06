@@ -44,16 +44,20 @@
   &__photo {
     width: 20rem;
     height: 20rem;
-    padding: 1rem;
+    margin: 1rem;
+    border-radius: 0.5rem;
 
-    &-block {
-      @extend %flex-center;
+    &-input {
+      display: none;
+    }
 
-      flex-direction: column;
-      background-color: color.$font-color--white;
-      grid-column: 2/3;
-      grid-row: 2/3;
-      border-left: 0.2rem solid color.$font-color--black;
+    &-label {
+      background: color.$second-color;
+      padding: 0.8rem 2rem;
+      border-radius: 0.5rem;
+      font-size: 2rem;
+      color: color.$font-color--white;
+      cursor: pointer;
     }
 
     &-text {
@@ -119,13 +123,6 @@
     &__absence-product {
       font-size: 1.6rem;
       margin: 5rem 0 0;
-    }
-
-    &__photo-block {
-      grid-row: 4/5;
-      grid-column: 1/3;
-      padding: 0 0 2rem;
-      border-left: none color.$font-color--black;
     }
   }
 }
