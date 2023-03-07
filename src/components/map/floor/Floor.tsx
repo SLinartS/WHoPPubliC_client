@@ -18,6 +18,7 @@ const MapFloor: FC<IMapFloorProps> = ({
   freeSpace,
   reservedSpace,
   productIds,
+  isSearch,
   index,
 }) => {
   const { storePopup } = useRootStore();
@@ -40,12 +41,16 @@ const MapFloor: FC<IMapFloorProps> = ({
       } else {
         storePopup.select.floors.addItem(id);
       }
+    } else if (freeSpace < capacity) {
+      openMapProductsHandler();
     }
   }
 
   return (
     <div
-      className={`map-block__floor ${floorClasses}`}
+      className={`map-block__floor ${floorClasses} ${
+        freeSpace === capacity ? 'map-block__floor--empty' : ''
+      }`}
       data-floor-id={id}
       data-floor-index={index}
       data-floor-free-space={freeSpace}
@@ -55,7 +60,7 @@ const MapFloor: FC<IMapFloorProps> = ({
     >
       <div
         className={`map-block__floor-link ${
-          productIds.length ? 'map-block__floor-link--active' : ''
+          isSearch ? 'map-block__floor-link--active' : ''
         }`}
         onClick={openMapProductsHandler}
       />

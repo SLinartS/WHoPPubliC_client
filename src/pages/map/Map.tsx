@@ -22,7 +22,7 @@ const MapPage: FC = () => {
     if (storeMap.status.get('fetch') === 'pending') {
       storeMap.action.fetch('');
     }
-  }, [storeMap.status.get('fetch')]);
+  }, []);
 
   function searchHandler(newValue: string) {
     storeMap.action.fetch(newValue);

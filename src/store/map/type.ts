@@ -23,6 +23,7 @@ export interface IFloor {
   capacity: number;
   freeSpace: number;
   reservedSpace: number;
+  isSearch: boolean;
   productIds: number[];
 }
 

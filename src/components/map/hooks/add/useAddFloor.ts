@@ -17,6 +17,7 @@ export function useAddFloor() {
               capacity: 300,
               freeSpace: 300,
               reservedSpace: 0,
+              isSearch: false,
               productIds: [],
             });
           });

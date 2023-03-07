@@ -61,6 +61,7 @@ const MapBlock: FC<IMapBlockProps> = ({
           capacity={floor.capacity}
           freeSpace={floor.freeSpace}
           reservedSpace={floor.reservedSpace}
+          isSearch={floor.isSearch}
           productIds={floor.productIds}
           index={floorIndex}
         />

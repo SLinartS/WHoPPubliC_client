@@ -114,7 +114,7 @@ const LoginPage: FC = () => {
             errors={storeAuth.state.auth.login.errors}
             changeHandler={changeFieldHandler}
             fieldName='login'
-            typeForm=''
+            typeForm='login'
             placeholder='Логин'
             classes='login__input'
             onFocusHandler={onFocusHandler}
@@ -133,7 +133,7 @@ const LoginPage: FC = () => {
             errors={storeAuth.state.auth.password.errors}
             changeHandler={changeFieldHandler}
             fieldName='password'
-            typeForm=''
+            typeForm='login'
             placeholder='Пароль'
             classes='login__input'
             onFocusHandler={onFocusHandler}

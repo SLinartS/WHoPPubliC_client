@@ -37,7 +37,9 @@
     }
 
     &--map-products {
-      padding: 2rem 0 2rem 2rem;
+      padding: 2rem 0;
+      margin-left: 2rem;
+      width: calc(100% - 4rem);
     }
   }
 

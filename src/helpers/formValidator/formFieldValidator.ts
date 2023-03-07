@@ -92,19 +92,6 @@ export default class FormFieldValidator {
     return this;
   }
 
-  public notBeforeToday() {
-    if (
-      DateTime.fromFormat(this._value, 'dd.MM.yyyy').toMillis() >
-      DateTime.now().toMillis()
-    ) {
-      return this;
-    }
-    this._errors.push(
-      `Нелья указать время начала/окончания меньше, чем сейчас`,
-    );
-    return this;
-  }
-
   public outOfRange(min: number, max: number) {
     const value = Number(this._value);
     if (value > min && value < max) {

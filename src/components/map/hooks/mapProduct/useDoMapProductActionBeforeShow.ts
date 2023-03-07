@@ -8,7 +8,7 @@ export function useDoMapProductActionBeforeShow() {
     storeTable.utils.setDefaultMark(
       'products',
       storeProduct.state.products.data,
-      ['categoryId', 'printingHouse'],
+      ['categoryId', 'imageUrl'],
     );
   }, []);
 }

@@ -1,7 +1,7 @@
 import '../style.scss';
 import '../../style.scss';
 
-import imagePlaceholder from '@assets/images/placeholder.png';
+import imagePlaceholder from '@assets/images/placeholder.jpg';
 import AssembledBlockFieldInput from '@components/form/assembled/BlockFieldInput';
 import AssembledBlockFieldSelect from '@components/form/assembled/BlockFieldSelect';
 import AssembledBlockFieldText from '@components/form/assembled/BlockFieldText';
@@ -52,7 +52,7 @@ const PopupFormProduct: FC = () => {
   const imageUrl = useMemo(() => {
     const imagePath = storeProduct.state.product.productInfo.imageUrl.value;
     if (imagePath) {
-      return `${process.env.REACT_APP_STATIC_FILES_URL}public/${imagePath}`;
+      return `${process.env.REACT_APP_STATIC_FILES_URL}public${imagePath}`;
     }
     return imagePlaceholder;
   }, []);
@@ -68,11 +68,15 @@ const PopupFormProduct: FC = () => {
     const files = fileInputRef.current?.files;
     if (files) {
       storePopup.form.product.setFileValue(files[0]);
-      setSelectedImageName(
-        `${files[0].name.substring(0, 10)}${
-          files[0].name.length > 10 ? '...' : ''
-        }`,
-      );
+      if (files[0]) {
+        setSelectedImageName(
+          `${files[0].name.substring(0, 12)}${
+            files[0].name.length > 12 ? '...' : ''
+          }`,
+        );
+      } else {
+        setSelectedImageName('Выберите файл');
+      }
     }
   }
 
@@ -129,11 +133,17 @@ const PopupFormProduct: FC = () => {
           break;
         case 'update':
           storeProduct.action.update(() => {
-            storeProduct.action.addFile(() => {
+            if (fileInputRef.current?.files && fileInputRef.current.files[0]) {
+              storeProduct.action.addFile(() => {
+                storePopup.form.product.clearFormData();
+                closeHandler();
+                storeProduct.status.set('fetch', 'pending');
+              });
+            } else {
               storePopup.form.product.clearFormData();
               closeHandler();
               storeProduct.status.set('fetch', 'pending');
-            });
+            }
           });
           break;
         default:
@@ -291,6 +301,7 @@ const PopupFormProduct: FC = () => {
                 id='photo'
                 ref={fileInputRef}
                 type='file'
+                accept='.png, .jpg, .jpeg'
                 name='image'
                 onChange={changeFileHandler}
                 className='popup-form__photo-input'

@@ -44,10 +44,7 @@ export class StorePopupFormTask {
 
       case 'dateStart':
       case 'dateEnd':
-        validator
-          .notEmpty()
-          .dateFormat('dd.MM.yyyy', 'дд.ММ.гггг')
-          .notBeforeToday();
+        validator.notEmpty().dateFormat('dd.MM.yyyy', 'дд.ММ.гггг');
         break;
 
       case 'timeStart':

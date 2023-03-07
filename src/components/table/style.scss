@@ -52,6 +52,13 @@
     height: 1.6rem;
     position: absolute;
   }
+
+  &__empty-text {
+    width: fit-content;
+    display: inline;
+    justify-self: center;
+    font-size: 2rem;
+  }
 }
 
 @media (max-width: 900px) {

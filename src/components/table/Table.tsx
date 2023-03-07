@@ -74,7 +74,7 @@ const Table: FC<ITableProps> = ({
         return null;
       });
     }
-    return <p>Данные отсутствуют</p>;
+    return <p className='table__empty-text'>Данные отсутствуют</p>;
   }
 
   return (

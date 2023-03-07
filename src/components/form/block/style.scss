@@ -22,6 +22,10 @@
         align-items: center;
         width: fit-content;
       }
+
+      &-photo {
+        align-items: center;
+      }
     }
 
     &--task {
@@ -32,6 +36,13 @@
       &-points {
         align-items: center;
         justify-content: center;
+      }
+    }
+
+    &--login {
+      &-login,
+      &-password {
+        margin: 0;
       }
     }
   }

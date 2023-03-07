@@ -113,6 +113,7 @@ export class StorePopupFormProduct {
 
   public setFileValue(file: File) {
     this._file.value = file;
+    this._file.errors = [];
   }
 
   public getFileErrors() {

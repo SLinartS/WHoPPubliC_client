@@ -27,10 +27,16 @@
       }
 
       &-photo {
+        width: fit-content;
         display: flex;
         flex-direction: column;
         justify-content: center;
         align-items: center;
+      }
+
+      &-photo .form-layout__error-image {
+        right: 0;
+        top: 45%;
       }
     }
 
