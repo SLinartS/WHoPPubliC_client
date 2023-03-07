@@ -5,9 +5,10 @@ import { FC, useEffect, useState } from 'react';
 
 interface ILoaderProps {
   classes?: string;
+  isError?: boolean;
 }
 
-const Loader: FC<ILoaderProps> = ({ classes }) => {
+const Loader: FC<ILoaderProps> = ({ classes, isError }) => {
   const [isDisplayError, setIsDisplayError] = useState<boolean>(false);
 
   useEffect(() => {
@@ -22,7 +23,7 @@ const Loader: FC<ILoaderProps> = ({ classes }) => {
 
   return (
     <div className={`lds-facebook__shell ${classes}`}>
-      {isDisplayError ? (
+      {isError || isDisplayError ? (
         <p className='loader__error-message'>
           Ошибка загрузки данных. Повторите попытку позже
         </p>

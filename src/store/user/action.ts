@@ -12,7 +12,6 @@ export class StoreUserAction {
 
   public *fetch(search: string, actionIfDone?: () => void) {
     try {
-      this.root.storeUser.status.set('fetch', 'during');
       const response: AxiosResponse<IUser[]> =
         yield extendAxios.get<AxiosResponse>(
           `users${search ? `?search=${search}` : ''}`,
@@ -31,7 +30,6 @@ export class StoreUserAction {
 
   public *show(id: number, actionIfDone?: () => void) {
     try {
-      this.root.storeUser.status.set('show', 'during');
       const response: AxiosResponse<IOneUser> =
         yield extendAxios.get<AxiosResponse>(`users/${id}`);
       this.root.storeUser.state.user = response.data;
@@ -53,7 +51,6 @@ export class StoreUserAction {
       workSchedules: this.root.storePopup.select.workSchedules.workSchedules,
     };
     try {
-      this.root.storeUser.status.set('store', 'during');
       yield extendAxios.post(`users`, requestData);
       this.root.storeUser.status.set('store', 'done');
       this.root.storeTable.selectedItem.setItemId('users', 'users', 0);
@@ -72,7 +69,6 @@ export class StoreUserAction {
       workSchedules: this.root.storePopup.select.workSchedules.workSchedules,
     };
     try {
-      this.root.storeUser.status.set('update', 'during');
       yield extendAxios.put('users', requestData);
       this.root.storeUser.status.set('update', 'done');
       if (actionIfDone) {
@@ -85,7 +81,6 @@ export class StoreUserAction {
 
   public *destroy(id: number, actionIfDone?: () => void) {
     try {
-      this.root.storeUser.status.set('destroy', 'during');
       yield extendAxios.delete(`users/${id}`);
 
       this.root.storeUser.status.set('destroy', 'done');

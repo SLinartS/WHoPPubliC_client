@@ -1,6 +1,6 @@
 import './style.scss';
 
-import Loader from '@components/loader/Loader';
+import LoaderWrapper from '@components/loader/wrapper/Wrapper';
 import PointsMap from '@components/points/PointsMap';
 import SearchField from '@components/searchField/SearchField';
 import { useRootStore } from '@helpers/RootStoreProvider/useRootStore';
@@ -28,19 +28,15 @@ const Points: FC = () => {
 
       <p className='points__title'>Точки приёмки</p>
       <div className='points__block'>
-        {storePoint.status.get('fetch') === 'done' ? (
+        <LoaderWrapper status={storePoint.status.get('fetch')}>
           <PointsMap pointsType='acceptance' />
-        ) : (
-          <Loader />
-        )}
+        </LoaderWrapper>
       </div>
       <p className='points__title'>Точки отгрузки</p>
       <div className='points__block'>
-        {storePoint.status.get('fetch') === 'done' ? (
+        <LoaderWrapper status={storePoint.status.get('fetch')}>
           <PointsMap pointsType='shipment' />
-        ) : (
-          <Loader />
-        )}
+        </LoaderWrapper>
       </div>
     </main>
   );

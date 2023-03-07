@@ -5,7 +5,7 @@ import deleteIcon from '@assets/icons/delete/delete-second.svg';
 import editIcon from '@assets/icons/edit/edit-second.svg';
 import filterIcon from '@assets/icons/sliders/sliders-white.svg';
 import ButtonIcon from '@components/buttonIcon/ButtonIcon';
-import Loader from '@components/loader/Loader';
+import LoaderWrapper from '@components/loader/wrapper/Wrapper';
 import SearchField from '@components/searchField/SearchField';
 import Table from '@components/table/Table';
 import { useRootStore } from '@helpers/RootStoreProvider/useRootStore';
@@ -106,23 +106,19 @@ const Products: FC = () => {
       </div>
 
       <div className='products__table'>
-        {storeProduct.status.get('fetch') === 'done' ? (
+        <LoaderWrapper status={storeProduct.status.get('fetch')}>
           <Table
             data={storeProduct.state.products.data}
             valuesType='products'
             selectingValues='products'
             displayedColumns={storeTable.utils.getColumnsWithMark('products')}
           />
-        ) : (
-          <Loader />
-        )}
+        </LoaderWrapper>
       </div>
 
-      {storeProduct.status.get('fetch') === 'done' ? (
+      <LoaderWrapper status={storeProduct.status.get('fetch')}>
         <div className='products__select'>{getSelects()}</div>
-      ) : (
-        <Loader />
-      )}
+      </LoaderWrapper>
 
       {storeState.interface.getIsShowPopupFilter() ? <PopupFilter /> : ''}
     </main>

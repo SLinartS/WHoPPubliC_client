@@ -1,7 +1,7 @@
 import '../style.scss';
 import '../../style.scss';
 
-import Loader from '@components/loader/Loader';
+import LoaderWrapper from '@components/loader/wrapper/Wrapper';
 import PointsMap from '@components/points/PointsMap';
 import WindowHeaderForm from '@components/windowHeader/form/Form';
 import { useRootStore } from '@helpers/RootStoreProvider/useRootStore';
@@ -52,14 +52,12 @@ const PopupSelectPoints: FC = () => {
         saveEventHandler={saveHandler}
         closeEventHandler={closeHandler}
       />
-      {storePoint.status.get('fetch') === 'done' ? (
+      <LoaderWrapper status={storePoint.status.get('fetch')}>
         <PointsMap
           pointsType={getPointType()}
           classes='points-map--select-points'
         />
-      ) : (
-        <Loader />
-      )}
+      </LoaderWrapper>
     </>
   );
 };

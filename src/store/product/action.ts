@@ -19,7 +19,6 @@ export class StoreProductAction {
 
   public *fetch(search: string, actionIfDone?: () => void) {
     try {
-      this.root.storeProduct.status.set('fetch', 'during');
       const response: AxiosResponse<TProductsData> =
         yield extendAxios.get<TProductsData>(
           `products${search ? `?search=${search}` : ''}`,
@@ -38,7 +37,6 @@ export class StoreProductAction {
 
   public *show(productId: number, actionIfDone?: () => void) {
     try {
-      this.root.storeProduct.status.set('show', 'during');
       const response: AxiosResponse<IOneProduct> =
         yield extendAxios.get<IOneProduct>(`products/${productId}`);
 
@@ -56,7 +54,6 @@ export class StoreProductAction {
 
   public *store(actionIfDone?: () => void) {
     try {
-      this.root.storeProduct.status.set('store', 'during');
       const requestData: IRequestProduct = {
         fields: this.root.storePopup.form.product.formData,
         pointId: this.root.storePopup.select.points.values[0],
@@ -76,7 +73,6 @@ export class StoreProductAction {
 
   public *addFile(actionIfDone?: () => void) {
     try {
-      this.root.storeProduct.status.set('addImage', 'during');
       const file = this.root.storePopup.form.product.getFile().value;
       if (!file) {
         throw new Error('file not found');
@@ -102,7 +98,6 @@ export class StoreProductAction {
 
   public *update(actionIfDone?: () => void) {
     try {
-      this.root.storeProduct.status.set('update', 'during');
       const requestProductData: IRequestProduct = {
         fields: this.root.storePopup.form.product.formData,
         pointId: this.root.storePopup.select.points.values[0],
@@ -125,7 +120,6 @@ export class StoreProductAction {
 
   public *destroy(productId: number, actionIfDone?: () => void) {
     try {
-      this.root.storeProduct.status.set('destroy', 'during');
       yield extendAxios.delete(`products/${productId}`);
 
       this.root.storeProduct.status.set('destroy', 'done');
@@ -149,7 +143,6 @@ export class StoreProductAction {
     };
 
     try {
-      this.root.storeProduct.status.set('markAsMoved', 'during');
       yield extendAxios.patch('products/markAsMoved', requestData);
 
       this.root.storeProduct.status.set('markAsMoved', 'done');

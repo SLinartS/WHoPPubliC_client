@@ -17,7 +17,6 @@ export class StoreTaskAction {
     actionIfDone?: () => void,
   ) {
     try {
-      this.root.storeTask.status.setFetch(taskType, 'during');
       const response: AxiosResponse<ITask[]> =
         yield extendAxios.get<AxiosResponse>(
           `tasks?type=${taskType}${search ? `&search=${search}` : ''}`,
@@ -36,7 +35,6 @@ export class StoreTaskAction {
 
   public *show(taskId: number, actionIfDone?: () => void) {
     try {
-      this.root.storeTask.status.set('show', 'during');
       const response: AxiosResponse<IOneTask> =
         yield extendAxios.get<AxiosResponse>(`tasks/${taskId}`);
       this.root.storeTask.state.task = response.data;
@@ -66,7 +64,6 @@ export class StoreTaskAction {
     };
 
     try {
-      this.root.storeTask.status.set('store', 'during');
       yield extendAxios.post('tasks', requestTaskData);
       this.root.storeTask.status.set('store', 'done');
       if (actionIfDone) {
@@ -91,7 +88,6 @@ export class StoreTaskAction {
       pointIds: storePopup.select.points.values,
     };
     try {
-      this.root.storeTask.status.set('update', 'during');
       yield extendAxios.put('tasks', requestData);
       this.root.storeTask.status.set('update', 'done');
       if (actionIfDone) {
@@ -108,7 +104,6 @@ export class StoreTaskAction {
     actionIfDone?: () => void,
   ) {
     try {
-      this.root.storeTask.status.set('destroy', 'during');
       if (isDeleteProducts) {
         yield extendAxios.delete(`tasks/${taskId}?deleteProducts=1`);
       } else {

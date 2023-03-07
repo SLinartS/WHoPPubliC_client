@@ -1,7 +1,7 @@
 import '../style.scss';
 import '../../style.scss';
 
-import Loader from '@components/loader/Loader';
+import LoaderWrapper from '@components/loader/wrapper/Wrapper';
 import Table from '@components/table/Table';
 import { ITableObject } from '@components/table/type';
 import WindowHeaderForm from '@components/windowHeader/form/Form';
@@ -77,11 +77,9 @@ const PopupSelectProduct: FC = () => {
         closeEventHandler={closeHandler}
       />
       <div className='popup-select__table'>
-        {storeProduct.status.get('fetch') === 'done' ? (
-          displayTable()
-        ) : (
-          <Loader />
-        )}
+        <LoaderWrapper status={storeProduct.status.get('fetch')}>
+          {displayTable()}
+        </LoaderWrapper>
       </div>
     </>
   );

@@ -1,7 +1,7 @@
 import './style.scss';
 
 import Button from '@components/button/Button';
-import Loader from '@components/loader/Loader';
+import LoaderWrapper from '@components/loader/wrapper/Wrapper';
 import SearchField from '@components/searchField/SearchField';
 import { useRootStore } from '@helpers/RootStoreProvider/useRootStore';
 import { observer } from 'mobx-react-lite';
@@ -49,8 +49,8 @@ const PerformanceReport: FC = () => {
         />
       </div>
       <div className='performance-reports__table'>
-        {storePerformanceReport.status.get('fetch') === 'done' ? (
-          storePerformanceReport.state.reports.map((report) => (
+        <LoaderWrapper status={storePerformanceReport.status.get('fetch')}>
+          {storePerformanceReport.state.reports.map((report) => (
             <PerformanceReportItem
               key={report.id}
               id={report.id}
@@ -58,10 +58,8 @@ const PerformanceReport: FC = () => {
               downloadReportHandler={downloadReportHandler}
               deleteReportHandler={deleteReportHandler}
             />
-          ))
-        ) : (
-          <Loader />
-        )}
+          ))}
+        </LoaderWrapper>
       </div>
     </main>
   );

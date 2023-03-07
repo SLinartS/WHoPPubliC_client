@@ -1,6 +1,6 @@
 import Button from '@components/button/Button';
 import { observer } from 'mobx-react-lite';
-import React, { FC } from 'react';
+import { FC } from 'react';
 
 interface PerformanceReportItemProps {
   id: number;

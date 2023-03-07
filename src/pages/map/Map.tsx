@@ -2,7 +2,7 @@ import './style.scss';
 
 import gearIcon from '@assets/icons/gear/gear-second.svg';
 import ButtonIcon from '@components/buttonIcon/ButtonIcon';
-import Loader from '@components/loader/Loader';
+import LoaderWrapper from '@components/loader/wrapper/Wrapper';
 import Map from '@components/map/Map';
 import SearchField from '@components/searchField/SearchField';
 import { useRootStore } from '@helpers/RootStoreProvider/useRootStore';
@@ -33,7 +33,7 @@ const MapPage: FC = () => {
       <div className='map__search'>
         <SearchField searchHandler={searchHandler} />
       </div>
-      {['done', 'update'].includes(storeMap.status.get('fetch')) ? (
+      <LoaderWrapper status={storeMap.status.get('fetch')}>
         <div className='map__container'>
           <ButtonIcon
             src={gearIcon}
@@ -44,9 +44,7 @@ const MapPage: FC = () => {
           />
           <Map isEditZoneButton={editMap} />
         </div>
-      ) : (
-        <Loader />
-      )}
+      </LoaderWrapper>
     </main>
   );
 };

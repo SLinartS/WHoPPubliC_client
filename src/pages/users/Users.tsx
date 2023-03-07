@@ -4,7 +4,7 @@ import addIcon from '@assets/icons/add/add-second.svg';
 import deleteIcon from '@assets/icons/delete/delete-second.svg';
 import editIcon from '@assets/icons/edit/edit-second.svg';
 import ButtonIcon from '@components/buttonIcon/ButtonIcon';
-import Loader from '@components/loader/Loader';
+import LoaderWrapper from '@components/loader/wrapper/Wrapper';
 import SearchField from '@components/searchField/SearchField';
 import Table from '@components/table/Table';
 import { useRootStore } from '@helpers/RootStoreProvider/useRootStore';
@@ -82,16 +82,14 @@ const Users = () => {
       </div>
 
       <div className='users__table'>
-        {storeUser.status.get('fetch') === 'done' ? (
+        <LoaderWrapper status={storeUser.status.get('fetch')}>
           <Table
             data={storeUser.state.users}
             valuesType='users'
             selectingValues='users'
             displayedColumns={storeTable.utils.getColumnsWithMark('users')}
           />
-        ) : (
-          <Loader />
-        )}
+        </LoaderWrapper>
       </div>
     </main>
   );

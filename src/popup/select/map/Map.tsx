@@ -1,7 +1,7 @@
 import '../style.scss';
 import '../../style.scss';
 
-import Loader from '@components/loader/Loader';
+import LoaderWrapper from '@components/loader/wrapper/Wrapper';
 import Map from '@components/map/Map';
 import WindowHeaderForm from '@components/windowHeader/form/Form';
 import { useRootStore } from '@helpers/RootStoreProvider/useRootStore';
@@ -54,11 +54,9 @@ const PopupSelectMap: FC = () => {
         className='popup-select__free-space-indicator'
         style={{ background }}
       />
-      {storeMap.status.get('fetch') === 'done' ? (
+      <LoaderWrapper status={storeMap.status.get('fetch')}>
         <Map classes='map-block--select-map' />
-      ) : (
-        <Loader />
-      )}
+      </LoaderWrapper>
     </>
   );
 };

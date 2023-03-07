@@ -1,6 +1,6 @@
 import './style.scss';
 
-import Loader from '@components/loader/Loader';
+import LoaderWrapper from '@components/loader/wrapper/Wrapper';
 import { useRootStore } from '@helpers/RootStoreProvider/useRootStore';
 import { useGetSelects } from '@hooks/product/useGetSelects';
 import { observer } from 'mobx-react-lite';
@@ -14,19 +14,19 @@ const PopupFilter: FC = () => {
     storeState.interface.hidePopupFilter();
   }
 
-  return storeProduct.status.get('fetch') === 'done' ? (
-    <div className='popup-filter'>
-      <button
-        className='popup-filter__button'
-        type='button'
-        onClick={hidePopupFilterHandler}
-      >
-        Показать
-      </button>
-      {getSelects()}
-    </div>
-  ) : (
-    <Loader />
+  return (
+    <LoaderWrapper status={storeProduct.status.get('fetch')}>
+      <div className='popup-filter'>
+        <button
+          className='popup-filter__button'
+          type='button'
+          onClick={hidePopupFilterHandler}
+        >
+          Показать
+        </button>
+        {getSelects()}
+      </div>
+    </LoaderWrapper>
   );
 };
 
