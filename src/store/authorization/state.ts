@@ -73,7 +73,7 @@ export class StoreAuthorization {
         break;
       default:
     }
-    this.auth[field].value = trimValue;
+    this.auth[field].value = value;
     this.checkErrorsExist(validator.errors, field);
   }
 

@@ -78,8 +78,11 @@ export class StoreProductAction {
         throw new Error('file not found');
       }
       const productId = this.root.storePopup.form.product.formData.id.value;
+      const productArticle =
+        this.root.storePopup.form.product.formData.article.value;
       const formData = new FormData();
       formData.append('id', String(productId));
+      formData.append('article', String(productArticle));
       formData.append('photo', file);
       yield extendAxios.post('products-add-image', formData, {
         headers: {

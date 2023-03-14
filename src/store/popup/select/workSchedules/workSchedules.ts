@@ -54,9 +54,9 @@ export class StorePopupSelectWorkSchedules {
   public setFieldWorkScheduleValue(
     indexDayOfWeek: keyof TWorkScheduleSelectData,
     field: keyof IOneWorkScheduleSelectData,
-    newValue: string,
+    value: string,
   ) {
-    const trimValue = newValue.trim();
+    const trimValue = value.trim();
     const validator = new FormFieldValidator(trimValue);
     switch (field) {
       case 'startTime':
@@ -69,7 +69,7 @@ export class StorePopupSelectWorkSchedules {
 
       default:
     }
-    this._workSchedules[indexDayOfWeek][field].value = trimValue;
+    this._workSchedules[indexDayOfWeek][field].value = value;
     this.checkErrorsExist(validator.errors, indexDayOfWeek, field);
   }
 

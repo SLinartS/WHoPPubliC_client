@@ -54,7 +54,7 @@ export class StorePopupFormTask {
 
       default:
     }
-    this._formData[field].value = trimValue;
+    this._formData[field].value = value;
     this.checkErrorsExist(validator.errors, field);
   }
 
