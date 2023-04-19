@@ -10,7 +10,10 @@ export function useGetSelects() {
 
   return useCallback((): ReactNode[] => {
     const selectNodes: ReactNode[] = [];
-    if (storeProduct.state.products.data[0]) {
+    if (
+      storeProduct.state.products.data.length &&
+      storeProduct.state.products.data[0]
+    ) {
       selectNodes.push(
         getDataForSelects().map(([key, item]) => (
           <SelectTable
@@ -23,7 +26,7 @@ export function useGetSelects() {
         )),
       );
     } else {
-      selectNodes.push(<p>Отсутствуют данные</p>);
+      selectNodes.push(<p key='0'>Отсутствуют данные</p>);
     }
     return selectNodes;
   }, []);
