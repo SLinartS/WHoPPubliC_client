@@ -1,7 +1,7 @@
 import { makeAutoObservable, toJS } from 'mobx';
 
 import deepCopy from '../../../../utils/deepCopy/deepCopy';
-import { IProduct } from '../../../product/type';
+import { IProductInfo } from '../../../product/type';
 import RootStore from '../../../root';
 import { TArrayOrErrorType } from '../../../type';
 import { INITIAL_ARRAY_VALUE } from '../../form/config';
@@ -25,9 +25,9 @@ export class StorePopupSelectProducts {
     this._products.errors = newError;
   }
 
-  public getProductListData(): IProduct[] {
+  public getProductListData(): IProductInfo[] {
     const productList = this._products.value;
-    const productListData: IProduct[] =
+    const productListData: IProductInfo[] =
       this.root.storeProduct.state.products.data.filter((product) =>
         productList.includes(product.id.value),
       );

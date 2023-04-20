@@ -1,5 +1,5 @@
 import { useRootStore } from '@helpers/RootStoreProvider/useRootStore';
-import { IProductFormDataFields } from '@store/popup/form/product/type';
+import { TProductFormDataFields } from '@store/popup/form/product/type';
 import { TPopups } from '@store/popup/status/type';
 import { useCallback } from 'react';
 
@@ -18,7 +18,7 @@ export function useFetchOneProductAndFillForm() {
 
           Object.entries(productInfo).forEach(([key, element]) => {
             if (!['categoryTitle', 'imageUrl'].includes(key)) {
-              const typedKey = key as keyof IProductFormDataFields;
+              const typedKey = key as keyof TProductFormDataFields;
               storePopup.form.product.setFormField(
                 typedKey,
                 String(element.value),

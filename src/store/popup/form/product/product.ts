@@ -4,14 +4,19 @@ import { makeAutoObservable, toJS } from 'mobx';
 
 import RootStore from '../../../root';
 import { INITIAL_VALUE } from '../config';
-import { IFile, IProductFormDataFields } from './type';
+import {
+  IFile,
+  IProductGeneralDataFields,
+  TProductFormDataFields,
+  TProductVariousDataFieldsWords,
+} from './type';
 
 export class StorePopupFormProduct {
   constructor(private readonly root: RootStore) {
     makeAutoObservable(this, {});
   }
 
-  private readonly initialFormData: IProductFormDataFields = {
+  private readonly initialFormData: TProductFormDataFields = {
     id: INITIAL_VALUE,
     article: INITIAL_VALUE,
     title: INITIAL_VALUE,
@@ -27,21 +32,24 @@ export class StorePopupFormProduct {
     },
   };
 
-  private _formData: IProductFormDataFields = deepCopy(this.initialFormData);
+  private _formData: TProductFormDataFields = deepCopy(this.initialFormData);
 
   public get formData() {
     return this._formData;
   }
 
-  public getFormField(field: keyof IProductFormDataFields) {
+  public getFormField(field: keyof TProductFormDataFields) {
     return this._formData[field].value;
   }
 
-  public getFormErrors(field: keyof IProductFormDataFields) {
+  public getFormErrors(field: keyof TProductFormDataFields) {
     return toJS(this._formData[field].errors);
   }
 
-  public setFormField(field: keyof IProductFormDataFields, value: string) {
+  public setFormField(
+    field: keyof IProductGeneralDataFields | TProductVariousDataFieldsWords,
+    value: string,
+  ) {
     const trimValue = value.trim();
     const validator = new FormFieldValidator(trimValue);
     switch (field) {
@@ -126,7 +134,7 @@ export class StorePopupFormProduct {
 
   private checkErrorsExist(
     errors: string[] | false,
-    field: keyof IProductFormDataFields,
+    field: keyof IProductGeneralDataFields | TProductVariousDataFieldsWords,
   ) {
     if (errors) {
       this._formData[field].errors = errors;
@@ -136,6 +144,10 @@ export class StorePopupFormProduct {
   }
 
   public clearFormData() {
+    this.root.storePopup.form.product._formData = deepCopy(
+      this.initialFormData,
+    );
+    this._formData = deepCopy(this.initialFormData);
     this._formData = deepCopy(this.initialFormData);
   }
 }

@@ -13,12 +13,16 @@ import FormLayout from '@components/form/layout/Layout';
 import WindowHeaderForm from '@components/windowHeader/form/Form';
 import { useRootStore } from '@helpers/RootStoreProvider/useRootStore';
 import { useFetchOneProductAndFillForm } from '@hooks/product/useFetchOneProductAndFillForm';
-import { IOption } from '@store/category/type';
-import { IProductFormDataFields } from '@store/popup/form/product/type';
+import { IOption, TProductTypes } from '@store/category/type';
 import { observer } from 'mobx-react-lite';
-import { FC, useEffect, useMemo, useRef, useState } from 'react';
+import { FC, ReactNode, useEffect, useMemo, useRef, useState } from 'react';
 import { useIsProductErrors } from 'src/popup/hooks/errors/product/useIsProductErrors';
 import { useResetForm } from 'src/popup/hooks/resetForm/useResetForm';
+
+import { useChangeFieldHandler } from './hooks/changeFieldHandler';
+import PopupFormProductBook from './variants/Book';
+import PopupFormProductBooklet from './variants/Booklet';
+import PopupFormProductMagazine from './variants/Magazine';
 
 const PopupFormProduct: FC = () => {
   const { storePopup, storeProduct, storeCategory, storeUtils } =
@@ -26,9 +30,12 @@ const PopupFormProduct: FC = () => {
   const fetchOneProductAndFillForm = useFetchOneProductAndFillForm();
   const resetForm = useResetForm();
   const isProductErrors = useIsProductErrors();
+  const changeFieldHandler = useChangeFieldHandler();
   const fileInputRef = useRef<HTMLInputElement>(null);
   const [selectedImageName, setSelectedImageName] =
     useState<string>('Выберите файл');
+  const [productVariantWindow, setProductVariantWindow] =
+    useState<TProductTypes>('book');
 
   function generateArticle() {
     storeUtils.generateArticle('product', () => {
@@ -38,6 +45,12 @@ const PopupFormProduct: FC = () => {
 
   function changeSelectHandler(option: IOption) {
     storePopup.form.product.setFormField('categoryId', String(option.id));
+    const productType = storeCategory.state.categories.find(
+      (category) => category.id === option.id,
+    )?.productType;
+    if (productType) {
+      setProductVariantWindow(productType);
+    }
   }
 
   const windowTitle = useMemo(() => {
@@ -56,13 +69,6 @@ const PopupFormProduct: FC = () => {
     }
     return imagePlaceholder;
   }, []);
-
-  function changeFieldHandler(
-    newValue: string,
-    fieldName: keyof IProductFormDataFields,
-  ) {
-    storePopup.form.product.setFormField(fieldName, String(newValue));
-  }
 
   function changeFileHandler() {
     const files = fileInputRef.current?.files;
@@ -156,6 +162,19 @@ const PopupFormProduct: FC = () => {
     storePopup.status.show('selectPoints');
   }
 
+  function displayProductVariantWindow(): ReactNode {
+    switch (productVariantWindow) {
+      case 'book':
+        return <PopupFormProductBook variantClass='book' />;
+      case 'magazine':
+        return <PopupFormProductMagazine variantClass='magazine' />;
+      case 'booklet':
+        return <PopupFormProductBooklet variantClass='booklet' />;
+      default:
+        return <PopupFormProductBook variantClass='book' />;
+    }
+  }
+
   useEffect(() => {
     storeCategory.action.fetch();
   }, []);
@@ -174,38 +193,9 @@ const PopupFormProduct: FC = () => {
         saveEventHandler={saveHandler}
         closeEventHandler={closeHandler}
       />
-      <div className='popup-form__content-block popup-form__content-block--add-product'>
-        <FormLayout classes='main-info'>
-          <AssembledBlockFieldInput
-            value={storePopup.form.product.getFormField('title')}
-            errors={storePopup.form.product.getFormErrors('title')}
-            changeHandler={changeFieldHandler}
-            typeForm='product'
-            fieldName='title'
-            titleText='Название'
-            placeholder='Иван-царевич и серый волк'
-          />
-          <AssembledBlockFieldInput
-            value={storePopup.form.product.getFormField('author')}
-            errors={storePopup.form.product.getFormErrors('author')}
-            changeHandler={changeFieldHandler}
-            typeForm='product'
-            fieldName='author'
-            titleText='Автор'
-            placeholder='Отсутствует'
-          />
-          <AssembledBlockFieldSelect
-            options={storeCategory.state.categories}
-            errors={storePopup.form.product.getFormErrors('categoryId')}
-            changeHandler={changeSelectHandler}
-            currentOption={currentCategoryValue}
-            typeForm='product'
-            fieldName='categoryId'
-            titleText='Категория'
-          />
-        </FormLayout>
 
-        <FormLayout classes='article-info-product'>
+      <div className='popup-form__content-block popup-form__content-block--add-product'>
+        <FormLayout classes='general'>
           <AssembledBlockFieldText
             typeForm='product'
             fieldName='article'
@@ -213,57 +203,6 @@ const PopupFormProduct: FC = () => {
             errors={storePopup.form.product.getFormErrors('article')}
             titleText='Артикул'
           />
-        </FormLayout>
-
-        <FormLayout classes='second-info'>
-          <AssembledBlockFieldInput
-            typeForm='product'
-            fieldName='yearOfPublication'
-            titleText='Год издания'
-            value={storePopup.form.product.getFormField('yearOfPublication')}
-            changeHandler={changeFieldHandler}
-            errors={storePopup.form.product.getFormErrors('yearOfPublication')}
-            placeholder='1998'
-          />
-          <AssembledBlockFieldInput
-            typeForm='product'
-            fieldName='printingHouse'
-            titleText='Типография'
-            value={storePopup.form.product.getFormField('printingHouse')}
-            changeHandler={changeFieldHandler}
-            errors={storePopup.form.product.getFormErrors('printingHouse')}
-            placeholder='ОФСЕТ МОСКВА'
-          />
-          <AssembledBlockFieldInput
-            typeForm='product'
-            fieldName='number'
-            titleText='Количество'
-            value={storePopup.form.product.getFormField('number')}
-            changeHandler={changeFieldHandler}
-            errors={storePopup.form.product.getFormErrors('number')}
-            placeholder='300'
-          />
-          <AssembledBlockFieldInput
-            typeForm='product'
-            fieldName='publishingHouse'
-            titleText='Издательство'
-            value={storePopup.form.product.getFormField('publishingHouse')}
-            changeHandler={changeFieldHandler}
-            errors={storePopup.form.product.getFormErrors('publishingHouse')}
-            placeholder='АСТ'
-          />
-          <AssembledBlockFieldInput
-            typeForm='product'
-            fieldName='yearOfPrinting'
-            titleText='Дата печати'
-            value={storePopup.form.product.getFormField('yearOfPrinting')}
-            changeHandler={changeFieldHandler}
-            errors={storePopup.form.product.getFormErrors('yearOfPrinting')}
-            placeholder='26.05.2022'
-          />
-        </FormLayout>
-
-        <FormLayout classes='points-product'>
           <FormBlock
             titleText=''
             classes='product-points'
@@ -277,7 +216,8 @@ const PopupFormProduct: FC = () => {
             </FormField>
           </FormBlock>
         </FormLayout>
-        <FormLayout classes='photo-product'>
+
+        <FormLayout classes='photo-and-category'>
           <FormBlock
             titleText=''
             classes='product-photo'
@@ -308,7 +248,26 @@ const PopupFormProduct: FC = () => {
               />
             </FormField>
           </FormBlock>
+          <AssembledBlockFieldSelect
+            options={storeCategory.state.categories}
+            errors={storePopup.form.product.getFormErrors('categoryId')}
+            changeHandler={changeSelectHandler}
+            currentOption={currentCategoryValue}
+            typeForm='product'
+            fieldName='categoryId'
+            titleText='Категория'
+          />
+          <AssembledBlockFieldInput
+            typeForm='product'
+            fieldName='number'
+            titleText='Количество'
+            value={storePopup.form.product.getFormField('number')}
+            changeHandler={changeFieldHandler}
+            errors={storePopup.form.product.getFormErrors('number')}
+            placeholder='300'
+          />
         </FormLayout>
+        {displayProductVariantWindow()}
       </div>
     </>
   );

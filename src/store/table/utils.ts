@@ -1,7 +1,10 @@
 import { IUser } from '@store/user/type';
 import { makeAutoObservable } from 'mobx';
 
-import { IProduct } from '../product/type';
+import {
+  IGeneralProductInformation,
+  TVariousProductInformation,
+} from '../product/type';
 import RootStore from '../root';
 import { TMarkType } from '../state/type';
 import { ITask } from '../task/type';
@@ -20,7 +23,10 @@ export class StoreTableUtils {
 
   public setDefaultMark(
     itemType: TMarkType,
-    data: IProduct[] | ITask[] | IUser[],
+    data:
+      | (IGeneralProductInformation[] & TVariousProductInformation[])
+      | ITask[]
+      | IUser[],
     excludeColumns: string[],
   ) {
     Object.keys(data[0]).forEach((key) => {

@@ -1,5 +1,5 @@
 import { useRootStore } from '@helpers/RootStoreProvider/useRootStore';
-import { IProduct } from '@store/product/type';
+import { IProductInfo } from '@store/product/type';
 import { useCallback } from 'react';
 
 import { useGetUnselectedProducts } from './useGetUnselectedProduct';
@@ -14,9 +14,10 @@ export function useGetProductsWithoutLinkToTask() {
         .filter((product) => product.taskId === 0)
         .map((product) => product.productId);
 
-    const productsWithoutLinkToTask: IProduct[] = unselectedProducts().filter(
-      ($product) => idsProductsWithoutLinkToTask.includes($product.id.value),
-    );
+    const productsWithoutLinkToTask: IProductInfo[] =
+      unselectedProducts().filter(($product) =>
+        idsProductsWithoutLinkToTask.includes($product.id.value),
+      );
 
     return productsWithoutLinkToTask;
   }, []);
