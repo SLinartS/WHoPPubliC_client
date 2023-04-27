@@ -5,22 +5,21 @@ export type TProductFormDataFields = IProductGeneralDataFields &
 
 export interface IProductGeneralDataFields {
   id: TValueOrErrorType;
+  title: TValueOrErrorType;
   article: TValueOrErrorType;
   number: TValueOrErrorType;
   categoryId: TValueOrErrorType;
+  typeId: TValueOrErrorType;
 }
 
 export type TProductVariousDataFieldsWords =
   | keyof IProductBookDataFields
-  | keyof IProductMagazineDataFields
-  | keyof IProductBookletDataFields;
+  | keyof IProductMagazineDataFields;
 
 export type TProductVariousDataFields = IProductBookDataFields &
-  IProductMagazineDataFields &
-  IProductBookletDataFields;
+  IProductMagazineDataFields;
 
 export interface IProductBookDataFields {
-  title: TValueOrErrorType;
   author: TValueOrErrorType;
   yearOfPublication: TValueOrErrorType;
   yearOfPrinting: TValueOrErrorType;
@@ -29,17 +28,9 @@ export interface IProductBookDataFields {
 }
 
 export interface IProductMagazineDataFields {
-  title: TValueOrErrorType;
-  yearOfPublication: TValueOrErrorType;
   printingHouse: TValueOrErrorType;
   publishingHouse: TValueOrErrorType;
-}
-
-export interface IProductBookletDataFields {
-  title: TValueOrErrorType;
-  author: TValueOrErrorType;
-  printingHouse: TValueOrErrorType;
-  publishingHouse: TValueOrErrorType;
+  dateOfPrinting: TValueOrErrorType;
 }
 
 export interface IFile {

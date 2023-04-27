@@ -25,19 +25,19 @@ export type IProductInfo = IGeneralProductInformation &
 export interface IGeneralProductInformation extends ITableObject {
   id: IField<number>;
   article: IField<string>;
-  imageUrl: IField<string>;
+  title: IField<string>;
   number: IField<number>;
-  categoryTitle: IField<string>;
+  imageUrl: IField<string>;
+  note: IField<string>;
+  categoryAlias: IField<string>;
   categoryId: IField<number>;
+  typeAlias: IField<string>;
+  typeId: IField<number>;
 }
 
-export type TVariousProductInformation =
-  | IProductBook
-  | IProductMagazine
-  | IProductBooklet;
+export type TVariousProductInformation = IProductBook | IProductMagazine;
 
 export interface IProductBook {
-  title: IField<string>;
   author: IField<string>;
   yearOfPublication: IField<string>;
   yearOfPrinting: IField<string>;
@@ -46,17 +46,9 @@ export interface IProductBook {
 }
 
 export interface IProductMagazine {
-  title: IField<string>;
-  yearOfPublication: IField<string>;
   printingHouse: IField<string>;
   publishingHouse: IField<string>;
-}
-
-export interface IProductBooklet {
-  title: IField<string>;
-  author: IField<string>;
-  printingHouse: IField<string>;
-  publishingHouse: IField<string>;
+  dateOfPrinting: IField<string>;
 }
 
 export interface IServiceProductInformation {

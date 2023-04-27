@@ -4,7 +4,5 @@ export interface IOption {
 }
 
 export interface IOptionCategory extends IOption {
-  productType: TProductTypes;
+  alias: string;
 }
-
-export type TProductTypes = 'book' | 'magazine' | 'booklet';

@@ -22,11 +22,16 @@ export class StorePopupFormProduct {
     title: INITIAL_VALUE,
     author: INITIAL_VALUE,
     yearOfPublication: INITIAL_VALUE,
+    dateOfPrinting: INITIAL_VALUE,
     number: INITIAL_VALUE,
     yearOfPrinting: INITIAL_VALUE,
     printingHouse: INITIAL_VALUE,
     publishingHouse: INITIAL_VALUE,
     categoryId: {
+      value: '1',
+      errors: [],
+    },
+    typeId: {
       value: '1',
       errors: [],
     },

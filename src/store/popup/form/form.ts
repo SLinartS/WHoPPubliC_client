@@ -1,3 +1,4 @@
+import { TProductTypes } from '@store/productType/type';
 import { makeAutoObservable } from 'mobx';
 
 import RootStore from '../../root';
@@ -56,5 +57,15 @@ export class StorePopupForm {
 
   public set isInProductForm(newStatus: boolean) {
     this._isInProductForm = newStatus;
+  }
+
+  private _productVariantWindow: TProductTypes = 'book';
+
+  set productVariantWindow(newVariant: TProductTypes) {
+    this._productVariantWindow = newVariant;
+  }
+
+  get productVariantWindow() {
+    return this._productVariantWindow;
   }
 }

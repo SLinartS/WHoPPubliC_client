@@ -13,7 +13,8 @@ import FormLayout from '@components/form/layout/Layout';
 import WindowHeaderForm from '@components/windowHeader/form/Form';
 import { useRootStore } from '@helpers/RootStoreProvider/useRootStore';
 import { useFetchOneProductAndFillForm } from '@hooks/product/useFetchOneProductAndFillForm';
-import { IOption, TProductTypes } from '@store/category/type';
+import { IOption } from '@store/category/type';
+import { TProductTypes } from '@store/productType/type';
 import { observer } from 'mobx-react-lite';
 import { FC, ReactNode, useEffect, useMemo, useRef, useState } from 'react';
 import { useIsProductErrors } from 'src/popup/hooks/errors/product/useIsProductErrors';
@@ -21,12 +22,16 @@ import { useResetForm } from 'src/popup/hooks/resetForm/useResetForm';
 
 import { useChangeFieldHandler } from './hooks/changeFieldHandler';
 import PopupFormProductBook from './variants/Book';
-import PopupFormProductBooklet from './variants/Booklet';
 import PopupFormProductMagazine from './variants/Magazine';
 
 const PopupFormProduct: FC = () => {
-  const { storePopup, storeProduct, storeCategory, storeUtils } =
-    useRootStore();
+  const {
+    storePopup,
+    storeProductType,
+    storeProduct,
+    storeCategory,
+    storeUtils,
+  } = useRootStore();
   const fetchOneProductAndFillForm = useFetchOneProductAndFillForm();
   const resetForm = useResetForm();
   const isProductErrors = useIsProductErrors();
@@ -34,8 +39,6 @@ const PopupFormProduct: FC = () => {
   const fileInputRef = useRef<HTMLInputElement>(null);
   const [selectedImageName, setSelectedImageName] =
     useState<string>('Выберите файл');
-  const [productVariantWindow, setProductVariantWindow] =
-    useState<TProductTypes>('book');
 
   function generateArticle() {
     storeUtils.generateArticle('product', () => {
@@ -45,12 +48,11 @@ const PopupFormProduct: FC = () => {
 
   function changeSelectHandler(option: IOption) {
     storePopup.form.product.setFormField('categoryId', String(option.id));
-    const productType = storeCategory.state.categories.find(
-      (category) => category.id === option.id,
-    )?.productType;
-    if (productType) {
-      setProductVariantWindow(productType);
-    }
+  }
+
+  function changeProductTypeHandler(option: IOption) {
+    storePopup.form.product.setFormField('typeId', String(option.id));
+    storePopup.form.state.productVariantWindow = option.title as TProductTypes;
   }
 
   const windowTitle = useMemo(() => {
@@ -98,6 +100,20 @@ const PopupFormProduct: FC = () => {
   }, [
     storeCategory.status.get('fetch'),
     storePopup.form.product.getFormField('categoryId'),
+  ]);
+
+  const currentProductTypeValue = useMemo(() => {
+    const id = Number(storePopup.form.product.getFormField('typeId'));
+    const title = storeProductType.state.productTypes.find(
+      (type) => type.id === id,
+    )?.title;
+    if (title) {
+      return { id, title };
+    }
+    return { id, title: '' };
+  }, [
+    storeProductType.status.get('fetch'),
+    storePopup.form.product.getFormField('typeId'),
   ]);
 
   function resetHandler() {
@@ -163,13 +179,13 @@ const PopupFormProduct: FC = () => {
   }
 
   function displayProductVariantWindow(): ReactNode {
-    switch (productVariantWindow) {
+    switch (storePopup.form.state.productVariantWindow) {
       case 'book':
         return <PopupFormProductBook variantClass='book' />;
       case 'magazine':
         return <PopupFormProductMagazine variantClass='magazine' />;
-      case 'booklet':
-        return <PopupFormProductBooklet variantClass='booklet' />;
+      case 'other':
+        return <p>Замени эту пустоту</p>;
       default:
         return <PopupFormProductBook variantClass='book' />;
     }
@@ -177,6 +193,7 @@ const PopupFormProduct: FC = () => {
 
   useEffect(() => {
     storeCategory.action.fetch();
+    storeProductType.action.fetch();
   }, []);
 
   useEffect(() => {
@@ -256,6 +273,15 @@ const PopupFormProduct: FC = () => {
             typeForm='product'
             fieldName='categoryId'
             titleText='Категория'
+          />
+          <AssembledBlockFieldSelect
+            options={storeProductType.state.productTypes}
+            errors={storePopup.form.product.getFormErrors('typeId')}
+            changeHandler={changeProductTypeHandler}
+            currentOption={currentProductTypeValue}
+            typeForm='product'
+            fieldName='typeId'
+            titleText='Тип'
           />
           <AssembledBlockFieldInput
             typeForm='product'

@@ -30,6 +30,9 @@ import { StorePopupWindowInformation } from './popup/window/information/informat
 import { StoreProductAction } from './product/action';
 import { StoreProduct } from './product/state';
 import { StoreProductStatus } from './product/status';
+import { StoreProductTypeAction } from './productType/action';
+import { StoreProductType } from './productType/state';
+import { StoreProductTypeStatus } from './productType/status';
 import { StoreRoleAction } from './roles/action';
 import { StoreRole } from './roles/state';
 import { StoreRoleStatus } from './roles/status';
@@ -102,6 +105,12 @@ interface IStoreCategory {
   action: StoreCategoryAction;
 }
 
+interface IStoreProductType {
+  state: StoreProductType;
+  status: StoreProductTypeStatus;
+  action: StoreProductTypeAction;
+}
+
 interface IStoreRole {
   state: StoreRole;
   status: StoreRoleStatus;
@@ -156,6 +165,8 @@ class RootStore {
   public storePoint: IStorePoint;
 
   public storeCategory: IStoreCategory;
+
+  public storeProductType: IStoreProductType;
 
   public storeRole: IStoreRole;
 
@@ -217,6 +228,12 @@ class RootStore {
       state: new StoreCategory(this),
       status: new StoreCategoryStatus(this),
       action: new StoreCategoryAction(this),
+    };
+
+    this.storeProductType = {
+      state: new StoreProductType(this),
+      status: new StoreProductTypeStatus(this),
+      action: new StoreProductTypeAction(this),
     };
 
     this.storeRole = {
