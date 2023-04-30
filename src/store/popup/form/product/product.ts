@@ -24,6 +24,7 @@ export class StorePopupFormProduct {
     yearOfPublication: INITIAL_VALUE,
     dateOfPrinting: INITIAL_VALUE,
     number: INITIAL_VALUE,
+    note: INITIAL_VALUE,
     yearOfPrinting: INITIAL_VALUE,
     printingHouse: INITIAL_VALUE,
     publishingHouse: INITIAL_VALUE,
@@ -32,6 +33,14 @@ export class StorePopupFormProduct {
       errors: [],
     },
     typeId: {
+      value: '1',
+      errors: [],
+    },
+    regularityId: {
+      value: '1',
+      errors: [],
+    },
+    audienceId: {
       value: '1',
       errors: [],
     },
@@ -83,6 +92,7 @@ export class StorePopupFormProduct {
         break;
 
       case 'yearOfPublication':
+      case 'yearOfPrinting':
         validator.notEmpty().hasOnlyDigits().minLength(4).maxLength(4);
         break;
 
@@ -90,7 +100,7 @@ export class StorePopupFormProduct {
         validator.notEmpty().hasOnlyDigits().outOfRange(1, 100000);
         break;
 
-      case 'yearOfPrinting':
+      case 'dateOfPrinting':
         validator.notEmpty().dateFormat('dd.MM.yyyy', 'дд.ММ.гггг');
         break;
 

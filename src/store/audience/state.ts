@@ -3,20 +3,20 @@ import { makeAutoObservable } from 'mobx';
 
 import RootStore from '../root';
 
-export class StoreProductType {
+export class StoreAudience {
   constructor(private readonly root: RootStore) {
     makeAutoObservable(this, {});
   }
 
-  private _productTypes: IOption[] = [];
+  private _audiences: IOption[] = [];
 
-  public get productTypes() {
-    return this._productTypes.slice().sort((a, b) => {
+  public get audiences() {
+    return this._audiences.slice().sort((a, b) => {
       return a.id - b.id;
     });
   }
 
-  public set productTypes(newProductTypes: IOption[]) {
-    this._productTypes = newProductTypes;
+  public set audiences(newAudiences: IOption[]) {
+    this._audiences = newAudiences;
   }
 }

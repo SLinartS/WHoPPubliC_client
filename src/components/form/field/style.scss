@@ -132,6 +132,41 @@
     }
   }
 
+  &__textarea {
+    @extend %standard-transition;
+
+    font-size: 2rem;
+    height: 4rem;
+    width: 100%;
+    border: none;
+    border-bottom: 0.2rem solid color.$font-color--black;
+    background: color.$font-color--white;
+    opacity: 0.5;
+    outline: none;
+    box-sizing: border-box;
+    border-radius: 0;
+    resize: none;
+    overflow-y: scroll;
+
+    &--active {
+      opacity: 1;
+    }
+
+    html &--error {
+      border-color: color.$fourth-color;
+      opacity: 1;
+
+      &:focus {
+        opacity: 1;
+        border-color: color.$fourth-color;
+      }
+    }
+
+    &:focus {
+      opacity: 1;
+    }
+  }
+
   &__datetime {
     display: grid;
     grid-template-columns: 4fr 3fr;

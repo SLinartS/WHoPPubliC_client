@@ -51,15 +51,15 @@ const Products: FC = () => {
     setSelectedProductType(option.id);
   }
 
-  const currentProductType = useMemo(() => {
+  const currentProductType = useMemo((): IOption => {
     const id = selectedProductType;
-    const title = storeProductType.state.productTypes.find(
+    const productType = storeProductType.state.productTypes.find(
       (type) => type.id === id,
-    )?.title;
-    if (title) {
-      return { id, title };
+    );
+    if (productType?.title) {
+      return { id, title: productType.title, alias: productType.alias };
     }
-    return { id, title: '' };
+    return { id, title: '', alias: '' };
   }, [selectedProductType, storeProductType.status.get('fetch')]);
 
   const displayedProductData = useMemo(() => {

@@ -23,7 +23,7 @@ const FormFieldSelect: FC<IFormFieldSelectProps> = ({
   }
 
   function getText() {
-    const text = currentOption.title;
+    const text = currentOption.alias;
     if (text.length >= 30) {
       const animationDuration = Math.round(250000 / text.length);
       return (
@@ -73,10 +73,14 @@ const FormFieldSelect: FC<IFormFieldSelectProps> = ({
               key={option.id}
               data-option-value={option.id}
               onClick={() =>
-                changeFieldHandler({ id: option.id, title: option.title })
+                changeFieldHandler({
+                  id: option.id,
+                  title: option.title,
+                  alias: option.alias,
+                })
               }
             >
-              <p className='custom-select__text'>{option.title}</p>
+              <p className='custom-select__text'>{option.alias}</p>
             </div>
           ))}
         </div>

@@ -1,7 +1,7 @@
 import { ChangeEvent, ChangeEventHandler, MouseEventHandler } from 'react';
 
 export type TChangeFieldEvent = ChangeEvent<
-  HTMLInputElement | HTMLSelectElement
+  HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement
 >;
 
 export type TChangeFieldHandler = ChangeEventHandler<

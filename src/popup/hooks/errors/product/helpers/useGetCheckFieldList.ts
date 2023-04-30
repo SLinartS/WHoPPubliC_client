@@ -13,9 +13,12 @@ export function useGetCheckFieldList() {
   )[] => {
     const standardFields: (keyof IProductGeneralDataFields)[] = [
       'id',
+      'title',
       'article',
       'number',
+      'note',
       'categoryId',
+      'typeId',
     ];
     let additionalFields: TProductVariousDataFieldsWords[] = [];
 
@@ -34,6 +37,8 @@ export function useGetCheckFieldList() {
           'printingHouse',
           'publishingHouse',
           'dateOfPrinting',
+          'regularityId',
+          'audienceId',
         ];
         break;
 

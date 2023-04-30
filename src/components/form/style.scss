@@ -23,37 +23,28 @@
       display: grid;
       grid-template-columns: 1fr 1fr;
       grid-template-rows: 12rem 12rem;
+      column-gap: 4rem;
       justify-items: center;
     }
 
-    &--book {
-      &__main-info {
-        display: grid;
-        grid-template-columns: repeat(2, calc(50% - 2rem));
-        column-gap: 4rem;
-      }
-
-      &__second-info {
-        display: grid;
-        grid-template-columns: 2fr 5fr;
-        grid-template-rows: repeat(3, 10rem);
-        column-gap: 4rem;
-      }
+    &--main-info {
+      display: grid;
+      grid-template-columns: repeat(2, calc(50% - 2rem));
+      column-gap: 4rem;
     }
 
-    &--magazine {
-      &__main-info {
-        display: grid;
-        grid-template-columns: repeat(2, calc(50% - 2rem));
-        column-gap: 4rem;
-      }
+    &--book-info {
+      display: grid;
+      grid-template-columns: 2fr 5fr;
+      grid-template-rows: repeat(3, 10rem);
+      column-gap: 4rem;
+    }
 
-      &__second-info {
-        display: grid;
-        grid-template-columns: 2fr 5fr;
-        grid-template-rows: repeat(3, 10rem);
-        column-gap: 4rem;
-      }
+    &--magazine-info {
+      display: grid;
+      grid-template-columns: 2fr 5fr;
+      grid-template-rows: repeat(3, 10rem);
+      column-gap: 4rem;
     }
   }
 }

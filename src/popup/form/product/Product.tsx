@@ -5,6 +5,7 @@ import imagePlaceholder from '@assets/images/placeholder.jpg';
 import AssembledBlockFieldInput from '@components/form/assembled/BlockFieldInput';
 import AssembledBlockFieldSelect from '@components/form/assembled/BlockFieldSelect';
 import AssembledBlockFieldText from '@components/form/assembled/BlockFieldText';
+import AssembledBlockFieldTextarea from '@components/form/assembled/BlockFieldTextarea';
 import FormBlock from '@components/form/block/Block';
 import FormBlockTitle from '@components/form/block/title/Title';
 import FormField from '@components/form/field/Field';
@@ -21,6 +22,7 @@ import { useIsProductErrors } from 'src/popup/hooks/errors/product/useIsProductE
 import { useResetForm } from 'src/popup/hooks/resetForm/useResetForm';
 
 import { useChangeFieldHandler } from './hooks/changeFieldHandler';
+import { useChangeSelectHandler } from './hooks/changeSelectHandler';
 import PopupFormProductBook from './variants/Book';
 import PopupFormProductMagazine from './variants/Magazine';
 
@@ -36,6 +38,7 @@ const PopupFormProduct: FC = () => {
   const resetForm = useResetForm();
   const isProductErrors = useIsProductErrors();
   const changeFieldHandler = useChangeFieldHandler();
+  const changeSelectHandler = useChangeSelectHandler();
   const fileInputRef = useRef<HTMLInputElement>(null);
   const [selectedImageName, setSelectedImageName] =
     useState<string>('Выберите файл');
@@ -46,13 +49,15 @@ const PopupFormProduct: FC = () => {
     });
   }
 
-  function changeSelectHandler(option: IOption) {
-    storePopup.form.product.setFormField('categoryId', String(option.id));
+  function changeCategoryHandler(option: IOption) {
+    changeSelectHandler('categoryId', option);
   }
 
   function changeProductTypeHandler(option: IOption) {
-    storePopup.form.product.setFormField('typeId', String(option.id));
-    storePopup.form.state.productVariantWindow = option.title as TProductTypes;
+    changeSelectHandler('typeId', option, () => {
+      storePopup.form.state.productVariantWindow =
+        option.title as TProductTypes;
+    });
   }
 
   const windowTitle = useMemo(() => {
@@ -88,29 +93,29 @@ const PopupFormProduct: FC = () => {
     }
   }
 
-  const currentCategoryValue = useMemo(() => {
+  const currentCategoryValue = useMemo((): IOption => {
     const id = Number(storePopup.form.product.getFormField('categoryId'));
-    const title = storeCategory.state.categories.find(
-      (category) => category.id === id,
-    )?.title;
-    if (title) {
-      return { id, title };
+    const category = storeCategory.state.categories.find(
+      (oneCategory) => oneCategory.id === id,
+    );
+    if (category?.title) {
+      return { id, title: category.title, alias: category.alias };
     }
-    return { id, title: '' };
+    return { id, title: '', alias: '' };
   }, [
     storeCategory.status.get('fetch'),
     storePopup.form.product.getFormField('categoryId'),
   ]);
 
-  const currentProductTypeValue = useMemo(() => {
+  const currentProductTypeValue = useMemo((): IOption => {
     const id = Number(storePopup.form.product.getFormField('typeId'));
-    const title = storeProductType.state.productTypes.find(
+    const productType = storeProductType.state.productTypes.find(
       (type) => type.id === id,
-    )?.title;
-    if (title) {
-      return { id, title };
+    );
+    if (productType?.title) {
+      return { id, title: productType.title, alias: productType.alias };
     }
-    return { id, title: '' };
+    return { id, title: '', alias: '' };
   }, [
     storeProductType.status.get('fetch'),
     storePopup.form.product.getFormField('typeId'),
@@ -181,13 +186,13 @@ const PopupFormProduct: FC = () => {
   function displayProductVariantWindow(): ReactNode {
     switch (storePopup.form.state.productVariantWindow) {
       case 'book':
-        return <PopupFormProductBook variantClass='book' />;
+        return <PopupFormProductBook />;
       case 'magazine':
-        return <PopupFormProductMagazine variantClass='magazine' />;
+        return <PopupFormProductMagazine />;
       case 'other':
         return <p>Замени эту пустоту</p>;
       default:
-        return <PopupFormProductBook variantClass='book' />;
+        return <PopupFormProductBook />;
     }
   }
 
@@ -235,6 +240,53 @@ const PopupFormProduct: FC = () => {
         </FormLayout>
 
         <FormLayout classes='photo-and-category'>
+          <AssembledBlockFieldSelect
+            options={storeProductType.state.productTypes}
+            errors={storePopup.form.product.getFormErrors('typeId')}
+            changeHandler={changeProductTypeHandler}
+            currentOption={currentProductTypeValue}
+            typeForm='product'
+            fieldName='typeId'
+            titleText='Тип'
+          />
+          <AssembledBlockFieldSelect
+            options={storeCategory.state.categories}
+            errors={storePopup.form.product.getFormErrors('categoryId')}
+            changeHandler={changeCategoryHandler}
+            currentOption={currentCategoryValue}
+            typeForm='product'
+            fieldName='categoryId'
+            titleText='Категория'
+          />
+          <AssembledBlockFieldInput
+            typeForm='product'
+            fieldName='number'
+            titleText='Количество'
+            value={storePopup.form.product.getFormField('number')}
+            changeHandler={changeFieldHandler}
+            errors={storePopup.form.product.getFormErrors('number')}
+            placeholder='300'
+          />
+        </FormLayout>
+        <FormLayout classes='main-info'>
+          <AssembledBlockFieldInput
+            value={storePopup.form.product.getFormField('title')}
+            errors={storePopup.form.product.getFormErrors('title')}
+            changeHandler={changeFieldHandler}
+            typeForm='product'
+            fieldName='title'
+            titleText='Название'
+            placeholder='Иван-царевич и серый волк'
+          />
+          <AssembledBlockFieldTextarea
+            value={storePopup.form.product.getFormField('note')}
+            errors={storePopup.form.product.getFormErrors('note')}
+            changeHandler={changeFieldHandler}
+            typeForm='product'
+            fieldName='note'
+            titleText='Примечание'
+            placeholder='Дополнительная информация...'
+          />
           <FormBlock
             titleText=''
             classes='product-photo'
@@ -265,34 +317,8 @@ const PopupFormProduct: FC = () => {
               />
             </FormField>
           </FormBlock>
-          <AssembledBlockFieldSelect
-            options={storeCategory.state.categories}
-            errors={storePopup.form.product.getFormErrors('categoryId')}
-            changeHandler={changeSelectHandler}
-            currentOption={currentCategoryValue}
-            typeForm='product'
-            fieldName='categoryId'
-            titleText='Категория'
-          />
-          <AssembledBlockFieldSelect
-            options={storeProductType.state.productTypes}
-            errors={storePopup.form.product.getFormErrors('typeId')}
-            changeHandler={changeProductTypeHandler}
-            currentOption={currentProductTypeValue}
-            typeForm='product'
-            fieldName='typeId'
-            titleText='Тип'
-          />
-          <AssembledBlockFieldInput
-            typeForm='product'
-            fieldName='number'
-            titleText='Количество'
-            value={storePopup.form.product.getFormField('number')}
-            changeHandler={changeFieldHandler}
-            errors={storePopup.form.product.getFormErrors('number')}
-            placeholder='300'
-          />
         </FormLayout>
+
         {displayProductVariantWindow()}
       </div>
     </>

@@ -90,13 +90,13 @@ const PopupFormUser: FC = () => {
     storePopup.form.user.setFormField(fieldName, String(newValue));
   }
 
-  const currentRoleValue = useMemo(() => {
+  const currentRoleValue = useMemo((): IOption => {
     const id = Number(storePopup.form.user.getFormField('roleId'));
-    const title = storeRole.state.roles.find((role) => role.id === id)?.title;
-    if (title) {
-      return { id, title };
+    const role = storeRole.state.roles.find((oneRole) => oneRole.id === id);
+    if (role?.title) {
+      return { id, title: role.title, alias: role.alias };
     }
-    return { id, title: '' };
+    return { id, title: '', alias: '' };
   }, [
     storeRole.status.get('fetch'),
     storePopup.form.user.getFormField('roleId'),

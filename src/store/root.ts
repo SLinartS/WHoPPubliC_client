@@ -1,5 +1,8 @@
 import { configure } from 'mobx';
 
+import { StoreAudienceAction } from './audience/action';
+import { StoreAudience } from './audience/state';
+import { StoreAudienceStatus } from './audience/status';
 import { StoreAuthorizationAction } from './authorization/action';
 import { StoreAuthorization } from './authorization/state';
 import { StoreAuthorizationStatus } from './authorization/status';
@@ -33,6 +36,9 @@ import { StoreProductStatus } from './product/status';
 import { StoreProductTypeAction } from './productType/action';
 import { StoreProductType } from './productType/state';
 import { StoreProductTypeStatus } from './productType/status';
+import { StoreRegularityAction } from './regularity/action';
+import { StoreRegularity } from './regularity/state';
+import { StoreRegularityStatus } from './regularity/status';
 import { StoreRoleAction } from './roles/action';
 import { StoreRole } from './roles/state';
 import { StoreRoleStatus } from './roles/status';
@@ -111,6 +117,18 @@ interface IStoreProductType {
   action: StoreProductTypeAction;
 }
 
+interface IStoreAudience {
+  state: StoreAudience;
+  status: StoreAudienceStatus;
+  action: StoreAudienceAction;
+}
+
+interface IStoreRegularity {
+  state: StoreRegularity;
+  status: StoreRegularityStatus;
+  action: StoreRegularityAction;
+}
+
 interface IStoreRole {
   state: StoreRole;
   status: StoreRoleStatus;
@@ -167,6 +185,10 @@ class RootStore {
   public storeCategory: IStoreCategory;
 
   public storeProductType: IStoreProductType;
+
+  public storeAudience: IStoreAudience;
+
+  public storeRegularity: IStoreRegularity;
 
   public storeRole: IStoreRole;
 
@@ -234,6 +256,18 @@ class RootStore {
       state: new StoreProductType(this),
       status: new StoreProductTypeStatus(this),
       action: new StoreProductTypeAction(this),
+    };
+
+    this.storeAudience = {
+      state: new StoreAudience(this),
+      status: new StoreAudienceStatus(this),
+      action: new StoreAudienceAction(this),
+    };
+
+    this.storeRegularity = {
+      state: new StoreRegularity(this),
+      status: new StoreRegularityStatus(this),
+      action: new StoreRegularityAction(this),
     };
 
     this.storeRole = {

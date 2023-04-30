@@ -4,7 +4,7 @@ import extendAxios from '@utils/extendAxios';
 import { AxiosResponse } from 'axios';
 import { makeAutoObservable } from 'mobx';
 
-export class StoreProductTypeAction {
+export class StoreAudienceAction {
   constructor(private readonly root: RootStore) {
     makeAutoObservable(this, {});
   }
@@ -12,13 +12,13 @@ export class StoreProductTypeAction {
   public *fetch() {
     try {
       const response: AxiosResponse<IOption[]> =
-        yield extendAxios.get<AxiosResponse>('product-types');
+        yield extendAxios.get<AxiosResponse>('audiences');
 
-      this.root.storeProductType.state.productTypes = response.data;
+      this.root.storeAudience.state.audiences = response.data;
 
-      this.root.storeProductType.status.set('fetch', 'done');
+      this.root.storeAudience.status.set('fetch', 'done');
     } catch (error) {
-      this.root.storeProductType.status.set('fetch', 'error');
+      this.root.storeAudience.status.set('fetch', 'error');
     }
   }
 }

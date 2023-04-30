@@ -9,7 +9,7 @@ export interface TProductsData {
 }
 
 export interface IOneProduct {
-  productInfo: IGeneralProductInformation & TVariousProductInformation;
+  productInfo: IProductInfo;
   pointId: number;
   serviceInformation: Omit<IServiceProductInformation, 'productId'>;
 }
@@ -49,6 +49,10 @@ export interface IProductMagazine {
   printingHouse: IField<string>;
   publishingHouse: IField<string>;
   dateOfPrinting: IField<string>;
+  regularityAlias: IField<string>;
+  regularityAliasId: IField<number>;
+  audienceAlias: IField<string>;
+  audienceId: IField<number>;
 }
 
 export interface IServiceProductInformation {

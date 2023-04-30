@@ -8,6 +8,7 @@ export interface IProductGeneralDataFields {
   title: TValueOrErrorType;
   article: TValueOrErrorType;
   number: TValueOrErrorType;
+  note: TValueOrErrorType;
   categoryId: TValueOrErrorType;
   typeId: TValueOrErrorType;
 }
@@ -31,6 +32,8 @@ export interface IProductMagazineDataFields {
   printingHouse: TValueOrErrorType;
   publishingHouse: TValueOrErrorType;
   dateOfPrinting: TValueOrErrorType;
+  regularityId: TValueOrErrorType;
+  audienceId: TValueOrErrorType;
 }
 
 export interface IFile {

@@ -3,7 +3,7 @@ import extendAxios from '@utils/extendAxios';
 import { AxiosResponse } from 'axios';
 import { makeAutoObservable } from 'mobx';
 
-import { IOptionCategory } from './type';
+import { IOption } from './type';
 
 export class StoreCategoryAction {
   constructor(private readonly root: RootStore) {
@@ -12,7 +12,7 @@ export class StoreCategoryAction {
 
   public *fetch() {
     try {
-      const response: AxiosResponse<IOptionCategory[]> =
+      const response: AxiosResponse<IOption[]> =
         yield extendAxios.get<AxiosResponse>('categories');
 
       this.root.storeCategory.state.categories = response.data;
