@@ -54,10 +54,7 @@ const PopupFormProduct: FC = () => {
   }
 
   function changeProductTypeHandler(option: IOption) {
-    changeSelectHandler('typeId', option, () => {
-      storePopup.form.state.productVariantWindow =
-        option.title as TProductTypes;
-    });
+    changeSelectHandler('typeId', option);
   }
 
   const windowTitle = useMemo(() => {
@@ -113,6 +110,8 @@ const PopupFormProduct: FC = () => {
       (type) => type.id === id,
     );
     if (productType?.title) {
+      storePopup.form.state.productVariantWindow =
+        productType.title as TProductTypes;
       return { id, title: productType.title, alias: productType.alias };
     }
     return { id, title: '', alias: '' };

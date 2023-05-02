@@ -14,12 +14,8 @@ export function useChangeSelectHandler() {
         | keyof IProductGeneralDataFields
         | TProductVariousDataFieldsWords,
       option: IOption,
-      actionAfterChange?: () => void,
     ) => {
       storePopup.form.product.setFormField(fieldName, String(option.id));
-      if (actionAfterChange) {
-        actionAfterChange();
-      }
     },
     [],
   );
