@@ -1,6 +1,10 @@
 @use '@styles/colors.scss' as color;
 @use '@styles/templates.scss';
 
+.test-class {
+  color: red;
+}
+
 .table {
   width: calc(100% - 1rem);
   transform: rotateX(180deg);
@@ -31,6 +35,21 @@
       &--header {
         font-weight: 700;
         height: 5rem;
+
+        &-sort-asc {
+          background: url('~@assets/icons/arrow/up/arrow-up.svg') no-repeat
+            bottom 50% right 1rem;
+          background-size: 1.6rem;
+        }
+
+        &-sort-desc {
+          background: url('~@assets/icons/arrow/down/arrow-down.svg') no-repeat
+            bottom 50% right 1rem;
+          background-size: 1.6rem;
+        }
+
+        background-size: 2rem;
+        background-clip: border-box;
       }
 
       &--selected {

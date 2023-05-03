@@ -1,5 +1,7 @@
 import './style.scss';
 
+import { useRootStore } from '@helpers/RootStoreProvider/useRootStore';
+import { useSortData } from '@hooks/useSortData';
 import {
   TSelectedItems,
   TSelectedProducts,
@@ -30,6 +32,9 @@ const Table: FC<ITableProps> = ({
   displayedColumns,
   classes,
 }) => {
+  const sortData = useSortData();
+  const { storeTable } = useRootStore();
+
   function countColumnsNumber(): number {
     if (data[0]) {
       if (displayedColumns) {
@@ -42,10 +47,39 @@ const Table: FC<ITableProps> = ({
     return 1;
   }
 
+  function sortyData(key: string) {
+    sortData(key, valuesType);
+  }
+
+  function getHeaderSortClasses(key: string) {
+    if (key) {
+      console.log(
+        storeTable.state.lastStatusEqual,
+        key,
+        storeTable.state.currentSortedColumn,
+      );
+      if (
+        storeTable.state.lastStatusEqual &&
+        storeTable.state.previousSortedColumn === key
+      ) {
+        return 'table__column-shell--header-sort-desc';
+      }
+      if (
+        !storeTable.state.lastStatusEqual &&
+        storeTable.state.currentSortedColumn === key
+      ) {
+        return 'table__column-shell--header-sort-asc';
+      }
+      return '';
+    }
+    return '';
+  }
+
   function getOneHeader(
     element: IField<string | number>,
     index: number,
     length: number,
+    key: string,
   ): ReactNode {
     return (
       <TableColumnShell
@@ -53,7 +87,8 @@ const Table: FC<ITableProps> = ({
         classes={`table__column-shell--header ${addBorderRadius(
           index,
           length,
-        )}`}
+        )}${getHeaderSortClasses(key)}`}
+        clickHandler={() => sortyData(key)}
       >
         <TableColumn
           key={element.value + element.alias}
@@ -69,7 +104,7 @@ const Table: FC<ITableProps> = ({
       return Object.entries(data[0]).map(([key, element]) => {
         if (displayedColumns.includes(key)) {
           index += 1;
-          return getOneHeader(element, index, displayedColumns!.length);
+          return getOneHeader(element, index, displayedColumns!.length, key);
         }
         return null;
       });

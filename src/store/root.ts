@@ -45,6 +45,7 @@ import { StoreRoleStatus } from './roles/status';
 import { StoreStateCheckMark } from './state/checkMark';
 import { StoreStateInterface } from './state/interface';
 import { StoreTableSelectedItem } from './table/selectedItem/selectedItem';
+import { StoreTableState } from './table/state';
 import { StoreTableUtils } from './table/utils';
 import { StoreTaskAction } from './task/action';
 import { StoreTaskStatus } from './task/status';
@@ -157,6 +158,7 @@ interface IStorePopup {
 }
 
 interface IStoreTable {
+  state: StoreTableState;
   selectedItem: StoreTableSelectedItem;
   utils: StoreTableUtils;
 }
@@ -298,6 +300,7 @@ class RootStore {
     };
 
     this.storeTable = {
+      state: new StoreTableState(this),
       selectedItem: new StoreTableSelectedItem(this),
       utils: new StoreTableUtils(this),
     };

@@ -3,7 +3,7 @@ import { makeAutoObservable } from 'mobx';
 import deepCopy from '../../utils/deepCopy/deepCopy';
 import { INITIAL_VALUE_NUMBER, INITIAL_VALUE_STRING } from '../constants';
 import RootStore from '../root';
-import { IOneProduct, TProductsData } from './type';
+import { IOneProduct, IProductInfo, TProductsData } from './type';
 
 const initialOneProduct: IOneProduct = {
   productInfo: {
@@ -49,6 +49,10 @@ export class StoreProduct {
 
   public set products(newProducts: TProductsData) {
     this._products = newProducts;
+  }
+
+  public setNewProductsData(newProducts: IProductInfo[]) {
+    this._products.data = deepCopy(newProducts);
   }
 
   private _product: IOneProduct = deepCopy(initialOneProduct);

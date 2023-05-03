@@ -83,6 +83,7 @@ const Products: FC = () => {
     selectedProductType,
     storeProductType.status.get('fetch'),
     storeProduct.status.get('fetch'),
+    storeProduct.state.products.data,
   ]);
 
   function changeHandler(): void {
