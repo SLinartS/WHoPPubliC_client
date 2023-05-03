@@ -19,6 +19,7 @@ export class StoreProductAction {
 
   public *fetch(search: string, actionIfDone?: () => void) {
     try {
+      this.root.storeProduct.status.set('fetch', 'update');
       const response: AxiosResponse<TProductsData> =
         yield extendAxios.get<TProductsData>(
           `products${search ? `?search=${search}` : ''}`,
