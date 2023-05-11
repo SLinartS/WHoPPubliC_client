@@ -24,7 +24,7 @@ const FormFieldSelect: FC<IFormFieldSelectProps> = ({
 
   function getText() {
     const text = currentOption.alias;
-    if (text.length >= 30) {
+    if (text?.length >= 30) {
       const animationDuration = Math.round(250000 / text.length);
       return (
         <>
