@@ -53,11 +53,6 @@ const Table: FC<ITableProps> = ({
 
   function getHeaderSortClasses(key: string) {
     if (key) {
-      console.log(
-        storeTable.state.lastStatusEqual,
-        key,
-        storeTable.state.currentSortedColumn,
-      );
       if (
         storeTable.state.lastStatusEqual &&
         storeTable.state.previousSortedColumn === key

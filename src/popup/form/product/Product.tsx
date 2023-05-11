@@ -189,7 +189,7 @@ const PopupFormProduct: FC = () => {
       case 'magazine':
         return <PopupFormProductMagazine />;
       case 'other':
-        return <p>Замени эту пустоту</p>;
+        return <p />;
       default:
         return <PopupFormProductBook />;
     }
@@ -238,7 +238,7 @@ const PopupFormProduct: FC = () => {
           </FormBlock>
         </FormLayout>
 
-        <FormLayout classes='photo-and-category'>
+        <FormLayout classes='type-and-category'>
           <AssembledBlockFieldSelect
             options={storeProductType.state.productTypes}
             errors={storePopup.form.product.getFormErrors('typeId')}

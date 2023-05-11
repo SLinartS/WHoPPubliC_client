@@ -30,6 +30,7 @@ export class StoreTableUtils {
     excludeColumns: string[],
   ) {
     Object.keys(data[0]).forEach((key) => {
+      console.log(key);
       if (!excludeColumns.includes(key)) {
         this.root.storeState.checkMark.changeCheckedMark(key, true, itemType);
       } else {

@@ -140,9 +140,16 @@ const PopupFormTask: FC = () => {
           storeProduct.state.products.data,
           [
             'categoryId',
+            'imageUrl',
             'printingHouse',
             'yearOfPublication',
             'publishingHouse',
+            'regularityId',
+            'audienceId',
+            'typeId',
+            'author',
+            'yearOfPrinting',
+            'dateOfPrinting',
           ],
         );
       });

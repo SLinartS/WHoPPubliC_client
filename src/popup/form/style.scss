@@ -103,14 +103,18 @@
     &__content-block {
       overflow-y: scroll;
 
-      &--add-product {
-        grid-template-columns: 50% 50%;
-        grid-template-rows: repeat(5, auto);
-      }
-
       &--add-task {
         grid-template-columns: 50% 50%;
         grid-template-rows: 8rem 16rem 1fr;
+      }
+    }
+
+    &__photo {
+      width: 15rem;
+      height: 15rem;
+
+      &-label {
+        font-size: 1.6rem;
       }
     }
 

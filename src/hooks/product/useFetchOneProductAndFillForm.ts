@@ -16,7 +16,6 @@ export function useFetchOneProductAndFillForm() {
         storeProduct.action.show(checkResult.itemId, () => {
           const { pointId, productInfo } = storeProduct.state.product;
 
-          console.log(productInfo);
           Object.entries(productInfo).forEach(([key, element]) => {
             if (
               ![

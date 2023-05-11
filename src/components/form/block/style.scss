@@ -73,17 +73,6 @@
 
 @media (max-width: 1000px) {
   .form-layout {
-    &__block {
-      &--task {
-        &-date {
-          &-start,
-          &-end {
-            font-size: 2rem;
-          }
-        }
-      }
-    }
-
     &__title {
       font-size: 2rem;
     }
