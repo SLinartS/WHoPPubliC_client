@@ -1,10 +1,6 @@
 @use '@styles/colors.scss' as color;
 @use '@styles/templates.scss';
 
-.test-class {
-  color: red;
-}
-
 .table {
   width: calc(100% - 1rem);
   transform: rotateX(180deg);
@@ -29,26 +25,29 @@
 
       width: 100%;
       min-height: 3rem;
-      border: 0.1rem solid color.$font-color--black;
+      border-top: 0.1rem solid color.$font-color--black;
+      border-right: 0.1rem solid color.$font-color--black;
+      border-bottom: 0.1rem solid color.$font-color--black;
       background-color: color.$font-color--white;
+      box-sizing: border-box;
 
       &--header {
         font-weight: 700;
         height: 5rem;
+        padding-right: max(1rem, 1%);
+        box-sizing: border-box;
 
         &-sort-asc {
-          background: url('~@assets/icons/arrow/up/arrow-up.svg') no-repeat
-            bottom 50% right 1rem;
-          background-size: 1.6rem;
+          background-image: url('~@assets/icons/arrow/up/arrow-up.svg');
         }
 
         &-sort-desc {
-          background: url('~@assets/icons/arrow/down/arrow-down.svg') no-repeat
-            bottom 50% right 1rem;
-          background-size: 1.6rem;
+          background-image: url('~@assets/icons/arrow/down/arrow-down.svg');
         }
 
-        background-size: 2rem;
+        background-position: bottom 50% right 0.4rem;
+        background-size: 1.4rem;
+        background-repeat: no-repeat;
         background-clip: border-box;
       }
 
@@ -58,6 +57,7 @@
 
       &--first {
         border-radius: 0.5rem 0 0 0.5rem;
+        border-left: 0.1rem solid color.$font-color--black;
       }
 
       &--last {
@@ -90,6 +90,16 @@
       &-shell {
         &--header {
           height: 3rem;
+
+          &-sort-asc {
+            background-position: bottom 50% right 0.2rem;
+            background-size: 0.8rem;
+          }
+
+          &-sort-desc {
+            background-position: bottom 50% right 0.2rem;
+            background-size: 0.8rem;
+          }
         }
       }
     }
