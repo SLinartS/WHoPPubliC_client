@@ -47,10 +47,6 @@ const Table: FC<ITableProps> = ({
     return 1;
   }
 
-  function sortyData(key: string) {
-    sortData(key, valuesType);
-  }
-
   function getHeaderSortClasses(key: string) {
     if (key) {
       if (
@@ -82,8 +78,8 @@ const Table: FC<ITableProps> = ({
         classes={`table__column-shell--header ${addBorderRadius(
           index,
           length,
-        )}${getHeaderSortClasses(key)}`}
-        clickHandler={() => sortyData(key)}
+        )} ${getHeaderSortClasses(key)}`}
+        clickHandler={() => sortData(key, valuesType)}
       >
         <TableColumn
           key={element.value + element.alias}

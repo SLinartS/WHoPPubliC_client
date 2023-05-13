@@ -36,6 +36,7 @@
         height: 5rem;
         padding-right: max(1rem, 1%);
         box-sizing: border-box;
+        cursor: pointer;
 
         &-sort-asc {
           background-image: url('~@assets/icons/arrow/up/arrow-up.svg');
