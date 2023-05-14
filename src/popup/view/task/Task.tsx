@@ -93,9 +93,16 @@ const PopupViewTask: FC = () => {
           storeProduct.state.products.data,
           [
             'categoryId',
+            'imageUrl',
             'printingHouse',
             'yearOfPublication',
             'publishingHouse',
+            'regularityId',
+            'audienceId',
+            'typeId',
+            'author',
+            'yearOfPrinting',
+            'dateOfPrinting',
           ],
         );
       });
@@ -110,7 +117,7 @@ const PopupViewTask: FC = () => {
       />
 
       <div className='popup-view__content-block popup-view__content-block--view-task'>
-        <FormLayout classes='article-info-view-task'>
+        <FormLayout classes='article-info'>
           <AssembledBlockFieldText
             value={storePopup.form.task.getFormField('article')}
             errors={storePopup.form.task.getFormErrors('article')}
@@ -120,7 +127,7 @@ const PopupViewTask: FC = () => {
           />
         </FormLayout>
 
-        <FormLayout classes='time-info-view-task'>
+        <FormLayout classes='time-info'>
           <AssembledBlockFieldDatetime
             valueDate={storePopup.form.task.getFormField('dateStart')}
             valueTime={storePopup.form.task.getFormField('timeStart')}

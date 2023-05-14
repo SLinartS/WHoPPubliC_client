@@ -8,6 +8,7 @@
   grid-template-columns: repeat(6, auto);
   row-gap: 0.5rem;
   font-size: 1.6rem;
+  padding-bottom: 0.2rem;
 
   &-wrapper {
     width: 100%;
@@ -34,9 +35,12 @@
       &--header {
         font-weight: 700;
         height: 5rem;
-        padding-right: max(1rem, 1%);
         box-sizing: border-box;
         cursor: pointer;
+
+        .table__column {
+          padding: 0 1rem;
+        }
 
         &-sort-asc {
           background-image: url('~@assets/icons/arrow/up/arrow-up.svg');

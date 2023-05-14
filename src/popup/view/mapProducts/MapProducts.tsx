@@ -5,14 +5,34 @@ import Table from '@components/table/Table';
 import WindowHeaderForm from '@components/windowHeader/form/Form';
 import { useRootStore } from '@helpers/RootStoreProvider/useRootStore';
 import { observer } from 'mobx-react-lite';
-import { FC } from 'react';
+import { FC, useEffect } from 'react';
 
 const PopupViewMapProducts: FC = () => {
-  const { storePopup, storeTable } = useRootStore();
+  const { storePopup, storeTable, storeProduct } = useRootStore();
 
   function closeHandler() {
     storePopup.status.hide('viewMapProducts');
   }
+
+  useEffect(() => {
+    storeTable.utils.setDefaultMark(
+      'products',
+      storeProduct.state.products.data,
+      [
+        'categoryId',
+        'imageUrl',
+        'printingHouse',
+        'yearOfPublication',
+        'publishingHouse',
+        'regularityId',
+        'audienceId',
+        'typeId',
+        'author',
+        'yearOfPrinting',
+        'dateOfPrinting',
+      ],
+    );
+  }, []);
 
   return (
     <>

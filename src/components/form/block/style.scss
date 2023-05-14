@@ -74,7 +74,12 @@
 @media (max-width: 1000px) {
   .form-layout {
     &__title {
-      font-size: 2rem;
+      &--task,
+      &--product {
+        &-article {
+          font-size: 2rem;
+        }
+      }
     }
   }
 }
