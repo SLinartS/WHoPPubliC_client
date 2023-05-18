@@ -8,7 +8,7 @@ export class StoreCategory {
     makeAutoObservable(this, {});
   }
 
-  private _categories: IOption[] = [];
+  private _categories: IOption<string>[] = [];
 
   public get categories() {
     return this._categories.slice().sort((a, b) => {
@@ -16,7 +16,7 @@ export class StoreCategory {
     });
   }
 
-  public set categories(newCategories: IOption[]) {
+  public set categories(newCategories: IOption<string>[]) {
     this._categories = newCategories;
   }
 }

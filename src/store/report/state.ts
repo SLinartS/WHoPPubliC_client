@@ -1,20 +1,20 @@
 import { makeAutoObservable } from 'mobx';
 
 import RootStore from '../root';
-import { IPerformanceReport } from './type';
+import { IReport } from './type';
 
-export class StorePerformanceReport {
+export class StoreReport {
   constructor(private readonly root: RootStore) {
     makeAutoObservable(this, {});
   }
 
-  private _reports: IPerformanceReport[] = [];
+  private _reports: IReport[] = [];
 
   public get reports() {
     return this._reports;
   }
 
-  public set reports(newReports: IPerformanceReport[]) {
+  public set reports(newReports: IReport[]) {
     this._reports = newReports;
   }
 }

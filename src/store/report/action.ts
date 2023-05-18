@@ -1,44 +1,45 @@
+import { TReportType } from '@store/fileType/type';
 import RootStore from '@store/root';
 import extendAxios from '@utils/extendAxios';
 import { AxiosResponse } from 'axios';
 import { makeAutoObservable } from 'mobx';
 
-import { IPerformanceReport } from './type';
+import { IReport } from './type';
 
-export class StorePerformanceReportAction {
+export class StoreReportAction {
   constructor(private readonly root: RootStore) {
     makeAutoObservable(this, {});
   }
 
   public *fetch(search: string) {
     try {
-      const response: AxiosResponse<IPerformanceReport[]> =
+      const response: AxiosResponse<IReport[]> =
         yield extendAxios.get<AxiosResponse>(
-          `performance-report${search ? `?search=${search}` : ''}`,
+          `reports${search ? `?search=${search}` : ''}`,
         );
 
-      this.root.storePerformanceReport.state.reports = response.data;
+      this.root.storeReport.state.reports = response.data;
 
-      this.root.storePerformanceReport.status.set('fetch', 'done');
+      this.root.storeReport.status.set('fetch', 'done');
     } catch (error) {
-      this.root.storePerformanceReport.status.set('fetch', 'error');
+      this.root.storeReport.status.set('fetch', 'error');
     }
   }
 
-  public *store(actionIfDone: () => void) {
+  public *store(reportType: TReportType, actionIfDone: () => void) {
     try {
-      yield extendAxios.post<AxiosResponse>('performance-report');
+      yield extendAxios.post<AxiosResponse>('reports', { reportType });
       actionIfDone();
-      this.root.storePerformanceReport.status.set('store', 'done');
+      this.root.storeReport.status.set('store', 'done');
     } catch (error) {
-      this.root.storePerformanceReport.status.set('store', 'error');
+      this.root.storeReport.status.set('store', 'error');
     }
   }
 
   public *download(id: number, title: string, actionIfDone?: () => void) {
     try {
       const response: AxiosResponse<Blob> =
-        yield extendAxios.get<AxiosResponse>(`performance-report/${id}`, {
+        yield extendAxios.get<AxiosResponse>(`reports/${id}`, {
           responseType: 'blob',
         });
       const href = URL.createObjectURL(response.data);
@@ -55,22 +56,22 @@ export class StorePerformanceReportAction {
       if (actionIfDone) {
         actionIfDone();
       }
-      this.root.storePerformanceReport.status.set('download', 'done');
+      this.root.storeReport.status.set('download', 'done');
     } catch (error) {
-      this.root.storePerformanceReport.status.set('download', 'error');
+      this.root.storeReport.status.set('download', 'error');
     }
   }
 
   public *destroy(id: number, actionIfDone?: () => void) {
     try {
-      yield extendAxios.delete(`performance-report/${id}`);
+      yield extendAxios.delete(`reports/${id}`);
 
       if (actionIfDone) {
         actionIfDone();
       }
-      this.root.storePerformanceReport.status.set('destroy', 'done');
+      this.root.storeReport.status.set('destroy', 'done');
     } catch (error) {
-      this.root.storePerformanceReport.status.set('destroy', 'error');
+      this.root.storeReport.status.set('destroy', 'error');
     }
   }
 }

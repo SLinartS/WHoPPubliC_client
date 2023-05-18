@@ -9,11 +9,11 @@ import { useCallback } from 'react';
 export function useChangeSelectHandler() {
   const { storePopup } = useRootStore();
   return useCallback(
-    (
+    <T>(
       fieldName:
         | keyof IProductGeneralDataFields
         | TProductVariousDataFieldsWords,
-      option: IOption,
+      option: IOption<T>,
     ) => {
       storePopup.form.product.setFormField(fieldName, String(option.id));
     },

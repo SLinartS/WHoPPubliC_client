@@ -1,5 +1,5 @@
-export interface IOption {
+export interface IOption<T> {
   id: number;
-  title: string;
+  title: T;
   alias: string;
 }

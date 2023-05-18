@@ -8,7 +8,7 @@ export class StoreAudience {
     makeAutoObservable(this, {});
   }
 
-  private _audiences: IOption[] = [];
+  private _audiences: IOption<string>[] = [];
 
   public get audiences() {
     return this._audiences.slice().sort((a, b) => {
@@ -16,7 +16,7 @@ export class StoreAudience {
     });
   }
 
-  public set audiences(newAudiences: IOption[]) {
+  public set audiences(newAudiences: IOption<string>[]) {
     this._audiences = newAudiences;
   }
 }

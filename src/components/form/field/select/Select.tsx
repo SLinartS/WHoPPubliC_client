@@ -2,22 +2,22 @@ import './style.scss';
 
 import { IOption } from '@store/category/type';
 import { observer } from 'mobx-react-lite';
-import { FC, useState } from 'react';
+import { useState } from 'react';
 
-interface IFormFieldSelectProps {
-  options: IOption[];
-  currentOption: IOption;
-  changeHandler: (option: IOption) => void;
+interface IFormFieldSelectProps<T> {
+  options: IOption<T>[];
+  currentOption: IOption<T>;
+  changeHandler: (option: IOption<T>) => void;
 }
 
-const FormFieldSelect: FC<IFormFieldSelectProps> = ({
+const FormFieldSelect = <T extends unknown>({
   options,
   currentOption,
   changeHandler,
-}) => {
+}: IFormFieldSelectProps<T>) => {
   const [isOpenDownDrop, setIsOpenDownDrop] = useState<boolean>(false);
 
-  function changeFieldHandler(option: IOption) {
+  function changeFieldHandler(option: typeof currentOption) {
     changeHandler(option);
     setIsOpenDownDrop(false);
   }

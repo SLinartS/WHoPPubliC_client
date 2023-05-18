@@ -1,4 +1,4 @@
-import performanceReportIcon from '@assets/icons/file/file-second.svg';
+import reportIcon from '@assets/icons/file/file-second.svg';
 import mapIcon from '@assets/icons/map/map-second.svg';
 import pointsIcon from '@assets/icons/points/points-second.svg';
 import productsIcon from '@assets/icons/products/products-second.svg';
@@ -34,8 +34,8 @@ export const HEADER_LINKS: IHeaderLinks[] = [
     to: 'users',
   },
   {
-    icon: performanceReportIcon,
+    icon: reportIcon,
     text: 'Отчёты',
-    to: 'performance-report',
+    to: 'reports',
   },
 ];

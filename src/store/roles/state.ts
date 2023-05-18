@@ -1,3 +1,4 @@
+import { TUserRole } from '@store/authorization/type';
 import { IOption } from '@store/category/type';
 import { makeAutoObservable } from 'mobx';
 
@@ -8,7 +9,7 @@ export class StoreRole {
     makeAutoObservable(this, {});
   }
 
-  private _roles: IOption[] = [];
+  private _roles: IOption<TUserRole>[] = [];
 
   public get roles() {
     return this._roles.slice().sort((a, b) => {
@@ -16,7 +17,7 @@ export class StoreRole {
     });
   }
 
-  public set roles(newRoles: IOption[]) {
+  public set roles(newRoles: IOption<TUserRole>[]) {
     this._roles = newRoles;
   }
 }

@@ -13,6 +13,7 @@ import { useRootStore } from '@helpers/RootStoreProvider/useRootStore';
 import { useFetchOneProductAndFillForm } from '@hooks/product/useFetchOneProductAndFillForm';
 import { useGetSelects } from '@hooks/product/useGetSelects';
 import { IOption } from '@store/category/type';
+import { TProductTypes } from '@store/productType/type';
 import { observer } from 'mobx-react-lite';
 import { FC, MouseEvent, useEffect, useMemo, useState } from 'react';
 
@@ -47,19 +48,19 @@ const Products: FC = () => {
     storeState.interface.showPopupFilter();
   }
 
-  function changeSelectHandler(option: IOption) {
+  function changeSelectHandler(option: IOption<TProductTypes>) {
     setSelectedProductType(option.id);
   }
 
-  const currentProductType = useMemo((): IOption => {
+  const currentProductType = useMemo((): IOption<TProductTypes> => {
     const id = selectedProductType;
     const productType = storeProductType.state.productTypes.find(
       (type) => type.id === id,
     );
-    if (productType?.title) {
-      return { id, title: productType.title, alias: productType.alias };
+    if (productType) {
+      return productType;
     }
-    return { id, title: '', alias: '' };
+    return { id, title: 'book', alias: '' };
   }, [selectedProductType, storeProductType.status.get('fetch')]);
 
   const displayedProductData = useMemo(() => {

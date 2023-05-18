@@ -11,7 +11,7 @@ export class StoreRegularityAction {
 
   public *fetch() {
     try {
-      const response: AxiosResponse<IOption[]> =
+      const response: AxiosResponse<IOption<string>[]> =
         yield extendAxios.get<AxiosResponse>('regularities');
 
       this.root.storeRegularity.state.regularities = response.data;

@@ -11,7 +11,7 @@ export class StoreAudienceAction {
 
   public *fetch() {
     try {
-      const response: AxiosResponse<IOption[]> =
+      const response: AxiosResponse<IOption<string>[]> =
         yield extendAxios.get<AxiosResponse>('audiences');
 
       this.root.storeAudience.state.audiences = response.data;

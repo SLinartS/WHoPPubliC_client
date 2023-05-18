@@ -12,7 +12,7 @@ export class StoreCategoryAction {
 
   public *fetch() {
     try {
-      const response: AxiosResponse<IOption[]> =
+      const response: AxiosResponse<IOption<string>[]> =
         yield extendAxios.get<AxiosResponse>('categories');
 
       this.root.storeCategory.state.categories = response.data;

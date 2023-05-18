@@ -5,6 +5,7 @@ import FormLayout from '@components/form/layout/Layout';
 import WindowHeaderForm from '@components/windowHeader/form/Form';
 import { useRootStore } from '@helpers/RootStoreProvider/useRootStore';
 import { useFetchOneUserAndFillForm } from '@hooks/user/useFetchOneUserAndFillForm';
+import { TUserRole } from '@store/authorization/type';
 import { IOption } from '@store/category/type';
 import { IUserFormDataFields } from '@store/popup/form/user/type';
 import { observer } from 'mobx-react-lite';
@@ -79,7 +80,7 @@ const PopupFormUser: FC = () => {
     storePopup.status.show('selectWorkSchedule');
   }
 
-  function changeSelectHandler(option: IOption) {
+  function changeSelectHandler(option: IOption<TUserRole>) {
     storePopup.form.user.setFormField('roleId', String(option.id));
   }
 
@@ -90,11 +91,11 @@ const PopupFormUser: FC = () => {
     storePopup.form.user.setFormField(fieldName, String(newValue));
   }
 
-  const currentRoleValue = useMemo((): IOption => {
+  const currentRoleValue = useMemo((): IOption<TUserRole> => {
     const id = Number(storePopup.form.user.getFormField('roleId'));
     const role = storeRole.state.roles.find((oneRole) => oneRole.id === id);
-    if (role?.title) {
-      return { id, title: role.title, alias: role.alias };
+    if (role) {
+      return role;
     }
     return { id, title: '', alias: '' };
   }, [

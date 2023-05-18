@@ -14,13 +14,13 @@ const PopupFormProductBook: FC = () => {
   const changeFieldHandler = useChangeFieldHandler();
   const changeSelectHandler = useChangeSelectHandler();
 
-  const currentAudienceValue = useMemo((): IOption => {
+  const currentAudienceValue = useMemo((): IOption<string> => {
     const id = Number(storePopup.form.product.getFormField('audienceId'));
     const audience = storeAudience.state.audiences.find(
       (oneAudience) => oneAudience.id === id,
     );
-    if (audience?.title) {
-      return { id, title: audience.title, alias: audience.alias };
+    if (audience) {
+      return audience;
     }
     return { id, title: '', alias: '' };
   }, [
@@ -28,13 +28,13 @@ const PopupFormProductBook: FC = () => {
     storePopup.form.product.getFormField('audienceId'),
   ]);
 
-  const currentRegularityValue = useMemo((): IOption => {
+  const currentRegularityValue = useMemo((): IOption<string> => {
     const id = Number(storePopup.form.product.getFormField('regularityId'));
     const regularity = storeRegularity.state.regularities.find(
       (oneRegularity) => oneRegularity.id === id,
     );
-    if (regularity?.title) {
-      return { id, title: regularity.title, alias: regularity.alias };
+    if (regularity) {
+      return regularity;
     }
     return { id, title: '', alias: '' };
   }, [
@@ -42,11 +42,11 @@ const PopupFormProductBook: FC = () => {
     storePopup.form.product.getFormField('regularityId'),
   ]);
 
-  function changeAudienceHandler(option: IOption) {
+  function changeAudienceHandler(option: IOption<string>) {
     changeSelectHandler('audienceId', option);
   }
 
-  function changeRegularitiesHandler(option: IOption) {
+  function changeRegularitiesHandler(option: IOption<string>) {
     changeSelectHandler('regularityId', option);
   }
 

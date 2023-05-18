@@ -49,11 +49,11 @@ const PopupFormProduct: FC = () => {
     });
   }
 
-  function changeCategoryHandler(option: IOption) {
+  function changeCategoryHandler(option: IOption<string>) {
     changeSelectHandler('categoryId', option);
   }
 
-  function changeProductTypeHandler(option: IOption) {
+  function changeProductTypeHandler(option: IOption<TProductTypes>) {
     changeSelectHandler('typeId', option);
   }
 
@@ -90,13 +90,13 @@ const PopupFormProduct: FC = () => {
     }
   }
 
-  const currentCategoryValue = useMemo((): IOption => {
+  const currentCategoryValue = useMemo((): IOption<string> => {
     const id = Number(storePopup.form.product.getFormField('categoryId'));
     const category = storeCategory.state.categories.find(
       (oneCategory) => oneCategory.id === id,
     );
-    if (category?.title) {
-      return { id, title: category.title, alias: category.alias };
+    if (category) {
+      return category;
     }
     return { id, title: '', alias: '' };
   }, [
@@ -104,17 +104,17 @@ const PopupFormProduct: FC = () => {
     storePopup.form.product.getFormField('categoryId'),
   ]);
 
-  const currentProductTypeValue = useMemo((): IOption => {
+  const currentProductTypeValue = useMemo((): IOption<TProductTypes> => {
     const id = Number(storePopup.form.product.getFormField('typeId'));
     const productType = storeProductType.state.productTypes.find(
       (type) => type.id === id,
     );
-    if (productType?.title) {
+    if (productType) {
       storePopup.form.state.productVariantWindow =
         productType.title as TProductTypes;
-      return { id, title: productType.title, alias: productType.alias };
+      return productType;
     }
-    return { id, title: '', alias: '' };
+    return { id, title: 'book', alias: '' };
   }, [
     storeProductType.status.get('fetch'),
     storePopup.form.product.getFormField('typeId'),

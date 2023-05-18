@@ -8,7 +8,7 @@ export class StoreRegularity {
     makeAutoObservable(this, {});
   }
 
-  private _regularities: IOption[] = [];
+  private _regularities: IOption<string>[] = [];
 
   public get regularities() {
     return this._regularities.slice().sort((a, b) => {
@@ -16,7 +16,7 @@ export class StoreRegularity {
     });
   }
 
-  public set regularities(newRegularities: IOption[]) {
+  public set regularities(newRegularities: IOption<string>[]) {
     this._regularities = newRegularities;
   }
 }

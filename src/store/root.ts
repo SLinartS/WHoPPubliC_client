@@ -9,12 +9,12 @@ import { StoreAuthorizationStatus } from './authorization/status';
 import { StoreCategoryAction } from './category/action';
 import { StoreCategory } from './category/state';
 import { StoreCategoryStatus } from './category/status';
+import { StoreFileTypeAction } from './fileType/action';
+import { StoreFileType } from './fileType/state';
+import { StoreFileTypeStatus } from './fileType/status';
 import { StoreMapAction } from './map/action';
 import { StoreMap } from './map/state';
 import { StoreMapStatus } from './map/status';
-import { StorePerformanceReportAction } from './performanceReport/action';
-import { StorePerformanceReport } from './performanceReport/state';
-import { StorePerformanceReportStatus } from './performanceReport/status';
 import { StorePointAction } from './point/action';
 import { StorePoint } from './point/state';
 import { StorePointStatus } from './point/status';
@@ -39,6 +39,9 @@ import { StoreProductTypeStatus } from './productType/status';
 import { StoreRegularityAction } from './regularity/action';
 import { StoreRegularity } from './regularity/state';
 import { StoreRegularityStatus } from './regularity/status';
+import { StoreReportAction } from './report/action';
+import { StoreReport } from './report/state';
+import { StoreReportStatus } from './report/status';
 import { StoreRoleAction } from './roles/action';
 import { StoreRole } from './roles/state';
 import { StoreRoleStatus } from './roles/status';
@@ -59,10 +62,10 @@ configure({
   enforceActions: 'always',
 });
 
-interface IStorePerformanceReport {
-  state: StorePerformanceReport;
-  status: StorePerformanceReportStatus;
-  action: StorePerformanceReportAction;
+interface IStoreReport {
+  state: StoreReport;
+  status: StoreReportStatus;
+  action: StoreReportAction;
 }
 
 interface IStoreAuthorization {
@@ -118,6 +121,12 @@ interface IStoreProductType {
   action: StoreProductTypeAction;
 }
 
+interface IStoreFileType {
+  state: StoreFileType;
+  status: StoreFileTypeStatus;
+  action: StoreFileTypeAction;
+}
+
 interface IStoreAudience {
   state: StoreAudience;
   status: StoreAudienceStatus;
@@ -166,7 +175,7 @@ interface IStoreTable {
 class RootStore {
   private static instance: RootStore;
 
-  public storePerformanceReport: IStorePerformanceReport;
+  public storeReport: IStoreReport;
 
   public storeAuth: IStoreAuthorization;
 
@@ -188,6 +197,8 @@ class RootStore {
 
   public storeProductType: IStoreProductType;
 
+  public storeFileType: IStoreFileType;
+
   public storeAudience: IStoreAudience;
 
   public storeRegularity: IStoreRegularity;
@@ -199,10 +210,10 @@ class RootStore {
   public storeTable: IStoreTable;
 
   private constructor() {
-    this.storePerformanceReport = {
-      state: new StorePerformanceReport(this),
-      status: new StorePerformanceReportStatus(this),
-      action: new StorePerformanceReportAction(this),
+    this.storeReport = {
+      state: new StoreReport(this),
+      status: new StoreReportStatus(this),
+      action: new StoreReportAction(this),
     };
 
     this.storeAuth = {
@@ -258,6 +269,12 @@ class RootStore {
       state: new StoreProductType(this),
       status: new StoreProductTypeStatus(this),
       action: new StoreProductTypeAction(this),
+    };
+
+    this.storeFileType = {
+      state: new StoreFileType(this),
+      status: new StoreFileTypeStatus(this),
+      action: new StoreFileTypeAction(this),
     };
 
     this.storeAudience = {

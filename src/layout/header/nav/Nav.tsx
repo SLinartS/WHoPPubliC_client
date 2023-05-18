@@ -21,10 +21,10 @@ const HeaderNav: FC<INavProps> = ({ isPopup = false }) => {
       case 'admin':
         break;
       case 'operator':
-        excludeLinks.push('users', 'performance-report');
+        excludeLinks.push('users', 'reports');
         break;
       case 'worker':
-        excludeLinks.push('users', 'products', 'performance-report');
+        excludeLinks.push('users', 'products', 'reports');
         break;
       default:
         excludeLinks.push(
@@ -33,7 +33,7 @@ const HeaderNav: FC<INavProps> = ({ isPopup = false }) => {
           'tasks',
           'products',
           'users',
-          'performance-report',
+          'reports',
         );
     }
     return HEADER_LINKS.filter((link) => !excludeLinks.includes(link.to));

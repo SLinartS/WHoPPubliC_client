@@ -2,13 +2,9 @@ import RootStore from '@store/root';
 import { TStatus } from '@store/type';
 import { makeAutoObservable } from 'mobx';
 
-export type TPerformanceReportStatus =
-  | 'fetch'
-  | 'store'
-  | 'download'
-  | 'destroy';
+export type TReportStatus = 'fetch' | 'store' | 'download' | 'destroy';
 
-export class StorePerformanceReportStatus {
+export class StoreReportStatus {
   constructor(private readonly root: RootStore) {
     makeAutoObservable(this, {});
   }
@@ -21,11 +17,11 @@ export class StorePerformanceReportStatus {
 
   private destroy: TStatus = 'pending';
 
-  public get(title: TPerformanceReportStatus) {
+  public get(title: TReportStatus) {
     return this[title];
   }
 
-  public set(title: TPerformanceReportStatus, newStatus: TStatus) {
+  public set(title: TReportStatus, newStatus: TStatus) {
     this[title] = newStatus;
   }
 }

@@ -4,6 +4,8 @@ import extendAxios from '@utils/extendAxios';
 import { AxiosResponse } from 'axios';
 import { makeAutoObservable } from 'mobx';
 
+import { TProductTypes } from './type';
+
 export class StoreProductTypeAction {
   constructor(private readonly root: RootStore) {
     makeAutoObservable(this, {});
@@ -11,7 +13,7 @@ export class StoreProductTypeAction {
 
   public *fetch() {
     try {
-      const response: AxiosResponse<IOption[]> =
+      const response: AxiosResponse<IOption<TProductTypes>[]> =
         yield extendAxios.get<AxiosResponse>('product-types');
 
       this.root.storeProductType.state.productTypes = response.data;

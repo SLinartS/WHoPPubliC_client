@@ -6,9 +6,9 @@ import Layout from './layout/Layout';
 import Login from './pages/login/Login';
 import Main from './pages/main/Main';
 import Map from './pages/map/Map';
-import PerformanceReport from './pages/performanceReport/PerformanceReport';
 import Points from './pages/points/Points';
 import Products from './pages/products/Products';
+import ReportPage from './pages/report/ReportPage';
 import Tasks from './pages/tasks/Tasks';
 import Users from './pages/users/Users';
 
@@ -51,8 +51,8 @@ const router = createBrowserRouter([
         element: <Users />,
       },
       {
-        path: 'performance-report',
-        element: <PerformanceReport />,
+        path: 'reports',
+        element: <ReportPage />,
       },
     ],
   },

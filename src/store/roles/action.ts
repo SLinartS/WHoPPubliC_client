@@ -1,3 +1,4 @@
+import { TUserRole } from '@store/authorization/type';
 import { IOption } from '@store/category/type';
 import RootStore from '@store/root';
 import extendAxios from '@utils/extendAxios';
@@ -11,7 +12,7 @@ export class StoreRoleAction {
 
   public *fetch() {
     try {
-      const response: AxiosResponse<IOption[]> =
+      const response: AxiosResponse<IOption<TUserRole>[]> =
         yield extendAxios.get<AxiosResponse>('roles');
 
       this.root.storeRole.state.roles = response.data;

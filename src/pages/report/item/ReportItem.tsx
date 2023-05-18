@@ -2,14 +2,14 @@ import Button from '@components/button/Button';
 import { observer } from 'mobx-react-lite';
 import { FC } from 'react';
 
-interface PerformanceReportItemProps {
+interface ReportItemProps {
   id: number;
   title: string;
   downloadReportHandler: (id: number, title: string) => void;
   deleteReportHandler: (id: number) => void;
 }
 
-const PerformanceReportItem: FC<PerformanceReportItemProps> = ({
+const ReportItem: FC<ReportItemProps> = ({
   id,
   title,
   downloadReportHandler,
@@ -17,19 +17,21 @@ const PerformanceReportItem: FC<PerformanceReportItemProps> = ({
 }) => {
   return (
     <>
-      <p className='performance-reports__report-title'>{title}</p>
+      <p className='reports__report-title'>
+        {title.split('-').splice(2).join('-')}
+      </p>
       <Button
         text='Скачать'
         clickHandler={() => downloadReportHandler(id, title)}
-        classes='performance-reports__report-button'
+        classes='reports__report-button'
       />
       <Button
         text='Удалить'
         clickHandler={() => deleteReportHandler(id)}
-        classes='performance-reports__report-button'
+        classes='reports__report-button'
       />
     </>
   );
 };
 
-export default observer(PerformanceReportItem);
+export default observer(ReportItem);

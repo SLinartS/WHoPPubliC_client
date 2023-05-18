@@ -10,4 +10,4 @@ export type TToLinkType =
   | 'tasks'
   | 'products'
   | 'users'
-  | 'performance-report';
+  | 'reports';

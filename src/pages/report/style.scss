@@ -1,7 +1,7 @@
 @use '@styles/templates.scss';
 @use '@styles/variables.scss' as variable;
 
-.performance-reports {
+.reports {
   @extend %grid-center;
 
   width: calc(100% - 2rem);
@@ -29,6 +29,10 @@
     align-self: center;
   }
 
+  &__empty {
+    font-size: 2rem;
+  }
+
   &__report {
     &-title {
       font-size: 2rem;
@@ -42,12 +46,18 @@
   }
 
   &__button-generate-block {
+    display: flex;
     align-self: center;
+  }
+
+  &__button-generate {
+    margin-left: 4rem;
+    min-width: 35rem;
   }
 }
 
 @media (max-width: 1000px) {
-  .performance-reports {
+  .reports {
     grid-template-rows: 5rem 5rem calc(
         100vh - variable.$header-height--mid - 5rem - 5rem - 2rem - 0.5rem
       );
@@ -71,19 +81,41 @@
         padding: 0.5rem 1rem;
       }
     }
+
+    &__button-generate {
+      margin-left: 3rem;
+      min-width: 26rem;
+    }
   }
 }
 
 @media (max-width: 850px) {
-  .performance-reports {
-    grid-template-rows: 5rem 5rem calc(
-        100vh - variable.$header-height--low - 5rem - 5rem - 2rem - 0.5rem
+  .reports {
+    grid-template-rows: 5rem 12rem calc(
+        100vh - variable.$header-height--low - 5rem - 12rem - 2rem - 0.5rem
       );
+
+    &__button-generate-block {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      align-self: center;
+
+      .custom-select {
+        width: 30rem;
+        margin: 2rem 0;
+      }
+    }
+
+    &__button-generate {
+      margin: 0;
+      min-width: 25rem;
+    }
   }
 }
 
 @media (max-width: 750px) {
-  .performance-reports {
+  .reports {
     &__report {
       &-title {
         font-size: 1.6rem;
