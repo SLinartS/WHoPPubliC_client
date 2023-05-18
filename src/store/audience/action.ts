@@ -19,6 +19,7 @@ export class StoreAudienceAction {
       this.root.storeAudience.status.set('fetch', 'done');
     } catch (error) {
       this.root.storeAudience.status.set('fetch', 'error');
+      this.fetch();
     }
   }
 }

@@ -21,6 +21,7 @@ export class StoreProductTypeAction {
       this.root.storeProductType.status.set('fetch', 'done');
     } catch (error) {
       this.root.storeProductType.status.set('fetch', 'error');
+      this.fetch();
     }
   }
 }

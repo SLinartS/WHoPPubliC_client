@@ -19,6 +19,7 @@ export class StoreRegularityAction {
       this.root.storeRegularity.status.set('fetch', 'done');
     } catch (error) {
       this.root.storeRegularity.status.set('fetch', 'error');
+      this.fetch();
     }
   }
 }

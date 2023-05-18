@@ -20,6 +20,7 @@ export class StoreCategoryAction {
       this.root.storeCategory.status.set('fetch', 'done');
     } catch (error) {
       this.root.storeCategory.status.set('fetch', 'error');
+      this.fetch();
     }
   }
 }

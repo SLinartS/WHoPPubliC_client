@@ -20,6 +20,7 @@ export class StoreRoleAction {
       this.root.storeRole.status.set('fetch', 'done');
     } catch (error) {
       this.root.storeRole.status.set('fetch', 'error');
+      this.fetch();
     }
   }
 }
