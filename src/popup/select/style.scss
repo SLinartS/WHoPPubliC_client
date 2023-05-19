@@ -24,17 +24,39 @@
   }
 
   &__work-schedule {
+    font-size: 2rem;
     display: grid;
     align-items: center;
     grid-template-columns: 1fr;
     margin: 2rem 6rem;
     row-gap: 2rem;
 
+    p {
+      width: fit-content;
+    }
+
     &-item {
       display: grid;
       align-items: center;
       grid-template-columns: 4rem 12rem 12rem;
       column-gap: 4rem;
+    }
+  }
+}
+
+@media (max-width: 1000px) {
+  .popup-select {
+    &__work-schedule {
+      font-size: 1.6rem;
+      margin: 2rem 6rem;
+      row-gap: 1rem;
+
+      &-item {
+        display: grid;
+        align-items: center;
+        grid-template-columns: 4rem 8rem 8rem;
+        column-gap: 2rem;
+      }
     }
   }
 }
