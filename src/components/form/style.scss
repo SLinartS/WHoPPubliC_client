@@ -93,6 +93,7 @@
       display: grid;
       grid-template-columns: 1fr 1fr;
       column-gap: 4rem;
+      row-gap: 2rem;
       border-bottom: 0.2rem solid color.$font-color--black;
     }
 
@@ -163,11 +164,11 @@
         justify-items: center;
         grid-template-columns: 1fr;
       }
-  
+
       &--contact-info {
         grid-template-columns: 1fr;
       }
-  
+
       &--login-info {
         grid-template-columns: 1fr;
       }

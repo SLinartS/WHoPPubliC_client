@@ -98,7 +98,7 @@ const LoginPage: FC = () => {
             src={appIcon}
             alt='app icon'
           />
-          <h2 className='login__app-name'>МИС «Склад»</h2>
+          <h2 className='login__app-name'>ИС «Склад»</h2>
         </div>
         <h3 className='login__title'>Авторизация</h3>
         <div className='login__inputs-block'>
