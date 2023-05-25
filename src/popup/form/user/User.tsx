@@ -135,7 +135,7 @@ const PopupFormUser: FC = () => {
             typeForm='user'
             fieldName='surname'
             titleText='Фамилия'
-            placeholder='Иванович'
+            placeholder='Иванов'
           />
           <AssembledBlockFieldInput
             value={storePopup.form.user.getFormField('patronymic')}
@@ -144,7 +144,7 @@ const PopupFormUser: FC = () => {
             typeForm='user'
             fieldName='patronymic'
             titleText='Отчество'
-            placeholder='Иванов'
+            placeholder='Иванович'
           />
 
           <Button
@@ -183,7 +183,7 @@ const PopupFormUser: FC = () => {
             typeForm='user'
             fieldName='login'
             titleText='Логин'
-            placeholder='JDU34'
+            placeholder='JDU34Y'
           />
           <AssembledBlockFieldSelect
             options={storeRole.state.roles}
