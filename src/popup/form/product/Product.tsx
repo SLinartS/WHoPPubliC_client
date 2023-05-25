@@ -150,8 +150,6 @@ const PopupFormProduct: FC = () => {
         case 'create':
           storeProduct.action.store(() => {
             storeProduct.action.addFile(() => {
-              storePopup.form.product.clearFormData();
-              storePopup.select.points.clear();
               closeHandler();
               storeProduct.status.set('fetch', 'pending');
             });
@@ -161,12 +159,10 @@ const PopupFormProduct: FC = () => {
           storeProduct.action.update(() => {
             if (fileInputRef.current?.files && fileInputRef.current.files[0]) {
               storeProduct.action.addFile(() => {
-                storePopup.form.product.clearFormData();
                 closeHandler();
                 storeProduct.status.set('fetch', 'pending');
               });
             } else {
-              storePopup.form.product.clearFormData();
               closeHandler();
               storeProduct.status.set('fetch', 'pending');
             }

@@ -30,6 +30,7 @@ const IconButton: FC<IIconButtonProps> = ({ eventHandler, iconType }) => {
       src={getIcon()}
       alt='save'
       onClick={eventHandler}
+      draggable={false}
     />
   );
 };

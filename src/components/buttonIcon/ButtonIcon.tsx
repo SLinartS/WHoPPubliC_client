@@ -22,6 +22,7 @@ const ButtonIcon: FC<IButtonIconProps> = ({
       src={src}
       alt={alt}
       onClick={clickHandler}
+      draggable={false}
     />
   );
 };

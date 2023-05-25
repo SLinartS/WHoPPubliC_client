@@ -13,7 +13,7 @@ const TableColumn: FC<TableColumnProps> = ({ text }) => {
       }
     }
     return text;
-  }, [document.documentElement.clientWidth]);
+  }, [document.documentElement.clientWidth, text]);
 
   return <p className='table__column'>{formatText} </p>;
 };

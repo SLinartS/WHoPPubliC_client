@@ -37,11 +37,15 @@ const Header: FC = () => {
         onClick={hidePopupNavHandler}
       >
         <div className='header__info'>
-          <Link to='/'>
+          <Link
+            to='/'
+            draggable={false}
+          >
             <img
               className='header__icon'
               src={appIcon}
               alt='app icon'
+              draggable={false}
             />
           </Link>
           <div className='header__user'>

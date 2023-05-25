@@ -35,6 +35,7 @@ const SearchField: FC<ISarchFieldProps> = ({ searchHandler, classes }) => {
         className='search-field__icon'
         alt='search'
         onClick={() => searchHandler!(value)}
+        draggable={false}
       />
       <input
         type='text'

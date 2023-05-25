@@ -1,4 +1,5 @@
 import { TStatus } from '@store/type';
+import { observer } from 'mobx-react-lite';
 import { FC, ReactNode } from 'react';
 
 import Loader from '../Loader';
@@ -19,4 +20,4 @@ const LoaderWrapper: FC<ILoaderWrapperProps> = ({ status, children }) => {
   return <>{children}</>;
 };
 
-export default LoaderWrapper;
+export default observer(LoaderWrapper);

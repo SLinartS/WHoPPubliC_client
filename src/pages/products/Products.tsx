@@ -80,12 +80,7 @@ const Products: FC = () => {
       default:
         return storeProduct.state.products.data;
     }
-  }, [
-    selectedProductType,
-    storeProductType.status.get('fetch'),
-    storeProduct.status.get('fetch'),
-    storeProduct.state.products.data,
-  ]);
+  }, [selectedProductType, storeProduct.state.products.data]);
 
   function changeHandler(): void {
     storePopup.form.state.formActionType = 'update';

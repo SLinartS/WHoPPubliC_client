@@ -24,10 +24,10 @@ export function useFetchOneTaskAndFillForm() {
 
           const { task } = storePopup.form;
 
-          const dateStart = taskInfo.timeEnd.value.substring(0, 10);
-          const timeStart = taskInfo.timeEnd.value.substring(11, 16);
-          const dateEnd = taskInfo.timeStart.value.substring(0, 10);
-          const timeEnd = taskInfo.timeStart.value.substring(11, 16);
+          const dateStart = taskInfo.timeStart.value.substring(0, 10);
+          const timeStart = taskInfo.timeStart.value.substring(11, 16);
+          const dateEnd = taskInfo.timeEnd.value.substring(0, 10);
+          const timeEnd = taskInfo.timeEnd.value.substring(11, 16);
 
           task.setFormField('id', String(taskInfo.id.value));
           task.setFormField('article', taskInfo.article.value);
