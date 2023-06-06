@@ -2,13 +2,23 @@ FROM node
 
 WORKDIR /app
 
-COPY package.json /app
+# if there is no ready-made build folder, 
+# then (for servers with RAM > 2gb)
+# ----------
+# COPY package.json /app
+# RUN ["npm", "install"]
+# COPY . .
+# RUN ["npm", "run", "build"]
+# ----------
 
-RUN ["npm", "install"]
+# or
+# ----------
+COPY ./docker/package.json .
+COPY ./docker/server.js .
+RUN npm install
+# ----------
 
-COPY . .
-
-CMD ["npm", "start"]
+CMD ["node", "server.js"]
 
 ENV DOCKER_PORT=3000
 
