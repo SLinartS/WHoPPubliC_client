@@ -1,4 +1,4 @@
-drebuild: dstop build drun
+drebuild: dstop dbuild drun
 
 dbuild:
 	docker build . -t whoclient
