@@ -4,6 +4,7 @@
 .vscode
 .env
 .VSCodeCounter
+.idea
 
 # cache
 .eslintcache
